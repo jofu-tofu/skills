@@ -8,17 +8,17 @@
 ## First Principles
 
 1. **Comprehension Over Production**: AI output is cheap; human review time is the bottleneck. Optimize for the reader, not the writer.
-2. **Inverted Pyramid of Information**: Order content by reader value, not author chronology — point first, support second, background last.
-3. **Philosophy Before Format**: The comprehension principles drive all output; format (HTML, PPT) is a late rendering choice.
-4. **Clarity Over Brevity**: Prefer omitting sections over writing vague content. Every sentence must add specific information.
-5. **Section-Level Restartability**: Each section should restart a smaller version of the same information order so readers can enter anywhere without getting lost.
+2. **Inverted Pyramid + Section Independence**: Order content by reader value. Each section restarts the pattern so readers can enter anywhere.
+3. **Bridge to the Known**: Surface first principles and connect to what the reader already knows. Cross-domain analogies and gap-driven framing produce clarity faster than additional explanation.
+4. **Density Over Completeness**: Include only what the reader needs. Prefer omitting over vagueness. When density and other principles conflict, density wins.
+5. **Philosophy Before Format**: The comprehension principles drive all output; format (HTML, PPT) is a late rendering choice.
 6. **Extensible Adapters**: New formats add rendering instructions to FormatAdapters.md. They never add new philosophy.
 
 ---
 
 ## Problem This Skill Solves
 
-Document creation requests produce output optimized for production speed, not human comprehension. Without a comprehension-first framework, documents suffer from expert gatekeeping, narrative dependence, compression damage, and confident vagueness. ClarityEngine provides a philosophy-driven layer that ensures all document output is optimized for the reader's ability to understand, decide, and act.
+Document creation requests produce output optimized for production speed, not human comprehension. Without a comprehension-first framework, documents suffer from expert gatekeeping, narrative dependence, compression damage, confident vagueness, and explanation by exhaustion — adding more words instead of finding a better frame. ClarityEngine provides a philosophy-driven layer that ensures all document output is optimized for the reader's ability to understand, decide, and act, including bridging to concepts the audience already knows.
 
 Additionally, Philosophy.md serves as a passive shared resource — any PAI skill producing human-facing output can reference it for comprehension principles without invoking the full ClarityEngine workflow.
 
@@ -31,7 +31,9 @@ Additionally, Philosophy.md serves as a passive shared resource — any PAI skil
 | Architecture axis | Philosophy-first (principles drive output) | Format-first (HTML vs PPT as primary axis) | Format is a rendering choice, not a design driver. Philosophy-first ensures consistent comprehension quality across formats. |
 | Information ordering | Inverted pyramid as the umbrella frame | Narrative-first sequencing | Readers need the main point first. Supporting detail and background should arrive in descending reader value, not author chronology. |
 | Workflow structure | Unified CreateDocument with late format selection | Three separate creation workflows (CreatePresentation, CreateHtml, CreatePpt) | One workflow with format as a late decision matches "Philosophy Before Format." |
-| Rules handling | 54 rules distilled to 15 principle-mapped checkpoints | Keep rules as appendix; Remove entirely | Appendix creates two sources of truth. Removing loses testability. Distillation preserves testability under philosophical framing. |
+| Rules handling | 54 rules distilled to 18 principle-mapped checkpoints | Keep rules as appendix; Remove entirely | Appendix creates two sources of truth. Removing loses testability. Distillation preserves testability under philosophical framing. |
+| Conceptual clarity | First-principles bridging + cross-domain connection as P3 | Formatting-only philosophy | Clarity is a thinking problem, not just a formatting problem. Connecting to reader's existing knowledge produces understanding faster than adding more explanation. Adapted from Design skill and CriticalThinking lens system. |
+| Principle pruning | 4 principles (merged 7→4) | Keep all 7 separate principles | P2 (Skip-Friendly) was a corollary of P1. P3 (Clarity Over Brevity) was a boundary condition on Density. P4 (Scannable Architecture) was formatting rules already captured in RC checkpoints. Merging reduces redundancy and signal-to-noise. |
 | Comprehension layer scope | Passive shared resource (Philosophy.md) | Active convention with enforced Read instruction | Passive avoids coupling. Skills discover and opt in voluntarily. Escalation path exists if passive proves insufficient. |
 | Format extensibility | Single FormatAdapters.md file | Separate adapter files per format | At 2 formats, separate files is premature. One file with clear sections keeps it simple. |
 | Readability scoring | Flesch 60-70 scoped to summary prose | Flesch as universal gate | AHRQ, Redish confirm Flesch produces meaningless results for structured content (bullets, tables). |
@@ -59,6 +61,7 @@ Additionally, Philosophy.md serves as a passive shared resource — any PAI skil
 - [ ] A Document Brief exists before any rendering begins.
 - [ ] Output passes the "pick any section at random" independence test.
 - [ ] ReadabilityGate contract checkpoints are evaluated against the output.
+- [ ] Output contains at least one cross-domain bridge or first-principles framing per major topic.
 - [ ] Format selection rationale documented when auto-selected.
 - [ ] New formats can be added by modifying only FormatAdapters.md.
 - [ ] Other skills can reference Philosophy.md without invoking the full workflow.

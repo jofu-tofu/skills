@@ -9,7 +9,7 @@ metadata:
 
 # ClarityEngine
 
-Comprehension-optimized document and presentation authoring. Philosophy-first: five comprehension principles drive all output; format is a late rendering choice.
+Comprehension-optimized document and presentation authoring. Philosophy-first: four core principles drive all output — including first-principles bridging and cross-domain connection. Format is a late rendering choice.
 
 - HTML for scrollable, link-friendly, readable documents
 - PPT/PPTX for enterprise and formal stakeholder settings
@@ -35,7 +35,7 @@ Running the **WorkflowName** workflow from the **ClarityEngine** skill...
 
 | File | Purpose |
 |------|---------|
-| `Philosophy.md` | Five comprehension principles and 15-checkpoint Readability Contract — the core of this skill |
+| `Philosophy.md` | Four core principles (including cross-domain bridging and first-principles framing) and 18-checkpoint Readability Contract — the core of this skill |
 | `FormatAdapters.md` | Format-specific rendering instructions (HTML, PPT) and selection logic |
 | `ToolingLandscape.md` | Verified external tooling and CDN references with trade-offs |
 

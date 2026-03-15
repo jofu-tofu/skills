@@ -9,7 +9,7 @@
 
 ## Reference Material
 
-- `../Philosophy.md` — Five comprehension principles and Readability Contract
+- `../Philosophy.md` — Four core principles and Readability Contract
 - `../FormatAdapters.md` — Format-specific rendering instructions
 - `../ToolingLandscape.md` — Verified external tooling references
 
@@ -47,7 +47,7 @@ If required inputs are missing, ask concise questions before proceeding.
 
 ### Step 3: Load Philosophy
 
-Read `../Philosophy.md`. Apply the five comprehension principles to all subsequent content decisions. If `audience_exposure` is `partner` or `customer`, or `artifact_intent` is `review` or `decide`, also apply the Audience and Review Addendum from Philosophy.md. If content type is `codebase-analysis`, also load the Codebase Analysis Addendum from Philosophy.md.
+Read `../Philosophy.md`. Apply the four core principles to all subsequent content decisions. If `audience_exposure` is `partner` or `customer`, or `artifact_intent` is `review` or `decide`, also apply the Audience and Review Addendum from Philosophy.md. If content type is `codebase-analysis`, also load the Codebase Analysis Addendum from Philosophy.md.
 
 ### Step 4: Build Document Brief
 
@@ -70,26 +70,39 @@ Create a format-neutral brief:
 
 For review/decision artifacts, default the `information_order` to the inverted pyramid: lead with the point, follow with evidence, and push background later.
 
-### Step 5: Run Research When Needed
+### Step 5: Conceptual Clarity Pass (Bridge to the Known)
+
+Before writing or researching, apply first-principles bridging to the Document Brief:
+
+1. **Surface assumptions** — What does the reader need to already understand for this document to make sense? State these explicitly. If an assumption is wrong, the whole document fails — better to surface it early.
+2. **Identify the gap** — What specific confusion, question, or decision does this document address? Not "covers topic X" but "resolves whether Y or Z." Gap-driven framing prevents the document from becoming a knowledge dump.
+3. **Find bridges** — For each major concept, identify at least one cross-domain analogy, mental model, or pattern the audience already knows. If the audience is engineers, a biology analogy may reveal structure. If the audience is executives, a financial framing may land faster. The bridge should make the concept feel like recognition, not absorption.
+4. **Choose the right representation** — Is there a different way to frame the problem that makes it dramatically simpler for this audience? If the current framing requires extensive explanation, the framing itself may be wrong.
+
+Add `bridges` and `assumptions` fields to the Document Brief:
+- `bridges`: List of cross-domain analogies or familiar frameworks to use
+- `assumptions`: Underlying assumptions the reader must hold for the document to make sense
+
+### Step 6: Run Research When Needed
 
 If user asks for research, or evidence is missing:
 - Invoke the Research skill
 - Use verified sources only
 
-### Step 6: Select Output Format
+### Step 7: Select Output Format
 
 Read `../FormatAdapters.md` and apply Format Selection Logic:
 - If user specified format, honor it
 - If `auto`, decide based on audience, venue, and content type
 - Document the selection rationale
 
-### Step 7: Render
+### Step 8: Render
 
 Follow the appropriate adapter section in `../FormatAdapters.md`:
 - **HTML**: Generate semantic HTML with CDN tooling, apply CSS targets, build document structure, open in browser
 - **PPT**: Select build path (Marp/PptxGenJS/python-pptx), define slide contract, generate PPTX
 
-### Step 7.5: Compression Pass
+### Step 8.5: Compression Pass
 
 Before the ReadabilityGate, run a structured compression pass on the rendered content. This step catches AI-generated noise that sounds reasonable but adds no information.
 
@@ -107,7 +120,7 @@ Run the four compression levels in order:
 
 After compression, verify: is the document at least 30% shorter than the pre-compression draft? If not, compress again. The first draft is almost always too long.
 
-### Step 8: Auto-Chain ReadabilityGate
+### Step 9: Auto-Chain ReadabilityGate
 
 After rendering, auto-chain the `ReadabilityGate` workflow with:
 - `artifact`: path to the generated file

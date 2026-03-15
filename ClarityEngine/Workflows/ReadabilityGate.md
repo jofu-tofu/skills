@@ -10,7 +10,7 @@
 
 ## Reference Material
 
-- `../Philosophy.md` — Readability Contract checkpoints (RC-1 through RC-20)
+- `../Philosophy.md` — Readability Contract checkpoints (RC-1 through RC-23)
 
 ## Purpose
 
@@ -37,7 +37,8 @@ All callers pass this stable interface:
   - **Blocker** — accessibility violations, missing document structure
   - **Major** — readability degradation, comprehension barriers
   - **Polish** — improvements that enhance but do not degrade
-- Note: Principle 6 (Density Over Completeness) checkpoints RC-16 through RC-20 are **Major** severity — they represent comprehension barriers caused by noise, not missing information.
+- Note: Principle 3 (Bridge to the Known) checkpoints RC-21 through RC-23 are **Major** severity — they represent comprehension barriers caused by missing conceptual connections.
+- Note: Principle 4 (Density Over Completeness) checkpoints RC-16 through RC-20 are **Major** severity — they represent comprehension barriers caused by noise, not missing information.
 - Overall verdict: **FAIL** if any Blocker exists; **PASS** otherwise
 - Per-principle summary: `{principle}: {passed}/{total} checkpoints`
 
@@ -58,7 +59,7 @@ Accept the input interface contract fields:
 
 ### Step 2: Load Readability Contract
 
-Read `../Philosophy.md` and extract the Readability Contract (RC-1 through RC-20).
+Read `../Philosophy.md` and extract the Readability Contract (RC-1 through RC-23).
 
 If `content_type` is `codebase-analysis`, also load the Codebase Analysis Addendum from Philosophy.md.
 
@@ -73,6 +74,14 @@ For each applicable checkpoint:
 Interpret checkpoints contextually per format:
 - HTML: CSS properties and DOM structure apply directly
 - PPT: Map checkpoints to equivalent slide formatting properties (font size, contrast, spacing)
+
+#### Bridge Checkpoints (RC-21 through RC-23)
+
+These checkpoints target conceptual clarity — whether the document connects to what the reader already knows:
+
+- **RC-21 (First Principles):** For each major section, are the underlying assumptions or first principles stated before detailed content? Score FAIL if sections dive into details without grounding.
+- **RC-22 (Cross-Domain Bridge):** Does the document contain at least one analogy, mental model, or pattern from a domain the audience already knows? Score FAIL if all explanation stays in the author's domain vocabulary.
+- **RC-23 (Gap Framing):** Is the specific question, confusion, or gap being addressed explicit? Score FAIL if the document covers a topic without identifying the specific question it answers.
 
 #### Density Checkpoints (RC-16 through RC-20)
 
@@ -91,7 +100,7 @@ Group findings by severity:
 2. **Major** — significantly impacts comprehension
 3. **Polish** — nice-to-have improvements
 
-Within each severity, group by principle (P1-P5).
+Within each severity, group by principle (P1-P4).
 
 ### Step 5: Return Advisory Report
 

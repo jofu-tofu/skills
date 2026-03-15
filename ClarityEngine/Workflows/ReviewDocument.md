@@ -20,12 +20,11 @@ Run a quality and delivery-readiness audit on a document or presentation. Combin
 
 ### Step 1: Validate Against Comprehension Principles
 
-Check the document against Philosophy.md's five principles:
-- **Layman First**: Does the opening deliver the main point before background?
-- **Skip-Friendly**: Can any section be read independently as a small inverted pyramid?
-- **Clarity Over Brevity**: Are there vague or jargon-laden sections?
-- **Scannable Architecture**: Is the information order visible through hierarchy, chunking, and visual emphasis?
-- **Evidence Over Assertion**: Are claims specific and traceable?
+Check the document against Philosophy.md's four core principles:
+- **Layman First**: Does the opening deliver the main point before background? Can any section be read independently?
+- **Evidence Over Assertion**: Are claims specific, traceable, and verifiable? Are there vague or jargon-laden sections?
+- **Bridge to the Known**: Are first principles stated before details? Does the document connect to what the reader already knows through cross-domain analogies or familiar frameworks? Is the specific gap or question being addressed explicit?
+- **Density Over Completeness**: Could the document be shorter and still support the same decisions? Are there sentences that add no new information?
 
 For partner/customer-facing review artifacts, also check the Audience and Review Addendum:
 - Does the language stay in the reader's world rather than internal taxonomy?
