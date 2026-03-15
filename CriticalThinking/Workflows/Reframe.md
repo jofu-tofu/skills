@@ -107,10 +107,6 @@ Write each perspective file (`perspective-N.md`) as follows:
 ## Key Questions This Frame Raises
 
 [3-5 questions that emerge from treating the limitation as the core problem — questions that a vague statement of the original problem would never surface.]
-
-## Why This Frame Matters
-
-[1-2 sentences: what the gap-driven reframe reveals that a broad attack on the problem misses.]
 ```
 
 **Lenses 2-3 (Cross-Domain):**
@@ -124,20 +120,15 @@ Write each perspective file (`perspective-N.md`) as follows:
 ## Lens Selection
 
 **Domain:** [Name]
-**Non-adjacency from prior domain lenses:** [1-2 sentences: why this domain is distant from prior domain lenses]
 **What this vocabulary reveals:** [1 sentence: what becomes visible in this domain's language]
 
 ## Reframed Problem
 
-[2-4 paragraphs. Translate the problem entirely into this domain's native framing. Use the domain's vocabulary, mental models, and problem structures. A practitioner in this field would recognize this as their own problem.]
+[2-4 paragraphs. State the problem entirely in this domain's native terms. Do not map back to the original domain — the downstream agent has access to the original problem separately via prompt.txt. A practitioner in this field would read this and see their own problem, with no reference to the source domain.]
 
 ## Key Questions This Frame Raises
 
 [3-5 questions that ONLY this domain's vocabulary would surface — non-obvious questions invisible in the original framing.]
-
-## Why This Frame Matters
-
-[1-2 sentences: what this reframing reveals that a direct attack on the problem misses.]
 ```
 
 **Lens 4 (Representation Shift):**
@@ -161,10 +152,6 @@ Write each perspective file (`perspective-N.md`) as follows:
 ## Key Questions This Frame Raises
 
 [3-5 questions that ONLY the new representation makes askable — questions that don't exist in the original representation.]
-
-## Why This Frame Matters
-
-[1-2 sentences: what the representation shift reveals that operating in the original primitive misses.]
 ```
 
 **Lens 5 (Adaptive — format depends on choice):**
@@ -179,11 +166,6 @@ If **Option B (Mechanistic/Causal):**
 **Type:** Mechanistic / causal localization
 **Stance:** [The persona — e.g., "The Root Cause Analyst", "The Causal Tracer"]
 
-## Lens Selection
-
-**Why mechanistic:** [1-2 sentences: what gap this fills that lenses 1-4 leave open]
-**Orthogonality justification:** [1-2 sentences: what questions this lens asks that none of lenses 1-4 can ask]
-
 ## Causal Analysis
 
 [2-4 paragraphs. Trace the actual causal chain. Identify the specific links, factors, or components that produce the current outcome. Localize where exactly the chain breaks or where intervention would have the most leverage.]
@@ -191,10 +173,6 @@ If **Option B (Mechanistic/Causal):**
 ## Key Questions This Frame Raises
 
 [3-5 questions about mechanism, causation, and leverage points — questions that reframing alone cannot answer.]
-
-## Why This Frame Matters
-
-[1-2 sentences: what the causal trace reveals that reframing misses.]
 ```
 
 If **Option C (Adversarial/Failure):**
@@ -205,11 +183,6 @@ If **Option C (Adversarial/Failure):**
 **Type:** Adversarial / failure mode analysis
 **Stance:** [The persona — e.g., "The Adversary", "The Failure Analyst"]
 
-## Lens Selection
-
-**Why adversarial:** [1-2 sentences: what gap this fills that lenses 1-4 leave open]
-**Orthogonality justification:** [1-2 sentences: what questions this lens asks that none of lenses 1-4 can ask]
-
 ## Failure Analysis
 
 [2-4 paragraphs. Model what would break, destroy, or defeat each potential approach. Identify worst-case scenarios, attack surfaces, and failure modes. Reason from the perspective of an adversary.]
@@ -217,10 +190,6 @@ If **Option C (Adversarial/Failure):**
 ## Key Questions This Frame Raises
 
 [3-5 questions about vulnerabilities, failure modes, and worst cases — questions that constructive/analytical lenses systematically miss.]
-
-## Why This Frame Matters
-
-[1-2 sentences: what the adversarial perspective reveals that constructive analysis misses.]
 ```
 
 ## Constraints
@@ -230,7 +199,7 @@ Verify before writing:
 1. **Gap specificity:** The gap-driven lens identifies a *specific* failure, not a restatement of the original problem. "The API is slow" is a restatement. "Response times degrade non-linearly under concurrent load" is a specific failure.
 2. **Non-adjacency (domains):** Practitioners in one cross-domain field would rarely encounter the vocabulary of the other. If the two domains share significant vocabulary, replace one.
 3. **Representation novelty:** The representation shift proposes a genuinely different primitive, not just a synonym for the current one. If the new representation doesn't change what operations are easy/hard, it's not a real shift.
-4. **Adaptive justification:** The 5th lens choice is explicitly justified — why this option over the other two, given lenses 1-4.
+4. **Adaptive fit:** The 5th lens fills a gap left by lenses 1-4. Its questions cannot be derived from any combination of lenses 1-4.
 5. **Coverage:** Five independent agents each receiving one file would produce five distinct analyses, not convergent ones.
 6. **Substance:** Each reframing uses actual frameworks — specific concepts, models, and terminology. Surface metaphors are insufficient.
 
