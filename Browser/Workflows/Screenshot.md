@@ -26,8 +26,19 @@ Capture visual evidence from the current browser state or from a freshly loaded 
    bun run Tools/Browse.ts screenshot <path>
    ```
 
-3. **Prefer evidence over decoration**
+3. **Critically evaluate the visual state**
+   After capturing, inspect the screenshot for layout and visual quality issues before reporting that things look correct. Check for:
+   - Text or content clipped by container boundaries
+   - Asymmetric spacing, padding, or alignment between elements that should match
+   - Elements overlapping or overflowing their containers
+   - Text that doesn't fit its bounding box (truncated, wrapped awkwardly, or too small to read)
+   - Visual imbalance — one side heavier, uneven gutters, inconsistent margins
+   - Misaligned rows, columns, or grid items that should line up
+
+   If any of these are present, describe the specific problem. Do not say the page "looks fine" or "renders correctly" when visual issues are visible.
+
+4. **Prefer evidence over decoration**
    Capture the state that matters to the task: the broken page, the loaded component, or the final verified result.
 
-4. **Pair with diagnostics when relevant**
+5. **Pair with diagnostics when relevant**
    If the screenshot is part of verification or debugging, also review console errors and failed requests before reporting success.

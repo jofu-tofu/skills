@@ -40,5 +40,16 @@ Verify that a page renders correctly and surface browser-side failures with evid
 5. **Capture final proof**
    Use `screenshot` for visual proof or `a11y` for a lighter-weight structural snapshot.
 
-6. **Report what the browser proved**
-   If there are console errors or failed requests, report them plainly instead of claiming the page works.
+6. **Evaluate visual quality**
+   When verifying via screenshot, inspect the rendered page for layout and visual issues before reporting success. Check for:
+   - Text or content clipped by container boundaries
+   - Asymmetric spacing, padding, or alignment between elements that should match
+   - Elements overlapping or overflowing their containers
+   - Text that doesn't fit its bounding box (truncated, wrapped awkwardly, or too small to read)
+   - Visual imbalance — one side heavier, uneven gutters, inconsistent margins
+   - Misaligned rows, columns, or grid items that should line up
+
+   If any of these are present, describe the specific problem rather than reporting the page as verified.
+
+7. **Report what the browser proved**
+   If there are console errors, failed requests, or visual quality issues, report them plainly instead of claiming the page works.
