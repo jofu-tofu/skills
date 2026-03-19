@@ -102,11 +102,11 @@ Write each perspective file (`perspective-N.md`) as follows:
 
 ## Reframed Problem
 
-[2-4 paragraphs. Start from the specific failure. Rewrite it as a constraint. Then analyze what solution class this constraint maps to. Show how the sharpened problem statement changes what approaches are viable.]
+[1-2 paragraphs. Start from the specific failure, rewrite as a constraint, show what solution class it maps to.]
 
 ## Key Questions This Frame Raises
 
-[3-5 questions that emerge from treating the limitation as the core problem — questions that a vague statement of the original problem would never surface.]
+[3-5 questions that emerge from this reframing — questions invisible in the original framing.]
 ```
 
 **Lenses 2-3 (Cross-Domain):**
@@ -115,20 +115,20 @@ Write each perspective file (`perspective-N.md`) as follows:
 # Perspective N: [Domain Name]
 
 **Type:** Cross-domain synthesis
-**Stance:** [The persona — e.g., "The Ecologist", "The Urban Planner"]
+**Stance:** [The persona]
 
 ## Lens Selection
 
 **Domain:** [Name]
-**What this vocabulary reveals:** [1 sentence: what becomes visible in this domain's language]
+**What this vocabulary reveals:** [1 sentence]
 
 ## Reframed Problem
 
-[2-4 paragraphs. State the problem entirely in this domain's native terms. Do not map back to the original domain — the downstream agent has access to the original problem separately via prompt.txt. A practitioner in this field would read this and see their own problem, with no reference to the source domain.]
+[1-2 paragraphs. State the problem entirely in this domain's native terms. A practitioner would see their own problem.]
 
 ## Key Questions This Frame Raises
 
-[3-5 questions that ONLY this domain's vocabulary would surface — non-obvious questions invisible in the original framing.]
+[3-5 questions that ONLY this domain's vocabulary would surface.]
 ```
 
 **Lens 4 (Representation Shift):**
@@ -137,21 +137,21 @@ Write each perspective file (`perspective-N.md`) as follows:
 # Perspective 4: Representation Shift
 
 **Type:** Representation shift
-**Stance:** [The persona — e.g., "The Abstraction Engineer", "The Primitive Redesigner"]
+**Stance:** [The persona]
 
 ## Lens Selection
 
-**Current representation:** [1-2 sentences: what primitive/abstraction the problem currently uses]
-**Proposed alternative:** [1-2 sentences: the new primitive and why it simplifies]
-**What this shift reveals:** [1 sentence: what structure becomes visible in the new representation]
+**Current representation:** [1 sentence]
+**Proposed alternative:** [1 sentence]
+**What this shift reveals:** [1 sentence]
 
 ## Reframed Problem
 
-[2-4 paragraphs. Describe the problem using the new primitive. Show how the representation change makes previously hidden structure visible or previously hard operations easy.]
+[1-2 paragraphs. Describe the problem using the new primitive. Show what becomes visible or easy.]
 
 ## Key Questions This Frame Raises
 
-[3-5 questions that ONLY the new representation makes askable — questions that don't exist in the original representation.]
+[3-5 questions that ONLY the new representation makes askable.]
 ```
 
 **Lens 5 (Adaptive — format depends on choice):**
@@ -164,15 +164,15 @@ If **Option B (Mechanistic/Causal):**
 # Perspective 5: Mechanistic / Causal Localization
 
 **Type:** Mechanistic / causal localization
-**Stance:** [The persona — e.g., "The Root Cause Analyst", "The Causal Tracer"]
+**Stance:** [The persona]
 
 ## Causal Analysis
 
-[2-4 paragraphs. Trace the actual causal chain. Identify the specific links, factors, or components that produce the current outcome. Localize where exactly the chain breaks or where intervention would have the most leverage.]
+[1-2 paragraphs. Trace the causal chain. Identify where intervention has the most leverage.]
 
 ## Key Questions This Frame Raises
 
-[3-5 questions about mechanism, causation, and leverage points — questions that reframing alone cannot answer.]
+[3-5 questions about mechanism, causation, and leverage points.]
 ```
 
 If **Option C (Adversarial/Failure):**
@@ -181,15 +181,15 @@ If **Option C (Adversarial/Failure):**
 # Perspective 5: Adversarial / Failure Mode Analysis
 
 **Type:** Adversarial / failure mode analysis
-**Stance:** [The persona — e.g., "The Adversary", "The Failure Analyst"]
+**Stance:** [The persona]
 
 ## Failure Analysis
 
-[2-4 paragraphs. Model what would break, destroy, or defeat each potential approach. Identify worst-case scenarios, attack surfaces, and failure modes. Reason from the perspective of an adversary.]
+[1-2 paragraphs. Model what breaks each potential approach. Identify worst cases and failure modes.]
 
 ## Key Questions This Frame Raises
 
-[3-5 questions about vulnerabilities, failure modes, and worst cases — questions that constructive/analytical lenses systematically miss.]
+[3-5 questions about vulnerabilities and failure modes.]
 ```
 
 ## Constraints

@@ -51,7 +51,7 @@ Write to your assigned file using this exact structure:
 - **Source:** [URL or FROM TRAINING — verify]
 
 ### 2. ...
-[aim for 5-15 papers]
+[aim for 3-7 papers — quality over quantity]
 
 ## Vocabulary Discovered
 - [term]: [meaning]
@@ -69,4 +69,4 @@ Write to your assigned file using this exact structure:
 - Prefer peer-reviewed papers over blog posts or Wikipedia
 - Flag systematic reviews and meta-analyses prominently — they're gold
 - Record terms you discover that the original query didn't include
-- Better to return 5 highly relevant papers than 15 marginal ones
+- Better to return 3 highly relevant papers than 10 marginal ones

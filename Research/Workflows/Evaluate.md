@@ -23,40 +23,31 @@ All files from `$RESEARCH_DIR/`:
 
 Sort all papers into tiers:
 
-| Tier | Criteria | Weight |
-|------|----------|--------|
-| **T1** | Systematic reviews, meta-analyses | Highest |
-| **T2** | Large-scale empirical, industry deployment | High |
-| **T3** | Standard peer-reviewed empirical | Medium |
-| **T4** | Preliminary, grey literature, preprints | Low |
-| **T5** | Theoretical, opinion, foundational frameworks | Context only |
+| Tier | Criteria |
+|------|----------|
+| **T1** | Systematic reviews, meta-analyses |
+| **T2** | Large-scale empirical, industry deployment |
+| **T3** | Standard peer-reviewed empirical |
+| **T4** | Preliminary, grey literature, preprints |
+| **T5** | Theoretical, opinion, foundational frameworks |
 
-For each paper: assign tier + one-sentence justification.
+Group papers by tier — no per-paper justification needed unless a tier assignment is non-obvious.
 
 ### Step 2: Map Convergences, Tensions, Gaps
 
-**Convergences** — claims supported by 3+ independent sources.
-Assign confidence: High / Medium / Low.
+**Convergences** — claims supported by 3+ independent sources. One sentence each with confidence level.
 
-**Tensions** — where sources disagree. For each:
-- What does each side claim?
-- What might explain the disagreement?
-- What would resolve it?
+**Tensions** — where sources disagree. State the disagreement and what might explain it.
 
-**Gaps** — what has NOT been studied. Look for:
-- Questions the literature doesn't address
-- Populations or contexts not covered
-- Methods not yet applied
+**Gaps** — what has NOT been studied. 2-3 bullet points.
 
 ### Step 3: Assess Systematic Risks
 
-1. **Publication bias:** Are findings suspiciously positive? Did Agent G
-   find contradictions?
-2. **Replication status:** Have key findings been independently replicated?
-3. **Methodological diversity:** Do all studies use the same method?
-4. **Recency:** Are key findings from recent work or decades old?
-5. **Conflict of interest:** Industry-funded studies with aligned incentives?
-6. **Unverified papers:** How many papers are marked `[FROM TRAINING — verify]`?
+Flag any of these that apply (skip those that don't):
+1. Publication bias — suspiciously positive results?
+2. Replication concerns — key findings independently replicated?
+3. Methodological monoculture — all studies use same method?
+4. Unverified papers — how many marked `[FROM TRAINING — verify]`?
 
 ## Output Format
 
@@ -67,47 +58,35 @@ Write to `$RESEARCH_DIR/evaluation.md`:
 
 ## Triage Summary
 - Total papers: [N]
-- T1 (systematic reviews): [N]
-- T2 (high-quality empirical): [N]
-- T3 (standard empirical): [N]
-- T4 (preliminary): [N]
-- T5 (theoretical): [N]
+- T1: [N] | T2: [N] | T3: [N] | T4: [N] | T5: [N]
 - Unverified (FROM TRAINING): [N]
 - Overall evidence quality: [Strong / Moderate / Weak / Very Weak]
 
 ## Paper Triage
 
 ### Tier 1
-| Paper | Justification |
-|-------|---------------|
-| [Author Year] | [why T1] |
+- [Author Year], [Author Year], ...
 
-[repeat for each tier]
+### Tier 2
+- [Author Year], [Author Year], ...
 
-## Key Findings (with confidence)
+[continue for each non-empty tier]
 
-### Finding 1: [claim]
-- **Confidence:** [High / Medium / Low]
-- **Supporting:** [papers with tier]
-- **Contradicting:** [papers, if any]
-- **Caveats:** [limitations]
+## Key Findings
 
-[continue for all major findings]
+| Finding | Confidence | Supporting | Contradicting |
+|---------|-----------|------------|---------------|
+| [claim] | [H/M/L] | [papers] | [papers] |
 
 ## Convergences
 - [claim]: supported by [papers]. Confidence: [level].
 
 ## Tensions
-- [tension]: Side A ([papers]) vs Side B ([papers]).
-  Possible explanation: [hypothesis].
+- [tension]: [Side A papers] vs [Side B papers]. Possible explanation: [1 sentence].
 
 ## Gaps
-- [gap]: [what's missing and why it matters]
+- [gap]: [what's missing]
 
-## Systematic Risk Assessment
-- Publication bias: [assessment]
-- Replication: [assessment]
-- Methodological diversity: [assessment]
-- Conflict of interest: [assessment]
-- Unverified sources: [N papers need web verification]
+## Systematic Risks
+[Only flag risks that actually apply — omit clean categories.]
 ```

@@ -17,9 +17,7 @@
 
 The perspective file contains a reframed problem AND a first-principles decomposition identifying irreducible components, relationships, and leverage points. Using the decomposition as a map, explore the solution space within this lens and generate 2-3 genuinely distinct approaches with honest trade-offs.
 
-Do not pick a winner. The synthesis agent has context from all five lenses and is in a far better position to evaluate and recommend. Your job is to explore the solution space as thoroughly as possible within your lens, giving the synthesis agent rich material to work with.
-
-This is the heaviest step in the pipeline. Use all available tools — research, exploration, reasoning — to ground your approaches in reality. The more substantive and well-explored each approach is, the more the synthesis agent can extract.
+Do not pick a winner. The synthesis agent has context from all five lenses and is in a far better position to evaluate and recommend. Your job is to map the key approaches within your lens — not exhaustively, but enough for the synthesis agent to compare across lenses.
 
 ## Instructions
 
@@ -36,27 +34,11 @@ Re-read `prompt.txt` — the user needs insight into their real problem, not an 
 
 Using the decomposition's leverage points as starting positions, brainstorm approaches that address the problem within this lens. Cast a wide net first, then narrow to the 2-3 most distinct and substantive options.
 
-For each potential approach, assess:
-- Which leverage point(s) does it target?
-- Which assumptions does it rely on? (Check the assumptions table.)
-- How does it differ from the other approaches — is it genuinely distinct, or a variant?
-
-If two approaches are variants of the same idea, merge them or replace one. The goal is maximum coverage of the solution space within this lens, not maximum count.
-
-Research and exploration are encouraged here. If the lens suggests a specific framework, technique, or domain-specific solution, investigate it. Ground approaches in specifics, not abstractions.
+If two approaches are variants of the same idea, merge them or replace one. Prioritize distinctness over count.
 
 ### Step 3: Articulate Trade-Offs
 
-For each approach, identify what you gain and what you give up. Trade-offs are the most valuable output of this step — they're what the synthesis agent needs to compare across lenses.
-
-Evaluate trade-offs along dimensions relevant to this lens and the user's problem. Common dimensions include:
-- Effort vs impact
-- Speed vs thoroughness
-- Simplicity vs capability
-- Short-term vs long-term
-- Risk vs reward
-
-Be honest. If an approach has a fatal flaw in certain conditions, say so. If it's brilliant in narrow circumstances, say that too.
+For each approach, state what you gain and what you give up. One sentence each — trade-offs are the most valuable output for the synthesis agent.
 
 ### Step 4: Translate to the User's Domain
 
@@ -64,7 +46,7 @@ Each approach must be understandable outside this lens's jargon. Express the cor
 
 ## Output Format
 
-Append to the perspective file:
+Append to the perspective file. **Target length: 40-60 lines.** Match the Decompose step's density — concise, not exhaustive.
 
 ```markdown
 ---
@@ -75,13 +57,9 @@ Append to the perspective file:
 
 **Targets leverage point(s):** [Which leverage points from the decomposition]
 
-**Description:** [2-3 paragraphs. What this approach is and how it works, expressed in this lens's terms then translated to the user's domain. Be specific and concrete.]
+**Description:** [1-2 paragraphs. What this approach is and how it works, in this lens's terms then translated to the user's domain.]
 
-**Trade-offs:**
-- **Gains:** [What you get — be specific]
-- **Costs:** [What you give up — be honest]
-- **Best when:** [Conditions where this is the right choice]
-- **Worst when:** [Conditions where this fails or backfires]
+**Trade-offs:** [Gains] vs [Costs]. Best when [condition]. Worst when [condition].
 
 ### Approach 2: [Name]
 
@@ -93,7 +71,7 @@ Append to the perspective file:
 
 ### What This Lens Reveals
 
-[1-3 sentences. Step back from the specific approaches. What does this lens's analysis of the solution space reveal about the problem that the original framing hides? What's the non-obvious insight about the trade-off landscape itself?]
+[1-2 sentences. The non-obvious insight about the trade-off landscape itself.]
 ```
 
 ## Constraints

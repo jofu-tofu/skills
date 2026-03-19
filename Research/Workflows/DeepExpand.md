@@ -62,20 +62,15 @@ Write to your assigned file:
 ## Papers Found
 
 ### 1. [Author (Year)] "Title"
-- **Type:** [empirical / review / replication / critique]
 - **Found Via:** [which seed or reframing led here]
-- **Key Finding:** [1-2 sentences]
-- **Unique Contribution:** [why Wave 1 missed this]
+- **Key Finding:** [1 sentence]
 - **Source:** [URL or FROM TRAINING — verify]
 
 [continue for all papers]
 
 ## Strategy Report
 - Seed papers used: [list]
-- Queries used: [list]
 - Unique finds (not in seeds): [count]
-- Cross-domain bridges: [Agent F only]
-- Contradictions found: [Agent G only]
 ```
 
 ## Quality Criteria

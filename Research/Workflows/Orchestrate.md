@@ -125,17 +125,12 @@ Write `$RESEARCH_DIR/seed-papers.md`:
 
 ## Papers (ranked by relevance)
 
-### 1. [Author (Year)] "Title"
-- **Venue:** [journal/conference]
-- **Type:** [empirical / review / meta-analysis]
-- **Found by:** [agents A, B, C]
-- **Key terms:** [terms from this paper]
-- **Relevance:** [one sentence]
-
-[continue for all unique papers]
+| # | Paper | Type | Found by | Relevance |
+|---|-------|------|----------|-----------|
+| 1 | [Author (Year)] "Title" | [empirical/review/meta-analysis] | [agents] | [one sentence] |
 
 ## Vocabulary Discovered
-- [term]: [meaning, which agent found it]
+- [term]: [meaning]
 
 ## Existing Reviews Found
 - [review paper, with notes on recency/quality]
@@ -144,8 +139,7 @@ Write `$RESEARCH_DIR/seed-papers.md`:
 [from above]
 
 ## Landscape Assessment
-- Major schools of thought: [list]
-- Key debates: [list]
+- Major debates: [list]
 - Apparent gaps: [list]
 ```
 
@@ -184,14 +178,9 @@ with seed-papers.md.
 
 ```markdown
 ## Wave 2 Saturation
-- Papers already in seeds: [N]
 - New unique papers: [N]
 - Saturation ratio: [overlap / total]
-- Assessment: [saturated (>80% overlap) | moderate | unsaturated (<50% overlap)]
 ```
-
-If unsaturated and the user hasn't constrained time, consider running a
-second expansion round using newly discovered seeds.
 
 ### Step 3: Evaluate (1 Agent)
 

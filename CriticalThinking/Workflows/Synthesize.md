@@ -22,122 +22,66 @@ Synthesis is not summary. A summary compresses each perspective into a bullet po
 
 ### Step 1: Read Everything
 
-Read all 5 perspective files end-to-end and re-read `prompt.txt`. For each perspective, note:
-- The core reframing (how this lens sees the problem)
-- The key insight from decomposition (what was non-obvious)
-- The approaches proposed and their trade-offs (gains, costs, best-when, worst-when)
-- What the lens reveals about the solution space
+Read all 5 perspective files end-to-end and re-read `prompt.txt`. For each perspective, note the core reframing, the key insight from decomposition, and the approaches with trade-offs.
 
-### Step 2: Identify Convergences
+### Step 2: Find Convergences and Contradictions
 
-Where do multiple perspectives independently arrive at the same conclusion through different reasoning paths? Convergence from independent chains is high-confidence signal — if two analyses both identify the same structural bottleneck through completely different logic, that bottleneck is almost certainly real.
+**Convergences:** Where do multiple perspectives independently reach the same conclusion through different reasoning? This is the highest-confidence signal the pipeline produces.
 
-### Step 3: Identify Contradictions
+**Contradictions:** Where do perspectives disagree? These reveal genuine tensions a single-perspective analysis would miss. Note whether the disagreement is about facts, values, or framing.
 
-Where do perspectives disagree? Contradictions are the most valuable output — they reveal genuine tensions that a single-perspective analysis would miss. For each contradiction:
-- What exactly do the perspectives disagree on?
-- Is the disagreement about facts, values, or framing?
-- Can it be resolved, or is it a genuine trade-off the user must navigate?
+### Step 3: Cross-Pollinate
 
-### Step 4: Cross-Pollinate
+Find 1-2 insights where one perspective strengthens or transforms an approach from another. The best synthesis creates combinations no single agent could have conceived.
 
-Find insights from one perspective that strengthen or transform approaches from another:
-- Does one decomposition reveal a component that another approach could exploit?
-- Does one formalization make a vague insight from another perspective precise?
-- Does one incentive analysis explain why another perspective's analog evolved one way and not another?
+### Step 4: Produce Integrated Answer
 
-The best synthesis creates combinations no single agent could have conceived.
-
-### Step 5: Integrate Trade-Offs
-
-Each perspective file contains 2-3 approaches with explicit trade-offs. Compare these trade-offs across all five lenses:
-
-- **Convergent trade-offs:** Multiple lenses independently identify the same cost or gain from different reasoning paths. These are high-confidence — if a biological, economic, and structural lens all flag the same cost, it's real.
-- **Contradictory trade-offs:** One lens sees something as a gain, another sees it as a cost. These reveal hidden complexity in the decision space.
-- **Complementary trade-offs:** One lens's approach mitigates another lens's identified cost. These suggest combined strategies.
-
-Produce a unified trade-off landscape the user can navigate — not a list of every trade-off from every lens, but the integrated picture of what the key decisions are and what each direction costs.
-
-### Step 6: Produce Integrated Answer
-
-Weave the above into a coherent response that answers the user's original question with the full depth of five reasoning chains behind it.
+Weave the above into a direct answer to the user's original question.
 
 ## Output Format
 
-Write to `$THINK_DIR/synthesis.md`:
+Write to `$THINK_DIR/synthesis.md`. **Target length: 80-120 lines.** Density over exhaustiveness.
 
 ```markdown
 # Critical Thinking Synthesis
 
-**Original problem:** [1-2 sentence restatement of the user's prompt]
+**Original problem:** [1-2 sentence restatement]
 
-## Perspectives Analyzed
+## Perspectives Summary
 
-| # | Lens | Core Insight | Solution Approach |
-|---|------|-------------|-------------------|
-| 1 | [Name] | [1-line key insight] | [1-line approach] |
-| 2 | [Name] | [1-line key insight] | [1-line approach] |
-| 3 | [Name] | [1-line key insight] | [1-line approach] |
-| 4 | [Name] | [1-line key insight] | [1-line approach] |
-| 5 | [Name] | [1-line key insight] | [1-line approach] |
+| # | Lens | Core Insight |
+|---|------|-------------|
+| 1 | [Name] | [1-line] |
+| 2 | [Name] | [1-line] |
+| 3 | [Name] | [1-line] |
+| 4 | [Name] | [1-line] |
+| 5 | [Name] | [1-line] |
 
-## Convergences (High-Confidence Findings)
+## Convergences
 
-### [Convergence 1 title]
-**Perspectives:** [which ones]
-[Description of the shared finding and why independent arrival at it matters]
+[Where 2+ perspectives independently agree. 1-2 paragraphs. These are the highest-confidence findings.]
 
-### [Convergence 2 title]
-[Continue as needed]
+## Contradictions
 
-## Contradictions (Genuine Tensions)
-
-### [Contradiction 1 title]
-**Between:** [Perspective X] vs [Perspective Y]
-**Nature:** [Factual / Values / Framing]
-[Description and implications]
+[Where perspectives genuinely disagree. 1-2 paragraphs. Present the tension — don't resolve artificially.]
 
 ## Cross-Pollinated Insights
 
-### [Insight 1 title]
-**Combines:** [Perspective X] + [Perspective Y]
-[The novel insight and why it matters]
-
-## Trade-Off Landscape
-
-[The integrated trade-off picture across all five lenses. Not a dump of every trade-off — the synthesized map of key decisions the user faces.]
-
-### [Key decision/trade-off 1]
-**Convergence:** [Which lenses independently flag this, and from what angle]
-**What you gain:** [Integrated view of the upside]
-**What it costs:** [Integrated view of the downside]
-**Tension:** [If lenses disagree on whether this is a gain or cost, describe the tension]
-
-### [Key decision/trade-off 2]
-[Same structure — continue for each major trade-off the user must navigate]
+[1-2 novel combinations. Brief — just the insight and why it matters.]
 
 ## Integrated Answer
 
-[3-6 paragraphs. The main deliverable — a direct, concrete answer to the user's original problem drawing from all five reasoning chains:
-- Lead with the strongest, most actionable conclusion
-- Incorporate convergences as high-confidence foundations
-- Reference the trade-off landscape — frame key decisions clearly
-- Acknowledge contradictions as tensions the user must navigate
-- Include cross-pollinated insights where they strengthen the answer
-- Write in plain language, not jargon
-- Be specific enough to act on]
+[3-5 paragraphs. The main deliverable — a direct, actionable answer to the user's problem. Lead with the strongest conclusion, reference convergences and tensions, write in plain language.]
 
 ## Action Items
 
-[Concrete next steps, ordered by priority. Each self-contained and actionable.]
-
-1. **[Action]** — [Why, drawing from which perspective(s)]
+1. **[Action]** — [Why, from which perspective(s)]
 2. **[Action]** — [Why]
 3. **[Action]** — [Why]
 
-## What This Analysis Cannot Tell You
+## Limitations
 
-[Honest limitations. What questions remain unanswered? What requires additional information, domain expertise, or empirical testing? This section prevents over-confidence.]
+[2-3 sentences. What this analysis cannot tell you. What requires empirical testing or domain expertise.]
 ```
 
 ## Constraints

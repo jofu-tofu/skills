@@ -23,14 +23,11 @@ Write to `$RESEARCH_DIR/evidence-map.md`:
 # Evidence Map: [Research Question]
 
 ## Executive Summary
-[3-5 sentences: What does the evidence say? How confident should we be?
-What's the biggest caveat?]
+[3-5 sentences: What does the evidence say? How confident? Biggest caveat?]
 
 ## Evidence Quality
-- Papers reviewed: [N]
-- Systematic reviews found: [N]
+- Papers reviewed: [N] | Systematic reviews: [N] | Unverified: [N]
 - Overall quality: [Strong / Moderate / Weak / Very Weak]
-- Unverified papers: [N] (marked with [FROM TRAINING — verify])
 
 ## Key Findings
 
@@ -39,37 +36,23 @@ What's the biggest caveat?]
 - **Evidence:** [key papers]
 - **Caveats:** [limitations]
 
-[continue for all major findings]
+[continue for major findings]
 
 ## Convergences
 [Where 3+ sources agree — highest confidence claims]
 
 ## Tensions
-[Where the evidence disagrees — often the most valuable findings.
-Do not smooth over disagreements.]
-
-## Gaps
-[What the evidence does NOT address]
+[Where the evidence disagrees. Do not smooth over disagreements.]
 
 ## What This Evidence Cannot Tell You
-[Genuine limitations — not hedging. What questions remain? What evidence
-is missing? What would you need to be more confident? This section is
-mandatory and must be substantive.]
+[Genuine limitations — what's missing, what would you need for more confidence. Mandatory and substantive.]
 
-## Recommended Next Steps
+## Next Steps
 - **Read in full:** [top 3-5 papers with brief why]
-- **Experts to consult:** [key researchers, if identifiable]
-- **Searches not performed:** [databases or strategies not used]
 - **Open questions:** [what remains unknown]
 
 ## Pipeline Metadata
-- Wave 1: [N papers from 3 agents]
-- Wave 2: [N additional papers]
-  - Backward citations: [N unique]
-  - Forward citations: [N unique]
-  - Cross-domain: [N unique]
-  - Adversarial: [N unique]
-- Saturation: [assessment]
+- Wave 1: [N papers] | Wave 2: [N additional]
 - Output directory: $RESEARCH_DIR
 ```
 
