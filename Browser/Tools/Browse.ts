@@ -672,7 +672,7 @@ Browse CLI v2.0.0 - Debug-First Browser Automation
 
 Usage:
   bun run Browse.ts <url>                    Navigate with full diagnostics
-  bun run Browse.ts <url> --headless         Navigate in headless mode (faster, no window)
+  bun run Browse.ts <url> --headed           Navigate in headed mode (visible browser window)
   bun run Browse.ts a11y                     Show accessibility tree of current page
   bun run Browse.ts errors                   Show console errors
   bun run Browse.ts warnings                 Show console warnings
@@ -688,7 +688,7 @@ Usage:
   bun run Browse.ts stop                     Stop session
 
 Session auto-starts on first use. No explicit start needed.
-Browser window is VISIBLE by default for debugging. Use --headless for faster iteration testing.
+Browser runs HEADLESS by default. Use --headed to see the browser window for debugging.
 
 Examples:
   bun run Browse.ts https://example.com
@@ -701,11 +701,15 @@ Examples:
 async function main(): Promise<void> {
   const rawArgs = process.argv.slice(2)
 
-  // Parse --headless flag (can appear anywhere)
-  if (rawArgs.includes('--headless')) {
-    process.env.BROWSE_HEADLESS = 'true'
+  // Parse --headed flag (can appear anywhere)
+  if (rawArgs.includes('--headed')) {
+    process.env.BROWSER_HEADLESS = 'false'
   }
-  const args = rawArgs.filter(a => a !== '--headless')
+  // Keep --headless for backwards compat
+  if (rawArgs.includes('--headless')) {
+    process.env.BROWSER_HEADLESS = 'true'
+  }
+  const args = rawArgs.filter(a => a !== '--headed' && a !== '--headless')
 
   const command = args[0]
 

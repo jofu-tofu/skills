@@ -36,7 +36,7 @@ import { writeFileCompat, fileExists, removeFile, serve, isWSL, findWindowsChrom
 
 const CONFIG = {
   port: parseInt(process.env.BROWSER_PORT || '9222'),
-  headless: process.env.BROWSER_HEADLESS === 'true',  // false by default (visible)
+  headless: process.env.BROWSER_HEADLESS !== 'false',  // true by default (headless)
   // viewport: null means "match actual window size" — no viewport override.
   // This prevents the viewport from exceeding the OS window, which would clip
   // content and break scrolling (especially when the app uses overflow:clip on body).

@@ -104,7 +104,7 @@ export class PlaywrightBrowser {
       : (options?.viewport || { width: 1280, height: 720 })
 
     this.browser = await launcher.launch({
-      headless: options?.headless ?? false,
+      headless: options?.headless ?? true,
       ...(options?.executablePath ? { executablePath: options.executablePath } : {}),
       // Request a large window; the OS will constrain to what fits on screen.
       ...(viewport === null ? { args: ['--window-size=1920,1080'] } : {})
