@@ -30,15 +30,15 @@ Max 2 sentences per table cell. Choosing prose requires a data-shape justificati
 
 | Section | Format |
 |---------|--------|
-| Problem | Prose (1-2 sentences) |
-| Current State | Bullets or table |
-| Appetite | Inline |
-| Goals / Non-Goals | Bullets |
-| Approach | Prose + diagrams |
+| Why This Design | Prose (2 paragraphs max) |
+| Current State | Bullets, table, or diagram |
+| Approach | Prose + diagrams (mandatory visual element) |
+| Precedent & Evidence | Table (mandatory) |
 | Alternatives Considered | Table (mandatory) |
-| Risks & Rabbit Holes | Bullets |
-| User Impact | Prose or bullets |
-| Open Questions | Numbered list |
+| Open Questions & Flexibility | Numbered list, mark concession surfaces |
+| Goals & Non-Goals | Bullets |
+| Risks & Mitigations | Bullets with inline rebuttals |
+| Ask | Prose (3-5 sentences max) |
 | Decision Log | Table (mandatory) |
 
 ---
@@ -63,17 +63,16 @@ Not every section belongs in every document. Include a section only if removing 
 
 | Section | Standard | Full | Include When... |
 |---------|----------|------|-----------------|
-| Problem | Must | Must | Always |
+| Why This Design | Must | Must | Always — narrative framing |
 | Current State | Could | Should | Existing system is being changed |
-| Appetite | Could | Could | Time/effort constraint is a key design factor |
-| Goals | Must | Must | Always |
-| Non-Goals | Should | Must | Scope boundaries matter or are contentious |
 | Approach | Must | Must | Always |
-| Alternatives | Must | Must | Always — this is a pillar |
-| Risks | Should | Must | Non-trivial technical or business risk exists |
-| User Impact | Could | Should | End-users are affected |
-| Open Questions | Could | Should | Genuine unresolved items exist |
-| Decision Log | Could | Must | Decisions were made during the design process |
+| Precedent & Evidence | Should | Must | Approach builds on existing patterns |
+| Alternatives | Must | Must | Always |
+| Open Questions & Flexibility | Should | Must | Unresolved items exist or concession surfaces needed |
+| Goals & Non-Goals | Must | Must | Always |
+| Risks & Mitigations | Should | Must | Non-trivial risk exists |
+| Ask | Must | Must | Always — explicit decision request |
+| Decision Log | Could | Must | Decisions made during design |
 
 "Must" = unconditional. "Should" = unless actively irrelevant. "Could" = only when carrying specific, non-obvious information. Omit rather than fill with generic content.
 

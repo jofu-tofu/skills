@@ -1,6 +1,6 @@
 # ReviewDesign Workflow
 
-**Purpose**: Evaluate an existing design document — first as a reader, then for content completeness. The best review feedback comes from reading as the audience would, not from evaluating against a grid.
+**Purpose**: Evaluate an existing design document — first as a reader, then for content completeness, then for acceptance readiness. The best review feedback comes from reading as the audience would, not from evaluating against a grid.
 
 **When to Use**:
 - "Review this design", "critique", "what's missing"
@@ -10,7 +10,8 @@
 ## Reference Material
 
 - **Output Quality:** `../OutputQuality.md` — Format selection, density, macro-structure.
-- **Design Principles:** `../Principles.md` — 9 research-backed content patterns.
+- **Design Principles:** `../Principles.md` — Foundation qualities, context recognition, guardrails.
+- **Layer Toolbox:** `../Standards/LayerToolbox.md` — Situational tools (for checking layer appropriateness).
 
 ---
 
@@ -41,13 +42,13 @@ The strongest signal of an author-structured document: it's thorough but exhaust
 
 Now evaluate content completeness. Use the pillars as a lens, not a checklist — not every pillar demands a section, and a document can satisfy a pillar without naming it.
 
-**Problem Clarity** — Is the problem stated without jumping to the solution? Would someone outside the team understand what this solves?
+**Know Your Decision-Makers** — Does the document show awareness of who reviews it? Are reviewer concerns addressed? Is evidence matched to what decision-makers trust?
 
-**Trade-off Visibility** — Are alternatives shown, including "do nothing"? For each rejected alternative, do we know why? Are costs of the chosen approach acknowledged?
+**Build on What Exists** — Is the design anchored to internal precedent? Does it frame itself as an extension rather than a departure where possible?
 
-**Feedback Loop** — Are there open questions that need answers? Is decision authority clear?
+**Make It Easy to Say Yes** — Is the document structured to reduce friction? Are concerns addressed before they're raised? Is there a visual element? Does it end with a clear ask?
 
-**Organizational Memory** — Would a new team member understand why these decisions were made? Will this still make sense in 6 months?
+**Validate Before You Ask** — Does the document feel ready for circulation? Are blocking concerns addressed? Would a skeptical reader feel informed or sold to?
 
 #### Rendering Quality (via OutputQuality.md)
 
@@ -84,7 +85,18 @@ For any external references (URLs, doc links, ADR references):
 - Does the link have a purpose label? ("See RFC-42 for the auth decision" not just "See RFC-42")
 - Is the critical information from the link summarized in-doc? A reader shouldn't need to open an external link to understand the design.
 
-### Step 4: Produce Feedback
+### Step 4: Acceptance Assessment
+
+After the pillar checks, evaluate the document through the acceptance lens from `Principles.md`.
+
+| Check | Evaluates |
+|-------|-----------|
+| **Foundation Present** | Are all 6 foundation qualities visible? Narrative framing, honest trade-offs, evidence hierarchy, co-creation tone, visual element, explicit ask. |
+| **Layer Appropriateness** | Are situational tools appropriate for this design type and scale? Any over-application (too many Layer 3 tools for a Standard doc)? Any under-application (architectural design with no credibility tools)? Load `../Standards/LayerToolbox.md` for reference. |
+| **Guardrail Compliance** | Any violations? Unearned urgency? Stacked pressure? Performative concessions? Visible scaffolding? |
+| **Reviewer Fit** | If reviewers are known, does the document address their specific concerns with evidence they trust? |
+
+### Step 5: Produce Feedback
 
 Lead with the reader-experience finding — that's what makes the document better to receive, not just more complete. Use "Yes, if" framing for gaps.
 
@@ -104,10 +116,10 @@ Lead with the reader-experience finding — that's what makes the document bette
 
 | Pillar | Status | Note |
 |--------|--------|------|
-| Problem Clarity | Strong / Adequate / Gaps | [Brief note] |
-| Trade-off Visibility | Strong / Adequate / Gaps | [Brief note] |
-| Feedback Loop | Strong / Adequate / Gaps | [Brief note] |
-| Organizational Memory | Strong / Adequate / Gaps | [Brief note] |
+| Know Your Decision-Makers | Strong / Adequate / Gaps | [Brief note] |
+| Build on What Exists | Strong / Adequate / Gaps | [Brief note] |
+| Make It Easy to Say Yes | Strong / Adequate / Gaps | [Brief note] |
+| Validate Before You Ask | Strong / Adequate / Gaps | [Brief note] |
 
 | Check | Status | Note |
 |-------|--------|------|
@@ -115,6 +127,15 @@ Lead with the reader-experience finding — that's what makes the document bette
 | Claim Credibility | OK / Unsubstantiated | [Brief note] |
 | Visual Coverage | OK / Gaps | [Brief note] |
 | Link Hygiene | OK / Issues | [Brief note] |
+
+### Acceptance Assessment
+
+| Check | Status | Note |
+|-------|--------|------|
+| Foundation Present | All 6 / Missing: [list] | [Brief note] |
+| Layer Appropriateness | Appropriate / Over-applied / Under-applied | [Brief note] |
+| Guardrail Compliance | Clean / Violations: [list] | [Brief note] |
+| Reviewer Fit | Addressed / Gaps: [list] | [Brief note or "No reviewer info available"] |
 
 ### Feedback (Yes, if...)
 
@@ -131,13 +152,14 @@ The "Yes, if" frame assumes the design is moving forward and asks what it needs 
 
 ## Calibration by Scale
 
-- **Quick (ADR)**: Focus on reader experience and alternatives. Don't penalize for missing sections.
-- **Standard**: Reader experience + all 4 pillars at moderate expectations. A Standard design doesn't need a review process section.
-- **Full**: Reader experience + all 4 pillars at full depth. Expect thorough alternatives, clear authority, and a review plan.
+- **Quick (ADR)**: Focus on reader experience and alternatives. Don't penalize for missing foundation qualities or acceptance assessment.
+- **Standard**: Reader experience + all 4 pillars + Foundation Present and Guardrail Compliance from acceptance assessment. A Standard design doesn't need a review process section.
+- **Full**: Reader experience + all 4 pillars + full acceptance assessment. Expect thorough alternatives, clear authority, and a review plan.
 
 ---
 
 ## Integration Notes
 
-- **Load `Principles.md`** when you need the 9 patterns for deeper grounding during evaluation — especially Pattern 9 (Structure for the Reader) for structural feedback
+- **Load `Principles.md`** when you need the foundation qualities or guardrails for deeper grounding during evaluation
+- **Load `Standards/LayerToolbox.md`** when checking layer appropriateness in Step 4
 - After review, the author may use `CreateDesign` to revise, or `RecordDecision` to capture individual decisions surfaced during review
