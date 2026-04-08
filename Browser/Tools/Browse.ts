@@ -209,7 +209,7 @@ async function ensureSession(): Promise<number> {
   const env: Record<string, string> = {
     ...process.env as Record<string, string>,
     BROWSER_PORT: String(port),
-    BROWSER_HEADLESS: process.env.BROWSE_HEADLESS === 'true' ? 'true' : 'false'
+    BROWSER_HEADLESS: process.env.BROWSER_HEADLESS === 'false' ? 'false' : 'true'
   }
 
   // On Windows, Bun + Playwright chromium.launch() hangs.
