@@ -41,14 +41,14 @@ Language models are trained with reward signals that systematically prefer longe
 
 Nielsen's 1997 study measured a 124% usability improvement from combining three techniques: conciseness (half word count), scannability (bullets, headings), and objectivity (facts, not claims). These effects are multiplicative, not additive. This is why the rules target all three simultaneously — format selection enforces scannability, density rules enforce conciseness, and banned vocabulary enforces objectivity.
 
-## Anchoring, Loss Aversion, Reactance, and Pre-Suasion
+## Anchoring, Loss Aversion, Reactance, and Framing
 
-The acceptance framework draws on four additional research traditions:
+The review-support framework draws on four additional research traditions:
 
 - **Anchoring bias** (Tversky & Kahneman, 1974): The first piece of information disproportionately shapes all subsequent evaluation. This grounds the evidence hierarchy (lead with internal precedent) and narrative framing (set the interpretive lens first).
-- **Loss aversion** (Kahneman & Tversky, 1979): Losses feel roughly 2x as painful as equivalent gains. This grounds penalty framing (cost of inaction) — but also the guardrail against false urgency, because manufactured loss framing triggers reactance.
+- **Loss aversion** (Kahneman & Tversky, 1979): Losses feel roughly 2x as painful as equivalent gains. This grounds cost-of-delay framing — but also the guardrail against false urgency, because manufactured loss framing triggers reactance.
 - **Reactance theory** (Brehm, 1966): When people feel their freedom to choose is being restricted, they resist — even if they would have freely chosen the same option. This grounds the guardrails against stacking pressure and visible scaffolding.
-- **Pre-Suasion** (Cialdini, 2016): Directing attention to a concept before the message makes people more receptive to messages consistent with that concept. This grounds narrative framing — the opening paragraph isn't just context, it's the interpretive lens.
+- **Framing effects** (Tversky & Kahneman, 1981): The way a decision is presented changes how people evaluate trade-offs. This grounds narrative framing — the opening paragraph should define the problem, users, criteria, and decision boundary.
 
 ---
 
@@ -71,12 +71,11 @@ The acceptance framework draws on four additional research traditions:
 | **Design Thinking** (Stanford d.school, NNGroup) | Empathy-first problem framing; POV madlib; diverge-then-converge; human-centered design |
 | **William Zinsser** (On Writing Well) | Reader-first structure; the writer's job is to do work the reader cannot |
 
-### Acceptance & Persuasion Science Sources
+### Review & Decision Science Sources
 
 | Source | Contribution |
 |--------|-------------|
-| **Robert Cialdini** (Influence, Pre-Suasion) | Six principles of influence; pre-suasion attention direction; unity principle |
-| **Fisher & Ury** (Getting to Yes) | Interest-based negotiation; separate people from problems; co-creation |
+| **Fisher & Ury** (Getting to Yes) | Interest-based negotiation; separate people from problems; collaborative review |
 | **Kahneman & Tversky** (Prospect Theory, 1979) | Loss aversion; anchoring bias; framing effects |
 | **Jack Brehm** (Reactance Theory, 1966) | Resistance to perceived freedom restriction; boomerang effects of pressure |
 | **Samuelson & Zeckhauser** (Status Quo Bias, 1988) | Default bias; why ambiguous asks produce inaction |

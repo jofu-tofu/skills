@@ -1,6 +1,6 @@
 # CreateDesign Workflow
 
-**Purpose**: Walk through a structured design process that scales from standard feature designs to full architecture documents. Produces a concrete markdown design artifact oriented toward reviewer acceptance.
+**Purpose**: Walk through a structured design process that scales from standard feature designs to full architecture documents. Produces a concrete markdown design artifact oriented toward decision quality and constructive review.
 
 **When to Use**:
 - "Design doc", "write a design", "scope this feature", "proposal"
@@ -10,12 +10,36 @@
 ## Reference Material
 
 - **Output Quality:** `../OutputQuality.md` — Format selection, density, anti-AI patterns. **Read before producing any output in Step 4.**
-- **Design Principles:** `../Principles.md` — Foundation qualities, context recognition, guardrails.
-- **Layer Toolbox:** `../Standards/LayerToolbox.md` — Situational tools by cognitive phase. **Read during Step 4.**
+- **Design Principles:** `../Principles.md` — Decision spine, foundation qualities, context recognition, guardrails.
+- **Layer Toolbox:** `../Standards/LayerToolbox.md` — Situational review-support tools. **Read during Step 4.**
 
 ---
 
 ## Process
+
+### Step 0: Clarify Blocking Unknowns
+
+Before assessing scale or drafting, separate known facts from missing context. Use repo/source context when available, but do not invent user goals, user segments, current-state facts, reviewer concerns, or decision criteria from generic domain knowledge.
+
+Ask only questions that change the artifact. Each question must use this format:
+
+```markdown
+**Question:** [Specific missing fact]
+**Why this matters:** [How the answer affects scale, criteria, scope, evidence, or wording]
+```
+
+Ask when any of these are unknown:
+- **Target users or beneficiaries** — needed to define what matters and avoid generic criteria
+- **User/workflow pain** — needed to derive criteria from real friction rather than preference
+- **Decision boundary** — needed to know what is being approved and what stays async
+- **Decision owner/reviewers** — needed to choose evidence and review framing
+- **Constraints/appetite** — needed to choose scale and avoid over-designing
+- **Criteria or trade-off priority** — needed to evaluate alternatives without post-hoc justification
+- **Current-state facts** — needed to avoid unsupported claims
+
+If the user cannot answer, record the gap as an assumption or open question. Do not silently promote it to fact.
+
+---
 
 ### Step 1: Assess Scale
 
@@ -27,7 +51,7 @@ Before anything else, determine the appropriate scale for this design.
 | **Standard** | Feature, workflow, medium scope, weeks of work | Phases 1-4 of this workflow |
 | **Full** | Architecture, new system, multi-week initiative, multiple teams | All 5 phases |
 
-**Default to the lightest appropriate scale.** If uncertain, ask the user. Over-scoping a design is a failure mode — it creates friction and discourages future documentation.
+**Default to the lightest appropriate scale when the context supports it.** If scale is uncertain because the decision boundary, blast radius, or intended use is missing, ask the user with a **Why this matters** label. Over-scoping a design is a failure mode — it creates friction and discourages future documentation.
 
 **Write**: "Scale assessment: [Quick/Standard/Full] because [reason]"
 
@@ -41,12 +65,12 @@ Two sub-phases that establish the foundation for the design.
 
 #### Step 2a: Know Your Reviewers
 
-**Ask the user (use AskUserQuestion or conversational clarification):**
+**Ask the user (use AskUserQuestion or conversational clarification) when this cannot be inferred from provided context. Label each question with why it matters:**
 
 1. **Who will review/approve this design?**
 2. **For each reviewer**: What are their top 2-3 concerns? What's their likely disposition (supportive, neutral, skeptical)? What evidence types do they trust?
 
-**If the user can't name specific reviewers**, use these fallback archetypes based on the design type:
+**If the user can't name specific reviewers**, use these fallback archetypes based on the design type and label them as assumptions:
 
 | Archetype | Top Concern | Evidence They Trust |
 |-----------|------------|-------------------|
@@ -61,7 +85,7 @@ Select 1-2 archetypes that match the design type. A technical design defaults to
 
 #### Step 2b: Define the Problem
 
-**Ask the user:**
+**Ask the user for missing items. Label each question with why it matters and skip questions already answered by the prompt or repo context:**
 
 1. **What problem are we solving?** Not "what do we want to build" — what pain or gap exists?
 2. **For whom?** Who experiences this problem? Who benefits from solving it?
@@ -69,6 +93,9 @@ Select 1-2 archetypes that match the design type. A technical design defaults to
 4. **What's the appetite?** How much time/effort do we WANT to spend? (This is a constraint, not an estimate.)
 5. **What kind of design is this?** (scope, UI, technical, architectural, process, quick decision)
 6. **How big is the change?** Incremental extension, moderate departure, or significant departure from current state?
+7. **What exact decision is needed?** If there are multiple decisions, list them and keep the meeting/review surface to 2-3 decision points per 30 minutes.
+8. **Who owns the decision?** Name the DRI/decider. Reviewers provide input; one owner makes the final call.
+9. **What is out of scope for this decision?** Identify topics that should move async or become follow-up decisions.
 
 **Synthesize into a Problem Statement** using the Design Thinking POV format:
 
@@ -80,11 +107,70 @@ Frame the problem statement to address the top blocking concern identified in St
 
 **Output**: Problem statement + context summary + reviewer model
 
+**Grounding rule**: The problem statement may use only user-provided facts, repo/source evidence, or explicitly labeled assumptions. If target users, user value, or current-state pain are unknown, ask before writing the problem statement.
+
 ---
 
-### Step 3: Build Your Case
+### Step 3: Build the Decision Spine
 
-Gather evidence and evaluate alternatives, oriented toward the reviewer concerns identified in Step 2.
+Build the reasoning spine before recommending an option. The sequence is:
+
+> Context -> risks -> constraints -> criteria -> assumptions -> alternatives -> decision
+
+#### Step 3a: Define the Decision Boundary
+
+Capture:
+- **Decision**: the exact choice being made
+- **Owner**: the single person or role accountable for the final call
+- **Decision type**: reversible, reversible with cost, or hard to reverse
+- **Allowed inputs**: concerns that can change the outcome
+- **Out-of-scope inputs**: topics to park, answer async, or route to a follow-up decision
+
+This turns the design into a decision artifact, not a discussion space.
+
+#### Step 3b: Derive Decision Criteria
+
+Criteria define what "good" means for this decision. Derive them from first principles:
+
+1. What breaks if we optimize the wrong thing?
+2. What will hurt in 6 months?
+3. What matters most right now?
+
+Use a criteria table:
+
+| Criterion | Why It Matters | Priority | Evaluation |
+|-----------|----------------|----------|------------|
+| [Concrete criterion] | [Risk or constraint it answers] | Must / Should / Could or rank | [Metric, evidence, or review question] |
+
+Criteria must be ranked. Unranked criteria preserve debate instead of resolving it.
+
+Use the design type to find non-arbitrary criteria:
+- **UI/UX**: start from workflow friction and human constraints. Common dimensions: interaction cost, cognitive load, learnability, discoverability, efficiency at scale, error prevention/recovery, flexibility. If the org uses Nielsen heuristics, translate only relevant heuristics into concrete criteria for this workflow.
+- **Architecture/data model**: start from system risks. Common dimensions: correctness, scalability, coupling, performance, operational safety, observability, schema evolution.
+- **Scope**: start from product and delivery risks. Common dimensions: user value, time-to-ship, overbuild risk, underbuild risk, complexity, milestone integrity.
+
+If you cannot derive criteria from the stated workflow, risks, constraints, or user priorities, ask before proceeding:
+
+```markdown
+**Question:** Which outcome matters most if we have to trade off [A] against [B]?
+**Why this matters:** This priority determines the decision criteria; without it, the design would invent intent and over-explain alternatives.
+```
+
+Criteria may include assumptions, but they must be labeled. Example: "Assumption: daily users prioritize repeated-use speed over first-use guidance."
+
+#### Step 3c: Separate Assumptions from Criteria
+
+Assumptions are testable beliefs that make the criteria reasonable. Capture only load-bearing assumptions: if the assumption were false, would the decision change?
+
+Examples:
+- Criteria: "Optimize for repeated-use efficiency over first-use guidance."
+- Assumption: "Most users perform this workflow daily after onboarding."
+
+Debate only assumptions that can flip the decision. Everything else moves async.
+
+#### Step 3d: Gather Evidence and Evaluate Alternatives
+
+Gather evidence and evaluate alternatives, oriented toward the decision criteria and reviewer concerns identified in Step 2.
 
 **Apply the evidence hierarchy** (from `Principles.md`):
 - Internal precedent first — what has your org done before that's similar?
@@ -92,6 +178,7 @@ Gather evidence and evaluate alternatives, oriented toward the reviewer concerns
 - External research — what data supports this approach?
 
 **For each plausible approach:**
+- How does it perform against the top criteria?
 - What would we gain?
 - What would we lose?
 - How does it address each reviewer's top concerns?
@@ -99,7 +186,7 @@ Gather evidence and evaluate alternatives, oriented toward the reviewer concerns
 
 **Classify decisions:**
 - **Load-bearing** — anchor heavily with evidence; these are non-negotiable
-- **Negotiable** — mark as concession surfaces for reviewer input
+- **Negotiable** — mark as flexible surfaces for reviewer input
 
 **For controversial sections:**
 - Draft preemptive rebuttals for the top 2-3 anticipated objections
@@ -123,40 +210,43 @@ At least one visual is mandatory. For architectural or multi-component designs, 
 **Also identify:**
 - **Non-goals** — things deliberately excluded, with rationale
 - **Rabbit holes** — areas of technical risk to timebox or avoid
+- **Revisit triggers** — assumption or metric changes that should reopen the decision later
 
-**Output**: Evidence matrix + alternatives evaluation + visual plan + classified decisions
+**Output**: Decision boundary + ranked criteria + load-bearing assumptions + evidence matrix + alternatives evaluation + visual plan + classified decisions + revisit triggers
 
 ---
 
-### Step 4: Draft for Acceptance
+### Step 4: Draft for Review
 
-Synthesize into the design artifact. Apply the Foundation + Layers framework throughout.
+Synthesize into the design artifact. Apply the Foundation + review-support tools throughout.
 
 **Before writing, read `../OutputQuality.md`** and **`../Standards/LayerToolbox.md`**.
 
 #### Apply Foundation Qualities
+
+Start with the Decision Spine from Step 3. The recommendation should read as the result of criteria and evidence, not as a choice later justified by them.
 
 All 6 foundation qualities from `Principles.md` are mandatory:
 
 1. **Narrative framing** — Opening "Why This Design" section makes the design feel like the natural next step
 2. **Honest trade-offs** — Alternatives get genuine consideration; recommended option has acknowledged weaknesses
 3. **Evidence hierarchy** — Claims trace to internal precedent, industry practice, or data
-4. **Co-creation tone** — "We" language; concession surfaces invite participation
+4. **Constructive review surface** — fixed/flexible/open items are clear; reviewer input has a defined place
 5. **Show don't tell** — Execute the visual plan from Step 3. Diagrams are the primary communication; prose explains what they can't show
 6. **Explicit ask** — Document ends with a specific decision request
 
-#### Select Situational Tools
+#### Select Review-Support Tools
 
 Read `../Standards/LayerToolbox.md`. For each layer, check the "Activate When" column against your Step 2 context:
 
 1. **Layer 1 (Credibility):** Read each tool's trigger. If a trigger matches your situation, activate that tool.
 2. **Layer 2 (Structure):** Same process.
-3. **Layer 3 (Momentum):** Same process. Respect the scale limit (Standard: max 1; Full: max 2).
+3. **Layer 3 (Decision Timing):** Same process. Use only when the timing facts matter.
 
 For each layer, write a one-line note:
 - "Layer 1: Activating **benchmarks** because audience is data-driven and we have performance claims."
 - "Layer 2: Activating **preemptive rebuttals** because the migration will face 'why not stay on current system' objections."
-- "Layer 3: No tools — no trigger matches at this scale."
+- "Layer 3: No tools — no timing trigger matches at this scale."
 
 If no trigger matches for a layer, activate zero tools for that layer.
 
@@ -164,7 +254,7 @@ If no trigger matches for a layer, activate zero tools for that layer.
 
 Before finalizing, verify against the 5 guardrails in `Principles.md`:
 - Urgency is earned (quantifiable cost of inaction)
-- Momentum tools within scale limit
+- Timing/pressure tools are grounded and limited
 - Concession surfaces are genuinely flexible
 - Dominant type leads for hybrids
 - Scaffolding is invisible
@@ -177,7 +267,7 @@ Before finalizing, verify against the 5 guardrails in `Principles.md`:
 
 **Density principle**: A design document's power is inversely proportional to its length. Every additional sentence competes for the reader's finite attention — and the sentences that matter most (the decision points, the key trade-offs) lose force as the document grows. The reader who skims past your critical insight because it was buried in context didn't fail you — the document failed them.
 
-Write the shortest document that a reviewer can say yes to. Let OutputQuality.md's density rules, signal tests, and compression protocol do the enforcement — they exist precisely so you don't need rigid word counts. When in doubt about whether a section is too long, apply the "So What?" test: if removing a paragraph changes no decision, remove it.
+Write the shortest document that lets a reviewer understand, challenge, approve, or revisit the decision. Let OutputQuality.md's density rules, signal tests, and compression protocol do the enforcement — they exist precisely so you don't need rigid word counts. When in doubt about whether a section is too long, apply the "So What?" test: if removing a paragraph changes no decision, remove it.
 
 As a rough anchor: Standard designs typically land around 500–1000 words, Full designs around 1000–2500 words. These aren't limits — they're what naturally results from disciplined section selection and compression. If you're well above that range, you're likely including content the reader doesn't need to decide.
 
@@ -189,27 +279,33 @@ Auto-chain the `ValidateOutput` workflow:
 - `artifact`: the completed design document from Step 4
 - `scale`: the assessed scale from Step 1
 
-ValidateOutput runs dual gates: Substance Gate first, then Acceptance Gate. Fix any FAIL results before delivery.
+ValidateOutput runs dual gates: Substance Gate first, then Review Readiness Gate. Fix any FAIL results before delivery.
 
 ---
 
 ### Step 5: Review (Full Scale Only)
 
-Structure feedback using the "Yes, if" framing — objections are constructive contributions, not blockers.
+Structure feedback as decision input: objections should clarify criteria, evidence, assumptions, scope, or alternatives.
+
+Use the design artifact to compress the decision, not to explore from scratch. Pre-wire high-risk objections before the meeting: send the draft to the 2-3 stakeholders most likely to block, ask what would make them block it, and revise weak criteria, assumptions, or evidence before live review.
 
 **Pre-review readiness check:**
 - Do you have the votes? Cross-reference the reviewer model from Step 2a against the document.
 - Is every blocking concern addressed with evidence the reviewer trusts?
-- Would a skeptical reader feel informed or sold to?
+- Would a skeptical reader feel informed rather than sold to?
+- Is the review surface bounded by criteria, assumptions, option evaluation, and explicit non-goals?
 
 **Process:**
 1. Identify reviewers based on the decision authority established in Step 2
-2. Present the design document
-3. Collect feedback framed as "Yes, if [condition]" rather than "No, because [objection]"
-4. Cross-reference actual feedback against the reviewer model — update the model for future designs
-5. Capture outstanding concerns and resolution path
-6. Record final decisions with rationale in the decision log
-7. Set a revisit date if the design has time-sensitive assumptions
+2. Pre-wire alignment with likely blockers before live review
+3. Present the design document as the decision filter: criteria, load-bearing assumptions, and option comparison
+4. Collect feedback framed as "This changes the decision if [condition]" rather than open-ended preference
+5. Classify each objection: changes criteria, changes assumption, changes option evaluation, or out of scope
+6. Park comments that do not affect the decision criteria or load-bearing assumptions
+7. Cross-reference actual feedback against the reviewer model — update the model for future designs
+8. Capture outstanding concerns and resolution path
+9. Record final decisions with rationale in the decision log
+10. Set a revisit date or revisit trigger if the design has time-sensitive assumptions
 
 **Output**: Updated design document with review feedback incorporated + decision log entries
 
@@ -226,10 +322,29 @@ The artifact this workflow produces. **Include only sections selected per Output
 **Author**: [name]  |  **Decider**: [name/role]
 
 ## Why This Design
-[Narrative framing — 2 paragraphs that make the design feel like the natural next step. Addresses the top blocking concern within the first paragraph.]
+[Narrative framing — 2 paragraphs that state the problem, users, top criteria, and why the proposed change follows. Addresses the top blocking uncertainty within the first paragraph.]
 
 ## Current State
 [What exists today — what's broken/missing. Use visuals where possible.]
+
+## Decision Boundary
+| Field | Value |
+|-------|-------|
+| Decision | [Exact choice being made] |
+| Owner | [DRI / decider] |
+| Type | [Reversible / reversible with cost / hard to reverse] |
+| In Scope | [Inputs allowed to change the outcome] |
+| Out of Scope | [Topics to answer async, park, or route to follow-up] |
+
+## Decision Criteria
+| Criterion | Why It Matters | Priority | Evaluation |
+|-----------|----------------|----------|------------|
+| ... | ... | Must / Should / Could or rank | Metric, evidence, or review question |
+
+## Assumptions & Revisit Triggers
+| Assumption | Why It Matters | Revisit Trigger |
+|------------|----------------|-----------------|
+| ... | ... | [Metric, event, or new evidence that reopens the decision] |
 
 ## Approach
 [The actual design. Diagrams, flow charts, architecture pictures. Show don't tell. Break large changes into incremental phases where applicable.]
@@ -242,10 +357,10 @@ The artifact this workflow produces. **Include only sections selected per Output
 ## Alternatives Considered
 | Option | Pros | Cons | Why Not |
 |--------|------|------|---------|
-| [Alternative A] | ... | ... | [Tied to specific concern it fails to address] |
+| [Alternative A] | ... | ... | [Tied to criterion or concern it fails to address] |
 
 ## Open Questions & Flexibility
-[Genuine unresolved items. Mark which are concession surfaces — areas where you're genuinely flexible and invite reviewer input.]
+[Genuine unresolved items. Mark which are flexible, what evidence would decide them, and which owner should resolve them.]
 
 ## Goals & Non-Goals
 - Goals: [Specific, measurable]
@@ -255,11 +370,11 @@ The artifact this workflow produces. **Include only sections selected per Output
 [Embedded inline where possible. For remaining risks: each risk paired with a mitigation or acknowledgment. Preemptive rebuttals for the top 2-3 anticipated objections.]
 
 ## Ask
-[Explicit decision request: "Approve this design" / "Approve with conditions" / "Choose between Option A and Option B." The single strongest reason to say yes. Not a summary.]
+[Explicit decision request: "Approve this design" / "Approve with conditions" / "Choose between Option A and Option B" / "Validate these criteria before implementation." Not a summary.]
 
 ## Decision Log
-| Decision | Rationale | Date |
-|----------|-----------|------|
+| When / Source | Decision / Concern | Why | Revisit If | Reopens |
+|---------------|--------------------|-----|------------|---------|
 ```
 
 ### Worked Examples for New Sections
@@ -278,12 +393,12 @@ The artifact this workflow produces. **Include only sections selected per Output
 | Teams that migrate caching incrementally report fewer rollback incidents | Shopify eng blog, Stripe infrastructure post | Industry |
 
 **Open Questions & Flexibility** (scope design):
-1. Cache invalidation strategy: TTL-based vs. event-driven. **Concession surface** — we lean toward TTL for simplicity but would adopt event-driven if the catalog team prefers tighter consistency.
+1. Cache invalidation strategy: TTL-based vs. event-driven. **Flexible** — we lean toward TTL for simplicity but would adopt event-driven if the catalog team needs tighter consistency.
 2. Should we cache product images or just metadata? Needs input from the frontend team on current bottlenecks.
-3. **Concession surface** — Redis cluster topology (single-node vs. cluster) is flexible. We've sized for single-node but can scale if the infra team has concerns.
+3. **Flexible** — Redis cluster topology (single-node vs. cluster). We've sized for single-node but can scale if the infra team has concerns.
 
 **Ask** (Full, architectural):
-> We recommend approving the Redis read-through cache as described. It extends our existing infrastructure, addresses the p99 SLA risk before Q4, and leaves cache topology and invalidation strategy flexible for reviewer input. Approve this design, or identify conditions under which it would be acceptable.
+> Approve the Redis read-through cache as described, or identify which criterion or assumption changes the decision. It extends our existing infrastructure, addresses the p99 SLA risk before Q4, and leaves cache topology and invalidation strategy flexible for reviewer input.
 
 ---
 
@@ -305,7 +420,7 @@ The artifact this workflow produces. **Include only sections selected per Output
 ## Integration Notes
 
 - **From RecordDecision**: Quick-scale assessments redirect there instead
-- **From ReviewDesign**: Existing designs can be evaluated against the 4 Pillars and the Acceptance Assessment
+- **From ReviewDesign**: Existing designs can be evaluated against the 6 Pillars and Review Readiness
 - **To RecordDecision**: Full-scale designs may spawn individual ADRs for key decisions
 - **Load `Principles.md`** when deeper grounding is needed on any foundation quality or guardrail
 - **Load `Standards/LayerToolbox.md`** during Step 4 for situational tool selection

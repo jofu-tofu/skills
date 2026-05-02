@@ -1,6 +1,6 @@
 # Design Principles
 
-**Purpose**: Context file containing the acceptance-oriented framework that grounds the Design skill. Organized as Foundation (always-on qualities) + Context Recognition + Guardrails (constraints). Loaded on-demand by workflows when deeper grounding is needed.
+**Purpose**: Context file containing the decision-quality and review-oriented framework that grounds the Design skill. Organized as Decision Spine + Foundation (always-on qualities) + Context Recognition + Guardrails (constraints). Loaded on-demand by workflows when deeper grounding is needed.
 
 **Companion files** (loaded only when needed):
 - `Standards/LayerToolbox.md` — Situational tools organized by cognitive phase. Loaded during CreateDesign Step 4.
@@ -8,21 +8,64 @@
 
 ---
 
+## The Decision Spine
+
+A design's reasoning must be explicit before the recommendation appears: **decision boundary -> criteria -> assumptions -> option comparison -> ask**. This prevents post-hoc justification, limits review drift, and gives every stakeholder the same filter for comments.
+
+### Clarification Before Synthesis
+
+When context is missing, ask before filling gaps with plausible-sounding assumptions. A design saves words by aligning to the user's actual intent and the known facts; invented context creates extra prose, weak criteria, and review churn.
+
+Ask only blocking questions. Each question must include **Why this matters** so the user can see how the answer changes scale, criteria, evidence, or scope. If an answer is unknown, capture it as an explicit assumption or open question instead of treating it as fact.
+
+**Anti-pattern**: Creating user goals, decision criteria, reviewer concerns, or current-state facts from generic domain knowledge when the prompt did not provide them.
+
+**Test**: Is every claim grounded in user-provided context, repo/source evidence, or an explicitly labeled assumption?
+
+### Decision Boundary
+
+State exactly what is being decided, who owns the final call, whether the decision is reversible, and which inputs are allowed to change the outcome. A bounded decision lets reviewers contribute without turning the document into an open-ended brainstorming space.
+
+**Anti-pattern**: "Choose database approach" when the real decision is "Pick persistence layer for the billing service; reversible; owner = platform lead; inputs = consistency, operational risk, and 12-month scale; not style preference."
+
+### Decision Criteria
+
+Criteria define what "good" means for this decision. Derive them from first principles: context -> risks -> constraints -> criteria. Prioritize them so trade-offs become explicit: correctness may outrank performance for a ledger, while repeated-use efficiency may outrank first-use discoverability for a daily workflow.
+
+Valid criteria are concrete, ranked, and decision-driving. They map to real failure modes, can be observed or evaluated, force trade-offs, and help reject options. If a criterion cannot help say no to an option, it is decoration.
+
+**Domain guides**:
+- **UI/UX**: derive criteria from workflow friction and human constraints: interaction cost, cognitive load, learnability, discoverability, efficiency at scale, error prevention/recovery, flexibility. Nielsen heuristics are a source library; translate only relevant heuristics into workflow-specific criteria.
+- **Architecture/data model**: derive criteria from system risk: correctness, scalability, coupling, performance, operational safety, observability, schema evolution.
+- **Scope**: derive criteria from product and delivery risk: user value, time-to-ship, overbuild risk, underbuild risk, complexity, milestone integrity.
+
+### Assumptions and Revisit Triggers
+
+Assumptions are testable beliefs that explain why the criteria are valid; they are not the criteria themselves. Debate only assumptions that would change the decision. Revisit triggers turn future disagreement into a factual question: "Did the assumptions change?"
+
+**Anti-pattern**: Trying to align on every assumption. This creates swirl. Align on criteria first, then resolve only load-bearing assumptions.
+
+### Review Surface
+
+The document should make comments constructive by defining what feedback is in scope. A review comment should challenge a criterion, a priority, a load-bearing assumption, an option's score against criteria, or a stated non-goal. Styling details, implementation preferences, and adjacent concerns move async unless they affect the decision criteria.
+
+**Test**: Can every blocking comment be answered as "changes criteria," "changes assumption," "changes option evaluation," or "out of scope"?
+
+---
+
 ## The Foundation
 
-Six always-on qualities applied to every design document. These are not "selected" — they are ambient properties of good design writing that handle 80% of acceptance work.
+Six always-on qualities applied to every design document. These are not "selected" — they are ambient properties of good design writing that handle most review and comprehension work.
 
 ### 1. Narrative Framing
 
-The opening sets the interpretive lens. A reviewer who encounters your frame first reads everything through it. Not neutral problem description — a compelling case for why this path is right, presented as the natural next step.
+The opening sets the interpretive lens. A reviewer who encounters your frame first reads everything through it. Not generic background — a compact statement of the problem, users, criteria, and proposed change.
 
-The first paragraph addresses the top blocking concern. The second builds momentum toward the approach. A reader who finishes the opening should already be leaning toward yes.
-
-> "Pre-suasion is the practice of getting people sympathetic to your message before they experience it." — Robert Cialdini, *Pre-Suasion*
+The first paragraph addresses the top blocking uncertainty. The second shows why the proposed change follows from the criteria. A reader who finishes the opening should understand the decision before reading the details.
 
 Bransford & Johnson (1972) demonstrated that providing the topic before the content produces roughly 2x recall. Frame first, detail second.
 
-**Anti-pattern**: Neutral "background" openings that describe the situation without directing interpretation. The reader constructs their own frame — and it may work against you.
+**Anti-pattern**: Generic "background" openings that describe the situation without naming the decision. The reader must infer what matters.
 
 ### 2. Honest Trade-offs
 
@@ -36,31 +79,27 @@ In trial advocacy, disclosing weaknesses on direct examination ("disclose on dir
 
 ### 3. Evidence Hierarchy
 
-Internal precedent > industry practice > external research. What your own org has done is the strongest anchor because it's simultaneously social proof, authority, and risk reduction.
+Internal precedent > industry practice > external research. What your own org has done is usually the strongest evidence because it is closest to the current constraints, systems, and team habits.
 
 | Evidence Type | Strength | Why |
 |--------------|----------|-----|
-| Internal precedent | Strongest | "We've done this before" — social proof + authority + proven feasibility |
-| Industry practice | Strong | "Others do this" — social proof + external validation |
+| Internal precedent | Strongest | "We've done this before" — local feasibility and operational fit |
+| Industry practice | Strong | "Others do this" — external validation when local data is missing |
 | External research | Moderate | "Studies show" — authority, but distant from your specific context |
 
 Anchoring bias (Tversky & Kahneman, 1974): the first reference point disproportionately shapes evaluation. Lead with internal precedent when available.
 
-> "A person's compliance with a request is often strongly influenced by knowing that others in the same situation have complied." — Cialdini on Social Proof
+**Anti-pattern**: Leading with external research when internal precedent exists. Your own org's experience is usually more relevant.
 
-**Anti-pattern**: Leading with external research when internal precedent exists. Your own org's experience is more persuasive and more relevant.
+### 4. Constructive Review Surface
 
-### 4. Co-Creation Tone
+Reviewers need clear ways to improve the decision without reopening everything. Mark what is fixed, what is flexible, and what evidence would change the outcome.
 
-People defend decisions they helped shape. "We" language and genuine concession surfaces transform "your proposal" into "our approach." Reviewers who feel like co-authors become advocates.
-
-The IKEA effect: people value things more when they contributed to building them. Concession surfaces — areas deliberately left flexible for reviewer input — create ownership.
+Use collaborative language and genuine flexibility where reviewer input can improve the design. A flexible surface is useful only when you would accept a different answer.
 
 > "Separate the people from the problem. Focus on interests, not positions." — Fisher & Ury, *Getting to Yes*
 
-Cialdini's Unity principle: people say yes to those they consider "one of us." Co-creation tone signals shared identity and shared goals.
-
-**Anti-pattern**: "I propose" / "my design" language that positions the author against reviewers. Also: performative concessions where the "flexible" areas are actually locked down.
+**Anti-pattern**: Performative flexibility where the "open question" has a predetermined answer.
 
 ### 5. Show Don't Tell
 
@@ -74,13 +113,9 @@ Architectural or multi-component designs need 2-3 visuals. Even feature-level de
 
 ### 6. Explicit Ask
 
-The document ends with a clear, specific request: approve, give feedback on X, decide between A and B. Not a summary — a decision request.
+The document ends with a clear, specific request: approve, give feedback on X, decide between A and B, or validate criteria before more work happens. Not a summary — a decision request.
 
 An ambiguous conclusion forces the reviewer to construct an action — and the easiest self-constructed action is "defer." Default bias (Samuelson & Zeckhauser, 1988): when no clear action is specified, people choose the status quo.
-
-In trial advocacy, this is verdict construction — telling the jury exactly what verdict to reach and why.
-
-> "Never leave the close to chance. Tell the decision-maker exactly what you're asking for." — Trial advocacy principle
 
 **Anti-pattern**: Ending with a summary or "next steps" list that doesn't include a specific decision request. The reader finishes informed but uncommitted.
 
@@ -94,11 +129,11 @@ Before applying situational tools, understand the design situation. Three questi
 
 | Design Type | Characteristics | Foundation Emphasis |
 |------------|----------------|-------------------|
-| Scope (next quarter planning) | Resource allocation, prioritization | Co-creation tone critical; concession surfaces for negotiation |
+| Scope (next quarter planning) | Resource allocation, prioritization | Constructive review surface critical; flexible surfaces for negotiation |
 | UI/UX (new flow, redesign) | Visual, user-facing | Show don't tell dominant; heavy use of mockups and flows |
 | Technical (caching, API, service) | Performance, correctness | Evidence hierarchy key; benchmarks and data |
 | Architectural (migration, new system) | Cross-team, high stakes | All foundation qualities at full depth |
-| Process (code review, workflow) | People and habits | Co-creation tone critical; social proof from industry |
+| Process (code review, workflow) | People and habits | Constructive review surface critical; internal precedent matters |
 | Quick decision (database, library) | Single choice, low ceremony | Evidence hierarchy via comparison table |
 
 ### Question 2: Who decides, and what are their concerns?
@@ -126,7 +161,7 @@ Model each reviewer when known:
 |-------------|--------|-------------|
 | Incremental extension | Builds on existing pattern | Frame as continuation; evidence hierarchy anchors to precedent |
 | Moderate departure | New approach to existing problem | Needs stronger evidence; preemptive rebuttals for "why not keep current approach" |
-| Significant departure | New system, migration, paradigm shift | Full Layer 2 + Layer 3 tools; incremental blocking to make it digestible |
+| Significant departure | New system, migration, paradigm shift | Strong criteria, evidence, and incremental blocking to make it digestible |
 
 ---
 
@@ -136,15 +171,15 @@ Five rules that constrain tool application. Framed as what to do, not what to av
 
 ### 1. Earn Urgency
 
-Use penalty framing only when inaction has quantifiable cost. If the cost of waiting a month is negligible, frame the decision as low-pressure. Manufactured urgency triggers reactance (Brehm, 1966) — people resist when they feel their freedom to choose is being restricted.
+Use cost-of-delay framing only when inaction has quantifiable cost. If the cost of waiting a month is negligible, frame the decision as low-pressure. Manufactured urgency triggers reactance (Brehm, 1966) — people resist when they feel their freedom to choose is being restricted.
 
-### 2. Limit Momentum Tools
+### 2. Limit Pressure
 
-Apply at most 1 Layer 3 tool at Quick or Standard scale. At most 2 at Full scale. When multiple momentum tools stack (penalty + scarcity + forcing mechanism together), the reader stops evaluating the design and starts resisting the pressure.
+Apply pressure only when the facts justify it. When cost, deadline, and dependency framing stack together, the reader stops evaluating the design and starts resisting the pressure.
 
 ### 3. Offer Genuine Flexibility
 
-Mark areas as concession surfaces only when you would genuinely accept the reviewer's alternative. If the "open question" has a predetermined answer, it's not a concession — it's manipulation. Fake flexibility erodes trust when discovered, and it will be discovered.
+Mark areas as flexible only when you would genuinely accept the reviewer's alternative. If the "open question" has a predetermined answer, it is fake flexibility. Fake flexibility erodes trust when discovered, and it will be discovered.
 
 ### 4. Let the Dominant Type Lead
 
@@ -152,4 +187,4 @@ For hybrid designs (e.g., scope + architecture), classify by who approves. The a
 
 ### 5. Make Scaffolding Invisible
 
-Rewrite until the document reads as a clear design, not a persuasion exercise. The techniques should be invisible — the document should feel like honest reasoning that naturally leads to approval. Loss aversion framing that feels manipulative, concession surfaces that feel staged, urgency that feels manufactured — rewrite or remove all of these.
+Rewrite until the document reads as a clear design, not a persuasion exercise. The structure should feel like honest reasoning. Loss framing that feels manipulative, flexible surfaces that feel staged, or urgency that feels manufactured should be rewritten or removed.

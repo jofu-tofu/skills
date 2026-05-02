@@ -1,6 +1,6 @@
 # ReviewDesign Workflow
 
-**Purpose**: Evaluate an existing design document — first as a reader, then for content completeness, then for acceptance readiness. The best review feedback comes from reading as the audience would, not from evaluating against a grid.
+**Purpose**: Evaluate an existing design document — first as a reader, then for content completeness, then for review readiness. The best review feedback comes from reading as the audience would, not from evaluating against a grid.
 
 **When to Use**:
 - "Review this design", "critique", "what's missing"
@@ -10,7 +10,7 @@
 ## Reference Material
 
 - **Output Quality:** `../OutputQuality.md` — Format selection, density, macro-structure.
-- **Design Principles:** `../Principles.md` — Foundation qualities, context recognition, guardrails.
+- **Design Principles:** `../Principles.md` — Decision spine, foundation qualities, context recognition, guardrails.
 - **Layer Toolbox:** `../Standards/LayerToolbox.md` — Situational tools (for checking layer appropriateness).
 
 ---
@@ -38,9 +38,13 @@ Before checking content, ask the structural question: **does this document serve
 
 The strongest signal of an author-structured document: it's thorough but exhausting. Everything is there, nothing is foregrounded.
 
-### Step 3: Check Content Against the 4 Pillars
+### Step 3: Check Content Against the 6 Pillars
 
 Now evaluate content completeness. Use the pillars as a lens, not a checklist — not every pillar demands a section, and a document can satisfy a pillar without naming it.
+
+**Define the Decision Spine** — Does the document state the decision boundary, owner, ranked criteria, load-bearing assumptions, and revisit triggers before recommending an option? Can comments be classified as criteria, assumptions, option evaluation, or out of scope?
+
+**Ask Before Inventing** — Are users, user value, current-state pain, criteria, and scale grounded in stated facts or source evidence? Are unknowns labeled as assumptions or open questions rather than written as fact?
 
 **Know Your Decision-Makers** — Does the document show awareness of who reviews it? Are reviewer concerns addressed? Is evidence matched to what decision-makers trust?
 
@@ -75,6 +79,18 @@ Categorize each significant claim by strength and check evidence expectations:
 
 Flag any implemented-state assertion that lacks traceable evidence. Planning intent with only rationale is fine.
 
+#### Criteria Integrity Check
+
+Check whether criteria were defined before the recommendation and whether the recommendation follows from them.
+
+| Check | Expected |
+|-------|----------|
+| Criteria Derivation | Criteria trace to workflow friction, system risk, product risk, constraints, or reviewer concerns |
+| Criteria Priority | Criteria are ranked or marked Must/Should/Could |
+| Assumption Separation | Assumptions are testable beliefs, not disguised criteria |
+| Option Evaluation | Alternatives are compared against top criteria |
+| Review Surface | Open questions and objections connect to criteria, assumptions, or non-goals |
+
 #### Visual Assessment
 
 For structural content (system boundaries, data flows, component relationships, state machines), check: would a diagram communicate this faster than prose? If yes and no diagram exists, note it as a gap. If a diagram exists, check that labels reference real identifiers, not abstractions like "Data Layer."
@@ -85,15 +101,15 @@ For any external references (URLs, doc links, ADR references):
 - Does the link have a purpose label? ("See RFC-42 for the auth decision" not just "See RFC-42")
 - Is the critical information from the link summarized in-doc? A reader shouldn't need to open an external link to understand the design.
 
-### Step 4: Acceptance Assessment
+### Step 4: Review Readiness
 
-After the pillar checks, evaluate the document through the acceptance lens from `Principles.md`.
+After the pillar checks, evaluate whether the document is ready for review.
 
 | Check | Evaluates |
 |-------|-----------|
-| **Foundation Present** | Are all 6 foundation qualities visible? Narrative framing, honest trade-offs, evidence hierarchy, co-creation tone, visual element, explicit ask. |
-| **Layer Appropriateness** | Are situational tools appropriate for this design type and scale? Any over-application (too many Layer 3 tools for a Standard doc)? Any under-application (architectural design with no credibility tools)? Load `../Standards/LayerToolbox.md` for reference. |
-| **Guardrail Compliance** | Any violations? Unearned urgency? Stacked pressure? Performative concessions? Visible scaffolding? |
+| **Foundation Present** | Are the decision spine and all 6 foundation qualities visible? Decision boundary, ranked criteria, load-bearing assumptions, narrative framing, honest trade-offs, evidence hierarchy, constructive review surface, visual element, explicit ask. |
+| **Layer Appropriateness** | Are situational review-support tools appropriate for this design type and scale? Any over-application (too many timing tools for a Standard doc)? Any under-application (architectural design with no grounding tools)? Load `../Standards/LayerToolbox.md` for reference. |
+| **Guardrail Compliance** | Any violations? Unearned urgency? Stacked pressure? Performative flexibility? Visible scaffolding? |
 | **Reviewer Fit** | If reviewers are known, does the document address their specific concerns with evidence they trust? |
 
 ### Step 5: Produce Feedback
@@ -116,6 +132,8 @@ Lead with the reader-experience finding — that's what makes the document bette
 
 | Pillar | Status | Note |
 |--------|--------|------|
+| Define the Decision Spine | Strong / Adequate / Gaps | [Brief note] |
+| Ask Before Inventing | Strong / Adequate / Gaps | [Brief note] |
 | Know Your Decision-Makers | Strong / Adequate / Gaps | [Brief note] |
 | Build on What Exists | Strong / Adequate / Gaps | [Brief note] |
 | Make It Easy to Say Yes | Strong / Adequate / Gaps | [Brief note] |
@@ -124,11 +142,12 @@ Lead with the reader-experience finding — that's what makes the document bette
 | Check | Status | Note |
 |-------|--------|------|
 | Self-Claim Follow-Through | OK / Contradictions | [Brief note] |
+| Criteria Integrity | OK / Gaps | [Brief note] |
 | Claim Credibility | OK / Unsubstantiated | [Brief note] |
 | Visual Coverage | OK / Gaps | [Brief note] |
 | Link Hygiene | OK / Issues | [Brief note] |
 
-### Acceptance Assessment
+### Review Readiness
 
 | Check | Status | Note |
 |-------|--------|------|
@@ -152,9 +171,9 @@ The "Yes, if" frame assumes the design is moving forward and asks what it needs 
 
 ## Calibration by Scale
 
-- **Quick (ADR)**: Focus on reader experience and alternatives. Don't penalize for missing foundation qualities or acceptance assessment.
-- **Standard**: Reader experience + all 4 pillars + Foundation Present and Guardrail Compliance from acceptance assessment. A Standard design doesn't need a review process section.
-- **Full**: Reader experience + all 4 pillars + full acceptance assessment. Expect thorough alternatives, clear authority, and a review plan.
+- **Quick (ADR)**: Focus on reader experience and alternatives. Don't penalize for missing foundation qualities or review readiness assessment.
+- **Standard**: Reader experience + all 6 pillars + Foundation Present and Guardrail Compliance from review readiness assessment. A Standard design doesn't need a review process section.
+- **Full**: Reader experience + all 6 pillars + full review readiness assessment. Expect thorough alternatives, clear authority, and a review plan.
 
 ---
 

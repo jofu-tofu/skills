@@ -5,8 +5,8 @@
 ## Reference Material
 
 - **Output Quality:** `../OutputQuality.md` — Format selection, density, anti-AI patterns.
-- **Design Principles:** `../Principles.md` — Foundation qualities, guardrails.
-- **Layer Toolbox:** `../Standards/LayerToolbox.md` — Situational tools (for checking layer appropriateness).
+- **Design Principles:** `../Principles.md` — Decision spine, foundation qualities, guardrails.
+- **Layer Toolbox:** `../Standards/LayerToolbox.md` — Situational review-support tools (for checking layer appropriateness).
 
 ## Purpose
 
@@ -25,13 +25,13 @@ The same agent that generated the document runs this as a self-check. On FAIL, r
 
 ### Step 1: Load Rules
 
-Read `../OutputQuality.md` and `../Principles.md`. Internalize format selection, density principles, banned patterns, foundation qualities, and guardrails before evaluating.
+Read `../OutputQuality.md` and `../Principles.md`. Internalize format selection, density principles, banned patterns, decision spine, foundation qualities, and guardrails before evaluating.
 
 ### Step 2: Run Gate 1 — Substance Gate
 
-The Substance Gate holds veto power. If the document fails substance checks, it cannot proceed to the Acceptance Gate. Process these as a batch.
+The Substance Gate holds veto power. If the document fails substance checks, it cannot proceed to the Review Readiness Gate. Process these as a batch.
 
-Eight binary checks. Each produces PASS or FAIL.
+Ten binary checks. Each produces PASS or FAIL.
 
 | Check | What It Tests | PASS Criteria |
 |-------|--------------|---------------|
@@ -43,29 +43,31 @@ Eight binary checks. Each produces PASS or FAIL.
 | **Compression** | No sentence fails the Signal Tests (falsifiability, one-new-fact, prediction, state-once) | Zero sentences that are unfalsifiable, predictable from heading, or duplicate |
 | **Coherence** | Adjacent paragraphs have logical flow | Every paragraph pair can accept 'because', 'therefore', 'however', or 'for example' between them |
 | **Evidence-Grounding** | Claims of superiority trace to evidence | Every claim that one option is better than another traces to precedent, metric, or citation |
+| **Criteria-Grounding** | Recommendation follows from stated criteria | Decision criteria are ranked, important assumptions or evidence gaps are labeled, and the recommended option/change is evaluated against the top criteria |
+| **Context-Grounding** | The artifact does not invent missing context | Users, user value, current-state pain, scale, criteria, and reviewer concerns trace to user-provided facts, repo/source evidence, or explicitly labeled assumptions/open questions |
 
-### Step 3: Run Gate 2 — Acceptance Gate
+### Step 3: Run Gate 2 — Review Readiness Gate
 
 Runs only after Gate 1 passes. Process these as a batch: verify foundation qualities, then check guardrails and reviewer fit together.
 
 | Check | What It Tests | PASS Criteria |
 |-------|--------------|---------------|
-| **Foundation Coverage** | All 6 foundation qualities are present | Narrative framing (compelling opening), honest trade-offs (genuine alternatives), evidence hierarchy (claims traced to sources), co-creation tone ("we" language, no adversarial framing), visual element (at least one diagram/table/chart), explicit ask (specific decision request at end) |
-| **Guardrail Compliance** | The 5 guardrail rules are satisfied | Urgency is earned, momentum tools within scale limit, concessions are genuine, dominant type leads for hybrids, scaffolding is invisible |
+| **Foundation Coverage** | The decision spine, context grounding, and all 6 foundation qualities are present | Decision boundary or problem statement, ranked criteria, important assumptions or evidence gaps, grounded facts, narrative framing, honest trade-offs, evidence hierarchy, constructive review surface, visual element, explicit ask |
+| **Guardrail Compliance** | The 5 guardrail rules are satisfied | Urgency is earned, pressure is limited, flexible surfaces are genuine, dominant type leads for hybrids, scaffolding is invisible |
 | **Concern Coverage** | Each reviewer's blocking concerns are addressed | When reviewers are identified in the document, each blocking concern is addressed with evidence matched to that reviewer's trust profile. SKIP if no reviewer information is available. |
-| **Reactance Check** | No passage feels like visible persuasion | Re-read as a skeptical outsider. Does any passage feel like it's trying to sell rather than inform? Flag any passage where the persuasion technique is detectable. |
+| **Reactance Check** | No passage feels like visible pressure | Re-read as a skeptical outsider. Does any passage feel like it is trying to sell rather than inform? Flag any passage where the framing technique is detectable. |
 
 ### Step 4: Scale Calibration
 
 | Scale | Gate 1 Checks | Gate 2 Checks | Enforcement |
 |-------|--------------|---------------|-------------|
-| **Quick** (ADR) | Format-Shape, Density, AI-ism, Compression (4 checks) | None | Fix before delivery |
-| **Standard** | All 8 checks | Foundation Coverage, Guardrail Compliance (2 checks) | Fix before delivery |
-| **Full** | All 8 checks | All 4 checks | Fix before delivery; higher scrutiny |
+| **Quick** (ADR) | Format-Shape, Density, AI-ism, Compression, Criteria-Grounding, Context-Grounding (6 checks) | None | Fix before delivery |
+| **Standard** | All 10 checks | Foundation Coverage, Guardrail Compliance (2 checks) | Fix before delivery |
+| **Full** | All 10 checks | All 4 checks | Fix before delivery; higher scrutiny |
 
 For Quick scale, skip Section-Relevance, Layer-Cake, Coherence, and Evidence-Grounding from Gate 1, and skip Gate 2 entirely.
 
-Standard scale runs 10 checks total. This is the practical ceiling — do not add more checks at this scale.
+Standard scale runs 12 checks total. This is the practical ceiling — do not add more checks at this scale.
 
 ### Step 5: Fix Failures
 
@@ -105,8 +107,10 @@ After the design artifact, append this summary:
 | Compression | PASS/FAIL | [sentences removed + reason, or "—"] |
 | Coherence | PASS/FAIL | [paragraph pair fixed + connective added, or "—"] |
 | Evidence-Grounding | PASS/FAIL | [ungrounded claim found + fix, or "—"] |
+| Criteria-Grounding | PASS/FAIL | [criteria, assumption, or option-evaluation gap + fix, or "—"] |
+| Context-Grounding | PASS/FAIL | [invented context found + fixed by asking, sourcing, or labeling assumption, or "—"] |
 
-**Gate 2 — Acceptance:**
+**Gate 2 — Review Readiness:**
 | Check | Result | Notes |
 |-------|--------|-------|
 | Foundation Coverage | PASS/FAIL | [missing quality + fix, or "—"] |
@@ -115,7 +119,7 @@ After the design artifact, append this summary:
 | Reactance Check | PASS/FAIL | [visible scaffolding found + rewrite, or "—"] |
 ```
 
-For Quick scale, show only the 4 applicable Gate 1 checks and omit the Gate 2 table.
+For Quick scale, show only the 6 applicable Gate 1 checks and omit the Gate 2 table.
 For Standard scale, show all Gate 1 checks and the 2 applicable Gate 2 checks.
 
 ---
