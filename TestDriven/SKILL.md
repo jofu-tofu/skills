@@ -1,7 +1,7 @@
 ---
 name: TestDriven
 description: Test-driven development philosophy and smart testing methodology. USE WHEN writing tests OR designing test strategy OR refactoring code with tests OR reviewing test quality OR discussing TDD OR characterization testing OR catching regressions OR tests keep breaking after refactoring OR AI refactored code OR AI generated tests OR testing async code OR testing microservices OR testing LLM output OR mutation testing OR stub vs mock OR contract testing OR too many mocks OR isolate side effects OR code hard to test OR functional core imperative shell. Contains 11 core principles from authoritative sources for writing tests that survive refactoring.
-compatibility: Designed for Claude Code and Devin (or similar agent products)
+compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
   version: "1.0.0"
@@ -30,7 +30,7 @@ When a workflow is matched, **read its file and follow the steps within it.**
 | "write tests", "add tests", "test this", "how do I test" | `Workflows/WriteTests.md` | Writing tests for new or existing code |
 | "review tests", "test quality", "PR review", "audit tests" | `Workflows/ReviewTests.md` | Evaluating test quality in code review |
 | "diagnose test", "fix test", "test breaking", "test failing after refactor" | `Workflows/DiagnoseTest.md` | Fixing broken or flaky tests |
-| "AI refactored", "AI generated", "validate AI", "copilot", "claude refactored" | `Workflows/AIValidation.md` | Validating AI-refactored code or AI-generated tests |
+| "AI refactored", "AI generated", "validate AI", "copilot", "Codex refactored" | `Workflows/AIValidation.md` | Validating AI-refactored code or AI-generated tests |
 | "test async", "test promises", "test callbacks", "await in tests", "async test" | `Workflows/AsyncTesting.md` | Testing asynchronous operations and Promises |
 | "contract test", "test microservices", "consumer-driven", "pact", "test services without running them" | `Workflows/ContractTesting.md` | Testing service interfaces without running all services |
 | "test LLM", "test AI output", "prompt testing", "evaluate AI", "test language model" | `Workflows/LLMTesting.md` | Testing language model components and AI pipelines |

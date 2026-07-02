@@ -1,7 +1,7 @@
 ---
 name: GreenRed
 description: Behavior-focused test writing with two modes — Green (characterize existing code with passing tests) and Red (specify new behavior with failing tests). USE WHEN green red OR greenred OR characterize behavior OR behavior tests OR write failing tests OR lock behavior OR test the interface OR IO contract tests OR test before implementing OR capture behavior.
-compatibility: Designed for Claude Code and Devin (or similar agent products)
+compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
   version: "1.0.0"

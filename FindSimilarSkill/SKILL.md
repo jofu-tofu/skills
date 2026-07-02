@@ -1,7 +1,7 @@
 ---
 name: FindSimilarSkill
 description: Search for existing skills similar to what you want. USE WHEN user wants to find a skill, discover existing skills, search for capabilities, check if a skill exists, find similar tools, look for commands, OR wants to know what skills are available for a specific task.
-compatibility: Designed for Claude Code and Devin (or similar agent products). Benefits from internet access for external skill discovery.
+compatibility: Designed for Codex and Devin (or similar agent products). Benefits from internet access for external skill discovery.
 metadata:
   author: pai
   version: "1.0.0"
@@ -24,7 +24,7 @@ Searches for skills and capabilities that match what you're looking for — both
 User: "Is there a skill for resizing images?"
 → Invokes Search workflow
 → Searches PAI internal skills via SkillSearch.ts
-→ Searches GitHub for Claude Code community skills
+→ Searches GitHub for Codex community skills
 → Returns: Internal matches + External community results
 ```
 

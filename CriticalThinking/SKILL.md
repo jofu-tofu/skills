@@ -1,7 +1,7 @@
 ---
 name: CriticalThinking
 description: Multi-agent critical thinking pipeline that escapes local minima by analyzing problems through five orthogonal lenses — gap-driven reframing, cross-domain synthesis, representation shift, and an adaptive fifth lens. Lens types are backed by empirical analysis of 3,819 top-tier research papers (Sci-Reasoning, arXiv:2601.04577). USE WHEN critical thinking OR think critically OR analyze problem OR think about this from different angles OR multiple perspectives OR escape local minima OR orthogonal analysis OR think deeply OR attack this problem OR break down this problem OR think harder OR rigorous analysis OR five perspectives OR cross-domain reasoning OR avoid blind spots OR stress test an idea.
-compatibility: Designed for Claude Code and Devin (or similar agent products).
+compatibility: Designed for Codex and Devin (or similar agent products).
 metadata:
   author: pai
   version: "2.0.0"

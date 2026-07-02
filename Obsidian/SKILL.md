@@ -1,15 +1,15 @@
 ---
 name: Obsidian
-description: Obsidian-native capability enhancer for note work. USE WHEN working in an Obsidian vault and the task should leverage wikilinks, backlinks, properties, Dataview, Mermaid, Canvas, templates, or related-note context instead of plain markdown editing. Helps improve notes, gather vault context, build dashboards and MOCs, and choose the right visual form.
-compatibility: Designed for Claude Code and Devin (or similar agent products). Requires access to an Obsidian vault directory.
+description: Obsidian-native capability enhancer for note work and project continuity. USE WHEN working in an Obsidian vault and the task should leverage wikilinks, backlinks, properties, Dataview, Mermaid, Canvas, templates, related-note context, project vault structure, trust levels, or artifact promotion. Helps improve notes, gather context, build dashboards, choose visual forms, and maintain continuity across agent sessions.
+compatibility: Designed for Codex and Devin (or similar agent products). Requires access to an Obsidian vault directory.
 metadata:
   author: pai
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Obsidian
 
-Use this skill to make agents Obsidian-native rather than markdown-generic. It focuses on linking, context gathering, properties and queries, and choosing the right representation for a note. Folder routing belongs to the vault's `CLAUDE.md` tree, not this skill.
+Use this skill to make agents Obsidian-native rather than markdown-generic. It focuses on linking, context gathering, properties and queries, visual representation, and project continuity through trust-aware artifact handling. Folder routing belongs to the vault's `AGENTS.md` tree, not this skill.
 
 ## Vault Location
 
@@ -24,7 +24,9 @@ PAI has direct read/write access.
 - Prefer note-native improvements: wikilinks, aliases, embeds, properties, Dataview, and MOCs.
 - Prefer Mermaid, Canvas, MOCs, or Dataview before Excalidraw unless the user explicitly wants sketchy freeform visuals.
 - Treat community-plugin advice as optional unless the user already has the plugin or asks for it.
-- Use the nearest `CLAUDE.md` for routing and placement rules.
+- Use the nearest `AGENTS.md` for routing and placement rules.
+- Treat trust level as authority to act, not confidence or note length.
+- Keep first-class project folders stable by workflow/trust layer; put project-specific folders on the second layer.
 
 ## Workflow Routing
 
@@ -36,6 +38,9 @@ When a workflow is matched, **read its file and follow the steps within it.**
 | **GatherContext** | "find related notes", "gather note context", "collect note context", "what connects to this" | `Workflows/GatherContext.md` |
 | **BuildQuery** | "make a dataview", "build a dashboard", "create a MOC", "make an index note" | `Workflows/BuildQuery.md` |
 | **ChooseVisualForm** | "diagram this", "visualize this", "mermaid or canvas", "choose diagram format" | `Workflows/ChooseVisualForm.md` |
+| **StructureProjectVault** | "structure project vault", "set up project notes", "create vault context", "organize project artifacts" | `Workflows/StructureProjectVault.md` |
+| **CaptureSession** | "capture this session", "save session recap", "record agent session", "summarize for vault" | `Workflows/CaptureSession.md` |
+| **PromoteArtifact** | "promote this artifact", "make this a decision", "mark as source backed", "archive this note" | `Workflows/PromoteArtifact.md` |
 
 ## Context Files
 
@@ -50,6 +55,7 @@ Load these on-demand when specific reference is needed:
 | `Dataview.md` | Query syntax and output forms |
 | `Templater.md` | Template and scripting patterns |
 | `WorkflowPatterns.md` | MOCs and knowledge-work patterns |
+| `Standards/ContinuityPrinciples.md` | Trust levels, promotion authority, context-layer contract, and continuity philosophy |
 | `Excalidraw.md` | Optional hand-drawn/sketch reference |
 | `Plugins.md` | Agent-relevant core and community plugin patterns |
 
@@ -71,20 +77,20 @@ User: "Find related notes for this topic and suggest backlinks"
 -> Returns: ranked context pack plus suggested wikilinks/backlinks
 ```
 
-**Example 3: Build a live dashboard or hub**
+**Example 3: Build a trust-aware project vault**
 ```
-User: "Build a Dataview dashboard for my project reviews"
--> Invokes BuildQuery workflow
--> Checks existing metadata patterns before inventing new ones
--> Returns: Dataview block, MOC, or fallback markdown structure
+User: "Set up project notes for this larger project with meetings and decisions"
+-> Invokes StructureProjectVault workflow
+-> Creates or proposes stable first-layer folders and project-specific second-layer folders
+-> Returns: AGENTS.md routing rules, trust rubric, promotion authority, and starter index structure
 ```
 
-**Example 4: Choose the right visual form**
+**Example 4: Promote an artifact safely**
 ```
-User: "Should this be Mermaid, Canvas, or something else?"
--> Invokes ChooseVisualForm workflow
--> Chooses the lowest-friction representation that fits the information shape
--> Returns: recommendation and the artifact or structure to use
+User: "This is the decision; promote it"
+-> Invokes PromoteArtifact workflow
+-> Checks source links, authority boundary, and supersession fields
+-> Returns: promoted decision or final artifact with backlinks to lower-trust evidence
 ```
 
 ## Quick Reference
@@ -97,5 +103,6 @@ EMBEDS:      ![[Note]] | ![[Note#Heading]] | ![[Note#^block]]
 PROPERTIES:  YAML frontmatter with text, list, number, checkbox, date, tags
 QUERIES:     Dataview LIST | TABLE | TASK | CALENDAR
 VISUALS:     Mermaid | Canvas | MOC | Table | Excalidraw
-PRIORITY:    Linking and retrieval first, visuals second
+TRUST:       T0 raw | T1 research | T2 source-backed | T3 working | T4 decision | T5 final | T9 archive
+PRIORITY:    Decisions and final artifacts first; research and recaps only with provenance or uncertainty
 ```

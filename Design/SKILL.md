@@ -2,7 +2,7 @@
 name: Design
 description: Design document methodology for any scale. USE WHEN design doc, design brief, scoping document, product brief, architecture decision, RFC, technical design, design review, scope a feature, write a proposal, record a decision. Guides agents through criteria-first design and constructive review from quick ADRs to full architecture docs.
 context: fork
-compatibility: Designed for Claude Code and Devin (or similar agent products)
+compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
   version: "3.0.0"
@@ -122,6 +122,10 @@ What this skill explicitly avoids:
 - **Setup Paragraphs** — Opening a section by restating the heading in prose form. "In this section, we will discuss the security implications of..." → delete and start with the actual security finding.
 - **Circular Elaboration** — Saying the same thing multiple times in different words across a section. Each sentence sounds fine alone; together they make no progress. Keep the best phrasing, delete the rest.
 - **Completeness Over Signal** — Including information because it might be relevant rather than because the reader needs it. If four of five points are obvious, include only the one that isn't. Missing information is recoverable; wasted attention is not.
+- **Jargon-First Epic Writing** — Starting with routine, item, API, or data-model names before explaining the workflow outcome. Explain what exists, what is missing, and why timing or ownership matters first.
+- **False Settlement of Uncertainty** — Turning meeting notes, user wording, or open questions into decided architecture. Preserve uncertainty as open questions or hypotheses.
+- **DLG Boundary Blur** — Letting a narrow DLG become a broad architecture bucket. Separate this DLG, future DLGs, and out-of-scope work explicitly.
+- **Broad Impact Claims** — Saying related extensions or workflows all need changes without proving overlap. Classify each as unchanged, needs review, or must change.
 - **Technically Right, Review-Hostile** — Sound design that ignores reader needs. A design can be correct on every technical dimension and still fail because reviewers cannot see the problem, criteria, trade-offs, or change.
 - **Agreement Over Correctness** — Optimizing for yes instead of making the correct decision low-friction. Approval should follow from a clear decision spine, not from pressure.
 - **Review Support as a Sledgehammer** — Applying every framing tool at max intensity; the document reads as a sales pitch. If the scaffolding is visible, the technique has failed.

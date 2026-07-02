@@ -1,7 +1,7 @@
 ---
 name: Browser
 description: Debug-first browser automation for Playwright page verification and frontend troubleshooting. Console logs, network failures, screenshots, and accessibility snapshots are part of the primary workflow. USE WHEN verify UI, debug web, inspect rendered page, troubleshoot frontend, take browser screenshot, or reproduce a browser issue.
-compatibility: Designed for Claude Code and Devin (or similar agent products). Requires Playwright.
+compatibility: Designed for Codex and Devin (or similar agent products). Requires Playwright.
 metadata:
   author: pai
   version: "2.0.0"

@@ -1,7 +1,7 @@
 ---
 name: SkillForge
 description: Create, modify, test, and maintain skills. MANDATORY for ALL skill modifications — direct Edit bypasses quality gates. USE WHEN create skill OR new skill OR update skill OR edit skill OR improve skill OR change skill OR tweak skill OR adjust skill OR add workflow OR remove workflow OR modify skill OR refactor skill OR fix skill structure OR test skill OR try skill OR does this skill work OR run skill test OR evaluate skill OR run evals OR optimize description OR fix triggering OR skill not triggering OR retrospective OR run retrospective OR skill retrospective OR analyze skill OR audit skill OR comprehensive skill check OR what's wrong with this skill OR diagnose skill OR review skill OR incorporate research OR add research OR integrate finding OR add evidence OR update principles.
-compatibility: Designed for Claude Code and Devin (or similar agent products)
+compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
   version: "1.0.0"
@@ -51,7 +51,7 @@ User: "Test the Research skill — I want to see if it works on real prompts"
 User: "The ClarityEngine skill isn't triggering when I ask for presentations"
 -> Invokes OptimizeDescription workflow
 -> Generates 15-20 should-trigger and should-not-trigger eval queries
--> Runs iterative optimization loop via claude -p
+-> Runs iterative optimization loop via Codex -p
 -> Applies the best-scoring description to the skill
 ```
 

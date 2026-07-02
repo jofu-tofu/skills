@@ -1,7 +1,7 @@
 ---
 name: WebDesign
 description: Web design, accessibility, and UI quality guidelines for building production interfaces. USE WHEN writing UI components OR reviewing UI code OR building forms OR fixing accessibility OR implementing WCAG OR keyboard navigation OR color contrast OR focus management OR responsive layout OR animation OR touch targets OR dark mode OR i18n OR reviewing design quality. Contains 41 rules across 10 priority categories.
-compatibility: Designed for Claude Code and Devin (or similar agent products)
+compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
   version: "1.0.0"

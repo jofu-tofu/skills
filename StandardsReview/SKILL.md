@@ -1,7 +1,7 @@
 ---
 name: StandardsReview
 description: "Language-specific coding standards review. Reviews code against 283 rules across 8 languages (React, Rust, Svelte, Tailwind, TypeScript, C#, Python, MUMPS). USE WHEN review code standards OR review coding standards OR check my code standards OR standards review OR review my TypeScript OR review my React OR review my Rust OR review my Python OR review my Svelte OR review my C# OR check language best practices OR lint my code with standards."
-compatibility: Designed for Claude Code and Devin (or similar agent products)
+compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
   version: "1.0.0"

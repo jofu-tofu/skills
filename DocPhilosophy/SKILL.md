@@ -1,7 +1,7 @@
 ---
 name: DocPhilosophy
 description: Philosophical framework for documentation placement decisions. USE WHEN deciding where documentation belongs OR evaluating doc placement strategy OR discussing context rot OR signal-to-noise in docs OR AI context file design OR docs going unread OR codebase vs knowledge base OR doc placement architecture OR ADR placement OR docs-as-code philosophy. Contains 7 principles from authoritative sources for documentation that survives and serves.
-compatibility: Designed for Claude Code and Devin (or similar agent products)
+compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
   version: "1.0.0"
@@ -49,9 +49,9 @@ Route documentation to its correct location:
 ```
 Who is the primary audience?
 │
-├─ AI AGENTS (Claude, Copilot, etc.)
+├─ AI AGENTS (Codex, Copilot, etc.)
 │  └─ AI Context Files
-│     CLAUDE.md, AGENTS.md, skill files
+│     AGENTS.md, AGENTS.md, skill files
 │     See: Rules/AIContextLayers.md
 │
 ├─ FUTURE DEVELOPERS (including future-you)
@@ -102,7 +102,7 @@ counter += 1;
 
 ### 2. AI Context Files
 
-Instructions shaping AI agent behavior: CLAUDE.md, AGENTS.md, skill files, system prompts.
+Instructions shaping AI agent behavior: AGENTS.md, AGENTS.md, skill files, system prompts.
 
 These are documentation *for* agents operating within the system — not documentation *about* the system. Different audience, different density requirements.
 
@@ -176,8 +176,8 @@ User: "We picked PostgreSQL over MongoDB. Where does this go?"
 
 **Example 3: AI agent instructions**
 ```
-User: "Claude keeps formatting PRs wrong in this repo"
-→ CLAUDE.md with PR formatting rules (AI Context File)
+User: "Codex keeps formatting PRs wrong in this repo"
+→ AGENTS.md with PR formatting rules (AI Context File)
 → Dense, scannable, no prose — context window is finite
 → NOT in README (humans don't need this; agents do)
 → NOT in wiki (agents can't read your wiki)
@@ -194,7 +194,7 @@ User: "Claude keeps formatting PRs wrong in this repo"
 | `Rules/SignalOverNoise.md` | Cognitive load theory applied to docs | Docs are too long or going unread |
 | `Rules/WhyNotWhat.md` | Document intent, not mechanics | Writing comments or ADRs |
 | `Rules/ContextRotIsReal.md` | Documentation decays in code and AI contexts | Evaluating doc freshness strategy |
-| `Rules/AIContextLayers.md` | How AI agents consume documentation | Writing CLAUDE.md, AGENTS.md, or skill files |
+| `Rules/AIContextLayers.md` | How AI agents consume documentation | Writing AGENTS.md, AGENTS.md, or skill files |
 | `Rules/KnowledgeIsPerishable.md` | Organizational forgetting; externalize or lose | Deciding what to capture and where |
 
 ---

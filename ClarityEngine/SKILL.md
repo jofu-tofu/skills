@@ -1,7 +1,7 @@
 ---
 name: ClarityEngine
 description: Comprehension-optimized document and presentation authoring. PAI's universal clarity layer. USE WHEN create document OR create presentation OR create HTML report OR create PowerPoint deck OR build slide deck OR make deck OR make a slideshow OR generate slides OR create html document OR build web document OR create scrollable report OR create ppt deck OR create powerpoint deck OR create professional deck OR analyze codebase visually OR architecture diagram OR visual explanation OR convert presentation OR html to ppt OR ppt to html OR html to powerpoint OR powerpoint to html OR turn into powerpoint OR change format OR review presentation OR polish slide deck OR presentation quality check OR readability check OR check readability OR run readability gate OR diagram the codebase OR show type flow OR diagram how modules connect.
-compatibility: Designed for Claude Code and Devin (or similar agent products)
+compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
   version: "1.0.0"

@@ -213,6 +213,66 @@ Delete all: "This section will cover...", "As discussed above...", "It's worth n
 
 ---
 
-## 11. Override Policy
+## 11. Design Work Controls
+
+These rules handle recurring design-cleanup failures in Epic and DLG-heavy work.
+
+### Plain-English First
+
+Start complex technical designs with the workflow fact pattern:
+- What exists now
+- What does not exist yet
+- Why timing, ownership, or scope matters
+- What decision the design must make
+
+Only then add routine names, item numbers, API names, or data-model terms. If the first paragraph starts with implementation nouns and not the workflow outcome, rewrite it.
+
+### Preserve User Wording and Uncertainty
+
+For meeting-driven updates, keep the user's wording where it carries meaning or uncertainty. Separate:
+- **What was said**
+- **Design implication**
+- **Open question**
+
+Do not convert unresolved storage, ownership, lineage, or timing questions into asserted architecture. If the source is ambiguous, label it as an open question or hypothesis.
+
+### DLG Boundary
+
+For Epic DLG designs, include the boundary when scope could drift:
+
+| Boundary | Meaning |
+|----------|---------|
+| This DLG | Changes or proof owned by the current ticket |
+| Adjacent/Future DLGs | Related work that belongs elsewhere |
+| Out of Scope | Plausible work deliberately excluded |
+| Source of Truth | Existing design/spec/doc that owns the durable scope |
+
+Support notes should link to the source-of-truth design instead of copying its scope, decisions, or traceability structure.
+
+### Selective Impact Analysis
+
+When related extensions, components, workflows, or services might be affected, classify each one:
+
+| Classification | Meaning |
+|----------------|---------|
+| Unchanged | No overlapping trigger, data ownership, or behavior contract |
+| Needs Review | Possible overlap, but evidence is incomplete |
+| Must Change | Proven overlap with the new model or contract |
+
+Avoid broad "everything needs the new model" claims. Name the overlap that forces each impact classification.
+
+### Artifact Weight
+
+Match ceremony to the user's requested artifact:
+- **Design doc**: use selected design sections.
+- **Support note**: short context plus links.
+- **Estimate note**: problem/risk/estimate and explicit math.
+- **Meeting note**: dated notes, implications, open questions.
+
+If the artifact supports another design, keep it short and point to the source of truth.
+
+---
+
+## 12. Override Policy
 
 Any rule can be overridden with a brief inline justification tied to data shape. "Using prose because it reads better" is invalid. "Using prose because the alternatives require multi-step causal arguments" is valid.

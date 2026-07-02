@@ -61,9 +61,30 @@ If Quick → stop here and invoke `RecordDecision` instead.
 
 ### Step 2: Understand Context
 
-Two sub-phases that establish the foundation for the design.
+Three checks establish the foundation for the design: artifact weight, reviewer model, and problem definition.
 
-#### Step 2a: Know Your Reviewers
+#### Step 2a: Set Artifact Weight and Boundaries
+
+Before problem synthesis, identify what kind of artifact the user is asking for. This prevents support material from becoming a full design document.
+
+| Artifact Weight | Signals | Output Shape |
+|-----------------|---------|--------------|
+| **Design Doc** | New feature, architecture, reviewable approach | Full selected sections from Step 4 |
+| **Support Note** | "write this somewhere", "context", "notes", "index this" | Short note linked from the source-of-truth doc |
+| **Estimate Note** | Planned hours, PRJ planning, buffer, timeline | Problem/risk/estimate, explicit math, source-of-truth link |
+| **Meeting Note** | "meeting notes", "we discussed", uncertain decisions | Dated notes, user wording, implications, open questions |
+
+For Epic DLG work, also define the DLG boundary before drafting:
+- **This DLG**: what this ticket will change or prove.
+- **Adjacent/Future DLGs**: related work that belongs elsewhere.
+- **Out of Scope**: plausible work deliberately excluded.
+- **Source of Truth**: the design/spec/doc that owns scope; support notes link to it instead of duplicating it.
+
+If the artifact is a support, estimate, or meeting note, keep it intentionally short. Do not add traceability scaffolding, indexed-scope sections, or formal design structure unless the user asks for it.
+
+**Output**: Artifact weight + DLG/scope boundary summary
+
+#### Step 2b: Know Your Reviewers
 
 **Ask the user (use AskUserQuestion or conversational clarification) when this cannot be inferred from provided context. Label each question with why it matters:**
 
@@ -83,7 +104,7 @@ Select 1-2 archetypes that match the design type. A technical design defaults to
 
 **Output**: Reviewer model (names or archetypes, concerns, dispositions, evidence preferences)
 
-#### Step 2b: Define the Problem
+#### Step 2c: Define the Problem
 
 **Ask the user for missing items. Label each question with why it matters and skip questions already answered by the prompt or repo context:**
 
@@ -101,9 +122,11 @@ Select 1-2 archetypes that match the design type. A technical design defaults to
 
 > **[WHO]** needs **[WHAT]** because **[WHY / INSIGHT]**
 
-Frame the problem statement to address the top blocking concern identified in Step 2a.
+Frame the problem statement to address the top blocking concern identified in Step 2b.
 
 **One-Sentence Mission Test**: The entire design's purpose must fit in this single POV sentence. If it can't, the scope is too broad — consider splitting into multiple designs or reducing to Quick scale.
+
+**Plain-English First Test**: For complex Epic designs, write the workflow outcome first: what exists now, what does not, what timing or ownership problem matters, and what decision this design must make. Add routine, item, API, or data-model names only after that model is clear.
 
 **Output**: Problem statement + context summary + reviewer model
 
@@ -210,6 +233,7 @@ At least one visual is mandatory. For architectural or multi-component designs, 
 **Also identify:**
 - **Non-goals** — things deliberately excluded, with rationale
 - **Rabbit holes** — areas of technical risk to timebox or avoid
+- **Selective impact** — for related extensions, components, or workflows, mark each as **Unchanged**, **Needs Review**, or **Must Change**. Do not imply broad impact unless overlap is proven.
 - **Revisit triggers** — assumption or metric changes that should reopen the decision later
 
 **Output**: Decision boundary + ranked criteria + load-bearing assumptions + evidence matrix + alternatives evaluation + visual plan + classified decisions + revisit triggers
@@ -290,7 +314,7 @@ Structure feedback as decision input: objections should clarify criteria, eviden
 Use the design artifact to compress the decision, not to explore from scratch. Pre-wire high-risk objections before the meeting: send the draft to the 2-3 stakeholders most likely to block, ask what would make them block it, and revise weak criteria, assumptions, or evidence before live review.
 
 **Pre-review readiness check:**
-- Do you have the votes? Cross-reference the reviewer model from Step 2a against the document.
+- Do you have the votes? Cross-reference the reviewer model from Step 2b against the document.
 - Is every blocking concern addressed with evidence the reviewer trusts?
 - Would a skeptical reader feel informed rather than sold to?
 - Is the review surface bounded by criteria, assumptions, option evaluation, and explicit non-goals?

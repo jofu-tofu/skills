@@ -2,8 +2,8 @@
 name: Research
 description: Evidence-based scientific literature discovery and synthesis using a multi-wave agent pipeline — seed finding, citation chaining, cross-domain reframing, and evidence quality assessment. USE WHEN literature review OR find research papers OR academic research OR scientific evidence OR what does the research say OR find papers OR systematic review OR evidence map OR citation search OR paper discovery OR cross-domain papers OR evaluate research quality OR lit review OR survey the literature OR what studies exist OR research synthesis OR find academic sources.
 compatibility:
-  platforms: [claude-code, windsurf]
-  models: [claude-sonnet-4-20250514, claude-opus-4-20250514]
+  platforms: [Codex, windsurf]
+  models: [Codex-sonnet-4-20250514, Codex-opus-4-20250514]
 version: "2.0"
 ---
 

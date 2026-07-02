@@ -1,7 +1,7 @@
 ---
 name: CodeReview
 description: Comprehensive multi-agent code review and codebase audit system. USE WHEN code review OR review PR OR review pull request OR review changes OR review commits OR review diff OR check my code OR audit code changes OR review this branch OR what did I change OR look over my code OR inspect my changes OR critique this PR OR give feedback on my changes OR audit this module OR audit this directory OR review this codebase OR audit code quality OR review code health OR audit architecture.
-compatibility: Designed for Claude Code and Devin (or similar agent products). Requires git.
+compatibility: Designed for Codex and Devin (or similar agent products). Requires git.
 metadata:
   author: pai
   version: "1.0.0"

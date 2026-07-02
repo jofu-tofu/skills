@@ -1,13 +1,13 @@
 {
-  "generated": "2026-03-15T04:14:33.217580+00:00",
-  "totalSkills": 16,
+  "generated": "2026-06-22T14:54:38.8137152Z",
+  "totalSkills": 17,
   "alwaysLoadedCount": 1,
-  "deferredCount": 15,
+  "deferredCount": 16,
   "skills": {
     "contextlayer": {
       "name": "ContextLayer",
       "path": "ContextLayer/SKILL.md",
-      "fullDescription": "Generate and maintain slim, high-signal CLAUDE.md context files for AI agents. USE WHEN the request involves creating, reviewing, correcting, shrinking, or refreshing CLAUDE.md files \u2014 whether the user says so explicitly or describes symptoms like \"agents are confused\", \"context is stale\", \"CLAUDE.md is too big\", \"just started a new project\", \"agents keep putting things in the wrong place\", \"my skill is getting confused about its own structure\", \"agents don't know about our workaround\", \"why did we implement it this way is lost\", \"context hasn't been updated in a while\", or \"I just added a new module and agents don't know about it\". Covers the full lifecycle of agent context files. For README, API docs, or non-CLAUDE.md documentation, handle directly without this skill.",
+      "fullDescription": "Generate and maintain slim, high-signal CLAUDE.md context files for AI agents. USE WHEN the request involves creating, reviewing, correcting, shrinking, or refreshing CLAUDE.md files — whether the user says so explicitly or describes symptoms like \"agents are confused\", \"context is stale\", \"CLAUDE.md is too big\", \"just started a new project\", \"agents keep putting things in the wrong place\", \"my skill is getting confused about its own structure\", \"agents don't know about our workaround\", \"why did we implement it this way is lost\", \"context hasn't been updated in a while\", or \"I just added a new module and agents don't know about it\". Covers the full lifecycle of agent context files. For README, API docs, or non-CLAUDE.md documentation, handle directly without this skill.",
       "triggers": [
         "request",
         "involves",
@@ -29,7 +29,7 @@
     "research": {
       "name": "Research",
       "path": "Research/SKILL.md",
-      "fullDescription": "Evidence-based scientific literature discovery and synthesis using a multi-wave agent pipeline \u2014 seed finding, citation chaining, cross-domain reframing, and evidence quality assessment. USE WHEN literature review OR find research papers OR academic research OR scientific evidence OR what does the research say OR find papers OR systematic review OR evidence map OR citation search OR paper discovery OR cross-domain papers OR evaluate research quality OR lit review OR survey the literature OR what studies exist OR research synthesis OR find academic sources.",
+      "fullDescription": "Evidence-based scientific literature discovery and synthesis using a multi-wave agent pipeline — seed finding, citation chaining, cross-domain reframing, and evidence quality assessment. USE WHEN literature review OR find research papers OR academic research OR scientific evidence OR what does the research say OR find papers OR systematic review OR evidence map OR citation search OR paper discovery OR cross-domain papers OR evaluate research quality OR lit review OR survey the literature OR what studies exist OR research synthesis OR find academic sources.",
       "triggers": [
         "literature",
         "review",
@@ -258,7 +258,7 @@
     "greenred": {
       "name": "GreenRed",
       "path": "GreenRed/SKILL.md",
-      "fullDescription": "Behavior-focused test writing with two modes \u2014 Green (characterize existing code with passing tests) and Red (specify new behavior with failing tests). USE WHEN green red OR greenred OR characterize behavior OR behavior tests OR write failing tests OR lock behavior OR test the interface OR IO contract tests OR test before implementing OR capture behavior.",
+      "fullDescription": "Behavior-focused test writing with two modes — Green (characterize existing code with passing tests) and Red (specify new behavior with failing tests). USE WHEN green red OR greenred OR characterize behavior OR behavior tests OR write failing tests OR lock behavior OR test the interface OR IO contract tests OR test before implementing OR capture behavior.",
       "triggers": [
         "green",
         "red",
@@ -470,7 +470,7 @@
     "criticalthinking": {
       "name": "CriticalThinking",
       "path": "CriticalThinking/SKILL.md",
-      "fullDescription": "Multi-agent critical thinking pipeline that escapes local minima by analyzing problems through five orthogonal lenses \u2014 gap-driven reframing, cross-domain synthesis, representation shift, and an adaptive fifth lens. Lens types are backed by empirical analysis of 3,819 top-tier research papers (Sci-Reasoning, arXiv:2601.04577). USE WHEN critical thinking OR think critically OR analyze problem OR think about this from different angles OR multiple perspectives OR escape local minima OR orthogonal analysis OR think deeply OR attack this problem OR break down this problem OR think harder OR rigorous analysis OR five perspectives OR cross-domain reasoning OR avoid blind spots OR stress test an idea.",
+      "fullDescription": "Multi-agent critical thinking pipeline that escapes local minima by analyzing problems through five orthogonal lenses — gap-driven reframing, cross-domain synthesis, representation shift, and an adaptive fifth lens. Lens types are backed by empirical analysis of 3,819 top-tier research papers (Sci-Reasoning, arXiv:2601.04577). USE WHEN critical thinking OR think critically OR analyze problem OR think about this from different angles OR multiple perspectives OR escape local minima OR orthogonal analysis OR think deeply OR attack this problem OR break down this problem OR think harder OR rigorous analysis OR five perspectives OR cross-domain reasoning OR avoid blind spots OR stress test an idea.",
       "triggers": [
         "critical",
         "thinking",
@@ -513,7 +513,7 @@
     "skillforge": {
       "name": "SkillForge",
       "path": "SkillForge/SKILL.md",
-      "fullDescription": "Create, modify, test, and maintain skills. MANDATORY for ALL skill modifications \u2014 direct Edit bypasses quality gates. USE WHEN create skill OR new skill OR update skill OR edit skill OR improve skill OR change skill OR tweak skill OR adjust skill OR add workflow OR remove workflow OR modify skill OR refactor skill OR fix skill structure OR test skill OR try skill OR does this skill work OR run skill test OR evaluate skill OR run evals OR optimize description OR fix triggering OR skill not triggering OR retrospective OR run retrospective OR skill retrospective OR analyze skill OR audit skill OR comprehensive skill check OR what's wrong with this skill OR diagnose skill OR review skill OR incorporate research OR add research OR integrate finding OR add evidence OR update principles.",
+      "fullDescription": "Create, modify, test, and maintain skills. MANDATORY for ALL skill modifications — direct Edit bypasses quality gates. USE WHEN create skill OR new skill OR update skill OR edit skill OR improve skill OR change skill OR tweak skill OR adjust skill OR add workflow OR remove workflow OR modify skill OR refactor skill OR fix skill structure OR test skill OR try skill OR does this skill work OR run skill test OR evaluate skill OR run evals OR optimize description OR fix triggering OR skill not triggering OR retrospective OR run retrospective OR skill retrospective OR analyze skill OR audit skill OR comprehensive skill check OR what's wrong with this skill OR diagnose skill OR review skill OR incorporate research OR add research OR integrate finding OR add evidence OR update principles.",
       "triggers": [
         "create",
         "skill",
@@ -566,6 +566,36 @@
         "TestSkill",
         "OptimizeDescription",
         "ExtractFindings"
+      ],
+      "tier": "deferred"
+    },
+    "statediagrams": {
+      "name": "StateDiagrams",
+      "path": "StateDiagrams/SKILL.md",
+      "fullDescription": "State diagram modeling and review. USE WHEN creating state diagrams OR state machines OR state maps OR lifecycle diagrams OR statecharts OR fixing Mermaid state diagrams OR choosing between stateDiagram-v2, flowchart, PlantUML, or transition tables. Uses XState/statechart concepts as the modeling referent before selecting an output syntax.",
+      "triggers": [
+        "creating",
+        "state",
+        "diagrams",
+        "machines",
+        "maps",
+        "lifecycle",
+        "statecharts",
+        "fixing",
+        "mermaid",
+        "choosing",
+        "statediagram-v2",
+        "flowchart",
+        "plantuml",
+        "transition",
+        "tables",
+        "xstate"
+      ],
+      "workflows": [
+        "CreateStateMachine",
+        "CreateDecisionStateMap",
+        "ReviewStateDiagram",
+        "ConvertStateDiagram"
       ],
       "tier": "deferred"
     }

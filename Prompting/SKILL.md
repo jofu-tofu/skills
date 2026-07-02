@@ -1,7 +1,7 @@
 ---
 name: Prompting
-description: Meta-prompting system for dynamic prompt generation using templates, standards, and patterns. USE WHEN meta-prompting, template generation, prompt optimization, programmatic prompt composition, OR auditing agent instruction files (skill files, CLAUDE.md, system prompts) for signal density, hedging, or voice consistency.
-compatibility: Designed for Claude Code and Devin (or similar agent products)
+description: Meta-prompting system for dynamic prompt generation using templates, standards, and patterns. USE WHEN meta-prompting, template generation, prompt optimization, programmatic prompt composition, OR auditing agent instruction files (skill files, AGENTS.md, system prompts) for signal density, hedging, or voice consistency.
+compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
   version: "1.0.0"
@@ -21,7 +21,7 @@ If this directory exists, load and apply any PREFERENCES.md, configurations, or 
 ## Overview
 
 The Prompting skill owns ALL prompt engineering concerns:
-- **Standards** - Anthropic best practices, Claude 4.x patterns, empirical research
+- **Standards** - Anthropic best practices, Codex 4.x patterns, empirical research
 - **Templates** - Handlebars-based system for programmatic prompt generation
 - **Tools** - Template rendering, validation, and composition utilities
 - **Patterns** - Reusable prompt primitives and structures
@@ -32,7 +32,7 @@ This is the "standard library" for prompt engineering - other skills reference t
 
 ### 1. Standards.md
 Complete prompt engineering documentation based on:
-- Anthropic's Claude 4.x Best Practices (November 2025)
+- Anthropic's Codex 4.x Best Practices (November 2025)
 - Context engineering principles
 - The Fabric prompt pattern system
 - 1,500+ academic papers on prompt optimization
@@ -147,7 +147,7 @@ The templating system eliminated **~35,000 tokens (65% reduction)** across PAI:
 - `Tools/RenderTemplate.ts` - Implementation details
 
 **Research Foundation:**
-- Anthropic: "Claude 4.x Best Practices" (November 2025)
+- Anthropic: "Codex 4.x Best Practices" (November 2025)
 - Anthropic: "Effective Context Engineering for AI Agents"
 - Anthropic: "Prompt Templates and Variables"
 - The Fabric System (January 2024)
