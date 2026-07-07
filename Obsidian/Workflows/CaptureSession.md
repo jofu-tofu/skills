@@ -22,12 +22,13 @@ Read the nearest project `AGENTS.md`. Use its artifact routing, trust rubric, an
 
 Separate content into trust-aware buckets:
 
-- summary and state of work -> `20-working/session-recaps/` or project equivalent
-- raw sources or pasted material -> `10-sources/raw/`
-- source-backed claims -> `10-sources/` or project equivalent
-- open questions -> `20-working/open-questions/` or recap section
-- accepted user decisions -> `30-decisions/` only when explicitly confirmed
-- deliverables -> `40-artifacts/`
+- summary and state of work -> `20-working-T1-T3/session-recaps/` or project equivalent
+- raw sources or pasted material -> `10-sources-T0-T2/raw/`
+- source-backed claims -> `10-sources-T0-T2/` or project equivalent
+- open questions -> `20-working-T1-T3/open-questions/` or recap section
+- accepted user decisions -> `30-decisions-T4/` only when explicitly confirmed
+- active deliverable drafts -> `20-working-T1-T3/drafts/`
+- accepted or delivered outputs -> `40-artifacts-T5/`
 
 ### Step 3: Create recap
 
@@ -37,7 +38,7 @@ Use this structure:
 ---
 trust_level: T3
 artifact_type: session-recap
-status: current
+status: active
 created:
 updated:
 source: agent-session

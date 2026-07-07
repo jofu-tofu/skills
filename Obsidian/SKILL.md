@@ -27,6 +27,7 @@ PAI has direct read/write access.
 - Use the nearest `AGENTS.md` for routing and placement rules.
 - Treat trust level as authority to act, not confidence or note length.
 - Keep first-class project folders stable by workflow/trust layer; put project-specific folders on the second layer.
+- Treat archive as lifecycle status, not a trust level.
 
 ## Workflow Routing
 
@@ -55,7 +56,7 @@ Load these on-demand when specific reference is needed:
 | `Dataview.md` | Query syntax and output forms |
 | `Templater.md` | Template and scripting patterns |
 | `WorkflowPatterns.md` | MOCs and knowledge-work patterns |
-| `Standards/ContinuityPrinciples.md` | Trust levels, promotion authority, context-layer contract, and continuity philosophy |
+| `Standards/ContinuityPrinciples.md` | Trust levels, lifecycle status, promotion authority, context-layer contract, and continuity philosophy |
 | `Excalidraw.md` | Optional hand-drawn/sketch reference |
 | `Plugins.md` | Agent-relevant core and community plugin patterns |
 
@@ -81,15 +82,15 @@ User: "Find related notes for this topic and suggest backlinks"
 ```
 User: "Set up project notes for this larger project with meetings and decisions"
 -> Invokes StructureProjectVault workflow
--> Creates or proposes stable first-layer folders and project-specific second-layer folders
--> Returns: AGENTS.md routing rules, trust rubric, promotion authority, and starter index structure
+-> Creates or proposes trust-labeled first-layer folders and project-specific second-layer folders
+-> Returns: AGENTS.md routing rules, trust rubric, lifecycle statuses, promotion authority, and starter index structure
 ```
 
 **Example 4: Promote an artifact safely**
 ```
 User: "This is the decision; promote it"
 -> Invokes PromoteArtifact workflow
--> Checks source links, authority boundary, and supersession fields
+-> Checks source links, authority boundary, status, and supersession fields
 -> Returns: promoted decision or final artifact with backlinks to lower-trust evidence
 ```
 
@@ -103,6 +104,8 @@ EMBEDS:      ![[Note]] | ![[Note#Heading]] | ![[Note#^block]]
 PROPERTIES:  YAML frontmatter with text, list, number, checkbox, date, tags
 QUERIES:     Dataview LIST | TABLE | TASK | CALENDAR
 VISUALS:     Mermaid | Canvas | MOC | Table | Excalidraw
-TRUST:       T0 raw | T1 research | T2 source-backed | T3 working | T4 decision | T5 final | T9 archive
+FOLDERS:     00-inbox-T0 | 10-sources-T0-T2 | 20-working-T1-T3 | 30-decisions-T4 | 40-artifacts-T5 | 90-archive
+TRUST:       T0 raw | T1 research | T2 source-backed | T3 working | T4 decision | T5 final
+STATUS:      active | draft | accepted | final | superseded | archived
 PRIORITY:    Decisions and final artifacts first; research and recaps only with provenance or uncertainty
 ```

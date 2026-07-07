@@ -35,11 +35,11 @@ Use this first layer unless the nearest `AGENTS.md` already defines a compatible
 <Project>/
   AGENTS.md
   _index.md
-  00-inbox/
-  10-sources/
-  20-working/
-  30-decisions/
-  40-artifacts/
+  00-inbox-T0/
+  10-sources-T0-T2/
+  20-working-T1-T3/
+  30-decisions-T4/
+  40-artifacts-T5/
   90-archive/
 ```
 
@@ -50,7 +50,7 @@ Do not create project-specific top-level folders such as `Meetings/`, `Research/
 Choose the smallest second-layer set that fits the project:
 
 ```text
-10-sources/
+10-sources-T0-T2/
   raw/
   extracted/
   research/
@@ -59,19 +59,19 @@ Choose the smallest second-layer set that fits the project:
   documents/
   logs/
 
-20-working/
+20-working-T1-T3/
   session-recaps/
   plans/
   hypotheses/
   analysis/
   open-questions/
+  drafts/
 
-30-decisions/
+30-decisions-T4/
   accepted/
   superseded/
 
-40-artifacts/
-  drafts/
+40-artifacts-T5/
   final/
   presentations/
   exports/
@@ -92,12 +92,12 @@ Profile: lightweight | research-heavy | meeting-heavy | delivery-heavy | mixed/l
 
 ## First-Layer Contract
 
-- `00-inbox/` holds unprocessed captures.
-- `10-sources/` holds provenance-bearing inputs and source-backed notes.
-- `20-working/` holds synthesis, plans, session recaps, hypotheses, and open questions.
-- `30-decisions/` holds human-confirmed decisions and superseded decision history.
-- `40-artifacts/` holds drafts, final deliverables, exports, and presentations.
-- `90-archive/` holds inactive or superseded material retained for history.
+- `00-inbox-T0/` holds unprocessed captures.
+- `10-sources-T0-T2/` holds provenance-bearing inputs and source-backed notes.
+- `20-working-T1-T3/` holds synthesis, plans, session recaps, hypotheses, and open questions.
+- `30-decisions-T4/` holds human-confirmed decisions and superseded decision history.
+- `40-artifacts-T5/` holds final deliverables, exports, and presentations; keep active drafts in `20-working-T1-T3/`.
+- `90-archive/` holds inactive, superseded, or archived material from any trust level.
 
 ## Trust Rubric
 
@@ -109,8 +109,20 @@ Profile: lightweight | research-heavy | meeting-heavy | delivery-heavy | mixed/l
 | T3 | Working Judgment | Current plan, draft spec, analysis, design direction | Continue work, draft artifacts, identify likely next steps | Override accepted decisions |
 | T4 | Decision | Human-confirmed decision with rationale/date/status | Act as authoritative, resolve conflicts, guide implementation | Override without explicit supersession |
 | T5 | Final Artifact | Published or delivered output derived from decisions | Reuse as canonical deliverable | Modify casually without checking decision/source basis |
-| T9 | Archived | Retained history, inactive or superseded | Use for historical context only | Use as current guidance unless restored |
 
+## Lifecycle Status
+
+Trust level is authority/evidence level. Status is lifecycle state.
+
+Use these status values:
+- `active`
+- `draft`
+- `accepted`
+- `final`
+- `superseded`
+- `archived`
+
+Archived material keeps its original `trust_level`. Example: a superseded decision remains `trust_level: T4` with `status: superseded`.
 ## Promotion Authority
 
 Agents may promote:
@@ -122,13 +134,31 @@ Agents may promote:
 Agents must ask before promoting:
 - any artifact to T4 decision
 - any decision to superseded
-- any active project artifact to T9 archive
+- any active project artifact to `status: archived`
 
 Agents must not:
 - treat research as a decision
 - treat a recap as a decision
 - resolve conflicting decisions silently
 
+## Pruning Policy
+
+After promoting an artifact, prune duplicate active lower-trust material.
+
+Agents may delete:
+- scratch or inbox notes whose content was fully captured elsewhere
+- duplicate working drafts replaced by a promoted artifact
+- temporary agent research fully represented in a source-backed note, decision, or final artifact
+- empty shells left behind by move/merge work
+
+Agents should archive or mark superseded instead of deleting:
+- raw sources
+- source-backed notes
+- accepted or superseded decisions
+- final artifacts
+- notes with unique rationale, quotes, source links, or historical context
+
+If deleting the old artifact would break the provenance chain, keep it in `90-archive/` with `status: archived` and backlinks to the promoted artifact.
 ## Required Properties
 
 Use these properties for durable project artifacts:
@@ -148,12 +178,12 @@ superseded_by:
 
 ## Retrieval Order
 
-1. `30-decisions/` accepted decisions
-2. `40-artifacts/final/` final artifacts
-3. `10-sources/` source-backed notes
-4. `20-working/` working plans and recaps
-5. `00-inbox/` and raw captures only when source inspection is needed
-6. `90-archive/` only for history or supersession checks
+1. `30-decisions-T4/` accepted decisions
+2. `40-artifacts-T5/final/` final artifacts
+3. `10-sources-T0-T2/` source-backed notes
+4. `20-working-T1-T3/` working plans and recaps
+5. `00-inbox-T0/` and raw captures only when source inspection is needed
+6. `90-archive/` only for history or supersession checks; inspect original `trust_level` before using
 
 ## Obsidian Continuity
 
@@ -163,7 +193,8 @@ Before ending meaningful work:
 - Capture durable context if the session changed project state.
 - Update `_index.md` if the current goal, canonical decisions, open questions, or active artifacts changed.
 - Link new notes to relevant sources, decisions, and artifacts.
-- Keep research, working notes, decisions, and final artifacts at their correct trust levels.
+- Keep research, working notes, decisions, and final artifacts at their correct trust levels; use `status` for draft/final/superseded/archived lifecycle.
+- Prune duplicate active lower-trust notes after promotion, preserving provenance and decision history.
 
 Authority rules:
 - Research and session recaps are not decisions.

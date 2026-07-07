@@ -26,13 +26,23 @@
 | T3 | Working Judgment | Current plan, draft spec, analysis, open design direction | Continue work, draft artifacts, identify likely next steps | Override accepted decisions |
 | T4 | Decision | Human-confirmed decision with rationale, date, and status | Act as authoritative, resolve conflicts, guide implementation | Override without explicit supersession |
 | T5 | Final Artifact | Published or delivered output derived from decisions | Reuse as canonical deliverable or external-facing artifact | Modify casually without checking decision/source basis |
-| T9 | Archived | Retained history, inactive or superseded | Use for historical context only | Use as current guidance unless restored |
 
 **ANTI-PATTERN:** Confidence laundering: a polished research note becomes authoritative because it sounds complete.
 
 **TEST:** Does the artifact's trust level say what an agent can safely do next?
 
 **Sources:** User trust-rubric discussion in this session.
+## Archive Is Lifecycle Status
+
+**WHY:** Archive can contain old raw captures, superseded decisions, stale working notes, or delivered artifacts. Treating archive as a higher-numbered trust level confuses trust with lifecycle state because an archived decision was still a real decision historically.
+
+**WHAT:** Keep trust as `T0` through `T5` and use `status` for lifecycle: `active`, `draft`, `accepted`, `final`, `superseded`, or `archived`. Use `90-archive/` as a status bucket that can contain artifacts from any trust level.
+
+**ANTI-PATTERN:** Trust inflation by archive: archived material appears higher authority because it has a larger number.
+
+**TEST:** Can an archived note retain its original trust level while clearly showing it is not current guidance?
+
+**Sources:** User numbering correction in this session.
 
 ## Promotion Adds Structure Or Authority
 
@@ -47,9 +57,9 @@
 | T2 -> T3 | Allowed | Mark assumptions and open questions |
 | T3 -> T4 | Ask first | User explicitly confirms the decision |
 | T4 -> T5 | Allowed when direct | Artifact implements accepted decisions and links back to them |
-| Any current artifact -> T9 | Ask for important material | Add archive reason or supersession link |
+| Any active artifact -> status: archived | Ask for important material | Add archive reason or supersession link |
 
-Use the action rule: T0/T1 are inputs, T2 is evidence, T3 is working direction, T4 is authority, T5 is deliverable, and T9 is history.
+Use the action rule: T0/T1 are inputs, T2 is evidence, T3 is working direction, T4 is authority, and T5 is deliverable. Archive is lifecycle status, not a trust level.
 
 **ANTI-PATTERN:** Silent authority escalation: an agent writes `accepted` or `decision` because a plan seems reasonable.
 
@@ -57,29 +67,40 @@ Use the action rule: T0/T1 are inputs, T2 is evidence, T3 is working direction, 
 
 **Sources:** User promotion-authority discussion in this session.
 
-## Stable Layers, Flexible Subfolders
+## Promotion Prunes Active Duplicates
+
+**WHY:** A continuity system fails if every promotion leaves redundant lower-trust drafts active. The user still has to remember which copy matters, so working memory stays overloaded.
+
+**WHAT:** After promotion, prune the old active artifact. Delete scratch notes, duplicate working drafts, and temporary agent research when their useful content is represented in the promoted artifact. Archive or mark superseded artifacts that contain unique rationale, historical context, or provenance. Preserve raw sources, source-backed evidence, accepted decisions, and final artifacts unless the project `AGENTS.md` explicitly says otherwise.
+
+**ANTI-PATTERN:** Duplicate authority: both the promoted decision and the old working note remain active, so future agents may use the wrong one.
+
+**TEST:** After promotion, is there exactly one active artifact that future agents should use for the promoted content, with provenance still traceable?
+
+**Sources:** User pruning direction in this session.
+## Stable Trust-Labeled Layers, Flexible Subfolders
 
 **WHY:** Projects vary in weight. A small project may not need meeting-note folders; a large project may need meetings, interviews, source documents, exports, and presentations. The first layer should remain stable so agents do not relearn the model for every project.
 
-**WHAT:** Use stable first-class folders by workflow/trust layer, then add project-specific second-layer folders only when useful. Recommended first layer:
+**WHAT:** Use stable first-class folders by workflow/trust layer with trust levels in the folder names, then add project-specific second-layer folders only when useful. Recommended first layer:
 
 ```text
 <Project>/
   AGENTS.md
   _index.md
-  00-inbox/
-  10-sources/
-  20-working/
-  30-decisions/
-  40-artifacts/
+  00-inbox-T0/
+  10-sources-T0-T2/
+  20-working-T1-T3/
+  30-decisions-T4/
+  40-artifacts-T5/
   90-archive/
 ```
 
-Examples of second-layer folders include `10-sources/meetings/`, `10-sources/research/`, `20-working/session-recaps/`, `20-working/open-questions/`, `30-decisions/accepted/`, `30-decisions/superseded/`, `40-artifacts/drafts/`, and `40-artifacts/final/`.
+Examples of second-layer folders include `10-sources-T0-T2/meetings/`, `10-sources-T0-T2/research/`, `20-working-T1-T3/session-recaps/`, `20-working-T1-T3/open-questions/`, `30-decisions-T4/accepted/`, `30-decisions-T4/superseded/`, `20-working-T1-T3/drafts/`, and `40-artifacts-T5/final/`.
 
 **ANTI-PATTERN:** Taxonomy sprawl: every project invents unrelated top-level folders, so agents cannot infer trust or workflow stage.
 
-**TEST:** Can an agent identify artifact authority from the top-level folder and project specifics from the second layer?
+**TEST:** Can an agent identify artifact authority from the top-level folder name and project specifics from the second layer?
 
 **Sources:** User folder-flexibility discussion in this session.
 

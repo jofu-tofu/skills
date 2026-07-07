@@ -10,7 +10,7 @@
 
 ## Purpose
 
-Move or relabel an artifact across trust levels without silently changing authority. Promotions that add structure may proceed when requirements are met; promotions that add authority require explicit user confirmation.
+Move or relabel an artifact across trust levels without silently changing authority. Promotions that add structure may proceed when requirements are met; promotions that add authority require explicit user confirmation. After promotion, prune duplicate active lower-trust material so the workspace keeps one clear active artifact.
 
 ## Workflow Steps
 
@@ -18,9 +18,9 @@ Move or relabel an artifact across trust levels without silently changing author
 
 Read the nearest project `AGENTS.md` first. Its routing and authority rules override generic examples in this workflow.
 
-### Step 2: Identify current and target trust levels
+### Step 2: Identify current and target trust/status
 
-Determine current `trust_level`, `artifact_type`, `status`, source links, and folder location. If missing, infer cautiously and report the inference.
+Determine current `trust_level`, `status`, `artifact_type`, source links, and folder location. If missing, infer cautiously and report the inference. Trust is authority/evidence level; status is lifecycle state such as `active`, `draft`, `accepted`, `final`, `superseded`, or `archived`.
 
 Use the action rule:
 
@@ -30,7 +30,6 @@ T2 = evidence
 T3 = working direction
 T4 = authority
 T5 = deliverable
-T9 = history
 ```
 
 ### Step 3: Check promotion authority
@@ -48,7 +47,7 @@ Agents must ask before:
 
 - promoting anything to T4 decision
 - marking an accepted decision as superseded
-- archiving active project material
+- setting active project material to `status: archived`
 - resolving conflicting decisions
 
 If the user has already said "this is the decision", "lock that in", "treat this as accepted", or equivalent, that counts as explicit confirmation for T4.
@@ -72,7 +71,27 @@ supersedes:
 superseded_by:
 ```
 
-### Step 5: Apply target template
+### Step 5: Prune old active material
+
+After the promoted artifact exists and provenance links are preserved, remove duplicate active material.
+
+Agents may delete the old artifact when it is:
+
+- scratch or inbox material whose content was fully captured elsewhere
+- a duplicate working draft replaced by the promoted artifact
+- temporary agent research fully represented in a source-backed note, decision, or final artifact
+- an empty shell left behind by move/merge work
+
+Agents should archive or mark superseded instead of deleting when the old artifact has:
+
+- unique source quotes, links, or evidence
+- rationale not copied into the promoted artifact
+- historical context needed to understand a decision
+- prior accepted authority, such as an old decision
+
+Preserve raw sources, source-backed notes, accepted decisions, and final artifacts unless the project `AGENTS.md` explicitly allows deletion. If deletion would break the provenance chain, archive and backlink instead.
+
+### Step 6: Apply target template
 
 For T2 source-backed notes, include:
 
@@ -108,16 +127,17 @@ For T4 decisions, include:
 
 For T5 final artifacts, include links to the accepted decisions and source-backed notes it depends on.
 
-### Step 6: Update backlinks and index
+### Step 7: Update backlinks and index
 
 Update `_index.md` or suggest the exact update when a canonical decision, final artifact, or supersession changes.
 
-### Step 7: Report
+### Step 8: Report
 
 Return:
 
 - source artifact and target artifact
 - promotion performed or confirmation needed
-- trust-level change
+- trust-level and status change
 - provenance links retained
+- old active artifact deleted, archived, superseded, or retained with reason
 - conflicts or missing evidence
