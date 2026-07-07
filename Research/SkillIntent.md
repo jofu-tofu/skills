@@ -51,7 +51,9 @@ and persistent artifacts that accumulate knowledge across sessions.
 
 ## Explicit Out-of-Scope
 
-- **Web content retrieval** — use ResearchLegacy for blog posts, news, web content
+- **General web content retrieval** — this skill can use ordinary web search for
+  source discovery, but it is optimized for evidence-backed research rather than
+  broad scraping or content extraction workflows
 - **Full systematic review** — produces evidence maps, not PRISMA-compliant reviews
 - **Meta-analysis** — no quantitative effect size pooling
 - **Primary research** — finds and evaluates existing research, not conducts new

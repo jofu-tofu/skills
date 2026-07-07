@@ -9,7 +9,6 @@ This repo stores shared LLM skills.
 - The repo root contains the active skill directories for this repo.
 - `skill-index.json` is also stored at the repo root.
 - `Prompting/` is a promoted root-level copy of the former `Utilities/Prompting` sub-skill.
-- `ResearchLegacy/Research` remains as a nested skill.
 - `Thinking/` and `Utilities/` were intentionally removed from this repo during the split from PAI.
 
 ## Current caveat
