@@ -89,6 +89,8 @@ Run the four-level Compression Protocol from `../OutputQuality.md` Section 6:
 
 Then run the Coherence Gate from `../OutputQuality.md` Section 9. Fix any paragraph pairs that lack logical connectives.
 
+For a document going to reviewers, run the fresh-reader and cut passes in `ReviewDesign.md` Step 3.5 when a subagent is available.
+
 ### Step 6: Append Self-Check Summary
 
 After the design artifact, append this summary:

@@ -28,6 +28,14 @@ State exactly what is being decided, who owns the final call, whether the decisi
 
 **Anti-pattern**: "Choose database approach" when the real decision is "Pick persistence layer for the billing service; reversible; owner = platform lead; inputs = consistency, operational risk, and 12-month scale; not style preference."
 
+### Section Boundaries
+
+Give each section one job. The problem section holds current behavior, why it's a problem, and evidence for disputed claims. The proposal section holds what changes, what stays the same, the risks, and the open questions. Neither restates the other.
+
+Write the design so a reviewer can approve it without opening another design. When it depends on other work, say what the dependency means for users or for the decision. Keep links to related designs and investigation notes in author notes.
+
+**Test**: Could a reviewer approve this design having read nothing else?
+
 ### Decision Criteria
 
 Criteria define what "good" means for this decision. Derive them from first principles: context -> risks -> constraints -> criteria. Prioritize them so trade-offs become explicit: correctness may outrank performance for a ledger, while repeated-use efficiency may outrank first-use discoverability for a daily workflow.
@@ -67,6 +75,8 @@ Bransford & Johnson (1972) demonstrated that providing the topic before the cont
 
 **Anti-pattern**: Generic "background" openings that describe the situation without naming the decision. The reader must infer what matters.
 
+When reviewers need context about the feature itself, give it in one or two sentences and link to the reference, pinned to a version and date. How the feature works and its edge cases stay in the reference unless they change the decision.
+
 ### 2. Honest Trade-offs
 
 Showing what you rejected and why prevents derailment and builds trust through demonstrated intellectual honesty. Every alternative gets genuine consideration. The recommended option has acknowledged weaknesses.
@@ -90,6 +100,12 @@ Internal precedent > industry practice > external research. What your own org ha
 Anchoring bias (Tversky & Kahneman, 1974): the first reference point disproportionately shapes evaluation. Lead with internal precedent when available.
 
 **Anti-pattern**: Leading with external research when internal precedent exists. Your own org's experience is usually more relevant.
+
+**Spend evidence on disputed claims.** Reviewers already know how their own system behaves, so state current behavior as fact and keep verification notes with the working material. Put evidence where a reviewer could reasonably disagree, such as a regulatory reading or a performance claim. When the sources differ in authority, order them from most to least binding and say how binding each is.
+
+**Anti-pattern**: Proving the current state while the contested claim gets one sentence.
+
+**Test**: Would a reviewer dispute this claim if it had no evidence? If not, drop the evidence.
 
 ### 4. Constructive Review Surface
 

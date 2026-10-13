@@ -271,6 +271,18 @@ Match ceremony to the user's requested artifact:
 
 If the artifact supports another design, keep it short and point to the source of truth.
 
+### Evidence Lines
+
+Write each source as one line, ordered from most to least authoritative. Start the line with the source and its authority in bold, then give what it says. Put longer quotes, page references, and research detail in the research notes and link to them.
+
+Example: `**Regulation text, 42 CFR 422.121(b)(4)(ii) (binding):** excludes only "Denied prior authorizations."`
+
+### Omit Standard Design Mechanics
+
+Put requested values directly in the design fields or tables. Omit narration about template mechanics or field conventions that the intended reviewers can infer from the artifact.
+
+Explain a convention only when it is nonstandard, disputed, affects implementation or review, or cannot be inferred from the artifact.
+
 ---
 
 ## 12. Override Policy

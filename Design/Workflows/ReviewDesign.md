@@ -100,6 +100,16 @@ For structural content (system boundaries, data flows, component relationships, 
 For any external references (URLs, doc links, ADR references):
 - Does the link have a purpose label? ("See RFC-42 for the auth decision" not just "See RFC-42")
 - Is the critical information from the link summarized in-doc? A reader shouldn't need to open an external link to understand the design.
+- Is an internal reference pinned to a version and date (a wiki revision ID, a document version) so later edits don't change what the design cites?
+
+### Step 3.5: Fresh-Reader and Cut Passes
+
+When a subagent is available, run two independent reads of the reviewer-facing sections:
+
+1. **Comprehension pass.** Give a fresh reader only those sections. Ask what the problem is, what evidence supports it, what changes, what the risks are, and what's undecided. Treat a wrong or missing answer as a gap in the document.
+2. **Cut pass.** Give a second fresh reader the document and ask what a reviewer could skip without losing anything needed to approve it.
+
+The cut pass finds redundancy the comprehension pass misses, because a reader can understand everything while reading the same point three times. Report the cuts that would remove a decision, risk, or disputed claim as rejected, and why.
 
 ### Step 4: Review Readiness
 
