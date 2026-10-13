@@ -78,7 +78,7 @@ Example of the structure (not a verified product requirement):
 
 **Test:** Each emphasized span in `measurements.md` falls in one of the five allowed classes.
 
-**Fail when:** Emphasis marks anything else, a requirement hides inside an example, or hierarchy is inconsistent.
+**Fail when:** Emphasis marks anything else, a requirement hides inside an example, or hierarchy is inconsistent. When the brief's constraints give the template's own emphasis convention, such as bold leads only for changes, that convention replaces the five classes.
 
 **Sources:** Schneider et al. 2018 (signaling improves retention and transfer, 103 studies); Lorch 1989 (unsignaled content can be recalled worse).
 
@@ -102,7 +102,9 @@ Example of the structure (not a verified product requirement):
 
 **Rule:** When the brief's `artifact_intent` is `decide` or `review`, or its `audience_exposure` is `partner` or `customer` and the document asks for a judgment, open with a labeled block: **Decision or ask**, **Why** (one to three reasons), **Risks and uncertainty**, and **Next step and deadline**. Each label holds one to three sentences. Use the organization's template labels when one exists. After the block, present the problem or proposed change, then its evidence, then the judgment, approval, or feedback requested. When visible product behavior is the proof, show screenshots and say what they demonstrate.
 
-**Test:** Find each answer from the labels alone.
+Every open question states the author's current position and what would change it. An open item with no position asks the reviewer to do the author's work, and a reviewer can only approve or push back on a stated position. Once the author decides, the item becomes a change and loses its "open" label.
+
+**Test:** Find each answer from the labels alone. Each item marked open, pending, or undecided names a recommendation.
 
 **Boundary:** Structured openings make answers faster and more accurate to find; they are not shown to improve decisions or memory. No study supports a specific summary length.
 

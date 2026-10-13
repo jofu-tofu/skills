@@ -43,7 +43,7 @@ $REVIEW_DIR/
 
 ### Step 1: Prepare the Shared Inputs
 
-- `brief.md`: the brief, including `audience`, `expertise`, `audience_exposure`, `artifact_intent`, and `budget_minutes`.
+- `brief.md`: the brief, including `audience`, `expertise`, `audience_exposure`, `artifact_intent`, and `budget_minutes`. Copy into its `constraints` any template or house rules from a domain skill that applies, such as a company design-template skill, because the lenses see the brief but not those skills.
 - `reader-questions.md`: the audience description, then three to five neutral questions. Cover the main point, the cause or mechanism, the evidence, the material uncertainty, and the next action. Include the ask, the decision, and the top risk when the artifact has them. For an informative artifact with no action, ask what the reader should now understand.
 - `answer-key.md`: the expected answer to each question, from the brief and sources. Only the Verifier receives it.
 - When the brief names more than one audience, such as approvers and implementers, write one question file and one answer key per audience, suffixed with the audience name.
