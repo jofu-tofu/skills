@@ -16,7 +16,7 @@ Decide which findings stand, settle conflicts between lenses, compare the Reader
 ## Inputs
 
 - From `$REVIEW_DIR`: `brief.md`, every `reader-questions*.md` and `answer-key*.md`, `sources/`, and `verification.md`.
-- From `$ROUND_DIR`: the artifact copy, every `lens-*.md`, `measurements.md`, and `render/` when present.
+- From `$ROUND_DIR`: the artifact copy, every `lens-*.md`, `measurements.md`, `skim-layer.md`, and `render/` when present.
 - On repair rounds, the previous round's `declined.md`.
 
 ## Workflow Steps
@@ -24,6 +24,8 @@ Decide which findings stand, settle conflicts between lenses, compare the Reader
 ### Step 1: Score the Reader's Answers
 
 Compare each Reader's answers with the matching `answer-key*.md`: **Correct**, **Partial**, **Wrong**, or **Not found**. A wrong or missing answer is evidence to inspect, not automatic proof that the document is at fault. Find the passage, missing step, or visual that caused it. Each answer that is not Correct becomes a comprehension finding. It is Major when the question concerns the main point, the ask, the decision, or the top risk. Treat the Reader's sticking points as supporting evidence for lens findings at the same location, or as new findings when no lens flagged them.
+
+Score the Skim Reader, who saw only the headings and bold text, against the same key, but only on the questions about the main point, the ask, the decision, and the top risk. Each of those it gets Wrong or Not found is an RC-10 finding: Major when the skim layer contradicts the document or omits the main point or the decision, and Polish otherwise. Report its results as their own table.
 
 ### Step 2: Filter for Relevance
 

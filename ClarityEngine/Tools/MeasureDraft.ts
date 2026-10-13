@@ -5,7 +5,8 @@
  * Mechanical measurements that ClarityEngine's lens reviewers use as evidence:
  * main-path reading time against a budget (RC-19), headings with their first
  * sentences and paragraph openings (RC-5, RC-6), emphasized spans (RC-10), the
- * first half of the main path (RC-9), and, with --before, sentences that lost a
+ * first half of the main path (RC-9), the skim layer of headings and bold text
+ * (RC-10), and, with --before, sentences that lost a
  * connective between drafts (RC-25).
  *
  * The main path is everything outside <details> blocks and appendix sections.
@@ -305,7 +306,46 @@ function describeEmphasis(blocks: DraftBlock[]): string {
     for (const span of block.emphasizedSpans) rows.push(`| ${rows.length + 1} | ${escapeCell(block.sectionHeading)} | ${escapeCell(span)} |`);
   }
   if (rows.length === 0) return "## Emphasized Spans (RC-10)\n\nNone found.";
-  return ["## Emphasized Spans (RC-10)", "", "| # | Section | Text |", "|---|---|---|", ...rows].join("\n");
+
+  const densityBySection = new Map<string, { boldWords: number; totalWords: number; maxSpansInBlock: number }>();
+  for (const block of blocks) {
+    if (block.kind === "heading" || !block.onMainPath) continue;
+    const density = densityBySection.get(block.sectionHeading) ?? { boldWords: 0, totalWords: 0, maxSpansInBlock: 0 };
+    density.totalWords += countWords(block.text);
+    density.boldWords += block.emphasizedSpans.reduce((sum, span) => sum + countWords(span), 0);
+    density.maxSpansInBlock = Math.max(density.maxSpansInBlock, block.emphasizedSpans.length);
+    densityBySection.set(block.sectionHeading, density);
+  }
+  const densityRows = [...densityBySection]
+    .filter(([, density]) => density.boldWords > 0)
+    .map(([section, density]) => {
+      const boldPercent = Math.round((density.boldWords / Math.max(density.totalWords, 1)) * 100);
+      return `| ${escapeCell(section)} | ${boldPercent}% | ${density.maxSpansInBlock} |`;
+    });
+  return [
+    "## Emphasized Spans (RC-10)",
+    "",
+    "| # | Section | Text |",
+    "|---|---|---|",
+    ...rows,
+    "",
+    "Bold density on the main path:",
+    "",
+    "| Section | Bold words | Most spans in one paragraph |",
+    "|---|---|---|",
+    ...densityRows,
+  ].join("\n");
+}
+
+// The skim layer is what a reader who reads only headings and bold text sees, in order.
+function buildSkimLayer(blocks: DraftBlock[]): string {
+  const lines: string[] = [];
+  for (const block of blocks) {
+    if (!block.onMainPath) continue;
+    if (block.kind === "heading") lines.push("", `${"#".repeat(block.headingLevel)} ${block.text}`, "");
+    else for (const span of block.emphasizedSpans) lines.push(`- ${span}`);
+  }
+  return lines.join("\n").trim() + "\n";
 }
 
 function buildFirstHalf(blocks: DraftBlock[], mainPathWords: number): { markdown: string; words: number; lastSection: string } {
@@ -387,6 +427,7 @@ function main(): void {
       "",
       `${firstHalf.words} words, ending in section "${firstHalf.lastSection}". ${options.outDir ? "Full text: first-half.md." : ""}`,
     ].join("\n"),
+    `## Skim Layer (RC-10)\n\nHeadings and bold text in reading order. ${options.outDir ? "Full text: skim-layer.md." : ""}`,
   ];
   if (options.beforePath) sections.push(describeConnectiveChanges(parseBlocks(readDraft(options.beforePath)), blocks));
   const measurementsMarkdown = sections.join("\n\n") + "\n";
@@ -394,13 +435,15 @@ function main(): void {
   if (!options.outDir) {
     console.log(measurementsMarkdown);
     console.log("---\n\n" + firstHalf.markdown);
+    console.log("---\n\n" + buildSkimLayer(blocks));
     return;
   }
   const outDir = resolve(options.outDir);
   mkdirSync(outDir, { recursive: true });
   writeFileSync(join(outDir, "measurements.md"), measurementsMarkdown);
   writeFileSync(join(outDir, "first-half.md"), firstHalf.markdown);
-  console.log(`Wrote ${join(outDir, "measurements.md")} and ${join(outDir, "first-half.md")}`);
+  writeFileSync(join(outDir, "skim-layer.md"), buildSkimLayer(blocks));
+  console.log(`Wrote measurements.md, first-half.md, and skim-layer.md to ${outDir}`);
 }
 
 main();

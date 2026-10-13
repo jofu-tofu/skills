@@ -34,7 +34,7 @@ Create `$REVIEW_DIR` as `_output/clarity-review/[YYYYMMDD-HHMMSS]` in the workin
 $REVIEW_DIR/
   brief.md, reader-questions[-audience].md, answer-key[-audience].md
   sources/, verification.md
-  round-1/   artifact copy, measurements.md, first-half.md, render/, lens-*.md,
+  round-1/   artifact copy, measurements.md, first-half.md, skim-layer.md, render/, lens-*.md,
              verified-findings.md, report.md, declined.md
   round-2/   ...
 ```
@@ -63,7 +63,7 @@ For visual formats, capture the rendered output into `$ROUND_DIR/render/` as des
 | Artifact | Lenses |
 |---|---|
 | Short-form: email, chat, pull request description, or a main path under about 400 words | Reader, Cutter, Navigator |
-| Standard document or deck | Reader, Cutter, Logician, Navigator, AudienceFit |
+| Standard document or deck | Reader, Skim Reader, Cutter, Logician, Navigator, AudienceFit |
 | Any rendered visual output (HTML, PPTX, PDF) | Add Visual |
 | More than one audience in the brief | One Reader per audience |
 
@@ -74,13 +74,14 @@ Start one fresh agent per lens, in parallel, with no inherited conversation. Giv
 | Lens | Inputs |
 |---|---|
 | Reader | Artifact (rendered pages or slides when available), its `reader-questions[-audience].md` |
+| Skim Reader | `skim-layer.md` in place of the artifact, `reader-questions.md`; it uses the Reader lens and writes `lens-SkimReader.md` |
 | Cutter | Artifact, `brief.md`, `measurements.md` |
 | Logician | Artifact, `brief.md`, `sources/`, `measurements.md` |
-| Navigator | Artifact, `brief.md`, `measurements.md`, `first-half.md` |
+| Navigator | Artifact, `brief.md`, `measurements.md`, `first-half.md`, `skim-layer.md` |
 | AudienceFit | Artifact, `brief.md` |
 | Visual | `render/`, artifact, `brief.md`, `sources/` |
 
-The Reader never receives the brief or an answer key.
+Neither Reader receives the brief or an answer key.
 
 Prompt template:
 

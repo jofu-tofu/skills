@@ -49,7 +49,7 @@ Each check has a stable RC ID and exactly one owning lens. This table is the ind
 | RC-7 | Examples clarify claims; uncertainty is marked | 2 | `Lenses/Logician.md` |
 | RC-8 | Related ideas are grouped; structure fits the content and task | 1 | `Lenses/Navigator.md` |
 | RC-9 | Skimmers and early leavers still get the main argument | 1 | `Lenses/Navigator.md` |
-| RC-10 | Hierarchy and emphasis mark only what the reader must notice | 1 | `Lenses/Navigator.md` |
+| RC-10 | Bold forms a skim layer that summarizes the document | 1 | `Lenses/Navigator.md` |
 | RC-11 | Diagram labels use verified identifiers or defined groups | 2 | `Lenses/Visual.md` |
 | RC-12 | Diagrams explain their purpose and notation | 3 | `Lenses/Visual.md` |
 | RC-13 | Material claims are traceable; inference is distinguished | 2 | `Lenses/Logician.md` |

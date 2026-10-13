@@ -15,7 +15,7 @@ You have five minutes and three other documents waiting. You read headings, the 
 
 **Sources:** Duggan & Payne 2009, 2011; Pirolli & Card 1999; Liu, White & Dumais 2010; Lagun & Lalmas 2016; Anderson & Pichert 1978; Kaakinen et al. 2003.
 
-`measurements.md` lists every heading with its first sentence, the first sentence of every paragraph, and every emphasized span. `first-half.md` holds the first half of the main path. Use both as evidence.
+`measurements.md` lists every heading with its first sentence, the first sentence of every paragraph, and every emphasized span with its density. `first-half.md` holds the first half of the main path, and `skim-layer.md` holds the headings and bold text in order. Use all three as evidence.
 
 ## Checks
 
@@ -67,20 +67,26 @@ You have five minutes and three other documents waiting. You read headings, the 
 
 **Sources:** Weinreich et al. 2008; Galesic & Bosnjak 2009.
 
-### RC-10: Hierarchy and emphasis mark only what the reader must notice
+### RC-10: Bold forms a skim layer that summarizes the document
 
-**Rule:** Use typography, headings, spacing, and emphasis consistently to show how ideas relate. When listing rules, state each rule in a main bullet and nest its examples and details beneath it. Label concrete illustrations "Example:". Keep independent requirements at the main level, never inside an example. Use bold, callouts, and highlight boxes only for a section claim, a decision, an ask, a risk, or a number the reader must act on. Remove decoration that competes with the content, and respect supplied templates.
+**Rule:** Headings and bold text, read alone and in order, give an accurate summary of the document's core: what it claims, decides, or asks, and why. Within a section, bold marks one kind of thing, usually the section's key claims, so a skimmer knows what every bold span means. Each bold span is a complete assertion with its key qualifier inside the bold, because readers remember what is cued and skip what is not, and a bold claim stripped of its caveat misleads. Bold at most one or two spans per paragraph and well under a third of a section's words; heavy cueing cancels the benefit. Mark definitions, warnings, and interface names some other way, such as italics, a callout, a table, or code font, unless the document declares one convention for them up front.
+
+Use typography, headings, and spacing consistently to show how ideas relate. When listing rules, state each rule in a main bullet and nest its examples and details beneath it. Label concrete illustrations "Example:". Keep independent requirements at the main level, never inside an example. Remove decoration that competes with the content, and respect supplied templates.
 
 Example of the structure (not a verified product requirement):
 
 - **Limit each group to 25 referrals.** Count each referral once, including the source and referrals hidden by security. Apply the limit across repeated additions.
   - Example: Allow five additions to a group of 20, but reject ten additions.
 
-**Test:** Each emphasized span in `measurements.md` falls in one of the five allowed classes.
+**Test:** Read `skim-layer.md`, the headings and bold text in order. It must state the document's main point, decision or ask, and top risk, and nothing in it may contradict the full text. Then check each section's spans: every one is the same kind of thing, every claim span has a verb and its qualifier, and `measurements.md` shows no paragraph with more than two spans.
 
-**Fail when:** Emphasis marks anything else, a requirement hides inside an example, or hierarchy is inconsistent. When the brief's constraints give the template's own emphasis convention, such as bold leads only for changes, that convention replaces the five classes.
+**Run-in heads and labels:** A bold lead label such as "Decision:" or "**Regulation text (binding):**" is structure, not emphasis. Treat it as a heading: it is exempt from the claim check, the plain sentence after it must make the claim, and every label in a section must be the same kind. A bold line that works as a heading should be a real heading, because assistive technology does not read bold as structure.
 
-**Sources:** Schneider et al. 2018 (signaling improves retention and transfer, 103 studies); Lorch 1989 (unsignaled content can be recalled worse).
+**Fail when:** The skim layer misses or misstates the main point, decision, ask, or top risk; a section's bold mixes kinds; a claim span drops a qualifier the surrounding text adds; a requirement hides inside an example; or hierarchy is inconsistent. When the brief's constraints give the template's own emphasis convention, such as bold leads only for changes, that convention sets the section's one kind.
+
+**Boundary:** Procedural and interface documentation conventionally reserves bold for interface elements (GOV.UK, Google, Microsoft, Mailchimp style guides); follow that convention there, and do not mix it with claim bolding in one document. The cueing studies mostly used students, recall tests, and underlining, and no study tests one-kind-per-section or bold-only comprehension directly. Treat the limits as heuristics. Readers who read everything gain little from bold, so the skim layer never replaces a clear opening.
+
+**Sources:** Nielsen Norman Group, "5 Formatting Techniques for Long-Form Content" (bold only the most important points, under 30% of the text) and the layer-cake scanning pattern (cues work only when they summarize the text below them); Lorch, Lorch & Klusewitz 1995 (cueing targets plus half the other sentences did no better than no cueing); Silvers & Kreiner 1997 and Gier et al. 2009 (highlighting the wrong content lowered comprehension below plain text); Schneider et al. 2018 (signaling improves retention and transfer, 103 studies); Lorch 1989 (uncued content gains nothing); Stull & Mayer 2007 (signaling helped only in moderation); Forte, Progressive Summarization, and Duarte, Glance Test (practitioner versions of a layer that reads alone).
 
 ### RC-23: The question being answered is explicit
 

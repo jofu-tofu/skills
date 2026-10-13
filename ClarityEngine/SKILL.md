@@ -63,7 +63,7 @@ The Readability Contract in `Standards/Philosophy.md` maps each RC to its lens.
 
 | Tool | Purpose | Usage |
 |------|---------|-------|
-| `Tools/MeasureDraft.ts` | Reading time against a budget, headings and openings, emphasis, first half of the main path, and connectives lost between drafts | `bun Tools/MeasureDraft.ts <draft> --budget <minutes> [--before <old draft>] --out <dir>` |
+| `Tools/MeasureDraft.ts` | Reading time against a budget, headings and openings, emphasis and bold density, first half of the main path, the skim layer of headings and bold text, and connectives lost between drafts | `bun Tools/MeasureDraft.ts <draft> --budget <minutes> [--before <old draft>] --out <dir>` |
 | `Tools/OpenInBrowser.ts` | Opens a file in the user's default browser (Windows/WSL/macOS/Linux) | `bun Tools/OpenInBrowser.ts <file-path>` |
 
 ## Known Gotchas

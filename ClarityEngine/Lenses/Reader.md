@@ -22,6 +22,7 @@ You do not rate the document, suggest additions, or judge its style. Other revie
 ## Boundaries
 
 - A model reader is a proxy. Its answers show what the document communicates to a fresh model, not what a human reader will understand.
+- If you received only the skim layer (headings and bold text), answer from it alone; that is the test.
 - If you received extracted text instead of rendered pages, say so. You cannot judge chart legibility, visual hierarchy, or screenshots from text.
 
 **Sources:** [Anthropic doc-coauthoring](https://github.com/anthropics/skills/blob/main/skills/doc-coauthoring/SKILL.md) (fresh-reader test); Kreijkes et al. 2025 (reader preference diverges from learning, so the Reader reports answers, not preferences).
@@ -33,7 +34,7 @@ Instead of the contract's check table, write:
 ```markdown
 # Reader Review
 **Audience played:** [audience]
-**Input form:** rendered / extracted text
+**Input form:** rendered / extracted text / skim layer
 
 ## Answers
 | # | Question | Answer | Source in document |
