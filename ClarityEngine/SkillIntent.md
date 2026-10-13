@@ -1,78 +1,56 @@
-# SkillIntent - ClarityEngine
+# Why ClarityEngine Exists
 
-> **For agents modifying this skill:** Read this before making any changes. It captures
-> the design intent, boundaries, and constraints that updates must preserve.
-
----
-
-## First Principles
-
-1. **Comprehension Over Production**: AI output is cheap; human review time is the bottleneck. Optimize for the reader, not the writer.
-2. **Inverted Pyramid + Section Independence**: Order content by reader value. Each section restarts the pattern so readers can enter anywhere.
-3. **Bridge to the Known**: Surface first principles and connect to what the reader already knows. Cross-domain analogies and gap-driven framing produce clarity faster than additional explanation.
-4. **Density Over Completeness**: Include only what the reader needs. Prefer omitting over vagueness. When density and other principles conflict, density wins.
-5. **Philosophy Before Format**: The comprehension principles drive all output; format (HTML, PPT) is a late rendering choice.
-6. **Extensible Adapters**: New formats add rendering instructions to FormatAdapters.md. They never add new philosophy.
-
----
+Read this file before changing the skill. It explains the choices that future edits should preserve.
 
 ## Problem This Skill Solves
 
-Document creation requests produce output optimized for production speed, not human comprehension. Without a comprehension-first framework, documents suffer from expert gatekeeping, narrative dependence, compression damage, confident vagueness, and explanation by exhaustion — adding more words instead of finding a better frame. ClarityEngine provides a philosophy-driven layer that ensures all document output is optimized for the reader's ability to understand, decide, and act, including bridging to concepts the audience already knows.
+A document can look polished while leaving the reader unsure what happened, why it matters, or what to do. ClarityEngine helps the author answer those questions. It plans the explanation before generating the file, then checks whether the result communicates the intended meaning.
 
-Additionally, Philosophy.md serves as a passive shared resource — any PAI skill producing human-facing output can reference it for comprehension principles without invoking the full ClarityEngine workflow.
+## First Principles
 
----
+1. **Help the reader understand.** Preserve the evidence and reasoning needed to assess the main point.
+2. **Put the point first.** Follow it with support and background. Give each section enough context to make sense when read separately.
+3. **Explain unfamiliar relationships.** Start from what the audience knows. Use examples, diagrams, or analogies when they clarify the subject.
+4. **Preserve meaning when shortening.** Remove filler while keeping causes, caveats, and actions. Repeat a fact when the reader needs it in a summary or another section.
+5. **Plan the content before rendering.** Honor the requested format. If none is specified, choose one after understanding how the reader will use the document.
+6. **Let format skills handle files.** Keep HTML and PPTX as peer options. Add other formats through FormatAdapters.md without changing the writing principles.
 
 ## Design Decisions
 
-| Decision | Chosen Approach | Alternatives Rejected | Why |
-|---|---|---|---|
-| Architecture axis | Philosophy-first (principles drive output) | Format-first (HTML vs PPT as primary axis) | Format is a rendering choice, not a design driver. Philosophy-first ensures consistent comprehension quality across formats. |
-| Information ordering | Inverted pyramid as the umbrella frame | Narrative-first sequencing | Readers need the main point first. Supporting detail and background should arrive in descending reader value, not author chronology. |
-| Workflow structure | Unified CreateDocument with late format selection | Three separate creation workflows (CreatePresentation, CreateHtml, CreatePpt) | One workflow with format as a late decision matches "Philosophy Before Format." |
-| Rules handling | 54 rules distilled to 18 principle-mapped checkpoints | Keep rules as appendix; Remove entirely | Appendix creates two sources of truth. Removing loses testability. Distillation preserves testability under philosophical framing. |
-| Conceptual clarity | First-principles bridging + cross-domain connection as P3 | Formatting-only philosophy | Clarity is a thinking problem, not just a formatting problem. Connecting to reader's existing knowledge produces understanding faster than adding more explanation. Adapted from Design skill and CriticalThinking lens system. |
-| Principle pruning | 4 principles (merged 7→4) | Keep all 7 separate principles | P2 (Skip-Friendly) was a corollary of P1. P3 (Clarity Over Brevity) was a boundary condition on Density. P4 (Scannable Architecture) was formatting rules already captured in RC checkpoints. Merging reduces redundancy and signal-to-noise. |
-| Comprehension layer scope | Passive shared resource (Philosophy.md) | Active convention with enforced Read instruction | Passive avoids coupling. Skills discover and opt in voluntarily. Escalation path exists if passive proves insufficient. |
-| Format extensibility | Single FormatAdapters.md file | Separate adapter files per format | At 2 formats, separate files is premature. One file with clear sections keeps it simple. |
-| Readability scoring | Flesch 60-70 scoped to summary prose | Flesch as universal gate | AHRQ, Redish confirm Flesch produces meaningless results for structured content (bullets, tables). |
-| Diagram framing | Co-equal text-diagram integration | Diagram-first primacy | Mayer's Multimedia Principle supports integration, not hierarchy. Tufte concurs. |
-| Miller citation | Cowan (2001) working memory 3-5 | Miller (1956) 7±2 | Miller's paper was about channel capacity; Cowan's replications establish 3-5 for working memory. |
-| Passive Philosophy.md | Passive with documented escalation path | Immediate active enforcement | 60-78% drift documented (OpsLevel, Springer 2024), but AI agents don't drift between sessions. Escalation to scoped active loading recommended if compliance issues emerge. |
-| RC-14 enforcement | Split: contrast blocks, palette advises | Fully advisory | Council 5/5 consensus. Contrast ratio is deterministic (0% false positive). Palette is judgment-based. |
+| Choice | Reason |
+|---|---|
+| One creation workflow | The same audience and content decisions apply across formats. |
+| Four principles and 23 stable RC checks | Principles guide judgment; checks make specific problems easier to find. Keep one current contract in Philosophy.md. |
+| PersonalStyleGuide.md applies throughout | Creation, revision, and conversion should use the user's plain, direct, connected style. |
+| A brief comes before rendering | It gives the author an audience, purpose, main point, and evidence needs to work from. |
+| Readability scores are optional diagnostics | Sentence length and Flesch scores can flag difficult prose. They cannot prove understanding, and do not apply meaningfully to code or tables. |
+| Text and visuals explain the same subject | Choose the combination that makes a relationship clear. Group ideas by meaning rather than fixed counts. |
+| A fresh reader answers questions from the document | This tests what the document actually communicates without help from the author's explanation. |
+| Content and rendering checks stay separate | Correct text does not prove a slide is legible. A good preview does not prove the file opens in the target app. |
+| Philosophy.md can be used on its own | Other skills can read the principles without running ClarityEngine. |
+| One adapter index names supported formats | Workflows accept those identifiers; `ppt` and `pptx` select the same PPTX adapter. |
 
----
-
-## Explicit Out-of-Scope
-
-- Full graphic design service work beyond document engineering workflows.
-- Vendor-specific proprietary template packs not provided by the user.
-- Guaranteed pixel-identical round-trip conversion between HTML and PPT.
-- Deep due-diligence or background-check research workflows (delegate to Research skill).
-- Enforcing other skills to read Philosophy.md (passive resource, not mandate).
-- Documentation placement strategy (handled by DocPhilosophy skill — placement, not content quality).
-- AI context file optimization (handled by ContextLayer skill — AI readers, not human readers).
-
----
+[Anthropic doc-coauthoring](https://github.com/anthropics/skills/blob/main/skills/doc-coauthoring/SKILL.md) provides the fresh-reader pattern. [Impeccable critique](https://github.com/pbakaus/impeccable/blob/main/skill/reference/critique.md) informs the separation of independent judgment and technical evidence. Model reviewers provide useful evidence, but cannot establish human comprehension.
 
 ## Success Criteria
 
-- [ ] A Document Brief exists before any rendering begins.
-- [ ] Output passes the "pick any section at random" independence test.
-- [ ] ReadabilityGate contract checkpoints are evaluated against the output.
-- [ ] Output contains at least one cross-domain bridge or first-principles framing per major topic.
-- [ ] Format selection rationale documented when auto-selected.
-- [ ] New formats can be added by modifying only FormatAdapters.md.
-- [ ] Other skills can reference Philosophy.md without invoking the full workflow.
+- [ ] A Document Brief exists before rendering.
+- [ ] Each section provides or links to the context needed to understand it.
+- [ ] The reader can follow the assumptions and causal steps.
+- [ ] Revisions preserve meaning, caveats, and required actions.
+- [ ] Applicable RC checks have recorded results.
+- [ ] An automatically selected format has a recorded reason.
+- [ ] The selected format has an adapter and verification steps.
+- [ ] New formats can be added without rewriting the philosophy.
+- [ ] Other skills can use Philosophy.md on its own.
+- [ ] Reported readiness matches the evidence.
 
----
+Use `NeedsRevision` when any Blocker or Major finding remains. Otherwise use `Unverified` when required evidence is missing, and `Ready` only when all required checks pass. Report missing evidence even when a known defect already requires revision.
+
+## Explicit Out-of-Scope
+
+ClarityEngine does not replace a graphic design service, provide unavailable proprietary templates, or promise pixel-identical HTML/PPT conversions. Use a research skill for deep investigations, DocPhilosophy for document placement, and ContextLayer for instructions intended for agents. Other skills are free to use Philosophy.md; they are not required to load it.
 
 ## Constraints
 
-1. Philosophy.md must remain self-contained — no references to sibling ClarityEngine files.
-2. Philosophy.md must stay under 200 lines.
-3. Preserve both HTML and PPT workflows as peer capabilities.
-4. Keep trigger phrases natural-language and non-overlapping.
-5. All trigger phrases from PresentationForge must be preserved in ClarityEngine.
-6. Prefer minimal dependency paths for lightweight HTML delivery.
+Keep Philosophy.md self-contained and under 200 lines. Preserve four principles, all 23 RC IDs, HTML/PPTX support, and existing PresentationForge trigger phrases. Keep workflow triggers natural and distinct. Prefer few dependencies for portable HTML. Length checks must not force missing reasoning, unnecessary analogies, or removal of useful repetition.

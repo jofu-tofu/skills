@@ -62,12 +62,11 @@ async function openInBrowser(path: string): Promise<void> {
 
   if (result.exitCode !== 0) {
     const stderr = result.stderr.toString().trim();
-    if (stderr) {
-      console.error(`Warning: ${stderr}`);
-    }
+    console.error(`Browser launch failed: ${stderr || "opener exited without an error message"}`);
+    process.exit(result.exitCode ?? 1);
   }
 
-  console.log(`Opened in browser: ${path}`);
+  console.log(`Browser launch requested: ${path}`);
 }
 
 await openInBrowser(resolved);

@@ -2,69 +2,23 @@
 
 > **Trigger:** "review presentation", "polish slide deck", "presentation quality check", "review document", "quality check"
 
-## Scope
-
-**Best fit for:** Quality-checking and polishing an existing document or presentation, returning a PASS/FAIL verdict with actionable fixes.
-**Route to:** `CreateDocument` for building a new document from scratch. `RepurposeDocument` for converting between HTML and PPT. For graphic design overhauls or full visual redesigns, use dedicated design tools.
-
 ## Reference Material
 
-- `../Philosophy.md` — Comprehension principles and Readability Contract
-- `../FormatAdapters.md` — Format-specific technical checks
+- `../Philosophy.md` — Comprehension principles
+- `../PersonalStyleGuide.md` — Plain, direct, connected prose
+- `../FormatAdapters.md` — Technical and visual checks
+- `../ReaderCheck.md` — Independent reader test
 
 ## Purpose
 
-Run a quality and delivery-readiness audit on a document or presentation. Combines information-order checks against Philosophy.md principles with readability scoring (via ReadabilityGate) and format-specific technical checks.
+Check an existing document or presentation's main point, wording, organization, formatting, and readiness for use. Audit requests return findings; requests to polish or fix also authorize scoped revisions. Use RepurposeDocument for format changes.
 
 ## Workflow Steps
 
-### Step 1: Validate Against Comprehension Principles
-
-Check the document against Philosophy.md's four core principles:
-- **Layman First**: Does the opening deliver the main point before background? Can any section be read independently?
-- **Evidence Over Assertion**: Are claims specific, traceable, and verifiable? Are there vague or jargon-laden sections?
-- **Bridge to the Known**: Are first principles stated before details? Does the document connect to what the reader already knows through cross-domain analogies or familiar frameworks? Is the specific gap or question being addressed explicit?
-- **Density Over Completeness**: Could the document be shorter and still support the same decisions? Are there sentences that add no new information?
-
-For partner/customer-facing review artifacts, also check the Audience and Review Addendum:
-- Does the language stay in the reader's world rather than internal taxonomy?
-- Does the artifact follow the reader's judgment path instead of the author's process?
-- When the subject is visible product behavior, do visuals carry the main evidence?
-- Does the closing make the requested confirmation, decision, or feedback explicit?
-- Could lower-priority material be trimmed without losing the core message?
-
-### Step 2: Run Readability Scoring
-
-Delegate readability scoring to the `ReadabilityGate` workflow:
-- Pass the artifact, content type, and format
-- ReadabilityGate returns advisory PASS/FAIL verdict with per-checkpoint scores
-- Incorporate ReadabilityGate findings into the overall review
-
-### Step 3: Run Format-Specific Technical Checks
-
-**HTML documents:**
-- Document loads without console errors
-- Navigation (sticky ToC, section anchors) functions correctly
-- Layout remains stable at common viewport widths
-- CDN dependencies load correctly
-
-**PPT decks:**
-- File opens in PowerPoint without repair warnings
-- Theme and fonts render as intended
-- Speaker notes exist where presenter support is needed
-- Animations are intentional and minimal
-- Output file size fits distribution channel constraints
-
-### Step 4: Produce Severity-Ranked Findings
-
-Combine principle, readability, and format-specific findings. Report in this order:
-1. Blockers (must fix before sharing)
-2. Major quality issues
-3. Polish improvements
-
-### Step 5: Output Ready-State
-
-Return:
-- `PASS` or `FAIL`
-- Top 3 fixes with direct rationale
-- Optional fast-pass fix plan for time-constrained revisions
+1. Identify the audience, what they need to understand or do, and the document's purpose from the request or brief. Ask only when ambiguity materially affects the review.
+2. Read Philosophy.md and PersonalStyleGuide.md. Check the main point, named subjects, reasoning, evidence, qualifications, and requested action. Check that rules come before their examples, independent requirements remain visible, and each section reads in a sensible order. Apply the relevant audience and codebase guidance.
+3. Run ReadabilityGate with artifact, content type, format, and brief. It performs the independent reader check separately from technical assessment. Do not run a second duplicate reader test.
+4. Complete the applicable FormatAdapters checks. Inspect every rendered page/slide or full HTML artifact. Keep file validity, visual inspection, and target-app verification distinct. Feed this evidence into the gate's status while keeping preview results separate from target-app results, including when the target app was not tested.
+5. Compare the reader's answers, writing review, and technical checks against the document. Rank by Blocker, Major, and Polish; cite exact locations.
+6. If fixes are requested, repair the material issues, re-render, and recheck affected content and visuals. Use at most two review/repair cycles.
+7. Return readiness, comprehension, and verification statuses using ReadabilityGate definitions, top fixes, and unresolved limitations. Deliver the reviewed/revised artifact when applicable.

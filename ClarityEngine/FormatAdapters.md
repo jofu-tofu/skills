@@ -1,130 +1,48 @@
 # Format Adapters
 
-> Rendering instructions for each supported output format. Philosophy.md drives what to communicate;
-> this file drives how to render it. Read by CreateDocument after the Document Brief is built.
+ClarityEngine plans the explanation for the audience. Installed format skills create the file and check how it looks. Apply PersonalStyleGuide.md to authored prose; explicit audience and template requirements still apply.
 
----
+## Choose the Format
 
-## Format Selection Logic
-
-1. **User specifies format** -> honor it without question.
-2. **Long-form analysis, report, codebase review** -> HTML (scrollable, link-friendly).
-3. **Executive/client formal meeting, strict corporate template** -> PPT.
-4. **Unclear** -> default to HTML for speed; offer PPT conversion afterward.
-
-| Condition | Prefer HTML | Prefer PPT |
-|---|---|---|
-| Rapid drafting and sharing by link | Yes | No |
-| Long-form analysis or report | Yes | No |
-| Codebase architecture review | Yes | No |
-| Executive or client-facing formal meeting | Sometimes | Yes |
-| Strict corporate template required | No | Yes |
-| Lightweight single-file handoff | Yes | No |
-| Offline editing in Microsoft Office | No | Yes |
-| Team editing inside PowerPoint | No | Yes |
-
----
+Honor a requested format. Otherwise prefer `html` for a scrollable report and `ppt` for a formal presentation. The identifiers `ppt` and `pptx` select the same PPTX adapter. Record the reason when selecting automatically. Read the applicable specialist skill before building. Do not install a new toolchain when an available supported renderer meets the need.
 
 ## HTML Adapter
 
-### CDN Stack (Zero Build Step)
-
-| Tool | CDN | Purpose |
-|------|-----|---------|
-| Tailwind CSS | `https://cdn.tailwindcss.com` | Professional styling, responsive layout, typography |
-| Mermaid.js | `https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js` | Diagram rendering (flowcharts, sequence, C4) |
-| Prism.js | `https://cdn.jsdelivr.net/npm/prismjs/` | Syntax highlighting for code blocks |
-
-> CDN dependencies require internet access. Offline environments are not supported.
-
-### CSS Targets
-
-- Body text: 16px minimum, 1.5x line height, relative units (rem/em)
-- Text containers: `max-width: 75ch` for optimal line length
-- Paragraph spacing: at least 2em
-- Responsive layout for mobile and desktop
-
-### Required Document Structure
-
-- Single `<h1>` document title
-- Sticky table of contents with section anchors (for documents exceeding 3 screen-heights)
-- Active section highlighting in ToC during scroll
-- Section anchors with `id` attributes on all H2 and H3 elements
-- Back-to-top affordance for long documents
-- Progressive disclosure with `<details>`/`<summary>` for supplementary content
-
-### Diagrams
-
-Use Mermaid.js for all diagrams in HTML output. Mermaid renders directly in the browser from markdown-like syntax — no image generation, no external tools, no build step. Place diagrams in `<pre class="mermaid">` blocks.
-
-Supported diagram types for common needs:
-- **Architecture/system boundaries**: `flowchart` or `C4Context`/`C4Container`
-- **Data flows and sequences**: `sequenceDiagram`
-- **State machines and transitions**: `stateDiagram-v2`
-- **Dependency graphs**: `flowchart` with directional arrows
-- **Timelines and Gantt**: `gantt`
-- **Entity relationships**: `erDiagram`
-
-When the visual-first principle (P4) calls for a diagram, Mermaid is the default tool in HTML context. Only reach for SVG hand-coding or external image generation if Mermaid cannot express the required visual.
-
-### Post-Generation
-
-After generating the HTML file, open it in the user's default browser:
-
-```bash
-bun /home/fujos/projects/pai/skills/ClarityEngine/Tools/OpenInBrowser.ts "<path>"
-```
-
-### Mermaid Gotcha
-
-Mermaid 11.12.3 parser: avoid `$` in labels, escaped `\n` in messages, and punctuation-heavy strings. If rendering fails, simplify labels first.
-
----
+- Build semantic HTML with clear headings, readable text, and sections ordered most important first, in an order the reader can follow. Use inline CSS and static content for a lightweight, self-contained report where practical.
+- Target readable body text (typically at least 16px), roughly 1.5 line height, and text widths around 75ch. Adapt spacing to the actual content.
+- For long documents, provide section anchors and useful navigation. Keep extra detail in expandable sections when useful. Keep essential reasoning visible.
+- Choose visuals that express comparison, sequence, causality, or hierarchy. Use Mermaid when appropriate, or static SVG/images when clearer. Keep diagrams understandable without animation.
+- Prefer self-contained assets when offline delivery matters. If external dependencies are needed, verify their official documentation, pin the tested version, and disclose the network requirement. An unpinned CDN is not the default.
+- Open the artifact through the available app/browser tool. If using the bundled OpenInBrowser helper, resolve its path relative to this installed skill and check its exit result. An opened browser is not visual verification.
+- Inspect the full rendered document at desktop and narrow widths. Check navigation, legibility, overflow, diagrams, asset loading, and console errors using available browser tools. For offline delivery, verify with network access disabled.
 
 ## PPT Adapter
 
-### Tool Selection
+Use the installed presentation skill. When a company or event template is requested or clearly required, use its matching installed template skill and renderer instructions. Discover those skills in the current session rather than assuming filesystem paths.
 
-| User Intent | Approach | Primary Tooling |
-|---|---|---|
-| Quick PPT draft from markdown | Convert markdown to PPTX | Marp CLI |
-| New automated corporate deck | Programmatic PPT generation | PptxGenJS |
-| Edit existing template safely | Template-preserving PPT editing | python-pptx |
+Before rendering, record each slide's point, evidence, necessary explanation, visual, and speaker-note needs. Preserve the requested template and editable content requirements. Product screenshots are evidence when the claim concerns visible product behavior. Essential qualifications belong where the audience will see them, not only in presenter notes.
 
-### Marp PPTX Flags
+Follow the specialist's supported generation and repair process. Inspect every rendered slide for clipping, overlap, font substitution, chart labels, contrast, and note preservation. Re-render after changes. A slide preview cannot establish that PowerPoint opens the file without repairs; report that separately.
 
-| User Says | Flag | Effect |
-|---|---|---|
-| "convert to ppt" | `--pptx` | Standard PPTX export |
-| "editable powerpoint" | `--pptx --pptx-editable` | More editable output |
-| "set filename" | `-o <file>.pptx` | Explicit output path |
+## Other Formats
 
-### Slide Budget
+For `docx`, use the installed document skill; for `pdf`, use the installed PDF skill. Follow its rendering/inspection workflow and the verification contract below. If a requested format has no supported adapter, identify the missing capability before choosing an alternative with the user.
 
-Define before rendering:
-- Slide list and information intent per slide
-- Per-slide content limits
-- Visual hierarchy and chart strategy
-- Speaker notes requirements
+## What Each Check Proves
 
-### Audience-Relative PPT Rendering
+Report independent evidence for each layer:
 
-- Match the deck's language to the reader's world. For partner/customer audiences, translate internal taxonomy into audience-safe terms.
-- Apply inverted-pyramid ordering when clarity matters most: lead with the point or change, follow with evidence, and push background or appendix material later. For review decks, that usually means problem/change first, evidence second, decision or feedback ask last.
-- When product behavior is the proof, screenshots are primary evidence. Use prose to frame the visual, not to narrate what the screenshot already shows.
-- Keep main slides lighter than speaker notes or appendix. If the reader can infer the point from the visual, do not repeat it at length on the slide.
+| Layer | What it establishes |
+|---|---|
+| Content | Claims, numbers, causal links, caveats, sources, and actions match the brief/source |
+| File | The chosen format's structural/package validation succeeded |
+| Rendered | The actual pages/slides/document were inspected; record renderer and artifact version |
+| Target app | Behavior was tested in the intended app, such as PowerPoint opening without a repair warning |
 
-### Build Issue Fallback
+Use passed, failed, not run, or not applicable for each layer. Record why a layer is not applicable. Target-app verification is required when the request or delivery contract depends on that app; otherwise disclose it as not run without implying it occurred. Missing required evidence prevents Ready. Rendering checks are required for visual deliverables.
 
-If the selected build tool is unavailable, try the next in priority order: Marp CLI -> PptxGenJS -> python-pptx. Report which path was used.
+Keep independent reader judgment separate from technical checks until comparing the findings. Fix material defects within scope and recheck affected output. Unsupported tools or inaccessible apps yield an explicit verification limit, not a fabricated pass.
 
----
+## Adding a Format
 
-## Adding a New Format
-
-To add a new format (e.g., Word, Excalidraw):
-
-1. Add a new section below with heading `## [Format] Adapter`
-2. Include: tool selection, rendering targets, required structure, post-generation steps
-3. Add the format to the Format Selection Logic table above
-4. No changes needed to Philosophy.md or workflow files — format is a rendering concern
+Add its identifier, specialist routing, rendering requirements, and evidence checks here. Workflow format inputs accept supported identifiers rather than hardcoded two-format enums. Keep the comprehension principles independent of the format.

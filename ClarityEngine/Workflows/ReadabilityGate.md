@@ -2,112 +2,60 @@
 
 > **Trigger:** "readability check", "check readability", "run readability gate"
 
-## Scope
-
-**Best fit for:** Running a readability and quality audit on a generated document or presentation, returning an advisory PASS/FAIL verdict with severity-ranked findings.
-**Auto-chained by:** CreateDocument, RepurposeDocument.
-**Route to:** `ReviewDocument` for a full information-order + readability + format-specific audit. This workflow focuses on Readability Contract checkpoints only.
-
 ## Reference Material
 
-- `../Philosophy.md` — Readability Contract checkpoints (RC-1 through RC-23)
+- `../Philosophy.md` — RC-1 through RC-23
+- `../PersonalStyleGuide.md` — Writing preferences
+- `../ReaderCheck.md` — Independent comprehension test
+- `../FormatAdapters.md` — Format verification evidence
 
 ## Purpose
 
-Score a document or presentation against the Readability Contract from Philosophy.md and return an advisory report. The gate always completes and returns findings — it does not block delivery. Users iterate on findings at their discretion.
+Check whether the document is clear and usable. Report Blocker or Major findings even when other checks pass. Always return the report and draft; failed or unavailable checks affect the readiness status.
 
-## Gate Behavior
-
-**ADVISORY, not blocking.** The gate always completes and returns findings alongside the artifact. The parent workflow delivers the artifact with the gate report attached. No retry loop. No halt-on-fail.
-
-## Input Interface Contract
-
-All callers pass this stable interface:
+## Inputs
 
 | Field | Type | Description |
-|-------|------|-------------|
-| `artifact` | string | Path to the generated file or inline content |
-| `content_type` | enum | One of: `general`, `codebase-analysis`, `technical-writeup` |
-| `format` | enum | One of: `html`, `ppt` |
-
-## Scoring Model
-
-- Each checkpoint scores **PASS** or **FAIL** (binary, with evidence cited)
-- Severity assigned per checkpoint:
-  - **Blocker** — accessibility violations, missing document structure
-  - **Major** — readability degradation, comprehension barriers
-  - **Polish** — improvements that enhance but do not degrade
-- Note: Principle 3 (Bridge to the Known) checkpoints RC-21 through RC-23 are **Major** severity — they represent comprehension barriers caused by missing conceptual connections.
-- Note: Principle 4 (Density Over Completeness) checkpoints RC-16 through RC-20 are **Major** severity — they represent comprehension barriers caused by noise, not missing information.
-- Overall verdict: **FAIL** if any Blocker exists; **PASS** otherwise
-- Per-principle summary: `{principle}: {passed}/{total} checkpoints`
-
-### RC-14 Split: Blocking vs Advisory
-
-RC-14 covers two categories with different enforcement levels:
-- **RC-14a** (Blocker, blocks delivery): WCAG AA contrast ratio (4.5:1 body text, 3:1 large text). Mathematically deterministic, near-zero false-positive rate.
-- **RC-14b** (Major, advisory): Colorblind-safe palettes and consistent color semantics. Judgment-based, advisory only.
+|---|---|---|
+| `artifact` | string | File path or inline content |
+| `content_type` | enum | `general`, `codebase-analysis`, or `technical-writeup` |
+| `format` | string | Supported FormatAdapters identifier, such as `html` or `ppt` |
+| `brief` | optional object | Audience, outcome, key claims, constraints; infer from request if absent |
 
 ## Workflow Steps
 
-### Step 1: Receive Context
+### Step 1: Gather Independent Evidence
 
-Accept the input interface contract fields:
-- `artifact`: path or content to audit
-- `content_type`: determines which checkpoints to apply
-- `format`: determines format-contextual interpretation of checkpoints
+Read the reference files. Run ReaderCheck before showing that reviewer the author's rationale, checklist scores, or technical findings. Separately inspect format evidence, including layout and measured contrast where applicable. Reuse verification only when it corresponds to this artifact version.
 
-### Step 2: Load Readability Contract
+### Step 2: Check the Relevant Checkpoints
 
-Read `../Philosophy.md` and extract the Readability Contract (RC-1 through RC-23).
+Record **PASS**, **FAIL**, **N/A**, or **NOT VERIFIED** for each RC checkpoint, with evidence and a reason. N/A means the feature or requirement does not apply, not that the check could not run. An artifact without code blocks may mark RC-15 N/A; an unrendered deck cannot pass layout checks.
 
-If `content_type` is `codebase-analysis`, also load the Codebase Analysis Addendum from Philosophy.md.
+Apply numerical writing targets as diagnostics unless the brief or an applicable accessibility requirement makes them binding. A longer sentence, purposeful recap, or absence of an unnecessary analogy is not itself a failure. Judge whether the reader can follow the explanation.
 
-### Step 3: Score Each Checkpoint
+For RC-2, review the wording itself, even when the reader understood the overall point. For each technical phrase, ask: "Can plain language express the same meaning for this reader?" If yes, flag it and provide the replacement. If not, state why the exact term is needed and check its explanation. Preserve evidence limits when rewriting; move investigation details to a nearby note only when the main claim remains accurate. Use PersonalStyleGuide.md for the jargon definition and examples.
 
-For each applicable checkpoint:
-1. Apply the checkpoint's test to the artifact
-2. Record PASS or FAIL
-3. Cite specific evidence: element inspected, value found, threshold compared
-4. Assign severity: Blocker, Major, or Polish
+Mark RC-2 **FAIL** when unnecessary jargon remains. Classify it as **Major** when it obscures the main point or action, or recurs throughout audience-facing explanations; readiness is then `NeedsRevision`. An isolated phrase with no material effect on understanding is **Polish**, but still needs replacement in an authorized editing pass. Correct facts or successful reader answers do not override this wording check.
 
-Interpret checkpoints contextually per format:
-- HTML: CSS properties and DOM structure apply directly
-- PPT: Map checkpoints to equivalent slide formatting properties (font size, contrast, spacing)
+Classify findings:
 
-#### Bridge Checkpoints (RC-21 through RC-23)
+- **Blocker:** Materially false or missing information, inaccessible essential content, or an unusable artifact.
+- **Major:** Missing causal links, ambiguous actions, lost qualifications, or other substantive comprehension/layout problems.
+- **Polish:** Optional improvements without a material effect on understanding or use.
 
-These checkpoints target conceptual clarity — whether the document connects to what the reader already knows:
+For RC-14, measure contrast against actual foreground and background where possible: normal text 4.5:1, large text 3:1. Record text category and measurement method. Mark uncertain or unmeasured cases NOT VERIFIED. Assess color-only meaning and palette consistency separately. Measured and judgment-based issues both affect readiness according to actual severity.
 
-- **RC-21 (First Principles):** For each major section, are the underlying assumptions or first principles stated before detailed content? Score FAIL if sections dive into details without grounding.
-- **RC-22 (Cross-Domain Bridge):** Does the document contain at least one analogy, mental model, or pattern from a domain the audience already knows? Score FAIL if all explanation stays in the author's domain vocabulary.
-- **RC-23 (Gap Framing):** Is the specific question, confusion, or gap being addressed explicit? Score FAIL if the document covers a topic without identifying the specific question it answers.
+### Step 3: Compare the Findings
 
-#### Density Checkpoints (RC-16 through RC-20)
+Compare independent reader answers with expected answers from the brief and sources. Use the document or rendered file to resolve disagreements. Keep comprehension findings separate from technical failures; neither substitutes for the other. A good overall score cannot cancel a Blocker or Major finding.
 
-These checkpoints specifically target AI-generated noise — content that sounds reasonable but adds no information:
+### Step 4: Return Status and Fixes
 
-- **RC-16 (Falsifiability):** For each claim, ask: could this be wrong? Sentences that are true regardless of context carry zero information. Score FAIL if unfalsifiable sentences found.
-- **RC-17 (Prediction):** For each section's opening sentence, ask: is this predictable from the heading? Headings that merely get restated in prose are wasted space. Score FAIL if predictable openers found.
-- **RC-18 (State Once):** Scan for facts repeated across sections. Each fact belongs in one canonical section. Score FAIL if duplicates found.
-- **RC-19 (Hard Limits):** Check sentence length ≤ 25 words, paragraphs ≤ 6 sentences, lists ≤ 7 items. Score FAIL if any violation.
-- **RC-20 (Meta-Commentary):** Scan for banned phrases: "This section covers...", "As discussed above...", "It's worth noting that...", "Let's explore...", "Moving on to...", and similar. Score FAIL if found.
+- **Readiness:** `NeedsRevision` if any Blocker or Major remains; otherwise `Unverified` if required checks are missing; otherwise `Ready`.
+- **Comprehension:** `Pass`, `NeedsRevision`, or `NotVerified`, based on reader evidence and material content findings. Missing independent reader evidence prevents `Pass` and makes readiness `Unverified` unless known defects already make it `NeedsRevision`.
+- **Verification:** State content, file, rendered, and target-app checks separately as passed, failed, not run, or not applicable.
+- **Findings:** Severity, location, evidence, and proposed fix; lead with the three that most affect understanding or use.
+- **Coverage:** Checked/applicable checkpoints, plus N/A and NOT VERIFIED counts. Coverage is not proof of readiness.
 
-### Step 4: Classify and Rank Findings
-
-Group findings by severity:
-1. **Blockers** — must address for accessibility/usability
-2. **Major** — significantly impacts comprehension
-3. **Polish** — nice-to-have improvements
-
-Within each severity, group by principle (P1-P4).
-
-### Step 5: Return Advisory Report
-
-Deliver:
-- **Overall Verdict:** PASS or FAIL (FAIL only if Blockers exist)
-- **Per-Principle Scores:** `{principle}: {passed}/{total}`
-- **Severity-Ranked Findings:** Blockers first, then Major, then Polish
-- **Top 3 Actionable Fixes:** The three highest-impact changes to improve comprehension
-- **Checkpoint Coverage:** Total checkpoints checked vs. total applicable
-- **Density Score:** Number of sentences passing all Signal Tests / total sentences (target: ≥ 0.90)
+The calling workflow may repair within its scope and rerun affected checks, up to its stated limit. Standalone audits report findings without assuming permission to rewrite. Return incomplete artifacts as drafts with limitations; do not block delivery or call them ready.
