@@ -103,10 +103,10 @@ Start one fresh agent:
 Read $SKILL_ROOT/Workflows/Verify.md and execute it.
 Review folder: $REVIEW_DIR. Round folder: $ROUND_DIR. Lenses run: [list].
 Previous round's declined.md: [path, or none].
-Write $ROUND_DIR/verified-findings.md and $ROUND_DIR/report.md. Return the report.
+Write $ROUND_DIR/verified-findings.md. Return the full report as text.
 ```
 
-Check that `report.md` exists. If `edit_scope` is `none`, return the report and stop.
+Save the returned report as `$ROUND_DIR/report.md`; some agent hosts let subagents return reports but not write them. If `edit_scope` is `none`, return the report and stop.
 
 ### Step 7: Repair
 

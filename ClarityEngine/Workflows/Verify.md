@@ -77,7 +77,7 @@ Relevance: [X]/[total] passed ([S] out-of-scope, [T] taste, [D] downgraded)
 Evidence: [N]/[X] verified ([I] invalid, [F] false positives, [U] unneeded additions, [M] misrouted, [V] unverified)
 ```
 
-Write `report.md`:
+Return the report as text in this format; the orchestrator saves it as `report.md`:
 
 ```markdown
 # ClarityEngine Review
@@ -106,4 +106,4 @@ Write `report.md`:
 - [checks not run, extracted-text boundaries, model-reader boundary]
 ```
 
-Lead with the three fixes that most affect understanding or use. List the rest with Blockers first, then Majors in main-path order, then Polish. Return the report content and the path to `report.md`.
+Lead with the three fixes that most affect understanding or use. List the rest with Blockers first, then Majors in main-path order, then Polish. Return the full report content.
