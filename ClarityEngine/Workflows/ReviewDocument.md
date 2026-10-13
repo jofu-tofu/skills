@@ -4,21 +4,17 @@
 
 ## Reference Material
 
-- `../Philosophy.md` — Comprehension principles
-- `../PersonalStyleGuide.md` — Plain, direct, connected prose
-- `../FormatAdapters.md` — Technical and visual checks
-- `../ReaderCheck.md` — Independent reader test
+- `ReadabilityGate.md` — The review panel
+- `../Standards/FormatAdapters.md` — Building and capturing the file when fixes require re-rendering
 
 ## Purpose
 
-Check an existing document or presentation's main point, wording, organization, formatting, and readiness for use. Audit requests return findings; requests to polish or fix also authorize scoped revisions. Use RepurposeDocument for format changes.
+Review an existing document or presentation. An audit request returns findings without editing. A request to polish or fix also authorizes scoped revisions. Use RepurposeDocument for format changes.
 
 ## Workflow Steps
 
-1. Identify the audience, what they need to understand or do, and the document's purpose from the request or brief. Ask only when ambiguity materially affects the review.
-2. Read Philosophy.md and PersonalStyleGuide.md. Check the main point, named subjects, reasoning, evidence, qualifications, and requested action. Check that rules come before their examples, independent requirements remain visible, and each section reads in a sensible order. Apply the relevant audience and codebase guidance.
-3. Run ReadabilityGate with artifact, content type, format, and brief. It performs the independent reader check separately from technical assessment. Do not run a second duplicate reader test.
-4. Complete the applicable FormatAdapters checks. Inspect every rendered page/slide or full HTML artifact. Keep file validity, visual inspection, and target-app verification distinct. Feed this evidence into the gate's status while keeping preview results separate from target-app results, including when the target app was not tested.
-5. Compare the reader's answers, writing review, and technical checks against the document. Rank by Blocker, Major, and Polish; cite exact locations.
-6. If fixes are requested, repair the material issues, re-render, and recheck affected content and visuals. Use at most two review/repair cycles.
-7. Return readiness, comprehension, and verification statuses using ReadabilityGate definitions, top fixes, and unresolved limitations. Deliver the reviewed/revised artifact when applicable.
+1. Reconstruct the brief from the request and the document: audience, expertise, outcome, artifact intent, content type, and a reading-time budget. Ask only when ambiguity materially affects the review.
+2. Gather the sources the document relies on, when available.
+3. Run the format's file check, and the target-app check when the request depends on that app, as FormatAdapters.md describes.
+4. Run ReadabilityGate with the sources, those results as `verification_evidence`, and `edit_scope: none` for an audit or `full` for a polish or fix request.
+5. Return the gate's report. For a polish or fix request, also return the revised artifact.

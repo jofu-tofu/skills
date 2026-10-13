@@ -4,58 +4,120 @@
 
 ## Reference Material
 
-- `../Philosophy.md` — RC-1 through RC-23
-- `../PersonalStyleGuide.md` — Writing preferences
-- `../ReaderCheck.md` — Independent comprehension test
-- `../FormatAdapters.md` — Format verification evidence
+- `../Lenses/` — One file per reviewer; passed to reviewers, not read here
+- `../Standards/ReviewContract.md` — What every reviewer returns; passed to reviewers, not read here
+- `Verify.md` — Decides which findings stand and sets the statuses
+- `../Standards/FormatAdapters.md` — Render evidence and verification layers
+- `../Tools/MeasureDraft.ts` — Mechanical measurements the lenses use as evidence
 
 ## Purpose
 
-Check whether the document is clear and usable. Report Blocker or Major findings even when other checks pass. Always return the report and draft; failed or unavailable checks affect the readiness status.
+Run the review panel on an artifact. You are a thin orchestrator: you prepare the inputs, start each lens reviewer in its own fresh agent, start the Verifier, and return its report. You do not open lens files or lens output, so your own view of the draft cannot shape the findings. When the calling workflow authorizes edits, you also act as the author who applies the verified fixes.
 
 ## Inputs
 
-| Field | Type | Description |
-|---|---|---|
-| `artifact` | string | File path or inline content |
-| `content_type` | enum | `general`, `codebase-analysis`, or `technical-writeup` |
-| `format` | string | Supported FormatAdapters identifier, such as `html` or `ppt` |
-| `brief` | optional object | Audience, outcome, key claims, constraints; infer from request if absent |
+| Field | Description |
+|---|---|
+| `artifact` | File path or inline content |
+| `content_type` | `general`, `codebase-analysis`, or `technical-writeup` |
+| `format` | A FormatAdapters identifier, such as `html` or `ppt` |
+| `brief` | The Document Brief from CreateDocument; reconstruct it from the request if absent |
+| `sources` | Optional source files, notes, or the original document, for claim checks |
+| `verification_evidence` | Optional File and Target-app check results from the calling workflow |
+| `edit_scope` | `none` (audit), `conversion` (fix Blockers, Majors, and fidelity defects only), or `full` |
+
+## Folder Layout
+
+Create `$REVIEW_DIR` as `_output/clarity-review/[YYYYMMDD-HHMMSS]` in the working directory, and set `$SKILL_ROOT` to this skill's directory. Inputs shared by every round go at the top; each round gets its own folder.
+
+```
+$REVIEW_DIR/
+  brief.md, reader-questions[-audience].md, answer-key[-audience].md
+  sources/, verification.md
+  round-1/   artifact copy, measurements.md, first-half.md, render/, lens-*.md,
+             verified-findings.md, report.md, declined.md
+  round-2/   ...
+```
 
 ## Workflow Steps
 
-### Step 1: Gather Independent Evidence
+### Step 1: Prepare the Shared Inputs
 
-Read the reference files. Run ReaderCheck before showing that reviewer the author's rationale, checklist scores, or technical findings. Separately inspect format evidence, including layout and measured contrast where applicable. Reuse verification only when it corresponds to this artifact version.
+- `brief.md`: the brief, including `audience`, `expertise`, `audience_exposure`, `artifact_intent`, and `budget_minutes`.
+- `reader-questions.md`: the audience description, then three to five neutral questions. Cover the main point, the cause or mechanism, the evidence, the material uncertainty, and the next action. Include the ask, the decision, and the top risk when the artifact has them. For an informative artifact with no action, ask what the reader should now understand.
+- `answer-key.md`: the expected answer to each question, from the brief and sources. Only the Verifier receives it.
+- When the brief names more than one audience, such as approvers and implementers, write one question file and one answer key per audience, suffixed with the audience name.
+- `sources/`: copy source files there, or write inline source notes to `sources/notes.md`. Leave it empty when there are none.
+- `verification.md`: the File and Target-app results from `verification_evidence`, or "not run" for each.
 
-### Step 2: Check the Relevant Checkpoints
+### Step 2: Measure the Draft
 
-Record **PASS**, **FAIL**, **N/A**, or **NOT VERIFIED** for each RC checkpoint, with evidence and a reason. N/A means the feature or requirement does not apply, not that the check could not run. An artifact without code blocks may mark RC-15 N/A; an unrendered deck cannot pass layout checks.
+Create `$ROUND_DIR` as `$REVIEW_DIR/round-[n]` and copy the artifact into it, keeping its file extension. Run `bun $SKILL_ROOT/Tools/MeasureDraft.ts <artifact copy> --budget <budget_minutes> --out $ROUND_DIR`. For PPTX or PDF, first extract slide or page text to Markdown with the format's specialist skill, then measure that file. If the tool cannot run, write `measurements.md` saying so; the lenses then gather structural evidence from the artifact directly, and RC-19 is NOT VERIFIED.
 
-Apply numerical writing targets as diagnostics unless the brief or an applicable accessibility requirement makes them binding. A longer sentence, purposeful recap, or absence of an unnecessary analogy is not itself a failure. Judge whether the reader can follow the explanation.
+### Step 3: Capture Render Evidence
 
-For RC-2, review the wording itself, even when the reader understood the overall point. For each technical phrase, ask: "Can plain language express the same meaning for this reader?" If yes, flag it and provide the replacement. If not, state why the exact term is needed and check its explanation. Preserve evidence limits when rewriting; move investigation details to a nearby note only when the main claim remains accurate. Use PersonalStyleGuide.md for the jargon definition and examples.
+For visual formats, capture the rendered output into `$ROUND_DIR/render/` as described in FormatAdapters.md.
 
-Mark RC-2 **FAIL** when unnecessary jargon remains. Classify it as **Major** when it obscures the main point or action, or recurs throughout audience-facing explanations; readiness is then `NeedsRevision`. An isolated phrase with no material effect on understanding is **Polish**, but still needs replacement in an authorized editing pass. Correct facts or successful reader answers do not override this wording check.
+### Step 4: Select the Panel
 
-Classify findings:
+| Artifact | Lenses |
+|---|---|
+| Short-form: email, chat, pull request description, or a main path under about 400 words | Reader, Cutter, Navigator |
+| Standard document or deck | Reader, Cutter, Logician, Navigator, AudienceFit |
+| Any rendered visual output (HTML, PPTX, PDF) | Add Visual |
+| More than one audience in the brief | One Reader per audience |
 
-- **Blocker:** Materially false or missing information, inaccessible essential content, or an unusable artifact.
-- **Major:** Missing causal links, ambiguous actions, lost qualifications, or other substantive comprehension/layout problems.
-- **Polish:** Optional improvements without a material effect on understanding or use.
+### Step 5: Run the Lenses in Parallel
 
-For RC-14, measure contrast against actual foreground and background where possible: normal text 4.5:1, large text 3:1. Record text category and measurement method. Mark uncertain or unmeasured cases NOT VERIFIED. Assess color-only meaning and palette consistency separately. Measured and judgment-based issues both affect readiness according to actual severity.
+Start one fresh agent per lens, in parallel, with no inherited conversation. Give each lens exactly these inputs, as absolute paths:
 
-### Step 3: Compare the Findings
+| Lens | Inputs |
+|---|---|
+| Reader | Artifact (rendered pages or slides when available), its `reader-questions[-audience].md` |
+| Cutter | Artifact, `brief.md`, `measurements.md` |
+| Logician | Artifact, `brief.md`, `sources/`, `measurements.md` |
+| Navigator | Artifact, `brief.md`, `measurements.md`, `first-half.md` |
+| AudienceFit | Artifact, `brief.md` |
+| Visual | `render/`, artifact, `brief.md`, `sources/` |
 
-Compare independent reader answers with expected answers from the brief and sources. Use the document or rendered file to resolve disagreements. Keep comprehension findings separate from technical failures; neither substitutes for the other. A good overall score cannot cancel a Blocker or Major finding.
+The Reader never receives the brief or an answer key.
 
-### Step 4: Return Status and Fixes
+Prompt template:
 
-- **Readiness:** `NeedsRevision` if any Blocker or Major remains; otherwise `Unverified` if required checks are missing; otherwise `Ready`.
-- **Comprehension:** `Pass`, `NeedsRevision`, or `NotVerified`, based on reader evidence and material content findings. Missing independent reader evidence prevents `Pass` and makes readiness `Unverified` unless known defects already make it `NeedsRevision`.
-- **Verification:** State content, file, rendered, and target-app checks separately as passed, failed, not run, or not applicable.
-- **Findings:** Severity, location, evidence, and proposed fix; lead with the three that most affect understanding or use.
-- **Coverage:** Checked/applicable checkpoints, plus N/A and NOT VERIFIED counts. Coverage is not proof of readiness.
+```
+You are the [Lens] reviewer for ClarityEngine.
+Read $SKILL_ROOT/Standards/ReviewContract.md, then $SKILL_ROOT/Lenses/[Lens].md.
+Review only these inputs: [absolute paths from the table above].
+Write your review to $ROUND_DIR/lens-[Lens][-audience].md and return that path.
+```
 
-The calling workflow may repair within its scope and rerun affected checks, up to its stated limit. Standalone audits report findings without assuming permission to rewrite. Return incomplete artifacts as drafts with limitations; do not block delivery or call them ready.
+Check that each returned file exists and is non-empty. Retry a missing lens once. Do not open the files.
+
+If fresh agents are unavailable, record the independent review as `NotVerified`. You may still check the draft against the lens files yourself, labeled as a self-check; a self-check cannot produce `Ready`.
+
+### Step 6: Verify
+
+Start one fresh agent:
+
+```
+Read $SKILL_ROOT/Workflows/Verify.md and execute it.
+Review folder: $REVIEW_DIR. Round folder: $ROUND_DIR. Lenses run: [list].
+Previous round's declined.md: [path, or none].
+Write $ROUND_DIR/verified-findings.md and $ROUND_DIR/report.md. Return the report.
+```
+
+Check that `report.md` exists. If `edit_scope` is `none`, return the report and stop.
+
+### Step 7: Repair
+
+1. Apply the report's fixes in order. With `edit_scope: conversion`, apply only Blocker and Major fixes and fidelity defects, and list the rest for the user.
+2. Decline a fix only by writing the reason, the RC or brief requirement it would break, into `$ROUND_DIR/declined.md`.
+3. Start the next round at Step 2, adding `--before <previous round's artifact copy>` to the MeasureDraft command. Every sentence it lists as having lost a connective needs its link restored or stated nearby before review.
+4. Re-render and recapture visual output.
+5. Rerun a fresh Reader, every lens that had a verified finding in a changed section, and Verify.
+
+Run at most two repair rounds. Then return the latest report with its remaining findings.
+
+### Step 8: Return
+
+Return the artifact and the Verifier's statuses, top fixes, and limitations. Deliver useful drafts with their limitations stated; a generated file alone is not ready.

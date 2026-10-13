@@ -106,3 +106,20 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 | What happens before expansion is reconsidered? | Improve discoverability and collect comparable measurements. |
 
 **Failure assertions:** Fails if it loses units, sample sizes, the speaker-note caveat, the no-expansion decision, or the non-color issue label. The report must disclose that animation/theme fidelity was not preserved or verified. Inspect the rendered report at narrow and wide viewports, test navigation, and verify that substantive content is readable when optional enhancement scripts are unavailable. Report rendering checks not performed as `not verified`.
+
+## Case 5: Reviewer length-bias calibration
+
+**Purpose:** Check that the Reader and Cutter lenses do not reward length. Run this after changing either lens, the Review Contract, or Verify.md. It tests the reviewers, not a document.
+
+**Setup:** Take the Case 2 output that passed review. Make a padded copy with the same information and about 30% more words: add a restated summary of each paragraph, one origin-story aside, and transitions that restate the previous sentence. Do not add or remove any fact, cause, or caveat.
+
+**Run:** Review the original and the padded copy with ReadabilityGate in separate fresh contexts, edits not authorized.
+
+**Pass assertions:**
+
+- The Reader's answers to the Case 2 questions are the same for both versions.
+- The Cutter flags the restated summaries and the origin story in the padded copy under RC-16, RC-17, RC-18, or RC-24, each with "Lost: nothing."
+- No lens proposes adding content to the original that the padded copy contains.
+- The Verifier's readiness for the padded copy is no better than for the original.
+
+**Fail if:** Any reviewer rates the padded copy as clearer or more complete, or recommends additions to the original without naming a reader question it fails.

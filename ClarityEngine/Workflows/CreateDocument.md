@@ -4,14 +4,15 @@
 
 ## Reference Material
 
-- `../Philosophy.md` — Comprehension principles and 23-checkpoint contract
-- `../PersonalStyleGuide.md` — Plain, direct, connected writing
-- `../FormatAdapters.md` — Rendering and verification responsibilities
-- `../ReaderCheck.md` — Independent comprehension test
+- `../Standards/Philosophy.md` — Comprehension principles and the check index
+- `../Standards/PersonalStyleGuide.md` — The voice
+- `../Lenses/` — The checks the draft will face; read them as the writing rules
+- `../Standards/FormatAdapters.md` — Building and capturing the file
+- `ReadabilityGate.md` — Review and repair
 
 ## Purpose
 
-Write a format-neutral Document Brief, draft for the intended reader, then build and inspect the requested file. Use RepurposeDocument for conversions and ReviewDocument for audits.
+Write a Document Brief, draft for the intended reader, build the file, then run the review panel and apply its verified fixes. Use RepurposeDocument for conversions and ReviewDocument for audits.
 
 ## Workflow Steps
 
@@ -22,42 +23,46 @@ Use the information already available, infer what you can, and proceed. Ask only
 | Brief field | Description |
 |---|---|
 | `topic` | Concrete subject |
-| `audience` | Reader role and existing knowledge |
+| `audience` | Reader role |
+| `expertise` | The reader's knowledge of this content: `newcomer`, `mixed`, or `expert`; default `mixed` |
 | `audience_exposure` | `internal`, `cross-functional`, `partner`, or `customer` |
 | `outcome` | What the reader should understand, decide, or do |
 | `artifact_intent` | `inform`, `explain`, `review`, or `decide` |
-| `content_type` | `general`, `codebase-analysis`, or `technical-writeup`; explicit user choice wins |
+| `content_type` | `general`, `codebase-analysis`, or `technical-writeup`; an explicit user choice wins |
 | `key_takeaway` | Main point |
 | `information_order` | Ordered sections and the purpose of each |
 | `evidence_needs` | Sources, observations, uncertainty, and unresolved questions |
-| `format` | User preference or supported adapter identifier; `auto` if unspecified |
+| `format` | User preference or a FormatAdapters identifier; `auto` if unspecified |
 | `depth` | `overview`, `standard`, or `deep-dive`; default `standard` |
+| `budget_minutes` | Reading time for the main path; set from `depth` unless the user gives one |
 | `constraints` | Template, length, accessibility, editability, offline use, distribution |
 
-Choose provisional length from audience and purpose. Treat it as a planning aid, not a reason to remove necessary reasoning.
+Set `budget_minutes` from `depth`. MeasureDraft converts main-path words to minutes at 220 words per minute, a little below the measured adult average of about 238 for nonfiction, because technical text reads slower:
+
+| Depth | Budget | About |
+|---|---|---|
+| `overview` | 2 minutes | 450 words |
+| `standard` | 5 minutes | 1,100 words |
+| `deep-dive` | 10 minutes | 2,200 words |
+
+For dense technical content, treat the estimate as optimistic. The budget is a planning target and a review diagnostic, never a reason to drop a needed step.
 
 ### Step 2: Plan the Explanation
 
-Read Philosophy.md and PersonalStyleGuide.md. Apply the guidance for codebase explanations, customer audiences, or review and decision documents when it fits the task. Lead with the point, then evidence and explanation. For each major section or slide, identify its claim, supporting evidence, causal explanation, and implication where applicable.
-
-State assumptions the reader needs. Identify the question the artifact answers. Use a familiar example, analogy, or diagram only when it clarifies a real knowledge gap; explain an analogy's limits when they matter.
+Read Philosophy.md, PersonalStyleGuide.md, and the lens files that will review this artifact. For each major section or slide, identify its claim, supporting evidence, causal explanation, and implication. Identify the question the artifact answers and the assumptions the reader needs. Decide what belongs on the main path and what goes in collapsed sections or an appendix.
 
 ### Step 3: Gather Evidence
 
-Research missing facts through available source tools or the relevant research skill. Delegate research and code exploration when authorized or required by the session. Keep verified facts, proposals, assumptions, and unknowns distinct. Preserve exact identifiers for technical audiences and explain them for other readers.
+Research missing facts through available source tools or a research skill, delegating when the session allows it. Keep verified facts, proposals, assumptions, and unknowns distinct, and save source notes for the Logician lens.
 
-### Step 4: Draft and Revise
+### Step 4: Draft
 
-Apply PersonalStyleGuide.md to wording, order, and formatting. In engineering designs, state the problem briefly, then write the changes as direct instructions. When listing rules, put each rule in a main bullet and nest its examples or supporting details. Keep independent requirements outside examples. Remove filler, conversation history, and sections with no reader purpose. Use a table when it makes repeated cases easier to compare.
+Write to pass the lens checks. Compare the draft with the brief and sources, keeping decisions, definitions, causal links, quantities, qualifications, evidence, and actions.
 
-Compare the revision with the brief and sources. Preserve decisions, definitions, causal links, quantities, qualifications, evidence, and actions. Keep purposeful summary repetition and reader orientation. There is no minimum percentage reduction, universal sentence-length limit, or requirement that every sentence make a falsifiable claim.
+### Step 5: Build
 
-### Step 5: Render and Inspect
+Build the file through FormatAdapters.md and the installed specialist skill. Run its file check, and the target-app check when delivery depends on that app.
 
-Read FormatAdapters.md. Honor the requested format; otherwise select one from audience and use. Record why when you choose the format automatically. Use the installed specialist skill for the format or branded template. Complete its file and rendered-output checks; inspect every slide/page or the full HTML document. Re-render and re-inspect after repairs.
+### Step 6: Review and Repair
 
-### Step 6: Check Comprehension and Readiness
-
-Run ReadabilityGate with `artifact`, `content_type`, `format`, and the brief. Include ReaderCheck.md's independent test. Reuse rendered evidence only for the current artifact version.
-
-Repair material issues within authorized scope, with at most two review/repair cycles. Recheck changed content and affected rendering. Return the artifact and concise readiness, comprehension, and verification statuses. Deliver useful drafts with limitations clearly stated; generating a file alone does not make it ready.
+Run ReadabilityGate with the artifact, content type, format, brief, source notes, the file and target-app results as `verification_evidence`, and `edit_scope: full`. Return the artifact with the gate's readiness, comprehension, and verification statuses and any remaining limitations.

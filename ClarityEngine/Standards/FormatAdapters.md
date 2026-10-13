@@ -1,48 +1,57 @@
 # Format Adapters
 
-ClarityEngine plans the explanation for the audience. Installed format skills create the file and check how it looks. Apply PersonalStyleGuide.md to authored prose; explicit audience and template requirements still apply.
+ClarityEngine plans the explanation; installed format skills build the file. This file says how to choose a format, build it, capture what the Visual lens needs, and define the verification layers the Verifier reports.
 
 ## Choose the Format
 
-Honor a requested format. Otherwise prefer `html` for a scrollable report and `ppt` for a formal presentation. The identifiers `ppt` and `pptx` select the same PPTX adapter. Record the reason when selecting automatically. Read the applicable specialist skill before building. Do not install a new toolchain when an available supported renderer meets the need.
+The **main path** of any artifact is everything outside collapsed sections and appendices. It is what a reader meets without choosing to expand anything, and the reading-time budget applies to it.
+
+Honor a requested format. Otherwise prefer `html` for a scrollable report and `ppt` for a formal presentation, and record the reason. The identifiers `ppt` and `pptx` select the same PPTX adapter. Read the applicable specialist skill before building. Use an available supported renderer rather than installing a new toolchain.
 
 ## HTML Adapter
 
-- Build semantic HTML with clear headings, readable text, and sections ordered most important first, in an order the reader can follow. Use inline CSS and static content for a lightweight, self-contained report where practical.
-- Target readable body text (typically at least 16px), roughly 1.5 line height, and text widths around 75ch. Adapt spacing to the actual content.
-- For long documents, provide section anchors and useful navigation. Keep extra detail in expandable sections when useful. Keep essential reasoning visible.
-- Choose visuals that express comparison, sequence, causality, or hierarchy. Use Mermaid when appropriate, or static SVG/images when clearer. Keep diagrams understandable without animation.
-- Prefer self-contained assets when offline delivery matters. If external dependencies are needed, verify their official documentation, pin the tested version, and disclose the network requirement. An unpinned CDN is not the default.
-- Open the artifact through the available app/browser tool. If using the bundled OpenInBrowser helper, resolve its path relative to this installed skill and check its exit result. An opened browser is not visual verification.
-- Inspect the full rendered document at desktop and narrow widths. Check navigation, legibility, overflow, diagrams, asset loading, and console errors using available browser tools. For offline delivery, verify with network access disabled.
+- Build semantic HTML with clear headings and readable text. Use inline CSS and static content for a self-contained report where practical.
+- Target body text of at least 16px, roughly 1.5 line height, and text widths around 75ch, adapted to the content.
+- Put collapsible detail in `<details>` elements, and keep essential reasoning outside them.
+- Use Mermaid when it suits the diagram, or static SVG or images when clearer.
+- Prefer self-contained assets when offline delivery matters. If external dependencies are needed, verify their official documentation, pin the tested version, and disclose the network requirement.
+- Open the artifact with the available browser tool, or with `Tools/OpenInBrowser.ts` resolved relative to this skill, and check its exit result. An opened browser is not visual verification.
+
+## Copied Content
+
+When content will be copied into another editor, in any format, keep its headings, list hierarchy, and explicit blank lines between sections in both rich-text and plain-text copies, rather than relying on page margins. For mock messages or callouts in HTML, provide a rich-HTML or image copy option, keep the text available, and label what the button copies. Check the destination app's paste behavior when it is accessible; a successful copy does not prove that app keeps the styling. Report that check under Target app.
 
 ## PPT Adapter
 
-Use the installed presentation skill. When a company or event template is requested or clearly required, use its matching installed template skill and renderer instructions. Discover those skills in the current session rather than assuming filesystem paths.
+Use the installed presentation skill. When a company or event template is requested or clearly required, use its matching template skill. Discover those skills in the current session rather than assuming file paths.
 
-Before rendering, record each slide's point, evidence, necessary explanation, visual, and speaker-note needs. Preserve the requested template and editable content requirements. Product screenshots are evidence when the claim concerns visible product behavior. Essential qualifications belong where the audience will see them, not only in presenter notes.
-
-Follow the specialist's supported generation and repair process. Inspect every rendered slide for clipping, overlap, font substitution, chart labels, contrast, and note preservation. Re-render after changes. A slide preview cannot establish that PowerPoint opens the file without repairs; report that separately.
+Before rendering, record each slide's point, evidence, explanation, visual, and speaker-note needs. Preserve the requested template and editability. Product screenshots are evidence when the claim concerns visible product behavior. Follow the specialist's generation and repair process, and re-render after changes.
 
 ## Other Formats
 
-For `docx`, use the installed document skill; for `pdf`, use the installed PDF skill. Follow its rendering/inspection workflow and the verification contract below. If a requested format has no supported adapter, identify the missing capability before choosing an alternative with the user.
+For `docx`, use the installed document skill; for `pdf`, use the installed PDF skill. If a requested format has no supported adapter, name the missing capability before choosing an alternative with the user.
 
-## What Each Check Proves
+## Render Evidence
 
-Report independent evidence for each layer:
+Save what the Visual lens and the Reader need into `$REVIEW_DIR/render/`, named by page or slide:
+
+- **HTML:** full-page captures at desktop and narrow widths, plus print layout when it applies. Record console errors and failed asset loads. For offline delivery, capture with network access disabled.
+- **PPTX:** an image of every slide, and the presenter notes as text.
+- **PDF and DOCX:** an image of every page.
+
+Record the renderer and the artifact version. Captures from an earlier version do not count.
+
+## Verification Layers
 
 | Layer | What it establishes |
 |---|---|
-| Content | Claims, numbers, causal links, caveats, sources, and actions match the brief/source |
-| File | The chosen format's structural/package validation succeeded |
-| Rendered | The actual pages/slides/document were inspected; record renderer and artifact version |
+| Content | Claims, numbers, causal links, caveats, sources, and actions match the brief and sources |
+| File | The format's structural or package validation succeeded |
+| Rendered | The actual pages, slides, or document were captured and inspected |
 | Target app | Behavior was tested in the intended app, such as PowerPoint opening without a repair warning |
 
-Use passed, failed, not run, or not applicable for each layer. Record why a layer is not applicable. Target-app verification is required when the request or delivery contract depends on that app; otherwise disclose it as not run without implying it occurred. Missing required evidence prevents Ready. Rendering checks are required for visual deliverables.
-
-Keep independent reader judgment separate from technical checks until comparing the findings. Fix material defects within scope and recheck affected output. Unsupported tools or inaccessible apps yield an explicit verification limit, not a fabricated pass.
+Each layer is passed, failed, not run, or not applicable, with a reason for not applicable. Target-app verification is required when the request or delivery depends on that app; otherwise report it as not run. Rendering checks are required for visual deliverables. An unsupported tool or inaccessible app is a stated verification limit, never an assumed pass.
 
 ## Adding a Format
 
-Add its identifier, specialist routing, rendering requirements, and evidence checks here. Workflow format inputs accept supported identifiers rather than hardcoded two-format enums. Keep the comprehension principles independent of the format.
+Add its identifier, specialist routing, render-evidence requirements, and file checks here. Workflows accept any identifier listed in this file.

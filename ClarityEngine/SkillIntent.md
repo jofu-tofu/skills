@@ -4,14 +4,14 @@ Read this file before changing the skill. It explains the choices that future ed
 
 ## Problem This Skill Solves
 
-A document can look polished while leaving the reader unsure what happened, why it matters, or what to do. ClarityEngine helps the author answer those questions. It plans the explanation before generating the file, then checks whether the result communicates the intended meaning.
+A document can look polished while leaving the reader unsure what happened, why it matters, or what to do. It can also be accurate and still too long for the reader to finish. ClarityEngine helps the author answer the reader's questions in the reading time the reader has. It plans the explanation before generating the file, then checks whether the result communicates the intended meaning.
 
 ## First Principles
 
 1. **Help the reader understand.** Preserve the evidence and reasoning needed to assess the main point.
 2. **Put the point first.** Follow it with support and background. Give each section enough context to make sense when read separately.
-3. **Explain unfamiliar relationships.** Start from what the audience knows. Use examples, diagrams, or analogies when they clarify the subject.
-4. **Preserve meaning when shortening.** Remove filler while keeping causes, caveats, and actions. Repeat a fact when the reader needs it in a summary or another section.
+3. **Explain unfamiliar relationships.** Start from what the audience knows, and state the links between ideas.
+4. **Cut what does not serve the reader; keep what connects.** Remove tangents, restatement, and weak points. Keep causes, caveats, actions, and the words that link them.
 5. **Plan the content before rendering.** Honor the requested format. If none is specified, choose one after understanding how the reader will use the document.
 6. **Let format skills handle files.** Keep HTML and PPTX as peer options. Add other formats through FormatAdapters.md without changing the writing principles.
 
@@ -20,32 +20,33 @@ A document can look polished while leaving the reader unsure what happened, why 
 | Choice | Reason |
 |---|---|
 | One creation workflow | The same audience and content decisions apply across formats. |
-| Four principles and 23 stable RC checks | Principles guide judgment; checks make specific problems easier to find. Keep one current contract in Philosophy.md. |
-| PersonalStyleGuide.md applies throughout | Creation, revision, and conversion should use the user's plain, direct, connected style. |
-| A brief comes before rendering | It gives the author an audience, purpose, main point, and evidence needs to work from. |
-| Readability scores are optional diagnostics | Sentence length and Flesch scores can flag difficult prose. They cannot prove understanding, and do not apply meaningfully to code or tables. |
-| Text and visuals explain the same subject | Choose the combination that makes a relationship clear. Group ideas by meaning rather than fixed counts. |
-| A fresh reader answers questions from the document | This tests what the document actually communicates without help from the author's explanation. |
+| Four principles, stable RC IDs | Principles guide judgment; checks make specific problems easier to find. An RC ID keeps its topic and is never reused for a different one. |
+| Each RC lives in exactly one lens file | One home per rule removes repetition, and each reviewer grades only the rules it owns. Philosophy.md keeps the principles and an index. |
+| Separate lens reviewers, run in parallel | A reviewer that reads only its own rules and never sees other findings gives independent evidence. Agreement between lenses then means something. |
+| Opposing pressures go to different lenses | The Cutter argues for removal and the Logician and Reader for explanation, so neither pushes the document to an extreme. |
+| Reviewers grade pass/fail with quoted evidence, never scores | Model judges favor longer text, and holistic scores are where that bias acts most. Additions must name the reader question they answer. |
+| A separate Verifier decides which findings stand | The author tends to favor its own draft, so it applies fixes but does not adjudicate them. |
+| Mechanical checks are a script | Word counts, first sentences, emphasis, truncation, and lost connectives need counting, not judgment. |
+| A brief with a reading-time budget comes before writing | It gives the author an audience, purpose, main point, evidence needs, and a length target derived from the reading rate. |
+| Readability scores are optional diagnostics | Formula scores predict comprehension poorly and do not apply to code or tables. |
+| A fresh reader answers questions from the document | This tests what the document communicates without the author's explanation. |
 | Content and rendering checks stay separate | Correct text does not prove a slide is legible. A good preview does not prove the file opens in the target app. |
-| Philosophy.md can be used on its own | Other skills can read the principles without running ClarityEngine. |
-| One adapter index names supported formats | Workflows accept those identifiers; `ppt` and `pptx` select the same PPTX adapter. |
+| Philosophy.md can be used on its own | Other skills can read the principles and the check index without running ClarityEngine; the full checks are in the lens files. |
 
-[Anthropic doc-coauthoring](https://github.com/anthropics/skills/blob/main/skills/doc-coauthoring/SKILL.md) provides the fresh-reader pattern. [Impeccable critique](https://github.com/pbakaus/impeccable/blob/main/skill/reference/critique.md) informs the separation of independent judgment and technical evidence. Model reviewers provide useful evidence, but cannot establish human comprehension.
+The research behind these choices is summarized in each lens file's sources. [Anthropic doc-coauthoring](https://github.com/anthropics/skills/blob/main/skills/doc-coauthoring/SKILL.md) provides the fresh-reader pattern. The CodeReview skill provides the lens, contract, and verifier structure.
 
 ## Success Criteria
 
-- [ ] A Document Brief exists before rendering.
-- [ ] Each section provides or links to the context needed to understand it.
-- [ ] The reader can follow the assumptions and causal steps.
-- [ ] Revisions preserve meaning, caveats, and required actions.
-- [ ] Applicable RC checks have recorded results.
-- [ ] An automatically selected format has a recorded reason.
-- [ ] The selected format has an adapter and verification steps.
+- [ ] A Document Brief with a reading-time budget exists before rendering.
+- [ ] Every RC ID appears in exactly one lens file.
+- [ ] Each lens agent's inputs exclude other lens files and other reviewers' output.
+- [ ] The Reader never receives the brief or the answer key.
+- [ ] Every verified finding cites a quote, an RC, and a reader harm.
+- [ ] Every addition finding names a reader question.
+- [ ] The Verifier, not the author, records which findings stand.
+- [ ] Revisions preserve meaning, caveats, required actions, and stated links.
+- [ ] Reported readiness matches the evidence, as Verify.md defines it.
 - [ ] New formats can be added without rewriting the philosophy.
-- [ ] Other skills can use Philosophy.md on its own.
-- [ ] Reported readiness matches the evidence.
-
-Use `NeedsRevision` when any Blocker or Major finding remains. Otherwise use `Unverified` when required evidence is missing, and `Ready` only when all required checks pass. Report missing evidence even when a known defect already requires revision.
 
 ## Explicit Out-of-Scope
 
@@ -53,4 +54,4 @@ ClarityEngine does not replace a graphic design service, provide unavailable pro
 
 ## Constraints
 
-Keep Philosophy.md self-contained and under 200 lines. Preserve four principles, all 23 RC IDs, HTML/PPTX support, and existing PresentationForge trigger phrases. Keep workflow triggers natural and distinct. Prefer few dependencies for portable HTML. Length checks must not force missing reasoning, unnecessary analogies, or removal of useful repetition.
+Keep Philosophy.md self-contained and under 200 lines. Preserve four principles, RC IDs 1–30 and their topics, HTML/PPTX support, and existing PresentationForge trigger phrases. Keep workflow triggers natural and distinct. Prefer few dependencies for portable HTML. Length budgets are diagnostics: they must not force out missing reasoning or useful repetition. A rule moves between lenses only by updating both the lens files and the Philosophy.md index together.

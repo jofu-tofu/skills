@@ -1,6 +1,6 @@
 # Historical Rule Traceability
 
-This file records the pre-1.1.0 distillation only. Its principle names, numerical limits, and checkpoint wording are historical, not current instructions. Philosophy.md is the authoritative current contract; ReadabilityGate.md in Workflows defines current statuses. Version 1.1.0 preserves all 23 RC IDs while replacing density quotas, mandatory analogies, and mechanical writing limits with meaning-preserving review.
+This file records the pre-1.1.0 distillation only. Its principle names, numerical limits, and checkpoint wording are historical, not current instructions. The current checks live in `Lenses/`, indexed by the Readability Contract in `Standards/Philosophy.md`; `Workflows/Verify.md` defines current statuses. Version 1.1.0 replaced density quotas, mandatory analogies, and mechanical writing limits with meaning-preserving review. Version 1.2.0 kept RC-1 to RC-23, added RC-24 to RC-30, and moved each check into one lens file.
 
 > Provenance record mapping all 54 PresentationForge rules to ClarityEngine checkpoints.
 > This file preserves the distillation lineage — which rules became which checkpoints,
