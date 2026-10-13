@@ -184,7 +184,7 @@ Remove unless they change factual meaning: quite, very, really, extremely, simpl
 
 - **"It's not just X, it's Y"** — Say what it IS.
 - **Trailing participles** — "...enabling teams to..." → end with concrete outcomes.
-- **Over-formatting** — Bold only key scanning terms, not every third word.
+- **Over-formatting** — Bold that doesn't read as a summary on its own. Follow ClarityEngine's skim-layer rule (RC-10 in `ClarityEngine/Lenses/Navigator.md`): headings plus bold, read alone, carry the core; one kind of bold per section; each span a complete claim with its qualifier.
 - **Summary phrases** — "In summary", "To summarize", "In conclusion" → the content summarizes itself.
 - **Promotional tone** — "Exciting", "powerful", "best-in-class" → state facts.
 - **Adjectives without data** — "Significant improvement" → number or delete.
@@ -273,7 +273,7 @@ If the artifact supports another design, keep it short and point to the source o
 
 ### Evidence Lines
 
-Write each source as one line, ordered from most to least authoritative. Start the line with the source and its authority in bold, then give what it says. Put longer quotes, page references, and research detail in the research notes and link to them.
+Write each source as one line, ordered from most to least authoritative. Start the line with the source and its authority in bold, then give what it says. The bold source label is a run-in head under the skim-layer rule: keep every label in the list the same kind, and state the section's key claim where a skimmer will see it, such as in a bold lead sentence before the list. Put longer quotes, page references, and research detail in the research notes and link to them.
 
 Example: `**Regulation text, 42 CFR 422.121(b)(4)(ii) (binding):** excludes only "Denied prior authorizations."`
 
