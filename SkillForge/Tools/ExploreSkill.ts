@@ -19,14 +19,12 @@
  */
 
 import { readdir, readFile, stat } from 'fs/promises';
-import { join, basename, relative } from 'path';
+import { join, basename, relative, sep } from 'path';
 import { existsSync } from 'fs';
-import { homedir } from 'os';
-import { getEnvVar } from '../../../hooks/lib/platform';
+import { resolveSkillsDir } from './lib/paths';
 
-const PAI_DIR = getEnvVar('PAI_DIR') || join(homedir(), 'pai');
-const SKILLS_DIR = join(PAI_DIR, 'skills');
-const TOOLS_DIR = join(PAI_DIR, 'skills', 'SkillForge', 'Tools');
+const SKILLS_DIR = resolveSkillsDir();
+const TOOLS_DIR = import.meta.dir;
 
 interface FileEntry {
   path: string;
@@ -54,7 +52,8 @@ async function collectFiles(dir: string, base: string): Promise<FileEntry[]> {
         const stats = await stat(fullPath);
         const entry: FileEntry = {
           path: fullPath,
-          relativePath: relative(base, fullPath),
+          // Forward slashes so prefix checks like 'Workflows/' work on Windows
+          relativePath: relative(base, fullPath).split(sep).join('/'),
           size: stats.size,
         };
         if (item.name.endsWith('.md') || item.name.endsWith('.ts')) {

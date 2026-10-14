@@ -10,15 +10,13 @@
  *   bun run ValidateSkill.ts --list         # List all skills with status
  */
 
-import { readdir, readFile } from 'fs/promises';
+import { readdir, readFile, stat } from 'fs/promises';
 import { join, basename } from 'path';
 import { existsSync } from 'fs';
-import { homedir } from 'os';
-import { parseFrontmatter as parseFrontmatterUtil, getEnvVar, expandEnvVars } from '../../../hooks/lib/platform';
+import { parseFrontmatter as parseFrontmatterUtil } from './lib/platform';
+import { resolveSkillsDir } from './lib/paths';
 
-const rawPaiDir = getEnvVar('PAI_DIR');
-const PAI_DIR = rawPaiDir ? expandEnvVars(rawPaiDir) : join(homedir(), 'projects', 'pai');
-const SKILLS_DIR = join(PAI_DIR, 'skills');
+const SKILLS_DIR = resolveSkillsDir();
 
 interface ValidationResult {
   skill: string;
@@ -216,11 +214,17 @@ async function findAllSkills(dir: string = SKILLS_DIR): Promise<string[]> {
   const entries = await readdir(dir, { withFileTypes: true });
 
   for (const entry of entries) {
-    if (!entry.isDirectory() || entry.name.startsWith('.') || entry.name === 'node_modules') {
+    if (entry.name.startsWith('.') || entry.name === 'node_modules') {
       continue;
     }
 
     const fullPath = join(dir, entry.name);
+    // Installed skills are often symlinks/junctions into other checkouts
+    const isDir = entry.isDirectory()
+      || (entry.isSymbolicLink() && (await stat(fullPath).catch(() => null))?.isDirectory());
+    if (!isDir) {
+      continue;
+    }
     const skillMdPath = join(fullPath, 'SKILL.md');
 
     if (existsSync(skillMdPath)) {
