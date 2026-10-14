@@ -6,6 +6,8 @@ Every lens reviewer follows this contract, and the Verifier applies its evidence
 
 As a lens reviewer, read only the files the orchestrator lists in your prompt: your lens file, this contract, and your inputs. Do not read other lens files, other reviewers' output, the author's rationale, or earlier review results. Independence is what makes agreement between reviewers meaningful. The Verifier's inputs are listed in Verify.md.
 
+When `contract.md` is among your inputs, the author has locked parts of the document and set what each section covers. Grade against it: a section that follows its contract passes on that point. If your rule would change a locked span or move content against a section contract, still report the finding, and name the lock or section it touches so the Verifier can route it to the author.
+
 ## Grade Each Check, Not the Document
 
 For every RC in your lens, record one status with one line of evidence:

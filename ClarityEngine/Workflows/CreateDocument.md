@@ -35,7 +35,7 @@ Use the information already available, infer what you can, and proceed. Ask only
 | `format` | User preference or a FormatAdapters identifier; `auto` if unspecified |
 | `depth` | `overview`, `standard`, or `deep-dive`; default `standard` |
 | `budget_minutes` | Reading time for the main path; set from `depth` unless the user gives one |
-| `constraints` | Template, length, accessibility, editability, offline use, distribution |
+| `constraints` | Template, length, accessibility, editability, offline use, distribution, and the document contract when one exists |
 
 Set `budget_minutes` from `depth`. MeasureDraft converts main-path words to minutes at 220 words per minute, a little below the measured adult average of about 238 for nonfiction, because technical text reads slower:
 

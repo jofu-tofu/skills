@@ -8,6 +8,7 @@
 - `../Standards/Philosophy.md` — The Readability Contract table, which maps each RC to its lens
 - `../Lenses/` — The rules behind each finding, for the lenses that ran
 - `../Standards/FormatAdapters.md` — The verification layers
+- `../Standards/DocumentContract.md` — How locks, section contracts, and checks bind every pass
 
 ## Purpose
 
@@ -15,7 +16,7 @@ Decide which findings stand, settle conflicts between lenses, compare the Reader
 
 ## Inputs
 
-- From `$REVIEW_DIR`: `brief.md`, every `reader-questions*.md` and `answer-key*.md`, `sources/`, and `verification.md`.
+- From `$REVIEW_DIR`: `brief.md`, every `reader-questions*.md` and `answer-key*.md`, `sources/`, `verification.md`, and `contract.md` when it exists.
 - From `$ROUND_DIR`: the artifact copy, every `lens-*.md`, `measurements.md`, `skim-layer.md`, and `render/` when present.
 - On repair rounds, the previous round's `declined.md`.
 
@@ -25,7 +26,7 @@ Decide which findings stand, settle conflicts between lenses, compare the Reader
 
 Compare each Reader's answers with the matching `answer-key*.md`: **Correct**, **Partial**, **Wrong**, or **Not found**. A wrong or missing answer is evidence to inspect, not automatic proof that the document is at fault. Find the passage, missing step, or visual that caused it. Each answer that is not Correct becomes a comprehension finding. It is Major when the question concerns the main point, the ask, the decision, or the top risk. Treat the Reader's sticking points as supporting evidence for lens findings at the same location, or as new findings when no lens flagged them.
 
-Score the Skim Reader, who saw only the headings and bold text, against the same key, but only on the questions about the main point, the ask, the decision, and the top risk. Each of those it gets Wrong or Not found is an RC-10 finding: Major when the skim layer contradicts the document or omits the main point or the decision, and Polish otherwise. Report its results as their own table.
+Score the Skim Reader, who saw only the headings and bold text, against the same key, but only on the questions about the main point, the ask, the decision, and the top risk. Each of those it gets Wrong or Not found is an RC-10 finding: Major when the skim layer contradicts the document or omits the main point or the decision, and Polish otherwise. Report its results as their own table. When the brief's constraints or the contract's emphasis convention keep a category out of bold in a section, such as risks written plain in a template that bolds only changes, mark that question N/A for the Skim Reader with the convention as the reason and rely on the Reader's result for it. Never verify a finding that would bold what the convention keeps plain.
 
 ### Step 2: Filter for Relevance
 
@@ -34,6 +35,7 @@ Apply these in order. Record a tag for each finding removed.
 - **SCOPE:** The finding concerns the artifact under review and the brief's scope. Tag `OUT-OF-SCOPE` otherwise.
 - **SUBSTANCE:** The finding names a reader harm under an RC, a `Rendered` defect, or a comprehension result from Step 1. Lens rules about wording and style are substance, because they are the user's standards. A preference with none of these behind it is tagged `TASTE`.
 - **PROPORTIONALITY:** The severity matches the contract's definitions. Downgrade an inflated finding and tag it `DOWNGRADED`; it stays in the report.
+- **DOCUMENT CONTRACT:** When `contract.md` exists, a finding whose fix would change a locked span, break a passing check, move content against a section contract, or edit a concern the Roles table assigns to another pass is tagged `PROPOSAL`. It goes under "Proposals for the Author" with the lock, check, or section it touches, and the author does not apply it. A finding that a section breaks its own contract is substance, not taste.
 
 ### Step 3: Check the Evidence
 
@@ -53,14 +55,15 @@ Merge findings at the same location that ask for compatible fixes, keep the high
 
 When findings ask for incompatible fixes to the same passage, resolve them in this order and record each resolution:
 
-1. Factual correctness and required content win.
-2. Comprehension evidence wins over length: a passage stays when it answers a question the Reader got wrong without it.
-3. Stated links between claims stay (RC-25). Settle a cut against a link by cutting the restatement and keeping the link.
-4. A cut stands when the Cutter stated "Lost: nothing" and no verified finding or answer-key item depends on the passage.
-5. An addition stands only when it answers a named reader question that the Reader got wrong or could not find.
-6. Otherwise, prefer the shorter version.
+1. The document contract wins: locks, section contracts, and passing checks stay as they are. Merging findings never overrides a lock; several lenses agreeing on a change to a locked span makes it a stronger proposal, not a fix.
+2. Factual correctness and required content win.
+3. Comprehension evidence wins over length: a passage stays when it answers a question the Reader got wrong without it.
+4. Stated links between claims stay (RC-25). Settle a cut against a link by cutting the restatement and keeping the link.
+5. A cut stands when the Cutter stated "Lost: nothing" and no verified finding or answer-key item depends on the passage.
+6. An addition stands only when it answers a named reader question that the Reader got wrong or could not find.
+7. Otherwise, prefer the shorter version.
 
-On repair rounds, accept a declined fix when `declined.md` cites an RC or brief requirement that the fix would break. Otherwise reinstate it.
+On repair rounds, accept a declined fix when `declined.md` cites an RC, brief requirement, lock, or contract check that the fix would break. Otherwise reinstate it.
 
 ### Step 5: Set the Statuses
 
@@ -96,6 +99,9 @@ Return the report as text in this format; the orchestrator saves it as `report.m
 
 ## Conflicts Resolved
 - [location]: [lens] vs [lens] — resolved by rule [n]: [outcome]
+
+## Proposals for the Author
+- [location] — [lock, check, or section it touches] — [proposed change and the finding behind it] [— Flagged by N lenses]
 
 ## Filtered
 [the two tally lines]

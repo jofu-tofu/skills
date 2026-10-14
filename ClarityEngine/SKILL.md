@@ -4,7 +4,7 @@ description: Comprehension-first document and presentation authoring in a plain,
 compatibility: Designed for Claude Code, Codex, and Devin (or similar agent products)
 metadata:
   author: pai
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # ClarityEngine
@@ -56,6 +56,7 @@ The Readability Contract in `Standards/Philosophy.md` maps each RC to its lens.
 | `Standards/ReviewContract.md` | Evidence standard, severity, and output format shared by every reviewer |
 | `Standards/FormatAdapters.md` | Choosing and building the format, capturing render evidence, verification layers |
 | `Standards/ToolingLandscape.md` | Optional tool and design references; check availability before use |
+| `Standards/DocumentContract.md` | Shared contract format: section contracts, author locks, and checks that a review must keep passing |
 | `Testing/RegressionCases.md` | Sample tasks for comparing skill versions; load when testing updates |
 | `Testing/RuleTraceability.md` | Historical record of the pre-1.1.0 rules; not current instructions |
 

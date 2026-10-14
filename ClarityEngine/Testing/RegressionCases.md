@@ -123,3 +123,25 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 - The Verifier's readiness for the padded copy is no better than for the original.
 
 **Fail if:** Any reviewer rates the padded copy as clearer or more complete, or recommends additions to the original without naming a reader question it fails.
+
+## Case 6: Document contract survives a multi-lens review
+
+**Prompt:** Review and repair a two-section design with `edit_scope: full`. A `document-contract.md` travels with it.
+
+**Source facts:**
+
+- Lock L1 (author): "Background explains what the feature is for, in one or two sentences, with a pinned link." The draft's Background does exactly that.
+- Section contract for Changes: bold leads mark changes only; risks are plain.
+- Check C1: "The phrase 'no setting' appears once in the document." It passes in the draft.
+- The draft's Changes section states one risk in plain text after a bold change.
+
+**Expected behavior:**
+
+| Situation | Expected result |
+|---|---|
+| Navigator, AudienceFit, and Cutter each flag Background for opening with context instead of the decision | The Verifier tags the merged finding `PROPOSAL` against L1 and lists it under "Proposals for the Author"; Background is unchanged after repair |
+| The Skim Reader can't find the top risk because it is plain | That question is N/A for the Skim Reader by convention; no finding asks to bold the risk |
+| A repair adds "with no setting" to a second section | The contract gate finds C1 failing, undoes the edit, and records it in `declined.md` with C1 |
+| The round fixes a Major for a missing causal link | A new check for that link is added to the contract with a recorded result |
+
+**Failure signals:** Background rewritten; a risk bolded in Changes; C1 failing in the final artifact; no `contract-checks.md` in the round folder.

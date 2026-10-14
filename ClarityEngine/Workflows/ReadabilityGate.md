@@ -9,6 +9,7 @@
 - `Verify.md` — Decides which findings stand and sets the statuses
 - `../Standards/FormatAdapters.md` — Render evidence and verification layers
 - `../Tools/MeasureDraft.ts` — Mechanical measurements the lenses use as evidence
+- `../Standards/DocumentContract.md` — The contract format: section contracts, author locks, and checks that bind every editing pass
 
 ## Purpose
 
@@ -25,6 +26,7 @@ Run the review panel on an artifact. You are a thin orchestrator: you prepare th
 | `sources` | Optional source files, notes, or the original document, for claim checks |
 | `verification_evidence` | Optional File and Target-app check results from the calling workflow |
 | `edit_scope` | `none` (audit), `conversion` (fix Blockers, Majors, and fidelity defects only), or `full` |
+| `contract` | Optional path to the `document-contract.md` that travels with the artifact; look beside the artifact when none is given |
 
 ## Folder Layout
 
@@ -33,9 +35,9 @@ Create `$REVIEW_DIR` as `_output/clarity-review/[YYYYMMDD-HHMMSS]` in the workin
 ```
 $REVIEW_DIR/
   brief.md, reader-questions[-audience].md, answer-key[-audience].md
-  sources/, verification.md
+  contract.md (when one exists), sources/, verification.md
   round-1/   artifact copy, measurements.md, first-half.md, skim-layer.md, render/, lens-*.md,
-             verified-findings.md, report.md, declined.md
+             verified-findings.md, report.md, declined.md, contract-checks.md
   round-2/   ...
 ```
 
@@ -43,7 +45,8 @@ $REVIEW_DIR/
 
 ### Step 1: Prepare the Shared Inputs
 
-- `brief.md`: the brief, including `audience`, `expertise`, `audience_exposure`, `artifact_intent`, and `budget_minutes`. Copy into its `constraints` any template or house rules from a domain skill that applies, such as a company design-template skill, because the lenses see the brief but not those skills.
+- `brief.md`: the brief, including `audience`, `expertise`, `audience_exposure`, `artifact_intent`, and `budget_minutes`. Copy into its `constraints` any template or house rules that apply, because the lenses see the brief but not where those rules came from.
+- `contract.md`: when a document contract exists, copy it here and add "The document contract binds; this review is the `prose` pass" to the brief's constraints. Its locks, section contracts, and emphasis conventions outrank every lens rule. When none exists and the author states decisions or locks during the review, start one in the format from DocumentContract.md and hand it back with the artifact.
 - `reader-questions.md`: the audience description, then three to five neutral questions. Cover the main point, the cause or mechanism, the evidence, the material uncertainty, and the next action. Include the ask, the decision, and the top risk when the artifact has them. For an informative artifact with no action, ask what the reader should now understand.
 - `answer-key.md`: the expected answer to each question, from the brief and sources. Only the Verifier receives it.
 - When the brief names more than one audience, such as approvers and implementers, write one question file and one answer key per audience, suffixed with the audience name.
@@ -75,13 +78,13 @@ Start one fresh agent per lens, in parallel, with no inherited conversation. Giv
 |---|---|
 | Reader | Artifact (rendered pages or slides when available), its `reader-questions[-audience].md` |
 | Skim Reader | `skim-layer.md` in place of the artifact, `reader-questions.md`; it uses the Reader lens and writes `lens-SkimReader.md` |
-| Cutter | Artifact, `brief.md`, `measurements.md` |
-| Logician | Artifact, `brief.md`, `sources/`, `measurements.md` |
-| Navigator | Artifact, `brief.md`, `measurements.md`, `first-half.md`, `skim-layer.md` |
-| AudienceFit | Artifact, `brief.md` |
-| Visual | `render/`, artifact, `brief.md`, `sources/` |
+| Cutter | Artifact, `brief.md`, `measurements.md`, `contract.md` |
+| Logician | Artifact, `brief.md`, `sources/`, `measurements.md`, `contract.md` |
+| Navigator | Artifact, `brief.md`, `measurements.md`, `first-half.md`, `skim-layer.md`, `contract.md` |
+| AudienceFit | Artifact, `brief.md`, `contract.md` |
+| Visual | `render/`, artifact, `brief.md`, `sources/`, `contract.md` |
 
-Neither Reader receives the brief or an answer key.
+Pass `contract.md` only when it exists. Neither Reader receives the brief, the contract, or an answer key.
 
 Prompt template:
 
@@ -111,11 +114,12 @@ Save the returned report as `$ROUND_DIR/report.md`; some agent hosts let subagen
 
 ### Step 7: Repair
 
-1. Apply the report's fixes in order. With `edit_scope: conversion`, apply only Blocker and Major fixes and fidelity defects, and list the rest for the user.
-2. Decline a fix only by writing the reason, the RC or brief requirement it would break, into `$ROUND_DIR/declined.md`.
-3. Start the next round at Step 2, adding `--before <previous round's artifact copy>` to the MeasureDraft command. Every sentence it lists as having lost a connective needs its link restored or stated nearby before review.
-4. Re-render and recapture visual output.
-5. Rerun a fresh Reader, every lens that had a verified finding in a changed section, and Verify.
+1. Apply the report's fixes in order. With `edit_scope: conversion`, apply only Blocker and Major fixes and fidelity defects, and list the rest for the user. Never apply an item under "Proposals for the Author"; return those to the user.
+2. Decline a fix only by writing the reason, the RC, brief requirement, lock, or contract check it would break, into `$ROUND_DIR/declined.md`.
+3. **Contract gate.** When `contract.md` exists, rerun every check in it against the revised artifact and write each result to `$ROUND_DIR/contract-checks.md`. Undo any fix that turned a passing check into a failing one or changed a locked span, and record it in `declined.md` with the check or lock ID. Then add a check for each Blocker or Major standard this round enforced, written so a later pass can test it from the document alone, and update the contract's Last result column.
+4. Start the next round at Step 2, adding `--before <previous round's artifact copy>` to the MeasureDraft command. Every sentence it lists as having lost a connective needs its link restored or stated nearby before review.
+5. Re-render and recapture visual output.
+6. Rerun a fresh Reader, every lens that had a verified finding in a changed section, and Verify.
 
 Run at most two repair rounds. Then return the latest report with its remaining findings.
 
