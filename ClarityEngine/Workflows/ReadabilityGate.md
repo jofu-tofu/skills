@@ -26,7 +26,7 @@ Run the review panel on an artifact. You are a thin orchestrator: you prepare th
 | `sources` | Optional source files, notes, or the original document, for claim checks |
 | `verification_evidence` | Optional File and Target-app check results from the calling workflow |
 | `edit_scope` | `none` (audit), `conversion` (fix Blockers, Majors, and fidelity defects only), or `full` |
-| `contract` | Optional path to the `document-contract.md` that travels with the artifact; look beside the artifact when none is given |
+| `contract` | Optional location of the document contract: a `Document Contract` section in the artifact's author notes, or a contract file; look in the artifact first, then beside it |
 
 ## Folder Layout
 
@@ -46,7 +46,7 @@ $REVIEW_DIR/
 ### Step 1: Prepare the Shared Inputs
 
 - `brief.md`: the brief, including `audience`, `expertise`, `audience_exposure`, `artifact_intent`, and `budget_minutes`. Copy into its `constraints` any template or house rules that apply, because the lenses see the brief but not where those rules came from.
-- `contract.md`: when a document contract exists, copy it here and add "The document contract binds; this review is the `prose` pass" to the brief's constraints. Its locks, section contracts, and emphasis conventions outrank every lens rule. When none exists and the author states decisions or locks during the review, start one in the format from DocumentContract.md and hand it back with the artifact.
+- `contract.md`: when a document contract exists, copy only its section here (never the rest of the author notes, which the lenses must not see) and add "The document contract binds; this review is the `prose` pass" to the brief's constraints. Its locks, section contracts, and emphasis conventions outrank every lens rule. When none exists and the author states decisions or locks during the review, start one in the format from DocumentContract.md, inside the artifact's author notes when it has them. Write the contract gate's results back to the contract where it lives, not only to the review folder.
 - `reader-questions.md`: the audience description, then three to five neutral questions. Cover the main point, the cause or mechanism, the evidence, the material uncertainty, and the next action. Include the ask, the decision, and the top risk when the artifact has them. For an informative artifact with no action, ask what the reader should now understand.
 - `answer-key.md`: the expected answer to each question, from the brief and sources. Only the Verifier receives it.
 - When the brief names more than one audience, such as approvers and implementers, write one question file and one answer key per audience, suffixed with the audience name.

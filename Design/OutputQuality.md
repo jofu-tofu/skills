@@ -12,7 +12,7 @@ Human attention is non-renewable. Every word costs the reader time. Missing info
 
 ### Contract Precedence
 
-When a document contract travels with the artifact (`document-contract.md`; format in `Standards/DocumentContract.md`), it outranks these rules. This skill is the `reasoning` pass: apply the content rules here (Section Selection, Signal Tests, State Once, Design Work Controls) and the contract's section contracts. Rules that belong to a concern the contract assigns to another pass, such as sentence limits, wording, and emphasis for `prose`, or headings and section order for `template`, become findings to report, not edits to make. Never change a locked span, and rerun the contract's checks before keeping an edit. Without a contract, every rule in this file applies.
+When the artifact carries a document contract (a `Document Contract` section in its author notes, or a contract file beside it; format in `Standards/DocumentContract.md`), it outranks these rules. This skill is the `reasoning` pass: apply the content rules here (Section Selection, Signal Tests, State Once, Design Work Controls) and the contract's section contracts. Rules that belong to a concern the contract assigns to another pass, such as sentence limits, wording, and emphasis for `prose`, or headings and section order for `template`, become findings to report, not edits to make. Never change a locked span, and rerun the contract's checks before keeping an edit. Without a contract, every rule in this file applies.
 
 ---
 

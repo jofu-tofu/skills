@@ -27,7 +27,7 @@ The same agent that generated the document runs this as a self-check. On FAIL, r
 
 Read `../OutputQuality.md` and `../Principles.md`. Internalize format selection, density principles, banned patterns, decision spine, foundation qualities, and guardrails before evaluating.
 
-If a `document-contract.md` travels with the artifact, read it too (format in `../Standards/DocumentContract.md`) and follow OutputQuality's Contract Precedence: its locks, section contracts, and checks outrank this workflow's rules.
+If the artifact carries a document contract, read it too (format in `../Standards/DocumentContract.md`) and follow OutputQuality's Contract Precedence: its locks, section contracts, and checks outrank this workflow's rules.
 
 ### Step 2: Run Gate 1 — Substance Gate
 

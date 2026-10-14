@@ -126,7 +126,7 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 
 ## Case 6: Document contract survives a multi-lens review
 
-**Prompt:** Review and repair a two-section design with `edit_scope: full`. A `document-contract.md` travels with it.
+**Prompt:** Review and repair a two-section design with `edit_scope: full`. Its author notes hold a Document Contract section.
 
 **Source facts:**
 
@@ -144,4 +144,4 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 | A repair adds "with no setting" to a second section | The contract gate finds C1 failing, undoes the edit, and records it in `declined.md` with C1 |
 | The round fixes a Major for a missing causal link | A new check for that link is added to the contract with a recorded result |
 
-**Failure signals:** Background rewritten; a risk bolded in Changes; C1 failing in the final artifact; no `contract-checks.md` in the round folder.
+**Failure signals:** Background rewritten; a risk bolded in Changes; C1 failing in the final artifact; no `contract-checks.md` in the round folder; a lens input that includes author notes beyond the contract section.

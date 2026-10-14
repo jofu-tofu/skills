@@ -69,7 +69,7 @@ Extract what the design says about itself — its declared scope, self-imposed c
 
 #### Contract and Decision Consistency
 
-If a `document-contract.md` travels with the design, check that every check in it still passes, that no locked span changed, and that every row in its Decisions table has its sweep done. With or without a contract, search for any earlier position that a later decision replaced (OutputQuality's Decision Change Sweep); each survivor is a self-claim contradiction.
+If the design carries a document contract, check that every check in it still passes, that no locked span changed, and that every row in its Decisions table has its sweep done. With or without a contract, search for any earlier position that a later decision replaced (OutputQuality's Decision Change Sweep); each survivor is a self-claim contradiction.
 
 #### Claim Credibility Check
 

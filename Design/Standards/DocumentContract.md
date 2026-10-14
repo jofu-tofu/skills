@@ -1,10 +1,18 @@
 # Document Contract (format 1)
 
-A document contract is a Markdown file that travels with a document and holds what the document must keep: what each section is for, what the author has locked, and the checks every later edit must keep passing. Any skill, agent, or person can read and write it. A tool that edits the document reads the contract first and treats it as binding, so one pass can't undo the standard another pass already met.
+A document contract is a Markdown section that travels with a document and holds what the document must keep: what each section is for, what the author has locked, and the checks every later edit must keep passing. Any skill, agent, or person can read and write it. A tool that edits the document reads the contract first and treats it as binding, so one pass can't undo the standard another pass already met.
 
-Name it `document-contract.md` and keep it next to the document, or in the review folder when the document lives elsewhere. When several documents share a folder, name it `<document file name> - contract.md`. Without a contract, work from your own defaults, and create one when you finish so later passes inherit your standard.
+## Where It Lives
+
+Keep it inside the document, as a `Document Contract` section in the author notes or wherever the document keeps material that isn't reviewer-facing, so the rules sit with the revision history and decisions are recorded once. Nest its subsections one heading level below it, and replace the frontmatter with a first line giving the format and the date. Use a separate file only when the document can't hold the section, such as a Track SmartText or a Word document: name it `document-contract.md`, or `<document file name> - contract.md` when several documents share a folder, and link it from the document.
+
+Find it by looking for a `Document Contract` heading in the document, then for a contract file beside it. A pass that hands the contract to reviewers who must not see the author's rationale copies only this section, never the rest of the author notes.
+
+Without a contract, work from your own defaults, and create one when you finish so later passes inherit your standard.
 
 ## Format
+
+As a separate file; inside a document, drop the frontmatter and shift the headings down.
 
 ```markdown
 ---
@@ -51,6 +59,8 @@ updated: YYYY-MM-DD
 |---|---|---|---|
 | YYYY-MM-DD | <current position> | <earlier position, or none> | yes / no |
 ```
+
+The Decisions table is the document's decision log. When the document also keeps narrative history, link each row to its entry instead of retelling the rationale.
 
 ## Rules for any pass that edits the document
 
