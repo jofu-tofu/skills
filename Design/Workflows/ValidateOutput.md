@@ -27,6 +27,8 @@ The same agent that generated the document runs this as a self-check. On FAIL, r
 
 Read `../OutputQuality.md` and `../Principles.md`. Internalize format selection, density principles, banned patterns, decision spine, foundation qualities, and guardrails before evaluating.
 
+If a `document-contract.md` travels with the artifact, read it too (format in `../Standards/DocumentContract.md`) and follow OutputQuality's Contract Precedence: its locks, section contracts, and checks outrank this workflow's rules.
+
 ### Step 2: Run Gate 1 — Substance Gate
 
 The Substance Gate holds veto power. If the document fails substance checks, it cannot proceed to the Review Readiness Gate. Process these as a batch.
@@ -77,6 +79,8 @@ On any FAIL result:
 3. Note what was found and what was changed
 
 Do not deliver an artifact with known FAIL results. Fix first, then deliver.
+
+With a contract, rerun every check in it after fixing. Undo any fix that turns a passing check into a failing one, or that touches a locked span, and list it as a proposal for the author instead. Add a check for each standard you enforced so later passes keep it, and record the results in the contract.
 
 ### Step 5.5: Run Compression Protocol
 

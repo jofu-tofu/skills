@@ -74,6 +74,7 @@ Running the **WorkflowName** workflow in the **Design** skill to ACTION...
 | `Standards/LayerToolbox.md` | Situational review-support tools (Grounding, Structure, Timing) |
 | `Standards/OutputScience.md` | Research grounding for output rules + full source attribution |
 | `OutputQuality.md` | Format selection, density, macro-structure, anti-AI patterns — how to render output |
+| `Standards/DocumentContract.md` | Shared contract format: section contracts, author locks, and checks that every editing pass keeps passing |
 
 ## Examples
 

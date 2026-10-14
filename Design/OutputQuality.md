@@ -10,6 +10,10 @@ Read before producing any design artifact. Apply during writing, not post-hoc.
 
 Human attention is non-renewable. Every word costs the reader time. Missing information is recoverable — wasted attention is not. When density and completeness conflict, density wins.
 
+### Contract Precedence
+
+When a document contract travels with the artifact (`document-contract.md`; format in `Standards/DocumentContract.md`), it outranks these rules. This skill is the `reasoning` pass: apply the content rules here (Section Selection, Signal Tests, State Once, Design Work Controls) and the contract's section contracts. Rules that belong to a concern the contract assigns to another pass, such as sentence limits, wording, and emphasis for `prose`, or headings and section order for `template`, become findings to report, not edits to make. Never change a locked span, and rerun the contract's checks before keeping an edit. Without a contract, every rule in this file applies.
+
 ---
 
 ## 1. Format Selection
@@ -92,7 +96,7 @@ Not every section belongs in every document. Include a section only if removing 
 - **Headers as Summary** — Read only the headers — they should tell the whole story. "Overview" fails. "JWT chosen over sessions" passes.
 - **"So What?" Test** — If removing a paragraph changes no decision, remove it.
 - **Kill the Setup** — Delete the first paragraph if it restates the heading. Real content starts in paragraph two.
-- **No Non-Data-Ink** — Remove hedging, throat-clearing, meta-commentary, and filler transitions.
+- **No Non-Data-Ink** — Remove throat-clearing, meta-commentary, filler transitions, and hedges that add no information. Keep a stated uncertainty, meaning what isn't known and what would settle it (see Preserve User Wording and Uncertainty).
 - **Tangent Test** — If a paragraph is interesting but unconnected to a decision in this design, cut it.
 - **Name Your Rules** — Behavioral rules get short names for reference. Unnamed rules force re-derivation.
 - **One Concept, One Name** — Two terms for the same thing means pick one, drop the other.
@@ -184,7 +188,7 @@ Remove unless they change factual meaning: quite, very, really, extremely, simpl
 
 - **"It's not just X, it's Y"** — Say what it IS.
 - **Trailing participles** — "...enabling teams to..." → end with concrete outcomes.
-- **Over-formatting** — Bold that doesn't read as a summary on its own. Follow ClarityEngine's skim-layer rule (RC-10 in `ClarityEngine/Lenses/Navigator.md`): headings plus bold, read alone, carry the core; one kind of bold per section; each span a complete claim with its qualifier.
+- **Over-formatting** — Bold that doesn't read as a summary on its own. Headings plus bold, read alone, should carry the core; bold one kind of thing per section; make each bold span a complete claim with its qualifier. A template's own emphasis convention, or the contract's, sets which kind.
 - **Summary phrases** — "In summary", "To summarize", "In conclusion" → the content summarizes itself.
 - **Promotional tone** — "Exciting", "powerful", "best-in-class" → state facts.
 - **Adjectives without data** — "Significant improvement" → number or delete.
@@ -273,9 +277,13 @@ If the artifact supports another design, keep it short and point to the source o
 
 ### Evidence Lines
 
-Write each source as one line, ordered from most to least authoritative. Start the line with the source and its authority in bold, then give what it says. The bold source label is a run-in head under the skim-layer rule: keep every label in the list the same kind, and state the section's key claim where a skimmer will see it, such as in a bold lead sentence before the list. Put longer quotes, page references, and research detail in the research notes and link to them.
+Write each source as one line, ordered from most to least authoritative. Start the line with the source and its authority in bold, then give what it says. The bold source label is a run-in head, not a claim: keep every label in the list the same kind, and state the section's key claim where a skimmer will see it, such as in a bold lead sentence before the list. Put longer quotes, page references, and research detail in the research notes and link to them.
 
 Example: `**Regulation text, 42 CFR 422.121(b)(4)(ii) (binding):** excludes only "Denied prior authorizations."`
+
+### Decision Change Sweep
+
+When a decision changes, find every statement of the old position before writing the new one: body sections, risks, open items, alternatives, author notes, and any copy already posted elsewhere. Rewrite or remove each hit, then record the change (Decision Log, or the contract's Decisions table with its sweep marked done). A reversed decision that survives in one section reads as a contradiction and fails Self-Claim Verification.
 
 ### Omit Standard Design Mechanics
 
