@@ -133,9 +133,12 @@ function stripInlineMarkdown(text: string): string {
 
 function findEmphasizedSpans(rawText: string): string[] {
   const spans: string[] = [];
-  const textWithoutInlineCode = rawText.replace(/`[^`]*`/g, "");
-  for (const match of textWithoutInlineCode.matchAll(/\*\*([^*]+)\*\*|__([^_]+)__|<mark>([\s\S]*?)<\/mark>/g)) {
-    const spanText = stripInlineMarkdown(match[1] ?? match[2] ?? match[3] ?? "");
+  // Hide inline code behind placeholders so markers inside code don't count as bold, then put the code text back.
+  const inlineCodeTexts: string[] = [];
+  const textWithCodePlaceholders = rawText.replace(/`([^`]*)`/g, (_whole, codeText: string) => `\u0000${inlineCodeTexts.push(codeText) - 1}\u0000`);
+  const restoreInlineCode = (text: string) => text.replace(/\u0000(\d+)\u0000/g, (_whole, codeIndex: string) => inlineCodeTexts[Number(codeIndex)]);
+  for (const match of textWithCodePlaceholders.matchAll(/\*\*([^*]+)\*\*|__([^_]+)__|<mark>([\s\S]*?)<\/mark>/g)) {
+    const spanText = restoreInlineCode(stripInlineMarkdown(match[1] ?? match[2] ?? match[3] ?? ""));
     if (spanText) spans.push(spanText);
   }
   return spans;
