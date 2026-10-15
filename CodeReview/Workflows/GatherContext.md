@@ -7,7 +7,8 @@
 **Input:**
 - Review target: commit range (diff mode) or target path (audit mode)
 - Requested lenses: any `/SkillName` arguments from user
-- Review mode: diff or audit
+- Review mode: diff or audit (Series and ReReview runs are diff mode with extra sections, see below)
+- Plug-in manifest: path to `plugin.json`, or `none` (format: `../Standards/PluginContract.md`)
 
 **Output:**
 - Writes context layer to `$REVIEW_DIR/context.md`
@@ -26,6 +27,13 @@ This workflow exists because **code review is a delegation problem**. The orches
 Without comprehensive context, the orchestrator either delegates blindly (agents review without knowing the rules) or doesn't delegate at all (single shallow pass). The context layer is the difference between a review that catches "this violates your TypeScript conventions" and one that only catches "this variable is unused."
 
 **Why comprehensiveness matters more than brevity here:** Every piece of context that the orchestrator doesn't have is a review dimension it can't construct. A missed coding standard is a class of issues that won't be caught. A missed user argument is a lens the user asked for that gets silently dropped. The context layer should be dense signal — not bloated, but complete.
+
+## Step 0: Read the Plug-in Manifest
+
+Skip this step when the manifest is `none`.
+
+1. Read the manifest. If its `contract` value isn't one that `../Standards/PluginContract.md` describes, write a single line to `$REVIEW_DIR/context.md` — `PLUGIN ERROR: unsupported contract [value] from [source]` — and return.
+2. Note `source`, and read every file listed in `context_fragments`. Hold them for Step 3. List any file that is missing or unreadable under Coverage Notes.
 
 ## Step 1: Gather Review Target Context
 
@@ -63,6 +71,12 @@ git diff main...HEAD --name-only
 
 If no intent available: note "Intent: unavailable — review will focus on technical correctness"
 
+**Stated behaviors.** From the intent sources, list each behavior the change promises and each acceptance criterion as its own bullet. Also list decisions the author has explicitly locked in or excluded ("out of scope", "intentionally not handling X"). INT checks the diff against these, and VerifyAndReport keeps findings from relitigating locked decisions.
+
+**Pinned scope.** Record the exact base and tip SHAs (`git rev-parse`), and for an explicit commit list, each commit's SHA. If the scope was ambiguous (for example "the other commit", or commits plus uncommitted changes), write down the reading you chose. If other authors' changes are interleaved in the same files in the range, list those commits so agents and the verifier can exclude their lines.
+
+**Series map** (only when the caller asks for a series review). For each commit in order: its SHA, summary, files touched, and any lines it adds that a later commit in the range removes or rewrites. Mark a commit `obsoleted by <sha>` when later commits undo most of what it adds.
+
 **Change fingerprint:**
 ```
 - Languages: [TypeScript, React/TSX, CSS, ...]
@@ -98,7 +112,7 @@ wc -l [target-path]/**/* 2>/dev/null | tail -1
 2. Recent conversation — has the user explained what they're looking for?
 3. Target README or CLAUDE.md — extract stated purpose of this module
 
-If no intent available: note "Intent: general health audit — all dimensions activated"
+If no intent available: note "Intent: general health audit — baseline lenses plus STR"
 
 **Target fingerprint:**
 ```
@@ -109,6 +123,16 @@ If no intent available: note "Intent: general health audit — all dimensions ac
 - Size tier: [Small (1-10 files) / Medium (10-50 files) / Large (50+ files)]
 - Complexity signals: [Multi-language, deep imports, generated code present]
 ```
+
+## Step 1b: Map Impact and Settings
+
+Diff mode only. This feeds the IMP and COR lenses.
+
+**Impact map.** For each exported or shared symbol the diff changes (signature, return values, thrown errors, defaults, side effects), find its callers outside the diff. Use LSP `findReferences` where a language server is available, and grep otherwise. For each changed data item, schema, serialized contract or config key, find the code that reads it. Record each entry as `symbol or item → caller file:line — what it relies on`. Stop at about 30 entries and note "truncated" if there were more.
+
+**Settings read.** List the configuration values, feature flags and settings the touched code reads, with the values each can take, so COR can reason through each value.
+
+**Release context.** Record what you can determine generically: target branch, whether this is a release or maintenance branch, and whether client and server or producer and consumer are changed together.
 
 ## Step 2: Gather Review Context
 
@@ -175,6 +199,30 @@ Compress everything into a structured context layer — designed to be injected 
 **[Category]: [Source name]**
 - [Key rules/principles relevant to these changes]
 
+### Stated Behaviors
+[One bullet per promised behavior or acceptance criterion. Then "Locked decisions:" bullets. Or "none found"]
+
+### Pinned Scope
+[Base and tip SHAs, explicit commit SHAs, scope assumptions, interleaved commits to exclude]
+
+### Impact Map
+[symbol or item → caller file:line — what it relies on. Note "truncated" if capped]
+
+### Release Context
+[Branch type, versions or components that ship separately, other in-flight changes]
+
+### Settings Read
+[Setting → possible values → where read]
+
+### Domain Rules
+[Plug-in content with no matching heading, or "none"]
+
+### Coverage Notes
+[What could not be gathered and why: no language server, plug-in file missing, tool unreachable. Or "none"]
+
+### Series Map
+_(series review only)_ [Per-commit entries from Step 1]
+
 ### Requested Lenses
 [Skill names passed as arguments, or "none — dimensions constructed from fingerprint + discovered context only"]
 
@@ -190,13 +238,9 @@ Compress everything into a structured context layer — designed to be injected 
 [Attached below or referenced by path]
 ```
 
-Create a timestamped review directory and write the context layer there:
+**Merging plug-in fragments.** Append each fragment section under the matching heading above, after your own content, labeled `(from [source])`. A fragment's `### Intent` adds to Stated Behaviors. Put sections with unknown headings under Domain Rules, and copy the fragment's Coverage Notes into Coverage Notes.
 
-```
-REVIEW_DIR=_output/contexts/[context-slug]/reviews/codereview/[YYYYMMDD-HHMMSS]
-```
-
-Write context layer to: `$REVIEW_DIR/context.md`
+Write the context layer to the `context.md` path the orchestrator gave you. The orchestrator owns `$REVIEW_DIR`; don't create another.
 
 **This Write is the handoff contract.** The orchestrator checks for the existence of `context.md` before spawning the next agent — if this file is missing, the pipeline cannot proceed. Use the Write tool to create the file. After writing, verify it exists.
 

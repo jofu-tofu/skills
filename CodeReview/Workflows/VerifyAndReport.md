@@ -7,6 +7,9 @@
 **Input:**
 - Per-dimension agent output files: `$REVIEW_DIR/dimension-[id].md` (paths from orchestrator)
 - `$REVIEW_DIR/context.md` (review context, includes review mode)
+- `$REVIEW_DIR/dimensions.json` (selected lenses and standards, plus `coverage` notes)
+- Plug-in manifest path, or `none`. Its `external_findings` files are read here (format: `../Standards/PluginContract.md`)
+- Prior verified findings path _(ReReview only)_
 
 **Output:**
 - `$REVIEW_DIR/verified-findings.md` — all findings with verification status
@@ -21,7 +24,9 @@ Three jobs in one pass: **verify** findings trace to actual changed lines and ar
 
 ## Verify
 
-Read all agent output files. Extract every finding (severity, file, line, heuristic, description, recommendation). Tag each with its source dimension.
+Read all agent output files. Extract every finding (severity, file, line, heuristic or rule ID, evidence label, description, recommendation). Tag each with its source dimension. Findings from `kind: standards` dimensions are tagged `standards`.
+
+Then read each `external_findings` file from the manifest. Tag those findings `deterministic`. Downgrade any CRITICAL to HIGH unless it has `blocking: true`. They get Pass 1's SCOPE filter (by their `scope` field: `line`, `file` or `change`, as the contract defines) and deduplication only, and go to the Standards section. Name any missing or unreadable file under Coverage.
 
 **Two-pass verification: Relevance first, then Evidence.**
 
@@ -33,7 +38,8 @@ Apply these filters **in order**. A finding that fails any filter is discarded w
 
 **SCOPE — Is this finding about the code under review?**
 
-- Diff mode: Does the finding concern lines changed in the commit range? A finding about unchanged code surrounding the diff is out of scope even if the changed code interacts with it — unless the change *creates a new bug* in the unchanged code (e.g., changing a function signature without updating a caller).
+- Diff mode: Does the finding concern lines changed in the commit range? A finding about unchanged code is in scope only when the change *creates a new bug* there (e.g., changing a function signature without updating a caller), or *makes an existing defect reachable or more consequential* (e.g., a new caller now passes the input that triggers an old bug). Both require the finding to name the changed line that causes the effect. Tag these `MADE-RELEVANT` and keep them. Otherwise, a finding about unchanged code is out of scope.
+- Lines that Pinned Scope lists as other authors' interleaved changes are out of scope.
 - Audit mode: Does the finding concern files in the target directory/module? Findings about dependencies or upstream code are out of scope.
 - Tag: `OUT-OF-SCOPE`
 
@@ -57,6 +63,11 @@ Downgrade or discard findings where the agent inflated severity:
 - A HIGH finding must describe something that will realistically affect users or developers. If it requires three wrong things to happen simultaneously, it's MEDIUM at best.
 - If a finding survives scope and substance checks but its severity is inflated by 2+ levels, downgrade it. If it's already LOW/SUGGESTION after downgrade, discard it — the report has limited attention budget.
 - Tag: `DISPROPORTIONATE`
+
+**LOCKED DECISION — Does this finding relitigate a decision the author already made?**
+
+If the finding challenges something context.md lists under Locked decisions (an explicit exclusion, a chosen approach, a declared out-of-scope item), and it names no failure the author couldn't have known about, move it to the **Ask the Author** list instead of reporting it as a defect. Keep it as a finding when it shows the locked decision causes a concrete failure.
+- Tag: `ASK-AUTHOR`
 
 ### Pass 2: Evidence Verification
 
@@ -83,7 +94,8 @@ Use `git blame` to confirm each finding's line was introduced by a commit in the
 | Commit in range BUT matches documented convention OR has explicit safeguards | FALSE POSITIVE | Discard |
 | Commit in range, plausibly intentional but creates risk conditions with no documented safeguard | RISK-ACKNOWLEDGED | Keep, mark "Risk: [description]" |
 | Finding lacks file:line, named heuristic, or failure mechanism | INVALID | Discard — does not meet Evidence Standard |
-| Commit NOT in range | PRE-EXISTING | Move to appendix |
+| Commit NOT in range, tagged MADE-RELEVANT with a named causal changed line | MADE-RELEVANT | Keep in "Made Relevant by This Change" |
+| Commit NOT in range, no causal link to a changed line | PRE-EXISTING | Move to the Pre-existing Issues section |
 | Later commit in range fixed the line | SELF-CORRECTED | Discard |
 | Cannot determine (binary, generated, blame unavailable) | UNVERIFIED | Keep, mark "manual review recommended" |
 
@@ -100,13 +112,36 @@ No commit range. Verify the cited code actually exists at the cited location.
 | File exists BUT lines don't match description | MISLOCATED | Mark "Location uncertain" |
 | File does not exist | INVALID | Discard |
 
+#### Evidence Labels
+
+Every kept finding carries one evidence label:
+
+| Label | Meaning |
+|---|---|
+| `source-verified` | The verifier traced the failure path in the code |
+| `reproduced` | The failure was shown by running code or a test |
+| `inferred` | Follows from the code, but not every path was traced |
+| `needs-runtime` | Only running the code would confirm it |
+| `deterministic` | Produced by a plug-in script |
+
+Keep the agent's label unless your own check supports a stronger one. Never upgrade a label because lint, typecheck or a build passed: those show the code compiles, not that it behaves correctly.
+
+#### Prior Findings _(ReReview only)_
+
+For each finding in the prior verified findings file, check the current tip and assign one status:
+- **Fixed:** the failure path no longer exists.
+- **Partly fixed:** some instances or paths remain; name them.
+- **Not fixed:** unchanged.
+- **Regressed:** the fix introduced a new failure. Also record that failure as a finding.
+
 ### Write Verified Findings
 
 Write to `$REVIEW_DIR/verified-findings.md` with verification status on each finding and a tally:
 
 ```
 Relevance Filter: [X]/[total raw] findings passed ([S] out-of-scope, [K] nitpicks, [J] disproportionate)
-Evidence Verification: [N]/[X] findings confirmed ([M] pre-existing, [F] false positives, [R] risk-acknowledged, [P] unverified, [Q] self-corrected)
+Evidence Verification: [N]/[X] findings confirmed ([M] pre-existing, [G] made relevant, [F] false positives, [R] risk-acknowledged, [P] unverified, [Q] self-corrected)
+Ask the Author: [A] | Standards: [S] ([D] deterministic)
 ```
 
 The relevance tally is as important as the evidence tally — it shows the verifier actively filtered noise rather than rubber-stamping agent output.
@@ -136,6 +171,7 @@ Write to `$REVIEW_DIR/report.md`. Lead with verdict, order by severity, every fi
 **Findings:** CRITICAL: X | HIGH: Y | MEDIUM: Z | LOW: W | SUGGESTIONS: V
 **Risk-Acknowledged:** R
 **Verified:** [N]/[M] findings confirmed against changed commits
+**Plug-in:** [source, or "none"]
 ```
 
 **Audit mode:**
@@ -148,6 +184,7 @@ Write to `$REVIEW_DIR/report.md`. Lead with verdict, order by severity, every fi
 **Findings:** CRITICAL: X | HIGH: Y | MEDIUM: Z | LOW: W | SUGGESTIONS: V
 **Risk-Acknowledged:** R
 **Verified:** [N]/[M] findings confirmed against actual code
+**Plug-in:** [source, or "none"]
 ```
 
 ### Verdict
@@ -159,9 +196,10 @@ Write to `$REVIEW_DIR/report.md`. Lead with verdict, order by severity, every fi
 ```markdown
 ### [Short title] — `[filename]:[line]`
 **Why it matters:** [1 sentence]
+**How it happens:** _(CRITICAL and HIGH only)_ [Numbered, plain-English sequence of events that leads to the failure, starting from a realistic input or user action]
 **What to do:** [Concrete action]
 **Introduced in:** commit [SHA prefix] "[message]" _(diff mode only)_
-**Verified:** Confirmed in review range
+**Evidence:** [source-verified | reproduced | inferred | needs-runtime]
 ```
 
 Findings flagged by multiple agents: note `**Confidence:** Flagged by N agents independently`.
@@ -170,5 +208,11 @@ Findings flagged by multiple agents: note `**Confidence:** Flagged by N agents i
 
 - **What Looks Good** — dimensions/domains that reviewed and found clean. Format: "[Dimension]: reviewed [N files in scope], no findings." Do not praise code quality or editorialize — this section proves coverage, not quality.
 - **Risk-Acknowledged Patterns** — findings where the code is plausibly intentional but creates risk conditions with no documented safeguard. Listed separately so the fixer can make an informed accept/reject decision. Each entry includes: the risk description, the mechanism, and what a safeguard would look like. Cap at 5 per review — if more qualify, keep the 5 with highest severity heuristics. RISK-ACKNOWLEDGED findings do not affect the merge verdict.
-- **Pre-existing Issues** _(diff mode, if any)_ — issues predating the change, listed for awareness
+- **Made Relevant by This Change** _(diff mode, if any)_ — defects in unchanged code that the change made reachable or more consequential. Each card adds **Caused by:** `[changed file:line]`. These count toward the merge verdict.
+- **Standards** _(if any)_ — findings from standards dimensions and plug-in `external_findings`, grouped by source, one line each: `file:line — rule — message [evidence label]`. They count toward the verdict only when CRITICAL or HIGH.
+- **Ask the Author** _(if any)_ — findings that would relitigate a locked decision, phrased as questions. Cap at 5.
+- **Prior Findings** _(ReReview only)_ — a table of each prior finding with its status (Fixed, Partly fixed, Not fixed, Regressed).
+- **Series Notes** _(series review only)_ — commits that are redundant or obsoleted by later commits in the range, from the Series Map, and which commit introduced each finding.
+- **Pre-existing Issues** _(diff mode, if any)_ — issues predating the change with no causal link to it, listed for awareness
+- **Coverage** — always present. Which lenses and standards ran; which were merged, dropped or skipped and why (from `dimensions.json` `coverage`); skipped addenda; Coverage Notes from context.md; whether the Impact Map was truncated; and what this review could not verify without running the code.
 - If user requested `--comment` or "post to PR": run `gh pr comment [number] --body-file [report-path]`

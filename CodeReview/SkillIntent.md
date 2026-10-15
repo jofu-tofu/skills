@@ -28,11 +28,23 @@ Everything else happens inside agents. The orchestrator has no opinion about how
 
 ### Judgment Over Triggers
 
-Dimension selection uses agent judgment, not trigger conditions. Trigger syntax was another layer of indirection that agents skipped reading. The SelectDimensions agent reads context, reads dimension descriptions, and picks what's relevant. Baseline dimensions (COR, SIM, RES) are always included as a guard rail, but non-baselines (CLA, STR) are pure judgment.
+Dimension selection uses agent judgment, not trigger syntax. Trigger syntax was another layer of indirection that agents skipped reading. The SelectDimensions agent reads context, reads dimension descriptions, and picks what's relevant, guided by signals written in plain language. Baseline lenses (COR, RES, SIM, CLA) always run. SEC, IMP and INT run whenever what the change touches calls for them, regardless of diff size: a three-line change to a permission check needs SEC more than a thousand lines of layout code does. STR runs for medium+ diffs and new modules.
 
 ### Self-Contained Dimensions
 
-Each dimension file has everything the review agent needs: persona, mental model, illustrative examples, severity calibration, language-specific notes, and output format. No indirection to INDEX.md or other files. The agent reads ONE file and adopts its philosophical stance. Dimensions were consolidated from 13 to 5 — reorganized by philosophical lens (how the agent thinks) rather than defect taxonomy (what the agent checks for).
+Each dimension file has everything the review agent needs: persona, mental model, illustrative examples, severity calibration, language-specific notes, boundaries, and output format. No indirection to INDEX.md or other files. The agent reads ONE file and adopts its philosophical stance. Dimensions were consolidated from 13 to 5 — reorganized by philosophical lens (how the agent thinks) rather than defect taxonomy (what the agent checks for) — and later grew to 8 lenses, each admitted by the lens test below. A plug-in addendum may follow the lens file in the agent's prompt; the lens file stays complete without it.
+
+### The Lens Test
+
+A candidate becomes a separate lens only if it asks a question, from a persona, that no existing lens covers, **and** at least one of these holds: it needs its own input (an impact map, a requirement), it activates under different conditions, or merging it would overload one agent's single pass. Otherwise it folds into the nearest stance as an illustrative example or a broader bullet. Test adequacy failed the test (it shares COR's skeptic stance, input and activation) and lives in COR, SIM and CLA. Rule lists never become lenses; they are standards dimensions.
+
+### Size Budget
+
+A lens is 1,000–1,300 words, with a hard cap of 1,400, and 8–10 bullets under "What This Lens Reveals". Token cost isn't the reason; checklist creep is. A long bullet list pushes the agent into linter mode, which is what the 13 → 5 redesign removed. More than 10 bullets means the lens holds two stances, so split it. Fewer than 4 means it's a sub-lens, so fold it. `Tools/CheckDimensionBudget.ts` enforces this.
+
+### The Plug-in Contract
+
+The core stays domain-neutral. A domain (a company's language, release process, data platform) enters through a wrapper skill that does all domain work itself and hands CodeReview four kinds of file: standards dimensions, per-lens addenda of 200 words or fewer, context fragments, and deterministic findings (`Standards/PluginContract.md`). CodeReview reads files and runs nothing on a plug-in's behalf. A plug-in can't add a lens, so the lens set and its philosophy stay under this skill's control.
 
 ### Context Compression Before Dispatch
 
@@ -42,7 +54,7 @@ Agents are expensive. Giving each agent the full codebase context + full diff + 
 
 Verification has two failure modes. The obvious one: rubber-stamping agent findings without checking if the code actually changed. The subtle one: confirming that every finding is *technically correct* while letting through a flood of nitpicks, preferences, and theoretical fragility that trains the reader to skim. A report with 20 verified findings where 12 are nitpicks is worse than a report with 8 findings — the reader loses trust in the signal and stops reading carefully.
 
-Pass 1 (Relevance) asks three questions before any git-blame work: Is this finding in scope? Does it describe a concrete failure mode or just a preference? Is the severity proportional to the actual risk? Findings that fail any filter are discarded with a tag (OUT-OF-SCOPE, NITPICK, DISPROPORTIONATE). The key test for substance: *"If this finding were ignored, what specific bad thing would happen?"* — if you can't name a concrete failure, it's not a finding.
+Pass 1 (Relevance) asks four questions before any git-blame work: Is this finding in scope? Does it describe a concrete failure mode or just a preference? Is the severity proportional to the actual risk? Does it relitigate a decision the author locked in? Findings that fail the first three are discarded with a tag (OUT-OF-SCOPE, NITPICK, DISPROPORTIONATE); findings that fail the fourth move to an Ask the Author list (ASK-AUTHOR). The key test for substance: *"If this finding were ignored, what specific bad thing would happen?"* — if you can't name a concrete failure, it's not a finding.
 
 Pass 2 (Evidence) is the git-blame verification that was always there — confirming findings trace to actual changed lines. But it now operates on a pre-filtered set, which means the evidence check focuses attention on findings that matter rather than spending tokens confirming nitpicks are technically accurate.
 
@@ -50,7 +62,7 @@ The relevance tally in the report is as important as the evidence tally — it s
 
 ### Report Dispositions
 
-Findings have three dispositions after verification:
+Findings have three main dispositions after verification, plus MADE-RELEVANT (a defect in unchanged code that names the changed line making it reachable; reported in its own section and counted in the verdict) and PRE-EXISTING (no causal link; listed for awareness):
 
 - **VERIFIED** — finding confirmed against changed commits (diff mode) or actual code (audit mode). Kept in the main findings section.
 - **FALSE POSITIVE** — finding matches a documented convention (CLAUDE.md, ADR, linter config, inline code comment) or has an explicit safeguard in code (catch-and-rethrow, validation check, circuit breaker). Discarded.
@@ -64,12 +76,15 @@ The absence of issues is signal, not silence. The report includes a "What Looks 
 
 ## Success Criteria
 
-1. Every flagged issue exists in lines introduced by the commit range being reviewed
+1. Every flagged issue exists in lines introduced by the commit range being reviewed, or names the changed line that made it reachable
 2. Agent count and skill selection are proportional to the size and nature of the changes
 3. The full review runs in a single session without context overflow
 4. The report is readable without skimming — the user engages with every finding
 5. Verified claim count is surfaced ("17/19 findings verified")
 6. Architecture map gives a coherent picture of what changed structurally
+7. Every kept finding carries an evidence label
+8. The core skill's files contain no domain-specific terms; domain knowledge arrives only through the plug-in contract
+9. Every lens file passes `Tools/CheckDimensionBudget.ts`
 
 ## Explicit Out-of-Scope
 
@@ -78,8 +93,12 @@ The absence of issues is signal, not silence. The report includes a "What Looks 
 - **Linter-catchable issues** — assume linters run in CI; don't duplicate their work
 - **Full-repository security sweeps** — audit mode targets user-specified directories/modules, not the entire repo
 - **Test generation** — a separate concern; note missing test coverage as a finding, but don't write tests
+- **Domain rules in the core** — company-, product- or language-dialect-specific rules belong in a plug-in's standards dimensions and addenda
+- **Running plug-in code** — CodeReview never executes a plug-in's scripts, queries or routing; the wrapper does that before calling it
 
 ## Evolution Notes
+
+*2026-10-15: Gap-driven expansion and plug-in contract. Evidence: 54 past review and DLG-issue sessions plus 414 human review issues on one developer's changes showed that 48% of diff-catchable human issues matched no dimension. The biggest gaps were effects outside the diff, conformance to the stated requirement, security, and domain standards the review never invoked. Changes: (1) three new lenses admitted by the new lens test: IMP (The Downstream Consumer), SEC (The Attacker), INT (The Spec Checker); a proposed test-adequacy lens failed the test and was folded into COR ("unproven behavior"), SIM ("over-built tests") and CLA (test names); (2) RES gave sibling-code negative space to IMP and test negative space to COR, and gained partial failure, concurrency and per-call cost; CLA became baseline and now requires contract headers and flags stale comments and local idiom breaks; SIM gained proportionality and a calibration rule for defensive checks; (3) size budget per lens, enforced by `Tools/CheckDimensionBudget.ts`; (4) generic four-input plug-in contract so domain wrappers add standards dimensions, addenda, context fragments and script findings without touching the core; (5) GatherContext adds Stated Behaviors, Pinned Scope, Impact Map, Release Context, Settings Read and Coverage Notes; (6) SelectDimensions selects by what the change touches as well as size, with lens caps 4/6/8 and a separate standards cap of 3; SEC and INT are never dropped; (7) VerifyAndReport adds evidence labels, a "Made Relevant by This Change" section for defects in unchanged code with a named causal changed line, an Ask the Author list for locked decisions, a Standards section, step-by-step trigger sequences, and a Coverage section; (8) new ReReview and SeriesReview workflows; (9) Review.md resolves SKILL_ROOT from the skill's own directory instead of the reviewed repo.*
 
 *2026-02-18: Initial shell created. Workflows GatherContext and DelegateAgents are specified; SynthesizeFindings, VerifyClaims, and GenerateReport are stubbed with TODOs. Priority for next iteration: define SynthesizeFindings deduplication strategy and GenerateReport template.*
 

@@ -17,10 +17,11 @@ These criteria orient every workflow decision:
 
 1. **Comprehensive** — No significant issue category goes unchecked (security, performance, architecture, correctness, style)
 2. **Single-session** — Entire review fits in one context window, achieved via agents + context compression
-3. **Credible** — Every flagged issue traces to an actual changed line in the specified commit range; no false positives from pre-existing code
+3. **Credible** — Every flagged issue traces to an actual changed line in the specified commit range, or to a stated causal link from one; no false positives from pre-existing code
 4. **Believable output** — Report is clear and concise enough that the user reads every word, not skims. No wall-of-text syndrome.
 5. **Proportional** — Agent count and dimension selection scale with the size and nature of the changes
-6. **Verified claims** — Issues discovered are cross-checked against the correct diff before reporting
+6. **Verified claims** — Issues discovered are cross-checked against the correct diff before reporting, and each carries an evidence label
+7. **Domain-neutral core** — Domain knowledge arrives through the plug-in contract (`Standards/PluginContract.md`), never in this skill's own files
 
 ## Orchestrator Architecture (MANDATORY)
 
@@ -43,11 +44,11 @@ Previous architecture had all workflow files read in a single LLM session. The L
 
 | Step | Agent | Input | Output | Artifact Check |
 |------|-------|-------|--------|---------------|
-| 1 | Setup | User request | `$REVIEW_DIR` created | Directory exists |
-| 2 | GatherContext | Commit range or target path | `context.md` | File exists, non-empty |
-| 3 | SelectDimensions | `context.md` + `Dimensions/` | `dimensions.json` | Valid JSON with dimension array |
-| 4 | Review Agents (parallel) | Dimension file + `context.md` + file list | `dimension-[id].md` per agent | All agent output files exist |
-| 5 | VerifyAndReport | Agent output file paths + `context.md` | `verified-findings.md` + `report.md` | `report.md` exists, output to user |
+| 1 | Setup | User request, optional `--plugin` manifest | `$REVIEW_DIR` created, `plugin.json` copied | Directory exists |
+| 2 | GatherContext | Commit range or target path, manifest | `context.md` | File exists, non-empty, no `PLUGIN ERROR` |
+| 3 | SelectDimensions | `context.md` + `Dimensions/` + manifest | `dimensions.json` | Valid JSON object with a `dimensions` array |
+| 4 | Review Agents (parallel) | Dimension file + addenda + `context.md` + file list | `dimension-[id].md` per agent | All agent output files exist |
+| 5 | VerifyAndReport | Agent output paths + `context.md` + `dimensions.json` + manifest | `verified-findings.md` + `report.md` | `report.md` exists, output to user |
 
 When triggered, you MUST:
 1. Read `Workflows/Review.md` FIRST — before reading any source code or diffs
@@ -66,22 +67,33 @@ Running the **Review** workflow from the **CodeReview** skill...
 | Workflow | Trigger | File |
 |----------|---------|------|
 | **Review** | "code review", "review my PR", "review this branch", "review my changes", "review my commits", "review last N commits", "check my code", "audit my changes", "what did I change", "do a code review", "run a review", "audit this module", "audit this directory", "review this codebase", "audit code quality", "review code health", "audit architecture" | `Workflows/Review.md` |
+| **ReReview** | "re-review my fix", "did my fix work", "check fix for regressions", "review the fix delta" | `Workflows/ReReview.md` |
+| **SeriesReview** | "review commit series", "review this commit stack", "commit by commit review" | `Workflows/SeriesReview.md` |
 
-> **Pipeline stages** (GatherContext, SelectDimensions, VerifyAndReport) are internal — each runs as a separate agent. Review.md is the orchestrator.
+> **Pipeline stages** (GatherContext, SelectDimensions, VerifyAndReport) are internal — each runs as a separate agent. Review.md is the orchestrator. ReReview and SeriesReview reuse Review.md's steps with the differences their files describe.
 
 ## Dimension System
 
-5 review dimensions organized by philosophical lens — each gives the agent a different way of looking at the same code. Dimensions are self-contained with persona, mental model, illustrative examples, severity calibration, and output format.
+8 review **lenses**, each a philosophical stance: a different way of looking at the same code. Lenses are self-contained with persona, mental model, illustrative examples, severity calibration, boundaries, and output format. A new lens has to pass the lens test in `SkillIntent.md`, and every lens stays within the size budget (`Tools/CheckDimensionBudget.ts`).
 
-| ID | Dimension | Stance | Baseline |
-|----|-----------|--------|----------|
-| COR | **Correctness** | The Skeptic — "Is this right?" | Yes |
-| CLA | **Clarity** | The First-Time Reader — "Does this explain itself?" | No |
-| SIM | **Simplicity** | The Reductionist — "Is this the simplest version?" | Yes |
-| RES | **Resilience** | The Devil's Advocate — "What will break this?" | Yes |
-| STR | **Structure** | The Architect — "Is this where it belongs?" | No |
+| ID | Lens | Stance | Runs |
+|----|------|--------|------|
+| COR | **Correctness** | The Skeptic — "Is this right, and would a test catch it if it weren't?" | Baseline |
+| RES | **Resilience** | The Devil's Advocate — "What will break this?" | Baseline |
+| SIM | **Simplicity** | The Reductionist — "Is this the simplest version?" | Baseline |
+| CLA | **Clarity** | The First-Time Reader — "Does this explain itself?" | Baseline |
+| SEC | **Security** | The Attacker — "Which input do you trust that I control?" | Triggered, any size |
+| IMP | **Impact & Compatibility** | The Downstream Consumer — "What did you just break for me?" | Triggered |
+| INT | **Intent Conformance** | The Spec Checker — "Where was this asked for?" | When intent is stated |
+| STR | **Structure** | The Architect — "Is this where it belongs?" | Medium+ or new modules |
 
-**Baseline dimensions** (COR, SIM, RES) are always included unless the review has <10 changed lines. Non-baseline dimensions (CLA, STR) are selected by the SelectDimensions agent based on context — included by default for medium+ diffs.
+SelectDimensions picks lenses by what the change touches as well as by its size, and never drops SEC or INT for the agent cap.
+
+**Standards dimensions** (`kind: standards`) are rule-based checks routed by file type. They come from plug-ins, run as their own agents (at most 3), and report in the report's Standards section.
+
+## Plug-in Contract
+
+A wrapper skill adds a domain without changing this skill. It passes `--plugin <manifest>` with four optional, file-only inputs: standards dimension directories, per-lens addenda (200 words or fewer), context fragments, and external findings. A plug-in can't add a lens. See `Standards/PluginContract.md`.
 
 ## Examples
 
@@ -113,6 +125,21 @@ User: "Audit the src/auth/ module"
 -> Agents review full file set, not a diff
 ```
 
+**Example 5: Follow-up after fixes**
+```
+User: "I fixed the review findings, did my fix work?"
+-> Invokes ReReview workflow
+-> Reviews the fix delta with COR, RES and IMP and assigns each prior finding Fixed, Partly fixed, Not fixed or Regressed
+```
+
+**Example 6: Wrapper with a plug-in**
+```
+A domain wrapper skill runs its own scripts and lookups, writes a manifest, then calls the Review workflow with --plugin
+-> GatherContext merges the wrapper's context fragments
+-> SelectDimensions adds the wrapper's standards dimensions and attaches its addenda to lenses
+-> VerifyAndReport reports the wrapper's script findings in the Standards section
+```
+
 ## Architecture Notes
 
 The skill uses a **layered compression strategy**:
@@ -124,8 +151,8 @@ The skill uses a **layered compression strategy**:
 
 Agent count scales with **review target size and complexity**:
 
-| Tier | Diff Lines | Audit Files | Agent Cap |
-|------|-----------|-------------|-----------|
-| Small | 1-50 | 1-10 | 3 |
-| Medium | 50-300 | 10-50 | 5 |
-| Large | 300+ | 50+ | 5 |
+| Tier | Diff Lines | Audit Files | Lens Cap | Standards Cap |
+|------|-----------|-------------|----------|---------------|
+| Small | 1-50 | 1-10 | 4 | 3 |
+| Medium | 50-300 | 10-50 | 6 | 3 |
+| Large | 300+ | 50+ | 8 | 3 |

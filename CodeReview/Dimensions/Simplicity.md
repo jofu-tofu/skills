@@ -1,6 +1,7 @@
 ---
 id: SIM
 name: Simplicity
+kind: lens
 baseline: true
 ---
 
@@ -40,17 +41,18 @@ The kind of issue where code is more complex than its problem requires:
 - **Dead code and dead paths** — functions never called, parameters never used, branches that can never execute, commented-out code preserved "just in case," feature flags that are always on or always off. Every dead line is a line someone will read and try to understand.
 - **Premature abstraction** — an interface with one implementation, a factory that creates one type, a strategy pattern with one strategy, a generic function used with one type. Abstractions that were built for flexibility that never materialized. The cost: readers must understand the abstraction layer to understand the concrete behavior.
 - **Unnecessary indirection** — wrapper functions that add no logic, delegation chains where A calls B calls C and B adds nothing, configuration objects that could be direct parameters, event systems where a direct function call would work. Each layer of indirection is a layer of "why?"
-- **Over-engineered for current needs** — code designed for requirements that don't exist yet. Configurable where hardcoded would work, generic where specific would work, distributed where centralized would work. Solving tomorrow's problem today, paying the complexity cost now with no guarantee the requirement arrives.
-- **Redundant validation and defensive code** — null checks on values the type system guarantees are present, error handling for conditions the caller prevents, validation that duplicates what the framework already does. Defensive code against impossible states is not safety — it's noise that obscures the real invariants.
+- **Over-engineered or out of proportion** — code designed for requirements that don't exist yet (configurable where hardcoded would work, generic where specific would work), or a new mechanism built where the codebase already has a lightweight one for the same job. Search for the existing precedent before accepting a new one.
+- **Redundant validation and defensive code** — null checks on values the type system guarantees, error handling for conditions the caller prevents, validation the framework already does. A defensive check earns its place by naming a scenario that can actually reach it. If the check guards a trust boundary, leave it to SEC.
 
 ### MEDIUM — Missed Simplification
 
 The kind of issue where code works but could be expressed more simply:
 
-- **Verbose patterns** — manual iteration where a built-in method works, explicit state machines where a simple flag suffices, hand-rolled logic the standard library provides. Using 10 lines where the language offers a 1-line idiom.
-- **Accidental duplication** — the same logic expressed differently in multiple places. Not always copy-paste — sometimes independently written code that converges on the same behavior. Unification would reduce total code and create a single source of truth.
+- **Verbose patterns** — manual iteration where a built-in method works, explicit state machines where a simple flag suffices, hand-rolled logic the standard library provides.
+- **Accidental duplication** — the same logic expressed in multiple places, by copy-paste or by convergence. Unification would create a single source of truth.
 - **Complex conditionals** — deeply nested if/else trees, boolean expressions with multiple negations, switch statements that could be lookup tables. The logic is correct but the expression of it is harder to follow than necessary.
-- **Speculative generality** — parameters that are always passed the same value, type parameters that are always the same type, configuration options that are never changed from defaults. Generality that serves no current purpose.
+- **Speculative generality** — parameters always passed the same value, type parameters always the same type, configuration options never changed from defaults.
+- **Over-built tests** — tests that mock everything around the unit until they only test the mocks, assert exact call counts or private steps instead of outcomes, or duplicate setup that a shared fixture would remove. They break on every refactor and catch nothing.
 
 ## Severity Calibration
 
@@ -123,6 +125,10 @@ function processItems(items: Item[]) {
   return items.map(transform);
 }
 ```
+
+## Boundaries
+
+Whether tests prove the behavior belongs to COR; whether test names are readable belongs to CLA. Security-relevant checks belong to SEC.
 
 ## Output Format
 

@@ -7,9 +7,10 @@
 ## Step 0: Resolve Paths
 
 ```bash
-REPO_ROOT=$(git rev-parse --show-toplevel)
-SKILL_ROOT=$REPO_ROOT/skills/CodeReview
+REPO_ROOT=$(git rev-parse --show-toplevel)   # the repository being reviewed
 ```
+
+Set `SKILL_ROOT` to this skill's own directory, the base directory reported when the skill loaded. It isn't derived from `REPO_ROOT`, because the reviewed repository usually isn't the one that holds this skill.
 
 ## Path Conventions
 
@@ -28,23 +29,26 @@ Determine review mode from the user's request (diff vs audit). Then create the r
 mkdir -p $REVIEW_DIR
 ```
 
+If the request or the calling skill passed `--plugin <path>`, copy that file to `$REVIEW_DIR/plugin.json` without parsing it, and set `PLUGIN=$REVIEW_DIR/plugin.json`. Otherwise set `PLUGIN=none`. The manifest format is defined in `$SKILL_ROOT/Standards/PluginContract.md`; the agents read it, not the orchestrator.
+
 ## Step 2: Gather Context
 
 Spawn agent:
-- **prompt:** `"Read $SKILL_ROOT/Workflows/GatherContext.md and execute it. Review target: [commit range or target path from user]. Requested lenses: [any /SkillName arguments]. Write your output to: $REVIEW_DIR/context.md. When done, return the absolute path to context.md."`
+- **prompt:** `"Read $SKILL_ROOT/Workflows/GatherContext.md and execute it. Review target: [commit range or target path from user]. Review mode: [diff | audit]. Requested lenses: [any /SkillName arguments]. Plug-in manifest: $PLUGIN. Write your output to: $REVIEW_DIR/context.md. When done, return the absolute path to context.md."`
 - **subagent_type:** `general-purpose`
 
 **CHECK:** Read `$REVIEW_DIR/context.md` — must exist and be non-empty.
 - If missing → retry once with same prompt.
 - If missing again → output error to user: "GatherContext failed after 2 attempts. Review aborted."
+- If its first line starts with `PLUGIN ERROR` → output that line to the user and stop.
 
 ## Step 3: Select Dimensions
 
 Spawn agent:
-- **prompt:** `"Read $SKILL_ROOT/Workflows/SelectDimensions.md and execute it. Context file: $REVIEW_DIR/context.md. Dimensions directory: $SKILL_ROOT/Dimensions/. Write your output to: $REVIEW_DIR/dimensions.json. When done, return the absolute path to dimensions.json."`
+- **prompt:** `"Read $SKILL_ROOT/Workflows/SelectDimensions.md and execute it. Context file: $REVIEW_DIR/context.md. Dimensions directory: $SKILL_ROOT/Dimensions/. Plug-in manifest: $PLUGIN. Write your output to: $REVIEW_DIR/dimensions.json. When done, return the absolute path to dimensions.json."`
 - **subagent_type:** `general-purpose`
 
-**CHECK:** Read `$REVIEW_DIR/dimensions.json` — must exist and contain a JSON array of dimensions.
+**CHECK:** Read `$REVIEW_DIR/dimensions.json` — must exist and be a JSON object with a non-empty `dimensions` array.
 - If missing → retry once. If missing again → error to user.
 
 ## Step 4: Spawn Review Agents
@@ -60,14 +64,17 @@ For each dimension in the list, spawn an agent in parallel (`run_in_background: 
 You are a principal engineer who has mass-reverted production deployments and conducted post-mortems on "obviously correct" code. You review code written by a colleague. You do not soften findings, hedge, or give the benefit of the doubt when safety is ambiguous.
 
 ## Evidence Standard
-A finding requires ALL of: (1) a specific file and line range, (2) a named heuristic from your dimension file, and (3) a concrete description of the risk condition — what could go wrong and through what mechanism. You do NOT need to prove the failure has already occurred or will occur for common inputs. If you can name the risk and the mechanism, report it.
+A finding requires ALL of: (1) a specific file and line range, (2) [lens: a named heuristic from your dimension file | standards: the rule ID from your rule source], and (3) a concrete description of the risk condition — what could go wrong and through what mechanism. You do NOT need to prove the failure has already occurred or will occur for common inputs. If you can name the risk and the mechanism, report it.
+
+Label each finding's evidence: `source-verified` (you traced it in the code), `inferred` (follows from the code but you did not trace every path), or `needs-runtime` (only running it would confirm). Passing lint or typecheck is not evidence that behavior is correct.
 
 Do not report style preferences, linter-catchable issues, or vague "consider refactoring" suggestions. Every finding must describe a failure path, not a preference.
 
 Report ONLY findings. Do not include praise or "looks good" commentary — a separate synthesis step handles that.
 
 ## Your Review Rules
-Read [dimension.path] for your detection heuristics, severity calibration, and output format.
+Read [dimension.path] for your stance, heuristics, severity calibration, and output format. (A merged entry such as SIM+CLA lists two files: apply both stances and tag each finding with the lens it came from.)
+[If dimension.addenda is non-empty: "Then read [dimension.addenda] — domain notes for your lens. They sharpen your stance for this codebase; they do not add a new one."]
 
 ## Review Context
 Read $REVIEW_DIR/context.md for what changed, why, and the review scope.
@@ -76,9 +83,9 @@ Read $REVIEW_DIR/context.md for what changed, why, and the review scope.
 [dimension.files]
 
 ## Instructions
-1. Read both files above before reviewing any code
-2. Review each file against your dimension's heuristics
-3. For each issue found, record: severity, file, line, heuristic used, description, recommendation
+1. Read the files above before reviewing any code
+2. Review each file against your dimension
+3. For each issue found, record: severity, file, line, heuristic or rule ID, evidence label, description, recommendation
 4. Write all findings to: $REVIEW_DIR/dimension-[dimension.id].md
 5. When done, return the absolute path to the file you wrote
 ```
@@ -94,7 +101,7 @@ The orchestrator collects file paths only — it does not read agent output cont
 ## Step 5: Verify Claims and Generate Report
 
 Spawn agent:
-- **prompt:** `"Read $SKILL_ROOT/Workflows/VerifyAndReport.md and execute it. Agent output files: [list of $REVIEW_DIR/dimension-*.md paths from Step 4]. Context: $REVIEW_DIR/context.md. Write verified findings to: $REVIEW_DIR/verified-findings.md. Write report to: $REVIEW_DIR/report.md. Return the report content AND the path to report.md."`
+- **prompt:** `"Read $SKILL_ROOT/Workflows/VerifyAndReport.md and execute it. Agent output files: [list of $REVIEW_DIR/dimension-*.md paths from Step 4]. Context: $REVIEW_DIR/context.md. Dimensions: $REVIEW_DIR/dimensions.json. Plug-in manifest: $PLUGIN. Write verified findings to: $REVIEW_DIR/verified-findings.md. Write report to: $REVIEW_DIR/report.md. Return the report content AND the path to report.md."`
 - **subagent_type:** `general-purpose`
 
 **CHECK:** `$REVIEW_DIR/report.md` exists.

@@ -1,6 +1,7 @@
 ---
 id: STR
 name: Structure
+kind: lens
 baseline: false
 ---
 
@@ -57,8 +58,7 @@ The kind of issue where placement is suboptimal and will create friction:
 
 ### MEDIUM
 
-- **Placement drift signals** — missed strategic opportunities where the change touches adjacent architectural debt and deepens it.
-- **Weak ownership signals** — no evidence placement was deliberate (responsibility unclear, naming/location mismatch) but impact remains localized.
+- **Placement and ownership drift** — the change touches adjacent architectural debt and deepens it, or nothing shows the placement was deliberate (responsibility unclear, name and location disagree), though impact remains localized.
 
 ## Severity Calibration
 
@@ -130,6 +130,10 @@ function getDiscount(user: User): number {
   return PLAN_DISCOUNTS[user.plan] ?? 0;
 }
 ```
+
+## Boundaries
+
+How the change affects callers and consumers outside the diff belongs to IMP. Line-level consistency with neighboring code belongs to CLA; this lens owns conventions at the architectural level.
 
 ## Output Format
 
