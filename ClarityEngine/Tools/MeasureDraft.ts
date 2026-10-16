@@ -28,15 +28,16 @@ const MIN_SIMILARITY_FOR_REWRITE = 0.5;
 const DETAILS_OPEN_MARKER = "@@CLARITY_DETAILS_OPEN@@";
 const DETAILS_CLOSE_MARKER = "@@CLARITY_DETAILS_CLOSE@@";
 
-type BlockKind = "heading" | "paragraph" | "item" | "table";
+export type BlockKind = "heading" | "paragraph" | "item" | "table";
 
-interface DraftBlock {
+export interface DraftBlock {
   kind: BlockKind;
   headingLevel: number;
   text: string;
   sectionHeading: string;
   onMainPath: boolean;
   emphasizedSpans: string[];
+  inlineCode: string[];
 }
 
 interface CliOptions {
@@ -72,7 +73,7 @@ function parseArgs(argv: string[]): CliOptions {
   return { ...options, draftPath: positional[0] } as CliOptions;
 }
 
-function readDraft(path: string): string {
+export function readDraft(path: string): string {
   const resolvedPath = resolve(path);
   if (!existsSync(resolvedPath)) {
     console.error(`File not found: ${resolvedPath}`);
@@ -144,7 +145,7 @@ function findEmphasizedSpans(rawText: string): string[] {
   return spans;
 }
 
-function parseBlocks(markdown: string): DraftBlock[] {
+export function parseBlocks(markdown: string): DraftBlock[] {
   const lines = markdown.replace(/\r\n/g, "\n").split("\n");
   const blocks: DraftBlock[] = [];
   let collapsedDepth = 0;
@@ -170,6 +171,7 @@ function parseBlocks(markdown: string): DraftBlock[] {
       sectionHeading: currentSectionHeading,
       onMainPath: isOnMainPath(),
       emphasizedSpans: kind === "heading" ? [] : findEmphasizedSpans(rawText),
+      inlineCode: [...rawText.matchAll(/`([^`]+)`/g)].map((match) => match[1]),
     });
   };
   const flushParagraph = () => {
@@ -231,11 +233,11 @@ function parseBlocks(markdown: string): DraftBlock[] {
   return blocks;
 }
 
-function countWords(text: string): number {
+export function countWords(text: string): number {
   return text.split(/\s+/).filter((token) => /[\p{L}\p{N}]/u.test(token)).length;
 }
 
-function splitSentences(text: string): string[] {
+export function splitSentences(text: string): string[] {
   const sentenceMatches: string[] = text.match(/[^.!?]+(?:[.!?]+["')\]]*(?=\s|$)|$)/g) ?? [];
   return sentenceMatches
     .map((sentence) => sentence.trim())
@@ -449,4 +451,4 @@ function main(): void {
   console.log(`Wrote measurements.md, first-half.md, and skim-layer.md to ${outDir}`);
 }
 
-main();
+if (import.meta.main) main();
