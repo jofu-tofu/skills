@@ -37,13 +37,18 @@ Example: In a kickoff summary, replace "The checked export sender code excludes 
 
 **Rule:** Name the subject and say what it does, with familiar words and concrete verbs. Give each sentence one main point, and keep a longer sentence when it makes a condition or relationship clearer. Use verbs, not nominalizations: "decide," not "make a decision regarding." Name the actor where the sentence assigns responsibility, not "it was decided." Do not place a clause between a subject and its verb. A very long sentence flags where to look; its length alone is not a failure.
 
+Write sentences, not note entries. A `label: status` fragment such as "Later denied: the receiver isn't told" or "Customer outreach: in progress" keeps the shape of the working notes it came from, so the reader has to supply the subject, the condition, and the reason. Write it as a sentence instead: "If it's later denied, the receiver never hears about it, so its copy stays pending." A run-in label on a list item is fine when a full sentence follows it.
+
+Make every reference resolve on the page. Each "the list," "the separate design," "it," or "this" points to something the reader has already met in the document. When a cut, a removed name, or a removed reason deletes what a phrase referred to, rewrite the phrase so it stands on its own.
+
 Examples:
 
 - Write "This can happen when" instead of "Circumstances required for this problem."
+- Write "If not, it's dropped from the statuses sent" instead of "If the answer is to exclude it, it comes off the list" when no list appears nearby.
 - Write "without changing the group" instead of "without mutation."
 - Instead of "The proposed approach supports enforcement of the capacity threshold to optimize operational efficiency," write "The editor allows up to 25 open referrals. Opening more can slow the workspace, so users must close one before opening another."
 
-**Fail when:** A sentence hides its actor, buries its verb in a noun, or nests a clause between subject and verb.
+**Fail when:** A sentence hides its actor, buries its verb in a noun, nests a clause between subject and verb, reads as a `label: status` note entry, or refers to something the document never introduced.
 
 **Boundary:** When readers lack the concepts, rewording does not close the gap; the content needs an explanation (RC-21).
 

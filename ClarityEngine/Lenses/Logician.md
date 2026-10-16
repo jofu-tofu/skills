@@ -43,7 +43,9 @@ Example: Instead of "The change has been successfully validated," write "The loc
 
 Example: "Cap opens at 25 for performance" is too compressed. Write "Opening many referrals can slow the workspace. Limit the number open at once to 25 to reduce that slowdown."
 
-**Fail when:** A conclusion follows a fact with no stated link, a step the reader must infer is missing, or an edit removed a connective without restating the relation.
+A counterpoint or caveat says how it bears on the claim it qualifies. "CMS doesn't define statuses, and the preamble's reasoning could be read to keep it excluded" raises a doubt and stops. Finish the thought by linking it to what the document already says follows from it: "…so whether to send it is still open (see Open before release)." When the document states no consequence, the fix is a question for the author, not a conclusion you supply.
+
+**Fail when:** A conclusion follows a fact with no stated link, a step the reader must infer is missing, an edit removed a connective without restating the relation, or a counterpoint ends without saying how it bears on the claim.
 
 **Boundary:** The benefit is largest for difficult text and newer readers and disappears on easy text. That does not justify terse writing for experts; skilled readers also benefit.
 

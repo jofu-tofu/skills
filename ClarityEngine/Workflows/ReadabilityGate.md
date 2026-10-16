@@ -116,10 +116,11 @@ Save the returned report as `$ROUND_DIR/report.md`; some agent hosts let subagen
 
 1. Apply the report's fixes in order. With `edit_scope: conversion`, apply only Blocker and Major fixes and fidelity defects, and list the rest for the user. Never apply an item under "Proposals for the Author"; return those to the user.
 2. Decline a fix only by writing the reason, the RC, brief requirement, lock, or contract check it would break, into `$ROUND_DIR/declined.md`.
-3. **Contract gate.** When `contract.md` exists, rerun every check in it against the revised artifact and write each result to `$ROUND_DIR/contract-checks.md`. Undo any fix that turned a passing check into a failing one or changed a locked span, and record it in `declined.md` with the check or lock ID. Then add a check for each Blocker or Major standard this round enforced, written so a later pass can test it from the document alone, and update the contract's Last result column.
-4. Start the next round at Step 2, adding `--before <previous round's artifact copy>` to the MeasureDraft command. Every sentence it lists as having lost a connective needs its link restored or stated nearby before review.
-5. Re-render and recapture visual output.
-6. Rerun a fresh Reader, every lens that had a verified finding in a changed section, and Verify.
+3. **Cold reread.** Reread every sentence you changed as a reader who has seen only the document, not the findings, author notes, or contract. Each one names who does what, says why when it states a consequence, and points only to things the document has introduced (RC-20, RC-25). A fix that satisfies its finding but reads like a filled-in form or a note entry gets rewritten as a sentence before the contract gate. In a prose pass, also compare each changed sentence with the one it replaced: every claim, qualifier, scope, owner, and name in it must already appear in the document. Linking two claims the document already makes is fine. Anything new, including a caveat repeated near a summary or a term taken from the brief, is undone and listed in `declined.md` as a proposal (Verify.md, PROSE PASS).
+4. **Contract gate.** When `contract.md` exists, rerun every check in it against the revised artifact and write each result to `$ROUND_DIR/contract-checks.md`. Undo any fix that turned a passing check into a failing one or changed a locked span, and record it in `declined.md` with the check or lock ID. Then add a check for each Blocker or Major standard this round enforced, written so a later pass can test it from the document alone, and update the contract's Last result column.
+5. Start the next round at Step 2, adding `--before <previous round's artifact copy>` to the MeasureDraft command. Every sentence it lists as having lost a connective needs its link restored or stated nearby before review.
+6. Re-render and recapture visual output.
+7. Rerun a fresh Reader, every lens that had a verified finding in a changed section, and Verify.
 
 Run at most two repair rounds. Then return the latest report with its remaining findings.
 

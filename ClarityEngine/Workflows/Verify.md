@@ -36,6 +36,7 @@ Apply these in order. Record a tag for each finding removed.
 - **SUBSTANCE:** The finding names a reader harm under an RC, a `Rendered` defect, or a comprehension result from Step 1. Lens rules about wording and style are substance, because they are the user's standards. A preference with none of these behind it is tagged `TASTE`.
 - **PROPORTIONALITY:** The severity matches the contract's definitions. Downgrade an inflated finding and tag it `DOWNGRADED`; it stays in the report.
 - **DOCUMENT CONTRACT:** When `contract.md` exists, a finding whose fix would change a locked span, break a passing check, move content against a section contract, or edit a concern the Roles table assigns to another pass is tagged `PROPOSAL`. It goes under "Proposals for the Author" with the lock, check, or section it touches, and the author does not apply it. A finding that a section breaks its own contract is substance, not taste.
+- **PROSE PASS:** When the brief or contract makes this review the prose pass, a fix that would add, narrow, broaden, or move a claim, qualifier, owner, position, or name is tagged `PROPOSAL`, even when an RC asks for it. That includes a caveat copied next to a summary (RC-28), a counterpoint given a conclusion the document never states (RC-25), and a term imported from the brief. A fix may reword, split, or join sentences, and may state a link between two claims the document already makes. When a finding needs a fact the document lacks, such as what was asked, list it as a proposal naming the missing fact.
 
 ### Step 3: Check the Evidence
 

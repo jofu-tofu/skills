@@ -145,3 +145,41 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 | The round fixes a Major for a missing causal link | A new check for that link is added to the contract with a recorded result |
 
 **Failure signals:** Background rewritten; a risk bolded in Changes; C1 failing in the final artifact; no `contract-checks.md` in the round folder; a lens input that includes author notes beyond the contract section.
+
+## Case 7: Compressed note-style prose after a cut pass
+
+**Purpose:** Check that a repair round turns note entries back into sentences, without compressing them further and without adding claims. Run this after changing RC-20, RC-25, RC-28, the Cutter persona, Verify's PROSE PASS filter, or ReadabilityGate's Repair step.
+
+**Prompt:** Review and repair this Changes section with `edit_scope: full`. Audience: reviewers who know the product but not the author's notes. Brief constraints: this is the prose pass, so do not add, remove, or move claims, owners, or positions; name no other design.
+
+**Source facts (the draft as given):**
+
+- "Later denied: the receiver isn't told, so its copy stays pending."
+- "Pending External Review: the owner confirms it before release. If the answer is to exclude it, it comes off the list." The status list is two bullets and a heading away.
+- "Customer interpretation outreach: in progress, no date set. Only a CMS answer would change the design." The owner's confirmation above can also change the design, so "only" is ambiguous.
+- "CMS answer: asked, no response yet." The section never says what CMS was asked.
+- "CMS doesn't define statuses, and the preamble's reasoning could be read to keep a denial under external review excluded." The open items list the owner's confirmation for this status.
+- "Denials are never sent, and an Epic receiver updates its copy only once the separate receiver design ships." This names another design.
+
+**Expected behavior:**
+
+| Situation | Expected result |
+|---|---|
+| AudienceFit reads the items | RC-20 findings that name the `label: status` form for at least two items, and "the list" as a referent the reader can't see, each with a full-sentence replacement in **Fix**. An RC-2 or RC-20 finding on "the separate receiver design" |
+| Logician reads the CMS sentence | An RC-25 finding whose fix links the doubt to the existing open item, not to a new position such as "excluding it is also defensible" |
+| A finding needs what CMS was asked, or what "only" means | Verify lists it under "Proposals for the Author" naming the missing fact; the author doesn't invent one |
+| A finding asks to copy the open items' caveat next to the bold lead (RC-28) | Verify tags it `PROPOSAL` under PROSE PASS |
+| Cutter reads the section | Every proposed cut removes a whole sentence and states what is lost; a cut that would remove a fact found nowhere else is a proposal, not a fix |
+| The author applies the fixes | The cold reread and claim comparison leave no changed sentence with a new claim, qualifier, scope, or name |
+
+**Grade the repaired draft:**
+
+| ID | Pass when | Fail examples |
+|---|---|---|
+| F1 | Each risk and open item reads as a complete sentence with the label removed | "Later denied: the receiver isn't told" (a run-in label doing the work of "If it's later denied"); "CMS answer: asked" |
+| F2 | No phrase points to something the section hasn't introduced nearby, and no other design is named | "comes off the list"; "the separate receiver design"; "Receiver design: in progress" |
+| F3 | The CMS doubt ends by linking to the owner's confirmation already in the section | Stops at "excluded"; or ends with a new position |
+| C1 | No new claim, qualifier, owner, position, or name. Grade each change as reword (pass), link between existing claims (pass), or new content (fail) | An added lead caveat sentence; "later-approved" narrowing a risk; "CMS-0057-F" imported from the brief; "isn't told" hardened to "never told" |
+| C2 | Items that need the author's facts are listed as proposals, not filled in | An invented CMS question; "only" silently resolved |
+
+**Failure signals:** Any F or C check fails. If C1 fails for every version under test, check whether a lens fix or Verify let the new content through before blaming the author step.
