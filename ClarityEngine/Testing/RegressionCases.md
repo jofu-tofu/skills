@@ -183,3 +183,41 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 | C2 | Items that need the author's facts are listed as proposals, not filled in | An invented CMS question; "only" silently resolved |
 
 **Failure signals:** Any F or C check fails. If C1 fails for every version under test, check whether a lens fix or Verify let the new content through before blaming the author step.
+
+## Case 8: Plain wording is generated and chosen, not patched
+
+**Purpose:** Check that PlainRewrite makes internal prose plain for an outside reader, keeps every condition, number, and scope word, and leaves already-plain sentences alone. Run this after changing ScorePlainness.ts, PlainRewrite.md, RC-2, RC-20, or the plain-wording rules in Verify. Run `bun test` in the skill folder first; it covers the gates and the decision rules on fixed inputs.
+
+**Prompt:** Make this summary plainer for a payer's operations lead who knows prior authorizations but not Epic's internal names. Required terms: prior authorization, payer.
+
+**Source facts (the draft as given):**
+
+1. "The checked export sender code excludes draft invoices unless the batch is closed."
+2. "The team that owns the payer interface we built last year decides the rollout."
+3. "Receiving-side pending-to-approved status update logic skips later revisions."
+4. "Users must close one referral before opening another, because the RFL workspace slows down past 25."
+5. "The approval of the request is performed by the reviewer within 2 business days."
+6. "Each payer gets a copy of every pending prior authorization."
+
+**Expected behavior:**
+
+| Situation | Expected result |
+|---|---|
+| Triage | Sentences 1 to 5 are flagged; sentence 6 is not |
+| A rewrite drops "unless," "must," "because," "25," or "2 business days" | ScorePlainness rejects it at a gate |
+| A rewrite turns "excludes" into "does not send" | It passes the negation gate |
+| Sentence 4 keeps "RFL" | The rewrite writes it out or explains it in parentheses, or the abbreviation is gone |
+| Candidates split on the strong signals | The decision is `merge`, and the merged version is kept only when it beats the best single candidate |
+| The meaning check | Each chosen sentence keeps its actor, action, conditions, and scope; a "no" falls back to the next passing candidate or the original |
+
+**Grade the result:**
+
+| ID | Pass when | Fail examples |
+|---|---|---|
+| P1 | No chosen sentence uses "export sender code," "receiving-side," "revisions," "RFL" unexplained, or "the approval of" | "The sender code leaves out draft invoices"; "The RFL workspace slows down" |
+| P2 | Sentence 2 names its actor and puts the verb within a few words of it | "The team that owns the interface we built decides" unchanged |
+| M1 | Every condition, cause, number, and scope word survives | "Users close one referral first"; "within a few days" |
+| M2 | No chosen sentence adds a fact, owner, or position | "The reviewer, usually a nurse, approves" |
+| K1 | Sentence 6 is unchanged | Any rewrite of sentence 6 |
+
+**Failure signals:** P1 or P2 fails while M1 passes: the rewriters or the strategies are too timid. M1 or M2 fails: check whether the gate or the meaning check let it through before blaming the rewriters.

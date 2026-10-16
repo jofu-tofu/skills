@@ -13,7 +13,7 @@ Review an existing document or presentation. An audit request returns findings w
 
 ## Workflow Steps
 
-1. Reconstruct the brief from the request and the document: audience, expertise, outcome, artifact intent, content type, and a reading-time budget. Ask only when ambiguity materially affects the review.
+1. Reconstruct the brief from the request and the document: audience, expertise, outcome, artifact intent, content type, a reading-time budget, and the terms the reader needs as written. Ask only when ambiguity materially affects the review.
 2. Gather the sources the document relies on, when available.
 3. Run the format's file check, and the target-app check when the request depends on that app, as FormatAdapters.md describes.
 4. Run ReadabilityGate with the sources, those results as `verification_evidence`, and `edit_scope: none` for an audit or `full` for a polish or fix request.

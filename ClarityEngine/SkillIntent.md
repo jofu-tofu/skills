@@ -30,6 +30,7 @@ A document can look polished while leaving the reader unsure what happened, why 
 | A brief with a reading-time budget comes before writing | It gives the author an audience, purpose, main point, evidence needs, and a length target derived from the reading rate. |
 | Readability scores are optional diagnostics | Formula scores predict comprehension poorly and do not apply to code or tables. |
 | A fresh reader answers questions from the document | This tests what the document communicates without the author's explanation. |
+| Plain wording is generated and selected, not only flagged | Reviewers who know the subject read its terms as plain, so findings quoted one at a time leave most jargon in place. Three rewrites with different strategies, scored by fixed meaning gates and plainness signals, give a repeatable choice, and a fresh reader checks what the gates can't see. |
 | Content and rendering checks stay separate | Correct text does not prove a slide is legible. A good preview does not prove the file opens in the target app. |
 | Philosophy.md can be used on its own | Other skills can read the principles and the check index without running ClarityEngine; the full checks are in the lens files. |
 
@@ -45,6 +46,7 @@ The research behind these choices is summarized in each lens file's sources. [An
 - [ ] Every addition finding names a reader question.
 - [ ] The Verifier, not the author, records which findings stand.
 - [ ] Revisions preserve meaning, caveats, required actions, and stated links.
+- [ ] PlainRewrite never applies a candidate that failed a gate or the meaning check.
 - [ ] Reported readiness matches the evidence, as Verify.md defines it.
 - [ ] New formats can be added without rewriting the philosophy.
 

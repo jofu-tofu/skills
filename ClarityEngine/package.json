@@ -1,0 +1,14 @@
+{
+  "name": "clarity-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "bun test"
+  },
+  "dependencies": {
+    "compromise": "^14.18.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.0"
+  }
+}

@@ -8,6 +8,7 @@
 - `../Standards/PersonalStyleGuide.md` — The voice
 - `../Lenses/` — The checks the draft will face; read them as the writing rules
 - `../Standards/FormatAdapters.md` — Building and capturing the file
+- `PlainRewrite.md` — Plainer wording, generated and selected after the draft
 - `ReadabilityGate.md` — Review and repair
 
 ## Purpose
@@ -35,6 +36,7 @@ Use the information already available, infer what you can, and proceed. Ask only
 | `format` | User preference or a FormatAdapters identifier; `auto` if unspecified |
 | `depth` | `overview`, `standard`, or `deep-dive`; default `standard` |
 | `budget_minutes` | Reading time for the main path; set from `depth` unless the user gives one |
+| `required_terms` | Terms this reader needs as written: product, feature, API, and regulation names, and words the audience already uses daily. Everything else is open to plainer wording |
 | `constraints` | Template, length, accessibility, editability, offline use, distribution, and the document contract when one exists |
 
 Set `budget_minutes` from `depth`. MeasureDraft converts main-path words to minutes at 220 words per minute, a little below the measured adult average of about 238 for nonfiction, because technical text reads slower:
@@ -59,10 +61,14 @@ Research missing facts through available source tools or a research skill, deleg
 
 Write to pass the lens checks. Compare the draft with the brief and sources, keeping decisions, definitions, causal links, quantities, qualifications, evidence, and actions.
 
-### Step 5: Build
+### Step 5: Make the Wording Plain
+
+Run PlainRewrite on the draft with the brief and `edit_scope: full`. It rewrites the sentences a script flags three ways, keeps only versions that preserve the meaning, and chooses the plainest. Drafting from source notes carries their vocabulary into the draft, and this step is where it gets translated for the reader.
+
+### Step 6: Build
 
 Build the file through FormatAdapters.md and the installed specialist skill. Run its file check, and the target-app check when delivery depends on that app.
 
-### Step 6: Review and Repair
+### Step 7: Review and Repair
 
 Run ReadabilityGate with the artifact, content type, format, brief, source notes, the file and target-app results as `verification_evidence`, and `edit_scope: full`. Return the artifact with the gate's readiness, comprehension, and verification statuses and any remaining limitations.

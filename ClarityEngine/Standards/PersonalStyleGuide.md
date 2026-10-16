@@ -6,7 +6,7 @@ The voice has three parts. Each part's rules, tests, and examples live in one le
 
 | Part | What it means | Rules |
 |---|---|---|
-| **Plain** | Familiar words, named subjects, concrete verbs, and no jargon the reader does not need | `Lenses/AudienceFit.md` (RC-2, RC-20, RC-29) |
+| **Plain** | Familiar words, named subjects, concrete verbs, and no jargon the reader does not need | `Lenses/AudienceFit.md` (RC-2, RC-20, RC-29); `Workflows/PlainRewrite.md` produces the wording |
 | **Direct** | The point first, each passage earning its place, and the design standing on its own without conversation history or commentary | `Lenses/Navigator.md` (RC-5, RC-26), `Lenses/Cutter.md` (RC-16) |
 | **Connected** | Every step linked to the next with "because," "so," or "when," and claims kept accurate when simplified | `Lenses/Logician.md` (RC-13, RC-25) |
 
