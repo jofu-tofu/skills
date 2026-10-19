@@ -244,3 +244,27 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 
 **Fail if:** RC-17 passes because sentences 3 and 4 add a condition or consequence; RC-18 exempts the section as a summary; or the fix drops the condition (once pending authorizations are sent) or the harm (users see an approved request as under review).
 
+## Case 10: Setup after use
+
+**Purpose:** Check that the Navigator and the Reader catch a paragraph that relies on events, actors, and stored things the document hasn't introduced yet, and that a repair round doesn't remove setup. Run this after changing RC-31, RC-5, the Reader's linear pass, or ReadabilityGate's Repair step.
+
+**Prompt:** Review and repair this Problem Summary with `edit_scope: full`. Audience: experts in UM and payer-to-payer. The section's lead is the bold sentence from Case 9.
+
+**Source facts:**
+
+- Draft paragraph 2: "The authorization also ends up saying two different things. The receiving payer saves the latest message it got from the sending payer, and that message says the authorization is approved. But the status and service lines its users see still come from the first, pending message. So when the receiving payer passes the authorization on to another payer, it sends the approved version, while its own users still see it as pending."
+- A list after it, headed "Circumstances required for this problem," says the receiving payer asks for the member's data again about every 90 days or when the member asks for a refresh.
+- The author's original paragraph opened with the setup: "Each time the authorization is received again, the receiver points the authorization at the newest payload it got, but keeps the status and service lines it filed the first time."
+
+**Expected behavior:**
+
+| Situation | Expected result |
+|---|---|
+| The Navigator lists paragraph 2's dependencies | A second receipt, the saved message kept apart from the record, and a third payer. None is introduced before use; the second receipt appears only in the later Circumstances list. An RC-31 finding |
+| The Navigator compares paragraph 2 with the lead | "Saves the latest message" reads as contradicting "never updates." The RC-31 finding asks paragraph 2's first sentence to state the distinction: it stores each new message but never applies it to the record users see |
+| The audience is expert | RC-31 still applies; no lens exempts it under RC-21 |
+| The Reader's linear pass | Sticking points marked "had to look ahead" (the second receipt or the other payer) and "had to reconcile" (saving versus never updating), recorded before the question pass |
+| A repair drops "Each time the authorization is received again" or turns "points at" into "saves" | The cold reread undoes it and lists it in `declined.md` |
+| The repair round reruns the panel | `round-2/` holds `lens-Reader.md`, `lens-Cutter.md`, and `lens-Navigator.md`. If it holds no `lens-*.md` files, the round's report says the lenses did not run and readiness is `Unverified` |
+
+**Fail if:** RC-31 passes paragraph 2; the Reader logs no look-ahead or reconcile sticking point; the repaired paragraph still relies on a later receipt, a stored message, or another payer before introducing it; or a repair round with no lens files reports the artifact as reviewed.

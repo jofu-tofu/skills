@@ -17,6 +17,8 @@ You have five minutes and three other documents waiting. You read headings, the 
 
 `measurements.md` lists every heading with its first sentence, the first sentence of every paragraph, and every emphasized span with its density. `first-half.md` holds the first half of the main path, and `skim-layer.md` holds the headings and bold text in order. Use all three as evidence.
 
+RC-31 is the one check you don't skim. For it, read every paragraph in full, front to back, and treat as known only what the document has said before that point.
+
 ## Checks
 
 ### RC-3: Headings mark real topic changes; each section has one job
@@ -37,7 +39,7 @@ You have five minutes and three other documents waiting. You read headings, the 
 
 **Test:** Classify each first sentence in `measurements.md` as claim, decision, ask, or other. "Other" fails.
 
-**Boundary:** Some organizational genres require a one-line context sentence first. Follow the genre when it does.
+**Boundary:** Some organizational genres require a one-line context sentence first. Follow the genre when it does. This check covers first sentences; RC-31 covers whether the rest of each paragraph has its setup.
 
 **Sources:** Bransford & Johnson 1972 (context given first doubled recall; given after, it did nothing); Harp & Mayer 1998; Suchan 1998.
 
@@ -115,6 +117,22 @@ Every open question states the author's current position and what would change i
 **Boundary:** Structured openings make answers faster and more accurate to find; they are not shown to improve decisions or memory. No study supports a specific summary length.
 
 **Sources:** Hartley 2004 (structured abstracts); Schwartz, Woloshin & Welch 2009; Suchan & Colucci 1989; Suchan 1998.
+
+### RC-31: Setup comes before use
+
+**Rule:** Each paragraph introduces the events, actors, and stored things it relies on before it relies on them. For each paragraph, list them: an event such as a second receipt, an actor such as a third payer, a stored thing such as a saved message kept apart from the record. Each one must be stated earlier in the document or in the same sentence that first uses it. A definite reference to an event or thing the document hasn't stated yet fails: "the latest message it got" when no earlier sentence says messages keep arriving, or "passes it on to another payer" when no other payer has come up. Setup placed later fails too, such as the conditions for a problem sitting in a list after the paragraph that depends on them.
+
+When a paragraph seems to contradict the section's lead, its first sentence states the distinction that reconciles them. After a lead saying the receiver "never updates" an authorization, a paragraph about what the receiver saves on each new receipt opens by saying that it stores each new message but never applies it to the record its users see.
+
+This check applies to every audience, experts included. An expert knows the domain, not the events of this document's scenario, so RC-21's expert exemption doesn't cover it.
+
+**Test:** For each paragraph, write its dependency list and, beside each item, the sentence that first introduces it. "Later," "nowhere," or a later list fails. Then compare each paragraph's first sentence with its section's lead; if a reader could take them as contradicting, the paragraph's first sentence must name the distinction.
+
+**Fix:** Move the setup ahead of its first use, usually by folding it into the paragraph's first sentence or by moving a later conditions list up. When the setup appears nowhere in the document, the finding is an addition and names the reader question it answers, such as "When does the receiver get the authorization again?"
+
+**Boundary:** A reference section, glossary, or table built for lookup isn't read in order; check only prose meant to be read through. RC-20 owns whether a pronoun or "the list" resolves, and RC-21 owns whether a term needs defining for this audience; this check owns the order in which the scenario's events, actors, and things appear.
+
+**Sources:** Bransford & Johnson 1972 (context given after the passage did nothing for recall); Haviland & Clark 1974 (readers slow down when a definite reference has no stated antecedent and they must infer one).
 
 ## Output
 

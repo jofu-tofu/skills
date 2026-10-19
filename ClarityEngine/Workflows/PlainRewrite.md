@@ -101,7 +101,7 @@ With `edit_scope: none`, stop here and return `plain-scores.md` and the meaning-
 With `edit_scope: full`:
 
 1. Replace each chosen sentence in the artifact, keeping its bold, links, and inline code where the words they mark still appear.
-2. Reread each changed paragraph whole. Each sentence still connects to the one before it, and every "it," "this," or "the list" still points to something the reader has met (RC-20, RC-25). Fix a broken link by rewording the new sentence, not by restoring the old one.
+2. Reread each changed paragraph whole. Each sentence still connects to the one before it, and every "it," "this," or "the list" still points to something the reader has met (RC-20, RC-25). Fix a broken link by rewording the new sentence, not by restoring the old one. Every event, actor, and stored thing the original paragraph set up is still set up before its first use (RC-31).
 3. Run `bun $SKILL_ROOT/Tools/MeasureDraft.ts <revised artifact> --before <original artifact> --out $PLAIN_DIR`. Restore or restate every connective it reports as lost.
 4. Write `$PLAIN_DIR/plain-rewrite.md`: for each sentence, its ID, the original, the result, the decision, and the reason. List the questions for the author and the sentences left for a later run, and return both to the user.
 

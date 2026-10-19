@@ -70,6 +70,7 @@ Each check has a stable RC ID and exactly one owning lens. This table is the ind
 | RC-28 | Caveats travel with the summary | 2 | `Lenses/Logician.md` |
 | RC-29 | Register is plain but not casual, and fits the genre | 3 | `Lenses/AudienceFit.md` |
 | RC-30 | Slide text fits how the deck is delivered | 1 | `Lenses/Visual.md` |
+| RC-31 | Setup comes before use | 1 | `Lenses/Navigator.md` |
 
 Comprehension (`Lenses/Reader.md`) has no RC ID. A fresh reader checks it by answering questions from the document.
 
