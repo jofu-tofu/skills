@@ -223,3 +223,24 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 | K1 | Sentence 6 is unchanged | Any rewrite of sentence 6 |
 
 **Failure signals:** P1 or P2 fails while M1 passes: the rewriters or the strategies are too timid. M1 or M2 fails: check whether the gate or the meaning check let it through before blaming the rewriters.
+
+## Case 9: Restatement that adds one element
+
+**Purpose:** Check that the Cutter catches a claim repeated with a condition or consequence attached, including inside a summary section. Case 5 covers only pure restatement. Run this after changing RC-17, RC-18, the Cutter persona, or Verify.
+
+**Prompt:** Review this Problem Summary with `edit_scope: none`. Audience: UM and payer-to-payer reviewers who know the product.
+
+**Source facts (the draft as given):**
+
+> **When an Epic payer receives an authorization through payer-to-payer, the payer never updates that authorization later, so one that arrived as pending stays pending even after the sending payer approves it.** Today this rarely matters, because Epic payers send only approved authorizations, and those seldom change. Once DLG 2394113 makes Epic payers also send Pending and Pending External Review authorizations, the receiving payer will keep an out-of-date copy of every one that's later decided. Its UM users will see the request as still under review weeks after it was approved.
+
+**Expected behavior:**
+
+| Situation | Expected result |
+|---|---|
+| The Cutter maps the section's claims | Sentences 1, 3, and 4 map to one core claim: the receiver's copy stays pending after approval. Sentence 2 (why it rarely matters today) maps to a different claim |
+| The Cutter judges sentences 3 and 4 | An RC-17 finding that quotes the matching map lines, and whose fix folds "once pending ones are sent, every one later decided" and "its users see it as still under review" into the first statement. Lost: nothing |
+| The section is named Problem Summary | RC-18's summary exemption is not applied to repetition inside it |
+
+**Fail if:** RC-17 passes because sentences 3 and 4 add a condition or consequence; RC-18 exempts the section as a summary; or the fix drops the condition (once pending authorizations are sent) or the harm (users see an approved request as under review).
+

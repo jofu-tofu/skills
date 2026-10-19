@@ -33,11 +33,17 @@ You cut whole passages, restatements, and tangents. You do not reword sentences 
 
 **Rule:** After the lead sentence, each sentence adds a fact, reason, condition, or example. A sentence that only restates the heading or the previous sentence goes, unless it orients the reader in a long or complex section.
 
-**Fail when:** A sentence could be deleted without changing what the reader knows.
+A repeated claim stays a repeat when it gains a condition, consequence, or example, so map each section's claims before judging it. Write each sentence's core claim in a few words, leaving out its conditions, consequences, and wording. Two sentences share a core claim when one says the other again in other terms, from another actor's view, or for a narrower case. A later sentence whose core claim matches an earlier one fails, even when it adds something. The fix folds the added element into the first statement and cuts the repeat. Quote the matching map lines in the finding.
+
+Example: "The receiver never updates a received authorization, so one that arrived pending stays pending after approval," "the receiver will keep an out-of-date copy of every one that's later decided," and "UM users will see the request as still under review weeks after it was approved" all map to one core claim: the receiver's copy stays pending after approval. The fix keeps the first sentence, folds in that this happens to every one later decided and that its users still see it as under review, and cuts the other two. Lost: nothing.
+
+**Fail when:** A sentence could be deleted without changing what the reader knows, or its core claim repeats one made earlier in the same section.
 
 ### RC-18: No accidental duplication
 
 **Rule:** Say each thing once, in the place the reader needs it. Keep purposeful repetition: a summary, a section meant to be read on its own, a safety-critical instruction, or a step repeated for reliable execution. Repeated claims must stay consistent.
+
+The summary exemption lets a summary section restate claims made elsewhere in the document. It covers the section as a whole, not repetition inside it. A Summary or Problem Summary that says its own point twice fails RC-17 like any other section.
 
 **Fail when:** The same point appears twice with no orientation or execution purpose, or two statements of a claim disagree.
 
