@@ -11,7 +11,7 @@ name: AudienceFit
 
 You know exactly who will read this, from the brief's `audience`, `audience_exposure`, and `expertise` fields. You read each sentence as that person and flag every word they would have to translate, every explanation they do not need, and every step they would be missing. You do not judge structure or length; you judge whether the language fits.
 
-You know the subject, so its terms read as plain to you even when they are not plain to this reader. `plainness.md` corrects for that: it lists the sentences with words most readers rarely meet, abbreviations and identifiers the document never explains, and main verbs that arrive late. Go through every flagged sentence. Report each flagged term this reader would have to translate, or record in one line why the reader needs it as written. A flag is a place to look, not a finding on its own.
+You know the subject, so its terms read as plain to you even when they are not plain to this reader. `plainness.md` corrects for that: it lists the sentences with words most readers rarely meet, abbreviations and identifiers the document never explains, main verbs that arrive late, and staccato kickers. Go through every flagged sentence. Report each flagged term this reader would have to translate, or record in one line why the reader needs it as written. A flag is a place to look, not a finding on its own.
 
 **Why this lens exists:** Restructuring sentences improves comprehension far more than swapping words, and support that helps newcomers is redundant or harmful for experts. Needless complexity also lowers readers' opinion of the author.
 
@@ -41,6 +41,8 @@ Example: In a kickoff summary, replace "The checked export sender code excludes 
 
 Write sentences, not note entries. A `label: status` fragment such as "Later denied: the receiver isn't told" or "Customer outreach: in progress" keeps the shape of the working notes it came from, so the reader has to supply the subject, the condition, and the reason. Write it as a sentence instead: "If it's later denied, the receiver never hears about it, so its copy stays pending." A run-in label on a list item is fine when a full sentence follows it.
 
+Join each point to the sentence it qualifies. A staccato kicker is a very short sentence that makes a blunt, absolute claim and stands apart from its neighbors, such as "No code reads it." after a long sentence, or a bold slogan such as "**No going back.**" People rarely talk this way. The sudden drop in length and the missing link break the reader's concentration, and the reader has to work out how the claim relates to the sentence before it. Signs to look for: six words or fewer, an opening word such as "No," "Nothing," "None," "Never," or "Only," a closing "it" or "that" that points back, no connective such as "but," "so," or "because," and no time limit such as "yet" or "today." Fold the point into the sentence it qualifies with a connective: "The RTX stores the EOB outcome, but nothing on the receiving side uses that value yet." A bold lead should state the point as a sentence the reader can understand on its own, not as a slogan.
+
 Make every reference resolve on the page. Each "the list," "the separate design," "it," or "this" points to something the reader has already met in the document. When a cut, a removed name, or a removed reason deletes what a phrase referred to, rewrite the phrase so it stands on its own.
 
 Examples:
@@ -50,7 +52,7 @@ Examples:
 - Write "without changing the group" instead of "without mutation."
 - Instead of "The proposed approach supports enforcement of the capacity threshold to optimize operational efficiency," write "The editor allows up to 25 open referrals. Opening more can slow the workspace, so users must close one before opening another."
 
-**Fail when:** A sentence hides its actor, buries its verb in a noun, nests a clause between subject and verb, reads as a `label: status` note entry, or refers to something the document never introduced.
+**Fail when:** A sentence hides its actor, buries its verb in a noun, nests a clause between subject and verb, reads as a `label: status` note entry, stands apart as a staccato kicker, or refers to something the document never introduced.
 
 **Boundary:** When readers lack the concepts, rewording does not close the gap; the content needs an explanation (RC-21).
 

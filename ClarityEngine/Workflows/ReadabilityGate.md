@@ -60,7 +60,7 @@ $REVIEW_DIR/
 
 Create `$ROUND_DIR` as `$REVIEW_DIR/round-[n]` and copy the artifact into it, keeping its file extension. Run `bun $SKILL_ROOT/Tools/MeasureDraft.ts <artifact copy> --budget <budget_minutes> --out $ROUND_DIR`. For PPTX or PDF, first extract slide or page text to Markdown with the format's specialist skill, then measure that file. If the tool cannot run, write `measurements.md` saying so; the lenses then gather structural evidence from the artifact directly, and RC-19 is NOT VERIFIED.
 
-Then run `bun $SKILL_ROOT/Tools/ScorePlainness.ts triage <artifact copy> --required "<the brief's required_terms>" --out $ROUND_DIR`. It writes `plainness.md`, the sentences with rare words, unexplained terms, or a late main verb, for the AudienceFit lens. If it cannot run, write `plainness.md` saying so.
+Then run `bun $SKILL_ROOT/Tools/ScorePlainness.ts triage <artifact copy> --required "<the brief's required_terms>" --out $ROUND_DIR`. It writes `plainness.md`, the sentences with rare words, unexplained terms, a late main verb, or a staccato kicker, for the AudienceFit lens. If it cannot run, write `plainness.md` saying so.
 
 ### Step 3: Capture Render Evidence
 

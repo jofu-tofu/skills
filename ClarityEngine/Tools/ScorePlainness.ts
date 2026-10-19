@@ -46,6 +46,14 @@ const LONG_SENTENCE_WORDS = 25;
 const TRIAGE_MAIN_VERB_DISTANCE = 7;
 // One strong flag, or two weak ones, is worth three rewrites; a lone passive or noun stack is not.
 const TRIAGE_MIN_PRIORITY = 2;
+// A staccato kicker is a short, unlinked sentence with a blunt claim, such as "No code reads it." It is flagged on its own.
+const KICKER_WEIGHT = 2;
+const KICKER_MAX_WORDS = 6;
+const KICKER_LONG_PREVIOUS_WORDS = 15;
+const KICKER_LENGTH_DROP = 3;
+const KICKER_ABSOLUTE_OPENERS = new Set(["no", "nothing", "none", "never", "neither", "nobody", "nowhere", "only", "every", "all", "always"]);
+const KICKER_POINTING_ENDINGS = new Set(["it", "that", "this", "them", "these", "those"]);
+const KICKER_CONNECTIVES = /\b(and|because|so|but|which|when|unless|though|although|if|yet|since|while|until|after|before|today|currently)\b/i;
 const MIN_CONTENT_LENGTH_RATIO = 0.6;
 const MIN_CONTENT_OVERLAP = 0.3;
 const MIN_CONTENT_WORDS_FOR_OVERLAP = 4;
@@ -596,6 +604,22 @@ const TRIAGE_FLAGS: { flag: string; test: (signals: Signals) => boolean; weight:
   { flag: "vague verb", test: (signals) => (signals.vagueVerbs ?? 0) > 0, weight: 1, reason: () => "a vague verb such as handle, ensure, or leverage" },
 ];
 
+// Says why a sentence reads as a staccato kicker, or returns null. The previous sentence is the one before it in the same block.
+export function findStaccatoKicker(sentence: string, previousSentence: string | null): string | null {
+  const kickerWords = sentence.toLowerCase().match(/[\p{L}\p{N}']+/gu) ?? [];
+  const endsAsStatement = /[.!]["')\]]*$/.test(sentence);
+  if (!endsAsStatement || kickerWords.length === 0 || kickerWords.length > KICKER_MAX_WORDS || KICKER_CONNECTIVES.test(sentence)) return null;
+  const fix = "join it to the sentence it qualifies with a connective";
+  const firstWord = kickerWords[0];
+  const lastWord = kickerWords[kickerWords.length - 1];
+  const previousWordCount = previousSentence ? countWords(previousSentence) : 0;
+  if (KICKER_ABSOLUTE_OPENERS.has(firstWord)) return `a short standalone claim that opens with "${firstWord}"; ${fix}`;
+  if (KICKER_POINTING_ENDINGS.has(lastWord)) return `a short standalone sentence that ends on "${lastWord}", pointing back; ${fix}`;
+  if (previousWordCount >= KICKER_LONG_PREVIOUS_WORDS && previousWordCount >= KICKER_LENGTH_DROP * kickerWords.length) return `a short standalone sentence after one of ${previousWordCount} words; ${fix}`;
+  if (kickerWords.length <= 2) return "a bare label written as a sentence; state the point as a full sentence";
+  return null;
+}
+
 export function triage(draftMarkdown: string, requiredTerms: string[]): { file: CandidateFile; report: string } {
   const blocks = parseBlocks(draftMarkdown).filter((block) => block.kind === "paragraph" || block.kind === "item");
   const documentText = blocks.map((block) => block.text).join("\n");
@@ -606,20 +630,24 @@ export function triage(draftMarkdown: string, requiredTerms: string[]): { file: 
   let sentenceNumber = 0;
 
   for (const block of blocks) {
-    for (const sentence of splitSentences(block.text)) {
+    const blockSentences = splitSentences(block.text);
+    for (const [sentenceIndex, sentence] of blockSentences.entries()) {
       sentenceNumber++;
       const codeSpans = block.inlineCode.filter((code) => sentence.includes(code));
       const signals = computeSignals(sentence, { protectedTerms: [...requiredTerms, ...codeSpans], explainedTerms: explainedSoFar });
       const flags = TRIAGE_FLAGS.filter((triageFlag) => triageFlag.test(signals));
-      const priority = flags.reduce((sum, triageFlag) => sum + triageFlag.weight, 0);
+      const kickerReason = findStaccatoKicker(sentence, sentenceIndex > 0 ? blockSentences[sentenceIndex - 1] : null);
+      const flagNames = [...flags.map((triageFlag) => triageFlag.flag), ...(kickerReason ? ["staccato kicker"] : [])];
+      const flagReasons = [...flags.map((triageFlag) => triageFlag.reason(signals)), ...(kickerReason ? [kickerReason] : [])];
+      const priority = flags.reduce((sum, triageFlag) => sum + triageFlag.weight, 0) + (kickerReason ? KICKER_WEIGHT : 0);
       if (priority >= TRIAGE_MIN_PRIORITY) {
         const id = `s${sentenceNumber}`;
-        sentences.push({ id, section: block.sectionHeading, original: sentence, codeSpans, explainedBefore: [...explainedSoFar], flags: flags.map((triageFlag) => triageFlag.reason(signals)), candidates: [] });
+        sentences.push({ id, section: block.sectionHeading, original: sentence, codeSpans, explainedBefore: [...explainedSoFar], flags: flagReasons, candidates: [] });
         const detail = [
           signals.rareWordList.length ? `rare: ${signals.rareWordList.join(", ")}` : "",
           signals.unexplainedTermList.length ? `terms: ${signals.unexplainedTermList.join(", ")}` : "",
         ].filter(Boolean).join("; ");
-        rows.push(`| ${id} | ${escapeCell(block.sectionHeading)} | ${block.onMainPath ? "main" : "collapsed"} | ${priority} | ${flags.map((triageFlag) => triageFlag.flag).join(", ")} | ${escapeCell(detail)} | ${escapeCell(sentence)} |`);
+        rows.push(`| ${id} | ${escapeCell(block.sectionHeading)} | ${block.onMainPath ? "main" : "collapsed"} | ${priority} | ${flagNames.join(", ")} | ${escapeCell(detail)} | ${escapeCell(sentence)} |`);
       }
       explainedSoFar = [...new Set([...explainedSoFar, ...findExplainedTerms(sentence)])];
     }
@@ -628,7 +656,7 @@ export function triage(draftMarkdown: string, requiredTerms: string[]): { file: 
   const report = [
     "# Plainness Triage",
     "",
-    `${sentences.length} of ${sentenceNumber} prose sentences are flagged. Priority adds each flag's weight: rare words and unexplained terms 3, a late main verb 2, the rest 1; a sentence is flagged at priority ${TRIAGE_MIN_PRIORITY} or more. Rare means SUBTLEX-US Zipf below ${RARE_WORD_ZIPF}; required terms and inline code are exempt.`,
+    `${sentences.length} of ${sentenceNumber} prose sentences are flagged. Priority adds each flag's weight: rare words and unexplained terms 3, a late main verb and a staccato kicker 2, the rest 1; a sentence is flagged at priority ${TRIAGE_MIN_PRIORITY} or more. Rare means SUBTLEX-US Zipf below ${RARE_WORD_ZIPF}; required terms and inline code are exempt.`,
     compromiseNlp ? "" : "\ncompromise is not installed, so main-verb distance, agentless passives, and noun stacks were not run. Run `bun install` in the skill folder.",
     "",
     "| ID | Section | Path | Priority | Flags | Detail | Sentence |",

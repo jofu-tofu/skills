@@ -34,7 +34,7 @@ The script decides from counts, not taste, so its choice is repeatable. Its sign
 
 Install the script's tagger once with `bun install` in the skill folder. If the registry path drops its last segment, pass the full registry URL with a trailing slash.
 
-Run `bun $SKILL_ROOT/Tools/ScorePlainness.ts triage <artifact> --required "<required_terms, comma-separated>" --out $PLAIN_DIR`. It writes `plainness.md`, which lists each flagged sentence with its reasons, and `plain-candidates.json`, which holds the same sentences with empty candidate lists. A sentence is flagged when it has a word most readers rarely meet, an abbreviation or identifier the document never explains, a main verb that arrives late, or two weaker signs together.
+Run `bun $SKILL_ROOT/Tools/ScorePlainness.ts triage <artifact> --required "<required_terms, comma-separated>" --out $PLAIN_DIR`. It writes `plainness.md`, which lists each flagged sentence with its reasons, and `plain-candidates.json`, which holds the same sentences with empty candidate lists. A sentence is flagged when it has a word most readers rarely meet, an abbreviation or identifier the document never explains, a main verb that arrives late, a staccato kicker (a short, unlinked, absolute sentence such as "No code reads it."), or two weaker signs together.
 
 Then settle which sentences go forward:
 
@@ -68,7 +68,8 @@ every condition, cause, negation, and scope word, such as must, may, only, all, 
 or an exact equivalent. Add no fact, owner, or position the paragraph does not already state. When
 a label's meaning is unclear from the paragraph, describe only what the paragraph says it does.
 Write complete sentences, not labels or fragments. A rewrite may be longer than the original, or
-split into two sentences, when that is what makes it plain.
+split into two sentences, when that is what makes it plain. For a staccato kicker, open the rewrite
+with a connective that ties it to the sentence before it, and say how far the claim reaches.
 Return JSON: {"<sentence id>": "<rewrite>", ...}
 Sentences, each with its paragraph and flag reasons: [id, paragraph, and flags from plain-candidates.json]
 ```

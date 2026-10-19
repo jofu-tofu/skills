@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { checkGates, computeSignals, decide, triage, type SentenceCandidates } from "./ScorePlainness.ts";
+import { checkGates, computeSignals, decide, findStaccatoKicker, triage, type SentenceCandidates } from "./ScorePlainness.ts";
 
 const noGateContext = { requiredTerms: [], codeSpans: [], documentTerms: [] };
 const noTermContext = { protectedTerms: [], explainedTerms: [] };
@@ -150,5 +150,30 @@ describe("triage", () => {
   test("exempts inline code and required terms", () => {
     const { file } = triage("The `getPendingAuths` call returns each payer record.\n", ["payer"]);
     expect(file.sentences).toEqual([]);
+  });
+
+  test("flags a staccato kicker and tells the rewriters to join it", () => {
+    const { file } = triage("The record keeps the outcome for every request that the team receives from the other plan each week. No code reads it.\n", []);
+    const kicker = file.sentences.find((flagged) => flagged.original === "No code reads it.");
+    expect(kicker?.flags?.join(" ")).toMatch(/join it to the sentence it qualifies/);
+  });
+});
+
+describe("findStaccatoKicker", () => {
+  test("flags short, unlinked, absolute sentences and bare labels", () => {
+    expect(findStaccatoKicker("No going back.", null)).toMatch(/opens with "no"/);
+    expect(findStaccatoKicker("Nothing changes.", null)).toMatch(/opens with "nothing"/);
+    expect(findStaccatoKicker("Users never see it.", null)).toMatch(/ends on "it"/);
+    expect(findStaccatoKicker("Required.", null)).toMatch(/bare label/);
+    expect(findStaccatoKicker("The tag skips them all.", "When the incoming copy is pending and the existing record is final, the tag skips the update entirely.")).toMatch(/after one of 18 words/);
+  });
+
+  test("leaves linked, limited, longer, and heading-style sentences alone", () => {
+    expect(findStaccatoKicker("But nothing on the receiving side uses it yet.", null)).toBeNull();
+    expect(findStaccatoKicker("No code reads it today.", null)).toBeNull();
+    expect(findStaccatoKicker("The tag checks both, so it stays safe.", null)).toBeNull();
+    expect(findStaccatoKicker("Each update opens and publishes one draft record.", null)).toBeNull();
+    expect(findStaccatoKicker("Limits:", null)).toBeNull();
+    expect(findStaccatoKicker("Josh decides before release.", "This design removes them, as updates do.")).toBeNull();
   });
 });

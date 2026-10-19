@@ -160,6 +160,7 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 - "CMS answer: asked, no response yet." The section never says what CMS was asked.
 - "CMS doesn't define statuses, and the preamble's reasoning could be read to keep a denial under external review excluded." The open items list the owner's confirmation for this status.
 - "Denials are never sent, and an Epic receiver updates its copy only once the separate receiver design ships." This names another design.
+- "The RTX stores the outcome: partial for Pending, and complete otherwise. No code reads it." The second sentence is a staccato kicker.
 
 **Expected behavior:**
 
@@ -179,6 +180,7 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 | F1 | Each risk and open item reads as a complete sentence with the label removed | "Later denied: the receiver isn't told" (a run-in label doing the work of "If it's later denied"); "CMS answer: asked" |
 | F2 | No phrase points to something the section hasn't introduced nearby, and no other design is named | "comes off the list"; "the separate receiver design"; "Receiver design: in progress" |
 | F3 | The CMS doubt ends by linking to the owner's confirmation already in the section | Stops at "excluded"; or ends with a new position |
+| F4 | No short, absolute sentence stands apart from the one it qualifies | "No code reads it." left as its own sentence; "**No going back.**" as a bold slogan |
 | C1 | No new claim, qualifier, owner, position, or name. Grade each change as reword (pass), link between existing claims (pass), or new content (fail) | An added lead caveat sentence; "later-approved" narrowing a risk; "CMS-0057-F" imported from the brief; "isn't told" hardened to "never told" |
 | C2 | Items that need the author's facts are listed as proposals, not filled in | An invented CMS question; "only" silently resolved |
 
