@@ -36,6 +36,7 @@ Use the information already available, infer what you can, and proceed. Ask only
 | `format` | User preference or a FormatAdapters identifier; `auto` if unspecified |
 | `depth` | `overview`, `standard`, or `deep-dive`; default `standard` |
 | `budget_minutes` | Reading time for the main path; set from `depth` unless the user gives one |
+| `companion_docs` | Where this reader can find detail the document leaves out: code comments, technical notes, a test plan, a reference guide, an appendix. Detail those places carry is summarized here, not repeated (RC-32). Leave it empty when nothing else carries the detail |
 | `required_terms` | Terms this reader needs as written: product, feature, API, and regulation names, and words the audience already uses daily. Everything else is open to plainer wording |
 | `constraints` | Template, length, accessibility, editability, offline use, distribution, and the document contract when one exists |
 

@@ -40,7 +40,7 @@ $REVIEW_DIR/
   contract.md (when one exists), sources/, verification.md
   round-1/   artifact copy, measurements.md, first-half.md, skim-layer.md, plainness.md,
              plain-candidates.json, render/, lens-*.md, verified-findings.md, report.md,
-             declined.md, contract-checks.md, plain/
+             declined.md, contract-checks.md, moved-out.md, plain/
   round-2/   ...
 ```
 
@@ -120,6 +120,7 @@ Save the returned report as `$ROUND_DIR/report.md`; some agent hosts let subagen
 ### Step 7: Repair
 
 1. Apply the report's fixes in order. With `edit_scope: conversion`, apply only Blocker and Major fixes and fidelity defects, and list the rest for the user. Never apply an item under "Proposals for the Author"; return those to the user.
+   For each applied RC-32 cut, append the removed passage, the summary sentence that replaced it, and its companion to `$ROUND_DIR/moved-out.md`. When the artifact has author notes, add the same entries there, so the detail reaches its home instead of disappearing. Give the user the list of entries to carry into each companion.
    For verified RC-2 and RC-20 findings about wording, run PlainRewrite instead of writing each fix by hand. Pass the quoted sentences as `sentences`, each with its finding's **Fix**, so the reviewer's wording competes as one more candidate; use `$ROUND_DIR/plain/` as `plain_dir` and `edit_scope: full`. When a finding says the jargon recurs through a section, also pass that section's sentences from `plainness.md`.
 2. Decline a fix only by writing the reason, the RC, brief requirement, lock, or contract check it would break, into `$ROUND_DIR/declined.md`.
 3. **Cold reread.** Reread every sentence you changed as a reader who has seen only the document, not the findings, author notes, or contract. Each one names who does what, says why when it states a consequence, and points only to things the document has introduced (RC-20, RC-25). A fix that satisfies its finding but reads like a filled-in form or a note entry gets rewritten as a sentence before the contract gate. In a prose pass, also compare each changed sentence with the one it replaced: every claim, qualifier, scope, owner, and name in it must already appear in the document. Linking two claims the document already makes is fine. Anything new, including a caveat repeated near a summary or a term taken from the brief, is undone and listed in `declined.md` as a proposal (Verify.md, PROSE PASS). Then check the other direction: every event, actor, and stored thing the replaced text set up is still set up before its first use (RC-31). A rewrite that drops a setup sentence, such as "Each time the authorization is received again," or that turns one mechanism into another, such as "points at" into "saves," is undone and listed in `declined.md`.
