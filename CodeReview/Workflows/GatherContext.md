@@ -159,6 +159,14 @@ This is the step most review systems skip. Beyond the diff, gather everything th
 
 **The goal is not to load everything** — it's to identify which rules and standards the review agents need to know about so they can evaluate the changes against the right criteria. Extract the relevant subset, not the full content.
 
+## Proof Contract in context.md
+
+Add a compact **Proof Coverage** section to context.md. Reuse supplied acceptance criteria and proof maps; for each in-scope behavior or invariant, record its source, affected surfaces, required/forbidden outcome, relevant test or runtime check, and available evidence. Facts include file/command/log receipts and when checked; label assumptions and stale evidence. Link commands/results to the reviewed revision and environment where known. Missing intent or evidence is a coverage gap, not permission to invent requirements. Audit mode maps only the audited scope.
+
+For changed flows, distinguish completion, visuals, persisted state, incidental defects, and required external side effects. Record missing dimensions as blocked/not run and non-applicable dimensions with reasons. Reuse supplied artifacts; gathering context does not authorize deployment, live side effects, or infrastructure changes.
+
+Source: Agentic Coding School, [What Makes a Good Spec](https://www.agenticcoding.school/v/AncgXp2w) and [What Counts as a Pass](https://www.agenticcoding.school/v/qP8WLv4G), retrieved 2026-10-28.
+
 ## Step 3: Produce Context Layer
 
 Compress everything into a structured context layer — designed to be injected into the orchestrator's working memory. This document must enable the orchestrator to construct review dimensions without re-scanning.
@@ -201,6 +209,9 @@ Compress everything into a structured context layer — designed to be injected 
 
 ### Stated Behaviors
 [One bullet per promised behavior or acceptance criterion. Then "Locked decisions:" bullets. Or "none found"]
+
+### Proof Coverage
+[Behavior / invariant → source → affected surface → required proof → evidence and provenance → status]
 
 ### Pinned Scope
 [Base and tip SHAs, explicit commit SHAs, scope assumptions, interleaved commits to exclude]

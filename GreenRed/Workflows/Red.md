@@ -51,6 +51,17 @@ Map out the behavior space using Given-When-Then:
 - **Error cases** — invalid inputs, missing required fields, type mismatches
 - **State transitions** — if the function changes state, verify before/after
 
+### Behavior-to-Proof Map
+
+Keep a compact table in the test handoff; use existing requirement IDs or short local labels:
+
+| Behavior / invariant | Source | Surface / public boundary | Required / forbidden outcome | Test or check | Result / evidence |
+|---|---|---|---|---|---|
+
+Map only behavior in scope. Reuse a supplied spec or proof map; record unresolved decisions rather than inventing product policy. For shared behavior, include affected surfaces (such as web, API, or worker) and identify differences explicitly. A boundary test proves that boundary, not every other surface. Mark unavailable checks as blocked or not run; give a reason for non-applicable checks. Keep this table in the response or existing task artifact; no new reporting infrastructure is required.
+
+Source: Agentic Coding School, [What Makes a Good Spec](https://www.agenticcoding.school/v/AncgXp2w) and [Invariants and Surfaces](https://www.agenticcoding.school/v/dzAJazOC), retrieved 2026-10-28.
+
 ### Step 3: Write Failing Tests
 
 Write real, runnable tests in the project's test framework (discovered in Step 0). Each test:
@@ -83,6 +94,8 @@ Check coverage of the behavior space:
 ## Done When
 
 Every behavior scenario from the user's spec (Step 2) has a corresponding test. All tests fail for the right reason (missing implementation, not infrastructure errors).
+
+Include the behavior-to-proof map with exact commands and failure evidence. Results are expected-red only when they fail for the specified missing behavior; distinguish infrastructure failures and checks not run. This handoff specifies future correctness; it does not claim implementation or runtime success.
 
 ## Output
 

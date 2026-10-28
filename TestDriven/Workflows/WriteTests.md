@@ -58,6 +58,17 @@ class UserService:
 
 ---
 
+### Behavior-to-Proof Map
+
+Keep a compact table in the test handoff; use existing requirement IDs or short local labels:
+
+| Behavior / invariant | Source | Surface / public boundary | Required / forbidden outcome | Test or check | Result / evidence |
+|---|---|---|---|---|---|
+
+Map only behavior in scope. Reuse a supplied spec or proof map; record unresolved decisions rather than inventing product policy. For shared behavior, include affected surfaces (such as web, API, or worker) and identify differences explicitly. A boundary test proves that boundary, not every other surface. Mark unavailable checks as blocked or not run; give a reason for non-applicable checks. Keep this table in the response or existing task artifact; no new reporting infrastructure is required.
+
+Source: Agentic Coding School, [What Makes a Good Spec](https://www.agenticcoding.school/v/AncgXp2w) and [Invariants and Surfaces](https://www.agenticcoding.school/v/dzAJazOC), retrieved 2026-10-28.
+
 ### Step 2: Write Failing Tests First (Red)
 
 **Start with the simplest happy path.** One behavior per test.
@@ -288,6 +299,14 @@ func TestGetUserReturnsNilForNonexistentID(t *testing.T) {
 | **State changes** | Before/after visible state |
 
 ---
+
+## Runtime Evidence for Changed Flows
+
+For changed user flows, choose relevant checks from five dimensions: completion, visual correctness, persisted state, incidental defects (console/network/focus), and required external side effects. A success screen proves completion only. Verify persisted state through a read after the action, and delivery through the test mailbox, queue, or equivalent available boundary. Stubbed delivery proves the stub contract, not real delivery. Use existing test environments and authorized test accounts; when unavailable, report the proof gap instead of creating infrastructure or sending live messages.
+
+Report each applicable dimension as pass, fail, blocked, or not run, with the exact command or action, observed outcome, revision and environment. Use not-applicable with a reason for dimensions outside the change. File or report incidental defects separately; a required outcome that failed still fails the flow. Static review, passing unit tests, and runtime proof remain distinct evidence.
+
+Source: Agentic Coding School, [What Counts as a Pass](https://www.agenticcoding.school/v/qP8WLv4G), retrieved 2026-10-28.
 
 ## Output Format
 

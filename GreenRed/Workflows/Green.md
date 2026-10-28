@@ -57,6 +57,17 @@ For each public entry point, document what it does from the outside:
   - Use range/property assertions ("result is between X and Y") when exact values are unstable
   - If no clean seam exists and behavior is inherently flaky, skip that assertion rather than writing a flaky test
 
+### Behavior-to-Proof Map
+
+Keep a compact table in the test handoff; use existing requirement IDs or short local labels:
+
+| Behavior / invariant | Source | Surface / public boundary | Required / forbidden outcome | Test or check | Result / evidence |
+|---|---|---|---|---|---|
+
+Map only behavior in scope. Reuse a supplied spec or proof map; record unresolved decisions rather than inventing product policy. For shared behavior, include affected surfaces (such as web, API, or worker) and identify differences explicitly. A boundary test proves that boundary, not every other surface. Mark unavailable checks as blocked or not run; give a reason for non-applicable checks. Keep this table in the response or existing task artifact; no new reporting infrastructure is required.
+
+Source: Agentic Coding School, [What Makes a Good Spec](https://www.agenticcoding.school/v/AncgXp2w) and [Invariants and Surfaces](https://www.agenticcoding.school/v/dzAJazOC), retrieved 2026-10-28.
+
 ### Step 3: Write Tests from the Outside
 
 Write real, runnable tests in the project's test framework (discovered in Step 0). Each test:
@@ -89,6 +100,8 @@ Every public entry point (from Step 1) has at least:
 - One error-condition test (where applicable — if a function has no meaningful error path, document why and skip)
 
 All tests pass against existing code.
+
+Include the completed behavior-to-proof map with exact commands and observed results. Characterized violations remain documented current behavior; label them separately from intended invariants. Report skipped unstable assertions as proof gaps rather than silently treating the behavior as covered.
 
 ## Output
 

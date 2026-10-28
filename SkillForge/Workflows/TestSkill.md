@@ -57,6 +57,14 @@ Save test cases to `evals/evals.json` in the workspace:
 
 Don't write assertions yet — just the prompts. Draft assertions in Step 5 while runs are in progress.
 
+### Comparable Runs and Proof
+
+Before execution, map each expected behavior to an assertion or explicit human check and its evidence artifact. Fix evaluation criteria before inspecting candidate outputs. Reuse real historical failures when available; keep the original input, starting revision, environment, and failure evidence. Replay baseline and candidate in separate disposable directories from the same starting state; isolate mutable data and external effects as well as files. If historical inputs or environments cannot be reproduced, label the limitation and use a synthetic case explicitly.
+
+Record the skill snapshot, model/runtime, tool configuration, and environmental differences for each run. Change one workflow variable at a time when testing its effect. Choose a finite trial/iteration limit and quality acceptance criteria before running; honor user limits and stop when they are reached. An unresolved regression is not accepted because the limit expired.
+
+Source: Agentic Coding School, [Factory Optimisation Loop](https://www.agenticcoding.school/v/3lHdxQ6e), retrieved 2026-10-28.
+
 ### Step 4: Spawn All Runs
 
 Put results in `<skill-name>-workspace/` as a sibling to the skill directory. Within the workspace, organize by iteration (`iteration-1/`, `iteration-2/`, etc.) and each test case gets a directory (`eval-<ID>/`).
@@ -108,6 +116,12 @@ When each subagent task completes, save timing data immediately to `timing.json`
 ```
 
 This is the only opportunity to capture this data — it comes through the task notification and isn't persisted elsewhere.
+
+### Evidence Beyond Tokens
+
+Alongside existing timing data, report failures, retries, and human interventions per completed task. Record actual monetary cost only when usage/billing evidence supplies it; otherwise mark cost unavailable and retain tokens as a separate measure. Compare like-for-like tasks and report sample count and variation. Use transcripts to explain repeated work and failures. Independent blind comparison already exists below; use it when claiming a workflow change preserves subjective quality. Faster or cheaper is an improvement only when the declared quality criteria still pass.
+
+Source: Agentic Coding School, [Observability & Telemetry](https://www.agenticcoding.school/v/LIAWPj8N), retrieved 2026-10-28.
 
 ### Step 7: Grade, Aggregate, and Launch the Viewer
 

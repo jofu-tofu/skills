@@ -191,6 +191,16 @@ Write to `$REVIEW_DIR/report.md`. Lead with verdict, order by severity, every fi
 
 2-3 sentences. Diff: is it safe to merge? Audit: what's the overall health?
 
+### Proof Coverage and Verdict Limits
+
+Carry context.md's Proof Coverage into the report: behavior/invariant, affected surface, required proof, evidence, and status (pass, fail, blocked, not run, or not applicable with a reason). Keep source inspection distinct from reproduced runtime behavior. A clean review or green CI does not prove a user flow, persistent state, or external delivery. Compare evidence with the reviewed revision and environment; explicitly mark unknown or stale provenance.
+
+An unverified required outcome prevents an unconditional safe-to-merge verdict: state the unresolved proof and next check. Missing evidence alone is a coverage limitation, not a code defect or an invented severity finding. Review known project release policy when supplied; report unmet gates without importing the instructor's review counts or approval thresholds. Review remains read-only and grants no merge/deploy authority. For repeated verification, honor the task's correction limit; if none exists, report the next action rather than starting an unbounded repair loop.
+
+Example: checkout confirmation passes but receipt delivery was not checked → completion pass, external delivery not run; delivery remains unproven.
+
+Source: Agentic Coding School, [What Counts as a Pass](https://www.agenticcoding.school/v/qP8WLv4G) and [The Merge Gate](https://www.agenticcoding.school/v/uqKaD5F9), retrieved 2026-10-28.
+
 ### Finding Card Format
 
 ```markdown
