@@ -42,7 +42,7 @@ When a pattern of fragility appears across multiple sites, surface the pattern r
 
 The kind of issue where failure will be silent, cascading, or data-corrupting:
 
-- **Coincidental correctness** — code that works due to implicit ordering, shared state, or assumptions about runtime behavior rather than explicit contracts. Test: could you reorder, parallelize, or call this function from a new callsite without breaking it?
+- **Coincidental correctness** — hidden ordering or shared-state assumptions. Who owns inputs, callback state and reset/reuse? Can a caller act correctly without a private prepare/reset/run sequence? Probe reordering or parallelism only where the contract permits it.
 - **Silent failure modes** — errors swallowed by empty catch blocks, catch-and-log-only with no re-throw, default return values on error paths that make callers believe success occurred.
 - **Boundary erosion** — correctness that depends on the internal state of something the code doesn't own, or on a concept split across modules with no clear owner.
 
@@ -50,10 +50,10 @@ The kind of issue where failure will be silent, cascading, or data-corrupting:
 
 The kind of issue where failure is likely under realistic conditions:
 
-- **Missing error paths** — new functionality that handles the happy path but not the failure mode: async operations with no error handling, state transitions with no rollback, branching with no default.
+- **Missing error paths** — happy-path handling without declared outcomes for dependency or injected-policy failures. Trace invalid input, unsupported capability, operational failure and cancellation through partial work and publication. Distinguish blocking, timeout and acknowledged stop wherever supported; timeout alone need not stop work.
 - **Partial failure and reruns** — multi-step changes that aren't atomic and leave mixed state when a later step fails; side effects performed before they're recorded; retries that duplicate work; one-time or destructive operations that aren't safe to run twice or to resume.
 - **Concurrency and ordering** — locks taken in inconsistent order or released on some exits but not others; refusal or conflict state inferred from message text instead of results; validation after mutation; caches or in-memory copies that drift from stored state; async steps that assume sequential completion.
-- **Scale and per-call cost** — unbounded loops, in-memory accumulation, queries without paging on growing tables, and repeated reads, calls or renders per item inside loops or frequently fired handlers. Ask "what happens at 10x volume?" and "how many reads does one call cost?"
+- **Scale and per-call cost** — repeated preparation/copies, remote work or unbounded results/traces. Ask what one call costs at realistic volume, which reuse is promised, and who bounds work, memory and concurrency. Trace amplification; label estimates and unmeasured performance honestly.
 - **Blast radius expansion** — changes that increase how many users, requests, or systems one failure affects: new shared dependencies without fallbacks, removed fallback paths, independent paths consolidated into one.
 
 ## Severity Calibration

@@ -46,8 +46,8 @@ When context.md lists **Settings Read**, evaluate the changed logic under each v
 
 - **Incomplete handling** — switch/match without every variant; optional values from external sources used without guards; empty collections that skip logic the caller expected to run.
 - **Data transformation fidelity** — map/filter/reduce chains that lose information, change shape, or silently drop items; parsing that accepts malformed input.
-- **Unproven behavior** — a behavior change no test would catch: no assertion on the new outcome, the positive case never exercised, the test stubs the very thing it claims to test, or it only checks that the code ran. Name the assertion that's missing.
-- **Configuration and precedence gaps** — logic that is wrong for some value of a setting it reads, settings promised but never read, or overlapping rules evaluated twice with no defined precedence.
+- **Unproven behavior** — no outcome assertion would catch the defect, the path is unexercised, or the test replaces the behavior under test. For replaceable implementations, identify invariant outcomes and a counterexample that breaks them; equivalent internal changes should remain green. Distinguish proposed assertions from executed proof.
+- **Configuration and precedence gaps** — invalid combinations reach side effects, promised settings are ignored, or overlapping rules lack precedence. Probe valid construction and consequential defaults: which policy must be explicit, which default is safe for the stated use, and where is that enforced?
 
 ### MEDIUM — Fragile Correctness
 

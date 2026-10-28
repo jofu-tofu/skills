@@ -44,7 +44,7 @@ When several callers share the same exposure, report the pattern once and list t
 
 ### HIGH — Contract Drift
 
-- **Caller assumption broken** — a caller passes inputs or relies on preconditions the changed code no longer accepts, or relies on side effects it no longer performs, such as a save path that assumed something had already been loaded.
+- **Caller assumption broken** — changed input, side-effect, timing or resource promises break a named caller. For implementations advertised as interchangeable, compare semantic guarantees as well as signatures: ownership, failure, model assumptions and outcomes. Declare capability/profile differences instead of treating shared types as behavioral equivalence.
 - **Widened input, narrow downstream** — the change lets new values through (new status, new category, empty, a legacy shape), and downstream rules written for the old, narrower set mishandle them.
 - **Incomplete fix across input shapes** — the fix handles the reported shape but not the sibling shapes the entry point accepts: internal vs external path, legacy formats, alternate callers.
 - **Wire or schema contract change** — renamed, retyped, removed or reordered fields in a serialized message, API response, generated type or stored schema, without both sides changing together.

@@ -23,9 +23,9 @@ Every change either creates leverage or adds weight:
 - **Strategic changes** make the next change easier — clarifying boundaries, opening extension points, establishing patterns.
 - **Tactical changes** solve only the immediate problem — hardcoded values, special cases, copy-paste with modifications. Each makes the next change slightly harder.
 
-The architect's question: "If I redesigned this system from scratch, where would this code live? Every gap between that ideal and the current placement is tech debt being created now."
+The architect's question: "Which likely change would cross this boundary, and why?" Name the responsibility and change cost, not just a preferred file location.
 
-Structure findings are inherently process-level — they address how the system evolves, not whether a single line works. When you find a structural issue, describe the architectural principle being violated, not just the symptom. "This helper doesn't belong in the controller" is a symptom; "business logic is leaking into the transport layer, which means every new endpoint will duplicate validation" is the principle.
+For a new or changed reusable interface, probe three paths from public contracts: a fresh caller completing an ordinary task; an author adding a supported extension; and replacement of an internal representation or execution mechanism while preserving behavior. Trace which concepts, files and lifecycle steps each path requires. A walkthrough suffices unless the review authorizes execution. Report concrete coupling; unexercised paths remain coverage limits. Keep necessary policy choices visible while hiding execution mechanics.
 
 ## Adversarial Operating Rules
 
@@ -43,7 +43,7 @@ The kind of issue where the change actively degrades system architecture:
 
 - **Module-level feature envy** — code imports more from foreign modules than its own, reaching across boundaries because it was placed on the wrong side. When a function's primary dependencies are all in another module, it's a function living in the wrong home.
 - **Silent convention break** — a new pattern contradicting an existing architectural decision without documenting why. A new state management approach alongside the existing one, a new API convention, a new error handling strategy — introduced without migration plan or ADR.
-- **Responsibility duplication** — two modules now own the same concept incompletely. Similar function names, parallel logic patterns, duplicated domain knowledge where neither module has the complete picture.
+- **Responsibility duplication** — two modules own the same concept incompletely. Probe whether the module owns a coherent outcome or forces callers to reconstruct its orchestration and duplicate domain knowledge.
 
 ### HIGH
 
@@ -51,10 +51,10 @@ The kind of issue where placement is suboptimal and will create friction:
 
 - **Nearest file syndrome** — new functionality added to an existing file by proximity rather than responsibility. The new code shares no conceptual relationship with the file's existing purpose — it solves a different problem that happens to need one function from this file.
 - **Discovery violation** — a new developer would not look here for this functionality. The file or module name doesn't hint at the capability, and no re-export or index file bridges the gap.
-- **Coupling introduction** — change creates a new dependency between previously independent modules. The dependency may be necessary, but it should be deliberate and minimal — through a stable interface, not through internal structure.
+- **Coupling introduction** — a dependency crosses internal structure instead of a stable contract. Can independently authored policies compose? Can an extension author implement the promised role without private job shapes, scheduler knowledge or unrelated lifecycle duties? Consumer opacity alone is insufficient.
 - **Tactical fix pattern** — change solves only this specific instance rather than the class of problems. Hardcoded values, special-case conditionals, copy-paste with minor modifications. Creates a maintenance multiplier requiring N similar changes for N future cases.
 - **Fragile placement** — code would need to move if the module it depends on most were refactored. Placement is coupled to current structure rather than to responsibility.
-- **Future-hostile change** — change makes the next likely change harder. New tight coupling, removal of extension points, data shape assumptions that constrain future evolution.
+- **Future-hostile change** — a likely data, storage or execution change forces unrelated callers or extensions to change. Trace that amplification; preserve supported variation without demanding speculative generality.
 
 ### MEDIUM
 

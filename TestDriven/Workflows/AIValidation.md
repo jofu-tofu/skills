@@ -120,7 +120,7 @@ assert refactored_result.side_effects == original_result.side_effects
 
 | Test Quality | AI Refactor Action |
 |--------------|-------------------|
-| Strong behavioral tests | Trust the refactor if tests pass |
+| Strong behavioral tests | Trust tested behavior if tests pass; list required runtime proof gaps |
 | Weak implementation-coupled tests | Add characterization tests first |
 | No tests | Add characterization tests first |
 | Mixed quality | Add tests for uncovered behavior |
@@ -253,7 +253,7 @@ AI-generated tests often violate FIRST:
 
 | Situation | Verdict | Action |
 |-----------|---------|--------|
-| AI refactored, strong behavioral tests pass | TRUST | Merge with confidence |
+| AI refactored, strong behavioral tests pass | TRUST within tested scope | Accept only when required runtime outcomes are also verified; otherwise list proof gaps |
 | AI refactored, weak tests pass | DISTRUST | Add characterization tests, re-evaluate |
 | AI refactored, tests fail | INVESTIGATE | May be behavior change or test was implementation-coupled |
 | AI generated tests, pass mutation test | USEFUL | Accept the tests |
@@ -262,6 +262,16 @@ AI-generated tests often violate FIRST:
 | AI generated tests, missing edge cases | ENHANCE | Add edge case coverage |
 
 ---
+
+## Runtime Evidence for Changed Flows
+
+For changed user flows, choose relevant checks from five dimensions: completion, visual correctness, persisted state, incidental defects (console/network/focus), and required external side effects. A success screen proves completion only. Verify persisted state through a read after the action, and delivery through the test mailbox, queue, or equivalent available boundary. Stubbed delivery proves the stub contract, not real delivery. Use existing test environments and authorized test accounts; when unavailable, report the proof gap instead of creating infrastructure or sending live messages.
+
+Report each applicable dimension as pass, fail, blocked, or not run, with the exact command or action, observed outcome, revision and environment. Use not-applicable with a reason for dimensions outside the change. File or report incidental defects separately; a required outcome that failed still fails the flow. Static review, passing unit tests, and runtime proof remain distinct evidence.
+
+Source: Agentic Coding School, [What Counts as a Pass](https://www.agenticcoding.school/v/qP8WLv4G), retrieved 2026-10-28.
+
+A TRUST verdict applies only to the behavior and environments actually verified. List uncovered required outcomes before recommending acceptance; passing behavioral tests alone does not prove end-to-end delivery.
 
 ## Output Format
 
