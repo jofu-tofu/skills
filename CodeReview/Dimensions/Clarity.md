@@ -41,7 +41,7 @@ The first-time reader's question: "Would I be confident modifying or calling thi
 ### HIGH — Intent Is Obscured
 
 - **Misleading names or stale comments** — names that suggest something different from what the code does, and comments, docs or help text the change made false: a count that no longer matches, a described return value that changed, a step that no longer happens.
-- **Incomplete contracts** — a new or changed public function, method, tag or export with no header, or one missing parameter direction, required or optional status, return value, or the shape of a structure it takes or returns.
+- **Incomplete contracts** — callers or extension authors must read private code to understand input/output shapes, ownership, consequential defaults or outcomes. Walk an ordinary use from the public contract. Can the caller distinguish completion from validity and explain a result or failure through bounded public diagnostics/provenance? Require evidence relevant to the task, not exhaustive logs.
 - **Clever over clear** — language tricks, obscure operators or dense idioms where a straightforward approach would work: nested ternaries, bitwise logic for booleans, regex where string methods suffice.
 - **Hidden control flow** — execution paths not visible in the local code: exceptions used for control flow, callbacks that modify shared state, early exits whose scope the reader can misjudge.
 - **Abstraction mismatch** — the abstraction level shifts without warning: a business function drops into byte manipulation, or a low-level utility makes business decisions.
@@ -49,7 +49,7 @@ The first-time reader's question: "Would I be confident modifying or calling thi
 ### MEDIUM — Comprehension Speed Bumps
 
 - **Dense expressions** — lines that pack several operations together: long chains, compound boolean expressions, nested calls.
-- **Implicit knowledge** — domain abbreviations without context, magic numbers or strings, patterns that only make sense if you know the framework's internals.
+- **Implicit knowledge** — abbreviations, magic values or usage requiring framework internals. Separate necessary policy semantics from guesses about copying, reset order, caching or blocking; a short example is insufficient if it relies on those guesses.
 - **Structural misdirection** — organization that doesn't match the conceptual flow: functions far from their callers, related logic scattered, methods that must be called in an undocumented order.
 - **Comments that don't explain** — a surprising decision with no "why", or comments that restate the code, use jargon, or describe the author's process instead of the code's behavior.
 - **Local idiom break** — new code that does the same job differently from its neighbors (condition style, helper choice, ordering, naming pattern) for no visible reason.

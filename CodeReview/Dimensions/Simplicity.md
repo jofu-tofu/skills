@@ -39,8 +39,8 @@ The reductionist's question: "What would happen if I deleted this?" If the answe
 The kind of issue where code is more complex than its problem requires:
 
 - **Dead code and dead paths** — functions never called, parameters never used, branches that can never execute, commented-out code preserved "just in case," feature flags that are always on or always off. Every dead line is a line someone will read and try to understand.
-- **Premature abstraction** — an interface with one implementation, a factory that creates one type, a strategy pattern with one strategy, a generic function used with one type. Abstractions that were built for flexibility that never materialized. The cost: readers must understand the abstraction layer to understand the concrete behavior.
-- **Unnecessary indirection** — wrapper functions that add no logic, delegation chains where A calls B calls C and B adds nothing, configuration objects that could be direct parameters, event systems where a direct function call would work. Each layer of indirection is a layer of "why?"
+- **Premature abstraction** — factories, strategies or generic layers with no demonstrated reuse or isolation benefit. One implementation alone is insufficient evidence: a boundary can hide substantial complexity or isolate side effects. Name the extra concepts callers must learn and what they gain.
+- **Unnecessary indirection** — wrappers or delegation that hide no useful complexity. Count the caller's total concepts, flags, conditional fields and orchestration, not just public methods. Does one small signature conceal a configuration language or force callers to reconstruct the workflow?
 - **Over-engineered or out of proportion** — code designed for requirements that don't exist yet (configurable where hardcoded would work, generic where specific would work), or a new mechanism built where the codebase already has a lightweight one for the same job. Search for the existing precedent before accepting a new one.
 - **Redundant validation and defensive code** — null checks on values the type system guarantees, error handling for conditions the caller prevents, validation the framework already does. A defensive check earns its place by naming a scenario that can actually reach it. If the check guards a trust boundary, leave it to SEC.
 
@@ -71,7 +71,7 @@ The kind of issue where code works but could be expressed more simply:
 ### Before — Premature abstraction
 
 ```typescript
-// Interface with one implementation, factory that creates one thing
+// This caller needs a query helper; no substitution or isolation contract is required.
 interface IUserRepository {
   findById(id: string): Promise<User>;
 }
@@ -95,7 +95,7 @@ const repo = UserRepositoryFactory.create();
 ### After — Direct
 
 ```typescript
-// No interface (add when a second implementation exists), no factory
+// Direct helper when no isolation boundary is needed; no factory.
 async function findUserById(id: string): Promise<User> {
   return db.query('SELECT * FROM users WHERE id = $1', [id]);
 }
