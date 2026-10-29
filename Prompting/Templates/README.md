@@ -1,11 +1,11 @@
-# LifeOS Templating System
+# the host Templating System
 
 **Version:** 1.0.0
 **Rollback Point:** v2.5.0
 
 ## Overview
 
-The LifeOS templating system enables **prompts that write prompts**—dynamic composition where structure is fixed but content is parameterized. Based on Anthropic's official `{{variable}}` syntax and industry best practices.
+The the host templating system enables **prompts that write prompts**—dynamic composition where structure is fixed but content is parameterized. Based on Anthropic's official `{{variable}}` syntax and industry best practices.
 
 ## Directory Structure
 
@@ -28,7 +28,7 @@ The rendering tools live beside this folder in `Prompting/Tools/` (`RenderTempla
 
 ## Core Syntax
 
-LifeOS uses Handlebars notation for template variables:
+the host uses Handlebars notation for template variables:
 
 | Syntax | Purpose | Example |
 |--------|---------|---------|
@@ -87,7 +87,7 @@ Reusable quality and completion checks.
 
 ## Evals
 
-Eval, judge and rubric prompts are not built from these templates. Every eval and judge runs through Assay (`LIFEOS/DOCUMENTATION/Assay/AssaySystem.md` § One eval system).
+Use an explicitly chosen evaluation tool or human review; record the baseline, cases and uncertainty.
 
 ## Usage
 
@@ -96,7 +96,7 @@ Eval, judge and rubric prompts are not built from these templates. Every eval an
 Relative template, data and output paths are looked up under `Templates/` first (then, for template and data, the current directory), so `Primitives/Roster.hbs` and `Data/Agents.yaml` below are `Templates/Primitives/Roster.hbs` and `Templates/Data/Agents.yaml`. Without `--output` the result prints to stdout.
 
 ```bash
-bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
+bun run <skill-dir>/Tools/RenderTemplate.ts \
   --template Primitives/Roster.hbs \
   --data Data/Agents.yaml \
   --output Compiled/AgentRoster.md
@@ -137,7 +137,7 @@ bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
 
 ## Rollback Instructions
 
-If a template change breaks rendering, restore the templates from your install's previous release with the LifeOS updater's backup, or reinstall the Prompting skill.
+If a template change breaks rendering, restore the templates from your install's previous release with the the host updater's backup, or reinstall the Prompting skill.
 
 ## Token Savings
 
@@ -147,7 +147,7 @@ If a template change breaks rendering, restore the templates from your install's
 | Agent Personalities | 3,000 | 1,200 | 60% |
 | Workflow Steps | 7,500 | 3,000 | 60% |
 | Agent Briefings | 6,400 | 1,900 | 70% |
-| Voice Notifications | 6,225 | 725 | 88% |
+Voice output is optional and only runs when explicitly requested through a host-provided tool.
 | **TOTAL** | ~53,000 | ~18,000 | **65%** |
 
 ## Available Helpers
@@ -197,7 +197,7 @@ The RenderTemplate.ts engine provides these custom Handlebars helpers:
 ### Render a Template
 
 ```bash
-bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
+bun run <skill-dir>/Tools/RenderTemplate.ts \
   --template Primitives/Roster.hbs \
   --data Data/Agents.yaml \
   --output Compiled/AgentRoster.md
@@ -206,7 +206,7 @@ bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
 ### Preview Without Writing
 
 ```bash
-bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
+bun run <skill-dir>/Tools/RenderTemplate.ts \
   --template Primitives/Gate.hbs \
   --data Data/ValidationGates.yaml \
   --preview
@@ -215,7 +215,7 @@ bun run ~/.claude/skills/Prompting/Tools/RenderTemplate.ts \
 ### Validate Template Syntax
 
 ```bash
-bun run ~/.claude/skills/Prompting/Tools/ValidateTemplate.ts \
+bun run <skill-dir>/Tools/ValidateTemplate.ts \
   --template Primitives/Briefing.hbs \
   --data Data/Agents.yaml
 ```
@@ -268,5 +268,5 @@ This system is based on research from:
 
 ## Related Documentation
 
-- `~/.claude/skills/Prompting/Standards.md` (prompt engineering standards)
-- `~/.claude/skills/Assay/SKILL.md`
+- `<skill-dir>/Standards.md` (prompt engineering standards)
+- `<host-config-dir>/skills/a user-selected evaluation tool/SKILL.md`

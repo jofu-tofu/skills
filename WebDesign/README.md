@@ -1,6 +1,6 @@
 # Webdesign
 
-LifeOS skill for designing and integrating web interfaces — inline aesthetic design plus the first-party **Claude Design** surface (claude.ai/design, `/design`, `/design-sync`).
+the host skill for designing and integrating web interfaces — inline aesthetic design plus the first-party **Claude Design** surface (claude.ai/design, `/design`, `/design-sync`).
 
 ## What It Does
 
@@ -16,7 +16,7 @@ Most design tools assume greenfield. Webdesign assumes the opposite: you already
 
 ## Prerequisites
 
-- **DirectDesign:** no Claude Design access or auth; the Interceptor skill (rendered check) and the ArtDirection skill (critique loop).
+- **DirectDesign:** no Claude Design access or auth; the browser screenshot verification skill (rendered check) and the visual critique skill (critique loop).
 - **NativeDesign:** a Claude subscription with Claude Design access, a harness build carrying the `/design` skill, and (for sync) a claude.ai login with design scopes.
 - For integration: the target project's framework, token file, and component directory.
 
@@ -43,8 +43,8 @@ The skill routes your request to the right intent automatically.
 ## Relationship to Other Tools
 
 - **`frontend-design` philosophy** (Anthropic, MIT): mirrored into `References/FrontendDesignPhilosophy.md` — the aesthetic doctrine for DirectDesign.
-- **Interceptor skill**: verification of rendered output (real Chrome screenshots).
-- **ArtDirection skill**: the critique loop every design passes before it reaches you.
+- **browser screenshot verification skill**: verification of rendered output (real Chrome screenshots).
+- **visual critique skill**: the critique loop every design passes before it reaches you.
 - **Art skill**: for illustrations, diagrams, header images — not overlapping scope.
 
 ## License

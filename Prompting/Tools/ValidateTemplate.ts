@@ -257,7 +257,7 @@ function main(): void {
 
   if (values.help || !values.template) {
     console.log(`
-LifeOS Template Validator
+standalone skill Template Validator
 
 Usage:
   bun run ValidateTemplate.ts --template <path> [options]

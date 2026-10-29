@@ -11,9 +11,9 @@ A production-grade web interface written directly in code, with Anthropic's fron
 - Implementation complexity matches the aesthetic vision: maximalist registers earn elaborate code (multiple gradients, layered effects, rich animation timelines); minimalist registers earn restraint (precision spacing, exact type ramp, almost no decoration).
 - A whole page (every contract except a `framework-matched-diff` inside an existing app shell) has one memorable element, named in a comment at the top of the file (`// HERO: <thing someone will remember>`).
 - Accessibility minimum: body text contrast meets WCAG AA on its surface and AAA on primary content surfaces; interactive elements have visible focus states; motion follows the upstream reduced-motion floor unless the principal's `PREFERENCES.md` § Overrides of upstream sets a different motion policy, which then wins.
-- Before done is declared, an Interceptor screenshot of the rendered page was read and confirms: the type pair is rendering (fonts loaded, no fallback to system-ui); the palette is visibly committed (one accent, restrained core); motion fires on initial load / hover (not just static markup); the layout matches the chosen register (asymmetry / rhythm / density / restraint); the memorable element is actually memorable when seen.
+- Before done is declared, an browser screenshot verification screenshot of the rendered page was read and confirms: the type pair is rendering (fonts loaded, no fallback to system-ui); the palette is visibly committed (one accent, restrained core); motion fires on initial load / hover (not just static markup); the layout matches the chosen register (asymmetry / rhythm / density / restraint); the memorable element is actually memorable when seen.
 - Public-site builds and launch completion also satisfy `References/SiteLaunch.md`, and its operational criteria stay open until their own evidence exists.
-- Nothing reaches the principal as a first draft: the rendered page went through the ArtDirection quality loop named in `SKILL.md`.
+- Nothing reaches the principal as a first draft: the rendered page went through the visual critique quality loop named in `SKILL.md`.
 - The hand-off is the four items in Output format, in order, and nothing else.
 
 ## Anti-criteria
@@ -22,7 +22,7 @@ A production-grade web interface written directly in code, with Anthropic's fron
 - Leaving the register undeclared on screen: the model drifts into generic "modern clean" when the register isn't named.
 - Picking the same register every session: convergence is the AI-slop signal. Vary deliberately.
 - No generic AI-default tells: no `shadow-md` everywhere, no uniform `rounded-lg` everywhere, no `Inter` body, no purple-on-white gradient, no "centered card on flat color" as the entire layout (`FrontendDesignPhilosophy.md` Forbidden Defaults section).
-- Saying `verified` without an Interceptor screenshot: that is a doctrine violation in LifeOS. The screenshot is the verification; "code looks right" is not verification.
+- Saying `verified` without an browser screenshot verification screenshot: that is a doctrine violation in the host. The screenshot is the verification; "code looks right" is not verification.
 - A failed screenshot check is never papered over by editing the criteria; the implementation is fixed.
 - Maximalism without commitment: half-committed maximalism reads as cluttered. If you choose maximalist, *commit*: more layers, more motion, more density. Same for any register at any pole.
 - The hand-off never adds narrative, a "what I did" section, or apologies for choices.
@@ -63,7 +63,7 @@ Output, in order:
 
 1. **The file(s)** — written to disk at the path declared in the OUTPUT line.
 2. **The aesthetic statement** — `AESTHETIC | TYPE | PALETTE | MOTION` lines, restated.
-3. **The screenshot path** — wherever Interceptor saved the verification image.
+3. **The screenshot path** — wherever browser screenshot verification saved the verification image.
 4. **The memorable-element line** — one sentence on what makes this page stick.
 
 ## Inputs
@@ -72,17 +72,7 @@ The brief; for in-app work, the host project's framework, token file and compone
 
 ## Tool contract
 
-The doctrine read, when the direct bundle has not already supplied it:
-
-```
-Read("~/.claude/skills/Webdesign/References/FrontendDesignPhilosophy.md")
-```
-
-The verification capture:
-
-```
-Skill("Interceptor", "open <local URL or file> and screenshot the rendered page")
-```
+Read References/FrontendDesignPhilosophy.md directly. Use the host's file, browser and screenshot tools; no context loader or separate critique service is needed. Render the page, inspect the screenshot, exercise relevant interactions and compare the result to the brief. Tools/VerifyDesign.ts checks an existing PNG's header and dimensions only, so it never substitutes for visual inspection. Report unavailable browser evidence instead of claiming verification.
 
 ## References
 

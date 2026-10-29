@@ -16,7 +16,7 @@ The design is written directly with Anthropic's open-source `frontend-design` ae
 
 ### Path 2 — NativeDesign (first-party artboards + design-system sync)
 
-The native `/design` skill (research preview, Aug 2026) brings Claude Design's artboard workflow into the CLI and Desktop, built on artifacts: generate genuinely divergent artboard variants, pick one, tweak it, have Claude implement it. `/design-sync` plus the `DesignSync` tool keep a codebase or component library in sync with a claude.ai/design design-system project — incrementally, never wholesale. This is also the deterministic successor to the retired Interceptor-driven ClaudeDesign path. Workflow: `NativeDesign`.
+The native `/design` skill (research preview, Aug 2026) brings Claude Design's artboard workflow into the CLI and Desktop, built on artifacts: generate genuinely divergent artboard variants, pick one, tweak it, have Claude implement it. `/design-sync` plus the `DesignSync` tool keep a codebase or component library in sync with a claude.ai/design design-system project — incrementally, never wholesale. This is also the deterministic successor to the retired browser screenshot verification-driven ClaudeDesign path. Workflow: `NativeDesign`.
 
 ### Routing rule
 
@@ -32,12 +32,7 @@ This skill is frequently called as a **sub-step of larger site work**. When invo
 
 User-specific design preferences (color palette, typography, spacing grid, animation timing, framework defaults) live at:
 
-```
-<configRoot>/LIFEOS/USER/CUSTOMIZATIONS/SKILLS/Webdesign/ (configRoot is `$CLAUDE_CONFIG_DIR` when set, else `~/.claude`)
-├── PREFERENCES.md     # Design tokens, preferred frameworks
-├── README.md
-└── EXTEND.yaml
-```
+Use the current host's tools for this operation; see `PORTABILITY.md`.
 
 The skill reads PREFERENCES.md if present and passes those tokens into every brief — DirectDesign inline, or the NativeDesign artboard brief and design-system project.
 
@@ -54,9 +49,9 @@ Path 1 (DirectDesign) needs nothing — no browser, no auth. Path 2 (NativeDesig
 
 ## Gotchas
 
-- **The upstream mirror rots without warning; check the commit, not the date.** Anthropic replaced `frontend-design` wholesale on 2026-09-03 (commit `41bbe19d`: register list and type tables gone, replaced by a subject-grounding + calibration-tells process). Our mirror was four months stale when a design run started. Before any design pass, run `gh api 'repos/anthropics/skills/commits?path=skills/frontend-design&per_page=1'` and compare against the `Imported:` line in `References/FrontendDesignPhilosophy.md`; a newer commit means refresh the mirror first (upstream verbatim in § Core Doctrine, intent-referenced tables in § Retained Reference, LifeOS overrides last). Upstream's "reduced motion respected" floor is overridden only when the principal's `PREFERENCES.md` § Overrides of upstream says so; never copy an override into an intent step.
+- **The upstream mirror rots without warning; check the commit, not the date.** Anthropic replaced `frontend-design` wholesale on 2026-09-03 (commit `41bbe19d`: register list and type tables gone, replaced by a subject-grounding + calibration-tells process). Our mirror was four months stale when a design run started. Before any design pass, run `gh api 'repos/anthropics/skills/commits?path=skills/frontend-design&per_page=1'` and compare against the `Imported:` line in `References/FrontendDesignPhilosophy.md`; a newer commit means refresh the mirror first (upstream verbatim in § Core Doctrine, intent-referenced tables in § Retained Reference, the host overrides last). Upstream's "reduced motion respected" floor is overridden only when the principal's `PREFERENCES.md` § Overrides of upstream says so; never copy an override into an intent step.
 
-- **Path 3 (ClaudeDesign via Interceptor) was retired 2026-08-17.** The native `/design` artboard workflow made the browser-automation route obsolete before it ever ran end-to-end. The seven intents plus `DriveClaudeDesign.ts`/`ProcessHandoffBundle.ts` and the bundle-spec references live in git history, not the tree. Do not rebuild a browser path for the design canvas.
+- **Path 3 (ClaudeDesign via browser screenshot verification) was retired 2026-08-17.** The native `/design` artboard workflow made the browser-automation route obsolete before it ever ran end-to-end. The seven intents plus `DriveClaudeDesign.ts`/`ProcessHandoffBundle.ts` and the bundle-spec references live in git history, not the tree. Do not rebuild a browser path for the design canvas.
 - **`/design` is a research preview.** Availability and behavior vary by harness build. Verify the skill exists in-session before promising artboards; DirectDesign remains the proven default until a supervised NativeDesign run lands real gotchas here.
 - **Artboard variants must genuinely diverge.** Brief each variant with a different register/typeface/composition per the design-variety doctrine — three saturations of one idea is a wasted fan-out. The pick step is the /v1-/v2-/v3 approval gate.
 - **Native-first — code and tokens are the source of truth, Figma is not a dependency.** Import a design system by linking the repo or uploading token/component files, never a `.fig` export. No Figma round-trip in either direction.
@@ -64,7 +59,7 @@ Path 1 (DirectDesign) needs nothing — no browser, no auth. Path 2 (NativeDesig
 - **Integration ≠ overwrite.** Output is diffs on top of existing code. A full redesign that replaces existing UI gets flagged and confirmed first.
 - **Design-system-first is the token fix.** The biggest token sink is re-inferring the brand every pass and correcting it. Sync the design system once so every later generation reuses it instead of guessing — the single highest-leverage move against quota burn.
 - **Session quotas.** Claude Design usage shares one pool with chat, Claude Code, and Cowork. Pro is thin for sustained design work; Max recommended.
-- **Output fidelity ≠ production-ready.** Polished visuals still need a verification + a11y pass. Run `Tools/VerifyDesign.ts` post-integration; rendered results verify through Interceptor (real Chrome), two evidence classes for any live claim.
+- **Output fidelity ≠ production-ready.** Polished visuals still need a verification + a11y pass. Run `Tools/VerifyDesign.ts` post-integration; rendered results verify through browser screenshot verification (real Chrome), two evidence classes for any live claim.
 - **Vision doesn't guess.** Unspecified breakpoints, contrast requirements, or dark-mode behavior get defaults that may not match the target app. Be explicit in the brief (`References/InputFormats.md`).
 
 ## Examples
@@ -76,7 +71,7 @@ User: "Give me a few directions for the pricing page — editorial vs brutalist 
 → Preflight: /design skill present, design system synced
 → Briefs three divergent artboards (different register, typeface, composition)
 → User picks one on the artboard surface, tweaks
-→ Implements the pick as a diff against the repo; verifies via Interceptor
+→ Implements the pick as a diff against the repo; verifies via browser screenshot verification
 ```
 
 **Example 2: Fast in-codebase design**

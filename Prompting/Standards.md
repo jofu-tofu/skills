@@ -54,7 +54,7 @@ unlisted, every listed boundary has ≥1 attack+control pair.
 | **Tool-contract** | Exact CLI syntax, API params, file paths, invocation recipe | The precise WHAT of a tool call; can't be guessed |
 | **Output-format-contract** | The required shape/schema/template the deliverable must match | Model free on HOW, bound on final form |
 
-Deterministic Tools (`*.ts`) are exempt entirely — they do one fixed thing by design. Everything else that reads as procedure is a candidate to cut. When generating or optimizing any prompt: state the ideal state, state the constraints, supply the tools, keep the four keep-classes, delete the choreography. Full epistemic grounding: `LIFEOS/RULES/Philosophy.md` § Ideal-State Prompting. For skill intents the standard is concrete and linted: `LIFEOS/DOCUMENTATION/Skills/SkillSystem.md` § Intent anatomy (`## Ideal State` and `## Anti-criteria` first, then only the allowed keep-class sections; `LIFEOS/TOOLS/IntentLint.ts`).
+Deterministic Tools (`*.ts`) are exempt entirely — they do one fixed thing by design. Everything else that reads as procedure is a candidate to cut. When generating or optimizing any prompt: state the ideal state, state the constraints, supply the tools, keep the four keep-classes, delete the choreography. State testable outcomes first; retain only necessary safety gates, tool contracts and output formats.
 
 ---
 
@@ -68,7 +68,7 @@ A **leading word** is a compact concept already living in the model's pretrainin
 
 When authoring or optimizing any prompt, hunt for restatements a leading word retires: "fast, deterministic, low-overhead" collapses to *tight*; "a test you believe in" collapses to *red* (a binary observable state). Fewer tokens AND a sharper hook. A weak leading word is a no-op ("be thorough" when the model is already thorough-ish); the fix is a stronger word (*relentless*), not more prose. The no-op test itself is BLE Question 1 (`skills/BitterLessonEngineering` — does this line change behavior versus the default?); apply it sentence by sentence, and delete failing sentences whole rather than trimming words from them.
 
-**Prompt the positive.** Steering by prohibition backfires — "don't think of an elephant" names the elephant and raises its availability. State the target behavior so the banned one is never spoken. Keep a prohibition only as a hard guardrail that can't be phrased positively (a safety-gate), and even then pair it with what to do instead. Live reference with the full vocabulary (context load vs cognitive load, progressive disclosure, failure modes): `skills/Prompting/References/WritingGreatSkills.md`.
+**Prompt the positive.** Steering by prohibition backfires — "don't think of an elephant" names the elephant and raises its availability. State the target behavior so the banned one is never spoken. Keep a prohibition only as a hard guardrail that can't be phrased positively (a safety-gate), and even then pair it with what to do instead. Live reference with the full vocabulary (context load vs cognitive load, progressive disclosure, failure modes): `<skill-dir>/References/WritingGreatSkills.md`.
 
 ---
 
@@ -93,7 +93,7 @@ When authoring or optimizing any prompt, hunt for restatements a leading word re
 - **Opus 4.5–4.8 may overtrigger tools:** Dial back aggressive language
 - **Change:** "CRITICAL: You MUST use this tool" → "Use this tool when..."
 - **Softer framing:** Reduces excessive tool invocation
-- **Opus 4.8 favors reasoning over tool calls:** if you want *more* tool use, run at `high` effort (the LifeOS ceiling) or describe when/how to use the tool — don't shout
+- **Opus 4.8 favors reasoning over tool calls:** if you want *more* tool use, run at `high` effort (the the host ceiling) or describe when/how to use the tool — don't shout
 
 ### Literal Instruction Following (Opus 4.8)
 
@@ -263,7 +263,7 @@ Create setup scripts (`init.sh`) for:
 ### Verification Without Human Feedback
 
 Provide testing capabilities:
-- Interceptor skill for browser validation
+- browser screenshot verification skill for browser validation
 - Computer use for visual verification
 - Automated test suites
 - Self-checking mechanisms
@@ -367,7 +367,7 @@ Report every issue you find, including ones you are uncertain about or consider 
 
 If you must self-filter in a single pass, be concrete about the bar ("report any bug that could cause incorrect behavior, a test failure, or a misleading result; omit only pure style/naming nits") — never a qualitative term like "important."
 
-This is the find→verify split the Workflow tool already encodes: finders maximize coverage, an adversarial verify stage kills the false positives. Any LifeOS review/finding prompt (Cato, a security-assessment skill's finding phases, code-review fan-outs) inherits this rule.
+This is the find→verify split the Workflow tool already encodes: finders maximize coverage, an adversarial verify stage kills the false positives. Any the host review/finding prompt (Cato, a security-assessment skill's finding phases, code-review fan-outs) inherits this rule.
 
 ---
 
@@ -751,23 +751,23 @@ An **open-source framework** for augmenting humans using AI.
 
 **Location:** github.com/danielmiessler/Fabric
 
-### Native Fabric Patterns in LifeOS
+### Native Fabric Patterns in the host
 
-**Location:** `~/.claude/skills/Fabric/Patterns/`
+**Location:** `<skill-dir>/Patterns/`
 
-LifeOS maintains a local copy of all Fabric patterns for native execution. Instead of spawning the `fabric` CLI for every pattern-based task, the system reads and applies patterns directly as prompts.
+the host maintains a local copy of all Fabric patterns for native execution. Instead of spawning the `fabric` CLI for every pattern-based task, the system reads and applies patterns directly as prompts.
 
 #### When to Use Native Patterns (Default)
 
 For any pattern-based processing, the system will:
-1. Read `skills/Fabric/Patterns/{pattern_name}/system.md`
+1. Read the relevant host-provided context
 2. Apply the pattern instructions directly to the content
 3. Execute without external CLI calls
 
 **Examples:**
-- `extract_wisdom` → Read and apply `skills/Fabric/Patterns/extract_wisdom/system.md`
-- `summarize` → Read and apply `skills/Fabric/Patterns/summarize/system.md`
-- `analyze_claims` → Read and apply `skills/Fabric/Patterns/analyze_claims/system.md`
+- `extract_wisdom` → Read and apply the relevant host-provided context
+- `summarize` → Read and apply the relevant host-provided context
+- `analyze_claims` → Read and apply the relevant host-provided context
 
 #### When to Still Use the Fabric CLI
 
@@ -780,7 +780,7 @@ These operations require the CLI because they access external services or config
 
 #### Updating Patterns
 
-Follow `skills/Fabric/Intents/UpdatePatterns.md` to sync the latest patterns.
+Follow the relevant host-provided context to sync the latest patterns.
 
 ---
 
@@ -998,7 +998,7 @@ Verify across multiple sources. Develop competing hypotheses. Track confidence l
 
 ## Prompt Templating System
 
-**Foundation:** Based on Anthropic's official `{{variable}}` syntax, industry patterns (LangChain, Handlebars, DSPy), and LifeOS's unique skill architecture.
+**Foundation:** Based on Anthropic's official `{{variable}}` syntax, industry patterns (LangChain, Handlebars, DSPy), and the host's unique skill architecture.
 
 The template system itself (syntax table, directory layout, the eval templates, rendering CLI and API, helpers, best practices) is documented once, in `Templates/README.md`. This section keeps why Handlebars and a worked example of each primitive.
 

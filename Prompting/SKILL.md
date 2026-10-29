@@ -7,8 +7,10 @@ evals:
 metadata:
   short-description: "Generate, compose, or optimize reusable prompts and templates, including system prompts. Produces prompts, not final domain content."
 version: 1.1.40
-description: "Meta-prompting standard library for generating, optimizing, and composing prompts programmatically via Standards, Handlebars Templates, and Tools; output is always a prompt to use elsewhere, not final content. USE WHEN meta-prompting, template generation, prompt optimization, prompt engineering, write a prompt, create system prompt, Handlebars template. NOT FOR generating final content (use the appropriate domain skill), or any eval: judge prompts, rubrics, scoring, grading or comparing outputs all run through Assay, the one eval system."
+description: Compose and optimize reusable prompts with local standards, templates and optional rendering tools. USE WHEN write a prompt, prompt optimization, system prompt, template generation, meta-prompting.
 ---
+
+Read `PORTABILITY.md` before use; it defines the standalone tool and storage contract and replaces any inherited platform-specific setup.
 
 # Prompting - Meta-Prompting & Template System
 
@@ -48,18 +50,12 @@ Library skill, no `Intents/` directory. Requests route to the tools and referenc
 |------|-----------|
 | `Standards.md` | writing, optimizing or auditing any prompt: the ideal-state standard, the keep-classes, signal-to-noise, Anthropic and research-backed practice |
 | `References/WritingGreatSkills.md` | the prompt is a skill or intent: invocation load, information hierarchy, completion criteria, pruning |
-| `Templates/` | composing a prompt from data: Primitives (Briefing, Structure, Gate, Roster, Voice) (evals and judges are not composed here; they run through Assay, `LIFEOS/DOCUMENTATION/Assay/AssaySystem.md` § One eval system), `Data/` presets, and `Templates/README.md` for the template system |
+| `Templates/` | composing a prompt from data: Primitives (Briefing, Structure, Gate, Roster, Voice) (evals and judges are not composed here; they run through a user-selected evaluation tool, `PORTABILITY.md`), `Data/` presets, and `Templates/README.md` for the template system |
 | `Setup.md` | first-time setup: the one package the template tools need (`handlebars`) and a read-only check |
 
 ## Data & Config
 
-**Before executing, check for user customizations at:**
-`<configRoot>/LIFEOS/USER/CUSTOMIZATIONS/SKILLS/Prompting/`
-configRoot is `$CLAUDE_CONFIG_DIR` when set, else `~/.claude`.
-
-If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
-
-First-time setup for the template tools is in [Setup.md](Setup.md).
+Use request preferences or local `Customizations/PREFERENCES.md`. Save outputs to the user's requested destination. Read `PORTABILITY.md`.
 
 ## Gotchas
 
@@ -71,17 +67,7 @@ First-time setup for the template tools is in [Setup.md](Setup.md).
 
 `renderTemplate(templatePath, data)` takes a path under `Templates/` and a data object and returns the text. `renderTemplate({ templatePath, dataPath })` renders from a .yaml or .json file instead.
 
-```typescript
-// Render a structured agent brief from data before launching general-purpose
-import { renderTemplate } from '${LIFEOS_SKILL_DIR}/Tools/RenderTemplate.ts';
-
-const prompt = renderTemplate('Primitives/Briefing.hbs', {
-  briefing: { type: 'research' },
-  agent: { id: 'EN-1', name: 'Skeptical Thinker', personality: {...} },
-  task: { description: 'Analyze security architecture', questions: [...] },
-  output_format: { type: 'markdown' }
-});
-```
+Use the current host's tools for this operation; see `PORTABILITY.md`.
 
 ### Example 2: Ideal-state brief from a data file (outcomes, constraints, tools)
 
@@ -106,16 +92,11 @@ task:
 output_format: { type: markdown }
 ```
 
-```bash
-# Relative paths are looked up under Templates/ first, then the current directory (so attack-surface-brief.yaml can sit where you run this).
-bun run ${LIFEOS_SKILL_DIR}/Tools/RenderTemplate.ts \
-  --template Primitives/Briefing.hbs \
-  --data attack-surface-brief.yaml --preview
-```
+Use the current host's tools for this operation; see `PORTABILITY.md`.
 
 ## References
 
-- `LIFEOS/DOCUMENTATION/Agents/AgentSystem.md` — agent briefs are the general-purpose agent plus a brief rendered from `Templates/Primitives/Briefing.hbs`.
+- `PORTABILITY.md` — agent briefs are the general-purpose agent plus a brief rendered from `Templates/Primitives/Briefing.hbs`.
 
 **Official anchors (drift check):** the two authoritative Anthropic sources this skill's standards derive from. They change with each model family, which is why `Standards.md` is checked against them when it is authored or audited:
 - Prompt engineering: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview

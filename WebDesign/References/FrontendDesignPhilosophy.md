@@ -1,12 +1,12 @@
 # Frontend Design Philosophy
 
-**Contents:** Core Doctrine (upstream, current) · Retained Reference (from the 2026-05 upstream; superseded upstream, kept for the workflows) · LifeOS Extensions
+**Contents:** Core Doctrine (upstream, current) · Retained Reference (from the 2026-05 upstream; superseded upstream, kept for the workflows) · the host Extensions
 
 > **Attribution.** The aesthetic doctrine in this file is mirrored from Anthropic's open-source `frontend-design` skill, MIT-licensed.
 > Source: https://github.com/anthropics/skills/tree/main/skills/frontend-design
 > Authors: Prithvi Rajasekaran, Alexander Bricken (Anthropic).
 > License: MIT (see Webdesign/References/FrontendDesignPhilosophy.LICENSE.txt for full terms).
-> Imported: 2026-09-03 from upstream commit `41bbe19d` ("Update frontend-design skill to avoid generic design defaults", #1713). Previous import 2026-05-08. The upstream text was replaced wholesale in that commit; § Core Doctrine below is the current upstream verbatim, § Retained Reference keeps the prior version's register list and type recipes because the `🎨 AESTHETIC:` and `🔠 TYPE:` lines in `Intents/DirectDesign.md` draw on them, and § LifeOS Extensions carries the LifeOS-specific overrides, clearly marked.
+> Imported: 2026-09-03 from upstream commit `41bbe19d` ("Update frontend-design skill to avoid generic design defaults", #1713). Previous import 2026-05-08. The upstream text was replaced wholesale in that commit; § Core Doctrine below is the current upstream verbatim, § Retained Reference keeps the prior version's register list and type recipes because the `🎨 AESTHETIC:` and `🔠 TYPE:` lines in `Intents/DirectDesign.md` draw on them, and § the host Extensions carries the the host-specific overrides, clearly marked.
 
 This file is the load-bearing reference for the **DirectDesign** workflow and the brief source for **NativeDesign** artboards. The intents route here for the actual aesthetic content.
 
@@ -164,16 +164,16 @@ Never animate body text while it is being read, form labels or inputs, or anythi
 
 ---
 
-## LifeOS Extensions
+## the host Extensions
 
-These extensions are LifeOS-specific (not in the upstream Anthropic source). They handle integration into the wider LifeOS workflow, and where they contradict the upstream text they win.
+These extensions are the host-specific (not in the upstream Anthropic source). They handle integration into the wider the host workflow, and where they contradict the upstream text they win.
 
 ### Overrides of upstream (install preferences)
 
-- **Install overrides come from PREFERENCES.md.** The principal's standing overrides of upstream defaults (motion policy, default page ground) are in `<configRoot>/LIFEOS/USER/CUSTOMIZATIONS/SKILLS/Webdesign/PREFERENCES.md` § Overrides of upstream; when that section exists it wins over the upstream quality floor here, and when it is absent upstream stands.
-- **Variety is checked against real data, not memory.** Before shipping, name the register, typeface, and alignment. Check the last 2–3 shipped sites (the `## Shipped sites` list in `USER/CUSTOMIZATIONS/SKILLS/Webdesign/PREFERENCES.md`; when it is empty or absent, the most recent sites in the projects list), inspect their `font-family` and ground declarations, and avoid repeating their type pairings.
+- **Local preferences apply.** Read Customizations/PREFERENCES.md when present and respect the user's explicit accessibility and motion requirements.
+- **Variety is checked against real data, not memory.** Before shipping, name the register, typeface, and alignment. Check the last 2–3 shipped sites (the `## Shipped sites` list in the relevant host-provided context; when it is empty or absent, the most recent sites in the projects list), inspect their `font-family` and ground declarations, and avoid repeating their type pairings.
 - **Data-heavy pages are where the calibration tells bite hardest.** Leaderboards, dashboards, and stat pages reach reflexively for monospace data labels, all-caps eyebrows, middle-dot meta strings, and hairline broadsheet rules. On those pages treat every one of those as a decision to defend in the plan, not a default to inherit.
 
-### Verification — Interceptor screenshot
+### Verification — browser screenshot verification screenshot
 
-Upstream's "take screenshots to review" is a gate here, not a suggestion: web output is verified through the **Interceptor skill** before done is declared, because real Chrome catches the rendering issues that "code looks right" misses. The screenshot criteria and the output contracts live in `Intents/DirectDesign.md`; the preferences that bias the register live in `SKILL.md` § Data & Config; the choice between DirectDesign and NativeDesign is `SKILL.md` § Intent Routing.
+Upstream's "take screenshots to review" is a gate here, not a suggestion: web output is verified through the **browser screenshot verification skill** before done is declared, because real Chrome catches the rendering issues that "code looks right" misses. The screenshot criteria and the output contracts live in `Intents/DirectDesign.md`; the preferences that bias the register live in `SKILL.md` § Data & Config; the choice between DirectDesign and NativeDesign is `SKILL.md` § Intent Routing.
