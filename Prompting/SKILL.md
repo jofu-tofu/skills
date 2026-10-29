@@ -1,53 +1,79 @@
 ---
 name: Prompting
-description: Meta-prompting system for dynamic prompt generation using templates, standards, and patterns. USE WHEN meta-prompting, template generation, prompt optimization, programmatic prompt composition, OR auditing agent instruction files (skill files, AGENTS.md, system prompts) for signal density, hedging, or voice consistency.
-compatibility: Designed for Codex and Devin (or similar agent products)
+evals:
+  manual:
+    reason: "a reusable prompt must be judged for whether it captures the supplied intent, constraints, and output contract"
+    falsifier: "the reviewer finds the prompt omits a material requirement or its output contract cannot guide the intended downstream task"
 metadata:
-  author: pai
-  version: "1.0.0"
+  short-description: "Generate, compose, or optimize reusable prompts and templates, including system prompts. Produces prompts, not final domain content."
+version: 1.1.40
+description: "Meta-prompting standard library for generating, optimizing, and composing prompts programmatically via Standards, Handlebars Templates, and Tools; output is always a prompt to use elsewhere, not final content. USE WHEN meta-prompting, template generation, prompt optimization, prompt engineering, write a prompt, create system prompt, Handlebars template. NOT FOR generating final content (use the appropriate domain skill), or any eval: judge prompts, rubrics, scoring, grading or comparing outputs all run through Assay, the one eval system."
 ---
-
-## Customization
-
-**Before executing, check for user customizations at:**
-`$PAI_DIR/skills/PAI/USER/SKILLCUSTOMIZATIONS/Prompting/`
-
-If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
 
 # Prompting - Meta-Prompting & Template System
 
-**Invoke when:** meta-prompting, template generation, prompt optimization, programmatic prompt composition, creating dynamic agents, generating structured prompts from data.
+**Contents:** Ideal State · Anti-criteria · Intent Routing · Data & Config · Gotchas · Examples · References
 
-## Overview
+Generates, optimizes, and composes prompts programmatically. It's the standard library for prompt engineering — other skills call it when they need to build or improve a prompt. The output is always a prompt to be used elsewhere, never the final content itself.
 
-The Prompting skill owns ALL prompt engineering concerns:
-- **Standards** - Anthropic best practices, Codex 4.x patterns, empirical research
-- **Templates** - Handlebars-based system for programmatic prompt generation
-- **Tools** - Template rendering, validation, and composition utilities
-- **Patterns** - Reusable prompt primitives and structures
+**Philosophy:** Prompts that write prompts. Structure is code, content is data. Meta-prompting enables dynamic composition where the same template with different data generates specialized agents, workflows, and evaluation frameworks.
 
-This is the "standard library" for prompt engineering - other skills reference these resources when they need to generate or optimize prompts.
+## Ideal State
 
-## Core Components
+- Every prompt this library generates or optimizes articulates the ideal state, not the procedure: WHAT done looks like as testable outcomes, the CONSTRAINTS, and the high-quality TOOLS available, with the specificity moved to the outcome so the prompt is more precise, not vaguer.
+- In every prompt this library generates or optimizes, the only HOW that survives is the four keep-classes (safety-gate, verified-gotcha, tool-contract, output-format-contract); every other procedural line failed the test of whether a smarter model would make it unnecessary. Deterministic tools (`*.ts`) are exempt. The full standard is `Standards.md` § Ideal-State Prompting.
+- A prompt composed from data keeps structure as code and content as data: a Handlebars template under `Templates/` rendered with a data object, or from a .yaml or .json file, through `RenderTemplate.ts`.
+- A reusable prompt captures the supplied intent, constraints, and output contract; its output contract can guide the intended downstream task; and it was tested before it was declared ready.
+- When `Standards.md` is authored or audited (not on routine template renders), both official anchors were fetched and every place our standards diverge from the current official guidance is flagged.
 
-### 1. Standards.md
-Complete prompt engineering documentation based on:
-- Anthropic's Codex 4.x Best Practices (November 2025)
-- Context engineering principles
-- The Fabric prompt pattern system
-- 1,500+ academic papers on prompt optimization
+## Anti-criteria
 
-**Key Topics:**
-- Markdown-first design (NO XML tags)
+- No reasoning choreography ("first analyze, then consider, then decide") in a prompt this library generates or optimizes: it is BLE-violating scaffolding that caps a capable model and rots as models improve.
+- Meta-prompting never produces the final deliverable: it generates PROMPTS, not content.
+- No template or prompt depends on specific model quirks; templates stay model-agnostic.
+- No generated prompt is declared ready untested: a prompt that looks good may perform poorly.
+- Standards drift is reported, never auto-adopted, and an unreachable anchor URL never blocks the work.
 
+## Intent Routing
 
-## Usage Examples
+Library skill, no `Intents/` directory. Requests route to the tools and reference docs:
 
-### Example 1: Using Briefing Template (Agent Skill)
+| Intent | Trigger | File |
+|--------|---------|------|
+| **RenderTemplate** (tool) | render a template, compose a prompt from data, Handlebars template | `Tools/RenderTemplate.ts` |
+| **ValidateTemplate** (tool) | validate a template | `Tools/ValidateTemplate.ts` |
+| **Standards** (reference) | prompt engineering standards, best practices, prompt optimization | `Standards.md` |
+
+| File | Read when |
+|------|-----------|
+| `Standards.md` | writing, optimizing or auditing any prompt: the ideal-state standard, the keep-classes, signal-to-noise, Anthropic and research-backed practice |
+| `References/WritingGreatSkills.md` | the prompt is a skill or intent: invocation load, information hierarchy, completion criteria, pruning |
+| `Templates/` | composing a prompt from data: Primitives (Briefing, Structure, Gate, Roster, Voice) (evals and judges are not composed here; they run through Assay, `LIFEOS/DOCUMENTATION/Assay/AssaySystem.md` § One eval system), `Data/` presets, and `Templates/README.md` for the template system |
+| `Setup.md` | first-time setup: the one package the template tools need (`handlebars`) and a read-only check |
+
+## Data & Config
+
+**Before executing, check for user customizations at:**
+`<configRoot>/LIFEOS/USER/CUSTOMIZATIONS/SKILLS/Prompting/`
+configRoot is `$CLAUDE_CONFIG_DIR` when set, else `~/.claude`.
+
+If this directory exists, load and apply any PREFERENCES.md, configurations, or resources found there. These override default behavior. If the directory does not exist, proceed with skill defaults.
+
+First-time setup for the template tools is in [Setup.md](Setup.md).
+
+## Gotchas
+
+- **`Tools/` is the only tool directory.** A byte-identical stale copy under `Templates/Tools/` was removed on 2026-10-14 (LOSIntegrity cruft sweep); edit and import `Tools/`, which `Tools/RenderTemplate.test.ts` covers.
+
+## Examples
+
+### Example 1: Using Briefing Template (compose an agent brief)
+
+`renderTemplate(templatePath, data)` takes a path under `Templates/` and a data object and returns the text. `renderTemplate({ templatePath, dataPath })` renders from a .yaml or .json file instead.
 
 ```typescript
-// skills/Agents/Tools/AgentFactory.ts
-import { renderTemplate } from '$PAI_DIR/skills/Utilities/Prompting/Tools/RenderTemplate.ts';
+// Render a structured agent brief from data before launching general-purpose
+import { renderTemplate } from '${LIFEOS_SKILL_DIR}/Tools/RenderTemplate.ts';
 
 const prompt = renderTemplate('Primitives/Briefing.hbs', {
   briefing: { type: 'research' },
@@ -57,108 +83,42 @@ const prompt = renderTemplate('Primitives/Briefing.hbs', {
 });
 ```
 
-### Example 2: Using Structure Template (Workflow)
+### Example 2: Ideal-state brief from a data file (outcomes, constraints, tools)
+
+The data states what done looks like, the limits, and the tools; it carries no steps.
 
 ```yaml
-# Data: phased-analysis.yaml
-phases:
-  - name: Discovery
-    purpose: Identify attack surface
-    steps:
-      - action: Map entry points
-        instructions: List all external interfaces...
-  - name: Analysis
-    purpose: Assess vulnerabilities
-    steps:
-      - action: Test boundaries
-        instructions: Probe each entry point...
+# Data: attack-surface-brief.yaml
+briefing: { type: analysis }
+agent: { id: SEC-1, name: Attack Surface Reviewer }
+context:
+  summary: Review the public API of the billing service before launch.
+  background: "Tools available: the repo checkout, rg, and read-only staging credentials."
+  constraints:
+    - Read-only; no writes to staging or production.
+    - Findings cite file:line or a reproducible request.
+task:
+  description: Report the external attack surface of the billing service.
+  deliverables:
+    - Every external entry point is listed with its auth requirement.
+    - Each finding carries a severity and a reproducible request or file:line.
+    - Entry points that could not be checked are named, with the reason.
+output_format: { type: markdown }
 ```
 
 ```bash
-bun run RenderTemplate.ts \
-  --template Primitives/Structure.hbs \
-  --data phased-analysis.yaml
+# Relative paths are looked up under Templates/ first, then the current directory (so attack-surface-brief.yaml can sit where you run this).
+bun run ${LIFEOS_SKILL_DIR}/Tools/RenderTemplate.ts \
+  --template Primitives/Briefing.hbs \
+  --data attack-surface-brief.yaml --preview
 ```
-
-### Example 3: Custom Agent with Voice Mapping
-
-```typescript
-// Generate specialized agent with appropriate voice
-const agent = composeAgent(['security', 'skeptical', 'thorough'], task, traits);
-// Returns: { name, traits, voice: 'default', voiceId: 'VOICE_ID...' }
-```
-
-## Integration with Other Skills
-
-### Agents Skill
-- Uses `Templates/Primitives/Briefing.hbs` for agent context handoff
-- Uses `RenderTemplate.ts` to compose dynamic agents
-- Maintains agent-specific template: `Agents/Templates/DynamicAgent.hbs`
-
-### Evals Skill
-- Uses eval-specific templates: Judge, Rubric, TestCase, Comparison, Report
-- Leverages `RenderTemplate.ts` for eval prompt generation
-- Eval templates may be stored in `Evals/Templates/` but use Prompting's engine
-
-### Development Skill
-- References `Standards.md` for prompt best practices
-- Uses `Structure.hbs` for workflow patterns
-- Applies `Gate.hbs` for validation checklists
-
-## Token Efficiency
-
-The templating system eliminated **~35,000 tokens (65% reduction)** across PAI:
-
-| Area | Before | After | Savings |
-|------|--------|-------|---------|
-| SKILL.md Frontmatter | 20,750 | 8,300 | 60% |
-| Agent Briefings | 6,400 | 1,900 | 70% |
-| Voice Notifications | 6,225 | 725 | 88% |
-| Workflow Steps | 7,500 | 3,000 | 60% |
-| **TOTAL** | ~53,000 | ~18,000 | **65%** |
-
-## Best Practices
-
-### 1. Separation of Concerns
-- **Templates**: Structure and formatting only
-- **Data**: Content and parameters (YAML/JSON)
-- **Logic**: Rendering and validation (TypeScript)
-
-### 2. Keep Templates Simple
-- Avoid complex logic in templates
-- Use Handlebars helpers for transformations
-- Business logic belongs in TypeScript, not templates
-
-### 3. DRY Principle
-- Extract repeated patterns into partials
-- Use presets for common configurations
-- Single source of truth for definitions
-
-### 4. Version Control
-- Templates and data in separate files
-- Track changes independently
-- Enable A/B testing of structures
 
 ## References
 
-**Primary Documentation:**
-- `Standards.md` - Complete prompt engineering guide
-- `Templates/README.md` - Template system overview (if preserved)
-- `Tools/RenderTemplate.ts` - Implementation details
+- `LIFEOS/DOCUMENTATION/Agents/AgentSystem.md` — agent briefs are the general-purpose agent plus a brief rendered from `Templates/Primitives/Briefing.hbs`.
 
-**Research Foundation:**
-- Anthropic: "Codex 4.x Best Practices" (November 2025)
-- Anthropic: "Effective Context Engineering for AI Agents"
-- Anthropic: "Prompt Templates and Variables"
-- The Fabric System (January 2024)
-- "The Prompt Report" - arXiv:2406.06608
-- "The Prompt Canvas" - arXiv:2412.05127
+**Official anchors (drift check):** the two authoritative Anthropic sources this skill's standards derive from. They change with each model family, which is why `Standards.md` is checked against them when it is authored or audited:
+- Prompt engineering: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview
+- Context engineering: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
 
-**Related Skills:**
-- Agents - Dynamic agent composition
-- Evals - LLM-as-Judge prompting
-- Development - Spec-driven development patterns
-
----
-
-**Philosophy:** Prompts that write prompts. Structure is code, content is data. Meta-prompting enables dynamic composition where the same template with different data generates specialized agents, workflows, and evaluation frameworks. This is core PAI DNA - programmatic prompt generation at scale.
+**Research foundation:** every source behind the standards, with links, is listed once in `Standards.md` § References and § Prompt Templating System › References.

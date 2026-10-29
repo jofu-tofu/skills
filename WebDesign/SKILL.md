@@ -1,202 +1,89 @@
 ---
-name: WebDesign
-description: Web design, accessibility, and UI quality guidelines for building production interfaces. USE WHEN writing UI components OR reviewing UI code OR building forms OR fixing accessibility OR implementing WCAG OR keyboard navigation OR color contrast OR focus management OR responsive layout OR animation OR touch targets OR dark mode OR i18n OR reviewing design quality. Contains 41 rules across 10 priority categories.
-compatibility: Designed for Codex and Devin (or similar agent products)
+name: Webdesign
+evals:
+  manual:
+    reason: "interface quality must be judged in a real browser against the requested hierarchy, interaction, and visual system"
+    falsifier: "the reviewer finds a required state unusable, visually incoherent, inaccessible, or absent from the rendered interface"
 metadata:
-  author: pai
-  version: "1.0.0"
+  short-description: "Design and implement web UI, prototypes, artboard variants, and design-system sync. Use Art for illustrations and HyperFrames for video."
+version: 1.3.3
+description: Designs and integrates web interfaces via DirectDesign (inline, Anthropic frontend-design philosophy, the default) or NativeDesign (/design artboards plus /design-sync design-system sync). USE WHEN web design, UI design, artboards, design variants, create prototype, design system, design sync, redesign site, mockup, landing page, dashboard design, design-to-code, frontend design, polish UI, design audit, brutalist/editorial/retro UI. NOT FOR illustrations/logos (Art), video (HyperFrames).
+license: Complete terms in LICENSE.txt
 ---
 
-# WebDesign
+# Webdesign
 
-Web design, accessibility, and UI quality guide for production interfaces. **41 rules across 10 categories, prioritized by impact.** Framework-agnostic patterns — WCAG 2.2 AA baseline. Works with React, Vue, Angular, or vanilla HTML/CSS/JS.
+Design interfaces using DirectDesign for in-code work, or NativeDesign for artboard variants and design-system sync. Respect existing app tokens and components; redesign only when requested. Both paths share the aesthetic doctrine in `References/FrontendDesignPhilosophy.md` and the same quality loop.
 
-## When to Apply This Skill
+## Ideal State
 
-**Automatic triggers:**
-- Writing UI components (forms, modals, navigation, layouts)
-- Code review for accessibility or UI quality
-- Fixing accessibility issues or audit findings
-- Implementing ARIA patterns or keyboard navigation
-- Color contrast, focus indicators, or dark mode work
-- Responsive layout, touch targets, or animation
-- Building forms with validation and error handling
-- Reviewing design quality or UI anti-patterns
-- i18n formatting or platform-specific rendering
+- Every design lands as working code (or a picked artboard implemented) in the host app's framework, diffed against its existing tokens and components; a full redesign happens only when the user asked for one, and replacing existing UI otherwise is flagged and confirmed first.
+- The result looks made for its subject and its host app, never like a generic AI page: a named register, none of the forbidden defaults in `References/FrontendDesignPhilosophy.md`.
+- The path fits the ask: DirectDesign for in-code work, NativeDesign for comparing looks or design-system sync, and an ambiguous ask gets both paths offered by name, never routed silently.
+- Nothing reaches the principal as a first draft (principal directive, 2026-09-17): before it is shown, the rendered result has an Interceptor capture and an ArtDirection critique that passed the bar, or a reported shortfall.
 
-## Quick Decision Tree
+## Intent Routing
 
-**Start here — what are you doing?**
+| Intent | Trigger | File |
+|--------|---------|------|
+| **DirectDesign** (default, bundle `direct`) | in-code UI design or a self-contained page; short ad-hoc design asks, "make a nice design", "do the design yourself", frontend aesthetics, brutalist/editorial/retro/maximalist UI | `Intents/DirectDesign.md` |
+| **NativeDesign** (bundle `native`) | artboards, "show me variants", "give me a few directions", "pick a design", mockup, prototype, "claude design", `/design`, `/design-sync`, design-system sync | `Intents/NativeDesign.md` |
 
-1. **Choosing HTML elements? Divs for buttons?** → Category 1: Semantic Structure & HTML (CRITICAL)
-2. **Focus not working? Tab order wrong?** → Category 2: Keyboard & Focus (CRITICAL)
-3. **Building a form? Input validation?** → Category 3: Forms & Inputs (HIGH)
-4. **Color, contrast, typography, dark mode?** → Category 4: Visual Design & Contrast (HIGH)
-5. **Responsive layout? Overflow? Safe areas?** → Category 5: Layout & Responsive (HIGH)
-6. **Touch targets? Hover? Drag? Click feedback?** → Category 6: Touch & Interaction (HIGH)
-7. **Images? Alt text? Copy guidelines?** → Category 7: Content & Media (MEDIUM)
-8. **Animations? Transitions? Loading states?** → Category 8: Animation & Motion (MEDIUM)
-9. **Slow rendering? Large lists? Lazy loading?** → Category 9: Performance & Loading (MEDIUM)
-10. **i18n? Dates? Hydration? AI UI?** → Category 10: Internationalization & Platform (LOW-MEDIUM)
+DirectDesign fits one pass that lands as code in an existing codebase or as a self-contained page, including when claude.ai access is unavailable. NativeDesign fits when the principal should compare genuinely divergent looks side by side, review visually before implementation, or the job is design-system sync. Illustrations and logos go to Art: brand assets are authored SVG, never generated UI output.
 
-**For code review:** Read `AntiPatterns.md` for a quick-scan checklist.
-**For data visualization:** Read `ChartsDataViz.md` for chart accessibility.
-**For detailed implementation:** Read the specific rule file from `Rules/` folder.
+Uncertain routing or the full reference loads bundle `full`. The direct bundle includes the full aesthetic reference and the DirectDesign intent, so its doctrine read is already satisfied; do not fetch the same bytes again. NativeDesign retains its original prerequisites and approvals.
 
-## Priority Hierarchy
+| File | Read when |
+|------|-----------|
+| `References/CompleteGuide.md` | the loader fails, or the `full` bundle: integration-aware operation, preflight, the dated gotchas |
+| `References/FrontendDesignPhilosophy.md` | any DirectDesign run or NativeDesign brief: the aesthetic doctrine, registers, type pairs, forbidden defaults |
+| `References/InputFormats.md` | writing a design brief, importing a design system, choosing iterate vs restart |
+| `References/ClaudeDesignCapabilities.md` | what Claude Design and `/design` can and cannot do, access, known limits |
+| `References/SiteLaunch.md` | public-site builds and launch completion |
+| `README.md` | the public-facing intro to the skill |
+| `Setup.md` | first-time setup: Interceptor test context for the rendered check, and Claude Design access for NativeDesign |
 
-| Priority | Category | Impact | Key Pattern | Rules |
-|----------|----------|--------|-------------|-------|
-| 1 | Semantic Structure & HTML | CRITICAL | Native HTML > ARIA | 4 |
-| 2 | Keyboard & Focus | CRITICAL | Focus management, Tab/Arrow | 5 |
-| 3 | Forms & Inputs | HIGH | Labels, validation, input types | 5 |
-| 4 | Visual Design & Contrast | HIGH | 4.5:1 contrast, readable type | 5 |
-| 5 | Layout & Responsive | HIGH | Safe areas, overflow, reflow | 3 |
-| 6 | Touch & Interaction | HIGH | 44px targets, hover states | 3 |
-| 7 | Content & Media | MEDIUM | Alt text, plain language, modals | 5 |
-| 8 | Animation & Motion | MEDIUM | Reduced motion, loading states | 3 |
-| 9 | Performance & Loading | MEDIUM | Virtualization, preloading | 4 |
-| 10 | Internationalization & Platform | LOW-MEDIUM | Intl API, hydration, AI transparency | 4 |
+## Tool contract
 
-## Top 10 High-Impact Rules
+Load context with the deterministic loader before executing an intent:
+`bun "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/LIFEOS/TOOLS/ContextLoad.ts" Webdesign load BUNDLE`
 
-These prevent the most common UI quality failures:
+It returns the selected instructions and their required sections with source hashes; follow every returned requirement. Use `list` to discover sections and bundles, and `search "query"` to search the indexed source; a failed search does not establish absence, so broaden it or load `full`. If the loader fails, read `References/CompleteGuide.md` and the relevant intent directly. Do not proceed with a partial load.
 
-1. **SemanticHtmlFirst** - Use `<button>` not `<div role="button">` (prevents 90% of ARIA issues)
-2. **FocusManagement** - Move focus to new content; restore on close
-3. **ContrastRatios** - 4.5:1 for text, 3:1 for UI components
-4. **AccessibleForms** - Labels, error messages via aria-describedby
-5. **FocusIndicators** - Visible focus with 3:1 contrast, focus-visible
-6. **TouchTargets** - Minimum 44x44px, adequate spacing
-7. **ReadableTypography** - Line height, line length, font pairing, tabular-nums
-8. **ReducedMotion** - prefers-reduced-motion for all animations
-9. **ImageOptimization** - Width/height, lazy loading, fetchpriority, WebP
-10. **AlternativeText** - Meaningful alt text; empty for decorative
+Verification and the quality loop:
+
+- Browser evidence uses Interceptor's `verify` bundle, including all its isolation and safety requirements. An unavailable verifier leaves the result explicitly unverified.
+- Capture the rendered page with `Tools/VerifyDesign.ts` or `skills/Interceptor/Tools/Capture.sh`.
+- `Skill("ArtDirection")` runs a direction council before new or large work; then the cross-vendor critique panel (`skills/ArtDirection/Tools/Critique.ts`) scores the capture against the rubric and names defects, and this skill iterates on those defects until the bar or reports the shortfall.
+- A file handed over through Downloads goes through `skills/ArtDirection/Tools/Deliver.ts`, which refuses without a passing, fresh critique and a Proof receipt.
+- Record the principal's verdict with `skills/ArtDirection/Tools/Calibrate.ts`.
+- Public-site builds and launch completion also load `References/SiteLaunch.md`; component edits and standalone mockups do not require registration.
+
+## Data & Config
+
+First-time setup (accounts, keys, files to fill in): [Setup.md](Setup.md).
+
+User design preferences (color palette, typography, spacing grid, animation timing, framework defaults, the last shipped sites) live at `<configRoot>/LIFEOS/USER/CUSTOMIZATIONS/SKILLS/Webdesign/PREFERENCES.md` (configRoot is `$CLAUDE_CONFIG_DIR` when set, else `~/.claude`). When present they feed every brief, DirectDesign inline, or the NativeDesign artboard brief and design-system project, and bias the register choice without binding it. Never substitute generic defaults for configured preferences. Without preferences, choose freshly each session and rotate registers across runs.
+
+## Gotchas
+
 
 ## Examples
 
-**Example 1: Building a Component**
 ```
-User: "Build a dropdown menu"
-→ Decision tree: Category 2 (Keyboard & Focus) + Category 1 (Semantic)
-→ Read Rules/KeyboardPatterns.md + Rules/SemanticHtmlFirst.md
-→ Apply: Arrow keys for options, Escape to close, native <button> trigger
+User: "Redesign the Example App page /app/reports/weekly inside the existing app shell — it looks like trash"
+→ DirectDesign, framework-matched-diff
+→ The page uses the app's own components and tokens, reads as designed rather than a plain table, and ships with its screenshot and a passing critique
 ```
 
-**Example 2: Building a Form**
 ```
-User: "Add a registration form"
-→ Decision tree: Category 3 (Forms & Inputs)
-→ Read Rules/AccessibleForms.md + Rules/FormInputTypes.md + Rules/FormValidation.md
-→ Apply: Labels, autocomplete, inputmode, inline error messages
+User: "Design and build example.com, a public content site for the course. Deploy only after I look."
+→ DirectDesign plus References/SiteLaunch.md
+→ A rendered site with a committed register, launch criteria in the project ISA, and the deploy held for the principal's yes
 ```
 
-**Example 3: Code Review**
 ```
-User: "Review this component for quality"
-→ Read AntiPatterns.md for quick-scan checklist
-→ Flag: outline:none without replacement, color-only errors, div buttons
-→ Deep dive: Read specific rule files for flagged issues
+User: "Pull this repo's design system into Claude Design"
+→ NativeDesign, sync leg
+→ The design-system project holds the repo's real tokens and components, so later artboards start from the brand
 ```
-
-## Reference Documentation
-
-**All 41 rules are sharded into individual files in `Rules/` folder for efficient loading.**
-
-### How to Use Rules
-
-**Pattern:** When applying a rule, read its specific file from Rules/ folder.
-
-```
-Decision tree identifies: Category 3 (Forms & Inputs)
-Quick ref shows: AccessibleForms rule
-Action: Read Rules/AccessibleForms.md
-Result: Complete code examples and WCAG references
-```
-
-### What's in Each Rule File
-
-Each rule file (`Rules/RuleName.md`) includes:
-- Why it matters (explanation + impact level)
-- Multiple code examples (Incorrect/Correct patterns)
-- Testing guidance (keyboard, screen reader, automated)
-- WCAG success criteria references (where applicable)
-
-### Rule File Naming Convention
-
-Rules use TitleCase naming for PAI compliance:
-- `semantic-html-first` → `Rules/SemanticHtmlFirst.md`
-- `focus-management` → `Rules/FocusManagement.md`
-- `form-validation` → `Rules/FormValidation.md`
-
-## Complete Rule Index
-
-### 1. Semantic Structure & HTML (CRITICAL)
-- SemanticHtmlFirst
-- LandmarkRegions
-- HeadingHierarchy
-- ListStructure
-
-### 2. Keyboard & Focus (CRITICAL)
-- FocusManagement
-- KeyboardPatterns
-- TabOrder
-- SkipLinks
-- FocusIndicators
-
-### 3. Forms & Inputs (HIGH)
-- AccessibleForms
-- FormInputTypes
-- FormValidation
-- FormSubmission
-- FormSafety
-
-### 4. Visual Design & Contrast (HIGH)
-- ContrastRatios
-- ColorIndependence
-- ReadableTypography
-- TypographicDetails
-- DarkModeTheming
-
-### 5. Layout & Responsive (HIGH)
-- LayoutFundamentals
-- OverflowHandling
-- ResponsiveText
-
-### 6. Touch & Interaction (HIGH)
-- TouchTargets
-- HoverStates
-- InteractionBehavior
-
-### 7. Content & Media (MEDIUM)
-- AlternativeText
-- ImageOptimization
-- PlainLanguageCopy
-- ModalAccessibility
-- ButtonVsLink
-
-### 8. Animation & Motion (MEDIUM)
-- ReducedMotion
-- AnimationTechniques
-- LoadingStates
-
-### 9. Performance & Loading (MEDIUM)
-- RenderPerformance
-- ResourcePreloading
-- UrlStateSync
-- TimeoutAccessibility
-
-### 10. Internationalization & Platform (LOW-MEDIUM)
-- IntlFormatting
-- HydrationSafety
-- AgentTransparency
-- UserControl
-
-## Integration
-
-This skill replaces the former AccessibleUI skill. All 23 original accessibility rules are preserved and enriched with web design best practices from Vercel Web Interface Guidelines and UI/UX Pro Max.
-
-**Standard:** WCAG 2.2 Level AA
-**Testing Tools:** axe-core, WAVE, Lighthouse Accessibility
-**Screen Readers:** NVDA, VoiceOver, JAWS
-**Complements React:** React skill covers component architecture and performance. This skill covers design quality, accessibility, and UI patterns — no duplication.
