@@ -1,0 +1,30 @@
+---
+status: proposed
+trust: T3
+updated: 2026-11-03
+---
+# Proposed SkillForge improvement records
+
+Latest design migration: [ReconcileLegacy decision](ReconcileLegacy/Decision.md), with [results](ReconcileLegacy/Results.md). Draft v0.3 carries over useful installed capabilities. This is a completed design change, not a completed behavioral improvement experiment.
+
+Current entry point: [SKILL.md](../SKILL.md). Active profiles cover CreateSkill, UpdateSkill, and EvaluateSkill; see [Architecture](../Architecture.md). The earlier ImproveSkill v0.1 documents remain design history. A draft instruction package now exists; no generally validated replacement is established. Completed bounded attempts and their retention decisions are listed below.
+
+The sixth step turns quality reasoning into a bounded attempt. Copy these templates into a new attempt folder when preparing an actual change:
+
+- [Plan](Templates/Plan.md) — failure, hypothesis, comparison, protected behavior, and stopping.
+- [Results](Templates/Results.md) — observations and their limits.
+- [Decision](Templates/Decision.md) — what to retain and why.
+
+Keep completed attempts unchanged; append dated corrections. Update this index with the retained version and applicable evidence. Templates are not run records.
+
+Gap-discovery integration: report (external research record: `../../Tasks/03-metrics-and-comparisons/Checks/GapDiscovery20261103/Report.md`) and design/routing record (external research record: `../../Tasks/03-metrics-and-comparisons/Checks/GapDiscovery20261103/improvement-record.json`). Authorized design additions remain in the proposal. Three candidate routing replies meet expectations, but the baseline also diagnoses correctly and concurrent candidate edits prevent a frozen-version comparison. Behavioral improvement is unverified. This is not installed skill acceptance. Gap records use [GapRecord](../Templates/Improvement/GapRecord.md).
+
+Measurement integration v0.4: report (external research record: `../../Tasks/03-metrics-and-comparisons/Checks/MeasurementIntegration20261103/Report.md`) and attempt record (external research record: `../../Tasks/03-metrics-and-comparisons/Checks/MeasurementIntegration20261103/improvement-record.json`). Shared measurement design/qualification and consistent grading are retained as authorized draft changes. Two immutable-candidate instruction probes pass; behavioral benefit remains unverified.
+
+Discovery/diagnosis/proposal pilot: report (external research record: `../../Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Report.md`), decision (external research record: `../../Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Decision.md`) and attempt record (external research record: `../../Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/improvement-record.json`). Four revision trials and six downstream executions completed. Prior v0.4 and candidate v0.5 each yielded 18/18 correct reserved synthetic outputs, versus 9/18 for original targets. No candidate advantage; D1 retains the canonical v0.4 method. The research-informed candidate stays in its experiment workspace, unverified. This index entry records the attempt; it does not adopt candidate behavior or install a skill.
+
+Research navigation, 2026-11-03: [central library](../ResearchLibrary/SkillForge%20Research%20Library.md) and Task 6 checks (external research record: `../../Tasks/06-experiment-design-and-skill-authoring/Checks/Report.md`). Added optional evidence-guide links to Authoring and DesignMeasurement following the user's research-first request. No workflow contract or decision rule changed; external research remains optional. Structural and link checks establish navigation integrity only. Improved retrieval, proposal quality and downstream effectiveness remain unverified. Prior experiment snapshots and decisions are preserved.
+
+Research-informed v0.6 comparison: report (external research record: `../../Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Report.md`) and decision (external research record: `../../Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Decision.md`). Candidate makes decisive-evidence inspection and intervention selection concrete and adds method-level comparison guidance. Nine fresh author portfolios produced executable target revisions. Prior, candidate and simple each completed 8/8 confirmation family opportunities across two repetitions. No superiority under D2; canonical v0.4 behavior retained, v0.6 experimental package (external research record: `../../Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/snapshots/candidate/ProposedSkillForge/SKILL.md`) preserved. Separate planning study addresses an untested capability.
+
+Planning follow-up: report (external research record: `../../Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Report.md`) and decision (external research record: `../../Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Decision.md`). One fresh planner/analyzer author per method; all three passed 4/4 development and 4/4 reserved scenarios on unchanged artifacts. No D3 advantage; conditional positive-result repeat was not triggered. The combined iteration report (external research record: `../../Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-IterationReport.md`) records why v0.6 remains experimental and why another edit requires a reproduced method failure.

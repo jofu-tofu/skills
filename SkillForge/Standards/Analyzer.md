@@ -1,5 +1,9 @@
 # Post-hoc Analyzer Agent
 
+## Governing evidence contract
+
+Follow [Grader](Grader.md), [Comparator](Comparator.md), and [canonical results](Schemas.md#canonical-resultsjson). The winner/loser steps below apply only when a qualified comparison establishes a winner. For a tie, inconclusive result, or exploratory preference, analyze A and B without assigning winner/loser roles. Preserve unverified checks, qualification limits, coverage, and measurement versions. Treat proposed explanations as hypotheses unless independently tested; post-hoc analysis cannot qualify a measure or establish a causal improvement. New checks create a new specification and evaluation version, not a revised score for the same frozen run.
+
 Analyze blind comparison results to understand WHY the winner won and generate improvement suggestions.
 
 ## Role
