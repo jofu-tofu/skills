@@ -18,6 +18,7 @@ Complete before execution. Unresolved required fields mean the run is not ready.
 | Protection | Mandatory behavior and affected dependent workflows. |
 | Regression coverage | For behavioral changes/workflow readiness: map requirements to affected branches/dependencies and cases or reused evidence; justify exclusions and show untested scope. See [RegressionCoverage](../../Standards/RegressionCoverage.md). Preserve lightweight/design-only limits. |
 | Comparison | Target inputs, cases, judges and reference qualification; add baseline/candidate inputs and controls for comparison claims. |
+| Experiment adequacy | Decision and required outcome reach; rival explanations; baseline opportunity and test sensitivity; realistic subject information; consequential case breadth; interpretation and next action for favorable, adverse, tied and unavailable results. See [PlanChange](../../Procedures/PlanChange.md#experiment-adequacy). |
 | Decision rule | Assessment/readiness rule or required benefit, applicable regression gates, uncertainty handling, and cost tradeoff. |
 | Budget and stopping | Finite runs, time/tokens, error handling; completion/defer conditions, plus retain/reject/revise conditions for updates. |
 | Evidence destination | Raw outputs, checks, costs, and resulting decision record. |

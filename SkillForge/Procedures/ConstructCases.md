@@ -12,3 +12,5 @@
 6. Map cases and reused evidence to the governing plan's regression coverage. Surface missing branches, handoffs and nonapplication contrasts before execution; return material scope conflicts to PlanChange rather than silently shrinking the claim. Return coverage, justified exclusions, unavailable prerequisites, suite paths and not_executed status. A case-only request stops here.
 
 Acceptance: a separate executor can run the plan without inventing requirements. A small smoke suite does not justify general effectiveness. Version suite changes independently of target changes.
+
+Before freezing a behavioral suite, trace every required decision in PlanChange's experiment adequacy check to observable evidence. Include the affected caller and final consumer where a handoff can lose the result. Inspect prompts for answers or coaching that remove the behavior being tested. Preserve development diagnoses separately from fresh confirmation; a saturated case remains useful preservation evidence but is not a reason to repeat an uninformative comparison. Return missing decision coverage to PlanChange before executing a suite that cannot answer its question.
