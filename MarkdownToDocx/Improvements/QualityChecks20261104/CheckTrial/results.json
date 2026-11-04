@@ -1,0 +1,1128 @@
+{
+  "suite_version": "MD-check-trial-v1",
+  "workflow": "EvaluateSkill",
+  "mode": "qualification",
+  "claim": "Determine whether the combined proposed checks distinguish six human-reviewed development examples; not target-skill quality or general checker reliability.",
+  "snapshots": {
+    "fixtures": {
+      "source.md": "57df3fd9ea6a1772b6281206bfcd41e7e9b0d812435c9da0c2c4d511d0c73a89",
+      "01-reference.docx": "eca5bb68224145be78f9c5758fde441fe3e54476cc0b2167c659a14c3b0295d5",
+      "02-missing-paragraph.docx": "d461ce33b3951e8badcab23ed828924b224385afbf9737a4937c6cc7575b0136",
+      "03-changed-table.docx": "21af15c07fdcce98ef281e0d2333784335613ef1fc9d086b34cdfa6b38cdeb06",
+      "04-clipped-diagram.docx": "b9f4934d8932e4d89d94dddbfa5dd87698fa467e5cf9d18a6b89ef4d31b1c4f6",
+      "05-page-image.docx": "815812dfc88c91441f4c2f0b616c11164375b0160608e0f8da263dd03a84bbd5",
+      "06-valid-formatting.docx": "9dbbeb168955082f031eedfcd84790654534ded2a96c73cf0f4dc71758635275"
+    },
+    "target": {
+      "SKILL.md": "86d6c5aa07471cb41341af5be0448047b22cb5ee81df9750efb0b96d2750235e",
+      "SkillIntent.md": "0a53248895278c0369c957a9268cbd747e6faff106d39ff44ecc35c0b0b79502",
+      "Tools/.gitkeep": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "Tools/PostProcessDocx.py": "74db01bcf7f29f3ab74b4a3c4894df9074138b895cfedf92b806ccf65bc419ee",
+      "Tools/RenderMermaid.mjs": "01a5cb9e14d6d8435070bd924d355c5ce8f562e512addb109c3aa76ffcc31819",
+      "Workflows/ConvertMarkdownToDocx.md": "c0df80f853265133497eae317b69c3b18045f4485df5cd1b8d4055a71ecb7ce7"
+    },
+    "scripts": {
+      "check_content.py": "a75257eb05f859d56a99cfd688dbf7e99e2b756684b89bd52be00255a7a62e51",
+      "edit_word.ps1": "a75ad48dd0ee5441e2fb7d0e211a3bdf90497eccafb63741f623d094fec34255",
+      "Plan.md": "bbc15581fb60f519095e3cb4cba662cdcecacaab3d77f60c38494f2724fa60c7",
+      "visual-observations.json": "182eeb9131ba329d2948946216ab691b977ddc1f474d511286ff6bfbbf12de3b"
+    },
+    "measurement": "MD-M-v0.1 with C1-C5 operationalized in Plan.md"
+  },
+  "requested_trials": 6,
+  "completed_trials": 6,
+  "runs": [
+    {
+      "case_id": "01-reference.docx",
+      "role": "development",
+      "configuration": "approved-example",
+      "trial": 1,
+      "execution_status": "completed",
+      "artifact_diagnostic_verdict": "pass",
+      "checks": [
+        {
+          "id": "C1",
+          "status": "pass",
+          "observation": {
+            "missing_native_content": [],
+            "heading_order_preserved": true,
+            "native_paragraphs": [
+              "Library pickup instructions",
+              "This fictional library example explains how to collect reserved books. Choose a pickup location and wait for a ready notice before travelling.",
+              "Collection deadline",
+              "Uncollected books return to the shelf after 3 days. A ready notice does not extend this deadline.",
+              "How to collect",
+              "Submit a request with your name and pickup location.",
+              "Wait for the library to review the request and send a ready notice.",
+              "Bring your library card when collecting the books.",
+              "Pickup locations",
+              "Request progress",
+              "Reference link for this fictional example: Pickup information"
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C2",
+          "status": "pass",
+          "observation": {
+            "native_tables": [
+              [
+                [
+                  "Location",
+                  "Limit",
+                  "Hours"
+                ],
+                [
+                  "North desk",
+                  "2 books",
+                  "09:00 to 12:00"
+                ],
+                [
+                  "South desk",
+                  "5 books",
+                  "13:00 to 17:00"
+                ],
+                [
+                  "Mobile stop",
+                  "1 book",
+                  "15:00 to 16:00"
+                ]
+              ]
+            ],
+            "expected_table": [
+              [
+                "Location",
+                "Limit",
+                "Hours"
+              ],
+              [
+                "North desk",
+                "2 books",
+                "09:00 to 12:00"
+              ],
+              [
+                "South desk",
+                "5 books",
+                "13:00 to 17:00"
+              ],
+              [
+                "Mobile stop",
+                "1 book",
+                "15:00 to 16:00"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C3",
+          "status": "pass",
+          "observation": {
+            "live_hyperlinks": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ],
+            "expected_links": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C4",
+          "measurement_id": "MD-visual-v1",
+          "status": "pass",
+          "observation": "Readable paragraphs and table; all three diagram nodes Submitted, Reviewed, Ready and both arrows visible; no clipping or overlap observed.",
+          "evidence": [
+            "visual-observations.json",
+            "../Examples/internal/renders/01-reference/page-1.png"
+          ],
+          "reason": "Unblinded visual check against the approved reference meaning; not an independent automated visual grader."
+        },
+        {
+          "id": "C5",
+          "measurement_id": "MD-edit-v1",
+          "status": "pass",
+          "observation": {
+            "file": "01-reference.docx",
+            "execution_status": "completed",
+            "status": "pass",
+            "opened": true,
+            "paragraph_found": true,
+            "cell_found": true,
+            "paragraph_persisted": true,
+            "cell_persisted": true,
+            "error": null,
+            "seconds": 0.5966234
+          },
+          "evidence": [
+            "word-observations.json"
+          ],
+          "reason": "Actual Word automation on disposable copies; missing native editing targets are observed failure, runtime errors would remain unverified. Disposable edited copies remain local to avoid publishing Word account metadata; the committed receipt preserves the observed task results."
+        },
+        {
+          "id": "MD-O04",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No conversion delivery/batch run performed.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O05",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No converter completion or error report to compare with actual execution.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O06",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "Automated fixture operations cannot establish user effort or repair burden.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        }
+      ]
+    },
+    {
+      "case_id": "02-missing-paragraph.docx",
+      "role": "development",
+      "configuration": "approved-example",
+      "trial": 1,
+      "execution_status": "completed",
+      "artifact_diagnostic_verdict": "fail",
+      "checks": [
+        {
+          "id": "C1",
+          "status": "fail",
+          "observation": {
+            "missing_native_content": [
+              "Uncollected books return to the shelf after 3 days. A ready notice does not extend this deadline."
+            ],
+            "heading_order_preserved": true,
+            "native_paragraphs": [
+              "Library pickup instructions",
+              "This fictional library example explains how to collect reserved books. Choose a pickup location and wait for a ready notice before travelling.",
+              "Collection deadline",
+              "How to collect",
+              "Submit a request with your name and pickup location.",
+              "Wait for the library to review the request and send a ready notice.",
+              "Bring your library card when collecting the books.",
+              "Pickup locations",
+              "Request progress",
+              "Reference link for this fictional example: Pickup information"
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C2",
+          "status": "pass",
+          "observation": {
+            "native_tables": [
+              [
+                [
+                  "Location",
+                  "Limit",
+                  "Hours"
+                ],
+                [
+                  "North desk",
+                  "2 books",
+                  "09:00 to 12:00"
+                ],
+                [
+                  "South desk",
+                  "5 books",
+                  "13:00 to 17:00"
+                ],
+                [
+                  "Mobile stop",
+                  "1 book",
+                  "15:00 to 16:00"
+                ]
+              ]
+            ],
+            "expected_table": [
+              [
+                "Location",
+                "Limit",
+                "Hours"
+              ],
+              [
+                "North desk",
+                "2 books",
+                "09:00 to 12:00"
+              ],
+              [
+                "South desk",
+                "5 books",
+                "13:00 to 17:00"
+              ],
+              [
+                "Mobile stop",
+                "1 book",
+                "15:00 to 16:00"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C3",
+          "status": "pass",
+          "observation": {
+            "live_hyperlinks": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ],
+            "expected_links": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C4",
+          "measurement_id": "MD-visual-v1",
+          "status": "pass",
+          "observation": "Remaining content is legible, with intact diagram and table. Empty Collection deadline section is a content omission caught by C1, not a clipping defect.",
+          "evidence": [
+            "visual-observations.json",
+            "../Examples/internal/renders/02-missing-paragraph/page-1.png"
+          ],
+          "reason": "Unblinded visual check against the approved reference meaning; not an independent automated visual grader."
+        },
+        {
+          "id": "C5",
+          "measurement_id": "MD-edit-v1",
+          "status": "pass",
+          "observation": {
+            "file": "02-missing-paragraph.docx",
+            "execution_status": "completed",
+            "status": "pass",
+            "opened": true,
+            "paragraph_found": true,
+            "cell_found": true,
+            "paragraph_persisted": true,
+            "cell_persisted": true,
+            "error": null,
+            "seconds": 0.2529596
+          },
+          "evidence": [
+            "word-observations.json"
+          ],
+          "reason": "Actual Word automation on disposable copies; missing native editing targets are observed failure, runtime errors would remain unverified. Disposable edited copies remain local to avoid publishing Word account metadata; the committed receipt preserves the observed task results."
+        },
+        {
+          "id": "MD-O04",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No conversion delivery/batch run performed.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O05",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No converter completion or error report to compare with actual execution.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O06",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "Automated fixture operations cannot establish user effort or repair burden.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        }
+      ]
+    },
+    {
+      "case_id": "03-changed-table.docx",
+      "role": "development",
+      "configuration": "approved-example",
+      "trial": 1,
+      "execution_status": "completed",
+      "artifact_diagnostic_verdict": "fail",
+      "checks": [
+        {
+          "id": "C1",
+          "status": "pass",
+          "observation": {
+            "missing_native_content": [],
+            "heading_order_preserved": true,
+            "native_paragraphs": [
+              "Library pickup instructions",
+              "This fictional library example explains how to collect reserved books. Choose a pickup location and wait for a ready notice before travelling.",
+              "Collection deadline",
+              "Uncollected books return to the shelf after 3 days. A ready notice does not extend this deadline.",
+              "How to collect",
+              "Submit a request with your name and pickup location.",
+              "Wait for the library to review the request and send a ready notice.",
+              "Bring your library card when collecting the books.",
+              "Pickup locations",
+              "Request progress",
+              "Reference link for this fictional example: Pickup information"
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C2",
+          "status": "fail",
+          "observation": {
+            "native_tables": [
+              [
+                [
+                  "Location",
+                  "Limit",
+                  "Hours"
+                ],
+                [
+                  "North desk",
+                  "5 books",
+                  "09:00 to 12:00"
+                ],
+                [
+                  "South desk",
+                  "2 books",
+                  "13:00 to 17:00"
+                ],
+                [
+                  "Mobile stop",
+                  "1 book",
+                  "15:00 to 16:00"
+                ]
+              ]
+            ],
+            "expected_table": [
+              [
+                "Location",
+                "Limit",
+                "Hours"
+              ],
+              [
+                "North desk",
+                "2 books",
+                "09:00 to 12:00"
+              ],
+              [
+                "South desk",
+                "5 books",
+                "13:00 to 17:00"
+              ],
+              [
+                "Mobile stop",
+                "1 book",
+                "15:00 to 16:00"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C3",
+          "status": "pass",
+          "observation": {
+            "live_hyperlinks": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ],
+            "expected_links": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C4",
+          "measurement_id": "MD-visual-v1",
+          "status": "pass",
+          "observation": "Table and other content are legible; wrong numerical associations are caught by C2, not a readability failure.",
+          "evidence": [
+            "visual-observations.json",
+            "../Examples/internal/renders/03-changed-table/page-1.png"
+          ],
+          "reason": "Unblinded visual check against the approved reference meaning; not an independent automated visual grader."
+        },
+        {
+          "id": "C5",
+          "measurement_id": "MD-edit-v1",
+          "status": "pass",
+          "observation": {
+            "file": "03-changed-table.docx",
+            "execution_status": "completed",
+            "status": "pass",
+            "opened": true,
+            "paragraph_found": true,
+            "cell_found": true,
+            "paragraph_persisted": true,
+            "cell_persisted": true,
+            "error": null,
+            "seconds": 0.3137337
+          },
+          "evidence": [
+            "word-observations.json"
+          ],
+          "reason": "Actual Word automation on disposable copies; missing native editing targets are observed failure, runtime errors would remain unverified. Disposable edited copies remain local to avoid publishing Word account metadata; the committed receipt preserves the observed task results."
+        },
+        {
+          "id": "MD-O04",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No conversion delivery/batch run performed.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O05",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No converter completion or error report to compare with actual execution.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O06",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "Automated fixture operations cannot establish user effort or repair burden.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        }
+      ]
+    },
+    {
+      "case_id": "04-clipped-diagram.docx",
+      "role": "development",
+      "configuration": "approved-example",
+      "trial": 1,
+      "execution_status": "completed",
+      "artifact_diagnostic_verdict": "fail",
+      "checks": [
+        {
+          "id": "C1",
+          "status": "pass",
+          "observation": {
+            "missing_native_content": [],
+            "heading_order_preserved": true,
+            "native_paragraphs": [
+              "Library pickup instructions",
+              "This fictional library example explains how to collect reserved books. Choose a pickup location and wait for a ready notice before travelling.",
+              "Collection deadline",
+              "Uncollected books return to the shelf after 3 days. A ready notice does not extend this deadline.",
+              "How to collect",
+              "Submit a request with your name and pickup location.",
+              "Wait for the library to review the request and send a ready notice.",
+              "Bring your library card when collecting the books.",
+              "Pickup locations",
+              "Request progress",
+              "Reference link for this fictional example: Pickup information"
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C2",
+          "status": "pass",
+          "observation": {
+            "native_tables": [
+              [
+                [
+                  "Location",
+                  "Limit",
+                  "Hours"
+                ],
+                [
+                  "North desk",
+                  "2 books",
+                  "09:00 to 12:00"
+                ],
+                [
+                  "South desk",
+                  "5 books",
+                  "13:00 to 17:00"
+                ],
+                [
+                  "Mobile stop",
+                  "1 book",
+                  "15:00 to 16:00"
+                ]
+              ]
+            ],
+            "expected_table": [
+              [
+                "Location",
+                "Limit",
+                "Hours"
+              ],
+              [
+                "North desk",
+                "2 books",
+                "09:00 to 12:00"
+              ],
+              [
+                "South desk",
+                "5 books",
+                "13:00 to 17:00"
+              ],
+              [
+                "Mobile stop",
+                "1 book",
+                "15:00 to 16:00"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C3",
+          "status": "pass",
+          "observation": {
+            "live_hyperlinks": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ],
+            "expected_links": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C4",
+          "measurement_id": "MD-visual-v1",
+          "status": "fail",
+          "observation": "Final diagram box ends abruptly after the beginning of the Ready label; its right border and rest of the label are missing. Other text/table content remains legible.",
+          "evidence": [
+            "visual-observations.json",
+            "../Examples/internal/renders/04-clipped-diagram/page-1.png"
+          ],
+          "reason": "Unblinded visual check against the approved reference meaning; not an independent automated visual grader."
+        },
+        {
+          "id": "C5",
+          "measurement_id": "MD-edit-v1",
+          "status": "pass",
+          "observation": {
+            "file": "04-clipped-diagram.docx",
+            "execution_status": "completed",
+            "status": "pass",
+            "opened": true,
+            "paragraph_found": true,
+            "cell_found": true,
+            "paragraph_persisted": true,
+            "cell_persisted": true,
+            "error": null,
+            "seconds": 0.3117229
+          },
+          "evidence": [
+            "word-observations.json"
+          ],
+          "reason": "Actual Word automation on disposable copies; missing native editing targets are observed failure, runtime errors would remain unverified. Disposable edited copies remain local to avoid publishing Word account metadata; the committed receipt preserves the observed task results."
+        },
+        {
+          "id": "MD-O04",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No conversion delivery/batch run performed.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O05",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No converter completion or error report to compare with actual execution.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O06",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "Automated fixture operations cannot establish user effort or repair burden.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        }
+      ]
+    },
+    {
+      "case_id": "05-page-image.docx",
+      "role": "development",
+      "configuration": "approved-example",
+      "trial": 1,
+      "execution_status": "completed",
+      "artifact_diagnostic_verdict": "fail",
+      "checks": [
+        {
+          "id": "C1",
+          "status": "fail",
+          "observation": {
+            "missing_native_content": [
+              "This fictional library example explains how to collect reserved books. Choose a pickup location and wait for a ready notice before travelling.",
+              "Uncollected books return to the shelf after 3 days. A ready notice does not extend this deadline.",
+              "Reference link for this fictional example: Pickup information",
+              "Submit a request with your name and pickup location.",
+              "Wait for the library to review the request and send a ready notice.",
+              "Bring your library card when collecting the books.",
+              "Library pickup instructions",
+              "Collection deadline",
+              "How to collect",
+              "Pickup locations",
+              "Request progress"
+            ],
+            "heading_order_preserved": false,
+            "native_paragraphs": []
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C2",
+          "status": "fail",
+          "observation": {
+            "native_tables": [],
+            "expected_table": [
+              [
+                "Location",
+                "Limit",
+                "Hours"
+              ],
+              [
+                "North desk",
+                "2 books",
+                "09:00 to 12:00"
+              ],
+              [
+                "South desk",
+                "5 books",
+                "13:00 to 17:00"
+              ],
+              [
+                "Mobile stop",
+                "1 book",
+                "15:00 to 16:00"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C3",
+          "status": "fail",
+          "observation": {
+            "live_hyperlinks": [],
+            "expected_links": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C4",
+          "measurement_id": "MD-visual-v1",
+          "status": "pass",
+          "observation": "Reference content is visually present and readable, including the complete diagram. Visual inspection alone cannot establish editability or a live hyperlink.",
+          "evidence": [
+            "visual-observations.json",
+            "../Examples/internal/renders/05-page-image/page-1.png"
+          ],
+          "reason": "Unblinded visual check against the approved reference meaning; not an independent automated visual grader."
+        },
+        {
+          "id": "C5",
+          "measurement_id": "MD-edit-v1",
+          "status": "fail",
+          "observation": {
+            "file": "05-page-image.docx",
+            "execution_status": "completed",
+            "status": "fail",
+            "opened": true,
+            "paragraph_found": false,
+            "cell_found": false,
+            "paragraph_persisted": null,
+            "cell_persisted": null,
+            "error": null,
+            "seconds": 0.1068272
+          },
+          "evidence": [
+            "word-observations.json"
+          ],
+          "reason": "Actual Word automation on disposable copies; missing native editing targets are observed failure, runtime errors would remain unverified. Disposable edited copies remain local to avoid publishing Word account metadata; the committed receipt preserves the observed task results."
+        },
+        {
+          "id": "MD-O04",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No conversion delivery/batch run performed.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O05",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No converter completion or error report to compare with actual execution.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O06",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "Automated fixture operations cannot establish user effort or repair burden.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        }
+      ]
+    },
+    {
+      "case_id": "06-valid-formatting.docx",
+      "role": "development",
+      "configuration": "approved-example",
+      "trial": 1,
+      "execution_status": "completed",
+      "artifact_diagnostic_verdict": "pass",
+      "checks": [
+        {
+          "id": "C1",
+          "status": "pass",
+          "observation": {
+            "missing_native_content": [],
+            "heading_order_preserved": true,
+            "native_paragraphs": [
+              "Library pickup instructions",
+              "This fictional library example explains how to collect reserved books. Choose a pickup location and wait for a ready notice before travelling.",
+              "Collection deadline",
+              "Uncollected books return to the shelf after 3 days. A ready notice does not extend this deadline.",
+              "How to collect",
+              "Submit a request with your name and pickup location.",
+              "Wait for the library to review the request and send a ready notice.",
+              "Bring your library card when collecting the books.",
+              "Pickup locations",
+              "Request progress",
+              "Reference link for this fictional example: Pickup information"
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C2",
+          "status": "pass",
+          "observation": {
+            "native_tables": [
+              [
+                [
+                  "Location",
+                  "Limit",
+                  "Hours"
+                ],
+                [
+                  "North desk",
+                  "2 books",
+                  "09:00 to 12:00"
+                ],
+                [
+                  "South desk",
+                  "5 books",
+                  "13:00 to 17:00"
+                ],
+                [
+                  "Mobile stop",
+                  "1 book",
+                  "15:00 to 16:00"
+                ]
+              ]
+            ],
+            "expected_table": [
+              [
+                "Location",
+                "Limit",
+                "Hours"
+              ],
+              [
+                "North desk",
+                "2 books",
+                "09:00 to 12:00"
+              ],
+              [
+                "South desk",
+                "5 books",
+                "13:00 to 17:00"
+              ],
+              [
+                "Mobile stop",
+                "1 book",
+                "15:00 to 16:00"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C3",
+          "status": "pass",
+          "observation": {
+            "live_hyperlinks": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ],
+            "expected_links": [
+              [
+                "Pickup information",
+                "https://example.org/pickup"
+              ]
+            ]
+          },
+          "measurement_id": "MD-content-v1",
+          "evidence": [
+            "source-expectations.json",
+            "content-observations.json"
+          ],
+          "reason": "Source-derived requirement checked against native Word document elements, limited to this fixture contract."
+        },
+        {
+          "id": "C4",
+          "measurement_id": "MD-visual-v1",
+          "status": "pass",
+          "observation": "Different serif font, wrapping and spacing remain readable; complete diagram and table fit on one page. No rejection for harmless typography differences.",
+          "evidence": [
+            "visual-observations.json",
+            "../Examples/internal/renders/06-valid-formatting/page-1.png"
+          ],
+          "reason": "Unblinded visual check against the approved reference meaning; not an independent automated visual grader."
+        },
+        {
+          "id": "C5",
+          "measurement_id": "MD-edit-v1",
+          "status": "pass",
+          "observation": {
+            "file": "06-valid-formatting.docx",
+            "execution_status": "completed",
+            "status": "pass",
+            "opened": true,
+            "paragraph_found": true,
+            "cell_found": true,
+            "paragraph_persisted": true,
+            "cell_persisted": true,
+            "error": null,
+            "seconds": 0.3208657
+          },
+          "evidence": [
+            "word-observations.json"
+          ],
+          "reason": "Actual Word automation on disposable copies; missing native editing targets are observed failure, runtime errors would remain unverified. Disposable edited copies remain local to avoid publishing Word account metadata; the committed receipt preserves the observed task results."
+        },
+        {
+          "id": "MD-O04",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No conversion delivery/batch run performed.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O05",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "No converter completion or error report to compare with actual execution.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        },
+        {
+          "id": "MD-O06",
+          "measurement_id": "MD-M-v0.1",
+          "status": "unverified",
+          "observation": "Automated fixture operations cannot establish user effort or repair burden.",
+          "evidence": [
+            "Plan.md"
+          ],
+          "reason": "Outside the static-example exercise; not silently counted as pass."
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "pass": 23,
+    "unverified": 18,
+    "fail": 7
+  },
+  "expected_decision_matches": {
+    "01-reference.docx": true,
+    "02-missing-paragraph.docx": true,
+    "03-changed-table.docx": true,
+    "04-clipped-diagram.docx": true,
+    "05-page-image.docx": true,
+    "06-valid-formatting.docx": true
+  },
+  "decision": {
+    "status": "pass",
+    "scope": "Known six-example discrimination only; broader qualification and target readiness unverified; user review pending"
+  },
+  "cost": {
+    "word_task_seconds": 1.9027325,
+    "content_check_seconds": 0.015000000013969839,
+    "model_tokens": null,
+    "total_wall_seconds": null
+  },
+  "limitations": [
+    "Known examples; same assistant authored fixtures and assessed results, with user-approved expectations.",
+    "C4 is unblinded visual assessment, not autonomous visual checker validation.",
+    "C1 checks expected text presence and heading order, not arbitrary added content, all list ordering or semantic style preservation.",
+    "C2 covers one simple native table; merged/nested tables are outside scope.",
+    "C5 uses Word automation, not a human UI editing trial.",
+    "MD-O04/05/06 remain unverified; no MarkdownToDocx execution or modification.",
+    "Six exposed examples do not estimate deployment reliability or prove SkillForge improvement.",
+    "Publication adaptation replaces one private checker path and omits disposable edited copies; original checker identity is preserved in publication-manifest.json. Raw observation receipts are unchanged."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "fixture_hashes_unchanged": true,
+    "target_hashes_unchanged": true,
+    "target_file_count": 6
+  },
+  "after": {
+    "fixtures": {
+      "source.md": "57df3fd9ea6a1772b6281206bfcd41e7e9b0d812435c9da0c2c4d511d0c73a89",
+      "01-reference.docx": "eca5bb68224145be78f9c5758fde441fe3e54476cc0b2167c659a14c3b0295d5",
+      "02-missing-paragraph.docx": "d461ce33b3951e8badcab23ed828924b224385afbf9737a4937c6cc7575b0136",
+      "03-changed-table.docx": "21af15c07fdcce98ef281e0d2333784335613ef1fc9d086b34cdfa6b38cdeb06",
+      "04-clipped-diagram.docx": "b9f4934d8932e4d89d94dddbfa5dd87698fa467e5cf9d18a6b89ef4d31b1c4f6",
+      "05-page-image.docx": "815812dfc88c91441f4c2f0b616c11164375b0160608e0f8da263dd03a84bbd5",
+      "06-valid-formatting.docx": "9dbbeb168955082f031eedfcd84790654534ded2a96c73cf0f4dc71758635275"
+    },
+    "target": {
+      "SKILL.md": "86d6c5aa07471cb41341af5be0448047b22cb5ee81df9750efb0b96d2750235e",
+      "SkillIntent.md": "0a53248895278c0369c957a9268cbd747e6faff106d39ff44ecc35c0b0b79502",
+      "Tools/.gitkeep": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "Tools/PostProcessDocx.py": "74db01bcf7f29f3ab74b4a3c4894df9074138b895cfedf92b806ccf65bc419ee",
+      "Tools/RenderMermaid.mjs": "01a5cb9e14d6d8435070bd924d355c5ce8f562e512addb109c3aa76ffcc31819",
+      "Workflows/ConvertMarkdownToDocx.md": "c0df80f853265133497eae317b69c3b18045f4485df5cd1b8d4055a71ecb7ce7"
+    }
+  }
+}

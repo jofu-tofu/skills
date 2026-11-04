@@ -1,0 +1,10 @@
+{
+  "scope": "publication replay of path-adapted content checker; not a new skill or Word trial",
+  "portable_content_observations_match_historical": true,
+  "replayed_files": 6,
+  "native_word_rerun": false,
+  "historical_raw_receipts_preserved": true,
+  "manifest_files_verified": 27,
+  "docx_account_metadata_and_private_path_scan": "passed",
+  "scripts_and_evidence_text_private_path_scan": "passed"
+}
