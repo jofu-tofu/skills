@@ -25,6 +25,7 @@ Skill changes can look plausible while missing the intended outcome, breaking ex
 | User entry points | Create, Update, Evaluate | One entry point per internal operation | Users request outcomes; procedures can still be tested independently. |
 | Approval | Shared decision procedure | Standalone orchestration workflow | The same evidence gate serves several tasks. |
 | Quality records | Shared rules plus workflow profiles | One universal quality score | Outcomes and tradeoffs differ by operation. |
+| Outcome detail and component goals | Derive specific outcomes, then map contributions back to dimensions or capabilities | Treat the existing component list as the quality definition | Expose missing coverage and unsupported responsibilities while preserving complementary contributions; mapping is not proof of causal benefit. |
 | Records | Separate current criteria from attempt history | Reload every prior conversation | Preserve useful reasoning with manageable context. |
 | Simple maintenance | Direct scoped edit and proportional checks | Full improvement loop for every edit | Avoid recreating the old system's reported chaining overhead. |
 | Review and trigger testing | Structural review during creation and substantive updates; trigger testing selected when relevant | Extra top-level routes | Preserve capabilities without multiplying user entry points. |

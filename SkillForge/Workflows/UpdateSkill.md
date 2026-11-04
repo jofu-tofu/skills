@@ -33,13 +33,27 @@ After substantive edits on any path, call ReviewDesign on the changed instructio
 
 Shared procedures are reusable operations, not required separate agent calls. Existing adequate records can be linked. A request to make a design change authorizes that change; no fabricated behavioral failure is needed.
 
+### Execution scope and stopping
+
+Before launching experiments, use PlanChange's experiment adequacy check: test the user's decision at the necessary level, not only the easiest intermediate artifact. If human checkpoints are not requested or have been withdrawn, make the evidence-based decisions within existing authority and continue. Do not invent a human review dependency for ordinary experiment choices.
+
+Before closing, resolve identified in-scope outcome uncertainties with available checks. Reporting an uncertainty honestly does not by itself finish work that is authorized and feasible. Preserve genuine scope and resource limits; do not expand a focused request into unrelated repairs.
+
+A request to improve behavior or repair a failure includes proportionate outcome evaluation within the user's scope. Do not silently downgrade it to design-only because the change is written as instructions, measures are missing, or the first edit is finished. Qualify or refine missing checks before using them to judge improvement. Explicit requests for a proposal or design-only revision keep that narrower scope; the maintenance shortcuts above remain proportional.
+
+For human-in-the-loop work, stop at the agreed outcome, measurement or result checkpoints with a concrete review artifact and the next action recorded. After the user resolves that checkpoint, continue the existing evaluation plan without requesting the same authorization again. Actual unavailable dependencies, resources or unresolved material choices may prevent execution: report what was attempted, the specific missing evidence and the next step, keeping improvement unverified. Do not treat a static validation pass or the candidate author's example as an outcome trial.
+
 1. Read target intent, affected workflows, applicable quality records, and the latest relevant decision. Preserve the baseline.
 2. For a reported or observed gap, call DiagnoseGap before planning. Then call EstablishQuality: for broad improvement, make the purpose-to-outcome reasoning visible before proposing metrics or edits; for a focused repair, revisit only the affected purpose and outcomes. Include DesignMeasurement for new/changed/unsupported measures even without a gap. Preserve criterion IDs and measurement versions; record authorized changes separately. Use the same qualified definition for baseline and candidate comparisons.
-3. Call PlanChange with the diagnosis or requested change, suspected cause, protected behavior, budget, and decision rule. Include its regression-coverage map and separate benefit/preservation gates for behavioral updates; shared instructions may affect other branches beyond the reported failure. A design hypothesis need not be presented as an observed failure. A case/checker gap may require only evaluation changes; retain the target when no skill edit is justified.
+3. Call PlanChange with the diagnosis or requested change, suspected cause, protected behavior, budget, and decision rule. Name the outcome-level evaluation and when it runs; for an improvement claim compare the preserved baseline and candidate under the same applicable checks and comparable conditions. Include its regression-coverage map and separate benefit/preservation gates for behavioral updates; shared instructions may affect other branches beyond the reported failure. A design hypothesis need not be presented as an observed failure. A case/checker gap may require only evaluation changes; retain the target when no skill edit is justified.
 4. Call DraftCandidate for the smallest coherent revision; avoid unrelated changes. Apply the authoring review above before evaluation.
-5. When execution is authorized, call EvaluateCandidate then ApproveSkill. For a design-only revision, return unverified status rather than claiming improvement.
-6. Call RecordLearning. Report which version was retained and the evidence scope. Further attempts need remaining budget and a new explicit hypothesis.
+5. For behavioral improvement or repair, call EvaluateCandidate then ApproveSkill before closing the attempt. Test the intended result and required preservation, not just instruction compliance or package structure. When improving SkillForge, separate better authoring/evaluation decisions from improved downstream skill behavior; evidence for one does not establish the other. For an explicit design-only revision, record evaluation as not run with its next step and return unverified status.
+6. Call RecordLearning. Report which version was retained and the evidence scope, including ties, regressions and unverified outcomes. A failed or inconclusive trial leads to a justified no-change/defer decision or a new hypothesis within remaining scope and budget; do not silently repeat until it wins. Further attempts preserve prior results and need appropriate fresh cases.
+
+If ApproveSkill identifies a feasible missing check for a required outcome, continue the bounded evaluation instead of advancing to final closure. Amend the plan/checker explicitly when needed, preserve earlier observations, and rerun affected comparisons fairly. If the check reveals a defect, return to the smallest justified revision. Final retention and completion are different decisions when a requested outcome remains unresolved.
 
 ## Completion
 
 The user receives the owned result, evidence status, and unresolved limitations. Do not silently expand a design-only or assessment-only request into execution, edits, installation, or release.
+
+For an improvement request, "draft edited; structural checks pass" is an intermediate state. Finish with an outcome-based retain/reject/defer decision or a specific pending human checkpoint or execution limitation. Missing qualification prevents a confirmed improvement claim; it does not justify skipping authorized exploratory or qualification work.

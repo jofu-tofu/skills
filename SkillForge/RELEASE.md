@@ -1,6 +1,6 @@
 # SkillForge 2.1.0 release candidate
 
-Version: 2.1.0-rc.2. Adds explicit purpose-to-outcome reasoning, challenges to outcome definitions, requested human checkpoints and staged improvement planning. Narrow maintenance remains lightweight. The prior offline qualification gates apply to 2.1.0-rc.1; they have not been rerun on these changed instructions.
+Version: 2.1.0-rc.7. Adds outcome decomposition, contribution mapping, experiment-adequacy checks and explicit continuation into outcome evaluation. Ordinary improvements use a small complete decision loop; larger studies require a decision and evidence that justify their cost. The final decision gate checks scope assumptions and composition across handoffs, returning feasible required checks to evaluation rather than closing prematurely. Narrow maintenance remains lightweight. The [experiment record](Improvements/ExperimentAdequacy/Record.md) preserves 29 completed trials, ties, rc.5/rc.6 failures and rc.7's successful exact replay and preservation control. This is bounded engineering evidence, not universal autonomous reliability or a rerun of all prior release qualification.
 
 The purpose-first walkthrough produced owner-agreed MarkdownToDocx outcomes and a bounded six-example check trial. This supports development use, not superiority over the prior method or autonomous reliability. See the [change record](Improvements/PurposeFirst/Proposal.md). Publishing this candidate does not itself install it or establish broader effectiveness.
 

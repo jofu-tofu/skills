@@ -2,11 +2,11 @@
 name: SkillForge
 description: Create, update, or evaluate reusable agent skills with explicit quality criteria and preserved evidence. USE WHEN create a skill OR improve a skill OR evaluate a skill OR a skill keeps missing expected behavior OR diagnose a skill gap.
 metadata:
-  version: "2.1.0-rc.2"
+  version: "2.1.0-rc.7"
 ---
 # SkillForge
 
-Release candidate adding purpose-first outcome reasoning and staged improvement planning to the retained v0.9 methods and portable 2.0 packaging. The new guidance has development walkthrough evidence, not a demonstrated advantage over the prior version. See [release scope](RELEASE.md) and [validation evidence](Evidence/ValidationSummary.md). Read [SkillIntent.md](SkillIntent.md) and [Quality/Shared.md](Quality/Shared.md), then load only the selected workflow and its declared references.
+Release candidate with purpose-first outcomes, contribution mapping, experiment adequacy checks and explicit continuation into outcome evaluation. Comparative benefit remains unverified; completed proposal probes did not establish an advantage. See [release scope](RELEASE.md) and [validation evidence](Evidence/ValidationSummary.md). Read [SkillIntent.md](SkillIntent.md) and [Quality/Shared.md](Quality/Shared.md), then load only the selected workflow and its declared references.
 
 ## Workflow Routing
 
