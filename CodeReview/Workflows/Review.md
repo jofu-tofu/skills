@@ -70,7 +70,7 @@ Label each finding's evidence: `source-verified` (you traced it in the code), `i
 
 Do not report style preferences, linter-catchable issues, or vague "consider refactoring" suggestions. Every finding must describe a failure path, not a preference.
 
-Report ONLY findings. Do not include praise or "looks good" commentary — a separate synthesis step handles that.
+Report findings without praise or "looks good" commentary. Always write a non-empty result, including when there are no findings: after completing the inspection, write `No findings.` with `Reviewed:` naming the inspected scope and `Limitations:` naming any remaining evidence limits (or `none`). If required inputs could not be inspected, write `Review incomplete.` and identify what is missing; do not present that as a clean review. These status lines are coverage information, not findings or proof of safety.
 
 ## Your Review Rules
 Read [dimension.path] for your stance, heuristics, severity calibration, and output format. (A merged entry such as SIM+CLA lists two files: apply both stances and tag each finding with the lens it came from.)
