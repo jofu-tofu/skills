@@ -1,6 +1,8 @@
 # SkillForge 2.1.0 release candidate
 
-Version: 2.1.0-rc.1. Declared offline qualification gates pass within the documented scope. No installation or publication has occurred for this candidate.
+Version: 2.1.0-rc.2. Adds explicit purpose-to-outcome reasoning, challenges to outcome definitions, requested human checkpoints and staged improvement planning. Narrow maintenance remains lightweight. The prior offline qualification gates apply to 2.1.0-rc.1; they have not been rerun on these changed instructions.
+
+The purpose-first walkthrough produced owner-agreed MarkdownToDocx outcomes and a bounded six-example check trial. This supports development use, not superiority over the prior method or autonomous reliability. See the [change record](Improvements/PurposeFirst/Proposal.md). Publishing this candidate does not itself install it or establish broader effectiveness.
 
 Integrates the retained v0.7–v0.9 evidence-preservation, regression-coverage and conditional-dependency methods with the portable research library from 2.0. Native discovery remains unverified; explicit workflow use is evaluated separately. Read [validation scope](Evidence/ValidationSummary.md).
 
