@@ -22,3 +22,5 @@ Three fresh-context candidate routing/planning replies met their bounded expecta
 ## Measurement integration — 2026-11-03
 
 Draft v0.4 adds shared DesignMeasurement and its specification template, workflow qualification gates, and reconciled Grader/Comparator/Analyzer/schema contracts. External Task 3 research is now optional background rather than an execution dependency. Structural validator passes 14/14; 175 local links resolved before reporting additions. Two immutable-candidate development probes meet bounded expectations. No baseline behavioral comparison or downstream benefit was established. Report and evidence (external research record: `../../Tasks/03-metrics-and-comparisons/Checks/MeasurementIntegration20261103/Report.md`).
+
+Current release status: [ValidationSummary](../Evidence/ValidationSummary.md) supersedes the historical status summaries above. Old observations and limitations remain unchanged.

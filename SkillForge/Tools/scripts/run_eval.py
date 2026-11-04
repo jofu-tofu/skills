@@ -8,10 +8,8 @@ for a set of queries. Outputs results as JSON.
 import argparse
 import json
 import os
-import select
 import subprocess
 import sys
-import time
 import uuid
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
@@ -39,8 +37,8 @@ def run_single_query(
     timeout: int,
     project_root: str,
     model: str | None = None,
-) -> bool:
-    """Run a single query and return whether the skill was triggered.
+) -> dict:
+    """Run a single query and return observation and execution status separately.
 
     Creates a command file in .claude/commands/ so it appears in Claude's
     available_skills list, then runs `claude -p` with the raw query.
@@ -90,92 +88,83 @@ def run_single_query(
             env=env,
         )
 
-        triggered = False
-        start_time = time.time()
-        buffer = ""
-        # Track state for stream event detection
-        pending_tool_name = None
-        accumulated_json = ""
-
+        execution_status = "completed"
+        reason = None
         try:
-            while time.time() - start_time < timeout:
-                if process.poll() is not None:
-                    remaining = process.stdout.read()
-                    if remaining:
-                        buffer += remaining.decode("utf-8", errors="replace")
-                    break
-
-                ready, _, _ = select.select([process.stdout], [], [], 1.0)
-                if not ready:
-                    continue
-
-                chunk = os.read(process.stdout.fileno(), 8192)
-                if not chunk:
-                    break
-                buffer += chunk.decode("utf-8", errors="replace")
-
-                while "\n" in buffer:
-                    line, buffer = buffer.split("\n", 1)
-                    line = line.strip()
-                    if not line:
-                        continue
-
-                    try:
-                        event = json.loads(line)
-                    except json.JSONDecodeError:
-                        continue
-
-                    # Early detection via stream events
-                    if event.get("type") == "stream_event":
-                        se = event.get("event", {})
-                        se_type = se.get("type", "")
-
-                        if se_type == "content_block_start":
-                            cb = se.get("content_block", {})
-                            if cb.get("type") == "tool_use":
-                                tool_name = cb.get("name", "")
-                                if tool_name in ("Skill", "Read"):
-                                    pending_tool_name = tool_name
-                                    accumulated_json = ""
-                                else:
-                                    return False
-
-                        elif se_type == "content_block_delta" and pending_tool_name:
-                            delta = se.get("delta", {})
-                            if delta.get("type") == "input_json_delta":
-                                accumulated_json += delta.get("partial_json", "")
-                                if clean_name in accumulated_json:
-                                    return True
-
-                        elif se_type in ("content_block_stop", "message_stop"):
-                            if pending_tool_name:
-                                return clean_name in accumulated_json
-                            if se_type == "message_stop":
-                                return False
-
-                    # Fallback: full assistant message
-                    elif event.get("type") == "assistant":
-                        message = event.get("message", {})
-                        for content_item in message.get("content", []):
-                            if content_item.get("type") != "tool_use":
-                                continue
-                            tool_name = content_item.get("name", "")
-                            tool_input = content_item.get("input", {})
-                            if tool_name == "Skill" and clean_name in tool_input.get("skill", ""):
-                                triggered = True
-                            elif tool_name == "Read" and clean_name in tool_input.get("file_path", ""):
-                                triggered = True
-                            return triggered
-
-                    elif event.get("type") == "result":
-                        return triggered
+            try:
+                output, _ = process.communicate(timeout=timeout)
+            except subprocess.TimeoutExpired:
+                execution_status = "timeout"
+                reason = "Provider timed out"
+                process.kill()
+                output, _ = process.communicate()
         finally:
-            # Clean up process on any exit path (return, exception, timeout)
             if process.poll() is None:
                 process.kill()
                 process.wait()
+            if process.stdout:
+                process.stdout.close()
+        if process.returncode and execution_status == "completed":
+            execution_status = "error"
+            reason = f"Provider exited with code {process.returncode}"
 
-        return triggered
+        triggered = False
+        completed = False
+        malformed = False
+        pending = {}
+
+        def matches(name, args):
+            if not isinstance(args, dict):
+                return False
+            field = "skill" if name == "Skill" else "file_path" if name == "Read" else None
+            value = args.get(field) if field else None
+            return isinstance(value, str) and clean_name in value
+
+        for line in output.decode("utf-8", errors="replace").splitlines():
+            if not line.strip():
+                continue
+            try:
+                event = json.loads(line)
+                if not isinstance(event, dict):
+                    raise ValueError("Expected object")
+                kind = event.get("type")
+                if kind == "assistant":
+                    for item in event.get("message", {}).get("content", []):
+                        if item.get("type") == "tool_use":
+                            triggered |= matches(item.get("name"), item.get("input"))
+                elif kind == "stream_event":
+                    se = event.get("event", {})
+                    index = se.get("index", 0)
+                    if se.get("type") == "content_block_start":
+                        cb = se.get("content_block", {})
+                        pending[index] = [cb.get("name"), ""]
+                        if cb.get("type") == "tool_use":
+                            triggered |= matches(cb.get("name"), cb.get("input"))
+                    elif se.get("type") == "content_block_delta" and index in pending:
+                        delta = se.get("delta", {})
+                        if delta.get("type") == "input_json_delta":
+                            pending[index][1] += delta.get("partial_json", "")
+                            try:
+                                args = json.loads(pending[index][1])
+                            except json.JSONDecodeError:
+                                continue
+                            triggered |= matches(pending[index][0], args)
+                    elif se.get("type") == "content_block_stop":
+                        pending.pop(index, None)
+                elif kind == "result":
+                    if event.get("is_error") or str(event.get("subtype", "")).startswith("error"):
+                        execution_status = "error"
+                        reason = "Provider reported an error result"
+                    elif event.get("subtype") == "success":
+                        completed = True
+            except (ValueError, TypeError, AttributeError):
+                malformed = True
+        if execution_status == "completed" and (malformed or not completed):
+            execution_status = "incomplete"
+            reason = "Malformed stream or missing successful result"
+        # Selection is an observed event even if execution later fails.
+        observed = True if triggered else False if execution_status == "completed" else None
+        return {"triggered": observed, "execution_status": execution_status, "reason": reason}
     finally:
         if command_file.exists():
             command_file.unlink()
@@ -193,6 +182,8 @@ def run_eval(
     model: str | None = None,
 ) -> dict:
     """Run the full eval set and return results."""
+    if runs_per_query < 1:
+        raise ValueError("runs_per_query must be positive")
     results = []
 
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
@@ -210,7 +201,7 @@ def run_eval(
                 )
                 future_to_info[future] = (item, run_idx)
 
-        query_triggers: dict[str, list[bool]] = {}
+        query_triggers: dict[str, list[dict]] = {}
         query_items: dict[str, dict] = {}
         for future in as_completed(future_to_info):
             item, _ = future_to_info[future]
@@ -222,13 +213,18 @@ def run_eval(
                 query_triggers[query].append(future.result())
             except Exception as e:
                 print(f"Warning: query failed: {e}", file=sys.stderr)
-                query_triggers[query].append(False)
+                query_triggers[query].append({"triggered": None, "execution_status": "error", "reason": str(e)})
 
     for query, triggers in query_triggers.items():
         item = query_items[query]
-        trigger_rate = sum(triggers) / len(triggers)
+        observations = [t["triggered"] for t in triggers]
+        unavailable = observations.count(None)
+        count = sum(t is True for t in observations)
+        trigger_rate = count / len(triggers) if not unavailable else None
         should_trigger = item["should_trigger"]
-        if should_trigger:
+        if unavailable:
+            did_pass = None
+        elif should_trigger:
             did_pass = trigger_rate >= trigger_threshold
         else:
             did_pass = trigger_rate < trigger_threshold
@@ -236,7 +232,10 @@ def run_eval(
             "query": query,
             "should_trigger": should_trigger,
             "trigger_rate": trigger_rate,
-            "triggers": sum(triggers),
+            "triggers": count,
+            "unverified_runs": unavailable,
+            "observations": triggers,
+            "status": "unverified" if did_pass is None else "pass" if did_pass else "fail",
             "runs": len(triggers),
             "pass": did_pass,
         })
@@ -251,7 +250,8 @@ def run_eval(
         "summary": {
             "total": total,
             "passed": passed,
-            "failed": total - passed,
+            "failed": sum(r["pass"] is False for r in results),
+            "unverified": sum(r["pass"] is None for r in results),
         },
     }
 
@@ -299,7 +299,7 @@ def main():
         summary = output["summary"]
         print(f"Results: {summary['passed']}/{summary['total']} passed", file=sys.stderr)
         for r in output["results"]:
-            status = "PASS" if r["pass"] else "FAIL"
+            status = r["status"].upper()
             rate_str = f"{r['triggers']}/{r['runs']}"
             print(f"  [{status}] rate={rate_str} expected={r['should_trigger']}: {r['query'][:70]}", file=sys.stderr)
 

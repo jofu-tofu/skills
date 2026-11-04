@@ -53,3 +53,7 @@ Proposed action: keep routing and essential contracts discoverable; link conditi
 ## Carry evidence into one concrete proposal
 
 Use **source → mechanism → change → test**: cite the scoped result; name the suspected local cause; propose an attributable edit; state an observation that could reject it. **ReviewDesign** checks contradictions, references and protected behavior. **ApproveSkill** applies the frozen outcome rule, and **RecordLearning** preserves unsuccessful changes. These are proposed research-use habits; their value must be assessed through downstream work, not by the presence of citations.
+
+## Later local evidence
+
+[ValidationSummary](../Evidence/ValidationSummary.md) records v0.7–v0.9 and current release qualification. The second real repair showed that provisioned test doubles can hide a broken optional-dependency bypass. Trace how the caller decides whether work applies, and test unnecessary work with its optional resource absent, contrasted with genuinely required work. This conditional lesson does not require experiments for wording-only edits. Qualified valid alternatives and explicit measurement corrections remain essential; raw disagreements must not be erased.

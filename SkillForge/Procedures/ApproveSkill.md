@@ -11,7 +11,7 @@ Internal procedure; called by workflows, not automatically loaded at entry.
 ## Steps
 
 1. Check that evidence matches the exact candidate, current criteria and qualified measurement versions/scope. Required unverified checks or unsupported measurement prevent readiness/improvement confirmation; return insufficient evidence unless a confirmed mandatory failure already determines not ready. Design delivery may still be complete.
-2. Apply mandatory gates before aggregate benefits or preferences.
+2. Apply mandatory gates before aggregate benefits or preferences. For an improvement, decide targeted benefit and required preservation separately using the plan's coverage map; both must meet their declared rules. Missing required branch/dependency evidence blocks the broader claim even when executed checks pass. Use [RegressionCoverage](../Standards/RegressionCoverage.md); preserve narrower supported results and design-only delivery without implying workflow readiness.
 3. Compare benefit and cost under the declared rule; expose unresolved value conflicts.
 4. Return a justified decision with scope and revisit trigger. Cite the governing rule ID or section anchor, file/version, applicable evidence and decision authority.
 5. Hand it to RecordLearning; make no deployment or installation action.

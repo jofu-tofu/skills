@@ -1,0 +1,37 @@
+{
+  "version": "D7-release-qualification",
+  "candidate": "2.1.0-rc.1",
+  "tested_method_sha256": "17e71ee15d8aa21bf199c4eb0ef35696332e70d463e4d6afd1f7eb6b26098e8b",
+  "scope": "Bounded offline release/lifecycle and retained regressions; not universal efficacy or production platform qualification.",
+  "gates": {
+    "broad_cases": 32,
+    "trigger_observations": {
+      "raw_pass": 73,
+      "raw_unverified": 3,
+      "adjudicated_pass": 76
+    },
+    "mermaid_parser": 40,
+    "dependency_contrasts": 6,
+    "fresh_downstream": 4,
+    "lifecycle": "Create/use/Evaluate/Update/reuse/re-evaluate: bounded pass",
+    "aggregation": {
+      "cli_report": 43,
+      "renderer": 12,
+      "compatibility": 2
+    }
+  },
+  "external_optional_evidence": {
+    "phase1_sha256": "fe2649529c4ba416681d90a137b873eb6dd2d0293fef921c907d3fe5e453e68e",
+    "broad_review_sha256": "f069a63c86549cdc4085b14cde49d0ddd74dc16c0d1451705aebe9807cc6702e"
+  },
+  "limits": [
+    "native discovery",
+    "live providers",
+    "real browser/DOCX appearance",
+    "exhaustive Markdown",
+    "native ACL/symlink execution",
+    "population reliability",
+    "cross-platform breadth",
+    "cost advantage"
+  ]
+}

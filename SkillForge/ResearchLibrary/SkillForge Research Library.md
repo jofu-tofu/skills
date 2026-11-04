@@ -34,3 +34,7 @@ Start here when designing an experiment, writing a skill, or proposing an improv
 ## Use boundary
 
 Empirical findings describe the studied setting. Platform specifications define compatibility. Vendor advice suggests practices to test. Local observations describe this project's runs. Proposed adaptations remain hypotheses until tested. Do not turn a citation into a mandatory step, arbitrary size limit or general superiority claim. Check sources and applicability before consequential use; accepted decisions remain in `30-decisions-T4`.
+
+## Later local evidence
+
+[ValidationSummary](../Evidence/ValidationSummary.md) records v0.7–v0.9 and current release qualification. The second real repair showed that provisioned test doubles can hide a broken optional-dependency bypass. Trace how the caller decides whether work applies, and test unnecessary work with its optional resource absent, contrasted with genuinely required work. This conditional lesson does not require experiments for wording-only edits. Qualified valid alternatives and explicit measurement corrections remain essential; raw disagreements must not be erased.

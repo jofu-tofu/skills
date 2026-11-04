@@ -43,3 +43,7 @@ Define the smallest worthwhile effect, estimate plausible variance, then plan th
 **PlanChange** freezes artifacts, cases, scorer, retry policy, resources and decision rule. **EvaluateCandidate** preserves failed and missing observations, distinguishes infrastructure retries from outcome retries, and records deviations. Exposed assessment cases become development evidence. Fresh confirmation is needed after adaptive changes; [Dwork et al.](https://arxiv.org/html/1506.02629) explains why repeated holdout consultation can overfit, without making its specialized reusable-holdout algorithm a required implementation.
 
 **RecordLearning** keeps null results, costs, versions and applicability. The next experiment should resolve a stated uncertainty. A more elaborate plan, passing structural validator or researcher agreement is not downstream benefit.
+
+## Later local evidence
+
+[ValidationSummary](../Evidence/ValidationSummary.md) records v0.7–v0.9 and current release qualification. The second real repair showed that provisioned test doubles can hide a broken optional-dependency bypass. Trace how the caller decides whether work applies, and test unnecessary work with its optional resource absent, contrasted with genuinely required work. This conditional lesson does not require experiments for wording-only edits. Qualified valid alternatives and explicit measurement corrections remain essential; raw disagreements must not be erased.

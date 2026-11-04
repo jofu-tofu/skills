@@ -220,6 +220,8 @@ Wall clock timing for a run. Located at `<run-dir>/timing.json`.
 
 Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
 
+The current authoritative contract is [BenchmarkFormat](../Tools/BenchmarkFormat.md). It defines null measurements, coverage, actual run counts, arbitrary configuration names, and comparison eligibility. The sample below is a legacy complete-data illustration, not the current full schema. Current consumers use `configuration_summary` when present and handle nulls explicitly.
+
 ```json
 {
   "metadata": {
@@ -294,7 +296,7 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
 - `runs[]`: Individual run results
   - `eval_id`: Numeric eval identifier
   - `eval_name`: Human-readable eval name (used as section header in the viewer)
-  - `configuration`: Must be `"with_skill"` or `"without_skill"` (the viewer uses this exact string for grouping and color coding)
+  - `configuration`: Discovered configuration name; `"with_skill"` and `"without_skill"` are conventional examples
   - `run_number`: Integer run number (1, 2, 3...)
   - `result`: Nested object with `pass_rate`, `passed`, `total`, `time_seconds`, `tokens`, `errors`
 - `run_summary`: Statistical aggregates per configuration
@@ -302,7 +304,7 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
   - `delta`: Difference strings like `"+0.50"`, `"+13.0"`, `"+1700"`
 - `notes`: Freeform observations from the analyzer
 
-**Important:** The viewer reads these field names exactly. Using `config` instead of `configuration`, or putting `pass_rate` at the top level of a run instead of nested under `result`, will cause the viewer to show empty/zero values. Always reference this schema when generating benchmark.json manually.
+**Important:** Preserve `configuration` and nested `result` field names. Missing measurements remain unknown. Follow BenchmarkFormat when generating new reports; the legacy illustration omits current coverage and comparison metadata.
 
 ---
 
@@ -437,6 +439,8 @@ Use `evaluation-plan.json` alongside the existing `evals.json`; this adds metada
 Each check also links its measurement specification/version, qualification status and evidence, permitted claim, required/optional status and uncertainty rule. [DesignMeasurement](../Procedures/DesignMeasurement.md) owns those specifications. [ConstructCases](../Procedures/ConstructCases.md) constructs suites; [EvaluateCandidate](../Procedures/EvaluateCandidate.md) owns execution and canonical results. Existing Boolean grading and benchmark exports are optional compatibility artifacts; they cannot represent unverified checks faithfully.
 
 ## Canonical results.json
+
+For behavioral changes and workflow-level readiness, link the governing plan's `regression_coverage` record (an inline mapping or artifact reference) from evaluation-plan.json and results.json. The record maps requirements and branches/dependencies to case/evidence IDs, roles and required/not-applicable/untested dispositions with reasons. Report targeted benefit and preservation conclusions separately, including coverage gaps. This is additive metadata, not a new verdict system; lightweight and design-only paths retain their existing limits. [RegressionCoverage](RegressionCoverage.md) defines the scope rule; PlanChange owns it.
 
 This section is the authoritative result contract for this proposed package. It replaces references to the absent TestSkill workflow. [Grader](Grader.md) supplies verdict rules; [ApproveSkill](../Procedures/ApproveSkill.md) makes readiness/retention decisions from this evidence.
 

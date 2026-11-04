@@ -45,3 +45,17 @@ def parse_skill_md(skill_path: Path) -> tuple[str, str, str]:
         i += 1
 
     return name, description, content
+
+
+def require_verified(data):
+    """Refuse incomplete legacy evidence before scoring, feedback or reporting."""
+    if isinstance(data, dict):
+        if "query" in data and "should_trigger" in data and data.get("pass") not in (True, False):
+            raise ValueError("Unverified trigger evidence: legacy Boolean consumer cannot proceed")
+        if data.get("status") == "unverified" or data.get("unverified", 0) or data.get("unverified_runs", 0):
+            raise ValueError("Unverified trigger evidence: legacy Boolean consumer cannot proceed")
+        for value in data.values():
+            require_verified(value)
+    elif isinstance(data, list):
+        for value in data:
+            require_verified(value)
