@@ -13,6 +13,8 @@
 
 Users often need fast, repeatable Markdown-to-Word export. Without a dedicated skill, conversions are inconsistent, path handling is error-prone, and failures are easy to miss.
 
+Owner-agreed purpose, 2026-11-04: turn existing Markdown into a Word document the user can read, edit and share, preserving its content and meaning with little manual repair. This covers single and batch conversion.
+
 ## Design Decisions
 
 | Decision | Chosen Approach | Alternatives Rejected | Why |
@@ -29,11 +31,9 @@ Users often need fast, repeatable Markdown-to-Word export. Without a dedicated s
 
 ## Success Criteria
 
-- Agent maps each markdown input to an explicit docx output.
-- Agent hardens table visibility so generated tables are readable in Word.
-- Agent verifies every output file exists and is non-empty.
-- Agent opens generated output files automatically after successful conversion.
-- Agent reports actionable failure details when conversion fails.
+The authoritative outcome definitions and their sources are in [Quality/Outcomes.md](Quality/Outcomes.md): faithful content, readable presentation, usable Word content, predictable delivery, trustworthy status and low manual effort. These are agreed requirements, not verified performance claims.
+
+The existing workflow retains explicit output mapping, table hardening, file checks, automatic opening and actionable failure reporting. File existence and nonzero size alone do not establish the agreed outcomes. [Quality/Measurements.md](Quality/Measurements.md) records proposed evidence and its limits; no conversion implementation change is included in this documentation revision.
 
 ## Constraints
 
