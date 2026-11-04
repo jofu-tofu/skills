@@ -4,7 +4,7 @@ description: Comprehensive multi-agent code review and codebase audit system. US
 compatibility: Designed for Codex and Devin (or similar agent products). Requires git.
 metadata:
   author: pai
-  version: "1.0.0"
+  version: "1.1.0-rc.1"
 ---
 
 # CodeReview
@@ -12,6 +12,8 @@ metadata:
 Multi-agent code review and codebase audit system with **process-boundary enforcement**. Operates in two modes: **diff mode** (review changes against a commit range) and **audit mode** (evaluate existing code in a directory/module). Both modes achieve depth through parallelism — agents review different dimensions simultaneously while a slim context layer prevents token waste. Diff mode verifies claims against changed commits; audit mode verifies claims against actual file contents.
 
 ## Success Criteria
+
+For evaluation and improvement, [Quality/Outcomes.md](Quality/Outcomes.md) defines granular results and valid contrasts for all eight dimensions; [Quality/Measurement.md](Quality/Measurement.md) defines evidence rules. [Improvements/Index.md](Improvements/Index.md) records tested scope and decisions. These records do not require every review agent to load the full profile or produce a finding for each outcome.
 
 These criteria orient every workflow decision:
 

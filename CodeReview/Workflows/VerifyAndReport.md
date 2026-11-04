@@ -26,6 +26,8 @@ Three jobs in one pass: **verify** findings trace to actual changed lines and ar
 
 Read all agent output files. Extract every finding (severity, file, line, heuristic or rule ID, evidence label, description, recommendation). Tag each with its source dimension. Findings from `kind: standards` dimensions are tagged `standards`.
 
+Interpret `No findings.` plus its reviewed scope and limitations as a completed inspection with no reported issue, not as a finding or proof of correctness. Carry its limitations into Coverage. Interpret `Review incomplete.` or a missing/empty result as unavailable coverage: identify the affected dimension and input, do not list it as clean, and do not infer findings or safety from it. Verify other findings normally; incomplete coverage does not erase evidence already established elsewhere. Apply this distinction in diff, audit, re-review and series reports, including standards agents. Do not count status lines in finding or verification tallies.
+
 Then read each `external_findings` file from the manifest. Tag those findings `deterministic`. Downgrade any CRITICAL to HIGH unless it has `blocking: true`. They get Pass 1's SCOPE filter (by their `scope` field: `line`, `file` or `change`, as the contract defines) and deduplication only, and go to the Standards section. Name any missing or unreadable file under Coverage.
 
 **Two-pass verification: Relevance first, then Evidence.**
