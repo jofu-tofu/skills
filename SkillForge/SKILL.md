@@ -2,11 +2,11 @@
 name: SkillForge
 description: Create, update, or evaluate reusable agent skills with explicit quality criteria and preserved evidence. USE WHEN create a skill OR improve a skill OR evaluate a skill OR a skill keeps missing expected behavior OR diagnose a skill gap.
 metadata:
-  version: "2.0.0"
+  version: "2.1.0-rc.1"
 ---
 # SkillForge
 
-Replacement adopted by user request on 2026-11-03. Behavioral superiority remains unverified. See [release scope](RELEASE.md). Read [SkillIntent.md](SkillIntent.md) and [Quality/Shared.md](Quality/Shared.md), then load only the selected workflow and its declared references.
+Release candidate integrating the retained v0.9 methods and portable 2.0 packaging. See [release scope](RELEASE.md) and [validation evidence](Evidence/ValidationSummary.md). Read [SkillIntent.md](SkillIntent.md) and [Quality/Shared.md](Quality/Shared.md), then load only the selected workflow and its declared references.
 
 ## Workflow Routing
 
@@ -36,4 +36,4 @@ Review/audit requests use EvaluateSkill's design-review mode. Description or tri
 
 ## Status
 
-See [Architecture.md](Architecture.md) for boundaries and [Checks/StructuralReview.md](Checks/StructuralReview.md) for structural verification scope. Experiment designs remain outside this package; no empirical result is implied by this scaffold.
+See [Architecture.md](Architecture.md) for boundaries and [Checks/StructuralReview.md](Checks/StructuralReview.md) for structural verification scope. Current bounded evidence and unsupported capabilities are indexed in [ValidationSummary](Evidence/ValidationSummary.md). Historical records retain their original scope; passing a finite suite does not establish universal effectiveness.

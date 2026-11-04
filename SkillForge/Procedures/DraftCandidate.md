@@ -11,7 +11,8 @@ Internal procedure; called by workflows, not automatically loaded at entry.
 ## Steps
 
 1. Read the target intent and affected instructions.
-2. Implement the smallest coherent change or initial candidate within scope.
+2. Implement the smallest coherent change or initial candidate within scope. When changing error, completion or retry handling, identify where execution status becomes an outcome verdict and what evidence is available at that decision. Preserve evidence that already establishes an individual criterion; a later failure does not automatically erase it. Conversely, missing evidence cannot establish an observed negative. Derive both decisions from the criterion before choosing a blanket success/failure policy, then check the affected consumers.
+   When changing a conditional step or its caller, trace how the caller decides whether that step is needed. Keep that decision and the skip path usable without resources required only by the optional work; moving detection into a tool can accidentally make its imports, initialization or preflight mandatory. Preserve one consistent decision rule and an executable caller-to-tool handoff. Do not silently skip work whose required dependency is genuinely missing.
 3. Preserve baseline and comparison records; separate criterion changes from instruction changes.
 4. Check links, structure, and dependencies. Record behavioral checks not run.
    Use [Authoring](../Standards/Authoring.md) and bundled [ValidateSkill.ts](../Tools/ValidateSkill.ts) for supported skill structure; see [tool invocation](../Tools/README.md). A validator's naming conventions are not universal behavioral requirements.

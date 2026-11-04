@@ -16,7 +16,7 @@ If the suite is missing, call [ConstructCases](ConstructCases.md) first with the
 2. Use provided evidence where sufficient; otherwise run only authorized, budgeted checks.
 3. Match conditions across comparisons. Keep reserved cases out of the authoring context.
 4. Preserve all outcomes, including failures and missing data; do not quietly retry until success.
-5. Report per-criterion results and limitations. Return the evidence without editing the target.
+5. Report per-criterion results against the plan's coverage map, including omitted and unexecuted required rows. Return targeted benefit and preservation evidence separately; a passing subset cannot establish workflow-wide preservation. Use [RegressionCoverage](../Standards/RegressionCoverage.md) for scope interpretation. Return evidence and limitations without editing the target.
 
 Use disposable workspaces and separate contexts where available. Keep baseline and candidate inputs equivalent, record model/runtime/tools and version hashes, and exclude the target from a no-skill baseline. Disclose inability to isolate; such execution supports only a limited smoke test. Context separation does not establish independent reference evidence or eliminate shared model errors.
 

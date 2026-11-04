@@ -20,7 +20,7 @@ import anthropic
 from scripts.generate_report import generate_html
 from scripts.improve_description import improve_description
 from scripts.run_eval import find_project_root, run_eval
-from scripts.utils import parse_skill_md
+from scripts.utils import parse_skill_md, require_verified
 
 
 def split_eval_set(eval_set: list[dict], holdout: float, seed: int = 42) -> tuple[list[dict], list[dict]]:
@@ -100,6 +100,17 @@ def run_loop(
             trigger_threshold=trigger_threshold,
             model=model,
         )
+        try:
+            require_verified(all_results)
+        except ValueError:
+            if live_report_path:
+                live_report_path.write_text(
+                    "<html><body><h1>Unverified trigger evidence</h1>"
+                    "<p>Optimization stopped. No best description was selected. "
+                    "See the evaluator observations and stderr.</p></body></html>",
+                    encoding="utf-8",
+                )
+            raise
         eval_elapsed = time.time() - t0
 
         # Split results back into train/test by matching queries

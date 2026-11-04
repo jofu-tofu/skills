@@ -1,9 +1,17 @@
-# SkillForge 2.0.0
+# SkillForge 2.1.0 release candidate
 
-Adopted on 2026-11-03 by explicit user request to replace the old installed skill and commit and push. Source: retained ProposedSkillForge v0.4 design with subsequent research navigation and attempt records. Experimental v0.5/v0.6 variants are not adopted.
+Version: 2.1.0-rc.1. Declared offline qualification gates pass within the documented scope. No installation or publication has occurred for this candidate.
 
-CreateSkill, UpdateSkill and EvaluateSkill replace the former five entry points. Review, trigger testing and research integration remain available through these workflows and shared procedures. The old workflow files are removed; Git history preserves the committed baseline.
+Integrates the retained v0.7–v0.9 evidence-preservation, regression-coverage and conditional-dependency methods with the portable research library from 2.0. Native discovery remains unverified; explicit workflow use is evaluated separately. Read [validation scope](Evidence/ValidationSummary.md).
 
-Packaging changes: active name/version, bundled optional research library, portable internal links, and removal of personal absolute paths from imported provenance. Historical records retain their original draft status. External research records stay in the research project; their paths are provenance text rather than broken package links.
+## Supported entry points
 
-Structural verification is separate from behavioral evidence. Existing bounded comparisons found ties, not superiority. Broad replacement trials and legacy provider/platform behavior remain unverified. Installation is an owner decision, not a claim of demonstrated improvement. Research and further experiments may continue separately.
+CreateSkill, UpdateSkill and EvaluateSkill retain design-only, lightweight, cases-only and assessment-only boundaries. Their procedures and useful research references are bundled. Historical external research identifiers are provenance text, not required paths.
+
+## Tools
+
+Supported structural validation is limited to the bundled legacy format. The benchmark aggregator is qualified for the tested metric units/missingness/counts contract; see [format contract](Tools/BenchmarkFormat.md). Legacy description evaluation has bounded offline Windows stream/consumer coverage, not qualified native discovery. Optional viewer and exploration helpers remain experimental; they are not required to complete core workflows. See [tool status](Tools/README.md).
+
+## History
+
+2.0.0 was adopted 2026-11-03 from the older v0.4 method lineage with portable links, bundled research and personal-path removal. This candidate preserves those packaging decisions and the historical null results. A package release does not claim universal superiority.

@@ -16,6 +16,7 @@ Complete before execution. Unresolved required fields mean the run is not ready.
 | Context check | Applicable criterion IDs; revised, retired, or unresolved criteria with reasons and authority. |
 | Hypothesis | For creation/change, smallest proposed change, predicted benefit, and evidence that would disprove it; not applicable to assessment-only work. |
 | Protection | Mandatory behavior and affected dependent workflows. |
+| Regression coverage | For behavioral changes/workflow readiness: map requirements to affected branches/dependencies and cases or reused evidence; justify exclusions and show untested scope. See [RegressionCoverage](../../Standards/RegressionCoverage.md). Preserve lightweight/design-only limits. |
 | Comparison | Target inputs, cases, judges and reference qualification; add baseline/candidate inputs and controls for comparison claims. |
 | Decision rule | Assessment/readiness rule or required benefit, applicable regression gates, uncertainty handling, and cost tradeoff. |
 | Budget and stopping | Finite runs, time/tokens, error handling; completion/defer conditions, plus retain/reject/revise conditions for updates. |

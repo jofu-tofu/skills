@@ -13,7 +13,7 @@ from pathlib import Path
 
 import anthropic
 
-from scripts.utils import parse_skill_md
+from scripts.utils import parse_skill_md, require_verified
 
 
 def improve_description(
@@ -29,6 +29,7 @@ def improve_description(
     iteration: int | None = None,
 ) -> str:
     """Call Claude to improve the description based on eval results."""
+    require_verified([eval_results, history, test_results])
     failed_triggers = [
         r for r in eval_results["results"]
         if r["should_trigger"] and not r["pass"]

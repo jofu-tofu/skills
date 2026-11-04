@@ -6,6 +6,8 @@ showing each description attempt with check/x for each test case.
 Distinguishes between train and test queries.
 """
 
+from scripts.utils import require_verified
+
 import argparse
 import html
 import json
@@ -15,6 +17,7 @@ from pathlib import Path
 
 def generate_html(data: dict, auto_refresh: bool = False, skill_name: str = "") -> str:
     """Generate HTML report from loop output data. If auto_refresh is True, adds a meta refresh tag."""
+    require_verified(data)
     history = data.get("history", [])
     holdout = data.get("holdout", 0)
     title_prefix = html.escape(skill_name + " \u2014 ") if skill_name else ""
@@ -148,7 +151,7 @@ def generate_html(data: dict, auto_refresh: bool = False, skill_name: str = "") 
 <body>
     <h1>""" + title_prefix + """Skill Description Optimization</h1>
     <div class="explainer">
-        <strong>Optimizing your skill's description.</strong> This page updates automatically as Claude tests different versions of your skill's description. Each row is an iteration — a new description attempt. The columns show test queries: green checkmarks mean the skill triggered correctly (or correctly didn't trigger), red crosses mean it got it wrong. The "Train" score shows performance on queries used to improve the description; the "Test" score shows performance on held-out queries the optimizer hasn't seen. When it's done, Claude will apply the best-performing description to your skill.
+        <strong>Optimizing your skill's description.</strong> This page updates automatically as Claude tests different versions of your skill's description. Each row is an iteration — a new description attempt. The columns show test queries: green checkmarks mean the skill triggered correctly (or correctly didn't trigger), red crosses mean it got it wrong. The "Train" score shows performance on queries used to improve the description; the "Test" score shows performance on held-out queries the optimizer hasn't seen. Selection is provisional: these legacy command-registration trials do not establish native skill-discovery accuracy or fresh final confirmation. No description is applied automatically.
     </div>
 """]
 
@@ -203,7 +206,9 @@ def generate_html(data: dict, auto_refresh: bool = False, skill_name: str = "") 
 """)
 
     # Find best iteration for highlighting
-    if test_queries:
+    if not history:
+        best_iter = None
+    elif test_queries:
         best_iter = max(history, key=lambda h: h.get("test_passed") or 0).get("iteration")
     else:
         best_iter = max(history, key=lambda h: h.get("train_passed", h.get("passed", 0))).get("iteration")
