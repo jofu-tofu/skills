@@ -5,6 +5,10 @@ updated: 2026-11-03
 ---
 # Proposed SkillForge improvement records
 
+Experiment adequacy candidate 2.1.0-rc.7, 2026-11-04: [diagnosis, iterations and evidence](ExperimentAdequacy/Record.md). Retained as a bounded tested candidate after 29 model trials. Experiment decision coverage, outcome evaluation and final-gate continuation are explicit. Rc.5 and rc.6 missed an in-scope aggregation case; rc.7's exact replay passed 9/9 and its CSV preservation control passed 5/5. Planning observations and limits remain separate from a general superiority claim. No installation or publication is implied.
+
+Outcome mapping candidate 2.1.0-rc.3, 2026-11-04: [gap, design and review record](OutcomeMapping/Record.md). Derive specific outcomes before mapping contributions to dimensions or capabilities; use that map to inform proposed responsibility changes. Authorized design revision only, not installed or published. Comparative benefit remains unverified.
+
 Purpose-first candidate 2.1.0-rc.2, 2026-11-04: [proposal and gap record](PurposeFirst/Proposal.md). Broad improvement derives and challenges outcomes from the user's job before choosing measures or changes; progressive planning justifies the smallest useful next step. A human-guided MarkdownToDocx walkthrough reached agreed outcomes and a six-example check exercise. The owner authorized committing and publishing the design. Comparative method benefit and autonomous reliability remain unverified; publication does not imply installation.
 
 Latest design migration: [ReconcileLegacy decision](ReconcileLegacy/Decision.md), with [results](ReconcileLegacy/Results.md). Draft v0.3 carries over useful installed capabilities. This is a completed design change, not a completed behavioral improvement experiment.
