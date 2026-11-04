@@ -1,73 +1,39 @@
 ---
 name: SkillForge
-description: Create, modify, test, and maintain skills. MANDATORY for ALL skill modifications — direct Edit bypasses quality gates. USE WHEN create skill OR new skill OR update skill OR edit skill OR improve skill OR change skill OR tweak skill OR adjust skill OR add workflow OR remove workflow OR modify skill OR refactor skill OR fix skill structure OR test skill OR try skill OR does this skill work OR run skill test OR evaluate skill OR run evals OR optimize description OR fix triggering OR skill not triggering OR retrospective OR run retrospective OR skill retrospective OR analyze skill OR audit skill OR comprehensive skill check OR what's wrong with this skill OR diagnose skill OR review skill OR incorporate research OR add research OR integrate finding OR add evidence OR update principles.
-compatibility: Designed for Codex and Devin (or similar agent products)
+description: Create, update, or evaluate reusable agent skills with explicit quality criteria and preserved evidence. USE WHEN create a skill OR improve a skill OR evaluate a skill OR a skill keeps missing expected behavior OR diagnose a skill gap.
 metadata:
-  author: pai
-  version: "1.0.0"
+  version: "2.1.0-rc.2"
 ---
-
 # SkillForge
 
-Unified skill lifecycle framework: creating, modifying, testing, validating, and reviewing skills in the PAI system.
-
-> **For agents modifying ANY skill (including SkillForge itself):** Modify skill triggers, descriptions, and workflow routing through SkillForge workflows — direct Edit bypasses quality gates. Typo or formatting fixes may use direct Edit.
-
-**Before executing any workflow below, first read `Standards/PromptingStandards.md`.** All skill content must align with its principles.
+Release candidate adding purpose-first outcome reasoning and staged improvement planning to the retained v0.9 methods and portable 2.0 packaging. The new guidance has development walkthrough evidence, not a demonstrated advantage over the prior version. See [release scope](RELEASE.md) and [validation evidence](Evidence/ValidationSummary.md). Read [SkillIntent.md](SkillIntent.md) and [Quality/Shared.md](Quality/Shared.md), then load only the selected workflow and its declared references.
 
 ## Workflow Routing
 
-When a workflow is matched, **read its file and follow the steps within it.**
+When a workflow is matched, read its file and follow the steps within it.
 
-**When executing a workflow, output this notification:**
+| Workflow | User intent | File |
+|---|---|---|
+| CreateSkill | Create a skill for a defined need | `Workflows/CreateSkill.md` |
+| UpdateSkill | Change or improve an existing skill | `Workflows/UpdateSkill.md` |
+| EvaluateSkill | Test, assess, or check readiness without changing a skill | `Workflows/EvaluateSkill.md` |
 
-```
-Running the **[WorkflowName]** workflow from the **SkillForge** skill...
-```
+Workflows orchestrate user tasks. [Procedures](Architecture.md) perform reusable operations. Approval is a shared evidence-based decision gate, not a separate user workflow. A readiness-only request routes through EvaluateSkill and then the gate. A design-only request ends with an explicitly unverified candidate.
 
-| Workflow | Trigger | File |
-|----------|---------|------|
-| **CreateSkill** | "create a new skill", "new skill", "build a skill", "make a skill" | `Workflows/CreateSkill.md` |
-| **UpdateSkill** | "update skill", "modify skill", "change skill", "refactor skill", "add workflow", "remove workflow", "edit skill", "tweak skill", "adjust skill", "create skill intent", "incorporate research", "add research", "integrate finding", "update principles" | `Workflows/UpdateSkill.md` |
-| **ReviewSkill** | "review skill", "audit skill", "retrospective on skill", "what's wrong with this skill", "skill health check", "diagnose and fix skill" | `Workflows/ReviewSkill.md` |
-| **TestSkill** | "test skill", "try skill", "does this skill work", "run skill test", "evaluate skill", "run evals" | `Workflows/TestSkill.md` |
-| **OptimizeDescription** | "optimize description", "fix triggering", "skill not triggering", "improve triggers" | `Workflows/OptimizeDescription.md` |
+All workflows use [DesignMeasurement](Procedures/DesignMeasurement.md) for new, changed, unsupported, or out-of-scope measures, including new skills without a reported gap. Record the intended outcome, evidence method, scoring rule, and qualification scope before using a measure to establish improvement or readiness. Results distinguish pass, fail, and unverified; missing evidence cannot establish success or failure.
 
-**After completing any author workflow (CreateSkill, UpdateSkill), run `ValidateSkill.ts` on the target skill.**
+For a reported skill gap, route by requested result: “fix/improve it” selects UpdateSkill; “is this happening/why/check it” selects EvaluateSkill. A bare complaint starts with assessment, not an assumed edit. Both workflows call [DiagnoseGap](Procedures/DiagnoseGap.md). Preserve unresolved intent if it affects the next action. Ordinary requests to review code or write a document belong to the target skill, not SkillForge.
 
 ## Examples
 
-**Example 1: Test a skill**
-```
-User: "Test the Research skill — I want to see if it works on real prompts"
--> Invokes TestSkill workflow
--> Generates 2-3 realistic test prompts, spawns with-skill and baseline subagents
--> Grades outputs against assertions, aggregates into benchmark
--> Opens eval viewer for human review with per-test-case feedback
-```
+Review/audit requests use EvaluateSkill's design-review mode. Description or triggering repairs use UpdateSkill with TestTriggering. Research integration and refactoring use UpdateSkill's maintenance paths. A typo uses its short path. See [tool capabilities and limits](Tools/README.md).
 
-**Example 2: Fix skill triggering**
-```
-User: "The ClarityEngine skill isn't triggering when I ask for presentations"
--> Invokes OptimizeDescription workflow
--> Generates 15-20 should-trigger and should-not-trigger eval queries
--> Runs iterative optimization loop via Codex -p
--> Applies the best-scoring description to the skill
-```
+- “Create a review skill” → CreateSkill scopes the need, establishes quality, drafts a candidate, and evaluates it within the authorized scope.
+- “Fix missed boundary bugs in this skill” → UpdateSkill preserves the baseline, plans a targeted revision, evaluates it, and applies the shared decision gate.
+- “Is this skill ready?” → EvaluateSkill inspects or collects evidence, then calls the decision gate. It does not revise the target.
+- “CodeReview keeps missing cross-file failures; improve it” → UpdateSkill diagnoses whether the skill, criteria, cases, or checker need changing before planning a revision.
+- “ClarityEngine scores well, but readers miss the exception. Is our evaluation wrong?” → EvaluateSkill diagnoses the gap and examines the measurement; it preserves the target and records proposed changes separately.
 
-**Example 3: Update a skill**
-```
-User: "Add a new workflow to the Research skill for extracting key findings"
--> Invokes UpdateSkill workflow (Quick Operations: Add Workflow)
--> Creates Workflows/ExtractFindings.md with standard structure
--> Adds routing table entry in SKILL.md
--> Runs ValidateSkill.ts
-```
+## Status
 
-**Example 4: Create a new skill**
-```
-User: "Create a skill for managing recipes"
--> Invokes CreateSkill workflow
--> Interviews user about what it does, triggers, workflows
--> Creates skill directory with TitleCase naming, SKILL.md, SkillIntent.md, Workflows/, Tools/
-```
+See [Architecture.md](Architecture.md) for boundaries and [Checks/StructuralReview.md](Checks/StructuralReview.md) for structural verification scope. Current bounded evidence and unsupported capabilities are indexed in [ValidationSummary](Evidence/ValidationSummary.md). Historical records retain their original scope; passing a finite suite does not establish universal effectiveness.

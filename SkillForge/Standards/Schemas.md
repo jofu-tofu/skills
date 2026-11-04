@@ -85,7 +85,7 @@ Tracks version progression in Improve mode. Located at workspace root.
 
 ## grading.json
 
-Output from the grader agent. Located at `<run-dir>/grading.json`.
+Optional legacy Boolean export from grading. Located at `<run-dir>/grading.json`. Canonical results and uncertainty follow [Canonical results.json](#canonical-resultsjson) and [Grader](Grader.md). Export only a declared scope with no unverified checks; otherwise skip this export rather than coerce or silently omit unknowns. The example below demonstrates legacy compatibility, not the default assessment contract.
 
 ```json
 {
@@ -220,6 +220,8 @@ Wall clock timing for a run. Located at `<run-dir>/timing.json`.
 
 Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
 
+The current authoritative contract is [BenchmarkFormat](../Tools/BenchmarkFormat.md). It defines null measurements, coverage, actual run counts, arbitrary configuration names, and comparison eligibility. The sample below is a legacy complete-data illustration, not the current full schema. Current consumers use `configuration_summary` when present and handle nulls explicitly.
+
 ```json
 {
   "metadata": {
@@ -294,7 +296,7 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
 - `runs[]`: Individual run results
   - `eval_id`: Numeric eval identifier
   - `eval_name`: Human-readable eval name (used as section header in the viewer)
-  - `configuration`: Must be `"with_skill"` or `"without_skill"` (the viewer uses this exact string for grouping and color coding)
+  - `configuration`: Discovered configuration name; `"with_skill"` and `"without_skill"` are conventional examples
   - `run_number`: Integer run number (1, 2, 3...)
   - `result`: Nested object with `pass_rate`, `passed`, `total`, `time_seconds`, `tokens`, `errors`
 - `run_summary`: Statistical aggregates per configuration
@@ -302,7 +304,7 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
   - `delta`: Difference strings like `"+0.50"`, `"+13.0"`, `"+1700"`
 - `notes`: Freeform observations from the analyzer
 
-**Important:** The viewer reads these field names exactly. Using `config` instead of `configuration`, or putting `pass_rate` at the top level of a run instead of nested under `result`, will cause the viewer to show empty/zero values. Always reference this schema when generating benchmark.json manually.
+**Important:** Preserve `configuration` and nested `result` field names. Missing measurements remain unknown. Follow BenchmarkFormat when generating new reports; the legacy illustration omits current coverage and comparison metadata.
 
 ---
 
@@ -428,3 +430,88 @@ Output from post-hoc analyzer. Located at `<grading-dir>/analysis.json`.
   }
 }
 ```
+
+
+## Evaluation Plan
+
+Use `evaluation-plan.json` alongside the existing `evals.json`; this adds metadata without changing legacy consumers. Record `suite_version`, `workflow`, `claim`, `baseline_type`, `snapshots`, `runtime`, `trials_per_case`, `max_runs`, `decision_rules`, `case_roles`, `checks`, and `limitations`. Link the governing PlanChange plan/version. Its baseline policy, decision rules, budget and stopping conditions are authoritative; ConstructCases derives execution details and returns conflicts for an explicit plan amendment. Snapshot identifiers may be pending during construction but must be resolved before execution. Each check identifies its case, method (executable command or judgment rubric), required evidence, and whether unavailable evidence prevents acceptance. Keep executor fixtures separate from grader-only keys.
+
+Each check also links its measurement specification/version, qualification status and evidence, permitted claim, required/optional status and uncertainty rule. [DesignMeasurement](../Procedures/DesignMeasurement.md) owns those specifications. [ConstructCases](../Procedures/ConstructCases.md) constructs suites; [EvaluateCandidate](../Procedures/EvaluateCandidate.md) owns execution and canonical results. Existing Boolean grading and benchmark exports are optional compatibility artifacts; they cannot represent unverified checks faithfully.
+
+## Canonical results.json
+
+For behavioral changes and workflow-level readiness, link the governing plan's `regression_coverage` record (an inline mapping or artifact reference) from evaluation-plan.json and results.json. The record maps requirements and branches/dependencies to case/evidence IDs, roles and required/not-applicable/untested dispositions with reasons. Report targeted benefit and preservation conclusions separately, including coverage gaps. This is additive metadata, not a new verdict system; lightweight and design-only paths retain their existing limits. [RegressionCoverage](RegressionCoverage.md) defines the scope rule; PlanChange owns it.
+
+This section is the authoritative result contract for this proposed package. It replaces references to the absent TestSkill workflow. [Grader](Grader.md) supplies verdict rules; [ApproveSkill](../Procedures/ApproveSkill.md) makes readiness/retention decisions from this evidence.
+
+Required top-level fields: `suite_version`, `workflow`, `mode`, `claim`, `snapshots`, `requested_trials`, `completed_trials`, `runs`, `decision`, and `limitations`. `snapshots` identifies target/baseline when applicable, cases, measurement and checker versions. `mode` names construction, qualification, exploratory assessment or confirmation; qualification/exploration cannot be reported as confirmed target improvement when required measures lack support.
+
+Each run records `case_id`, `role` (development/validation/acceptance), `configuration`, `trial`, `execution_status` (completed/error/timeout/not_run), and `checks`. Each check records `id`, `measurement_id`, `status` (pass/fail/unverified), raw `observation`, `evidence` references, and `reason`. Measurements may add numeric value, units, denominator/scale and uncertainty; these do not replace the justified verdict. Store missing values as null with reasons, not zero.
+
+Check meanings: pass = adequate applicable evidence supports the check; fail = adequate applicable evidence contradicts it; unverified = missing/conflicting evidence or unsupported checking method. Instrument status designed/qualified/unqualified is recorded in the measurement specification and is distinct from check status. An observed absence can establish failure of an explicit deliverable requirement; an unavailable observation cannot. Runtime errors/timeouts remain separate from task correctness; a separately declared deadline check may fail on measured timeout evidence.
+
+Report `decision` as pass, fail, inconclusive, blocked, or not_executed, with scope. A confirmed mandatory failure warrants fail even if other checks are unknown. Otherwise required unverified checks prevent pass and yield inconclusive; blocked means execution cannot proceed because required inputs/runtime are unavailable. Construction-only uses not_executed. Apply the declared rule to numeric effects and optional checks; do not invent an aggregate acceptance threshold. Readiness or retention is separately decided by ApproveSkill.
+
+Include counts of all three check states, attempted/completed runs, failed/missing observations and cost. A pass rate over adjudicated checks must identify its denominator and adjudication coverage; do not present it as full success. Zero denominators are undefined. Grading exports may include only a declared scope with no unverified checks; if unknowns exist in that scope, skip export and preserve canonical records.
+
+For updates, include `improvement_id`, `targeted_failure` and `loop_observations` from the improvement record. A good assessment of one version does not establish improvement. If a checker or measure changes, preserve the original assessment and repeat affected baseline/candidate comparisons under the revised definition.
+
+
+## Improvement Record
+
+For behavioral improvement proposals, UpdateSkill owns `improvement-record.json` in the task evaluation workspace. EvaluateCandidate returns comparison evidence; records and suite versions stay separate from target skill files. Each attempt has a unique ID, a parent/baseline identity, and candidate identity; link attempts rather than overwrite failed experiments. Keep factual observations separate from inferred causes. Use relative artifact paths or stable version identifiers.
+
+```json
+{
+  "improvement_id": "example-001",
+  "parent_attempt": null,
+  "workflow": "Example/Transform",
+  "baseline": "snapshot-or-hash",
+  "candidate": "pending",
+  "hypothesis": {
+    "observed_failure": "The output drops negative amounts.",
+    "evidence": ["baseline/run-1/output.json"],
+    "reproduction": "historical",
+    "suspected_cause": "The procedure filters by truthiness rather than validating numeric type.",
+    "smallest_change": "Replace the filtering instruction with a numeric type check.",
+    "predicted_effect": "Negative amounts remain in the computed total.",
+    "falsifying_outcome": "The same negative input is still omitted in a valid candidate run."
+  },
+  "evaluation": {
+    "suite_version": "v1",
+    "target_checks": ["negative-amount-preserved"],
+    "preservation_checks": ["ordinary-total", "empty-input"],
+    "max_runs": 6,
+    "fresh_case_ids": ["acceptance-negative-variant"]
+  },
+  "targeted_failure": {
+    "baseline_status": "not_run",
+    "candidate_status": "not_run",
+    "evidence": []
+  },
+  "loop_observations": [],
+  "decision": "unverified",
+  "reason": "Proposed; no comparison executed.",
+  "limitations": []
+}
+```
+
+For improvements without an observed failure, set `hypothesis.observed_failure` and `targeted_failure` to null and `hypothesis.reproduction` to `not_applicable`; record the desired gain and link the declared acceptance rule and preservation checks instead.
+
+For fix claims, `hypothesis.reproduction` is `historical`, `synthetic`, or `not_reproduced`. Targeted-failure statuses use `pass`, `fail`, `unverified`, or `not_run` for the named acceptance check. A baseline `fail` and candidate `pass` support resolution only with comparable execution, valid checks, and the declared repetition rule; runtime errors are recorded separately, not treated as reproductions.
+
+Each `loop_observations` item records `stage`, `status`, `observation`, `evidence`, and `attribution`. Stages are:
+
+| Stage | Question |
+|---|---|
+| `diagnosis` | Does evidence support the suspected cause, or only the symptom? |
+| `proposal` | Does the actual edit implement the hypothesized mechanism within scope? |
+| `activation` | Was the candidate workflow loaded in the evaluated run? |
+| `execution` | Did the agent execute the changed behavior; were tools and environment usable? |
+| `evaluation` | Were checks valid, comparable, and supported by available evidence? |
+| `selection` | Did the acceptance decision follow the frozen gain/readiness or fix rule and preservation checks? |
+| `transfer` | Did the fix survive fresh cases and affected workflow handoffs? |
+
+Stage `status` is `supported`, `failed`, `unknown`, or `not_tested`; `attribution` is `observed`, `suspected`, or `unknown`. Record multiple affected stages when warranted. An inactive skill supports an activation failure, not proof of a bad proposal; a missing artifact may leave evaluation unknown rather than establish a wrong diagnosis. Supported means evidence for that stage, not a proven causal explanation of the entire outcome.
+
+`decision` is `accepted`, `rejected`, or `unverified`. Record the decision returned by [ApproveSkill](../Procedures/ApproveSkill.md), with its governing rule ID or section anchor, file/version, evidence and authority; this record introduces no separate acceptance policy. For fix claims, acceptance requires targeted-failure reproduction in a comparable baseline and resolution in candidate execution. Improvements without an observed failure use the declared gain/readiness rule. Both require the declared preservation, acceptance and evidence/repetition checks. Record the tested scope: passing only the reproduction does not establish transfer. Reject when valid evidence contradicts the hypothesis or required preservation fails; keep uncertainty unverified when required execution, grading, or fix reproduction cannot decide. A useful partial result can seed another attempt while the current fix remains unaccepted. Report counts by stage and unknown/not-tested counts when summarizing multiple attempts; do not present stage counts as causal failure rates without an attribution study.

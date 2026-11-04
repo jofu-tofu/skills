@@ -1,0 +1,116 @@
+[
+  {
+    "Path": "Tools\\ExploreSkill.ts",
+    "Source": "SkillForge/Tools\\ExploreSkill.ts",
+    "SourceHash": "EE17584B207992C21190E914715BE3B59FBDF0DF082F6BC9FDA25D6A9D3399D4",
+    "DraftHash": "EE17584B207992C21190E914715BE3B59FBDF0DF082F6BC9FDA25D6A9D3399D4"
+  },
+  {
+    "Path": "Tools\\ValidateSkill.ts",
+    "Source": "SkillForge/Tools\\ValidateSkill.ts",
+    "SourceHash": "BCE70E063977C38AF49DED802D2F9D53260893DC7AD8B9056D8D58F5DA81E5AA",
+    "DraftHash": "BCE70E063977C38AF49DED802D2F9D53260893DC7AD8B9056D8D58F5DA81E5AA"
+  },
+  {
+    "Path": "Tools\\assets\\eval_review.html",
+    "Source": "SkillForge/Tools\\assets\\eval_review.html",
+    "SourceHash": "2CC6071B35AC897B17CF0388CE240FD959396F35F95A1F7D3E74A248DD060D0F",
+    "DraftHash": "2CC6071B35AC897B17CF0388CE240FD959396F35F95A1F7D3E74A248DD060D0F"
+  },
+  {
+    "Path": "Tools\\eval-viewer\\generate_review.py",
+    "Source": "SkillForge/Tools\\eval-viewer\\generate_review.py",
+    "SourceHash": "44D97A35BE977331B13B04932927B3BEB285862A173F0F15DD052D4F31DE5C76",
+    "DraftHash": "44D97A35BE977331B13B04932927B3BEB285862A173F0F15DD052D4F31DE5C76"
+  },
+  {
+    "Path": "Tools\\eval-viewer\\viewer.html",
+    "Source": "SkillForge/Tools\\eval-viewer\\viewer.html",
+    "SourceHash": "46ABD4E19E482B4AEEBEA24B135C2D88FB122A63346DBEAB7FCECD83828A826D",
+    "DraftHash": "46ABD4E19E482B4AEEBEA24B135C2D88FB122A63346DBEAB7FCECD83828A826D"
+  },
+  {
+    "Path": "Tools\\lib\\paths.ts",
+    "Source": "SkillForge/Tools\\lib\\paths.ts",
+    "SourceHash": "70230741F3E4761C1A0311209122C2C8C308F04B2171F47EB4451689708DD42C",
+    "DraftHash": "70230741F3E4761C1A0311209122C2C8C308F04B2171F47EB4451689708DD42C"
+  },
+  {
+    "Path": "Tools\\lib\\platform.ts",
+    "Source": "SkillForge/Tools\\lib\\platform.ts",
+    "SourceHash": "416EF285710384828DABA2633350437AB6446621D2A7179D66D039D4F3322FD4",
+    "DraftHash": "416EF285710384828DABA2633350437AB6446621D2A7179D66D039D4F3322FD4"
+  },
+  {
+    "Path": "Tools\\scripts\\__init__.py",
+    "Source": "SkillForge/Tools\\scripts\\__init__.py",
+    "SourceHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "DraftHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "Path": "Tools\\scripts\\aggregate_benchmark.py",
+    "Source": "SkillForge/Tools\\scripts\\aggregate_benchmark.py",
+    "SourceHash": "16C5A53E4CBF55A679A42C244CBA39CEE463D99CE507ECC9FAFC4CB4E0A133E0",
+    "DraftHash": "16C5A53E4CBF55A679A42C244CBA39CEE463D99CE507ECC9FAFC4CB4E0A133E0"
+  },
+  {
+    "Path": "Tools\\scripts\\generate_report.py",
+    "Source": "SkillForge/Tools\\scripts\\generate_report.py",
+    "SourceHash": "D90EC4CFC2DD539564EDD332880FB7561309A1F0097D082DE88E3101D6C8031E",
+    "DraftHash": "D90EC4CFC2DD539564EDD332880FB7561309A1F0097D082DE88E3101D6C8031E"
+  },
+  {
+    "Path": "Tools\\scripts\\improve_description.py",
+    "Source": "SkillForge/Tools\\scripts\\improve_description.py",
+    "SourceHash": "EEAD49A27311AA1627CB9693C18A6EDF772A3D2A889A4859973673A8F871C427",
+    "DraftHash": "EEAD49A27311AA1627CB9693C18A6EDF772A3D2A889A4859973673A8F871C427"
+  },
+  {
+    "Path": "Tools\\scripts\\run_eval.py",
+    "Source": "SkillForge/Tools\\scripts\\run_eval.py",
+    "SourceHash": "252AC58FEEDF233673D6A605661158DB20806F724C7D1DD32C92AE316B24EF67",
+    "DraftHash": "252AC58FEEDF233673D6A605661158DB20806F724C7D1DD32C92AE316B24EF67"
+  },
+  {
+    "Path": "Tools\\scripts\\run_loop.py",
+    "Source": "SkillForge/Tools\\scripts\\run_loop.py",
+    "SourceHash": "4EE43E46D2462FA5D55FCAE64ECE567805E1F446FD50E696AD3BBCD6C5D10F3B",
+    "DraftHash": "4EE43E46D2462FA5D55FCAE64ECE567805E1F446FD50E696AD3BBCD6C5D10F3B"
+  },
+  {
+    "Path": "Tools\\scripts\\utils.py",
+    "Source": "SkillForge/Tools\\scripts\\utils.py",
+    "SourceHash": "B396F920BFBB422822427D800656AB125876E1E42AE242ED3C9380338F9D0833",
+    "DraftHash": "B396F920BFBB422822427D800656AB125876E1E42AE242ED3C9380338F9D0833"
+  },
+  {
+    "Path": "Standards\\Analyzer.md",
+    "Source": "SkillForge/Standards\\Analyzer.md",
+    "SourceHash": "8CCCE0D9755F7684277870E791FFB643B026D5DD4508E5C1BDC8DFEC9E8532B5",
+    "DraftHash": "8CCCE0D9755F7684277870E791FFB643B026D5DD4508E5C1BDC8DFEC9E8532B5"
+  },
+  {
+    "Path": "Standards\\Comparator.md",
+    "Source": "SkillForge/Standards\\Comparator.md",
+    "SourceHash": "EE90AF43EB0DBE2FDADBB96D01F9776F387ED5C529CE083C22B8BEC4E3AE10D3",
+    "DraftHash": "EE90AF43EB0DBE2FDADBB96D01F9776F387ED5C529CE083C22B8BEC4E3AE10D3"
+  },
+  {
+    "Path": "Standards\\Grader.md",
+    "Source": "SkillForge/Standards\\Grader.md",
+    "SourceHash": "6EC1C6950FCAFA3E00D5E845B2498C5EA3E8F7F012BD9C6ABAD25425F3EE619C",
+    "DraftHash": "6EC1C6950FCAFA3E00D5E845B2498C5EA3E8F7F012BD9C6ABAD25425F3EE619C"
+  },
+  {
+    "Path": "Standards\\KnowledgeIntegration.md",
+    "Source": "SkillForge/Standards\\KnowledgeIntegration.md",
+    "SourceHash": "2A20097EF4BE484907BFEBC88B7124C55BE3209D8239714D2DB82BDA0C22AFDF",
+    "DraftHash": "2A20097EF4BE484907BFEBC88B7124C55BE3209D8239714D2DB82BDA0C22AFDF"
+  },
+  {
+    "Path": "Standards\\Schemas.md",
+    "Source": "SkillForge/Standards\\Schemas.md",
+    "SourceHash": "A203F96843B44CBC38155784B11C006999F52F8A2C10FA8EC1E3B6EAE85006E5",
+    "DraftHash": "A203F96843B44CBC38155784B11C006999F52F8A2C10FA8EC1E3B6EAE85006E5"
+  }
+]

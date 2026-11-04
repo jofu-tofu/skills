@@ -1119,7 +1119,7 @@
       document.getElementById("view-tabs").style.display = "flex";
 
       const container = document.getElementById("benchmark-content");
-      const summary = data.run_summary || {};
+      const summary = data.configuration_summary || Object.fromEntries(Object.entries(data.run_summary || {}).filter(([k]) => k !== "delta"));
       const metadata = data.metadata || {};
       const notes = data.notes || [];
 
@@ -1131,62 +1131,37 @@
       if (metadata.skill_name) html += "<strong>" + escapeHtml(metadata.skill_name) + "</strong> &mdash; ";
       if (metadata.timestamp) html += metadata.timestamp + " &mdash; ";
       if (metadata.evals_run) html += "Evals: " + metadata.evals_run.join(", ") + " &mdash; ";
-      html += (metadata.runs_per_configuration || "?") + " runs per configuration";
+      html += metadata.run_counts
+        ? "Discovered runs: " + escapeHtml(Object.entries(metadata.run_counts).map(([c, n]) => c + ": " + n).join(", "))
+        : (metadata.runs_per_configuration ?? "unknown") + " runs each per eval and configuration";
       html += "</p>";
 
-      // Summary table
-      html += '<table class="benchmark-table">';
-
+      // Summary statistics include observed/discovered coverage when available.
       function fmtStat(stat, pct) {
-        if (!stat) return "—";
+        if (!stat) return "unknown";
+        const coverage = stat.n != null ? " [" + stat.n + "/" + stat.total + "; " + escapeHtml(stat.status) + "]" : "";
+        if (stat.mean == null) return "unknown" + coverage;
         const suffix = pct ? "%" : "";
         const m = pct ? (stat.mean * 100).toFixed(0) : stat.mean.toFixed(1);
-        const s = pct ? (stat.stddev * 100).toFixed(0) : stat.stddev.toFixed(1);
-        return m + suffix + " ± " + s + suffix;
+        const sd = stat.stddev == null ? "unknown" : (pct ? (stat.stddev * 100).toFixed(0) : stat.stddev.toFixed(1));
+        return m + suffix + " ± " + sd + suffix + coverage;
       }
-
       function deltaClass(val) {
-        if (!val) return "";
+        if (val == null) return "";
         const n = parseFloat(val);
-        if (n > 0) return "benchmark-delta-positive";
-        if (n < 0) return "benchmark-delta-negative";
-        return "";
+        return n > 0 ? "benchmark-delta-positive" : n < 0 ? "benchmark-delta-negative" : "";
       }
-
-      // Discover config names dynamically (everything except "delta")
-      const configs = Object.keys(summary).filter(k => k !== "delta");
-      const configA = configs[0] || "config_a";
-      const configB = configs[1] || "config_b";
-      const labelA = configA.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-      const labelB = configB.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-      const a = summary[configA] || {};
-      const b = summary[configB] || {};
-      const delta = summary.delta || {};
-
-      html += "<thead><tr><th>Metric</th><th>" + escapeHtml(labelA) + "</th><th>" + escapeHtml(labelB) + "</th><th>Delta</th></tr></thead>";
-      html += "<tbody>";
-
-      html += "<tr><td><strong>Pass Rate</strong></td>";
-      html += "<td>" + fmtStat(a.pass_rate, true) + "</td>";
-      html += "<td>" + fmtStat(b.pass_rate, true) + "</td>";
-      html += '<td class="' + deltaClass(delta.pass_rate) + '">' + (delta.pass_rate || "—") + "</td></tr>";
-
-      // Time (only show row if data exists)
-      if (a.time_seconds || b.time_seconds) {
-        html += "<tr><td><strong>Time (s)</strong></td>";
-        html += "<td>" + fmtStat(a.time_seconds, false) + "</td>";
-        html += "<td>" + fmtStat(b.time_seconds, false) + "</td>";
-        html += '<td class="' + deltaClass(delta.time_seconds) + '">' + (delta.time_seconds ? delta.time_seconds + "s" : "—") + "</td></tr>";
+      const configs = Object.keys(summary);
+      const delta = (data.run_summary || {}).delta || {};
+      html += '<table class="benchmark-table"><thead><tr><th>Metric</th>';
+      for (const config of configs) html += "<th>" + escapeHtml(config) + "</th>";
+      html += "<th>Delta (first minus second)</th></tr></thead><tbody>";
+      for (const [metric, label] of [["pass_rate", "Pass Rate"], ["time_seconds", "Time (s)"], ["tokens", "Tokens"], ["output_chars", "Output characters"]]) {
+        if (!configs.some(c => summary[c][metric])) continue;
+        html += "<tr><td><strong>" + label + "</strong></td>";
+        for (const config of configs) html += "<td>" + fmtStat(summary[config][metric], metric === "pass_rate") + "</td>";
+        html += '<td class="' + deltaClass(delta[metric]) + '">' + escapeHtml(delta[metric] ?? "unknown") + "</td></tr>";
       }
-
-      // Tokens (only show row if data exists)
-      if (a.tokens || b.tokens) {
-        html += "<tr><td><strong>Tokens</strong></td>";
-        html += "<td>" + fmtStat(a.tokens, false) + "</td>";
-        html += "<td>" + fmtStat(b.tokens, false) + "</td>";
-        html += '<td class="' + deltaClass(delta.tokens) + '">' + (delta.tokens || "—") + "</td></tr>";
-      }
-
       html += "</tbody></table>";
 
       // Per-eval breakdown (if runs data available)
@@ -1223,27 +1198,27 @@
 
             for (const run of configRuns) {
               const r = run.result || {};
-              const prClass = r.pass_rate >= 0.8 ? "benchmark-delta-positive" : r.pass_rate < 0.5 ? "benchmark-delta-negative" : "";
+              const prClass = r.pass_rate == null ? "" : r.pass_rate >= 0.8 ? "benchmark-delta-positive" : r.pass_rate < 0.5 ? "benchmark-delta-negative" : "";
               html += '<tr class="' + rowClass + '">';
-              html += "<td>" + configLabel + "</td>";
-              html += "<td>" + run.run_number + "</td>";
-              html += '<td class="' + prClass + '">' + ((r.pass_rate || 0) * 100).toFixed(0) + "% (" + (r.passed || 0) + "/" + (r.total || 0) + ")</td>";
+              html += "<td>" + escapeHtml(configLabel) + "</td>";
+              html += "<td>" + escapeHtml(String(run.run_number)) + "</td>";
+              html += '<td class="' + prClass + '">' + (r.pass_rate == null ? "unknown" : (r.pass_rate * 100).toFixed(0) + "%") + " (" + (r.passed ?? "unknown") + "/" + (r.total ?? "unknown") + ")</td>";
               if (hasTime) html += "<td>" + (r.time_seconds != null ? r.time_seconds.toFixed(1) : "—") + "</td>";
-              if (hasErrors) html += "<td>" + (r.errors || 0) + "</td>";
+              if (hasErrors) html += "<td>" + (r.errors ?? "unknown") + "</td>";
               html += "</tr>";
             }
 
             // Average row
-            const rates = configRuns.map(r => (r.result || {}).pass_rate || 0);
-            const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
-            const avgPrClass = avgRate >= 0.8 ? "benchmark-delta-positive" : avgRate < 0.5 ? "benchmark-delta-negative" : "";
+            const rates = configRuns.map(r => (r.result || {}).pass_rate).filter(v => v != null);
+            const avgRate = rates.length ? rates.reduce((a, b) => a + b, 0) / rates.length : null;
+            const avgPrClass = avgRate == null ? "" : avgRate >= 0.8 ? "benchmark-delta-positive" : avgRate < 0.5 ? "benchmark-delta-negative" : "";
             html += '<tr class="benchmark-row-avg ' + rowClass + '">';
-            html += "<td>" + configLabel + "</td>";
+            html += "<td>" + escapeHtml(configLabel) + "</td>";
             html += "<td>Avg</td>";
-            html += '<td class="' + avgPrClass + '">' + (avgRate * 100).toFixed(0) + "%</td>";
+            html += '<td class="' + avgPrClass + '">' + (avgRate == null ? "unknown" : (avgRate * 100).toFixed(0) + "%") + " [" + rates.length + "/" + configRuns.length + "]</td>";
             if (hasTime) {
               const times = configRuns.map(r => (r.result || {}).time_seconds).filter(t => t != null);
-              html += "<td>" + (times.length ? (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1) : "—") + "</td>";
+              html += "<td>" + (times.length ? (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1) : "unknown") + " [" + times.length + "/" + configRuns.length + "]</td>";
             }
             if (hasErrors) html += "<td></td>";
             html += "</tr>";
