@@ -5,6 +5,8 @@ updated: 2026-11-03
 ---
 # Proposed SkillForge improvement records
 
+Purpose-first candidate 2.1.0-rc.2, 2026-11-04: [proposal and gap record](PurposeFirst/Proposal.md). Broad improvement derives and challenges outcomes from the user's job before choosing measures or changes; progressive planning justifies the smallest useful next step. A human-guided MarkdownToDocx walkthrough reached agreed outcomes and a six-example check exercise. The owner authorized committing and publishing the design. Comparative method benefit and autonomous reliability remain unverified; publication does not imply installation.
+
 Latest design migration: [ReconcileLegacy decision](ReconcileLegacy/Decision.md), with [results](ReconcileLegacy/Results.md). Draft v0.3 carries over useful installed capabilities. This is a completed design change, not a completed behavioral improvement experiment.
 
 Current entry point: [SKILL.md](../SKILL.md). Active profiles cover CreateSkill, UpdateSkill, and EvaluateSkill; see [Architecture](../Architecture.md). The earlier ImproveSkill v0.1 documents remain design history. A draft instruction package now exists; no generally validated replacement is established. Completed bounded attempts and their retention decisions are listed below.

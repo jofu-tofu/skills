@@ -1,0 +1,76 @@
+{
+  "purpose": "Portable publication of a historical development check trial; not a new evaluation run",
+  "transformations": [
+    {
+      "file": "CheckTrial/check_content.py",
+      "change": "Replace fixed local target path with required SKILL_TARGET environment variable. Checker decisions unchanged.",
+      "original_sha256": "a75257eb05f859d56a99cfd688dbf7e99e2b756684b89bd52be00255a7a62e51",
+      "packaged_sha256": "2401f8dcbde6e0acb7a90d395a22f19cf42453508d0976c522624a90b9adc751"
+    },
+    {
+      "file": "CheckTrial/results.json",
+      "change": "Replace private disposable-copy evidence references with retained Word observation receipts; preserve all statuses, observations and original checker hashes."
+    }
+  ],
+  "omitted": [
+    "Disposable Word-edited copies with account metadata",
+    "Machine-specific fixture builder and Word/PDF rendering helpers",
+    "PDF intermediates and contact sheet",
+    "Local chat checkpoint"
+  ],
+  "byte_identical_files": [
+    "Examples/01-reference.docx",
+    "Examples/02-missing-paragraph.docx",
+    "Examples/03-changed-table.docx",
+    "Examples/04-clipped-diagram.docx",
+    "Examples/05-page-image.docx",
+    "Examples/06-valid-formatting.docx",
+    "Examples/source.md",
+    "Examples/ReviewGuide.md",
+    "Examples/internal/construction-checks.json",
+    "CheckTrial/Plan.md",
+    "CheckTrial/Report.md",
+    "CheckTrial/source-expectations.json",
+    "CheckTrial/content-observations.json",
+    "CheckTrial/word-observations.json",
+    "CheckTrial/visual-observations.json",
+    "CheckTrial/isolation.json",
+    "CheckTrial/before-identities.json",
+    "CheckTrial/edit_word.ps1",
+    "Examples/internal/renders/01-reference/page-1.png",
+    "Examples/internal/renders/02-missing-paragraph/page-1.png",
+    "Examples/internal/renders/03-changed-table/page-1.png",
+    "Examples/internal/renders/04-clipped-diagram/page-1.png",
+    "Examples/internal/renders/05-page-image/page-1.png",
+    "Examples/internal/renders/06-valid-formatting/page-1.png"
+  ],
+  "files": {
+    ".gitattributes": "308a40fa1d89ae5ea4390b4c9b46a0108b09f171f07898f25d451fa0c69c4e9f",
+    "CheckTrial/before-identities.json": "b7f7fe528b95ba344eab5e58c8720f91d1db3100bf1dd3169dd85fa3a45ba424",
+    "CheckTrial/check_content.py": "2401f8dcbde6e0acb7a90d395a22f19cf42453508d0976c522624a90b9adc751",
+    "CheckTrial/content-observations.json": "7df47129c2cd0d703fff78d994deed2e51894c3ccfda0b932e75207b5ca5e161",
+    "CheckTrial/edit_word.ps1": "a75ad48dd0ee5441e2fb7d0e211a3bdf90497eccafb63741f623d094fec34255",
+    "CheckTrial/isolation.json": "61b22b921976afb55d5f6fb1cf68f85aac7750a3aae7bb930f995fc8c746fbf4",
+    "CheckTrial/Plan.md": "bbc15581fb60f519095e3cb4cba662cdcecacaab3d77f60c38494f2724fa60c7",
+    "CheckTrial/Report.md": "638d779a2dab005f3e35f5197a413664bfa5ddbe70b668c3167ef34e2cbe0d6e",
+    "CheckTrial/results.json": "7ee94748f035aaa6fedf59d81b53c79ed2793e83d5b05b9fe1abdd0ed4d190dc",
+    "CheckTrial/source-expectations.json": "001e1b37f27fa038063e5370d8deac4426a94890b2518234a63310d0a266095f",
+    "CheckTrial/visual-observations.json": "182eeb9131ba329d2948946216ab691b977ddc1f474d511286ff6bfbbf12de3b",
+    "CheckTrial/word-observations.json": "c7d4a0c606c00ae34de7e6cd6d29409c108e0921d74c7591fc5917e103b012ae",
+    "Examples/01-reference.docx": "eca5bb68224145be78f9c5758fde441fe3e54476cc0b2167c659a14c3b0295d5",
+    "Examples/02-missing-paragraph.docx": "d461ce33b3951e8badcab23ed828924b224385afbf9737a4937c6cc7575b0136",
+    "Examples/03-changed-table.docx": "21af15c07fdcce98ef281e0d2333784335613ef1fc9d086b34cdfa6b38cdeb06",
+    "Examples/04-clipped-diagram.docx": "b9f4934d8932e4d89d94dddbfa5dd87698fa467e5cf9d18a6b89ef4d31b1c4f6",
+    "Examples/05-page-image.docx": "815812dfc88c91441f4c2f0b616c11164375b0160608e0f8da263dd03a84bbd5",
+    "Examples/06-valid-formatting.docx": "9dbbeb168955082f031eedfcd84790654534ded2a96c73cf0f4dc71758635275",
+    "Examples/internal/construction-checks.json": "7c2f4d4e435c1e8c43784829305912be595a4fea803987d1dad02a49935bf47a",
+    "Examples/internal/renders/01-reference/page-1.png": "777dd77131068d81defa2598d2060a410b4e3c01dd3541ae02c5a781531410ca",
+    "Examples/internal/renders/02-missing-paragraph/page-1.png": "165e8e36083406c1a4e02f1b051b2755d432b5bc5417d366857a0ba202fc537b",
+    "Examples/internal/renders/03-changed-table/page-1.png": "1fe4e50f13c5f8f76d0bc24811e8392d050fab9a728e3d518942fc11cf43ca31",
+    "Examples/internal/renders/04-clipped-diagram/page-1.png": "34cea7d9b48af5cd30ea16dbe38fe72b2b1ba3671dd3183a447e7aff0ae55140",
+    "Examples/internal/renders/05-page-image/page-1.png": "e9cc92f8abadb482fa23e9d22c2cc78842908c8baaff6ba3d119a2add13b9b42",
+    "Examples/internal/renders/06-valid-formatting/page-1.png": "97a4969defcf3b0f86645c95c458fb97318ebaf0cef7e0e0b332e6a5fe7bf613",
+    "Examples/ReviewGuide.md": "eee67649ea9a99476db13208cc56715755d4a7c430b7e23b45c1f227366da549",
+    "Examples/source.md": "57df3fd9ea6a1772b6281206bfcd41e7e9b0d812435c9da0c2c4d511d0c73a89"
+  }
+}

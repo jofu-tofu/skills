@@ -1,6 +1,8 @@
 # Validation scope
 
-This package incorporates retained research draft v0.9 into the portable 2.0 release lineage. The declared offline release and real-lifecycle gates pass within the scope below. This supports this release candidate, not universal skill effectiveness.
+This package incorporates retained research draft v0.9 into the portable 2.0 release lineage. The offline release and real-lifecycle evidence below belongs to 2.1.0-rc.1. Version 2.1.0-rc.2 changes purpose/outcome reasoning and planning; those earlier results do not automatically qualify the revised instructions.
+
+The [purpose-first record](../Improvements/PurposeFirst/Proposal.md) describes a human-guided MarkdownToDocx walkthrough. Its six known document examples support a bounded check exercise, not a baseline/candidate comparison of SkillForge. Autonomous behavior, maintenance-path preservation and broad improvement remain unverified for the new guidance.
 
 ## Prior retained evidence
 
@@ -12,7 +14,7 @@ Earlier v0.5/v0.6 and planning experiments tied their comparators; no superiorit
 
 ## Release qualification
 
-The current [qualification record](ReleaseQualification.json) preserves the tested method identity, counts, evidence hashes and limits.
+The prior [qualification record](ReleaseQualification.json) preserves the tested 2.1.0-rc.1 method identity, counts, evidence hashes and limits.
 
 - Full real lifecycle: created PackagePortability, used it on actual old/release skill snapshots, independently evaluated it, added saved-report comparison, then independently used and re-evaluated it. The original audit remains byte-identical. Comparison distinguishes introduced/resolved/carried identities and unavailable inputs. Actual snapshots produced 0 introduced, 57 resolved and 0 carried findings; disappearance is not proof a dependency was repaired.
 - Two fresh broad portfolio rounds pass all 32 cases across Create, Update and Evaluate, including lightweight, design-only, cases-only, assessment-only and downstream handoffs. Four cases share each portfolio context.

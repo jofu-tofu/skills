@@ -1,0 +1,13 @@
+{
+  "measurement_id": "MD-visual-v1",
+  "assessor": "same authoring assistant, unblinded; user accepted the fixture expectations before this trial",
+  "method": "Inspect all six Word-rendered pages and compare visible diagram sequence with source.md; full-size inspection additionally used for reference, clipped diagram and typography alternative. No pixel-identity rule.",
+  "runs": [
+    {"file":"01-reference.docx","status":"pass","observation":"Readable paragraphs and table; all three diagram nodes Submitted, Reviewed, Ready and both arrows visible; no clipping or overlap observed."},
+    {"file":"02-missing-paragraph.docx","status":"pass","observation":"Remaining content is legible, with intact diagram and table. Empty Collection deadline section is a content omission caught by C1, not a clipping defect."},
+    {"file":"03-changed-table.docx","status":"pass","observation":"Table and other content are legible; wrong numerical associations are caught by C2, not a readability failure."},
+    {"file":"04-clipped-diagram.docx","status":"fail","observation":"Final diagram box ends abruptly after the beginning of the Ready label; its right border and rest of the label are missing. Other text/table content remains legible."},
+    {"file":"05-page-image.docx","status":"pass","observation":"Reference content is visually present and readable, including the complete diagram. Visual inspection alone cannot establish editability or a live hyperlink."},
+    {"file":"06-valid-formatting.docx","status":"pass","observation":"Different serif font, wrapping and spacing remain readable; complete diagram and table fit on one page. No rejection for harmless typography differences."}
+  ]
+}

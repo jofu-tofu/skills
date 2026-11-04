@@ -4,12 +4,14 @@ description: Convert Markdown content to DOCX with reliable defaults, Mermaid di
 compatibility: Designed for Codex and Devin (or similar agent products). Requires pandoc.
 metadata:
   author: pai
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # MarkdownToDocx
 
 Convert Markdown documents into Word `.docx` output using `pandoc`, with automatic Mermaid diagram rendering to images, visible table formatting, and auto-open for immediate review.
+
+For assessment or improvement, read the owner-agreed [quality outcomes](Quality/Outcomes.md) and [measurement scope](Quality/Measurements.md). Version 1.0.1 records quality requirements; the conversion workflow and tools are unchanged and have not been evaluated against all of them.
 
 ## Workflow Routing
 

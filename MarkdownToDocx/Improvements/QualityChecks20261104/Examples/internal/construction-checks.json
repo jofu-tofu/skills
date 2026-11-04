@@ -1,0 +1,16 @@
+{
+  "kind": "fixture construction inspection only",
+  "status": "passed",
+  "word_render_pages": 1,
+  "interactive_edit_task": "not run",
+  "measure_qualification": "pending human review",
+  "files": {
+    "source.md": "57df3fd9ea6a1772b6281206bfcd41e7e9b0d812435c9da0c2c4d511d0c73a89",
+    "01-reference.docx": "eca5bb68224145be78f9c5758fde441fe3e54476cc0b2167c659a14c3b0295d5",
+    "02-missing-paragraph.docx": "d461ce33b3951e8badcab23ed828924b224385afbf9737a4937c6cc7575b0136",
+    "03-changed-table.docx": "21af15c07fdcce98ef281e0d2333784335613ef1fc9d086b34cdfa6b38cdeb06",
+    "04-clipped-diagram.docx": "b9f4934d8932e4d89d94dddbfa5dd87698fa467e5cf9d18a6b89ef4d31b1c4f6",
+    "05-page-image.docx": "815812dfc88c91441f4c2f0b616c11164375b0160608e0f8da263dd03a84bbd5",
+    "06-valid-formatting.docx": "9dbbeb168955082f031eedfcd84790654534ded2a96c73cf0f4dc71758635275"
+  }
+}

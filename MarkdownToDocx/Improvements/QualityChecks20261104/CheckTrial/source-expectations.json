@@ -1,0 +1,47 @@
+{
+  "headings": [
+    "Library pickup instructions",
+    "Collection deadline",
+    "How to collect",
+    "Pickup locations",
+    "Request progress"
+  ],
+  "paragraphs": [
+    "This fictional library example explains how to collect reserved books. Choose a pickup location and wait for a ready notice before travelling.",
+    "Uncollected books return to the shelf after 3 days. A ready notice does not extend this deadline.",
+    "Reference link for this fictional example: Pickup information"
+  ],
+  "steps": [
+    "Submit a request with your name and pickup location.",
+    "Wait for the library to review the request and send a ready notice.",
+    "Bring your library card when collecting the books."
+  ],
+  "table": [
+    [
+      "Location",
+      "Limit",
+      "Hours"
+    ],
+    [
+      "North desk",
+      "2 books",
+      "09:00 to 12:00"
+    ],
+    [
+      "South desk",
+      "5 books",
+      "13:00 to 17:00"
+    ],
+    [
+      "Mobile stop",
+      "1 book",
+      "15:00 to 16:00"
+    ]
+  ],
+  "links": [
+    [
+      "Pickup information",
+      "https://example.org/pickup"
+    ]
+  ]
+}

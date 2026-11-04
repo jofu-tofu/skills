@@ -1,0 +1,74 @@
+[
+  {
+    "file": "01-reference.docx",
+    "execution_status": "completed",
+    "status": "pass",
+    "opened": true,
+    "paragraph_found": true,
+    "cell_found": true,
+    "paragraph_persisted": true,
+    "cell_persisted": true,
+    "error": null,
+    "seconds": 0.5966234
+  },
+  {
+    "file": "02-missing-paragraph.docx",
+    "execution_status": "completed",
+    "status": "pass",
+    "opened": true,
+    "paragraph_found": true,
+    "cell_found": true,
+    "paragraph_persisted": true,
+    "cell_persisted": true,
+    "error": null,
+    "seconds": 0.2529596
+  },
+  {
+    "file": "03-changed-table.docx",
+    "execution_status": "completed",
+    "status": "pass",
+    "opened": true,
+    "paragraph_found": true,
+    "cell_found": true,
+    "paragraph_persisted": true,
+    "cell_persisted": true,
+    "error": null,
+    "seconds": 0.3137337
+  },
+  {
+    "file": "04-clipped-diagram.docx",
+    "execution_status": "completed",
+    "status": "pass",
+    "opened": true,
+    "paragraph_found": true,
+    "cell_found": true,
+    "paragraph_persisted": true,
+    "cell_persisted": true,
+    "error": null,
+    "seconds": 0.3117229
+  },
+  {
+    "file": "05-page-image.docx",
+    "execution_status": "completed",
+    "status": "fail",
+    "opened": true,
+    "paragraph_found": false,
+    "cell_found": false,
+    "paragraph_persisted": null,
+    "cell_persisted": null,
+    "error": null,
+    "seconds": 0.1068272
+  },
+  {
+    "file": "06-valid-formatting.docx",
+    "execution_status": "completed",
+    "status": "pass",
+    "opened": true,
+    "paragraph_found": true,
+    "cell_found": true,
+    "paragraph_persisted": true,
+    "cell_persisted": true,
+    "error": null,
+    "seconds": 0.3208657
+  }
+]

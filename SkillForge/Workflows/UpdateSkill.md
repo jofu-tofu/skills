@@ -19,7 +19,7 @@ Deliver a scoped revision and a justified retain/reject/defer decision while pre
 
 ## Workflow Steps
 
-Choose the lightest path before the numbered behavioral loop:
+Choose the lightest path that fits the user's request. A broad request to improve a skill follows the numbered loop: establish its purpose and challenge expected outcomes before choosing changes. Mentioning structure as a possible first step does not make the whole request a structural refactor. Explicitly bounded maintenance keeps the short paths below.
 
 | Request | Path |
 |---|---|
@@ -34,7 +34,7 @@ After substantive edits on any path, call ReviewDesign on the changed instructio
 Shared procedures are reusable operations, not required separate agent calls. Existing adequate records can be linked. A request to make a design change authorizes that change; no fabricated behavioral failure is needed.
 
 1. Read target intent, affected workflows, applicable quality records, and the latest relevant decision. Preserve the baseline.
-2. For a reported or observed gap, call DiagnoseGap before planning. Then call EstablishQuality to check context drift or clarify affected outcomes, including DesignMeasurement for new/changed/unsupported measures even without a gap. Preserve criterion IDs and measurement versions; record authorized changes separately. Use the same qualified definition for baseline and candidate comparisons.
+2. For a reported or observed gap, call DiagnoseGap before planning. Then call EstablishQuality: for broad improvement, make the purpose-to-outcome reasoning visible before proposing metrics or edits; for a focused repair, revisit only the affected purpose and outcomes. Include DesignMeasurement for new/changed/unsupported measures even without a gap. Preserve criterion IDs and measurement versions; record authorized changes separately. Use the same qualified definition for baseline and candidate comparisons.
 3. Call PlanChange with the diagnosis or requested change, suspected cause, protected behavior, budget, and decision rule. Include its regression-coverage map and separate benefit/preservation gates for behavioral updates; shared instructions may affect other branches beyond the reported failure. A design hypothesis need not be presented as an observed failure. A case/checker gap may require only evaluation changes; retain the target when no skill edit is justified.
 4. Call DraftCandidate for the smallest coherent revision; avoid unrelated changes. Apply the authoring review above before evaluation.
 5. When execution is authorized, call EvaluateCandidate then ApproveSkill. For a design-only revision, return unverified status rather than claiming improvement.
