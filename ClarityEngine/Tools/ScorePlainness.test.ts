@@ -20,6 +20,35 @@ describe("checkGates", () => {
     expect(checkGates("The editor allows 25 open referrals.", "The editor limits open referrals.", noGateContext)[0]).toMatch(/numbers changed/);
   });
 
+  test("preserves signed quantities while accepting equivalent number and range notation", () => {
+    for (const [before, after] of [["-5", "5"], ["+2", "-2"], ["-0.5", "0.5"], ["−1.5%", "1.5%"]]) {
+      expect(checkGates(`The threshold is ${before} degrees.`, `The threshold is ${after} degrees.`, noGateContext)).toContainEqual(expect.stringMatching(/numbers changed/));
+    }
+    for (const [before, after] of [["-5", "−5"], ["+2", "2"], ["5-10", "5–10"], ["5 - 10", "5–10"], ["-1,250", "-1250"]]) {
+      expect(checkGates(`Allow ${before} units.`, `Allow ${after} units.`, noGateContext)).toEqual([]);
+    }
+    expect(checkGates("Use a 5-year term.", "Use a 5 year term.", noGateContext)).toEqual([]);
+    expect(checkGates("The thresholds are 5, -10 units.", "The thresholds are 5, 10 units.", noGateContext)).toContainEqual(expect.stringMatching(/numbers changed/));
+  });
+
+  test("keeps scientific exponent signs in the numeric marker", () => {
+    expect(checkGates("The threshold is 1e+5 units.", "The threshold is 1e-5 units.", noGateContext)).toContainEqual(expect.stringMatching(/numbers changed/));
+    expect(checkGates("The threshold is 1e−5 units.", "The threshold is 1e+5 units.", noGateContext)).toContainEqual(expect.stringMatching(/numbers changed/));
+    expect(checkGates("The threshold is 1e-5 units.", "The threshold remains 1e-5 units.", noGateContext)).toEqual([]);
+    // Other conservative gates can still reject equivalent scientific spelling.
+    // This assertion checks only the numeric marker's normalization.
+    expect(checkGates("The threshold is 1e-5 units.", "The threshold is 1E−5 units.", noGateContext).filter(reason => reason.startsWith("numbers changed"))).toEqual([]);
+  });
+
+  test("preserves leading-dot decimal signs and magnitude", () => {
+    for (const [before, after] of [["-.5", ".5"], ["−.5", ".5"], [".5", "5"], ["-.5e-2", "-.5e+2"]]) {
+      expect(checkGates(`The threshold is ${before} units.`, `The threshold is ${after} units.`, noGateContext)).toContainEqual(expect.stringMatching(/numbers changed/));
+    }
+    for (const [before, after] of [["-.5", "-0.5"], ["+.5", ".5"], ["-.5", "−.5"], [".5-.9", ".5–.9"]]) {
+      expect(checkGates(`Allow ${before} units.`, `Allow ${after} units.`, noGateContext)).toEqual([]);
+    }
+  });
+
   test("rejects flipped negation", () => {
     expect(checkGates("The receiver is not told when it is denied.", "The receiver is told when it is denied.", noGateContext)).toContain("negation count changed (1 → 0)");
   });
@@ -95,6 +124,17 @@ describe("computeSignals", () => {
 });
 
 describe("decide", () => {
+  test("does not select a plainer candidate that loses a quantity's negative sign", () => {
+    const result = decide({ id: "signed", original: "The threshold is -5 degrees after initialization.", candidates: [{ label: "A", text: "The threshold is 5 degrees after setup." }] }, { requiredTerms: [], documentTerms: [] });
+    expect(result.decision).toBe("keep-original");
+    expect(result.chosenText).toBe("The threshold is -5 degrees after initialization.");
+  });
+
+  test("does not select a plainer candidate that loses a leading-dot decimal sign", () => {
+    const result = decide({ id: "leading-dot", original: "The threshold is -.5 degrees after initialization.", candidates: [{ label: "A", text: "The threshold is .5 degrees after setup." }] }, { requiredTerms: [], documentTerms: [] });
+    expect(result.decision).toBe("keep-original");
+    expect(result.chosenText).toBe("The threshold is -.5 degrees after initialization.");
+  });
   const file = { requiredTerms: [], documentTerms: [] };
   const sentence = (candidates: SentenceCandidates["candidates"], original = "The checked export sender code excludes draft invoices unless the batch is closed."): SentenceCandidates => ({
     id: "s1",
