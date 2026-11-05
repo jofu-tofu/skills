@@ -73,7 +73,7 @@ For visual formats, capture the rendered output into `$ROUND_DIR/render/` as des
 | Short-form: email, chat, pull request description, or a main path under about 400 words | Reader, Cutter, Navigator, AudienceFit |
 | Standard document or deck | Reader, Skim Reader, Cutter, Logician, Navigator, AudienceFit |
 | Any rendered visual output (HTML, PPTX, PDF) | Add Visual |
-| More than one audience in the brief | One Reader per audience |
+| More than one audience in the brief | One Reader per audience; when the panel includes Skim Reader, one Skim Reader per audience |
 
 ### Step 5: Run the Lenses in Parallel
 
@@ -82,7 +82,7 @@ Start one fresh agent per lens, in parallel, with no inherited conversation. Giv
 | Lens | Inputs |
 |---|---|
 | Reader | Artifact (rendered pages or slides when available), its `reader-questions[-audience].md` |
-| Skim Reader | `skim-layer.md` in place of the artifact, `reader-questions.md`; it uses the Reader lens and writes `lens-SkimReader.md` |
+| Skim Reader | `skim-layer.md` in place of the artifact, its matching `reader-questions[-audience].md`; it uses the Reader lens and writes `lens-SkimReader[-audience].md` |
 | Cutter | Artifact, `brief.md`, `measurements.md`, `contract.md` |
 | Logician | Artifact, `brief.md`, `sources/`, `measurements.md`, `contract.md` |
 | Navigator | Artifact, `brief.md`, `measurements.md`, `first-half.md`, `skim-layer.md`, `contract.md` |

@@ -56,4 +56,4 @@ ClarityEngine does not replace a graphic design service, provide unavailable pro
 
 ## Constraints
 
-Keep Philosophy.md self-contained and under 200 lines. Preserve four principles, RC IDs 1–30 and their topics, HTML/PPTX support, and existing PresentationForge trigger phrases. Keep workflow triggers natural and distinct. Prefer few dependencies for portable HTML. Length budgets are diagnostics: they must not force out missing reasoning or useful repetition. A rule moves between lenses only by updating both the lens files and the Philosophy.md index together.
+Keep Philosophy.md self-contained and under 200 lines. Preserve four principles, RC IDs 1–31 and their topics, HTML/PPTX support, and existing PresentationForge trigger phrases. Keep workflow triggers natural and distinct. Prefer few dependencies for portable HTML. Length budgets are diagnostics: they must not force out missing reasoning or useful repetition. A rule moves between lenses only by updating both the lens files and the Philosophy.md index together.

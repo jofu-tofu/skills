@@ -4,10 +4,12 @@ description: Comprehension-first document and presentation authoring in a plain,
 compatibility: Designed for Claude Code, Codex, and Devin (or similar agent products)
 metadata:
   author: pai
-  version: "1.5.0"
+  version: "1.5.1-rc.1"
 ---
 
 # ClarityEngine
+
+Improvement evidence and limits: [Improvements/Index.md](Improvements/Index.md).
 
 Create documents and presentations that help readers understand the subject, follow the reasoning, and know what to do next. Start with the audience and main point, gather the evidence, write the explanation, make the wording plain, and build the file. Then a panel of independent reviewers checks it, a Verifier decides which findings stand, and the author applies the verified fixes.
 
@@ -117,3 +119,7 @@ User: "Run a readability check on this document"
 -> Measures the draft and runs the lens panel
 -> Returns the Verifier's report: what the reader understood, which findings stand, and the top fixes
 ```
+
+## Outcome and improvement records
+
+For evaluation or improvement, read [granular outcomes and current coverage](Quality/Outcomes.md). These records preserve open coverage and bounded evidence; they are not required context for every ordinary task or a claim of whole-skill readiness.
