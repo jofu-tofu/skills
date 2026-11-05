@@ -1,6 +1,6 @@
 # Review outcomes and dimension contributions
 
-Version CR-O 1, 2026-11-04. Source: owner request for granular outcomes; SkillIntent's credibility, systemic-risk, proportionality and scope requirements. Applies to scoped diff review, audit, fix re-review and commit-series review. These criteria define useful results, not finding quotas or proof that a lens caused a gain.
+Version CR-O 1.1, 2026-11-05. Source: owner request for granular outcomes; SkillIntent's credibility, systemic-risk, proportionality and scope requirements; [mined feedback and issue dispositions](../Improvements/HistoryScope/Record.md). Applies to scoped diff review, audit, fix re-review and commit-series review. These criteria define useful results, not finding quotas or proof that a lens caused a gain.
 
 The job is to help a maintainer decide whether code is fit for its intended use and what needs changing. The review should find consequential defects and credible maintenance risks, explain supported causes, and avoid unnecessary work or false reassurance. It cannot promise to find every defect.
 
@@ -47,6 +47,22 @@ All rows inherit O2–O6. Contributors overlap deliberately: one failure may nee
 | STR3 / O1,O2 | Distinguish systemic maintenance risk from an immediate runtime bug and support its consequence and severity. | STR traces the likely change and affected sites; verifier preserves substantive risks. | A coherent small module need not acquire more layers to fit a preferred architecture. |
 
 ## Challenge and limits
+
+### Scope and maintenance contrasts from historical feedback
+
+These specialize existing outcomes; they do not add a lens. Scope means delivering the authorized behavior with justified changes, not minimizing changed lines. Historical reports are leads until their final disposition and applicable revision are checked.
+
+| ID / parent | Expected result and contributions | Valid contrast |
+|---|---|---|
+| SCP1 / O3,INT1,INT3 | GatherContext preserves the latest explicit owner decision, its source, included consumers, exclusions and required prerequisites; INT checks that meaning. | A later authorized expansion can supersede an older narrow ticket. An assistant's proposed expansion does not authorize itself. |
+| SCP2 / O1,INT1,IMP1 | INT and IMP trace the complete required path, including unchanged helpers and sibling entry points governed by the same invariant. | Reachable unchanged code can already fulfill the requirement; superficially similar consumers may have different policies or identities. |
+| SCP3 / O3,INT2,SIM2 | Distinguish necessary implementation support and cleanup caused by the change from unrelated new behavior or speculative hardening. | Caller updates, an extraction and newly dead wiring may belong in scope without being enumerated in the ticket; unrelated normalization does not. |
+| SCP4 / O2,RES1,SIM2 | Establish a reachable failure and check producer guarantees before requesting defensive work or dismissing a safeguard. | Trusted validated in-process state differs from external input, persisted legacy state or concurrent mutation. Neither add nor remove validation by slogan. |
+| MNT1 / O1,SIM1,STR2 | Identify caller-specific selection or policy leaking into a shared operation when it creates concrete caller obligations; recommend a bounded behavior-preserving seam. | A coherent boolean option is valid. Parameter count or a preferred abstraction alone is not a finding. |
+| MNT2 / O1,COR1,CLA2 | Distinguish required effects for every item from a short-circuitable aggregate decision; explain actual skipped work or a demonstrated comprehension trap. | Stopping a pure comparison after all required effects complete is valid; do not label this a runtime defect. |
+| EVD1 / O2,O5 | Re-review and historical evaluation follow final issue disposition and exact evidence scope, retaining reversals, partial fixes and accepted limits. | A green unrelated suite or an intermediate published fix does not prove the disputed behavior; source evidence can still establish a defect without live reproduction. |
+
+Qualification and measured benefit for these contrasts are separate from their inclusion as owner-grounded outcomes. Do not turn this table into mandatory findings or a requirement to load historical transcripts during ordinary review.
 
 A report can mention every dimension yet miss the bug, cite a changed line yet invent the failure, or find the issue yet recommend removing a necessary safeguard. Those fail these outcomes. Conversely, a clean report, shared responsibility, or a different valid design may satisfy them. No per-lens finding quota, fixed decomposition depth or universal weighted score is required. Test the final report, not just lens outputs. Actual reader comprehension and long-term maintenance savings need evidence beyond synthetic reviews.
 

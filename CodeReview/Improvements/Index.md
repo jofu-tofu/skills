@@ -1,5 +1,7 @@
 # Improvement attempts
 
+- 2026-11-05 — Historical scope and maintenance feedback: [record](HistoryScope/Record.md). CR-O 1.1 adds owner-grounded scope, maintenance and final-disposition contrasts. Initial increment changes criteria only; runtime remains **1.1.0-rc.1**, with comparison pending and no behavioral benefit claim.
+
 - 2026-11-04 — Scope calibration follow-up: [record](ScopeCalibration/Record.md). Six final-stage contrasts and both native entry-point report outcomes pass without instruction changes. Release-gate and offline acceptance requirements survive into final reports. One CLI startup failure is preserved; delegation provenance and context isolation remain limited. Retain **1.1.0-rc.1**, with no new comparative benefit claim.
 
 - 2026-11-04 — Granular outcomes and clean-review handoff: [record](GranularOutcomes/Record.md). Retained candidate **1.1.0-rc.1** after matched baseline/candidate execution. Clean baseline review failed on empty lens artifacts even after permitted retries; candidate delivered a zero-finding report. Both detected six dispatch and two architecture defects. Re-review, series, standards-status and missing-input contrasts preserved expected results. [Outcomes](../Quality/Outcomes.md) defines 24 granular results; [measurement](../Quality/Measurement.md) records qualification and limits. No general detection advantage, native orchestration reliability or installation/publication is claimed.
