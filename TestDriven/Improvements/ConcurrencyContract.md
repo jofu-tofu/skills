@@ -1,0 +1,7 @@
+# Concurrency ceiling versus scheduling
+
+2026-11-05. A full-TDD trial produced a correct implementation and16 passing tests, but its tests rejected a valid serial implementation: they required exactly two immediate starts where the contract only specified at most two concurrent tasks. An independently qualified oracle accepted both implementations and rejected unbounded execution/swallowed errors. The trial also reached its300-second bound before writing the final report; preserved separately from the overconstraint failure.
+
+AsyncTesting now distinguishes ceilings from throughput guarantees and drives work that actually started. The follow-up delivered21 passing tests with real red/green/refactor snapshots, accepted the independent serial implementation, and rejected unbounded/completion-order variants. Callback assertion sensitivity, error identity, bounded completion and cleanup remain demonstrated; the original callback source is unchanged.
+
+Evidence: `RemainingSkills20261104/deep/engineering/tdd-async-plan.md`, `collect-qualification.json`, `tdd-independent-{candidate,candidate2}/result.json`, and `runs/tdd-async-{candidate,candidate2}`. Candidate2 had a420-second reporting allowance and finished in214seconds; do not attribute reporting completion differences across budgets to the instruction change. The valid-alternative result is the measured improvement. No claim of arbitrary scheduler/race coverage.
