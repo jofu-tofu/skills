@@ -25,7 +25,7 @@ Select a mode: review/audit invokes [ReviewDesign](../Procedures/ReviewDesign.md
 2. For a reported gap or suspected evaluation failure, call DiagnoseGap before freezing the specification. Call EstablishQuality to resolve or expose missing criteria. Keep proposed measurement changes in the evaluation workspace; preserve target files and canonical quality records. Then freeze the applicable specification. A readiness request without a gap need not run diagnosis.
 3. Call EvaluateCandidate using existing evidence or authorized executions. A single-version assessment need not invent a baseline.
 4. If readiness was requested, call ApproveSkill with the assessment and declared gate. Otherwise return the assessment directly.
-5. Call RecordLearning in the evaluation workspace, including failures, disagreements, and unchecked behavior.
+5. If ApproveSkill returned `continue`, perform its named check within assessment-only scope before closing; do not edit the target. Report an actual `blocked` limit when applicable. A trustworthy assessment may complete with an insufficient-evidence finding when that is the requested result. Call RecordLearning in the evaluation workspace, including failures, disagreements, and unchecked behavior.
 
 ## Completion
 

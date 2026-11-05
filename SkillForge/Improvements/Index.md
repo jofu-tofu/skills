@@ -5,6 +5,10 @@ updated: 2026-11-03
 ---
 # Proposed SkillForge improvement records
 
+Completion gate repair, 2026-11-04: [failure, implementation and evidence](CompletionGate/Record.md). Separates candidate retention from complete/continue/blocked; 24 CLI tests and both historical closure replays pass. Approved full SkillForge baseline/candidate runs completed after preserved timeout interruptions; the candidate invoked and consumed the gate. Separate typo/design controls pass. Bounded repair retained in the worktree; no general superiority, installation or publication claim.
+
+Research decision guidance, 2026-11-04: [scope and review](ResearchDecision/Record.md). Broad improvement checks existing evidence and conditionally searches academic literature before ranking changes. Initial static-only closure was invalid. Thirteen workflow trials now preserve blocked attempts, four completed behavioral comparisons, research/scope controls and 28/28 external output checks. Both methods worked; comparative superiority remains unverified. Candidate is experimental and uninstalled.
+
 Experiment adequacy candidate 2.1.0-rc.7, 2026-11-04: [diagnosis, iterations and evidence](ExperimentAdequacy/Record.md). Retained as a bounded tested candidate after 29 model trials. Experiment decision coverage, outcome evaluation and final-gate continuation are explicit. Rc.5 and rc.6 missed an in-scope aggregation case; rc.7's exact replay passed 9/9 and its CSV preservation control passed 5/5. Planning observations and limits remain separate from a general superiority claim. No installation or publication is implied.
 
 Outcome mapping candidate 2.1.0-rc.3, 2026-11-04: [gap, design and review record](OutcomeMapping/Record.md). Derive specific outcomes before mapping contributions to dimensions or capabilities; use that map to inform proposed responsibility changes. Authorized design revision only, not installed or published. Comparative benefit remains unverified.
