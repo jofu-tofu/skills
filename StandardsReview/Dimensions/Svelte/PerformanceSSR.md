@@ -2,13 +2,15 @@
 
 > The performance and SSR dimension covers bundle optimization, event handling patterns, error recovery, and server-side rendering safety -- the concerns that determine whether a Svelte application is fast, resilient, and correctly hydrated.
 
+Compatibility: Rune examples target Svelte 5; Svelte 4/legacy-mode syntax remains valid where supported. SvelteKit examples retain Kit 2 APIs unless a newer version is stated. Named interfaces, classes, callbacks, migration and layout conventions are conditional house policies, not automatic high-severity defects. Assess impact from the concrete contract. Shared mutable module examples are client-only demonstrations; create per-request/component instances for user-specific SSR state.
+
 ## Mental Model
 
-Performance in Svelte applications operates at two levels: build-time bundle optimization and runtime rendering efficiency. Unlike framework-heavy SPAs where the runtime itself is a performance bottleneck, Svelte compiles components to minimal imperative code, so the primary performance lever is what code gets shipped to the client in the first place. Dynamic imports are the primary tool here -- components that are not needed for initial render (modals, charts, rich text editors, admin panels) should be loaded on demand rather than included in the main bundle. This is especially impactful for SvelteKit applications where the initial page load determines Core Web Vitals scores.
+Performance in Svelte applications operates at two levels: build-time bundle optimization and runtime rendering efficiency. Svelte compiles components and includes runtime support. Measure bundle cost, rendering work and data loading rather than assuming the compiler removes runtime bottlenecks. Dynamic imports are the primary tool here -- components that are not needed for initial render (modals, charts, rich text editors, admin panels) should be loaded on demand rather than included in the main bundle. This is especially impactful for SvelteKit applications where the initial page load determines Core Web Vitals scores.
 
-Event handling in Svelte 5 moved from the `on:event` directive syntax to standard HTML event attributes (`onclick`, `onsubmit`, `oninput`). This is not just a cosmetic change -- the new syntax aligns with standard HTML, enables better tree-shaking, and works naturally with Svelte 5's event delegation system. Svelte 5 automatically delegates most events to the document root rather than attaching individual listeners per element, reducing memory usage in lists and repeated components. Understanding this delegation model is important because it means event handlers are already efficient by default, and manual event delegation patterns from other frameworks are unnecessary.
+Event handling in Svelte 5 moved from the `on:event` directive syntax to standard HTML event attributes (`onclick`, `onsubmit`, `oninput`). This is not just a cosmetic change -- the attribute names resemble HTML, while values are JavaScript handlers compiled by Svelte. Svelte 5 delegates a documented set of events, including click, to an application root, reducing memory usage in lists and repeated components. Understanding this delegation model is important because it means event handlers are already efficient by default, and manual event delegation patterns from other frameworks are unnecessary.
 
-Server-side rendering (SSR) introduces a class of bugs that do not exist in client-only applications: hydration mismatches. When the server renders HTML and the client hydrates it, any difference between server-rendered content and client-initialized state causes a mismatch warning (or silent UI corruption in production). The most common cause is non-deterministic values -- `Date.now()`, `Math.random()`, `window.innerWidth`, or any browser-only API that either does not exist on the server or produces a different value. The fix is to initialize such values to a deterministic placeholder during SSR and set the real value after mount.
+Server-side rendering (SSR) introduces a class of bugs that do not exist in client-only applications: hydration mismatches. When the server renders HTML and the client hydrates it, inconsistent rendered initial content can cause hydration problems; diagnostics and recovery depend on what differs. The most common cause is non-deterministic values -- `Date.now()`, `Math.random()`, `window.innerWidth`, or any browser-only API that either does not exist on the server or produces a different value. Use a deterministic placeholder followed by client initialization, or serialize a server-generated value for matching initial output.
 
 Error handling in SvelteKit distinguishes between expected errors (404 not found, 403 forbidden) and unexpected errors (database crash, null pointer). Expected errors use SvelteKit's `error()` helper, which sets the correct HTTP status code and renders the nearest `+error.svelte` page with structured error data. Unexpected errors are caught by SvelteKit's internal error handler and displayed generically to avoid leaking stack traces. At the component level, `<svelte:boundary>` provides error boundaries that catch rendering errors in child components and display fallback UI, preventing a single broken component from crashing the entire page.
 
@@ -16,15 +18,15 @@ Error handling in SvelteKit distinguishes between expected errors (404 not found
 
 ### When Reviewing Code
 
-Check for top-level imports of heavy components that are conditionally rendered -- these should use dynamic imports. Verify that event handlers use Svelte 5's attribute syntax (`onclick`, `onsubmit`) rather than the deprecated `on:click` directive. Look for non-deterministic values (`Date.now()`, `Math.random()`, `crypto.randomUUID()`, browser APIs like `window`, `document`, `localStorage`) initialized at the top level of a component script -- these cause hydration mismatches and must be deferred to `onMount`. Check that load functions use `error()` from `@sveltejs/kit` for expected error conditions (not found, unauthorized) rather than throwing generic `Error` objects. Look for error-prone component subtrees (user-generated content rendering, third-party widgets) that lack `<svelte:boundary>` wrappers.
+Check for top-level imports of heavy components that are conditionally rendered -- these should use dynamic imports. Verify that event handlers use Svelte 5's attribute syntax (`onclick`, `onsubmit`) rather than the deprecated `on:click` directive. Look for non-deterministic values (`Date.now()`, `Math.random()`, `crypto.randomUUID()`, browser APIs like `window`, `document`, `localStorage`) initialized at the top level of a component script -- check whether they affect rendered initial content or access unavailable browser APIs. `onMount` is one solution; server-created values serialized to the client are also valid. Check that load functions use `error()` from `@sveltejs/kit` for expected error conditions (not found, unauthorized) rather than throwing generic `Error` objects. Look for error-prone component subtrees (user-generated content rendering, third-party widgets) that lack `<svelte:boundary>` wrappers.
 
 ### When Designing / Planning
 
-Identify which components are heavy (large libraries, complex visualizations) and which are conditionally shown -- these are candidates for dynamic imports. Plan error handling at two levels: route-level with `error()` and `+error.svelte` pages, and component-level with `<svelte:boundary>` for isolating failures. Identify any features that need non-deterministic values (timestamps, random IDs, viewport dimensions) and plan them as client-only initializations. Consider which pages are SSR-critical (landing pages, SEO content) versus client-only (dashboards, admin panels) to determine where SSR safety is most important.
+Identify which components are heavy (large libraries, complex visualizations) and which are conditionally shown -- these are candidates for dynamic imports. Plan error handling at two levels: route-level with `error()` and `+error.svelte` pages, and component-level with `<svelte:boundary>` for isolating failures. Identify any features that need non-deterministic values (timestamps, random IDs, viewport dimensions) and choose client initialization or shared server-serialized initial values. Consider which pages are SSR-critical (landing pages, SEO content) versus client-only (dashboards, admin panels) to determine where SSR safety is most important.
 
 ### When Implementing
 
-For dynamic imports, store the dynamically loaded component in a `$state` variable typed as `typeof import('./Component.svelte').default | null`, load it in an async function, and conditionally render it when non-null. Use `onclick`, `onsubmit`, and other lowercase event attributes everywhere -- do not use `on:click` or `on:submit`. For event modifiers that existed in Svelte 4 (`|preventDefault`, `|stopPropagation`), call the methods directly in the handler function. Initialize non-deterministic values to safe defaults (`0`, `''`, `null`) and set real values in `onMount`. Use `error(404, 'Not found')` for expected failures in load functions and actions. Wrap error-prone subtrees with `<svelte:boundary>` and provide a `{#snippet failed(error)}` block for fallback UI.
+For dynamic imports, store the dynamically loaded component in a `$state` variable typed as `typeof import('./Component.svelte').default | null`, load it in an async function, and conditionally render it when non-null. Prefer event attributes for new Svelte 5 components; retain valid legacy directives when compatibility requires them. For event modifiers that existed in Svelte 4 (`|preventDefault`, `|stopPropagation`), call the methods directly in the handler function. Initialize non-deterministic values to safe defaults (`0`, `''`, `null`) and set real values in `onMount`. Use `error(404, 'Not found')` for expected failures in load functions and actions. Wrap error-prone subtrees with `<svelte:boundary>` and provide a `{#snippet failed(error)}` block for fallback UI.
 
 ## Rules in This Dimension
 
@@ -86,9 +88,9 @@ Use dynamic imports to lazy-load heavy components (modals, charts, rich text edi
 
 **Impact: MEDIUM (Svelte 5 standard — on:event directive is deprecated)**
 
-Use lowercase event attributes (`onclick`, `onsubmit`) instead of Svelte 4's `on:click` directive syntax. The new syntax is standard HTML and aligns with Svelte 5's move toward HTML-native patterns.
+Use lowercase event attributes (`onclick`, `onsubmit`) instead of Svelte 4's `on:click` directive syntax. These are Svelte-compiled JavaScript handler expressions, not HTML string handler attributes. Legacy directives remain supported; migration is a project policy.
 
-**Incorrect: Svelte 4 directive syntax — deprecated**
+**Legacy alternative: deprecated but supported directive syntax**
 
 ```svelte
 <button on:click={handleClick}>Click me</button>
@@ -108,45 +110,22 @@ Use lowercase event attributes (`onclick`, `onsubmit`) instead of Svelte 4's `on
 
 ---
 
-### SV5.3 Use Event Delegation for Large Lists
+### SV5.3 Use Svelte Event Delegation for Large Lists
 
-**Impact: HIGH (reduces memory usage from N listeners to 1)**
+**Impact: MEDIUM (avoid unnecessary manual dispatch)**
 
-For large lists, use a single event listener on the parent element instead of attaching listeners to each item. Read the target item from data attributes.
-
-**Incorrect: one listener per item — N listeners**
+Svelte 5 automatically delegates `click` and other documented events. Per-item `onclick` expressions do not imply one native listener per item. Prefer clear handlers and native interactive elements:
 
 ```svelte
 <ul>
   {#each items as item}
-    <li onclick={() => selectItem(item.id)}>
-      {item.name}
-    </li>
+    <li><button onclick={() => selectItem(item.id)}>{item.name}</button></li>
   {/each}
 </ul>
 ```
 
-**Correct: single delegated listener — 1 listener**
+Manual parent dispatch is optional when measurements or integration requirements justify it. Check nested targets, item identity and keyboard behavior; do not claim an automatic N-to-1 native listener reduction over this example.
 
-```svelte
-<script lang="ts">
-  function handleListClick(event: MouseEvent) {
-    const target = (event.target as HTMLElement).closest('[data-item-id]');
-    if (target) {
-      const id = target.getAttribute('data-item-id')!;
-      selectItem(id);
-    }
-  }
-</script>
-
-<ul onclick={handleListClick}>
-  {#each items as item}
-    <li data-item-id={item.id}>
-      {item.name}
-    </li>
-  {/each}
-</ul>
-```
 
 ---
 
@@ -190,7 +169,7 @@ export async function load({ params }) {
 
 **Impact: HIGH (prevents hydration mismatch between server and client)**
 
-Non-deterministic values (`Date.now()`, `Math.random()`, browser APIs) produce different results on server vs client, causing hydration mismatches. Initialize them only after mount.
+Do not independently generate different rendered initial values on server and client. Initialize browser-only values after mount, or generate a value once on the server and serialize it for identical initial rendering.
 
 **Incorrect: Date.now() during SSR — different on server and client**
 
@@ -230,12 +209,12 @@ Non-deterministic values (`Date.now()`, `Math.random()`, browser APIs) produce d
 
 **Impact: MEDIUM (prevents child errors from crashing entire page)**
 
-Wrap error-prone components with `<svelte:boundary>` to catch errors locally and show a fallback UI instead of crashing the entire page.
+In Svelte 5.3+, boundaries can recover from rendering/effect failures. They do not catch event-handler or detached asynchronous errors. By default they do not catch SSR errors; Svelte 5.51+ requires renderer `transformError` integration for SSR recovery. Check framework support rather than assuming it.
 
-**Incorrect: unhandled error crashes page**
+**Unisolated subtree: rendering failure can affect surrounding UI**
 
 ```svelte
-<!-- If UserProfile throws, the entire page crashes -->
+<!-- A client rendering failure here has no local recovery boundary -->
 <main>
   <UserProfile userId={id} />
   <RecentActivity />
@@ -248,7 +227,7 @@ Wrap error-prone components with `<svelte:boundary>` to catch errors locally and
 <script lang="ts">
   import type { Snippet } from 'svelte';
 
-  function handleError(error: Error) {
+  function handleError(error: unknown) {
     console.error('Component error:', error);
   }
 </script>
@@ -256,10 +235,10 @@ Wrap error-prone components with `<svelte:boundary>` to catch errors locally and
 <main>
   <svelte:boundary onerror={handleError}>
     <UserProfile userId={id} />
-    {#snippet failed(error)}
+    {#snippet failed(error, reset)}
       <div class="error-card">
         <p>Failed to load profile</p>
-        <button onclick={() => location.reload()}>Retry</button>
+        <button onclick={reset}>Retry</button>
       </div>
     {/snippet}
   </svelte:boundary>
@@ -270,28 +249,28 @@ Wrap error-prone components with `<svelte:boundary>` to catch errors locally and
 
 ## Rule Interactions
 
-- **DynamicImports + NoDeterministicSSR**: Dynamically imported components naturally avoid SSR issues because they load only on the client. However, the parent must handle the loading state to avoid a hydration mismatch from content appearing asynchronously.
-- **ExpectedVsUnexpected + ErrorBoundaries**: These form a two-tier error strategy. Expected errors in load functions use `error()` and render `+error.svelte`. Unexpected errors in component rendering are caught by `<svelte:boundary>` for graceful degradation without full-page crashes.
-- **OnclickOverOnClick + EventDelegation**: The new event attribute syntax enables Svelte 5's delegation system. Using the deprecated `on:click` syntax may bypass delegation, attaching individual listeners.
-- **NoDeterministicSSR + SeparateServerClientState (SV4)**: Non-deterministic values are inherently client-only state. The DataForms dimension's rule about separating server and client state provides the structural pattern; this dimension's rule ensures the values themselves are SSR-safe.
+- **DynamicImports + NoDeterministicSSR**: Dynamic import can execute on the server. Importing from a browser event or `onMount` makes that execution client-only; keep initial server/client output consistent.
+- **ExpectedVsUnexpected + ErrorBoundaries**: These form a two-tier error strategy. Expected errors in load functions use `error()` and render `+error.svelte`. Client rendering/effect errors within a configured boundary can use fallback UI; SSR and detached errors need separate handling.
+- **OnclickOverOnClick + EventDelegation**: Prefer event attributes in new Svelte 5 code and rely on documented delegated events. Do not infer listener counts or speedups solely from legacy syntax.
+- **NoDeterministicSSR + SeparateServerClientState (SV4)**: Server-generated values can be serialized for consistent hydration. The DataForms dimension's rule about separating server and client state provides the structural pattern; this dimension's rule ensures the values themselves are SSR-safe.
 
 ## Anti-Patterns (Severity Calibration)
 
 ### CRITICAL
 
-- **Browser API at top-level scope**: Accessing `window`, `document`, `localStorage`, `navigator`, or `IntersectionObserver` at the top level of a component script. This crashes SSR because these APIs do not exist in Node.js. Guard with `import { browser } from '$app/environment'` or defer to `onMount`.
+- **Browser API at top-level scope**: Accessing `window`, `document`, `localStorage`, `navigator`, or `IntersectionObserver` at the top level of a component script. Browser-only APIs may be unavailable or unsuitable in the server runtime; an unguarded `window` dereference fails in ordinary Node SSR. Guard with `import { browser } from '$app/environment'` or defer to `onMount`.
 - **Swallowing unexpected errors**: Catching all errors in a load function with a generic try/catch and returning fallback data instead of letting unexpected errors propagate. This hides bugs and makes debugging impossible. Only catch expected error conditions.
 
 ### HIGH
 
-- **Hydration mismatch from non-deterministic values**: Using `Date.now()`, `Math.random()`, or `crypto.randomUUID()` to initialize `$state` at the top level. The server renders one value, the client initializes a different one, causing visible UI flicker or silent content replacement.
-- **Eager import of heavy libraries**: Importing a charting library, rich text editor, or PDF renderer at the top level when the component using it is conditionally shown (behind a modal, tab, or feature flag). The entire library ships in the initial bundle regardless of usage.
+- **Hydration mismatch from non-deterministic values**: Independently generating different server/client values that affect initial rendered content can cause hydration inconsistencies. Unrendered state alone is not proof; serialized server values are valid.
+- **Eager import of heavy libraries**: Importing a charting library, rich text editor, or PDF renderer at the top level when the component using it is conditionally shown (behind a modal, tab, or feature flag). This can increase initial code cost; verify the production graph and tree-shaking before claiming a byte count or whole-library inclusion.
 - **Generic Error for expected conditions**: Throwing `new Error('Not found')` in a load function instead of `error(404, 'Not found')`. The result is a 500 status code, a generic error page, and incorrect error semantics for the client.
 
 ### MEDIUM
 
-- **Deprecated event directive syntax**: Using `on:click`, `on:submit`, `on:input` in Svelte 5 code. While still functional during the transition period, this is deprecated and may bypass event delegation optimizations.
-- **Missing error boundary on third-party content**: Rendering user-generated content or third-party widget output without a `<svelte:boundary>` wrapper. A rendering error in this content crashes the entire page instead of showing a contained fallback.
+- **Deprecated event directive syntax**: Using `on:click`, `on:submit`, `on:input` in Svelte 5 code. This remains supported legacy syntax; flag it only under an applicable migration policy.
+- **Missing error boundary on third-party content**: Rendering user-generated content or third-party widget output without a `<svelte:boundary>` wrapper. Consider local recovery for client rendering failures; missing a boundary is not proof of a page crash. SSR/event/async limitations remain as stated in SV5.6.
 - **Manual event delegation in lists**: Implementing custom event delegation on a parent element to handle clicks on list items, when Svelte 5 already delegates events automatically. This adds unnecessary complexity.
 
 ## Examples
@@ -306,9 +285,14 @@ Wrap error-prone components with `<svelte:boundary>` to catch errors locally and
 
   async function openEditor() {
     loading = true;
-    Editor = (await import('./RichEditor.svelte')).default;
-    loading = false;
-    showEditor = true;
+    try {
+      Editor = (await import('./RichEditor.svelte')).default;
+      showEditor = true;
+    } catch (error) {
+      console.error('Editor could not be loaded', error);
+    } finally {
+      loading = false;
+    }
   }
 </script>
 
@@ -377,7 +361,7 @@ export async function load({ params }) {
     {#snippet failed(error)}
       <div class="error-card">
         <p>Failed to render content</p>
-        <details><summary>Error</summary>{error.message}</details>
+        <!-- Keep internal error details out of the user-facing fallback. -->
       </div>
     {/snippet}
   </svelte:boundary>
@@ -421,3 +405,12 @@ export async function load({ params }) {
 - Svelte 5 migration guide: Event handling changes
 - Joy of Code: Svelte 5 performance patterns
 - Captain Codeman: SSR-safe patterns in SvelteKit
+
+### Primary verification sources
+
+- https://svelte.dev/docs/svelte/basic-markup#Events-Event-delegation
+- https://svelte.dev/docs/kit/performance
+- https://svelte.dev/docs/svelte/legacy-on
+- https://svelte.dev/docs/svelte/svelte-boundary
+- https://svelte.dev/docs/kit/state-management
+- https://svelte.dev/docs/svelte/lifecycle-hooks
