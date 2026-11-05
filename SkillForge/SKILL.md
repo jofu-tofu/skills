@@ -2,7 +2,7 @@
 name: SkillForge
 description: Create, update, or evaluate reusable agent skills with explicit quality criteria and preserved evidence. USE WHEN create a skill OR improve a skill OR evaluate a skill OR a skill keeps missing expected behavior OR diagnose a skill gap.
 metadata:
-  version: "2.1.0-rc.8"
+  version: "2.1.0-rc.9"
 ---
 # SkillForge
 
@@ -25,6 +25,8 @@ All workflows use [DesignMeasurement](Procedures/DesignMeasurement.md) for new, 
 For a reported skill gap, route by requested result: “fix/improve it” selects UpdateSkill; “is this happening/why/check it” selects EvaluateSkill. A bare complaint starts with assessment, not an assumed edit. Both workflows call [DiagnoseGap](Procedures/DiagnoseGap.md). Preserve unresolved intent if it affects the next action. Ordinary requests to review code or write a document belong to the target skill, not SkillForge.
 
 ## Examples
+
+Broad improvement uses [ComprehensiveImprovement](Procedures/ComprehensiveImprovement.md): reviewed whole-skill outcomes and structure define the parent scope; successive rounds resolve that scope. A small passing sample or a retained local fix cannot substitute for comprehensive coverage. Focused repairs and explicit maintenance remain proportional.
 
 Review/audit requests use EvaluateSkill's design-review mode. Description or triggering repairs use UpdateSkill with TestTriggering. Research integration and refactoring use UpdateSkill's scope check: behavioral changes follow its improvement loop; bounded maintenance keeps its short paths. A typo uses its short path. See [tool capabilities and limits](Tools/README.md).
 

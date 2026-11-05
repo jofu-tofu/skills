@@ -3,7 +3,7 @@
 **Input:** Target instructions, intent, relevant dependencies, and requested review scope.
 **Output:** Prioritized findings with evidence, uncertainty, and proposed next checks. No target edits.
 
-1. Inspect the entry point and only the relevant workflow/dependencies; use ExploreSkill only when a full snapshot is useful.
+1. Inspect the entry point and relevant workflow/dependencies. Broad improvement requires a baseline whole-skill review before edit selection, including all primary routes, responsibility/load boundaries, artifact owners and failure handoffs—even when no edit has yet been proposed. Use the purpose/outcome inventory from ComprehensiveImprovement to find absent or unjustified components. Focused repairs retain the affected-scope review.
 2. Check purpose alignment, user routing, unnecessary loading, contradictory instructions, missing handoffs, and executable acceptance criteria. Apply the responsibility checks below to the changed scope and its callers. Repeated boundary checks can verify the same owned rule; flag competing definitions with a concrete disagreement or drift risk.
 3. Distinguish a directly observed defect (such as a broken reference) from a behavioral hypothesis (such as too much context causing missed steps).
 4. For each finding report impact, source location, smallest proposed change, predicted effect, falsifying evidence, and effort.

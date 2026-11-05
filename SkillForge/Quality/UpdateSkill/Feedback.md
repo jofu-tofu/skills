@@ -11,4 +11,6 @@ For U06, inspect whether the attempt actually reaches outcome evidence and a dec
 
 Record criterion IDs, raw outputs, version identities, failed checks, costs, and unresolved judgments. [EvaluateCandidate](../../Procedures/EvaluateCandidate.md) owns evidence collection; [ApproveSkill](../../Procedures/ApproveSkill.md) owns readiness decisions.
 
+For U08/U09, compare original intent and the full primary task surface with the parent inventory **before** judging the selected round. Inspect actual follow-up execution after an initial green case: were uncovered families and structural defects evaluated/repaired, or only listed and deferred? Check resulting target behavior through its callers, not outcome counts or the word comprehensive. Passing one sampled task per portfolio skill cannot establish broad closure. Preserve focused/no-change controls to reject unnecessary restructuring or endless iteration.
+
 Source: [Outcomes](Outcomes.md) and the project's pilot designs. No executions have qualified this profile. Revisit on grader disagreement, false passes, false failures, or changed conditions. Open: reliability across models and task families.
