@@ -12,7 +12,7 @@
  * await browser.close()
  */
 
-import { chromium, firefox, webkit, type Browser, type Page, type BrowserContext } from 'playwright'
+import { chromium, firefox, webkit, type Browser, type Page, type BrowserContext, type Request } from 'playwright'
 
 export type BrowserType = 'chromium' | 'firefox' | 'webkit'
 
@@ -56,11 +56,12 @@ export interface ConsoleLogEntry {
 }
 
 export interface NetworkLogEntry {
-  type: 'request' | 'response'
+  type: 'request' | 'response' | 'failure'
   url: string
   method: string
   status?: number
   statusText?: string
+  errorText?: string
   headers?: Record<string, string>
   resourceType?: string
   timestamp: number
@@ -86,7 +87,8 @@ export class PlaywrightBrowser {
   private page: Page | null = null
   private consoleLogs: ConsoleLogEntry[] = []
   private networkLogs: NetworkLogEntry[] = []
-  private requestTimings: Map<string, number> = new Map()
+  private requestTimings = new WeakMap<Request, { timestamp: number; generation: number }>()
+  private networkGeneration = 0
   private pendingDialog: DialogInfo | null = null
   private autoHandleDialogs: boolean = false
   private dialogResponse: string | boolean = true
@@ -148,10 +150,15 @@ export class PlaywrightBrowser {
       })
     })
 
+    // Uncaught exceptions are page errors, not console messages.
+    page.on('pageerror', error => {
+      this.consoleLogs.push({ type: 'error', text: error.message, timestamp: Date.now() })
+    })
+
     // Capture network requests
     page.on('request', request => {
       const timestamp = Date.now()
-      this.requestTimings.set(request.url(), timestamp)
+      this.requestTimings.set(request, { timestamp, generation: this.networkGeneration })
       this.networkLogs.push({
         type: 'request',
         url: request.url(),
@@ -162,10 +169,24 @@ export class PlaywrightBrowser {
       })
     })
 
+    // Transport failures have no HTTP response/status to capture below.
+    page.on('requestfailed', request => {
+      const timestamp = Date.now()
+      const timing = this.requestTimings.get(request)
+      if (!timing || timing.generation !== this.networkGeneration) return
+      this.networkLogs.push({
+        type: 'failure', url: request.url(), method: request.method(),
+        resourceType: request.resourceType(),
+        errorText: request.failure()?.errorText || 'Request failed', timestamp,
+        duration: timestamp - timing.timestamp
+      })
+    })
+
     // Capture network responses
     page.on('response', async response => {
       const url = response.url()
-      const requestTime = this.requestTimings.get(url)
+      const timing = this.requestTimings.get(response.request())
+      if (!timing || timing.generation !== this.networkGeneration) return
       const timestamp = Date.now()
 
       let size = 0
@@ -176,6 +197,9 @@ export class PlaywrightBrowser {
         // Response body not available (e.g., redirects)
       }
 
+      // A response body can finish after navigation cleared the old page's logs.
+      if (timing.generation !== this.networkGeneration) return
+
       this.networkLogs.push({
         type: 'response',
         url,
@@ -185,7 +209,7 @@ export class PlaywrightBrowser {
         headers: response.headers(),
         resourceType: response.request().resourceType(),
         timestamp,
-        duration: requestTime ? timestamp - requestTime : undefined,
+        duration: timestamp - timing.timestamp,
         size
       })
     })
@@ -368,7 +392,7 @@ export class PlaywrightBrowser {
    */
   async click(selector: string, options?: ClickOptions): Promise<void> {
     const page = this.ensurePage()
-    await page.click(selector, {
+    await page.locator(selector).click({
       button: options?.button,
       clickCount: options?.clickCount,
       delay: options?.delay,
@@ -381,7 +405,7 @@ export class PlaywrightBrowser {
    */
   async hover(selector: string): Promise<void> {
     const page = this.ensurePage()
-    await page.hover(selector)
+    await page.locator(selector).hover()
   }
 
   /**
@@ -389,7 +413,7 @@ export class PlaywrightBrowser {
    */
   async fill(selector: string, value: string, options?: FillOptions): Promise<void> {
     const page = this.ensurePage()
-    await page.fill(selector, value, {
+    await page.locator(selector).fill(value, {
       timeout: options?.timeout,
       force: options?.force
     })
@@ -408,7 +432,7 @@ export class PlaywrightBrowser {
    */
   async select(selector: string, value: string | string[]): Promise<void> {
     const page = this.ensurePage()
-    await page.selectOption(selector, value)
+    await page.locator(selector).selectOption(value)
   }
 
   /**
@@ -429,7 +453,12 @@ export class PlaywrightBrowser {
    */
   async drag(sourceSelector: string, targetSelector: string): Promise<void> {
     const page = this.ensurePage()
-    await page.dragAndDrop(sourceSelector, targetSelector)
+    const source = page.locator(sourceSelector)
+    const target = page.locator(targetSelector)
+    // Resolve both identities before starting a drag that can trigger side effects.
+    await source.waitFor({ state: 'visible' })
+    await target.waitFor({ state: 'visible' })
+    await source.dragTo(target)
   }
 
   /**
@@ -437,7 +466,7 @@ export class PlaywrightBrowser {
    */
   async uploadFile(selector: string, filePath: string | string[]): Promise<void> {
     const page = this.ensurePage()
-    await page.setInputFiles(selector, filePath)
+    await page.locator(selector).setInputFiles(filePath)
   }
 
   // ============================================
@@ -564,7 +593,7 @@ export class PlaywrightBrowser {
    * const errors = browser.getNetworkLogs({ status: [400, 401, 403, 404, 500] })
    */
   getNetworkLogs(options?: {
-    type?: 'request' | 'response' | 'all'
+    type?: 'request' | 'response' | 'failure' | 'all'
     urlPattern?: string | RegExp
     method?: string | string[]
     status?: number | number[]
@@ -612,8 +641,7 @@ export class PlaywrightBrowser {
 
     // Clear logs if requested
     if (options?.clear) {
-      this.networkLogs = []
-      this.requestTimings.clear()
+      this.clearNetworkLogs()
     }
 
     return logs
@@ -624,7 +652,8 @@ export class PlaywrightBrowser {
    */
   clearNetworkLogs(): void {
     this.networkLogs = []
-    this.requestTimings.clear()
+    this.networkGeneration++
+    this.requestTimings = new WeakMap()
   }
 
   /**
@@ -905,8 +934,7 @@ export class PlaywrightBrowser {
       this.context = null
       this.page = null
       this.consoleLogs = []
-      this.networkLogs = []
-      this.requestTimings.clear()
+      this.clearNetworkLogs()
       this.pendingDialog = null
     }
   }
