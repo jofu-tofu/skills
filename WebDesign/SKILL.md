@@ -1,9 +1,9 @@
 ---
-name: Webdesign
+name: WebDesign
 description: Design and implement web interfaces with a deliberate visual system and browser verification. USE WHEN web design, landing page, dashboard design, prototype, design variants, design system, polish UI.
 ---
 
-# Webdesign
+# WebDesign
 
 Read `PORTABILITY.md` before use.
 
@@ -21,3 +21,5 @@ Tools/VerifyDesign.ts checks a supplied PNG file's header and dimensions only; i
 ## Examples
 
 Ask for the Webdesign workflow with the relevant task, input files and output destination. Apply the local method using available host tools, then report the result and evidence; identify any unavailable capability.
+
+Current outcome coverage and limits: [Quality/Outcomes.md](Quality/Outcomes.md). `SKILL.md` and the two intents own current routing. Older named-service references are optional historical context, not prerequisites or authority to access an account.
