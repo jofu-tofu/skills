@@ -36,7 +36,11 @@ A document can look polished while leaving the reader unsure what happened, why 
 
 The research behind these choices is summarized in each lens file's sources. [Anthropic doc-coauthoring](https://github.com/anthropics/skills/blob/main/skills/doc-coauthoring/SKILL.md) provides the fresh-reader pattern. The CodeReview skill provides the lens, contract, and verifier structure.
 
-## Success Criteria
+## Reader Outcomes
+
+The result should meet the applicable [reader outcomes](Quality/Outcomes.md). Their [measurement protocol](Quality/Measurement.md) distinguishes output quality, preserved constraints, and evidence limits. The checks below protect the process; completing them alone does not establish reader benefit.
+
+## Process and Preservation Checks
 
 - [ ] A Document Brief with a reading-time budget exists before rendering.
 - [ ] Every RC ID appears in exactly one lens file.

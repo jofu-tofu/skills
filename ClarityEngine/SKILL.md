@@ -62,6 +62,8 @@ Reviewers who know a subject read its terms as plain, so finding jargon one quot
 | `Standards/FormatAdapters.md` | Choosing and building the format, capturing render evidence, verification layers |
 | `Standards/ToolingLandscape.md` | Optional tool and design references; check availability before use |
 | `Standards/DocumentContract.md` | Shared contract format: section contracts, author locks, and checks that a review must keep passing |
+| `Quality/Outcomes.md` | Reader results and their contribution map; load when evaluating or improving this skill |
+| `Quality/Measurement.md` | Outcome checks and evidence limits; load for skill evaluation |
 | `Testing/RegressionCases.md` | Sample tasks for comparing skill versions; load when testing updates |
 | `Testing/RuleTraceability.md` | Historical record of the pre-1.1.0 rules; not current instructions |
 
