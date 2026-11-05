@@ -75,10 +75,10 @@ See: `Rules/TestDataBuilders.md`
 **Common causes:**
 
 ```pseudocode
-// CAUSE 1: Async assertion that never runs (most common)
+// CAUSE 1: Async assertion not owned by test completion
 function test_user_created():
     user_service.create_user("alice").then(user =>
-        assert user.id is not None  // this never runs — test exits first
+        assert user.id is not None  // may run after test completion
     )
     // Fix: await the Promise, or return it
 
@@ -99,9 +99,9 @@ function test_discount_applied():
     // Fix: assert discounted == 90
 ```
 
-**Detection:** Delete your assertion. If the test still passes — you have a Liar.
+**Detection:** In a disposable copy, make the relevant assertion deliberately false and run the actual project runner. Require an assertion failure, not an import/setup failure, then restore the test. If it passes, inspect an unexecuted path, missing completion ownership or swallowed error. Deleting an assertion cannot diagnose this defect: a valid test also passes without its successful assertion. Inspect the whole runner result; some frameworks fail on late assertions even after the callback completes.
 
-**Fix:** Write the assertion FIRST (Red-Green-Refactor → `Rules/RedGreenRefactor.md`). A test that starts red cannot be a Liar.
+**Fix:** Establish a meaningful assertion failure before implementation (Red-Green-Refactor → `Rules/RedGreenRefactor.md`), then preserve sensitivity as code and tests change. An earlier red result alone does not guarantee that the current assertion executes or checks the correct behavior. Also challenge the actual behavior: observing a deliberately false assertion proves execution, not that the assertion is a useful specification.
 
 See also: `Workflows/AsyncTesting.md` — async Liar tests
 
