@@ -4,11 +4,13 @@
 
 ## Mental Model
 
-React's component model is fundamentally about composition. The 8 rules in this dimension exist because the most common source of accidental complexity in React codebases is not performance or rendering — it is poor component design that compounds over time. Boolean props create exponential conditional branches. Monolithic components resist reuse. Tight coupling between state shape and consumer code makes refactors dangerous. These are architectural debts that slow every future change.
+Applicability: these composition rules are house preferences when they improve this project's interfaces. Props injection, render callbacks, boolean UI state and store-connected components remain valid. Judge demonstrated coupling or invalid states, not prop/line counts; policy-only findings are low severity. Examples contrast the chosen policy, not universal React validity. React 19 context-provider shorthand and `use(Context)` below require React 19; React 18 uses `<Context.Provider>` and `useContext`.
+
+React's component model is fundamentally about composition. The 8 rules in this dimension exist because the most common source of accidental complexity in React codebases is not performance or rendering — it is poor component design that compounds over time. Independent boolean flags permit exponentially many input combinations, but do not force exponential branches or invalidate orthogonal boolean state. Monolithic components resist reuse. Tight coupling between state shape and consumer code makes refactors dangerous. These are architectural debts that slow every future change.
 
 The underlying design principle is the Open-Closed Principle adapted for components: a component should be open for composition but closed for modification. Compound components let consumers assemble exactly what they need without touching internal logic. Explicit variants replace hidden boolean logic with named, self-documenting alternatives. Context interfaces decouple consumers from specific state implementations, enabling dependency injection at the React level.
 
-React 19 further reinforces this direction by removing the need for `forwardRef` (refs are now regular props) and by making `use()` the canonical way to consume context. These API changes are not cosmetic — they reduce the ceremony around composition patterns, which means there is less excuse for shortcuts like prop drilling or boolean flag accumulation.
+React 19 permits function components to receive `ref` as a prop and adds `use(Context)`. `forwardRef` remains supported for compatibility, and `useContext` remains valid. These APIs do not require a particular composition architecture.
 
 When these 8 rules are applied together, they produce components that are independently testable, composable without coordination, and resistant to the kind of cascading changes that plague monolithic component trees. The key insight is that architecture rules are force multipliers: a well-composed component tree makes performance optimization, server component adoption, and bundle splitting dramatically easier because the boundaries are already clean.
 
@@ -19,10 +21,10 @@ When these 8 rules are applied together, they produce components that are indepe
 Scan for these violations in severity order:
 
 1. **Boolean prop accumulation** — Any component with 3+ boolean props is a strong signal. Look for `isX`, `showY`, `hasZ` patterns in prop interfaces. This is the single most common architecture violation and the hardest to unwind later.
-2. **Render prop sprawl** — Components accepting `renderHeader`, `renderFooter`, `renderActions` callbacks instead of using children composition. These create implicit contracts that are hard to type and impossible to compose.
+2. **Render prop sprawl** — Components accepting `renderHeader`, `renderFooter`, `renderActions` callbacks instead of using children composition. These create implicit contracts that are potentially harder to navigate in this API, but still typeable and composable.
 3. **Direct state coupling** — Components that import specific store shapes, specific context values, or specific hook return types rather than accepting data through props or a generic context interface.
 4. **Missing compound component pattern** — Complex UI (modals, forms, toolbars, composers) implemented as a single component with 10+ props instead of a provider + composable subcomponents.
-5. **forwardRef in React 19** — Any use of `React.forwardRef` in a React 19+ codebase. Refs are regular props now; forwardRef adds unnecessary wrapper complexity.
+5. **Ref API compatibility** — Use `forwardRef` for ref-facing function components supporting React 18. In React 19-only code, ref-as-prop can be a migration preference; existing `forwardRef` is not a functional defect.
 
 ### When Designing / Planning
 
@@ -31,7 +33,7 @@ Before writing a new component, ask:
 - **Will this component need variants?** If yes, design explicit named variants (e.g., `ThreadComposer`, `ChannelComposer`) rather than a single component with boolean switches.
 - **Will consumers need to customize the layout?** If yes, use compound components with a shared context provider. If no, a simple props interface is sufficient.
 - **Does this component need to work with different state sources?** If yes, define a context interface (generic provider pattern) so the component is decoupled from any specific state management library.
-- **Is there a ref forwarding need?** In React 19+, just accept `ref` as a prop. In older versions, use `forwardRef` but plan to remove it during migration.
+- **Is there a ref forwarding need?** In React 19+, just accept `ref` as a prop. In React 18, use `forwardRef`; retain it while older-version support is required.
 
 The decision tree: simple display component (just props) -> configurable component (explicit variants) -> complex interactive component (compound components with context).
 
@@ -56,7 +58,7 @@ Apply rules in this order:
 | StateLiftState | MEDIUM | Move shared state to the lowest common ancestor to avoid prop drilling |
 | PatternsExplicitVariants | HIGH | Use named variant components instead of conditional logic inside a single component |
 | PatternsChildrenOverRenderProps | MEDIUM | Prefer children composition over render prop callbacks for layout customization |
-| React19NoForwardref | MEDIUM | Remove forwardRef wrappers in React 19+ where ref is a regular prop |
+| React19NoForwardref | MEDIUM | Optionally migrate ref wrappers in React 19-only code; retain React 18 compatibility |
 
 
 ---
@@ -70,9 +72,7 @@ tags: composition, props, architecture
 
 ### R1.1 Avoid Boolean Prop Proliferation
 
-Don't add boolean props like `isThread`, `isEditing`, `isDMThread` to customize
-component behavior. Each boolean doubles possible states and creates
-unmaintainable conditional logic. Use composition instead.
+For mutually exclusive or coupled modes, prefer explicit variants under this API policy. Independent boolean props (disabled, open, checked) remain valid; combinations alone do not prove unmaintainable logic.
 
 **Incorrect (boolean props create exponential complexity):**
 
@@ -173,9 +173,7 @@ tags: composition, compound-components, architecture
 
 ### R1.2 Use Compound Components
 
-Structure complex components as compound components with a shared context. Each
-subcomponent accesses shared state via context, not props. Consumers compose the
-pieces they need.
+When independent layout composition is required, consider compound components with shared context. Props and render callbacks are also valid; this policy chooses context for the illustrated multi-part API.
 
 **Incorrect (monolithic component with render props):**
 
@@ -288,9 +286,7 @@ tags: composition, state, architecture
 
 ### R1.3 Decouple State Management from UI
 
-The provider component should be the only place that knows how state is managed.
-UI components consume the context interface—they don't know if state comes from
-useState, Zustand, or a server sync.
+When using this provider pattern, keep store adaptation in the provider and let consumers use its stable interface. Injecting data/actions through props is an equally valid boundary; direct store access can be intentional.
 
 **Incorrect (UI coupled to state implementation):**
 
@@ -304,9 +300,9 @@ function ChannelComposer({ channelId }: { channelId: string }) {
     <Composer.Frame>
       <Composer.Input
         value={state.input}
-        onChange={(text) => sync.updateInput(text)}
+        onChange={(text) => updateInput(text)}
       />
-      <Composer.Submit onPress={() => sync.submit()} />
+      <Composer.Submit onPress={() => submit()} />
     </Composer.Frame>
   )
 }
@@ -404,7 +400,7 @@ tags: composition, context, state, typescript, dependency-injection
 
 ### R1.4 Define Generic Context Interfaces for Dependency Injection
 
-Define a **generic interface** for your component context with three parts:
+For this house pattern, define a reusable interface for the context with three parts:
 `state`, `actions`, and `meta`. This interface is a contract that any provider
 can implement—enabling the same UI components to work with completely different
 state implementations.
@@ -816,7 +812,7 @@ Each variant is explicit about:
 - What UI elements it includes
 - What actions are available
 
-No boolean prop combinations to reason about. No impossible states.
+Named variants make mode selection explicit; their props and composed children still need validation and tests.
 
 ---
 
@@ -829,9 +825,7 @@ tags: composition, children, render-props
 
 ### R1.7 Prefer Children Over Render Props
 
-Use `children` for composition instead of `renderX` props. Children are more
-readable, compose naturally, and don't require understanding callback
-signatures.
+For static layout slots, this house policy prefers children composition. Render callbacks remain useful when rendering depends on values supplied by the component.
 
 **Incorrect (render props):**
 
@@ -921,9 +915,9 @@ tags: react19, refs, context, hooks
 
 > **React 19+ only.** Skip this if you're on React 18 or earlier.
 
-In React 19, `ref` is now a regular prop (no `forwardRef` wrapper needed), and `use()` replaces `useContext()`.
+In React 19, function components can accept `ref` as a prop. `use(Context)` is an additional context-reading API; it does not remove `useContext()`.
 
-**Incorrect (forwardRef in React 19):**
+**Compatible with React 18 and React 19:**
 
 ```tsx
 const ComposerInput = forwardRef<TextInput, Props>((props, ref) => {
@@ -931,7 +925,7 @@ const ComposerInput = forwardRef<TextInput, Props>((props, ref) => {
 })
 ```
 
-**Correct (ref as a regular prop):**
+**React 19-only alternative (optional migration policy):**
 
 ```tsx
 function ComposerInput({ ref, ...props }: Props & { ref?: React.Ref<TextInput> }) {
@@ -939,13 +933,13 @@ function ComposerInput({ ref, ...props }: Props & { ref?: React.Ref<TextInput> }
 }
 ```
 
-**Incorrect (useContext in React 19):**
+**Valid in React 18 and React 19:**
 
 ```tsx
 const value = useContext(MyContext)
 ```
 
-**Correct (use instead of useContext):**
+**React 19 alternative:**
 
 ```tsx
 const value = use(MyContext)
@@ -961,12 +955,12 @@ The architecture rules form a coherent design system where each rule reinforces 
 - **AvoidBooleanProps + ExplicitVariants** work as a pair. The first identifies the problem (boolean flags); the second provides the solution (named variants). Applying AvoidBooleanProps without ExplicitVariants leaves developers without a clear alternative.
 - **CompoundComponents + ChildrenOverRenderProps** are complementary composition strategies. Compound components handle complex multi-part UI; children composition handles simpler slot-based layouts. Using render props when either pattern would work creates unnecessary complexity.
 - **ContextInterface + DecoupleImplementation + LiftState** form the state management triad. LiftState determines where state lives; DecoupleImplementation keeps implementation details hidden; ContextInterface provides the generic access pattern. Applying LiftState alone without decoupling produces components tightly coupled to a specific state shape.
-- **React19NoForwardref** simplifies all composition patterns by removing wrapper overhead, making compound components and context providers cleaner.
+- **React19NoForwardref** is an optional React 19-only API simplification, not a correctness or measured performance requirement.
 
 ## Anti-Patterns (Severity Calibration)
 
 ### CRITICAL
-- **Boolean prop explosion**: A component with 5+ boolean props where the interaction between flags creates untested state combinations. Example: `<Editor isThread isEditing showAttachments showFormatting isCompact />` — this is 2^5 = 32 possible states, most of which are never tested.
+- **Boolean prop explosion**: A component with 5+ boolean props where the interaction between flags creates untested state combinations. Example: `<Editor isThread isEditing showAttachments showFormatting isCompact />` — this is 2^5 = 32 possible states, whose relevant interactions should be tested; flag count alone does not establish missing coverage.
 - **God component**: A single component file exceeding 500 lines with 15+ props, mixing layout, business logic, and state management. This resists all forms of reuse and optimization.
 
 ### HIGH
@@ -974,8 +968,8 @@ The architecture rules form a coherent design system where each rule reinforces 
 - **Prop drilling through 3+ levels**: Passing a prop through intermediate components that do not use it, instead of using context or composition.
 
 ### MEDIUM
-- **forwardRef in React 19+**: Unnecessary wrapper that adds a level of indirection. Not a correctness issue but creates confusion about the component's API surface.
-- **Inline state shape in context**: Defining context value types inline rather than as a reusable interface, making it impossible to swap state implementations.
+- **Ref migration policy**: Report retained `forwardRef` only under an explicit React 19-only migration policy, at low severity. Do not report compatibility wrappers.
+- **Inline state shape in context**: Defining context value types inline rather than as a reusable interface, which may reduce reuse but does not prevent swapping compatible state implementations.
 
 ## Examples
 
@@ -1003,7 +997,7 @@ The architecture rules form a coherent design system where each rule reinforces 
 </Composer.Provider>
 ```
 
-Each variant (thread, channel, DM) gets its own state factory. Consumers compose only the subcomponents they need. Zero boolean flags, zero untested combinations.
+Each variant (thread, channel, DM) gets its own state factory. Consumers compose only the subcomponents they need. Fewer implicit mode combinations; composed variants still need tests.
 
 ### Example 2: Context Interface + Decoupled State (ContextInterface + DecoupleImplementation + LiftState)
 
@@ -1083,3 +1077,9 @@ function Modal({ children, ref, ...props }: ModalProps & { ref?: Ref<HTMLDivElem
 
 - Vercel Engineering — React Composition Patterns (January 2026), MIT
 - React Documentation — Compound Components, Context API, React 19 Release Notes
+
+## Candidate verification references
+
+- https://react.dev/learn/passing-data-deeply-with-context
+- https://react.dev/reference/react/useContext
+- https://react.dev/reference/react/forwardRef

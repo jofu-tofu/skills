@@ -4,13 +4,13 @@
 
 ## Mental Model
 
-Data fetching is the primary bottleneck in most React applications. The rules in this dimension address a single core problem: the request waterfall. A waterfall occurs whenever an async operation waits for a previous one to complete before it can start, even when the two operations are independent. In server-rendered Next.js applications, waterfalls are doubly expensive because they block the response stream — the user sees nothing until the slowest sequential chain completes.
+Data fetching is the primary bottleneck in most React applications. The rules in this dimension address a single core problem: the request waterfall. A waterfall occurs whenever an async operation waits for a previous one to complete before it can start, even when the two operations are independent. A blocking await delays the subtree it gates; existing layouts or Suspense fallbacks may already be visible. Measure the critical path. Independence includes authorization, ordering, rate limits and transaction semantics, not only whether one return value is used by another call.
 
 The 11 primary rules in this dimension form three layers of defense against waterfalls. The first layer is structural: `AsyncParallel` and `AsyncDeferAwait` ensure that independent operations run concurrently and that promises are created early but awaited late. The second layer is boundary-based: `AsyncSuspenseBoundaries` and `AsyncApiRoutes` structure the component tree so that slow data does not block fast content. The third layer is client-side: `ClientSwrDedup` prevents redundant network requests, `ClientEventListeners` and `ClientPassiveEventListeners` ensure that event-driven data fetching does not create jank, and `ClientLocalstorageSchema` prevents client-side state corruption that causes unnecessary refetches.
 
 The server-side rules (`ServerParallelFetching`, `ServerAfterNonblocking`) extend this same anti-waterfall philosophy to the server rendering pipeline. `AsyncDependencies` handles the edge case where operations genuinely depend on each other, providing patterns for minimizing the sequential portion.
 
-Together, these rules ensure that data reaches the user as fast as the network allows — no faster, but critically, no slower.
+These patterns can reduce avoidable waits; concurrency limits, server capacity and rendering still determine performance.
 
 ## Consumer Guide
 
@@ -18,11 +18,11 @@ Together, these rules ensure that data reaches the user as fast as the network a
 
 Scan for these violations in priority order:
 
-1. **Sequential awaits on independent data** (CRITICAL) — Look for consecutive `await` statements where the second call does not use the result of the first. This is the most common and highest-impact violation. `const user = await getUser(); const posts = await getPosts();` — if posts do not need the user, this is a waterfall.
-2. **Missing Suspense boundaries** (CRITICAL) — A page component that awaits multiple data sources before rendering anything. Without Suspense, the entire page blocks on the slowest query.
+1. **Sequential awaits on independent data** (CRITICAL) — Look for consecutive `await` statements where the second call does not use the result of the first. This is the most common and highest-impact violation. `const user = await getUser(); const posts = await getPosts();` — if posts have no data, authorization, ordering or rate-limit prerequisite, this may be an avoidable waterfall.
+2. **Missing Suspense boundaries** (CRITICAL) — A page component that awaits multiple data sources before rendering anything. A suitable parent boundary can already provide a fallback; choose boundaries around meaningful loading regions.
 3. **Barrel fetch functions** (HIGH) — A single `getData()` function that fetches everything a page needs sequentially inside it, hiding the waterfall from the component level.
 4. **SWR/React Query without dedup** (MEDIUM) — Multiple components independently fetching the same resource without a shared cache key.
-5. **Non-passive event listeners** (MEDIUM) — Scroll or touch listeners without `{ passive: true }`, which block the browser's compositor thread.
+5. **Cancelable touch/wheel listeners** — Use passive listeners when they do not cancel default scrolling. The scroll event itself is noncancelable; expensive handlers still need optimization.
 6. **Unvalidated localStorage reads** (LOW) — Reading client-side cached data without schema validation, risking stale or corrupted state after deployments.
 
 ### When Designing / Planning
@@ -30,19 +30,19 @@ Scan for these violations in priority order:
 Before implementing data fetching for a page or feature:
 
 - **Map the data dependency graph.** Draw which data depends on which. Independent branches should be `Promise.all()`'d. Dependent chains should be minimized to the true dependency (e.g., fetch user ID first, then fetch user-specific data).
-- **Decide where each fetch lives.** Server Components can fetch directly. Client components need SWR/React Query with deduplication. API routes consolidate multiple backend calls.
-- **Plan Suspense boundaries.** Each independent data source should have its own Suspense boundary so fast content streams immediately while slow content loads.
+- **Decide where each fetch lives.** Server Components can fetch directly. Client components can use framework data APIs, SWR/React Query, or carefully managed Effects; these libraries are choices, not React requirements. API routes consolidate multiple backend calls.
+- **Plan Suspense boundaries.** Group Suspense boundaries by meaningful loading UI; several sources can deliberately reveal together.
 - **Consider the API route consolidation pattern.** If a client component needs 3+ backend calls, consolidate them into a single API route that runs them in parallel server-side, eliminating client-side roundtrips.
 
 ### When Implementing
 
 Apply rules in this sequence:
 
-1. **Identify independence** — For every pair of async calls, ask: "Does the second need the result of the first?" If no, parallelize with `Promise.all()` (AsyncParallel).
+1. **Identify independence** — For every pair of async calls, ask: "Does the second need the result of the first?" If no other authorization, ordering or capacity constraint applies, consider `Promise.all()` (AsyncParallel).
 2. **Defer awaits** — Create promises early, await them at the point of use (AsyncDeferAwait). This naturally enables parallelism even when the code reads sequentially.
-3. **Wrap with Suspense** — Each independent data source gets its own Suspense boundary (AsyncSuspenseBoundaries). Place boundaries as close to the data source as possible.
-4. **Deduplicate client fetches** — Use SWR or React Query with stable cache keys (ClientSwrDedup). Never fetch the same resource from two components independently.
-5. **Optimize event handlers** — Add `{ passive: true }` to scroll/touch listeners (ClientPassiveEventListeners). Use proper cleanup in event subscriptions (ClientEventListeners).
+3. **Wrap with Suspense** — Choose a Suspense boundary for each intended loading region (AsyncSuspenseBoundaries). Place boundaries as close to the data source as possible.
+4. **Deduplicate client fetches** — Use SWR or React Query with stable cache keys (ClientSwrDedup). Repeated hook consumers can share cached requests; intentionally independent reads may also be needed.
+5. **Optimize event handlers** — Add `{ passive: true }` to touch/wheel listeners that do not cancel defaults (ClientPassiveEventListeners). Use proper cleanup in event subscriptions (ClientEventListeners).
 6. **Validate client storage** — Schema-validate localStorage reads (ClientLocalstorageSchema) to handle format changes across deployments.
 
 ## Rules in This Dimension
@@ -50,13 +50,13 @@ Apply rules in this sequence:
 | Rule | Impact | Summary |
 |------|--------|---------|
 | AsyncDeferAwait | CRITICAL | Move await to usage point; create promise early to enable parallelism |
-| AsyncParallel | CRITICAL | Promise.all() for independent operations — 2-10x improvement |
+| AsyncParallel | CRITICAL | Promise.all() for independent operations when concurrency is appropriate |
 | AsyncDependencies | HIGH | Minimize sequential chains to true data dependencies only |
 | AsyncApiRoutes | HIGH | Consolidate multiple backend calls into a single API route |
 | AsyncSuspenseBoundaries | CRITICAL | Stream content with Suspense boundaries around independent data |
 | ClientSwrDedup | MEDIUM-HIGH | Deduplicate client-side fetches with SWR/React Query cache keys |
 | ClientEventListeners | MEDIUM | Proper setup/teardown for event-driven data subscriptions |
-| ClientPassiveEventListeners | MEDIUM | Use passive: true on scroll/touch listeners to prevent jank |
+| ClientPassiveEventListeners | MEDIUM | Use passive touch/wheel listeners when no cancellation is needed |
 | ClientLocalstorageSchema | LOW-MEDIUM | Schema-validate localStorage reads to prevent stale state bugs |
 | ServerParallelFetching | HIGH | Parallel data fetching across server components |
 | ServerAfterNonblocking | HIGH | Run non-critical server work after response using next/after |
@@ -148,17 +148,17 @@ async function updateResource(resourceId: string, userId: string) {
 }
 ```
 
-This optimization is especially valuable when the skipped branch is frequently taken, or when the deferred operation is expensive.
+This optimization requires a contract allowing the early return and resource-existence disclosure. Otherwise keep authorization ahead of the lookup. Do not defer required permission or audit work.
 
 ---
 
 ### R2.2 Promise.all() for Independent Operations
 
-**Impact: CRITICAL (2-10× improvement)**
+**Impact: CRITICAL (potential reduction in sequential latency)**
 
-When async operations have no interdependencies, execute them concurrently using `Promise.all()`.
+When reads have no interdependencies and capacity permits, start them concurrently and await `Promise.all()`. This does not combine network requests or cancel remaining work on rejection.
 
-**Incorrect: sequential execution, 3 round trips**
+**Sequential: three requests in series**
 
 ```typescript
 const user = await fetchUser()
@@ -166,7 +166,7 @@ const posts = await fetchPosts()
 const comments = await fetchComments()
 ```
 
-**Correct: parallel execution, 1 round trip**
+**Concurrent: still three requests, with overlapping waits**
 
 ```typescript
 const [user, posts, comments] = await Promise.all([
@@ -180,9 +180,9 @@ const [user, posts, comments] = await Promise.all([
 
 ### R2.3 Dependency-Based Parallelization
 
-**Impact: CRITICAL (2-10× improvement)**
+**Impact: CRITICAL (potential reduction in sequential latency)**
 
-For operations with partial dependencies, use `better-all` to maximize parallelism. It automatically starts each task at the earliest possible moment.
+For partial dependencies, use promise chaining (shown below) or an explicitly selected task library such as better-all. The dependency graph must include authorization and side-effect ordering.
 
 **Incorrect: profile waits for config unnecessarily**
 
@@ -229,15 +229,16 @@ Reference: [https://github.com/shuding/better-all](https://github.com/shuding/be
 
 ### R2.4 Prevent Waterfall Chains in API Routes
 
-**Impact: CRITICAL (2-10× improvement)**
+**Impact: CRITICAL (potential reduction in sequential latency)**
 
-In API routes and Server Actions, start independent operations immediately, even if you don't await them yet.
+In API routes and Server Actions, start only genuinely independent reads early. Authenticate before protected reads. The example assumes config is public, and data reads are scoped to the verified session.
 
 **Incorrect: config waits for auth, data waits for both**
 
 ```typescript
 export async function GET(request: Request) {
   const session = await auth()
+  if (!session?.user?.id) return new Response('Unauthorized', { status: 401 })
   const config = await fetchConfig()
   const data = await fetchData(session.user.id)
   return Response.json({ data, config })
@@ -250,11 +251,10 @@ export async function GET(request: Request) {
 export async function GET(request: Request) {
   const sessionPromise = auth()
   const configPromise = fetchConfig()
-  const session = await sessionPromise
-  const [config, data] = await Promise.all([
-    configPromise,
-    fetchData(session.user.id)
-  ])
+  // Attach rejection handling to both promises immediately.
+  const [session, config] = await Promise.all([sessionPromise, configPromise])
+  if (!session?.user?.id) return new Response('Unauthorized', { status: 401 })
+  const data = await fetchData(session.user.id)
   return Response.json({ data, config })
 }
 ```
@@ -367,7 +367,7 @@ Both components share the same promise, so only one fetch occurs. Layout renders
 
 **Impact: MEDIUM-HIGH (automatic deduplication)**
 
-SWR enables request deduplication, caching, and revalidation across component instances.
+SWR enables request deduplication, caching, and revalidation across component instances sharing a cache provider/key and deduplication window. It is one valid data-layer choice.
 
 **Incorrect: no deduplication, each instance fetches**
 
@@ -405,7 +405,7 @@ function StaticContent() {
 **For mutations:**
 
 ```tsx
-import { useSWRMutation } from 'swr/mutation'
+import useSWRMutation from 'swr/mutation'
 
 function UpdateButton() {
   const { trigger } = useSWRMutation('/api/user', updateUser)
@@ -491,9 +491,9 @@ function Profile() {
 
 ### R2.8 Use Passive Event Listeners for Scrolling Performance
 
-**Impact: MEDIUM (eliminates scroll delay caused by event listeners)**
+**Impact: MEDIUM (can avoid waiting for cancellation decisions)**
 
-Add `{ passive: true }` to touch and wheel event listeners to enable immediate scrolling. Browsers normally wait for listeners to finish to check if `preventDefault()` is called, causing scroll delay.
+Add `{ passive: true }` to touch and wheel event listeners to enable immediate scrolling. For cancelable events, browsers may wait to determine whether scrolling is prevented; some targets already default to passive. The scroll event itself is noncancelable. Passive does not reduce the callback's CPU work.
 
 **Incorrect:**
 
@@ -557,15 +557,21 @@ const VERSION = 'v2'
 function saveConfig(config: { theme: string; language: string }) {
   try {
     localStorage.setItem(`userConfig:${VERSION}`, JSON.stringify(config))
+    return true
   } catch {
-    // Throws in incognito/private browsing, quota exceeded, or disabled
+    // May fail because of storage policy or quota; private mode alone is not proof.
+    return false
   }
 }
 
 function loadConfig() {
   try {
     const data = localStorage.getItem(`userConfig:${VERSION}`)
-    return data ? JSON.parse(data) : null
+    const value: unknown = data ? JSON.parse(data) : null
+    if (!value || typeof value !== 'object') return null
+    if (!('theme' in value) || !('language' in value)) return null
+    return typeof value.theme === 'string' && typeof value.language === 'string'
+      ? { theme: value.theme, language: value.language } : null
   } catch {
     return null
   }
@@ -577,8 +583,10 @@ function migrate() {
     const v1 = localStorage.getItem('userConfig:v1')
     if (v1) {
       const old = JSON.parse(v1)
-      saveConfig({ theme: old.darkMode ? 'dark' : 'light', language: old.lang })
-      localStorage.removeItem('userConfig:v1')
+      if (old && typeof old.darkMode === 'boolean' && typeof old.lang === 'string' &&
+          saveConfig({ theme: old.darkMode ? 'dark' : 'light', language: old.lang })) {
+        localStorage.removeItem('userConfig:v1')
+      }
     }
   } catch {}
 }
@@ -598,7 +606,7 @@ function cachePrefs(user: FullUser) {
 }
 ```
 
-**Always wrap in try-catch:** `getItem()` and `setItem()` throw in incognito/private browsing (Safari, Firefox), when quota exceeded, or when disabled.
+**Handle storage failures:** policy can deny storage and writes can exceed quota. Private browsing does not universally make reads/writes throw. Versioning does not replace validating parsed values.
 
 **Benefits:** Schema evolution via versioning, reduced storage size, prevents storing tokens/PII/internal flags.
 
@@ -608,7 +616,7 @@ function cachePrefs(user: FullUser) {
 
 **Impact: CRITICAL (eliminates server-side waterfalls)**
 
-React Server Components execute sequentially within a tree. Restructure with composition to parallelize data fetching.
+An async parent that awaits before returning children delays starting those children. Independent sibling work can overlap; React does not universally execute the whole tree sequentially. Preserve authorization/data prerequisites.
 
 **Incorrect: Sidebar waits for Page's fetch to complete**
 
@@ -629,7 +637,7 @@ async function Sidebar() {
 }
 ```
 
-**Correct: both fetch simultaneously**
+**Alternative: independent sibling fetches can overlap**
 
 ```tsx
 async function Header() {
@@ -689,7 +697,7 @@ export default function Page() {
 
 **Impact: MEDIUM (faster response times)**
 
-Use Next.js's `after()` to schedule work that should execute after a response is sent. This prevents logging, analytics, and other side effects from blocking the response.
+On Next.js 15.1+ with a supported deployment runtime, `after()` schedules work after a response or prerender finishes. Use it only when response success does not depend on that work. Keep required audits, authorization and consistency-critical invalidation awaited or durably enqueued before success. Execution is bounded by the route's runtime duration.
 
 **Incorrect: blocks response**
 
@@ -715,7 +723,7 @@ export async function POST(request: Request) {
 
 ```tsx
 import { after } from 'next/server'
-import { headers, cookies } from 'next/headers'
+import { headers } from 'next/headers'
 import { logUserAction } from '@/app/utils'
 
 export async function POST(request: Request) {
@@ -725,9 +733,7 @@ export async function POST(request: Request) {
   // Log after response is sent
   after(async () => {
     const userAgent = (await headers()).get('user-agent') || 'unknown'
-    const sessionCookie = (await cookies()).get('session-id')?.value || 'anonymous'
-    
-    logUserAction({ sessionCookie, userAgent })
+    await logUserAction({ userAgent }) // noncritical telemetry; never log session credentials
   })
   
   return new Response(JSON.stringify({ status: 'success' }), {
@@ -737,17 +743,17 @@ export async function POST(request: Request) {
 }
 ```
 
-The response is sent immediately while logging happens in the background.
+The response no longer awaits this telemetry. after is not a durable queue; static prerenders can run it at build/revalidation time.
 
 **Common use cases:**
 
 - Analytics tracking
 
-- Audit logging
+- Noncritical diagnostic logging (required audit persistence stays awaited or durably queued)
 
-- Sending notifications
+- Best-effort notifications (durably queue required delivery)
 
-- Cache invalidation
+- Optional cache warming (keep required invalidation in the success contract)
 
 - Cleanup tasks
 
@@ -755,7 +761,7 @@ The response is sent immediately while logging happens in the background.
 
 - `after()` runs even if the response fails or redirects
 
-- Works in Server Actions, Route Handlers, and Server Components
+- Works in supported Server Actions, Route Handlers and Server Components. Request APIs inside the callback are allowed in actions/handlers; capture needed values before scheduling from Server Components.
 
 Reference: [https://nextjs.org/docs/app/api-reference/functions/after](https://nextjs.org/docs/app/api-reference/functions/after)
 
@@ -802,9 +808,9 @@ function ShareButton({ chatId }: { chatId: string }) {
 
 **Impact: MEDIUM (maintains UI responsiveness)**
 
-Mark frequent, non-urgent state updates as transitions to maintain UI responsiveness.
+For React 18+, transitions mark React state updates as interruptible non-urgent rendering. The callback executes immediately; synchronous computation, DOM writes and network work are not deferred or cancelled. Do not transition controlled-input state. Measure expensive rendering before applying this optimization.
 
-**Incorrect: blocks UI on every scroll**
+**Ordinary update (only problematic if its render work is costly):**
 
 ```tsx
 function ScrollTracker() {
@@ -817,7 +823,7 @@ function ScrollTracker() {
 }
 ```
 
-**Correct: non-blocking updates**
+**Alternative: lower-priority React update:**
 
 ```tsx
 import { startTransition } from 'react'
@@ -838,81 +844,38 @@ function ScrollTracker() {
 
 ### R4.17 Prevent Hydration Mismatch Without Flickering
 
-**Impact: MEDIUM (avoids visual flicker and hydration errors)**
+**Impact: MEDIUM (matching initial server/client markup)**
 
-When rendering content that depends on client-side storage (localStorage, cookies), avoid both SSR breakage and post-hydration flickering by injecting a synchronous script that updates the DOM before React hydrates.
+Keep the server output and first client render consistent. If the server knows a theme preference (for example from a cookie), pass that same value to the client. Reading localStorage during SSR throws; mutating React-owned markup with a script does not automatically make hydration agree.
 
-**Incorrect: breaks SSR**
+**Incorrect: browser-only API during SSR**
 
 ```tsx
 function ThemeWrapper({ children }: { children: ReactNode }) {
-  // localStorage is not available on server - throws error
   const theme = localStorage.getItem('theme') || 'light'
-  
-  return (
-    <div className={theme}>
-      {children}
-    </div>
-  )
+  return <div className={theme}>{children}</div>
 }
 ```
 
-Server-side rendering will fail because `localStorage` is undefined.
-
-**Incorrect: visual flickering**
+**Correct when the server supplies the preference (separate client module):**
 
 ```tsx
-function ThemeWrapper({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState('light')
-  
-  useEffect(() => {
-    // Runs after hydration - causes visible flash
-    const stored = localStorage.getItem('theme')
-    if (stored) {
-      setTheme(stored)
-    }
-  }, [])
-  
-  return (
-    <div className={theme}>
-      {children}
-    </div>
-  )
+'use client'
+import { useState, type ReactNode } from 'react'
+export function ThemeWrapper({ initialTheme, children }: {
+  initialTheme: 'light' | 'dark'; children: ReactNode
+}) {
+  const [theme, setTheme] = useState(initialTheme)
+  return <div className={theme}>
+    <button onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}>Toggle theme</button>
+    {children}
+  </div>
 }
 ```
 
-Component first renders with default value (`light`), then updates after hydration, causing a visible flash of incorrect content.
+If only localStorage knows the preference, a matching default followed by an Effect is valid but may flash. A framework-supported pre-hydration theme script needs explicit DOM ownership, matching React expectations and CSP handling; it cannot promise zero flicker generically. Never derive server authorization from a client theme/auth-storage script.
 
-**Correct: no flicker, no hydration mismatch**
-
-```tsx
-function ThemeWrapper({ children }: { children: ReactNode }) {
-  return (
-    <>
-      <div id="theme-wrapper">
-        {children}
-      </div>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function() {
-              try {
-                var theme = localStorage.getItem('theme') || 'light';
-                var el = document.getElementById('theme-wrapper');
-                if (el) el.className = theme;
-              } catch (e) {}
-            })();
-          `,
-        }}
-      />
-    </>
-  )
-}
-```
-
-The inline script executes synchronously before showing the element, ensuring the DOM already has the correct value. No flickering, no hydration mismatch.
-
-This pattern is especially useful for theme toggles, user preferences, authentication states, and any client-only data that should render immediately without flashing default values.
+Reference: https://react.dev/reference/react-dom/client/hydrateRoot
 
 ---
 
@@ -920,7 +883,7 @@ This pattern is especially useful for theme toggles, user preferences, authentic
 
 **Impact: LOW-MEDIUM (avoids noisy hydration warnings for known differences)**
 
-In SSR frameworks (e.g., Next.js), some values are intentionally different on server vs client (random IDs, dates, locale/timezone formatting). For these *expected* mismatches, wrap the dynamic text in an element with `suppressHydrationWarning` to prevent noisy warnings. Do not use this to hide real bugs. Don’t overuse it.
+In SSR frameworks, dates or locale formatting can unavoidably differ. Keep IDs stable (for example useId or a server-provided ID), rather than generating mismatched random IDs. For these *expected* mismatches, wrap the dynamic text in an element with `suppressHydrationWarning` to prevent noisy warnings. This works one level deep; React does not patch mismatched text under suppression. It silences a warning, not the underlying difference.
 
 **Incorrect: known mismatch warnings**
 
@@ -946,85 +909,56 @@ function Timestamp() {
 
 ### R4.21 Use useTransition Over Manual Loading States
 
-**Impact: LOW (reduces re-renders and improves code clarity)**
+**Impact: LOW (pending state for React transitions)**
 
-Use `useTransition` instead of manual `useState` for loading states. This provides built-in `isPending` state and automatically manages transitions.
+Use `useTransition` for transition-related pending UI. Manual loading state or a data library remains valid, especially on React 18, whose transitions do not track async Actions. The example requires React 19 async Action support; post-await state is wrapped in another transition. Requests are not automatically cancelled or ordered.
 
-**Incorrect: manual loading state**
-
-```tsx
-function SearchResults() {
-  const [query, setQuery] = useState('')
-  const [results, setResults] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleSearch = async (value: string) => {
-    setIsLoading(true)
-    setQuery(value)
-    const data = await fetchResults(value)
-    setResults(data)
-    setIsLoading(false)
-  }
-
-  return (
-    <>
-      <input onChange={(e) => handleSearch(e.target.value)} />
-      {isLoading && <Spinner />}
-      <ResultsList results={results} />
-    </>
-  )
-}
-```
-
-**Correct: useTransition with built-in pending state**
+**React 19 example with stale-result guard:**
 
 ```tsx
-import { useTransition, useState } from 'react'
-
+import { useRef, useState, useTransition } from 'react'
 function SearchResults() {
   const [query, setQuery] = useState('')
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState<Result[]>([])
+  const [error, setError] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
-
-  const handleSearch = (value: string) => {
-    setQuery(value) // Update input immediately
-    
+  const latestRequest = useRef(0)
+  function handleSearch(value: string) {
+    setQuery(value) // Controlled input remains urgent.
+    const requestId = ++latestRequest.current
+    setError(null)
     startTransition(async () => {
-      // Fetch and update results
-      const data = await fetchResults(value)
-      setResults(data)
+      try {
+        const data = await fetchResults(value)
+        if (requestId === latestRequest.current) {
+          startTransition(() => setResults(data))
+        }
+      } catch {
+        if (requestId === latestRequest.current) {
+          startTransition(() => setError('Search failed'))
+        }
+      }
     })
   }
-
-  return (
-    <>
-      <input onChange={(e) => handleSearch(e.target.value)} />
-      {isPending && <Spinner />}
-      <ResultsList results={results} />
-    </>
-  )
+  return <>
+    <input value={query} onChange={e => handleSearch(e.target.value)} />
+    {isPending && <Spinner />}
+    {error && <p role="alert">{error}</p>}
+    <ResultsList results={results} />
+  </>
 }
 ```
 
-**Benefits:**
+The guard prevents old responses replacing newer results; it does not abort requests. isPending can include older outstanding Actions. Adapt cancellation and loading semantics to the data layer.
 
-- **Automatic pending state**: No need to manually manage `setIsLoading(true/false)`
-
-- **Error resilience**: Pending state correctly resets even if the transition throws
-
-- **Better responsiveness**: Keeps the UI responsive during updates
-
-- **Interrupt handling**: New transitions automatically cancel pending ones
-
-Reference: [https://react.dev/reference/react/useTransition](https://react.dev/reference/react/useTransition)
-
+Reference: https://react.dev/reference/react/useTransition
 
 ## Rule Interactions
 
 - **AsyncDeferAwait + AsyncParallel** are the foundational pair. DeferAwait naturally enables parallelism: by creating promises at the top of a function and awaiting them where results are needed, independent fetches overlap automatically. When reviewing code, check for DeferAwait first — applying it often reveals AsyncParallel opportunities.
-- **AsyncSuspenseBoundaries + ServerParallelFetching** work together in Next.js App Router. Parallel fetching ensures the server starts all data requests simultaneously; Suspense boundaries ensure the response streams as each resolves independently. Without Suspense, parallel fetching still blocks on the slowest query before sending any HTML.
+- **AsyncSuspenseBoundaries + ServerParallelFetching** work together in Next.js App Router. Independent reads can overlap; Suspense reveals the chosen loading regions as their required work resolves. Exact starts and reveal timing depend on the renderer/framework. The subtree awaiting Promise.all waits for all results, while surrounding layouts or parent fallbacks can still stream.
 - **AsyncApiRoutes + ClientSwrDedup** address the same problem from opposite ends. API routes consolidate server-side; SWR deduplicates client-side. For a page with many data needs, use API routes to reduce roundtrips, then SWR to cache and deduplicate across component remounts.
-- **ClientEventListeners + ClientPassiveEventListeners + RerenderTransitions** (cross-ref) form the event-driven data update chain. Passive listeners prevent scroll jank; proper cleanup prevents memory leaks; transitions prevent re-renders from blocking the main thread during data updates.
+- **ClientEventListeners + ClientPassiveEventListeners + RerenderTransitions** (cross-ref) form the event-driven data update chain. Passive touch/wheel listeners can avoid cancellation waits; cleanup releases subscriptions; transitions only reprioritize React rendering, not fetches or callback CPU work.
 - **ServerAfterNonblocking + AsyncDependencies** interact when server actions need to perform follow-up work (analytics, cache warming) after the primary data operation. Use `after()` for truly non-blocking side effects; use AsyncDependencies patterns when the follow-up genuinely depends on the primary result.
 
 ## Anti-Patterns (Severity Calibration)
@@ -1035,10 +969,10 @@ Reference: [https://react.dev/reference/react/useTransition](https://react.dev/r
 
 ### HIGH
 - **Client-side fetch cascade**: Component A fetches user, passes userId to Component B, which fetches posts, passes postIds to Component C, which fetches comments. Each component renders and fetches sequentially. Solution: consolidate into a single API route or use parallel server component fetching.
-- **Redundant SWR calls**: Three components on the same page each call `useSWR('/api/user')` with slightly different options, causing three network requests instead of one. Missing shared configuration or inconsistent cache keys.
+- **Redundant requests despite SWR**: Check keys, cache-provider scope and deduplication timing. Slightly different options alone do not prove three network requests.
 
 ### MEDIUM
-- **Non-passive scroll listener causing fetch jank**: A scroll-based infinite loader using `addEventListener('scroll', handler)` without `{ passive: true }`, causing frame drops during rapid scrolling because the browser cannot optimize scroll handling.
+- **Heavy scroll handler**: Optimize or throttle expensive work. Adding passive to a noncancelable scroll event does not fix callback CPU cost.
 - **Unversioned localStorage cache**: Client reads `JSON.parse(localStorage.getItem('settings'))` without validating the shape, causing crashes when the settings schema changes in a deployment.
 
 ## Examples
@@ -1046,7 +980,7 @@ Reference: [https://react.dev/reference/react/useTransition](https://react.dev/r
 ### Example 1: Waterfall Elimination (DeferAwait + Parallel + SuspenseBoundaries)
 
 ```tsx
-// BEFORE: 3 sequential awaits, no streaming — total: 900ms
+// BEFORE: illustrative sequential waits, no local streaming boundary
 async function DashboardPage() {
   const user = await getUser()           // 200ms
   const stats = await getStats()          // 400ms (independent!)
@@ -1054,7 +988,7 @@ async function DashboardPage() {
   return <Dashboard user={user} stats={stats} notifications={notifications} />
 }
 
-// AFTER: parallel fetches + Suspense streaming — total: 400ms
+// AFTER: eligible independent fetches + Suspense streaming
 async function DashboardPage() {
   return (
     <>
@@ -1072,7 +1006,7 @@ async function DashboardPage() {
 }
 ```
 
-Each component fetches its own data. Suspense boundaries let fast components render immediately. Total time = slowest single query (400ms), not the sum (900ms).
+Each component fetches its own data. Suspense boundaries let fast components render immediately. With the illustrative durations and negligible overhead, overlapping waits approach the slowest query rather than their sum; this is not a measured latency guarantee.
 
 ### Example 2: API Route Consolidation + SWR Dedup (ApiRoutes + SwrDedup + PassiveEventListeners)
 
@@ -1085,7 +1019,7 @@ function ActivityFeed() {
 
   useEffect(() => {
     const handler = () => loadMore()
-    window.addEventListener('scroll', handler) // blocks compositor
+    window.addEventListener('scroll', handler) // scroll is noncancelable; expensive work can still cause jank
     return () => window.removeEventListener('scroll', handler)
   }, [])
 }
@@ -1097,7 +1031,7 @@ function ActivityFeed() {
 
   useEffect(() => {
     const handler = () => {
-      startTransition(() => loadMore())
+      void loadMore() // The data layer owns loading/races; transition its React result update if needed
     }
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
@@ -1117,9 +1051,10 @@ export async function GET() {
 
 ```tsx
 // BEFORE: sequential server work blocks response
-async function ProductPage({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id)
-  await trackPageView(params.id)        // 150ms wasted — user waits for analytics
+async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const product = await getProduct(id)
+  await trackPageView(id)        // 150ms wasted — user waits for analytics
   const related = await getRelated(product.categoryId) // genuine dependency
   return <ProductDetail product={product} related={related} />
 }
@@ -1127,11 +1062,12 @@ async function ProductPage({ params }: { params: { id: string } }) {
 // AFTER: parallel where possible, after() for non-blocking, chain only true deps
 import { after } from 'next/server'
 
-async function ProductPage({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id)
+async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const product = await getProduct(id)
 
   // Non-blocking: analytics after response
-  after(() => trackPageView(params.id))
+  after(() => trackPageView(id))
 
   // True dependency: related needs categoryId from product
   const related = await getRelated(product.categoryId)
@@ -1152,3 +1088,18 @@ async function ProductPage({ params }: { params: { id: string } }) {
 - Vercel Engineering — React Best Practices (January 2026), MIT
 - React Documentation — Suspense, use(), Server Components
 - Next.js Documentation — Data Fetching, API Routes, next/after
+
+## Candidate verification references
+
+- https://nextjs.org/docs/app/getting-started/fetching-data
+- https://nextjs.org/docs/app/guides/authentication
+- https://react.dev/reference/react/Suspense
+- https://swr.vercel.app/docs/mutation
+- https://swr.vercel.app/docs/advanced/performance
+- https://www.w3.org/TR/cssom-view-1/#scrolling
+- https://developer.chrome.com/blog/scrolling-intervention
+- https://html.spec.whatwg.org/multipage/webstorage.html
+- https://nextjs.org/docs/app/api-reference/functions/after
+- https://nextjs.org/blog/next-15-1
+- https://react.dev/reference/react/useTransition
+- https://react.dev/reference/react-dom/client/hydrateRoot

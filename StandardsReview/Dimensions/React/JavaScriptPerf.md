@@ -6,15 +6,15 @@
 
 The 15 rules in this dimension operate below the React abstraction layer. While React manages the virtual DOM, component lifecycle, and rendering pipeline, the actual work inside components — iterating arrays, looking up data, manipulating the DOM, computing derived values — runs as plain JavaScript. Inefficient JavaScript inside a perfectly optimized React component still produces a slow application.
 
-These rules cluster into four concern areas. The first is **data structure selection** (3 rules): choosing the right data structure eliminates algorithmic complexity. `JsIndexMaps` replaces O(n) repeated `.find()` calls with O(1) Map lookups. `JsSetMapLookups` uses Set for membership tests instead of Array.includes(). `JsTosortedImmutable` uses immutable sort to avoid mutating shared arrays in a framework built on immutability.
+These rules cluster into four concern areas. The first is **data structure selection** (3 rules): choosing the right data structure eliminates algorithmic complexity. `JsIndexMaps` replaces O(n) repeated `.find()` calls with typically efficient Map lookups (not guaranteed constant time). `JsSetMapLookups` uses Set for membership tests instead of Array.includes(). `JsTosortedImmutable` uses immutable sort to avoid mutating shared arrays in a framework built on immutability.
 
 The second concern is **iteration efficiency** (4 rules): reducing the number of passes over data and short-circuiting early. `JsCombineIterations` merges multiple `.filter().map().reduce()` chains into a single pass. `JsLengthCheckFirst` adds a length guard before expensive array operations. `JsEarlyExit` returns from functions as soon as the result is known. `JsMinMaxLoop` avoids spreading large arrays into `Math.max()` which can overflow the call stack.
 
 The third concern is **caching and memoization** (3 rules): avoiding redundant computation. `JsCachePropertyAccess` caches deeply nested property lookups. `JsCacheFunctionResults` caches expensive function results across calls. `JsCacheStorage` caches repeated localStorage/sessionStorage access to avoid synchronous I/O in hot paths.
 
-The fourth concern is **DOM and event patterns** (2 rules + 3 advanced): `JsBatchDomCss` batches DOM reads and writes to prevent layout thrashing. `JsHoistRegexp` moves regular expression compilation outside hot loops. The advanced rules (`AdvancedEventHandlerRefs`, `AdvancedInitOnce`, `AdvancedUseLatest`) address React-specific JavaScript patterns: stable callback references, one-time initialization without effects, and always-current values without re-renders.
+The fourth concern is **DOM and event patterns** (2 rules + 3 advanced): `JsBatchDomCss` batches DOM reads and writes to prevent layout thrashing. `JsHoistRegexp` moves regular expression compilation outside hot loops. The advanced rules (`AdvancedEventHandlerRefs`, `AdvancedInitOnce`, `AdvancedUseLatest`) address React-specific JavaScript patterns: subscription ownership, per-module initialization guards, and latest-value reads in Effect callbacks.
 
-Individually, each rule provides a modest improvement. Together, they compound — a component that uses Map lookups, combines iterations, caches property access, and batches DOM operations can be 5-10x faster than one that uses naive patterns throughout.
+These are optimization candidates, not guaranteed speedups. Profile realistic inputs, preserve observable semantics and include allocation, construction and invalidation costs.
 
 ## Consumer Guide
 
@@ -23,10 +23,10 @@ Individually, each rule provides a modest improvement. Together, they compound �
 Scan for these patterns in descending impact order:
 
 1. **Repeated .find() in loops** (HIGH) — Any pattern where `.find()` is called inside `.map()` or `.forEach()` on a second array. This is O(n*m) where an index Map makes it O(n+m). Common in data joining operations.
-2. **Layout thrashing** (HIGH) — Interleaved DOM reads and writes: `el.offsetHeight; el.style.height = '100px'; el2.offsetHeight; el2.style.height = '200px';`. Each read forces the browser to recalculate layout. Batch all reads, then all writes.
+2. **Layout thrashing** (HIGH) — Interleaved DOM reads and writes: `el.offsetHeight; el.style.height = '100px'; el2.offsetHeight; el2.style.height = '200px';`. A read after invalidation can require layout work. Batch all reads, then all writes.
 3. **Multiple array passes** (MEDIUM) — `.filter().map()` or `.filter().reduce()` chains that could be a single `.reduce()`. Each pass allocates an intermediate array and iterates the full collection.
-4. **Spread into Math.max/min** (MEDIUM) — `Math.max(...largeArray)` throws a stack overflow for arrays over ~100K elements because each element becomes a function argument.
-5. **RegExp inside loops** (MEDIUM) — `new RegExp(pattern)` or regex literal inside a hot loop, recompiling the regex on every iteration.
+4. **Spread into Math.max/min** (MEDIUM) — `Math.max(...largeArray)` can exceed an implementation-dependent argument limit because each element becomes a function argument.
+5. **RegExp inside loops** (MEDIUM) — `new RegExp(pattern)` or regex literal inside a hot loop, creating a new RegExp object each iteration; compilation may be cached.
 6. **Deep property access in tight loops** (LOW) — `items[i].user.profile.settings.theme` accessed repeatedly without caching the intermediate reference.
 
 ### When Designing / Planning
@@ -46,7 +46,7 @@ Apply rules based on the code pattern you encounter:
 2. **Multiple array passes?** Combine into single iteration (JsCombineIterations). Add length guard for optional processing (JsLengthCheckFirst). Return early when possible (JsEarlyExit).
 3. **Repeated computation?** Cache function results (JsCacheFunctionResults). Cache property access chains (JsCachePropertyAccess). Cache storage reads (JsCacheStorage).
 4. **DOM manipulation?** Batch reads then writes (JsBatchDomCss). Hoist regex out of loops (JsHoistRegexp). Use immutable sort (JsTosortedImmutable).
-5. **React-specific patterns?** Stable event handlers via refs or useEffectEvent (AdvancedEventHandlerRefs). One-time initialization without useEffect (AdvancedInitOnce). Always-current value without re-render (AdvancedUseLatest).
+5. **React-specific patterns?** Consider latest callback reads in Effects (React 19.2+ useEffectEvent or a synchronized ref), and define initialization scope/cleanup. EffectEvent does not guarantee a stable function identity.
 
 ## Rules in This Dimension
 
@@ -62,7 +62,7 @@ Apply rules based on the code pattern you encounter:
 | JsEarlyExit | LOW-MEDIUM | Return early from functions when result is determined |
 | JsHoistRegexp | LOW-MEDIUM | Compile regex outside loops to avoid recompilation per iteration |
 | JsMinMaxLoop | MEDIUM | Use loop-based min/max for large arrays to avoid stack overflow |
-| JsSetMapLookups | MEDIUM | Use Set for O(1) membership tests instead of Array.includes() |
+| JsSetMapLookups | MEDIUM | Consider Set for repeated membership checks; include construction cost |
 | JsTosortedImmutable | LOW | Use toSorted() for immutable sort — avoids mutating shared arrays in React |
 | AdvancedEventHandlerRefs | LOW | Store event handlers in refs or useEffectEvent for stable subscriptions |
 | AdvancedInitOnce | LOW | Initialize values once without useEffect using ref or module-level patterns |
@@ -75,7 +75,7 @@ Apply rules based on the code pattern you encounter:
 
 **Impact: MEDIUM (prevents forced synchronous layouts and reduces performance bottlenecks)**
 
-Avoid interleaving style writes with layout reads. When you read a layout property (like `offsetWidth`, `getBoundingClientRect()`, or `getComputedStyle()`) between style changes, the browser is forced to trigger a synchronous reflow.
+Avoid interleaving style writes with layout reads. Reading layout after layout-affecting writes can force synchronous style/layout work when cached measurements are invalid. Not every property read or write forces a full reflow.
 
 **This is OK: browser batches style changes**
 
@@ -119,13 +119,13 @@ function updateElementStyles(element: HTMLElement) {
 
 ```typescript
 function updateElementStyles(element: HTMLElement) {
+  const { width, height } = element.getBoundingClientRect() // old geometry
   element.classList.add('highlighted-box')
-  
-  const { width, height } = element.getBoundingClientRect()
+  return { width, height }
 }
 ```
 
-**Better: use CSS classes**
+Use the reads-first version only when old geometry is intended. If new geometry is required, group writes then measure. CSS classes are an optional organization policy.
 
 **React example:**
 
@@ -163,9 +163,9 @@ See [this gist](https://gist.github.com/paulirish/5d52fb081b3570c81e3a) and [CSS
 
 ### R6.2 Build Index Maps for Repeated Lookups
 
-**Impact: LOW-MEDIUM (1M ops to 2K ops)**
+**Impact: workload-dependent (repeated lookups)**
 
-Multiple `.find()` calls by the same key should use a Map.
+Consider a Map for repeated key lookups. Preserve duplicate-key behavior: find returns the first match, while repeated Map.set would keep the last. The indexing examples, including the combined example, assume validated string or non-NaN identifiers. `find` with strict equality never matches NaN, whereas Map uses SameValueZero and can match it. If NaN is permitted, retain the scan or exclude NaN keys to preserve its behavior. Include index construction and memory in the comparison.
 
 **Incorrect (O(n) per lookup):**
 
@@ -178,11 +178,14 @@ function processOrders(orders: Order[], users: User[]) {
 }
 ```
 
-**Correct (O(1) per lookup):**
+**Alternative: indexed lookup (average sublinear access required by ECMAScript)**
 
 ```typescript
 function processOrders(orders: Order[], users: User[]) {
-  const userById = new Map(users.map(u => [u.id, u]))
+  const userById = new Map<User['id'], User>()
+  for (const user of users) {
+    if (!userById.has(user.id)) userById.set(user.id, user) // preserve first match
+  }
 
   return orders.map(order => ({
     ...order,
@@ -191,9 +194,9 @@ function processOrders(orders: Order[], users: User[]) {
 }
 ```
 
-Build map once (O(n)), then all lookups are O(1).
+With a hash-table implementation, construction and repeated lookup often give an expected O(n+m) join. ECMAScript requires average sublinear access, not worst-case O(1).
 
-For 1000 orders × 1000 users: 1M ops → 2K ops.
+The scan can make up to orders.length × users.length comparisons; index construction and lookups are different operations, not an exact 1M-to-2K benchmark.
 
 ---
 
@@ -201,7 +204,7 @@ For 1000 orders × 1000 users: 1M ops → 2K ops.
 
 **Impact: LOW-MEDIUM (reduces lookups)**
 
-Cache object property lookups in hot paths.
+Cache repeated property access only when values and array length stay invariant throughout the loop. Getters, proxies or process() mutations can make hoisting change behavior; engines may already optimize ordinary property access.
 
 **Incorrect: 3 lookups × N iterations**
 
@@ -211,7 +214,7 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 
-**Correct: 1 lookup total**
+**Alternative under the invariant-value contract: one chain evaluation before the loop**
 
 ```typescript
 const value = obj.config.settings.value
@@ -227,7 +230,7 @@ for (let i = 0; i < len; i++) {
 
 **Impact: MEDIUM (avoid redundant computation)**
 
-Use a module-level Map to cache function results when the same function is called repeatedly with the same inputs during render.
+Cache pure deterministic computation only when repeated cost warrants it. Bound memory and define invalidation. Module state can be shared across server requests; do not cache user authorization or secrets without an explicit isolation policy.
 
 **Incorrect: redundant computation**
 
@@ -257,6 +260,7 @@ function cachedSlugify(text: string): string {
     return slugifyCache.get(text)!
   }
   const result = slugify(text)
+  if (slugifyCache.size >= 1000) slugifyCache.clear() // illustrative bounded policy
   slugifyCache.set(text, result)
   return result
 }
@@ -275,27 +279,7 @@ function ProjectList({ projects }: { projects: Project[] }) {
 }
 ```
 
-**Simpler pattern for single-value functions:**
-
-```typescript
-let isLoggedInCache: boolean | null = null
-
-function isLoggedIn(): boolean {
-  if (isLoggedInCache !== null) {
-    return isLoggedInCache
-  }
-  
-  isLoggedInCache = document.cookie.includes('auth=')
-  return isLoggedInCache
-}
-
-// Clear cache when auth changes
-function onAuthChange() {
-  isLoggedInCache = null
-}
-```
-
-Use a Map (not a hook) so it works everywhere: utilities, event handlers, not just React components.
+A readable cookie's presence is not proof of login. Server authentication/authorization must remain authoritative. For mutable preferences, define who invalidates cached values before reuse; a hook-local memo or request-scoped cache may fit better than module state.
 
 Reference: [https://vercel.com/blog/how-we-made-the-vercel-dashboard-twice-as-fast](https://vercel.com/blog/how-we-made-the-vercel-dashboard-twice-as-fast)
 
@@ -305,7 +289,7 @@ Reference: [https://vercel.com/blog/how-we-made-the-vercel-dashboard-twice-as-fa
 
 **Impact: LOW-MEDIUM (reduces expensive I/O)**
 
-`localStorage`, `sessionStorage`, and `document.cookie` are synchronous and expensive. Cache reads in memory.
+These browser APIs are synchronous; cache only measured hot reads with a known invalidation contract. The example is browser-only, assumes same-document writes use its wrapper, and uses a bounded small key set. External changes can otherwise leave stale values.
 
 **Incorrect: reads storage on every call**
 
@@ -323,39 +307,48 @@ const storageCache = new Map<string, string | null>()
 
 function getLocalStorage(key: string) {
   if (!storageCache.has(key)) {
-    storageCache.set(key, localStorage.getItem(key))
+    try {
+      if (storageCache.size >= 100) storageCache.clear()
+      storageCache.set(key, localStorage.getItem(key))
+    } catch { return null }
   }
   return storageCache.get(key)
 }
 
 function setLocalStorage(key: string, value: string) {
-  localStorage.setItem(key, value)
-  storageCache.set(key, value)  // keep cache in sync
+  try {
+    localStorage.setItem(key, value)
+    storageCache.set(key, value)
+    return true
+  } catch { return false }
 }
 ```
 
-Use a Map (not a hook) so it works everywhere: utilities, event handlers, not just React components.
+A module Map is usable outside hooks, but its browser-only storage access and invalidation contract still apply.
 
-**Cookie caching:**
+**Cookies need a separate freshness policy:**
 
 ```typescript
-let cookieCache: Record<string, string> | null = null
-
+// Browser-only UI preference lookup; never proof of authorization.
 function getCookie(name: string) {
-  if (!cookieCache) {
-    cookieCache = Object.fromEntries(
-      document.cookie.split('; ').map(c => c.split('='))
-    )
+  for (const part of document.cookie.split(';')) {
+    const separator = part.indexOf('=')
+    if (separator < 0) continue
+    if (part.slice(0, separator).trim() === name) return part.slice(separator + 1)
   }
-  return cookieCache[name]
+  return undefined
 }
 ```
 
-**Important: invalidate on external changes**
+Server-set cookie changes do not emit storage events. Avoid indefinite cookie caching unless all writers can invalidate it.
+
+**Invalidate storage on external changes:**
 
 ```typescript
 window.addEventListener('storage', (e) => {
-  if (e.key) storageCache.delete(e.key)
+  if (e.storageArea !== localStorage) return
+  if (e.key === null) storageCache.clear() // another document called clear()
+  else storageCache.delete(e.key)
 })
 
 document.addEventListener('visibilitychange', () => {
@@ -373,7 +366,7 @@ If storage can change externally (another tab, server-set cookies), invalidate c
 
 **Impact: LOW-MEDIUM (reduces iterations)**
 
-Multiple `.filter()` or `.map()` calls iterate the array multiple times. Combine into one loop.
+For dense arrays and pure callbacks, a combined loop may avoid passes/temporary arrays. Fusion changes callback order, sparse-array handling and side effects; keep the original when those semantics matter and benchmark before preferring a less readable form.
 
 **Incorrect: 3 iterations**
 
@@ -416,7 +409,7 @@ function hasChanges(current: string[], original: string[]) {
 }
 ```
 
-Two O(n log n) sorts run even when `current.length` is 5 and `original.length` is 100. There is also overhead of joining the arrays and comparing the strings.
+Two O(n log n) sorts run even when `current.length` is 5 and `original.length` is 100. Joining also loses element boundaries (for example ['a,b', 'c'] and ['a', 'b,c'] collide), and the original sorts mutate inputs. The replacement compares elements and preserves input arrays.
 
 **Correct (O(1) length check first):**
 
@@ -427,8 +420,8 @@ function hasChanges(current: string[], original: string[]) {
     return true
   }
   // Only sort when lengths match
-  const currentSorted = current.toSorted()
-  const originalSorted = original.toSorted()
+  const currentSorted = [...current].sort()
+  const originalSorted = [...original].sort()
   for (let i = 0; i < currentSorted.length; i++) {
     if (currentSorted[i] !== originalSorted[i]) {
       return true
@@ -454,9 +447,9 @@ This new approach is more efficient because:
 
 **Impact: LOW-MEDIUM (avoids unnecessary computation)**
 
-Return early when result is determined to skip unnecessary processing.
+Return early only when the contract accepts the first error and no later processing is required. The examples below intentionally change last-error reporting to first-error reporting; they are not behavior-equivalent for multiple invalid fields.
 
-**Incorrect: processes all items even after finding answer**
+**Last-error policy (valid when required):**
 
 ```typescript
 function validateUsers(users: User[]) {
@@ -479,7 +472,7 @@ function validateUsers(users: User[]) {
 }
 ```
 
-**Correct: returns immediately on first error**
+**Alternative under a first-error policy:**
 
 ```typescript
 function validateUsers(users: User[]) {
@@ -502,7 +495,7 @@ function validateUsers(users: User[]) {
 
 **Impact: LOW-MEDIUM (avoids recreation)**
 
-Don't create RegExp inside render. Hoist to module scope or memoize with `useMemo()`.
+Consider hoisting a constant RegExp or memoizing a query-dependent one only for a measured hot path. Global/sticky test/exec mutate lastIndex, so reset or isolate state. Engine compilation caching means construction is not proof of full recompilation.
 
 **Incorrect: new RegExp every render**
 
@@ -537,7 +530,7 @@ regex.test('foo')  // true, lastIndex = 3
 regex.test('foo')  // false, lastIndex = 0
 ```
 
-Global regex (`/g`) has mutable `lastIndex` state:
+Global (`g`) and sticky (`y`) regex state can change test/exec results. The escapeRegex helper above must escape literal query input; it is an application helper, not an assumed browser API.
 
 ---
 
@@ -579,7 +572,7 @@ Still sorts unnecessarily when only min/max are needed.
 
 ```typescript
 function getLatestProject(projects: Project[]) {
-  if (projects.length === 0) return null
+  if (projects.length === 0) return undefined
   
   let latest = projects[0]
   
@@ -593,14 +586,14 @@ function getLatestProject(projects: Project[]) {
 }
 
 function getOldestAndNewest(projects: Project[]) {
-  if (projects.length === 0) return { oldest: null, newest: null }
+  if (projects.length === 0) return { oldest: undefined, newest: undefined }
   
   let oldest = projects[0]
   let newest = projects[0]
   
   for (let i = 1; i < projects.length; i++) {
     if (projects[i].updatedAt < oldest.updatedAt) oldest = projects[i]
-    if (projects[i].updatedAt > newest.updatedAt) newest = projects[i]
+    if (projects[i].updatedAt >= newest.updatedAt) newest = projects[i] // last tied newest, as in stable ascending sort
   }
   
   return { oldest, newest }
@@ -617,15 +610,15 @@ const min = Math.min(...numbers)
 const max = Math.max(...numbers)
 ```
 
-This works for small arrays, but can be slower or just throw an error for very large arrays due to spread operator limitations. Maximal array length is approximately 124000 in Chrome 143 and 638000 in Safari 18; exact numbers may vary - see [the fiddle](https://jsfiddle.net/qw1jabsx/4/). Use the loop approach for reliability.
+For very large arrays, argument-count limits can make spread calls throw. Limits depend on engine and call context; use a loop for unbounded inputs. These examples assume finite numeric timestamps and preserve stable-sort tie/empty behavior.
 
 ---
 
-### R6.11 Use Set/Map for O(1) Lookups
+### R6.11 Use Set/Map for Repeated Lookups
 
-**Impact: LOW-MEDIUM (O(n) to O(1))**
+**Impact: workload-dependent (average lookup improvement)**
 
-Convert arrays to Set/Map for repeated membership checks.
+Consider Set/Map when repeated checks amortize construction/memory costs. Do not rebuild a Set for each membership test. ECMAScript promises average sublinear access, not universal O(1).
 
 **Incorrect (O(n) per check):**
 
@@ -634,7 +627,7 @@ const allowedIds = ['a', 'b', 'c', ...]
 items.filter(item => allowedIds.includes(item.id))
 ```
 
-**Correct (O(1) per check):**
+**Alternative: prebuilt Set for repeated checks:**
 
 ```typescript
 const allowedIds = new Set(['a', 'b', 'c', ...])
@@ -647,7 +640,7 @@ items.filter(item => allowedIds.has(item.id))
 
 **Impact: MEDIUM-HIGH (prevents mutation bugs in React state)**
 
-`.sort()` mutates the array in place, which can cause bugs with React state and props. Use `.toSorted()` to create a new sorted array without mutation.
+`.sort()` mutates the array in place, which can cause bugs with React state and props. Use `.toSorted()` where ES2023 support is declared, or `[...array].sort(compare)` in older supported runtimes. Sorting an exclusively owned scratch array in place is valid.
 
 **Incorrect: mutates original array**
 
@@ -679,7 +672,7 @@ function UserList({ users }: { users: User[] }) {
 
 1. Props/state mutations break React's immutability model - React expects props and state to be treated as read-only
 
-2. Causes stale closure bugs - Mutating arrays inside closures (callbacks, effects) can lead to unexpected behavior
+2. Mutating shared arrays can invalidate identity-based memoization and change previous state snapshots; stale closures are a separate issue.
 
 **Browser support: fallback for older browsers**
 
@@ -688,7 +681,7 @@ function UserList({ users }: { users: User[] }) {
 const sorted = [...items].sort((a, b) => a.value - b.value)
 ```
 
-`.toSorted()` is available in all modern browsers (Chrome 110+, Safari 16+, Firefox 115+, Node.js 20+). For older environments, use spread operator:
+Declare ES2023 array-copy method support in the runtime and type-library target. Otherwise use the copy-and-sort fallback above; no framework upgrade alone supplies this method.
 
 **Other immutable array methods:**
 
@@ -706,9 +699,9 @@ const sorted = [...items].sort((a, b) => a.value - b.value)
 
 **Impact: LOW (stable subscriptions)**
 
-Store callbacks in refs when used in effects that shouldn't re-subscribe on callback changes.
+When callback changes should not reconnect an Effect subscription, React 19.2+ useEffectEvent can read the latest committed callback. React 18/19.0/19.1 can keep complete dependencies and resubscribe, or use a carefully synchronized ref pattern. Do not omit values that should reconfigure the subscription.
 
-**Incorrect: re-subscribes on every render**
+**Valid baseline: re-subscribes when handler identity changes**
 
 ```tsx
 function useWindowEvent(event: string, handler: (e) => void) {
@@ -734,9 +727,9 @@ function useWindowEvent(event: string, handler: (e) => void) {
 }
 ```
 
-**Alternative: use `useEffectEvent` if you're on latest React:**
+**Version and scope:**
 
-`useEffectEvent` provides a cleaner API for the same pattern: it creates a stable function reference that always calls the latest version of the handler.
+`useEffectEvent` requires React 19.2+. It reads latest values from Effect-owned callbacks; its returned function identity is not stable and must not be a dependency or general UI event handler.
 
 ---
 
@@ -744,7 +737,7 @@ function useWindowEvent(event: string, handler: (e) => void) {
 
 **Impact: LOW-MEDIUM (avoids duplicate init in development)**
 
-Do not put app-wide initialization that must run once per app load inside `useEffect([])` of a component. Components can remount and effects will re-run. Use a module-level guard or top-level init in the entry module instead.
+For browser-app initialization, an Effect with a module guard can avoid repeated setup on remount. Module duplication/HMR, separate roots and server request sharing change its scope. Keep initialization idempotent; subscriptions still need per-setup cleanup and must reconnect after Strict Mode cleanup.
 
 **Incorrect: runs twice in dev, re-runs on remount**
 
@@ -759,7 +752,7 @@ function Comp() {
 }
 ```
 
-**Correct: once per app load**
+**Alternative: once per evaluated browser module instance**
 
 ```tsx
 let didInit = false
@@ -780,11 +773,11 @@ Reference: [https://react.dev/learn/you-might-not-need-an-effect#initializing-th
 
 ---
 
-### R6.15 useEffectEvent for Stable Callback Refs
+### R6.15 useEffectEvent for Latest Values in Effects
 
 **Impact: LOW (prevents effect re-runs)**
 
-Access latest values in callbacks without adding them to dependency arrays. Prevents effect re-runs while avoiding stale closures.
+On React 19.2+, useEffectEvent reads latest values from Effect-owned callbacks without making that logic reactive. In this debounce example, the policy is that only query changes restart the timer; if onSearch changes should restart it, keep the original dependency.
 
 **Incorrect: effect re-runs on every callback change**
 
@@ -820,31 +813,31 @@ function SearchInput({ onSearch }: { onSearch: (q: string) => void }) {
 
 - **JsIndexMaps + JsSetMapLookups + JsCombineIterations** form the data processing triad. When processing a list that requires joining with another list (IndexMaps), filtering by membership in a set (SetMapLookups), and transforming the result (CombineIterations), applying all three can reduce a 3-pass O(n*m) operation to a single-pass O(n+m) operation. The Map and Set should be constructed once before the main iteration.
 - **JsCachePropertyAccess + JsCacheFunctionResults + JsCacheStorage** are all caching strategies at different levels. PropertyAccess caches object traversal within a single function scope. FunctionResults caches computation across multiple function calls. CacheStorage caches I/O across multiple render cycles. When a function reads from storage, traverses a deep object, and computes an expensive result, all three rules apply in sequence.
-- **JsBatchDomCss + JsHoistRegexp** address hot-path optimization from different angles. BatchDomCss prevents the browser from recalculating layout between interleaved reads and writes. HoistRegexp prevents the engine from recompiling regex patterns. Both become critical in tight loops — a loop that reads DOM dimensions and applies regex per iteration will be dramatically slower than one that batches reads, hoists regex, and writes in a final pass.
-- **AdvancedEventHandlerRefs + AdvancedUseLatest** both solve the stale closure problem but for different use cases. EventHandlerRefs creates a stable function reference for event subscriptions. UseLatest creates a stable reference to a changing value for reading in callbacks. When building a custom hook that subscribes to events and needs the latest props, both patterns apply together.
-- **AdvancedInitOnce + JsCacheStorage** interact for initialization patterns. InitOnce ensures a value is computed once (e.g., reading and parsing a config from localStorage). CacheStorage prevents repeated reads of the same key. Combined, they ensure that expensive initialization from storage happens exactly once per component lifecycle.
+- **JsBatchDomCss + JsHoistRegexp** address hot-path optimization from different angles. BatchDomCss prevents the browser from recalculating layout between interleaved reads and writes. HoistRegexp avoids repeated object construction when reuse preserves behavior; compilation savings depend on the engine. Profile hot loops before assigning severity or predicting a speedup.
+- **AdvancedEventHandlerRefs + AdvancedUseLatest** both solve the stale closure problem but for different use cases. Refs can hold a latest callback, while useEffectEvent supports nonreactive Effect logic without promising stable function identity. When building a custom hook that subscribes to events and needs the latest props, both patterns apply together.
+- **AdvancedInitOnce + JsCacheStorage** interact for initialization patterns. InitOnce ensures a value is computed once (e.g., reading and parsing a config from localStorage). CacheStorage prevents repeated reads of the same key. Their scopes differ: a module guard may outlive many mounts; a storage cache needs its own invalidation. Neither ensures exactly-once external effects.
 
 ## Anti-Patterns (Severity Calibration)
 
 ### CRITICAL
-- **O(n^2) data join in render path**: `orders.map(o => ({ ...o, user: users.find(u => u.id === o.userId) }))` with 1,000 orders and 1,000 users: 1,000,000 comparisons per render. Build a Map first: 2,000 operations total. This is the single highest-impact JavaScript optimization in data-heavy React components.
-- **Layout thrashing in animation frame**: Reading `offsetHeight`, writing `style.height`, reading `offsetWidth`, writing `style.width` in a `requestAnimationFrame` callback. Each read after a write forces a synchronous reflow. With 20 elements, this creates 20 forced reflows per frame — visible stuttering at 60fps.
+- **Repeated large scans in render**: Profile repeated find operations and consider a first-match-preserving index. Do not assign critical severity or exact operation savings from syntax alone.
+- **Layout thrashing in animation frame**: Reading `offsetHeight`, writing `style.height`, reading `offsetWidth`, writing `style.width` in a `requestAnimationFrame` callback. A read after a layout-affecting write can force synchronous layout. The number and cost of layouts depend on invalidation and browser behavior; confirm with a trace.
 
 ### HIGH
-- **Math.max(...hugeArray) stack overflow**: `Math.max(...array)` where array has 200,000 elements. This pushes 200K arguments onto the call stack, exceeding the maximum. Use a loop or `reduce()` instead. This is a production crash, not just a performance issue.
-- **Multiple array passes for single transformation**: `items.filter(predicate).map(transform).reduce(accumulate)` creates 2 intermediate arrays and iterates 3 times. A single `reduce()` does the same work in one pass with zero intermediate allocations.
+- **Unbounded spread into Math.max/min**: very large inputs may exceed engine argument limits. Use a loop or reduce for unbounded arrays; no fixed threshold is portable.
+- **Multiple array passes for single transformation**: `items.filter(predicate).map(transform).reduce(accumulate)` creates 2 intermediate arrays and iterates 3 times. A fused loop can avoid intermediate arrays when callback ordering, side effects and sparse-array semantics permit; reducers may still allocate their output.
 
 ### MEDIUM
-- **Regex compilation inside .map()**: `items.map(item => item.name.match(new RegExp(pattern)))` recompiles the regex for every item. Hoist `const re = new RegExp(pattern)` before the loop.
-- **Repeated localStorage.getItem in render**: `const theme = localStorage.getItem('theme')` called on every render. localStorage is synchronous I/O and can take 1-5ms per call. Cache in a module-level variable or ref.
-- **Array.includes() for set membership**: `blockedIds.includes(id)` in a loop over 10,000 items where `blockedIds` has 500 entries: 5,000,000 comparisons. `new Set(blockedIds).has(id)`: 10,000 lookups.
+- **Regex compilation inside .map()**: `items.map(item => item.name.match(new RegExp(pattern)))` creates a RegExp for every item; the engine may reuse compiled code. Hoist `const re = new RegExp(pattern)` before the loop.
+- **Repeated localStorage.getItem in render**: `const theme = localStorage.getItem('theme')` called on every render. This is browser-only synchronous work; measure cost and choose a cache only with a freshness and ownership contract.
+- **Array.includes() for set membership**: `blockedIds.includes(id)` in a loop over 10,000 items where `blockedIds` has 500 entries: up to 5,000,000 comparisons. Build the Set once before the loop, then perform membership lookups; account for construction cost.
 
 ## Examples
 
 ### Example 1: Data Processing Pipeline (IndexMaps + SetMapLookups + CombineIterations + EarlyExit)
 
 ```tsx
-// BEFORE: 3 passes, O(n*m) joins, no early exit — 1.2M ops for 1K items
+// BEFORE: repeated scans and intermediate arrays
 function OrderDashboard({ orders, users, blockedUserIds }: Props) {
   const activeOrders = orders.filter(o => !blockedUserIds.includes(o.userId))
   const enrichedOrders = activeOrders.map(o => ({
@@ -856,9 +849,13 @@ function OrderDashboard({ orders, users, blockedUserIds }: Props) {
   return <Dashboard orders={enrichedOrders} revenue={totalRevenue} />
 }
 
-// AFTER: 1 pass, O(n+m) with Map + Set — 3K ops for 1K items
+// AFTER: indexed join plus one output-building pass; measure total costs
 function OrderDashboard({ orders, users, blockedUserIds }: Props) {
-  const userById = useMemo(() => new Map(users.map(u => [u.id, u])), [users])
+  const userById = useMemo(() => {
+    const index = new Map<User['id'], User>()
+    for (const user of users) if (!index.has(user.id)) index.set(user.id, user)
+    return index
+  }, [users])
   const blocked = useMemo(() => new Set(blockedUserIds), [blockedUserIds])
 
   const { enrichedOrders, totalRevenue } = useMemo(() => {
@@ -868,8 +865,8 @@ function OrderDashboard({ orders, users, blockedUserIds }: Props) {
     const enrichedOrders: EnrichedOrder[] = []
 
     for (const order of orders) {
-      if (blocked.has(order.userId)) continue  // O(1) lookup, early skip
-      const user = userById.get(order.userId)   // O(1) lookup
+      if (blocked.has(order.userId)) continue  // indexed lookup, early skip
+      const user = userById.get(order.userId)   // indexed lookup
       enrichedOrders.push({ ...order, user })
       totalRevenue += order.amount
     }
@@ -893,7 +890,8 @@ function highlightMatches(items: HTMLElement[], query: string) {
     item.style.height = `${height}px`                   // write
     const text = item.querySelector('.text')?.textContent
     if (text?.match(new RegExp(query, 'i'))) {          // regex recompiled
-      item.querySelector('.badge')?.style.display = 'block'  // write
+      const badge = item.querySelector<HTMLElement>('.badge')
+      if (badge) badge.style.display = 'block' // write
     }
   })
 }
@@ -934,32 +932,32 @@ function useWebSocket(url: string, onMessage: (msg: Message) => void) {
     socket.addEventListener('message', (e) => onMessage(JSON.parse(e.data)))
     setWs(socket)
     return () => socket.close()
-  }, [url, onMessage])  // onMessage in deps = reconnect on every render
+  }, [url, onMessage])  // reconnects when URL or callback identity changes
 
   return ws
 }
 
-// AFTER: Stable subscription + latest callback + init once
+// AFTER: subscription with cleanup and latest callback; reconnects on mount/URL change
 function useWebSocket(url: string, onMessage: (msg: Message) => void) {
-  const onMessageEvent = useEffectEvent(onMessage)  // always latest, stable ref
-  const wsRef = useRef<WebSocket | null>(null)
+  const onMessageEvent = useEffectEvent(onMessage)  // React 19.2+, latest callback in this Effect
+  const [ws, setWs] = useState<WebSocket | null>(null)
 
   useEffect(() => {
     const socket = new WebSocket(url)
-    wsRef.current = socket
+    setWs(socket) // state informs consumers that render from this value
 
     socket.addEventListener('message', (e) => {
       onMessageEvent(JSON.parse(e.data))  // calls latest onMessage
     })
 
     return () => socket.close()
-  }, [url])  // only reconnects when URL changes
+  }, [url])  // setup also runs on mount; development Strict Mode may repeat setup/cleanup
 
-  return wsRef.current
+  return ws
 }
 ```
 
-EventHandlerRefs (via useEffectEvent) provides a stable reference. UseLatest ensures the callback always calls the latest version. The effect dependency array is minimal, preventing unnecessary reconnections.
+useEffectEvent lets this Effect call the latest onMessage without reconnecting for callback changes. Its function identity is not a stable-reference contract. The effect dependency array is minimal, preventing unnecessary reconnections.
 
 ## Does Not Cover
 
@@ -974,3 +972,22 @@ EventHandlerRefs (via useEffectEvent) provides a stable reference. UseLatest ens
 - Vercel Engineering — React Best Practices (January 2026), MIT
 - V8 Blog — Optimizing JavaScript Execution
 - Web.dev — Avoid Layout Thrashing, Rendering Performance
+
+## Candidate verification references
+
+- https://www.w3.org/TR/cssom-view-1/
+- https://tc39.es/ecma262/multipage/keyed-collections.html
+- https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.tosorted
+- https://tc39.es/ecma262/multipage/ecmascript-language-expressions.html
+- https://react.dev/reference/react/cache
+- https://nextjs.org/docs/app/guides/authentication
+- https://react.dev/reference/rules/components-and-hooks-must-be-pure
+- https://html.spec.whatwg.org/multipage/webstorage.html
+- https://html.spec.whatwg.org/multipage/dom.html#dom-document-cookie
+- https://react.dev/learn/updating-arrays-in-state
+- https://tc39.es/ecma262/multipage/text-processing.html#sec-regexpbuiltinexec
+- https://react.dev/reference/react/useEffectEvent
+- https://react.dev/blog/2025/10/01/react-19-2
+- https://react.dev/reference/react/useEffect
+- https://react.dev/reference/react/useRef
+- https://react.dev/learn/you-might-not-need-an-effect#initializing-the-application
