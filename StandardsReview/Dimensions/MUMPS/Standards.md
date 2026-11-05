@@ -4,7 +4,7 @@
 
 ## Mental Model
 
-M code quality begins with three interlocking disciplines: portability, formatting, and naming. Portability means defaulting to ANSI-compatible behavior so code survives engine upgrades and cross-platform deployment — vendor-specific features belong in wrapper layers, not business logic. Formatting in M is not cosmetic; whitespace is syntax-significant, so inconsistent spacing or null lines can alter parse behavior. Naming completes the picture: routines and tags are public interfaces, and ambiguous names or missing headers make every caller a guessing game. Together, these three concerns define the "form" of well-written M code — the structural baseline that makes deeper concerns (scoping, data access, concurrency) reviewable and safe.
+M code quality begins with three interlocking disciplines: portability, formatting, and naming. Portability requires a declared M standard revision and supported engine/version matrix. Standards-compatible syntax alone does not guarantee compatible behavior. Isolating vendor features in wrappers is house policy. Formatting in M is not cosmetic; whitespace is syntax-significant, so changes to command separators or indentation can alter parse behavior. Naming completes the picture: routines and tags are public interfaces, and ambiguous names or missing headers make every caller a guessing game. Together, these three concerns define the "form" of well-written M code — the structural baseline that makes deeper concerns (scoping, data access, concurrency) reviewable and safe.
 
 ## Consumer Guide
 
@@ -32,18 +32,18 @@ M code quality begins with three interlocking disciplines: portability, formatti
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| PreferAnsiMCore | CRITICAL | Keep core routine logic within ANSI-compatible M behavior |
-| IsolateImplementationSpecificCode | CRITICAL | Contain vendor-specific behavior in dedicated wrapper routines |
-| EnforcePortableNameLimits | CRITICAL | Keep routine, tag, variable, and global names in portable bounds |
+| PreferAnsiMCore | LOW | Keep core routine logic within ANSI-compatible M behavior |
+| IsolateImplementationSpecificCode | LOW | Contain vendor-specific behavior in dedicated wrapper routines |
+| EnforcePortableNameLimits | CONDITIONAL | Apply the declared standard revision and engine-specific name limits |
 | AvoidNonPortableDeviceCommands | HIGH | Use wrapper APIs for device and OS interactions |
 | RespectMWhitespaceSensitivity | HIGH | Treat spacing and indentation as syntax-level concerns |
 | KeepCommandSpacingConsistent | HIGH | Keep command and argument spacing predictable and uniform |
-| AvoidNullCodeLines | MEDIUM | Ensure each code line is executable code or a comment |
-| UseConsistentCommandStyle | MEDIUM | Do not mix short and long command forms arbitrarily |
-| UseDescriptiveRoutineAndTagNames | HIGH | Choose names that describe behavior, not local shorthand |
+| AvoidNullCodeLines | LOW | Ensure each code line is executable code or a comment |
+| UseConsistentCommandStyle | LOW | Do not mix short and long command forms arbitrarily |
+| UseDescriptiveRoutineAndTagNames | LOW | Choose names that describe behavior, not local shorthand |
 | FollowTagStartRules | HIGH | Tag names must follow valid starting-character rules |
-| IncludeTagParentheses | HIGH | Use explicit tag definitions for callable interfaces |
-| MaintainRoutineAndTagHeaders | HIGH | Keep routine/tag headers current and actionable |
+| IncludeTagParentheses | LOW | Use explicit tag definitions for callable interfaces |
+| MaintainRoutineAndTagHeaders | LOW | Keep routine/tag headers current and actionable |
 
 #### Portability
 
@@ -51,9 +51,9 @@ M code quality begins with three interlocking disciplines: portability, formatti
 
 ### M1.1 Prefer ANSI M Core
 
-**Impact: CRITICAL (Portability across IRIS and GT.M depends on this baseline)**
+**Impact: LOW (House policy; assess demonstrated compatibility or caller harm separately)**
 
-Default to ANSI-compatible M behavior in released code paths. Use implementation-specific features only when required and only behind explicit wrappers.
+Declare the target standard revision and supported engine versions; default to their common ANSI-compatible behavior in released code paths. Use implementation-specific features only when required and only behind explicit wrappers.
 
 **Avoid:** writing core business logic around vendor-only commands, variables, or relaxed syntax.
 
@@ -63,32 +63,30 @@ Default to ANSI-compatible M behavior in released code paths. Use implementation
 
 ### M1.2 Isolate Implementation-Specific Code
 
-**Impact: CRITICAL (Uncontained vendor behavior breaks upgrade and cross-platform safety)**
+**Impact: LOW (House policy; assess demonstrated compatibility or caller harm separately)**
 
 Implementation-dependent behavior belongs in designated wrapper layers, not in application routines.
 
 **Avoid:**
 ```m
-set x=$zv
-if x["GT.M" zwrite ^TMP("A")
+  set x=$zv
+  if x["GT.M" zwrite ^TMP("A")
 ```
 
 **Prefer:**
 ```m
-set %=$$zPlatformAction^%ZdWrapper(args...)
+  set result=$$Action^PLATWRAP(arg)
 ```
 
-Keep call sites implementation-independent.
+Keep call sites implementation-independent. `PLATWRAP` is an illustrative project-provided wrapper, not a verified Chronicles API.
 
 ---
 
 ### M1.3 Enforce Portable Name Limits
 
-**Impact: CRITICAL (Name truncation causes collisions and wrong target resolution)**
+**Impact: CONDITIONAL (High for demonstrated collisions or rejection on a supported target)**
 
-Keep routine, tag, variable, and global names within portable limits. Some engines allow longer names but resolve by the first 31 characters.
-
-**Rule of thumb:** if two identifiers only differ after character 31, they are unsafe.
+Specify the standard revision, engine versions, identifier kind, and toolchain. YottaDB documents 31-character identifiers and describes eight characters as M portability guidance; 31 is not a universal ANSI limit. IRIS 2026.2 documents first-31-character uniqueness for locals and labels, but first-255-character uniqueness for routines. Use the smallest supported limit; do not extrapolate variable truncation to every identifier kind.
 
 ---
 
@@ -124,8 +122,8 @@ Use one spacing standard for commands and arguments in each routine.
 
 **Prefer:**
 ```m
-set x=1,y=2
-if x>0 do Tag^ROU()
+  set x=1,y=2
+  if x>0 do Tag^ROU()
 ```
 
 **Avoid:**
@@ -138,15 +136,15 @@ if  x > 0  do  Tag^ROU ( )
 
 ### M2.3 Avoid Null Code Lines
 
-**Impact: MEDIUM (Null lines create ambiguity in parser and tooling)**
+**Impact: LOW (House policy; assess demonstrated compatibility or caller harm separately)**
 
-Every line should contain executable M code or a comment. Do not leave empty executable lines in routines.
+House policy: prefer comment separator lines to blank lines for consistent tooling. A blank line alone does not demonstrate a runtime defect; check the target parser and any line-offset references. Preserve required command spacing independently of this convention.
 
 ---
 
 ### M2.4 Use Consistent Command Style
 
-**Impact: MEDIUM (Mixed long/short command forms reduce readability)**
+**Impact: LOW (House policy; assess demonstrated compatibility or caller harm separately)**
 
 Choose abbreviated or verbose command style per routine/module and use it consistently.
 
@@ -158,7 +156,7 @@ Choose abbreviated or verbose command style per routine/module and use it consis
 
 ### M3.1 Use Descriptive Routine and Tag Names
 
-**Impact: HIGH (Routines and tags are interface surfaces)**
+**Impact: LOW (House policy; assess demonstrated compatibility or caller harm separately)**
 
 Names should communicate behavior and intent, not local shorthand or temporary context.
 
@@ -172,7 +170,7 @@ Names should communicate behavior and intent, not local shorthand or temporary c
 
 **Impact: HIGH (Invalid tag forms create portability and parser failures)**
 
-Tag names must begin with a letter or `%`, or be entirely numeric where permitted by standards and conventions.
+Use ASCII letters or `%` initially, followed by letters or digits, for the portable convention. YottaDB also accepts all-digit labels; labels are distinct from routine names. Check the target dialect and project convention before allowing them.
 
 Do not create alphanumeric tags that begin with a digit.
 
@@ -180,21 +178,21 @@ Do not create alphanumeric tags that begin with a digit.
 
 ### M3.3 Include Tag Parentheses
 
-**Impact: HIGH (Explicit signatures improve call correctness)**
+**Impact: LOW (House policy; assess demonstrated compatibility or caller harm separately)**
 
-Use parentheses in tag definitions for callable interfaces, including no-argument tags, unless a documented exception applies (for example entry-point constraints).
+House policy: use parentheses for new callable tags, including no-argument tags, unless entry-point constraints require otherwise. This is not a universal syntax requirement; check callers before adding a formal parameter list to an existing tag.
 
-**Prefer:**
+**Prefer (extrinsic function, called as `$$GetData()`):**
 ```m
 GetData()
-  quit value
+  quit "example"
 ```
 
 ---
 
 ### M3.4 Maintain Routine and Tag Headers
 
-**Impact: HIGH (Without headers, ownership and change intent become unclear)**
+**Impact: LOW (House policy; assess demonstrated compatibility or caller harm separately)**
 
 Maintain routine/tag headers with purpose, module/context, and revision notes. Keep headers synchronized with current behavior.
 
@@ -208,8 +206,8 @@ Header updates are required when changing public tag behavior or parameter contr
 
 ## Sources
 
-- Epic Chronicles programmer guidelines and coding standards references
-- Epic GT.M ANSI compatibility guidance
-- Official InterSystems and YottaDB portability references
-- Epic M syntax training references
-- Epic coding standards wiki guidance for M tags and headers
+- [YottaDB names, labels, parameter passing](https://docs.yottadb.com/ProgrammersGuide/langfeat.html)
+- [YottaDB commands](https://docs.yottadb.com/ProgrammersGuide/commands.html)
+- [IRIS 2026.2 identifier rules](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=RCOS_appx_identifiers)
+
+Public language documentation does not verify proprietary Chronicles conventions; confirm those against the actual project contract.
