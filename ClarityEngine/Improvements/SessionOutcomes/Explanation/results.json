@@ -1,0 +1,21 @@
+{
+  "suite_version": "explanation-v1",
+  "workflow": "ClarityEngine/CreateDocument planning and drafting",
+  "mode": "exploratory assessment",
+  "claim": "A concrete distinction instruction improves source-grounded application answers without meaning or scope regressions",
+  "snapshots": {"baseline": "80d6099f6c7c76dd0995284f7a3ae49d72cbb7d6", "candidate": "baseline plus Step 2 intervention described in report.md", "cases": "cases.md v1", "measurement": "M1 bounded source-fact agreement", "checker": "reference.md v1"},
+  "requested_trials": 6,
+  "completed_trials": 6,
+  "runs": [
+    {"case_id":"A","role":"development","configuration":"baseline","trial":1,"execution_status":"completed","checks":[{"id":"application-and-preservation","measurement_id":"M1","status":"pass","observation":"Three application answers correct; actors and custody restriction preserved","evidence":["baseline-output.md","reader-answers.md"],"reason":"Matches explicit fixture facts"}]},
+    {"case_id":"A","role":"development","configuration":"candidate","trial":1,"execution_status":"completed","checks":[{"id":"application-and-preservation","measurement_id":"M1","status":"pass","observation":"Three application answers correct; actors and custody restriction preserved","evidence":["candidate-output.md","reader-answers.md"],"reason":"Matches explicit fixture facts"}]},
+    {"case_id":"B","role":"validation","configuration":"baseline","trial":1,"execution_status":"completed","checks":[{"id":"ordinary-explanation","measurement_id":"M1","status":"pass","observation":"Two sentences; cause and trigger correct; no invented timer","evidence":["baseline-output.md","reader-answers.md"],"reason":"Matches source and explicit format constraint"}]},
+    {"case_id":"B","role":"validation","configuration":"candidate","trial":1,"execution_status":"completed","checks":[{"id":"ordinary-explanation","measurement_id":"M1","status":"pass","observation":"Two sentences; cause and trigger correct; no invented timer","evidence":["candidate-output.md","reader-answers.md"],"reason":"Matches source and explicit format constraint"}]},
+    {"case_id":"C","role":"validation","configuration":"baseline","trial":1,"execution_status":"completed","checks":[{"id":"source-limits","measurement_id":"M1","status":"pass","observation":"Separate reviewer/location settings; known customer example unavailable","evidence":["baseline-output.md","reader-answers.md"],"reason":"Preserves explicit uncertainty"}]},
+    {"case_id":"C","role":"validation","configuration":"candidate","trial":1,"execution_status":"completed","checks":[{"id":"source-limits","measurement_id":"M1","status":"pass","observation":"Separate reviewer/location settings; known customer example unavailable","evidence":["candidate-output.md","reader-answers.md"],"reason":"Preserves explicit uncertainty"}]}
+  ],
+  "decision": {"status":"inconclusive","scope":"No comparative gain; retain baseline instructions"},
+  "counts": {"pass":6,"fail":0,"unverified":0,"attempted_runs":6,"completed_runs":6,"tokens":null},
+  "regression_coverage": "../Record.md#protected-behavior-and-coverage",
+  "limitations": ["One execution per synthetic case/version", "Planning/drafting only", "Model reader, not human study", "Shared reader sees both outputs", "No historical failure reproduction" ]
+}
