@@ -1,6 +1,6 @@
 # Standalone contract
 
-Copy this entire directory, including its tools, templates, references and data. It requires no PAI installation, hooks, global memory store, account profile, or sibling skill. Resolve local files relative to this directory, never the current working directory. In command examples, replace `<skill-dir>` or set `SKILL_DIR` to this directory's absolute path.
+Copy this entire directory, including its tools, templates, references and data. It requires no PAI installation, hooks, global memory store, account profile, or sibling skill. Resolve skill instructions and bundled resources relative to this directory. The renderer also accepts caller-supplied input paths from the working directory or absolute paths; relative output paths retain the documented Templates-relative destination. Use an absolute output path when the destination must be explicit. In command examples, replace `<skill-dir>` or set `SKILL_DIR` to this directory's absolute path.
 
 Use the current host's available search, browser, file and agent tools. Named skills elsewhere are optional suggestions: apply the stated method directly when they are absent. Vendor diversity is optional unless the user requires it; when only one vendor is available, report that limit and never invent another participant. If the host cannot dispatch agents, perform distinct passes sequentially and label that substitution. Respect host permissions and finish all dispatched work before handing over the result.
 

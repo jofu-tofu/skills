@@ -1,16 +1,18 @@
 ---
 type: documentation
 category: methodology
-description: Prompt engineering standards based on Anthropic's Claude 4.x best practices (November 2025), context engineering principles, and the Fabric system. Universal principles for semantic clarity, multi-context workflows, and agentic coding patterns. Validated by empirical research showing 10-90% performance impact from structure choices.
+description: Local prompt-writing defaults informed by historical Claude 4.x guidance, context engineering references and the Fabric system. Apply task and host contracts first, then test actual downstream results.
 ---
 
 # Prompt Engineering Standards
 
+**Authority and scope:** User requirements and the target host/model contract govern the result. Ideal-state prompting, the four keep-classes, leading-word compression and no-template guidance below are local defaults, not universal findings established by the official anchors. Preserve exact literals, examples, data authority boundaries and required sequences when the task depends on them. Claude4.x-specific sections are historical guidance for that family; select them only for an applicable target. Evaluate actual downstream outputs before claiming a prompt improvement. See [official-anchor audit](Improvements/StandardsAnchors.md).
+
 **Contents:** Core Philosophy · Ideal-State Prompting — THE Default Standard · No-Template Prompting (dynamic-output directives, 2026-08-02) · Leading Words (adopted 2026-07-16, from Pocock's writing-great-skills, MIT) · Claude 4.x Behavioral Characteristics · Key Principles · Multi-Context Window Work · Proactive vs. Conservative Action Patterns · Parallel Tool Calling · Agentic Coding Best Practices · Subagent Orchestration · Output Format Control · Research & Information Gathering · Frontend Development (Avoiding "AI Slop") · Vision Capabilities · Empirical Foundation · Markdown Structure Standards · Writing Style Guidelines · Context Management Strategies · Tool Design Principles · Context File Templates · Best Practices Checklist · Anti-Patterns to Avoid · The Fabric System (January 2024) · References · The Ultimate Prompt Template · Prompt Templating System
 
-**Foundation:** Based on Anthropic's Claude 4.x Best Practices (November 2025), context engineering principles, and the Fabric system. Validated by empirical research across 1,500+ academic papers and production systems.
+**Foundation:** Historical Claude 4.x guidance (November 2025), context engineering references and the Fabric system inform these local defaults. Cited background studies do not validate this entire standard or establish a task-independent performance gain.
 
-**Philosophy:** Universal principles of semantic clarity and structure that work regardless of model implementation, with specific optimizations for Claude 4.x behavioral patterns.
+**Philosophy:** Prefer clear, sufficient context and explicit outcomes; retain the structure needed by the actual task. Model-specific suggestions require an applicable target and empirical checks.
 
 ---
 
@@ -463,16 +465,7 @@ Avoid generic, on-distribution outputs. Make creative, distinctive frontends tha
 
 ## Empirical Foundation
 
-**Research validates that prompt structure has measurable, significant impact:**
-
-- **Performance Range:** 10-90% variation based on structure choices
-- **Few-Shot Examples:** +25% to +90% improvement (optimal: 1-3 examples)
-- **Structured Organization:** Consistent performance gains across reasoning tasks
-- **Full Component Integration:** +25% improvement on complex tasks
-- **Clear Instructions:** Reduces ambiguity and improves task completion
-- **Production Impact:** +23% conversion, +31% satisfaction (production A/B testing, 50K users)
-
-**Sources:** 1,500+ academic papers, Microsoft PromptBench, Amazon Alexa production testing, PMC clinical NLP studies.
+Prompt structure is a task-specific design choice to test. This document previously asserted aggregate percentage gains and a 1,500-paper validation base without a traceable claim-to-study mapping. Those numerical claims are not retained as evidence. The references below are background leads; they do not establish a universal optimal number of examples, a production conversion lift, or the effectiveness of this complete standard.
 
 ---
 
@@ -482,7 +475,7 @@ Avoid generic, on-distribution outputs. Make creative, distinctive frontends tha
 
 Organize prompts into distinct semantic sections using standard Markdown headers.
 
-**Essential Sections (Empirically Validated):** under § Ideal-State Prompting, `## Instructions` states what done looks like and the constraints, never a sequence of reasoning steps.
+**Suggested Sections (adapt to the task):** under § Ideal-State Prompting, `## Instructions` states what done looks like and the constraints, never a sequence of reasoning steps.
 
 ```markdown
 ## Background Information
@@ -492,7 +485,7 @@ Essential context about the domain, system, or task
 Clear, actionable directives for the agent
 
 ## Examples
-Concrete examples demonstrating expected behavior (1-3 optimal)
+Concrete examples demonstrating expected behavior when useful
 
 ## Constraints
 Boundaries, limitations, and requirements
@@ -501,12 +494,12 @@ Boundaries, limitations, and requirements
 Explicit specification of desired response structure
 ```
 
-**Research Validation:**
-- Background/Context: Required - reduces ambiguity
-- Instructions: Required - baseline performance component
-- Examples: +25-90% improvement (1-3 examples optimal, diminishing returns after 3)
-- Constraints: Improves quality, reduces hallucination
-- Output Format: Improves compliance and reduces format errors
+**Design rationale to evaluate:**
+- Background/Context: Supply what the task needs to avoid missing context
+- Instructions: Make the task and authority clear
+- Examples: Use when they clarify a requirement; test their number and whether they cause unwanted copying
+- Constraints: State actual limits; verify compliance rather than assume it
+- Output Format: Specify required structure and check actual outputs
 
 ### Section Guidelines
 
@@ -804,7 +797,7 @@ Follow the relevant host-provided context to sync the latest patterns.
 
 ## The Ultimate Prompt Template
 
-**Synthesized from:** Anthropic's Claude 4.x Best Practices, context engineering principles, 1,500+ academic papers, and production-validated patterns.
+**Background:** Historical Claude 4.x guidance, context engineering references and local practice; not an independently validated universal recipe.
 
 **Design Philosophy:** Modular sections—include only what your task requires. Every section is optimized for Claude 4.x behavioral patterns.
 

@@ -6,7 +6,7 @@ evals:
     falsifier: "the reviewer finds the prompt omits a material requirement or its output contract cannot guide the intended downstream task"
 metadata:
   short-description: "Generate, compose, or optimize reusable prompts and templates, including system prompts. Produces prompts, not final domain content."
-version: 1.1.40
+version: 1.1.41-rc.2
 description: Compose and optimize reusable prompts with local standards, templates and optional rendering tools. USE WHEN write a prompt, prompt optimization, system prompt, template generation, meta-prompting.
 ---
 
@@ -51,13 +51,17 @@ Library skill, no `Intents/` directory. Requests route to the tools and referenc
 | `Standards.md` | writing, optimizing or auditing any prompt: the ideal-state standard, the keep-classes, signal-to-noise, Anthropic and research-backed practice |
 | `References/WritingGreatSkills.md` | the prompt is a skill or intent: invocation load, information hierarchy, completion criteria, pruning |
 | `Templates/` | composing a prompt from data: Primitives (Briefing, Structure, Gate, Roster, Voice) (evals and judges are not composed here; they run through a user-selected evaluation tool, `PORTABILITY.md`), `Data/` presets, and `Templates/README.md` for the template system |
-| `Setup.md` | first-time setup: the one package the template tools need (`handlebars`) and a read-only check |
+| `Setup.md` | first-time setup and optional local dependencies declared in `package.json` (`handlebars` and `yaml`) |
 
 ## Data & Config
 
 Use request preferences or local `Customizations/PREFERENCES.md`. Save outputs to the user's requested destination. Read `PORTABILITY.md`.
 
 ## Gotchas
+
+- Template validation parses syntax before reporting success. Variable/helper metadata is a static aid, not proof that every runtime branch or data shape is valid. See [parser validation evidence](Improvements/TemplateValidation.md).
+
+- Data validation follows active built-in scopes for supplied data and reports unchecked custom helper/partial paths. See [scope and partial evidence](Improvements/ScopedDataAndPartials.md), [primitive consumer evidence](Improvements/PrimitiveRendering.md), and [current outcomes](Quality/Outcomes.md).
 
 - **`Tools/` is the only tool directory.** A byte-identical stale copy under `Templates/Tools/` was removed on 2026-10-14 (LOSIntegrity cruft sweep); edit and import `Tools/`, which `Tools/RenderTemplate.test.ts` covers.
 
