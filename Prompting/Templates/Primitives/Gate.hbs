@@ -76,6 +76,7 @@
 {{/each}}
 
 {{else}}
+{{#if gate}}
 {{!-- Single gate mode --}}
 ## {{gate.name}} Checklist
 
@@ -106,6 +107,7 @@
 {{/each}}
 {{/if}}
 
+{{/if}}
 {{/if}}
 
 {{#if categories}}
