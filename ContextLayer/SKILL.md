@@ -16,6 +16,12 @@ agents to operate with bad context and produce subtly wrong behavior.
 **Context layer = tree**, not a single file. Root AGENTS.md for global
 orientation; subdirectory AGENTS.md files for scoped domain context.
 
+## Context-file identity
+
+Resolve the filename once from the user's explicit request and the project's host convention; default to AGENTS.md for this skill. Preserve an explicitly requested existing CLAUDE.md hierarchy. If both exist and scope is unclear, resolve which hierarchy the user intends before writes. Never create a second filename family or rename existing context implicitly.
+
+Workflow/template references to CLAUDE.md are legacy examples of the selected context filename, not a separate output requirement. Substitute the selected filename consistently in discovery, prompts, generated maintenance text, references and writes. Targeted work writes only its requested scope; root/sibling context remains protected unless separately authorized.
+
 ## Workflow Routing
 
 When a workflow is matched, **read its file and follow the steps within it.**
@@ -59,7 +65,7 @@ most common need and causes no harm if the content was already correct.
 - **Prune** → content-only pass (no filesystem reads) → remove low-signal lines
 - **Drift** → commit-delta + tree-sig fingerprint → diagnostic report, no file changes
 - **Budget:** Root 800–1500 tokens | Subdir 200–500 tokens
-- **Auto-apply:** All workflows write changes directly — reversible via git
+- **Writes:** Generate, Audit and Prune apply their authorized changes directly. Drift is diagnostic and does not modify context files.
 - **Protected:** `## Context Maintenance` sections are never removed by Prune (see Prune Step 2.5)
 - **Scope:** All workflows support targeted mode — specify a directory to operate on just that subtree
 - **Dependency map:** Generate (targeted) maps imports + consumers → adds ## Dependencies section

@@ -76,7 +76,7 @@ This prevents unbounded agent spawning on large projects (e.g., a project with 3
 | Full dependency lists | Too large, too volatile |
 | Version numbers (except Node/Python/Rust runtime) | Change frequently, high rot risk |
 | Content duplicated in README | Agent can read README on demand |
-| "See also" references | Agent won't follow them |
+| Unnecessary references | Do not add reference clutter; preserve explicit delegation when another document owns needed instructions |
 | Prose paragraphs | Tables and bullets only |
 
 ---

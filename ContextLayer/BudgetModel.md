@@ -25,7 +25,7 @@ Every CLAUDE.md entry must pass ALL of these tests to survive:
 | **Falsifiability** | If removed, would agent behavior degrade? | Remove it |
 | **Prediction** | Would an agent infer this from the code alone? | Remove it — the code is the source of truth |
 | **One New Fact** | Does this duplicate information from another bullet? | Keep the more specific version, delete the other |
-| **State Once** | Does this appear in both root and subdirectory CLAUDE.md? | Keep it in the more specific (subdirectory) file only |
+| **State Once** | Does this appear in both root and subdirectory CLAUDE.md? | Keep global rules at root and local rules local; remove a duplicate only when all intended consumers still receive the rule |
 | **Project-Specificity** | Is this true of most projects, or just this one? | If true of most → remove. Only project-specific content survives |
 
 ### Entry Format Constraints
@@ -46,7 +46,7 @@ Every CLAUDE.md entry must pass ALL of these tests to survive:
 | General best practices | "Use meaningful variable names" | Agent already knows this |
 | Hedging | "Consider using...", "It's recommended to..." | State the convention or don't. No hedging. |
 | Version numbers (non-runtime) | "React 18.2.0" | High rot risk. Agent reads package.json. |
-| "See also" references | "See: docs/architecture.md" | Agent won't follow them |
+| Unnecessary references | "See: docs/architecture.md" | Remove only when unnecessary; preserve intentional delegation of required instructions |
 | Redundant with README | Getting started steps already in README | Agent can read README on demand |
 | Unfalsifiable claims | "Good error handling is important" | True of every project. Zero information. |
 
@@ -98,7 +98,7 @@ CLAUDE.md budget is ~800–2,000 tokens out of ~200K context window. Each unnece
 ## Budget Red Flags
 
 If your generated CLAUDE.md is approaching 2000 tokens for root or 600 for subdir:
-- Remove all "See also" references (they don't work anyway)
+- Preserve references that delegate required instructions; remove only unnecessary references
 - Remove any prose paragraphs — convert to bullet lists
 - Remove anything the agent could infer from the file tree alone
 - Remove general best practices that any competent developer would apply

@@ -88,7 +88,7 @@ If nothing gathered: set `SUPPLEMENTARY_CONTEXT` to empty and proceed.
 
 ### Step 1 — Find Project Root and Build Tree Map
 
-1. Find the project root: look for `.git` directory walking up from the current directory
+ 1. Find the project root from the explicit task path or Git root; `.git` may be a directory or a worktree pointer file. If no Git root exists, use the supplied project directory and report history-based fields unavailable.
 2. Walk the directory tree (skip: `node_modules`, `.git`, `dist`, `build`, `.next`, `__pycache__`, `.cache`, `coverage`)
    - **Targeted mode:** walk only SCOPE_PATH, not the full project tree
 3. List all existing `CLAUDE.md` files in the tree — note their paths
@@ -149,11 +149,10 @@ DEPENDENCY CONTEXT for [SCOPE_PATH]:
 Additionally, this subsystem has the following cross-boundary dependencies:
 [paste DEPENDENCY CONTEXT block]
 
-If internal deps or consumers exist, include a ## Dependencies section in your output:
-  - Depends on: [dir — reason, e.g., "src/db — User model for auth queries"]
-  - Consumed by: [dir — reason, e.g., "src/api/routes — used as auth middleware"]
-Only include entries that would cause an agent to fail without knowing them.
+Use these verified relationships when choosing facts. Return only the normal Generate JSON schema; do not append Markdown or add undocumented fields.
 ```
+
+The orchestrator owns this dependency map separately from the agent JSON. In Step 4, use it to write the target's Dependencies section with verified Depends on/Consumed by paths and reasons. Keep unknown consumers explicit; do not turn a failed search into proof of no consumers. Include relationships needed for safe changes, without copying obvious import inventories. This avoids requiring a Markdown section from a JSON-only producer or misusing root-only cross_refs.
 
 ---
 
