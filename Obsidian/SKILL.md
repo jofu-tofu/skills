@@ -109,3 +109,7 @@ TRUST:       T0 raw | T1 research | T2 source-backed | T3 working | T4 decision 
 STATUS:      active | draft | accepted | final | superseded | archived
 PRIORITY:    Decisions and final artifacts first; research and recaps only with provenance or uncertainty
 ```
+
+## Outcome and improvement records
+
+For evaluation or improvement, read [granular outcomes and current coverage](Quality/Outcomes.md). These records preserve open coverage and bounded evidence; they are not required context for every ordinary task or a claim of whole-skill readiness.
