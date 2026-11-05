@@ -34,10 +34,10 @@ A mutation testing tool automatically generates "mutants" — versions of your c
 | Void method call removal | `cache.clear()` removed | Side effect verification |
 
 For each mutant:
-- **Killed:** At least one test failed → tests detected the bug ✅
-- **Survived:** All tests passed → tests missed this bug ❌
+- **Detected behavioral fault:** a meaningful assertion fails on a non-equivalent change after a verified passing baseline. Keep tool-specific killed status separately; compile/harness failures and unexplained timeouts do not establish this.
+- **Survived:** tests pass; determine whether the change is a consequential fault, equivalent behavior, or outside the supported contract before calling it a gap.
 
-**Mutation Score = Killed Mutants / Total Mutants × 100%**
+**Behavioral mutation score = detected non-equivalent behavioral faults / evaluable non-equivalent mutants × 100%.** State the tool's actual denominator separately.
 
 ---
 
@@ -52,12 +52,7 @@ Low mutation score → No, and your coverage report is lying to you.
 
 ## Interpreting Scores
 
-| Score | Assessment | Action |
-|-------|-----------|--------|
-| > 80% | Strong | Maintain; focus effort elsewhere |
-| 60-80% | Adequate | Target boundary conditions and return values |
-| 40-60% | Weak | Tests run code but don't verify it |
-| < 40% | Coverage theater | Major gaps; treat as untested |
+Scores depend on mutation scope and classification; there are no universal strong/adequate cutoffs. Prioritize consequential surviving faults, qualify valid alternatives, and report excluded or unresolved records.
 
 ---
 
@@ -73,7 +68,7 @@ return x * 1
 return x + 0  // semantically identical — surviving is correct
 ```
 
-Expect ~5-10% of mutants to be equivalent. A 100% kill rate is impossible and suspicious.
+Prove equivalence for the actual supported domain rather than assuming a fixed equivalent rate. A fully killed finite set is possible and establishes only that set.
 
 ---
 
@@ -109,7 +104,7 @@ Mutation testing and code coverage are complementary:
 | Coverage | Lines executed | Whether assertions verified anything |
 | Mutation score | Assertion effectiveness | Whether covered scenarios are representative |
 
-Aim for: **≥ 80% coverage AND ≥ 70% mutation score** on business-critical code.
+Choose project-specific gates from consequential behavior and demonstrated fault detection; percentages alone do not establish readiness. Use disposable copies or reliably restore source, preserving raw outcomes and final baseline checks.
 
 ---
 

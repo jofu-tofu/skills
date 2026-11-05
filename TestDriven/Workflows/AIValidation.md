@@ -61,7 +61,7 @@ function test_get_users():
 
 **Quick Assessment:**
 - Do tests mock internal classes? → Weak
-- Do tests assert on method calls? → Weak
+- Do tests bind to incidental internal method calls? → Weak; assertions on explicitly contractual external calls/events can be valid behavior checks.
 - Do tests assert on observable outcomes? → Strong
 
 #### Step 2: Add Characterization Tests If Needed

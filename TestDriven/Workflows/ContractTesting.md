@@ -49,7 +49,7 @@ What are you testing?
 
 ## Consumer Workflow (You call someone else's service)
 
-**Goal:** Prove your code makes calls that the provider will accept.
+**Goal:** Verify consumer calls against its declared contract. Provider acceptance remains unverified until the relevant provider implementation/version is checked.
 
 ```pseudocode
 // Step 1: Define what you expect from the provider
@@ -113,7 +113,7 @@ assert results.all_passed
 
 ## Bidirectional Workflow
 
-When you own both services, both sides generate contracts independently and a broker checks compatibility — no live service needed.
+When both sides publish independently verified interface descriptions, compare those descriptions for compatibility. This can avoid simultaneous live services, but compatible declarations alone do not prove either implementation conforms. Preserve version and provider-state provenance; report missing provider verification. Broker publication is an external write and requires authorization.
 
 ---
 

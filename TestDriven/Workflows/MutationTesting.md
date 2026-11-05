@@ -34,10 +34,10 @@ See: `Rules/MutationTesting.md` for the full principle.
 3. Run tests against each mutant
 4. KILLED: tests failed → good, tests detected the bug
 5. SURVIVED: tests passed → bad, tests missed this bug
-6. Mutation Score = Killed / Total mutants
+6. Report the tool denominator and a separately justified behavioral score
 ```
 
-A high mutation score means your tests are actually checking behavior. A low score means your tests run code but don't verify it.
+A score describes the selected mutants, not overall readiness. Verify a passing baseline first; separate assertion-detected faults from invalid mutants, harness failures, unclassified timeouts and proven equivalents. Preserve raw statuses and restore source after each controlled mutation.
 
 ---
 
@@ -81,10 +81,7 @@ mutmut results
 dotnet stryker
 ```
 
-**Interpret results:**
-- **> 80% mutation score:** Strong test suite
-- **60-80%:** Adequate — improve boundary condition tests
-- **< 60%:** Tests are not validating behavior — likely coverage theater
+**Interpret results:** classify each outcome before computing a score. A timeout needs investigation; compilation or harness failure is not proof an assertion detected a behavioral fault. Prioritize consequential survivors and report unavailable baseline/equivalence evidence.
 
 ---
 
@@ -146,8 +143,8 @@ stryker:
 |-----------|------------|
 | Slow on large codebases | Run on changed files only, or sample-based |
 | Doesn't test integration behavior | Combine with integration tests |
-| Equivalent mutants (logically same) | Accept ~5% equivalent mutant rate as normal |
-| Cannot test non-deterministic code | Use property-based testing instead |
+| Equivalent mutants (logically same) | Justify equivalence within the actual supported domain; do not assume a fixed rate |
+| Uncontrolled nondeterminism can obscure results | Control available seams and report residual uncertainty; property tests also need an oracle |
 
 ---
 

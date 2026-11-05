@@ -37,7 +37,7 @@ What are you verifying?
 │   → STOP HERE → Invoke the Evals PAI skill
 │
 ├─ Behavioral consistency across runs
-│   → Statistical testing with pass@k metric
+│   → Repeated trials with a metric matching the question
 │   → STOP HERE → Invoke the Evals PAI skill
 │
 ├─ Regression (did this output get worse?)
@@ -78,7 +78,7 @@ function test_report_has_required_sections():
     assert "Expected behavior:" in response
 ```
 
-These tests are deterministic, fast, and reliable. Apply FIRST (→ `Rules/FIRST.md`) — they satisfy all 5 properties.
+The assertions are deterministic; live model responses are not. Unit-test parsing and validation with fixed responses, and record live structural checks as integration/evaluation trials with latency, cost and variation. Schema success does not establish grounded correctness.
 
 ---
 
@@ -103,8 +103,10 @@ For semantic correctness, consistency, and regression testing, invoke the **Eval
 - **Code-based graders** — for structured, deterministic checks
 - **Model-based graders** — for semantic correctness using an LLM as judge
 - **Human graders** — for subjective quality evaluation
-- **pass@k metrics** — for non-deterministic outputs (run N times, pass if K succeed)
+- **Repeated-trial metrics** — report per-attempt success; pass@k measures at least one success among k attempts, not consistency. For n recorded attempts with c successes, the without-replacement estimate is 1 - C(n-c,k)/C(n,k). All-k success is C(c,k)/C(n,k) under that sampling scheme. Name sampling assumptions and retain per-input outcomes.
 - **Transcript capture** — for debugging and regression baselines
+
+If Evals is unavailable, report the missing dependency. Execute justified local checks when possible, but do not claim the delegated evaluation completed. Use grounded code checks when correctness is mechanically decidable; model grading is not mandatory merely because text came from a model.
 
 **How to invoke:** Say "run evals" or "evaluate this" to invoke the Evals skill. Provide your test inputs, expected behaviors, and which grader type to use.
 
@@ -141,7 +143,7 @@ The Evals skill handles this with its transcript capture and comparison features
 | Mistake | Problem | Fix |
 |---------|---------|-----|
 | Exact string matching | Fails on paraphrase, model updates | Use semantic grading or structural assertions only |
-| Testing on single run | LLMs are non-deterministic | Use pass@k (run N times, pass if K succeed) |
+| Testing on single run | LLMs are non-deterministic | Choose per-attempt, any-k or all-k success to match the question; retain failures and sampling assumptions |
 | No grounding data | Can't tell if output is correct | Build golden dataset of known-good examples |
 | Testing LLM, not your code | LLM works, your integration breaks | Separate LLM behavior from your code's logic |
 
