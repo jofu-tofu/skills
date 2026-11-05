@@ -1,5 +1,9 @@
 # Validation scope
 
+Current draft rc.9: [comprehensive-improvement record](../Improvements/ComprehensiveImprovement/Record.md). Completion checks improve from 29/34 to 34/34. Both full-method comparisons tie: 9/9 independent outputs per version on each task, including actual further repair rounds. Focused, assessment, maintenance, corrected design-only and corrected adequate-target controls preserve scope. Eleven model trials retain fixture/runner qualification corrections and all original evidence. Retained for bounded completion protections; general behavioral superiority remains unverified. Comprehensive downstream application is in progress. The earlier sampled remaining-skills pass does not establish comprehensive closure.
+
+## Prior rc.8 evidence
+
 Current candidate: 2.1.0-rc.8. The [completion-gate record](../Improvements/CompletionGate/Record.md) documents conditional research planning, effect-based routing and separate complete/continue/blocked task decisions. All 24 checker tests and both historical closure replays pass. Full baseline/candidate self-improvement runs completed after preserved timeout interruptions; the candidate invoked and consumed the gate. Separate typo/design controls pass. No comparative superiority or population reliability is established. Version metadata and these release notes were added after behavioral testing; operational instructions and checker code are unchanged from the tested candidate.
 
 ## Prior rc.7 evidence
