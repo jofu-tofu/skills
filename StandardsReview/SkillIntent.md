@@ -6,16 +6,16 @@ Multi-agent language-specific standards review that is trustworthy, proportional
 
 This skill solves the problem with three core mechanisms:
 1. **Language isolation** — each agent reviews one dimension from one language, preventing cross-contamination
-2. **Claim verification** — every issue is git-blame confirmed to have been introduced in the changed commits
+2. **Claim verification** — diff findings are supported by causal change evidence; audits use current source. Blame is supporting provenance, not a mandatory changed-line filter
 3. **Inlined rules** — 283 rules across 8 languages, directly in dimension files so agents always have the full rule text
 
 ## Design Philosophy
 
 ### The Process Boundary Principle
 
-Text-based enforcement does not work on LLMs. Imperative language ("you MUST follow this pipeline"), artifact checks, and mandatory notification steps all failed in practice — the LLM read the enforcement text in the same session and rationalized bypassing it. The fundamental insight: **if the orchestrator can read a workflow file, it can decide not to follow it.**
+Prior experience reported bypass of imperative instructions in a single shared context. This motivates separate stage contexts and observable artifacts; it does not establish that text never works or that process boundaries guarantee compliance.
 
-The solution is architectural, not textual: separate LLM sessions. The orchestrator (Review.md) spawns agents and checks artifacts. It never reads workflow internals. Each pipeline step runs as a separate agent invocation with its own context window. The orchestrator can't skip what it never sees.
+The orchestrator spawns separate agents and checks shared interfaces without interpreting workflow internals. Each stage owns its substantive work. Verify actual dispatch, outputs and coverage; unavailable agents or failed stages remain explicit. [ReviewContract](Standards/ReviewContract.md) owns the common handoff schema and status rules.
 
 ### The Thin Orchestrator Pattern
 
@@ -28,11 +28,11 @@ Everything else happens inside agents. The orchestrator has no opinion about how
 
 ### Language Isolation
 
-Each language's rules live in their own `Dimensions/[Language]/` subdirectory. No cross-language contamination. A TypeScript review agent receives ONLY TypeScript dimension files. This prevents the LLM from getting confused by rules from other languages and ensures focused, accurate reviews.
+Each language's rules live in `Dimensions/[Language]/`. A reviewer receives one dimension plus shared review context/contract. Mixed-language files can be assigned to several appropriate reviewers. This focuses responsibility; it does not guarantee correct findings or eliminate overlap.
 
 ### Self-Contained Dimensions
 
-Each dimension file has everything the review agent needs: inlined rules with IDs, detection heuristics, severity calibration, code examples, and output format. No indirection to INDEX.md or external files. The agent reads ONE file and knows exactly what rules to check. Rules use `### ID RuleName` format for machine-parseable rule identification.
+Each dimension inlines its rule IDs, detection guidance and examples without an INDEX lookup. The shared ReviewContract owns artifact, applicability and coverage semantics; actual source and project context determine whether a rule applies. Rule examples and nominal impact labels are not proof of a defect. Rules use `### ID RuleName` format for machine-parseable identity.
 
 ### Judgment Over Triggers
 
@@ -44,29 +44,29 @@ Agents are expensive. Giving each agent the full codebase context + full diff + 
 
 ### Git Blame Verification
 
-The most important credibility mechanism. An AI review that flags pre-existing issues — that the team already knows about and has decided to live with — immediately loses credibility. Every finding is verified against the commit range before it reaches the user.
+A diff review must distinguish change-caused issues from unrelated pre-existing ones. Inspect patches and endpoint state: an unchanged line can fail because a guard or caller changed. Audits deliberately cover existing code and need no introducing commit. This distinction matters more than the age of a cited line.
 
 ### Credibility Through Evidence of Work
 
-The absence of issues is signal, not silence. The report includes a "What Looks Good" section that names what each agent reviewed and found clean. This proves agents actually looked, not just that they didn't flag anything.
+The report names actual files/rules examined and scoped no-finding results. This makes coverage inspectable but prose alone does not prove execution. Missing, omitted and failed reviewers remain distinct from clean work.
 
 ## Success Criteria
 
 1. Every flagged issue traces to a specific rule ID from the dimension files
-2. Every flagged issue exists in lines introduced by the commit range being reviewed
+2. Diff findings have actual change-causation evidence; audit findings have current-source evidence; uncertainty and unrelated pre-existing issues stay distinct
 3. Agent count and dimension selection are proportional to the size and nature of the changes
-4. The full review runs in a single session without context overflow
+4. Scoped stages support a manageable review session, with real capacity limits reported rather than hidden coverage loss
 5. Language isolation is maintained — no cross-language rule contamination
 6. The report includes rule IDs so users can trace findings back to specific standards
 
 ## Explicit Out-of-Scope
 
-- **Cross-cutting review concerns** — Architecture, logic errors, complexity reduction belong in CodeReview, not here
+- **Unbounded cross-cutting review** — General architecture redesign and unrelated logic review belong in CodeReview. Concrete type, framework, resource, encapsulation and performance consequences of a named dimension remain in scope, including its architecture rules. Do not exclude a language-specific defect merely because it also affects correctness.
 - **Creating a separate Rules/ directory** — All rules are inlined in dimension files
 - **Merging language content** — Each language's rules stay isolated in their own dimension directory
 - **Integration with CodeReview** — These skills are deliberately decoupled
 - **Style nitpicks** — Only surface if they violate a specific rule; no subjective preferences
-- **Linter-catchable issues** — Assume linters run in CI; focus on deeper standards
+- **Routine linter duplication** — Use actual CI/linter context; do not assume an unspecified checker runs. A pure formatting/naming preference is at most a policy note when explicitly requested/relevant, never invented correctness harm. Prioritize consequential standards findings.
 
 ## Evolution Notes
 

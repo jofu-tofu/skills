@@ -4,12 +4,12 @@ description: "Language-specific coding standards review. Reviews code against 28
 compatibility: Designed for Codex and Devin (or similar agent products)
 metadata:
   author: pai
-  version: "1.0.0"
+  version: "1.0.1-rc.6"
 ---
 
 # StandardsReview
 
-Multi-agent language-specific standards review with **process-boundary enforcement**. **283 rules across 8 languages.** Operates in two modes: **diff mode** (review changes against a commit range) and **audit mode** (evaluate existing code in a directory/module). Achieves depth through parallelism — agents review different language dimensions simultaneously while a slim context layer prevents token waste. Diff mode verifies claims against changed commits; audit mode verifies claims against actual file contents.
+Multi-agent language-specific standards review with separate stage contexts. **283 distinct rule IDs across 8 languages**; some rules are intentionally inlined in more than one dimension. Diff mode reviews change-caused issues in an exact range; audit mode reviews current code in a target directory/module. Parallel reviewers use scoped context, and the final report distinguishes actual coverage from omitted or failed work. Shared interfaces are owned by [ReviewContract](Standards/ReviewContract.md).
 
 Complementary to CodeReview (cross-cutting concerns like architecture, logic errors, complexity). This skill reviews language-specific correctness: type safety, naming conventions, framework patterns, performance idioms.
 
@@ -18,11 +18,11 @@ Complementary to CodeReview (cross-cutting concerns like architecture, logic err
 These criteria orient every workflow decision:
 
 1. **Language-specific** — Every finding traces to a specific rule ID from the dimension files
-2. **Single-session** — Entire review fits in one context window, achieved via agents + context compression
-3. **Credible** — Every flagged issue traces to an actual changed line in the specified commit range; no false positives from pre-existing code
+2. **Manageable context** — Separate stages and scoped artifacts support one review session; real resource limits remain explicit rather than promising every review fits one context window
+3. **Credible** — Diff findings have change-causation evidence, including deleted guards affecting unchanged lines; audit findings have current-source evidence. Unrelated pre-existing issues are separate
 4. **Believable output** — Report is clear and concise enough that the user reads every word, not skims. No wall-of-text syndrome.
 5. **Proportional** — Agent count and dimension selection scale with the size and nature of the changes
-6. **Verified claims** — Issues discovered are cross-checked against the correct diff before reporting
+6. **Verified claims** — Findings and coverage are checked against the exact diff or audit source before reporting
 
 ## Orchestrator Architecture (MANDATORY)
 
@@ -35,11 +35,11 @@ These criteria orient every workflow decision:
 - Checks that artifacts exist between steps (e.g., `context.md` exists after GatherContext)
 - Reads `dimensions.json` to know which review agents to spawn
 
-Each pipeline step runs as a **separate agent invocation** (separate LLM session), creating real process boundaries that prevent bypass.
+Each pipeline step runs as a **separate agent invocation**, creating observable context boundaries. These support separation but do not guarantee compliance or statistical independence. If separate agents are unavailable, report that limit rather than claim the pipeline ran.
 
 ### Why Process Boundaries Matter
 
-Previous architecture had all workflow files read in a single LLM session. The LLM would read the enforcement text and bypass it — rationalizing that the full pipeline was "overkill" and doing an ad-hoc review instead. Process boundaries solve this: the orchestrator can't skip what it never reads.
+Earlier experience motivated separate stages after single-session instructions were bypassed. Keep that design intent, while checking actual dispatch and artifacts: boundaries reduce shared context but cannot by themselves prove that required work occurred.
 
 ### Pipeline Steps
 
@@ -47,7 +47,7 @@ Previous architecture had all workflow files read in a single LLM session. The L
 |------|-------|-------|--------|---------------|
 | 1 | Setup | User request | `$REVIEW_DIR` created | Directory exists |
 | 2 | GatherContext | Commit range or target path | `context.md` | File exists, non-empty |
-| 3 | SelectDimensions | `context.md` + `Dimensions/` | `dimensions.json` | Valid JSON with dimension array |
+| 3 | SelectDimensions | `context.md` + `Dimensions/` | `dimensions.json` | Valid object containing dimensions array per ReviewContract |
 | 4 | Review Agents (parallel) | Dimension file + `context.md` + file list | `dimension-[id].md` per agent | All agent output files exist |
 | 5 | VerifyAndReport | Agent output file paths + `context.md` | `verified-findings.md` + `report.md` | File exists, output to user |
 
@@ -88,7 +88,7 @@ Running the **Review** workflow from the **StandardsReview** skill...
 
 38 review dimensions organized by language. Each dimension file is self-contained with inlined rules, detection heuristics, severity calibration, and examples.
 
-**Baseline dimensions** per language are always included unless the review has <10 changed lines. Non-baseline dimensions are selected by the SelectDimensions agent based on context.
+SelectDimensions owns the baseline list and applicability decisions. Audits do not use changed-line thresholds. Caps bound concurrent agents, not coverage: queue relevant dimensions and report any explicit limit or omission.
 
 > **Architecture note:** All rule content is inlined directly in dimension files. There is no separate Rules/ directory. Each rule uses `### ID RuleName` format.
 
@@ -133,7 +133,7 @@ The skill uses a **layered compression strategy**:
 - Agent outputs -> Per-dimension files (each agent writes its own, returns path only)
 - Per-dimension files -> VerifyAndReport (claim-check against commit range, synthesize, generate report in single pass)
 
-Agent count scales with **review target size and complexity**:
+Concurrent agent count scales with **review target size and complexity**, bounded by actual host capacity; remaining selected work is queued:
 
 | Tier | Diff Lines | Audit Files | Agent Cap |
 |------|-----------|-------------|-----------|

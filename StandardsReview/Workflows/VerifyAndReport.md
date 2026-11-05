@@ -2,11 +2,14 @@
 
 > Internal workflow — invoked by Review.md, not user-facing.
 
+Read [ReviewContract](../Standards/ReviewContract.md), which owns claim, coverage and publication semantics. Preserve source-grounded valid alternatives and project/version applicability.
+
 ## Input / Output
 
 **Input:**
 - Per-dimension agent output files: `$REVIEW_DIR/dimension-[id].md` (paths from orchestrator)
 - `$REVIEW_DIR/context.md` (review context, includes review mode)
+- Selection manifest and missing/failed dimension IDs from the orchestrator
 
 **Output:**
 - `$REVIEW_DIR/verified-findings.md` — all findings with verification status
@@ -15,7 +18,7 @@
 
 ## Purpose
 
-Three jobs in one pass: **verify** findings trace to actual changed lines and aren't false positives, **synthesize** (deduplicate, resolve conflicts), and **generate** the final report. Combining these eliminates a redundant agent handoff — the verifying agent already has the full context needed to write the report.
+Three jobs: **verify** source-supported findings and, in diff mode, change causation; **synthesize** distinct causes/conflicts; **report** actual results and coverage. Combining these avoids a redundant handoff, not missing evidence.
 
 ---
 
@@ -27,13 +30,13 @@ Check context.md `Mode:` field to determine verification method.
 
 ### Diff Mode Verification
 
-Use `git blame` to confirm each finding's line was introduced by a commit in the review range. Also check for self-correction (a later commit in the range fixed the same line).
+Inspect the exact range, before/after source, patches and endpoint state. Blame is supporting provenance, not the sole gate: a deleted guard or changed caller/configuration can introduce failure at an unchanged line. Identify responsible change and affected location. Check whether the problem remains at the reviewed endpoint, including self-correction.
 
 | Condition | Result | Action |
 |---|---|---|
-| Commit in range AND genuine problem | VERIFIED | Keep |
-| Commit in range BUT intentional/idiomatic/not actually problematic | FALSE POSITIVE | Discard |
-| Commit NOT in range | PRE-EXISTING | Move to appendix |
+| Genuine problem caused by reviewed changes, including unchanged failure sites | VERIFIED | Keep with causal evidence |
+| Intentional/valid idiom, project exception, or no applicable problem | FALSE POSITIVE | Discard with reason |
+| Genuine issue predates the range and is unrelated to its changes | PRE-EXISTING | Appendix, outside new-finding count |
 | Later commit in range fixed the line | SELF-CORRECTED | Discard |
 | Cannot determine (binary, generated, blame unavailable) | UNVERIFIED | Keep, mark "manual review recommended" |
 
@@ -47,6 +50,7 @@ No commit range. Verify the cited code actually exists at the cited location.
 | File + lines exist BUT intentional/idiomatic/not actually problematic | FALSE POSITIVE | Discard |
 | File exists BUT lines don't match description | MISLOCATED | Mark "Location uncertain" |
 | File does not exist | INVALID | Discard |
+| Source cannot be read or applicability cannot be established | UNVERIFIED | Precise missing evidence; no clean claim |
 
 ### Write Verified Findings
 
@@ -61,9 +65,9 @@ Verification: [N]/[total] findings confirmed
 
 ## Synthesize
 
-- **Deduplicate:** Same file + overlapping lines (within 5 lines) + same rule category = merge. Keep higher severity, keep most specific rule ID, combine recommendations, note multi-agent agreement.
+- **Deduplicate:** Merge only the same cause and remedy. Nearby lines/shared categories prompt inspection, not automatic merging. Keep independently fixable failures distinct. Reassess severity by consequence rather than taking the highest label blindly; retain relevant rule IDs and conflicting evidence.
 - **Architectural map:** Group files by module. Summarize which modules have findings vs. clean.
-- **Clean areas:** Record what each language dimension reviewed and found clean — this becomes the "What Looks Good" section.
+- **Clean areas:** Report only actual completed files/rules with no supported finding. Reconcile completed, partial, failed and omitted coverage against selection. Missing/empty outputs are not clean. Incomplete reviews may contain useful verified findings.
 
 ---
 
@@ -111,10 +115,11 @@ Write to `$REVIEW_DIR/report.md`. Lead with verdict, order by severity, every fi
 **Verified:** Confirmed in review range
 ```
 
-Rule ID is ALWAYS included — this is what makes StandardsReview findings traceable to specific standards. Findings flagged by multiple agents: note `**Confidence:** Flagged by N agents independently`.
+Always include rule ID and source evidence. Multiple agents may corroborate findings; shared rules/context do not establish independent probability or guarantee correctness. Audit cards use current-source verification and omit introducing-commit claims; unverified cards cannot reuse a verified label.
 
 ### Additional Sections
 
 - **What Looks Good** — per-language dimensions that reviewed and found clean (e.g., "TypeScript type safety rules all pass (4 files, 5 rules checked)")
 - **Pre-existing Issues** _(diff mode, if any)_ — issues predating the change, listed for awareness. Include RULE_ID.
-- If user requested `--comment` or "post to PR": run `gh pr comment [number] --body-file [report-path]`
+- **Coverage and limitations** — selected/completed/partial/failed/omitted dimensions, actual files/rules checked and unavailable evidence. No findings is not a whole-codebase safety claim.
+- Publication is separate: only for an explicit request and resolved repository/PR destination, send the final reviewed report using the available authorized tool (gh uses `--repo` and `--body-file`). Check actual success and retain the report on failure. Missing tool/authentication/target means not published; a proposed command is not a successful delivery.
