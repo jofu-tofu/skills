@@ -1,9 +1,10 @@
 # Tool status and invocation
 
-Retained from the installed SkillForge on 2026-11-03, with the scoped repairs recorded in [validation evidence](../Evidence/ValidationSummary.md). Source hashes are recorded in Improvements/ReconcileLegacy/ImportedFiles.json. Tools are optional implementation support, not quality evidence by themselves.
+Retained from the installed SkillForge on 2026-11-03, with the scoped repairs recorded in [validation evidence](../Evidence/ValidationSummary.md). Source hashes are recorded in Improvements/ReconcileLegacy/ImportedFiles.json. Most tools are optional implementation support, not quality evidence by themselves. Behavioral updates invoke CheckCompletion when Node or Bun is available; ApproveSkill defines the labeled manual fallback.
 
 | Tool | Use | Status |
 |---|---|---|
+| CheckCompletion.cjs | Contract identity, evidence integrity and complete/continue/blocked task status | Node/Bun; behavioral updates invoke it through ApproveSkill. It does not judge semantic relevance or intercept final answers. |
 | ValidateSkill.ts and lib/ | Structural checks | Smoke-tested on this draft; enforces legacy naming/format assumptions. |
 | ExploreSkill.ts | Full read-only snapshot | Imported; runtime behavior not qualified here. Avoid loading every file by default. |
 | scripts/aggregate_benchmark.py | Aggregate compatible grading files | Metric units/missingness/counts: 43 bounded CLI/report checks pass; see [contract](BenchmarkFormat.md). |

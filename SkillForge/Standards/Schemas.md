@@ -440,6 +440,8 @@ Each check also links its measurement specification/version, qualification statu
 
 ## Canonical results.json
 
+Assessment `decision` and task completion are separate. Behavioral-update records also link the [completion contract and checker result](../Templates/Improvement/Completion.md); `task_status` follows [ApproveSkill](../Procedures/ApproveSkill.md#task-completion). An inconclusive assessment or retained candidate does not automatically complete the task. Assessment-only and explicit design-only completion follow their requested scope.
+
 For behavioral changes and workflow-level readiness, link the governing plan's `regression_coverage` record (an inline mapping or artifact reference) from evaluation-plan.json and results.json. The record maps requirements and branches/dependencies to case/evidence IDs, roles and required/not-applicable/untested dispositions with reasons. Report targeted benefit and preservation conclusions separately, including coverage gaps. This is additive metadata, not a new verdict system; lightweight and design-only paths retain their existing limits. [RegressionCoverage](RegressionCoverage.md) defines the scope rule; PlanChange owns it.
 
 This section is the authoritative result contract for this proposed package. It replaces references to the absent TestSkill workflow. [Grader](Grader.md) supplies verdict rules; [ApproveSkill](../Procedures/ApproveSkill.md) makes readiness/retention decisions from this evidence.

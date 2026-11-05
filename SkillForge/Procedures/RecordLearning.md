@@ -11,7 +11,7 @@ Internal procedure; called by workflows, not automatically loaded at entry.
 ## Steps
 
 1. Preserve raw evidence and links to exact versions.
-2. Record observations separately from interpretations and decisions.
+2. Record observations separately from interpretations and decisions. Preserve the owning workflow's task status, unresolved required outcomes and next action separately from candidate retention; recording a `continue` decision does not close the task.
 3. Index every recorded attempt, including failed, inconclusive and unexecuted attempts. Use the evaluation workspace's index for assessment-only work; otherwise use the target's attempt index. Update the retained-version pointer only when a retention decision exists.
 4. Update reusable criteria only with supported reasons; preserve prior versions.
    Retain measurement specifications, qualification evidence and scope, rejected alternatives, and the next discriminating experiment. Changed measurement versions require an explicit comparison or rerun; do not silently compare unlike scores.

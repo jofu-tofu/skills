@@ -1,5 +1,9 @@
 # SkillForge 2.1.0 release candidate
 
+Current version: 2.1.0-rc.8. Adds a conditional research decision before selecting improvements and separates candidate retention from task completion. Behavioral updates use a frozen outcome contract and the executable completion gate; unresolved feasible work returns to the workflow. The [completion-gate record](Improvements/CompletionGate/Record.md) preserves 24 passing CLI tests, two historical false-closure replays, the completed live caller check and narrow-scope controls. Interrupted runs and ties remain explicit; this is bounded evidence, not universal reliability. The user authorized local merge and installed update on 2026-11-04.
+
+## Prior rc.7 scope
+
 Version: 2.1.0-rc.7. Adds outcome decomposition, contribution mapping, experiment-adequacy checks and explicit continuation into outcome evaluation. Ordinary improvements use a small complete decision loop; larger studies require a decision and evidence that justify their cost. The final decision gate checks scope assumptions and composition across handoffs, returning feasible required checks to evaluation rather than closing prematurely. Narrow maintenance remains lightweight. The [experiment record](Improvements/ExperimentAdequacy/Record.md) preserves 29 completed trials, ties, rc.5/rc.6 failures and rc.7's successful exact replay and preservation control. This is bounded engineering evidence, not universal autonomous reliability or a rerun of all prior release qualification.
 
 The purpose-first walkthrough produced owner-agreed MarkdownToDocx outcomes and a bounded six-example check trial. This supports development use, not superiority over the prior method or autonomous reliability. See the [change record](Improvements/PurposeFirst/Proposal.md). Publishing this candidate does not itself install it or establish broader effectiveness.
