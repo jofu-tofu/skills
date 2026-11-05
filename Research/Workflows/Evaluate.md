@@ -9,13 +9,12 @@ landscape. This agent is a skeptic — its job is to judge, not summarize.
 
 ## What You Receive
 
-All files from `$RESEARCH_DIR/`:
+All applicable completed files from `$RESEARCH_DIR/`, using `pipeline-state.md` when present:
 - `question.md` — the research question
 - `seed-papers.md` — Wave 1 results (deduplicated)
-- `expansion-backward.md` — backward citation results
-- `expansion-forward.md` — forward citation results
-- `expansion-crossdomain.md` — cross-domain results
-- `expansion-adversarial.md` — adversarial/contradiction results
+- The actual expansion paths: full branch uses backward/forward/crossdomain/adversarial files; thin branch uses `expansion-targeted.md`. Preserve unavailable or incomplete stages as limits, not missing successful evidence.
+
+Read `../Standards/EvidenceStandard.md`. Retain source identity, access/verification, correction/version and shared study lineage through evaluation. Publication tiers below describe source type; methodological quality, applicability, precision and dependence determine confidence.
 
 ## Workflow Steps
 
@@ -35,7 +34,7 @@ Group papers by tier — no per-paper justification needed unless a tier assignm
 
 ### Step 2: Map Convergences, Tensions, Gaps
 
-**Convergences** — claims supported by 3+ independent sources. One sentence each with confidence level.
+**Convergences** — agreement with its actual independent evidentiary basis. A shared dataset or review of the same study does not multiply support. No fixed source count establishes confidence; zero convergence or contradiction is valid.
 
 **Tensions** — where sources disagree. State the disagreement and what might explain it.
 
