@@ -1,0 +1,3 @@
+# Public site launch checks
+
+Use the deployment target the user selected and its documented tools. Local design work never authorizes a remote publish. Verify the rendered site, responsive layouts, links, accessibility, metadata, error states and intended analytics/privacy behavior. Keep secrets in the target's supported secret store, never client bundles. Report the deployed URL and the checks actually run. An unavailable deployment, domain, browser check or analytics account stays unverified; never claim launch completion from source inspection alone. No global registry or mirroring service is required.
