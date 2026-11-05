@@ -1,5 +1,9 @@
 # Validation scope
 
+Current candidate: 2.1.0-rc.8. The [completion-gate record](../Improvements/CompletionGate/Record.md) documents conditional research planning, effect-based routing and separate complete/continue/blocked task decisions. All 24 checker tests and both historical closure replays pass. Full baseline/candidate self-improvement runs completed after preserved timeout interruptions; the candidate invoked and consumed the gate. Separate typo/design controls pass. No comparative superiority or population reliability is established. Version metadata and these release notes were added after behavioral testing; operational instructions and checker code are unchanged from the tested candidate.
+
+## Prior rc.7 evidence
+
 Current candidate: 2.1.0-rc.7. The [experiment-adequacy record](../Improvements/ExperimentAdequacy/Record.md) supersedes earlier pending statuses. Twenty-nine subjects completed across planning, live repairs, no-change/rejection decisions and follow-ups. Initial comparisons often tied. Rc.5/rc.6 left a feasible required aggregation check unresolved; rc.7 added a final-gate scope/composition check and explicit return to evaluation. The exact replay passed 9/9 external checks and a CSV preservation control passed 5/5. Planning judgments remain operator-led; a single successful replay does not establish general reliability. Earlier release qualification does not automatically transfer to this package.
 
 This package incorporates retained research draft v0.9 into the portable 2.0 release lineage. The offline release and real-lifecycle evidence below belongs to 2.1.0-rc.1. Versions 2.1.0-rc.2 and rc.3 change purpose/outcome reasoning and planning; those earlier results do not automatically qualify the revised instructions.

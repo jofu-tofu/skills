@@ -14,6 +14,7 @@ Complete before execution. Unresolved required fields mean the run is not ready.
 | Observed problem | Assessment question, requested gain, or failure and evidence; separate observation from suspected cause. |
 | Gap diagnosis | For a reported gap, link [GapRecord](../../Templates/Improvement/GapRecord.md); identify skill/outcome/case/checker/evidence gap and why the selected artifact should change. |
 | Context check | Applicable criterion IDs; revised, retired, or unresolved criteria with reasons and authority. |
+| Research decision | For broad improvement: question, existing evidence, academic search findings and limits, or why no new search is useful; distinguish unavailable research from sufficient evidence. See [PlanChange](../../Procedures/PlanChange.md#research-decision). For other scopes, apply only when relevant. |
 | Hypothesis | For creation/change, smallest proposed change, predicted benefit, and evidence that would disprove it; not applicable to assessment-only work. |
 | Protection | Mandatory behavior and affected dependent workflows. |
 | Regression coverage | For behavioral changes/workflow readiness: map requirements to affected branches/dependencies and cases or reused evidence; justify exclusions and show untested scope. See [RegressionCoverage](../../Standards/RegressionCoverage.md). Preserve lightweight/design-only limits. |
