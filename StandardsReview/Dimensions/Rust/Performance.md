@@ -6,19 +6,19 @@
 
 Rust's performance story rests on three pillars: zero-cost abstractions, allocation awareness, and a profiling-first culture.
 
-**Zero-cost abstractions** are the foundation. Iterators, trait dispatch, closures, and ownership transfers compile down to the same machine code as hand-written C loops. This means that idiomatic, readable Rust is already fast Rust. The temptation to "optimize" by dropping to raw index loops, unsafe pointer arithmetic, or manual memory management is almost always counterproductive -- it sacrifices readability and safety for performance gains that do not exist. The compiler's optimizer sees through iterator chains, inlines closures, and elides bounds checks when it can prove they are unnecessary. Writing idiomatic code is not a performance compromise; it is the performance strategy.
+**Zero-cost abstractions** are the foundation. Iterator abstractions can optimize well, but neither identical machine code nor a speed advantage over loops is guaranteed. This means that idiomatic, readable Rust is already fast Rust. The temptation to "optimize" by dropping to raw index loops, unsafe pointer arithmetic, or manual memory management is almost always counterproductive -- it sacrifices readability and safety without evidence that the change improves the target workload. The compiler's optimizer sees through iterator chains, inlines closures, and elides bounds checks when it can prove they are unnecessary. Writing idiomatic code is not a performance compromise; it is the performance strategy.
 
-**Allocation awareness** is the second pillar. In garbage-collected languages, allocations are invisible -- you create objects and the runtime handles the rest. In Rust, every `String`, `Vec`, `Box`, and `HashMap` is an explicit trip to the global allocator. This visibility is a superpower: you can see exactly where heap allocations happen and decide whether they are necessary. The key patterns are: accept borrowed types (`&str`, `&[T]`) instead of owned types (`String`, `Vec<T>`) when you only need to read; preallocate collections when the size is known; use small-buffer optimization (`SmallVec`, `SmallString`) when most instances are small; and avoid materializing intermediate collections in iterator pipelines. The caller-control principle -- letting the caller decide whether to allocate -- is the API design corollary.
+**Allocation awareness** is the second pillar. In garbage-collected languages, allocations are invisible -- you create objects and the runtime handles the rest. Owned containers can allocate, but empty containers and zero-sized values need not allocate, and optimizers may eliminate allocation calls. This visibility is a superpower: you can see exactly where heap allocations happen and decide whether they are necessary. The key patterns are: accept borrowed types (`&str`, `&[T]`) instead of owned types (`String`, `Vec<T>`) when you only need to read; preallocate collections when the size is known; use small-buffer optimization (`SmallVec`, `SmallString`) when most instances are small; and avoid materializing intermediate collections in iterator pipelines. The caller-control principle -- letting the caller decide whether to allocate -- is the API design corollary.
 
 **Profiling-first culture** is the third pillar. Even with zero-cost abstractions and allocation awareness, real performance work requires empirical measurement. Developer intuition about bottlenecks is unreliable. A function that "looks slow" may account for 0.1% of runtime, while the actual bottleneck hides in an innocent-looking loop. Cargo-flamegraph, perf, DHAT, and criterion.rs provide the tools to measure where time and memory are actually spent. The rule is simple: profile in release mode with debug symbols, identify the hot path, optimize only that path, and benchmark to confirm the improvement. Optimizing without measurement is guessing.
 
-Data layout completes the picture. Modern CPUs are cache-line machines: accessing contiguous memory is fast, chasing pointers is slow. When a tight loop touches only one field of a struct, storing all instances of that field contiguously (Struct-of-Arrays) can reduce cache misses by an order of magnitude compared to the default Array-of-Structs layout. This is not a universal transformation -- it trades API ergonomics for cache performance -- but in hot loops over large collections, it is often the single largest optimization available.
+Data layout completes the picture. Modern CPUs are cache-line machines: accessing contiguous memory is fast, chasing pointers is slow. When a tight loop touches only one field of a struct, storing all instances of that field contiguously (Struct-of-Arrays) may improve locality compared with an Array-of-Structs layout; the size of any benefit requires measurement. This is not a universal transformation -- it trades API ergonomics for cache performance -- but in hot loops over large collections, it is worth testing when profiling points to memory access costs.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-Look for these performance signals: `.clone()` calls in hot paths (covered by the Ownership dimension but relevant here), `.collect()` calls that create intermediate Vec values only to be iterated again, functions that accept `String` or `Vec<T>` when they only read the data, empty `Vec::new()` followed by a loop of known iteration count, `#[bench]` on nightly instead of criterion, and `unsafe` blocks justified by "performance" without accompanying benchmark evidence. Each of these is a location where performance is being left on the table or, worse, where readability and safety are being sacrificed for imaginary gains.
+Inspect `.clone()` in hot paths, intermediate collections, ownership in signatures, collection growth, benchmark methodology and unsafe optimization claims. These are investigation prompts, not demonstrated performance defects. Accept clear bounded loops, cheap clones and intentional ownership. Establish relevant workload and measurements before assigning a performance finding; use safety invariants separately for unsafe code.
 
 ### When Designing / Planning
 
@@ -26,14 +26,14 @@ Decide early whether a data structure will be in a hot path. If it will be itera
 
 ### When Implementing
 
-Use iterators as the default loop construct. Preallocate with `with_capacity` when the size is known. Accept `&str` and `&[T]` in function parameters. Chain iterator adaptors lazily and call a single terminal operation. When serialization or deserialization is on the hot path, use `#[serde(borrow)]` or zerocopy to avoid per-field allocations. Set up criterion benchmarks for any function whose performance matters, and use `black_box` to prevent dead-code elimination. Profile with cargo-flamegraph before reaching for unsafe or exotic optimizations.
+Use iterators as the default loop construct. Preallocate with `with_capacity` when the size is known. Accept `&str` and `&[T]` in function parameters. Chain iterator adaptors lazily and call a single terminal operation. When serialization or deserialization is on the hot path, use `#[serde(borrow)]` or zerocopy to avoid per-field allocations. Set up criterion benchmarks for any function whose performance matters, and use black_box as a best-effort optimization barrier. Profile with cargo-flamegraph before reaching for unsafe or exotic optimizations.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| IteratorsOverLoops | HIGH | Prefer iterator chains over manual index loops for equivalent or better compiled output |
-| PreallocateCollections | HIGH | Use Vec::with_capacity when the collection size is known or estimable |
+| IteratorsOverLoops | Context-dependent | Prefer clear iterator chains; measure performance against loops |
+| PreallocateCollections | Context-dependent | Use Vec::with_capacity when the collection size is known or estimable |
 | AvoidUnnecessaryAllocations | HIGH | Accept &str over String, use SmallVec for small collections, let callers control allocation |
 | BenchmarkWithCriterion | MEDIUM | Use criterion.rs with black_box for statistically rigorous benchmarks on stable Rust |
 | CacheFriendlyDataLayouts | MEDIUM | Use Struct-of-Arrays over Array-of-Structs for hot loops that touch few fields |
@@ -46,11 +46,11 @@ Use iterators as the default loop construct. Preallocate with `with_capacity` wh
 
 ### RS4.1 IteratorsOverLoops
 
-**Impact: HIGH (Iterator chains compile to equivalent or better machine code than manual loops while being more readable and less error-prone)**
+**Impact: Context-dependent (Iterator chains can clarify intent; performance is workload-dependent)**
 
-Rust's iterator adaptors are zero-cost abstractions. The compiler inlines and optimizes iterator chains into the same LLVM IR as hand-written index loops -- and often produces better code because bounds checks are elided. Manual index loops introduce opportunities for off-by-one errors, unchecked indexing, and obscure intent behind loop mechanics.
+Rust's iterator adaptors are zero-cost abstractions. The optimizer may inline iterator chains and eliminate bounds checks, but exact output depends on the code, target, and compiler. Manual index loops introduce opportunities for off-by-one errors, unchecked indexing, and obscure intent behind loop mechanics.
 
-**Incorrect: Manual index loop with bounds tracking**
+**House preference: Prefer iterator expressions when clearer (these loops are valid)**
 
 ```rust
 fn sum_of_squares_of_evens(data: &[i32]) -> i64 {
@@ -97,15 +97,15 @@ fn find_first_negative(values: &[f64]) -> Option<f64> {
 
 ### RS4.2 PreallocateCollections
 
-**Impact: HIGH (Vec::with_capacity avoids repeated reallocations that each copy the entire buffer, turning O(n) amortized into O(1) per push)**
+**Impact: Workload-dependent (Preallocation can avoid growth; Vec::push is already amortized O(1))**
 
-When you know the final size of a collection -- or a reasonable upper bound -- preallocating eliminates the geometric reallocation strategy that Vec, HashMap, and String use internally. Each reallocation copies all existing elements to a new, larger buffer. For large collections built in loops, this means multiple full-buffer copies that are entirely avoidable.
+Reserve a useful known capacity to avoid growth while that capacity suffices. Vec guarantees amortized O(1) push, not a particular growth factor. Growth may move existing elements, or the allocator may extend storage in place.
 
 **Incorrect: Growing from empty with repeated reallocations**
 
 ```rust
 fn build_lookup(names: &[String]) -> Vec<String> {
-    let mut result = Vec::new(); // capacity 0, will reallocate ~log2(n) times
+    let mut result = Vec::new(); // may grow as elements are pushed; growth factor is not guaranteed
     for name in names {
         result.push(name.to_uppercase());
     }
@@ -136,7 +136,7 @@ fn build_lookup(names: &[String]) -> Vec<String> {
 
 fn read_all_lines(path: &std::path::Path) -> std::io::Result<String> {
     let content = std::fs::read_to_string(path)?;
-    let mut output = String::with_capacity(content.len());
+    let mut output = String::with_capacity(content.len().saturating_add(1)); // final newline may add one byte
     for line in content.lines() {
         output.push_str(line);
         output.push('\n');
@@ -147,16 +147,16 @@ fn read_all_lines(path: &std::path::Path) -> std::io::Result<String> {
 
 **When acceptable:**
 - Collection size is truly unknown and no reasonable upper bound exists
-- The collection is small (fewer than ~16 elements) where the default capacity strategy is sufficient
+- The collection is small enough that measurement does not justify explicit capacity tuning
 - Building a collection lazily from an async stream where the total count is not available upfront
 
 ---
 
 ### RS4.3 AvoidUnnecessaryAllocations
 
-**Impact: HIGH (Accepting &str instead of String avoids forcing callers to allocate; SmallVec eliminates heap allocation for small collections)**
+**Impact: HIGH (Accepting &str instead of String avoids forcing callers to allocate; SmallVec can avoid a separate element-buffer allocation)**
 
-Every heap allocation involves a call to the global allocator, which is orders of magnitude slower than stack access. Functions that accept owned types when they only need to read force callers to clone or allocate unnecessarily. The caller-control principle says: let the caller decide whether to allocate; the callee should accept the most general borrowed form.
+Allocation has workload-dependent costs; optimized code may eliminate allocation calls. Owned read-only parameters can force callers to clone still-needed inputs; moving an existing owned value does not itself allocate. The caller-control principle says: let the caller decide whether to allocate; the callee should accept the most general borrowed form.
 
 **Incorrect: Requiring ownership when only reading**
 
@@ -175,7 +175,7 @@ fn main() {
     greet(name);         // moves, cannot reuse
 
     let words = vec!["foo".into(), "bar".into()];
-    contains_keyword(words, "foo".into()); // two unnecessary allocations
+    contains_keyword(words, "foo".into()); // keyword allocates; passing words moves its existing buffer
 }
 ```
 
@@ -194,7 +194,7 @@ fn contains_keyword(words: &[String], keyword: &str) -> bool {
 use smallvec::SmallVec;
 
 fn gather_errors(input: &[&str]) -> SmallVec<[String; 4]> {
-    let mut errors = SmallVec::new(); // stack-allocated for <= 4 items
+    let mut errors = SmallVec::new(); // up to 4 String headers inline; each nonempty String still owns a buffer
     for &item in input {
         if item.is_empty() {
             errors.push("empty item found".into());
@@ -244,7 +244,7 @@ fn bench_sort(c: &mut Criterion) {
         b.iter(|| {
             let mut v = black_box(vec![5, 3, 1, 4, 2]);
             v.sort();
-            black_box(&v); // prevent dead-code elimination
+            black_box(&v); // best-effort barrier against unwanted optimization
         });
     });
 }
@@ -270,9 +270,9 @@ criterion_main!(benches);
 
 ### RS4.5 CacheFriendlyDataLayouts
 
-**Impact: MEDIUM (Struct-of-Arrays layout keeps hot fields contiguous in memory, reducing cache misses in tight loops by an order of magnitude)**
+**Impact: MEDIUM when measured (Struct-of-Arrays can improve locality for selected fields)**
 
-Modern CPUs fetch memory in cache lines (typically 64 bytes). When you iterate over a Vec of structs (AoS) but only touch one field, every cache line loads the other fields as wasted bytes. Splitting into separate Vecs per field (SoA) ensures the hot data is packed contiguously, maximizing cache utilization. This matters most in tight loops over thousands of elements.
+Modern CPUs fetch memory in cache lines (typically 64 bytes). When you iterate over a Vec of structs (AoS) but only touch one field, cache fetches may include cold fields as well. Splitting into Vecs per field (SoA) keeps each field sequence contiguous; measure whether that improves the workload. This matters most in tight loops over thousands of elements.
 
 **Incorrect: Array-of-Structs wastes cache on cold fields**
 
@@ -280,12 +280,12 @@ Modern CPUs fetch memory in cache lines (typically 64 bytes). When you iterate o
 struct Particle {
     position: [f64; 3], // 24 bytes -- hot in physics step
     velocity: [f64; 3], // 24 bytes -- hot in physics step
-    color: [u8; 4],     // 4 bytes  -- cold in physics step
-    name: String,        // 24 bytes -- cold in physics step
+    color: [u8; 4],     // cold in physics step
+    name: String,      // header size depends on target; cold in physics step
 }
 
 fn update_positions(particles: &mut Vec<Particle>, dt: f64) {
-    // Each cache line loads color and name alongside position/velocity
+    // Some fetched cache lines may include cold fields
     for p in particles.iter_mut() {
         p.position[0] += p.velocity[0] * dt;
         p.position[1] += p.velocity[1] * dt;
@@ -305,7 +305,7 @@ struct Particles {
 }
 
 fn update_positions(particles: &mut Particles, dt: f64) {
-    // Only positions and velocities are in cache -- no waste
+    // Traversal touches positions and velocities; measure actual cache effects
     for (pos, vel) in particles.positions.iter_mut()
         .zip(particles.velocities.iter())
     {
@@ -317,17 +317,17 @@ fn update_positions(particles: &mut Particles, dt: f64) {
 ```
 
 **When acceptable:**
-- Small collections (fewer than ~100 elements) where cache behavior is irrelevant
-- All fields are accessed together in every operation, making AoS and SoA equivalent
+- Small or cold collections where layout changes show no useful measured benefit
+- All fields are accessed together; AoS may be preferable and equivalence is not guaranteed
 - Code clarity is more important than performance (configuration structs, domain models not in hot loops)
 
 ---
 
 ### RS4.6 CollectLazilyConsumeEagerly
 
-**Impact: HIGH (Each .collect() materializes an entire intermediate Vec; chaining iterators lazily fuses operations into a single pass with zero intermediate allocations)**
+**Impact: HIGH when intermediate storage violates memory or throughput needs (Avoid unnecessary materialization)**
 
-Rust iterators are lazy -- adaptors like `map`, `filter`, and `flat_map` build a pipeline that executes only when a terminal operation (`collect`, `sum`, `for_each`, `count`) consumes it. Calling `.collect()` between pipeline stages forces a full materialization of the intermediate result, allocating a Vec that exists only to be iterated again. Keep the chain lazy until the final terminal.
+Rust iterators are lazy -- adaptors like `map`, `filter`, and `flat_map` build a pipeline that executes only when a terminal operation (`collect`, `sum`, `for_each`, `count`) consumes it. Collect builds the requested collection type, not necessarily a Vec. An intermediate Vec may add storage and traversal; actual allocation can depend on size hints, reuse, and optimization. Keep the chain lazy until the final terminal.
 
 **Incorrect: Collecting intermediate results**
 
@@ -359,7 +359,7 @@ fn active_user_emails(users: &[User]) -> Vec<String> {
     users.iter()
         .filter(|u| u.is_active)
         .map(|u| u.email.clone())
-        .collect() // single allocation for the final result
+        .collect() // final Vec; growth and String clone allocations remain possible
 }
 
 fn total_line_count(files: &[String]) -> usize {
@@ -378,9 +378,9 @@ fn total_line_count(files: &[String]) -> usize {
 
 ### RS4.7 ProfileBeforeOptimizing
 
-**Impact: MEDIUM (Optimizing without profiling wastes effort on cold code paths; cargo flamegraph and DHAT identify the actual bottlenecks in minutes)**
+**Impact: MEDIUM (Profiling and allocation measurement help identify bottlenecks)**
 
-Developer intuition about where time is spent is wrong more often than it is right. Optimizing code that accounts for 2% of runtime while ignoring the function that accounts for 60% is a common failure mode. Profiling tools like cargo-flamegraph, perf, and DHAT provide empirical evidence of where CPU time and allocations actually go. Always profile in release mode with debug symbols enabled -- debug builds have fundamentally different performance characteristics.
+Developer intuition should be checked against representative measurements. Optimizing code that accounts for 2% of runtime while ignoring the function that accounts for 60% is a common failure mode. Profiling tools like cargo-flamegraph, perf, and DHAT provide empirical evidence of where CPU time and allocations actually go. Always profile in release mode with debug symbols enabled -- debug builds have fundamentally different performance characteristics.
 
 **Incorrect: Guessing at bottlenecks without measurement**
 
@@ -441,7 +441,7 @@ fn parse_records(data: &[u8]) -> Vec<Record> {
 
 **Impact: MEDIUM (Borrowing from the input buffer instead of allocating owned Strings eliminates per-field heap allocations during deserialization of large payloads)**
 
-Standard deserialization allocates a new String for every string field in the input. For large payloads with many string fields -- log records, API responses, configuration files -- these allocations dominate parse time. Zero-copy deserialization borrows directly from the input buffer, replacing per-field allocations with lifetime-tracked references. The serde `#[serde(borrow)]` attribute, the zerocopy crate, and rkyv provide different levels of zero-copy support.
+Deserializing into String owns the decoded text; allocation and parse-time impact depend on the format, data, and implementation. Zero-copy deserialization borrows directly from the input buffer, replacing per-field allocations with lifetime-tracked references. The serde `#[serde(borrow)]` attribute, the zerocopy crate, and rkyv provide different levels of zero-copy support.
 
 **Incorrect: Owning all deserialized strings**
 
@@ -453,44 +453,40 @@ struct LogEntry {
     timestamp: String,  // allocates
     level: String,      // allocates
     message: String,    // allocates
-    source: String,     // allocates -- 4 allocations per log entry
+    source: String,     // owned decoded text; exact allocation count is not promised
 }
 
 fn parse_logs(json_bytes: &[u8]) -> Vec<LogEntry> {
-    // Each entry allocates 4 Strings from the allocator
+    // Owns each decoded string; benchmark allocation behavior
     serde_json::from_slice(json_bytes).unwrap()
 }
 ```
 
-**Correct: Borrow from the input buffer**
+**Correct: Borrow when possible and own decoded escaped strings**
 
 ```rust
+use std::borrow::Cow;
 use serde::Deserialize;
 
 #[derive(Deserialize)]
 struct LogEntry<'a> {
     #[serde(borrow)]
-    timestamp: &'a str,  // points into input buffer
+    timestamp: Cow<'a, str>,
     #[serde(borrow)]
-    level: &'a str,      // points into input buffer
+    level: Cow<'a, str>,
     #[serde(borrow)]
-    message: &'a str,    // points into input buffer
+    message: Cow<'a, str>,
     #[serde(borrow)]
-    source: &'a str,     // zero allocations per log entry
+    source: Cow<'a, str>,
 }
 
-fn parse_logs(json_bytes: &[u8]) -> Vec<LogEntry<'_>> {
-    // Borrows string data directly from json_bytes -- no per-field allocation
-    serde_json::from_slice(json_bytes).unwrap()
+fn parse_logs(json_bytes: &[u8]) -> Result<Vec<LogEntry<'_>>, serde_json::Error> {
+    // Unescaped text can borrow; escape decoding may require owned text.
+    serde_json::from_slice(json_bytes)
 }
-
-// For binary formats, zerocopy provides truly zero-cost access:
-// use zerocopy::{FromBytes, Immutable, KnownLayout};
-// #[derive(FromBytes, Immutable, KnownLayout)]
-// #[repr(C)]
-// struct Header { version: u32, length: u64 }
-// let header = Header::read_from_prefix(bytes).unwrap();
 ```
+
+A field of type &str requires borrowed text and cannot represent every escaped JSON string from its original bytes. Cow with serde(borrow) accepts both forms. The output Vec and escaped fields may still allocate. Binary zero-copy APIs have separate layout, alignment, and validity contracts; a read-by-value API is not a borrowed view.
 
 **When acceptable:**
 - Deserialized data must outlive the input buffer (stored in a cache, sent to another thread)
@@ -500,27 +496,29 @@ fn parse_logs(json_bytes: &[u8]) -> Vec<LogEntry<'_>> {
 
 ## Rule Interactions
 
-**IteratorsOverLoops + CollectLazilyConsumeEagerly**: These rules form a pipeline. IteratorsOverLoops establishes that iterator chains are the default loop construct; CollectLazilyConsumeEagerly ensures those chains remain lazy until the final terminal operation. Together they produce single-pass, zero-intermediate-allocation pipelines.
+**IteratorsOverLoops + CollectLazilyConsumeEagerly**: These rules form a pipeline. IteratorsOverLoops establishes that iterator chains are the default loop construct; CollectLazilyConsumeEagerly ensures those chains remain lazy until the final terminal operation. Together they avoid explicit intermediate collections; adaptors and closures may still allocate.
 
-**AvoidUnnecessaryAllocations + PreallocateCollections**: Complementary allocation strategies. AvoidUnnecessaryAllocations eliminates allocations that should not happen at all (borrowing instead of owning). PreallocateCollections optimizes the allocations that must happen by doing them once upfront instead of incrementally.
+**AvoidUnnecessaryAllocations + PreallocateCollections**: Complementary allocation strategies. AvoidUnnecessaryAllocations eliminates allocations that should not happen at all (borrowing instead of owning). PreallocateCollections can reduce growth allocations when the estimate is sufficient; element allocations remain separate.
 
 **ProfileBeforeOptimizing + BenchmarkWithCriterion**: ProfileBeforeOptimizing identifies where to optimize; BenchmarkWithCriterion measures whether the optimization worked. Profiling without benchmarking leaves improvements unverified; benchmarking without profiling risks optimizing the wrong code.
 
-**CacheFriendlyDataLayouts + IteratorsOverLoops**: SoA layouts pay off when iteration is tight and touches few fields. Iterator chains over SoA Vecs with zip produce the cache-optimal access pattern that makes the layout transformation worthwhile.
+**CacheFriendlyDataLayouts + IteratorsOverLoops**: SoA layouts pay off when iteration is tight and touches few fields. Iterator chains over SoA Vecs with zip can improve locality; compare layouts using the actual workload.
 
-## Anti-Patterns (Severity Calibration)
+## Review prompts and severity calibration
 
-### HIGH
+The categories below group review prompts, not predetermined finding severities. First establish the applicable project/version contract, valid alternatives and concrete consequence. A style or design preference alone is LOW or omitted; HIGH/CRITICAL requires corresponding demonstrated harm.
 
-- **Intermediate .collect() in iterator chains**: Each collect allocates and fills a Vec that is immediately iterated again. In hot paths, this can double or triple allocation pressure for zero semantic benefit.
-- **Functions accepting String/Vec when they only read**: Forces every caller to allocate or clone, even when they already have a borrowed view. This is an API-level performance bug that propagates to all call sites.
-- **Growing a Vec from empty when the size is known**: Each geometric reallocation copies the entire buffer. For a million-element Vec, this means ~20 full-buffer copies instead of zero.
+### Check behavior and workload consequences
 
-### MEDIUM
+- **Intermediate .collect() in iterator chains**: Intermediate Vec collections can add memory and traversal costs. Establish whether reuse, optimizer behavior, and workload make the cost material.
+- **Functions accepting String/Vec when they only read**: May force callers with borrowed or still-needed inputs to allocate or clone; callers can move existing owned values without cloning. This is an API-level performance bug that propagates to all call sites.
+- **Growing a Vec from empty when the size is known**: Growth may relocate existing elements. Vec push is amortized O(1); neither twenty full final-sized copies nor a fixed growth factor is guaranteed.
 
-- **Array-of-Structs in tight numerical loops**: When a loop touches 8 bytes of a 200-byte struct, 96% of every cache line is wasted. The effect is measurable at ~1000 elements and dominant at ~100,000.
+### Check maintainability and explicit policy
+
+- **Array-of-Structs in tight numerical loops**: Touching only a small field can make contiguous field storage useful, but cache-line utilization and break-even sizes depend on layout, hardware, and access patterns.
 - **Using unsafe for "performance" without benchmark evidence**: Unsafe code that is not proven faster by measurement is pure risk with no reward. The compiler's optimizer handles the common cases.
-- **Benchmarking in debug mode**: Debug builds disable optimizations, inline nothing, and include overflow checks. Performance measurements in debug mode are meaningless for production behavior.
+- **Benchmarking in debug mode**: Cargo dev defaults differ from release, and both profiles are configurable. Benchmark with the deployment settings when drawing production conclusions.
 
 ### LOW
 
@@ -547,3 +545,19 @@ fn parse_logs(json_bytes: &[u8]) -> Vec<LogEntry<'_>> {
 - Data-Oriented Design in Rust: SoA vs AoS patterns and cache performance
 - serde documentation: zero-copy deserialization with lifetimes and #[serde(borrow)]
 - zerocopy crate documentation: safe transmutation and zero-copy parsing
+
+## Verified primary references
+
+- https://doc.rust-lang.org/book/ch13-04-performance.html
+- https://doc.rust-lang.org/std/hint/fn.black_box.html
+- https://doc.rust-lang.org/std/vec/struct.Vec.html
+- https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html
+- https://doc.rust-lang.org/reference/type-layout.html
+- https://doc.rust-lang.org/std/collections/index.html
+- https://doc.rust-lang.org/std/string/struct.String.html
+- https://doc.rust-lang.org/std/convert/trait.AsRef.html
+- https://rust-lang.github.io/api-guidelines/flexibility.html#c-caller-control
+- https://docs.rs/smallvec/latest/smallvec/struct.SmallVec.html
+- https://serde.rs/lifetimes.html
+- https://docs.rs/zerocopy/latest/zerocopy/trait.FromBytes.html
+- https://doc.rust-lang.org/cargo/reference/profiles.html

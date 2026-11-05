@@ -4,39 +4,39 @@
 
 ## Mental Model
 
-Rust's API design philosophy emerges from two forces that do not exist in most languages: the ownership system and semver-as-contract. Every public function signature is a promise about who owns data, how long it lives, and whether it can be mutated. Unlike languages where API breakage is a social convention enforced by changelogs, Rust's type system makes breakage a compile error for every downstream consumer. This means every `pub` item is a commitment with teeth.
+Public Rust signatures describe ownership, borrowing, and mutation. Changes to reachable public contracts can break downstream code at compile time or change its runtime behavior. Review compatibility against actual supported uses; a `pub` item hidden in a private module is not automatically an external API.
 
-The ownership system gives Rust a unique naming convention for conversions. The `as_`/`to_`/`into_` prefix convention is not stylistic decoration -- it encodes cost and ownership transfer into the method name. `as_str()` tells the caller "this is a zero-cost view"; `to_string()` tells them "this allocates"; `into_inner()` tells them "this consumes me." Violating these conventions does not cause a compile error, but it causes something worse: callers write code under false assumptions about performance and ownership, and the bugs surface only under load.
+Conversion prefixes communicate expectations: `as_` is cheap, `to_` may be expensive, and `into_` consumes its input. They do not prove a particular allocation count. By-value `to_` methods on `Copy` types are conventional too. Treat a naming-only departure as low-severity policy unless a concrete cost or ownership problem is shown.
 
-The semver dimension is equally critical. Adding a variant to a public enum is a breaking change. Adding a field to a public struct (if constructible by downstream) is a breaking change. Making a private function public is easy; making a public function private requires a major version bump. This asymmetry means the correct default is maximum privacy: start private, promote to `pub(crate)`, and only reach `pub` when you have a genuine external consumer. The `#[non_exhaustive]` attribute is the escape valve for types that need to grow -- it forces downstream code to handle the unknown, preserving your ability to evolve.
+Plan public extension points early. `#[non_exhaustive]` reserves room for enum variants and struct fields outside the defining crate; adding the attribute later can itself break existing clients. Choose the narrowest visibility that supports consumers, and review other contracts such as auto traits when evolving types.
 
-The builder pattern connects these ideas. A constructor with six positional parameters is unreadable, fragile to reorder, and impossible to extend without breakage. A builder names each parameter at the call site, provides defaults for optional ones, and lets you add new options in minor versions. Combined with `impl Into<T>` on builder methods, it creates APIs that are simultaneously type-safe and ergonomic.
+A builder can clarify several easily confused configuration parameters and preserve old calls when optional settings are added. Named configuration structs or ordinary constructors may also fit. Accept `impl Into<T>` where convenient without weakening the intended domain boundary.
 
-Finally, `Debug` and `Display` are not afterthoughts -- they are infrastructure. Without `Debug`, your types cannot appear in test assertions, log lines, or error chains. Without `Display` on error types, you cannot use the `?` operator in functions returning `Result`. These traits are the minimum interface tax for participating in the Rust ecosystem.
+Implement formatting traits where their contracts fit. `assert_eq!` needs `Debug`, while `assert!(predicate)` need not. `std::error::Error` requires both `Debug` and `Display`; propagating `Result` with `?` does not require either formatting trait.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-Check conversion methods for correct prefix conventions: `as_` must be O(1) borrow-to-borrow, `to_` may allocate and borrows self, `into_` must consume self. Flag any `impl Into<T>` on a type -- it should be `impl From<T>` instead (the blanket impl provides `Into` for free). Look for constructors with more than three parameters, especially when multiple parameters share a type -- suggest a builder. Verify that all public types derive or implement `Debug`, and that error types implement `Display`. Check for public enums without `#[non_exhaustive]` that are likely to grow. Verify that public items have doc comments with `# Examples`, `# Errors`, and `# Panics` sections where applicable.
+Check conversion names against the conventions and the actual receiver and cost; `to_` on a `Copy` receiver may take self by value. Prefer `From<T>` implementations where applicable; direct `Into` is legal and can support older compiler constraints. Look for constructors with more than three parameters, especially when multiple parameters share a type -- suggest a builder. Prefer suitable `Debug` output on public types, with redaction where necessary; types implementing `Error` must also implement `Display`. Check for public enums without `#[non_exhaustive]` that are likely to grow. Verify that public items have doc comments with `# Examples`, `# Errors`, and `# Panics` sections where applicable.
 
 ### When Designing / Planning
 
-Sketch your public API surface first and ask: "What is the minimum set of types and functions a consumer needs?" Everything else stays private or `pub(crate)`. For types that will be constructed with configuration, plan a builder from the start. For enums that represent extensible categories (error variants, event types, database backends), apply `#[non_exhaustive]` in the initial design. When designing conversion traits, decide the cost category first (view, clone, or move) and name accordingly.
+Sketch your public API surface first and ask: "What is the minimum set of types and functions a consumer needs?" Everything else stays private or `pub(crate)`. For complex optional configuration, consider a builder or configuration struct. For enums that represent extensible categories (error variants, event types, database backends), apply `#[non_exhaustive]` in the initial design. When designing conversion traits, decide the cost category first (view, clone, or move) and name accordingly.
 
 ### When Implementing
 
-Apply `#[derive(Debug)]` to every public struct and enum as the first line after the doc comment. Implement `Display` for any type that will appear in user-facing output or error messages. Use `impl Into<T>` in function parameters and `impl From<T>` on your types. Write doc comments before implementing the function body -- the act of describing the contract often reveals design issues. Run `cargo test --doc` to verify examples compile and pass. Use `#![warn(missing_docs)]` at the crate root to catch undocumented public items.
+Provide `Debug` for public types where useful; use a manual redacted implementation for sensitive fields. Implement `Display` for any type that will appear in user-facing output or error messages. Use `impl Into<T>` in function parameters and `impl From<T>` on your types. Write doc comments before implementing the function body -- the act of describing the contract often reveals design issues. Run `cargo test --doc` to verify examples compile and pass. Use `#![warn(missing_docs)]` at the crate root to catch undocumented public items.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| ConversionNaming | HIGH | Follow as_/to_/into_ conventions to communicate cost and ownership |
+| ConversionNaming | LOW | Follow as_/to_/into_ conventions to communicate cost and ownership |
 | ImplementFromNotInto | HIGH | Implement From (blanket gives Into); accept impl Into in parameters |
-| BuilderForComplexConstruction | HIGH | Use builder pattern for types with 3+ configuration options |
+| BuilderForComplexConstruction | MEDIUM | Consider builders for confusing or extensible configuration |
 | TypesOverBooleans | MEDIUM | Use enums instead of bool parameters to make call sites self-documenting |
-| DebugAndDisplayForAll | HIGH | Derive Debug on all public types; implement Display for user-facing types |
+| DebugAndDisplayForAll | MEDIUM | Provide suitable Debug and user-facing Display; respect sensitive data |
 | NonExhaustiveForEvolution | MEDIUM | Use #[non_exhaustive] on public enums and structs that may grow |
 | DocumentPublicAPI | HIGH | Doc comments with examples, errors, panics; verified by cargo test --doc |
 | MinimizePublicSurface | MEDIUM | Start private; promote to pub(crate), then pub only when needed |
@@ -46,9 +46,9 @@ Apply `#[derive(Debug)]` to every public struct and enum as the first line after
 
 ### RS7.1 ConversionNaming
 
-**Impact: HIGH (Communicates cost and ownership semantics through naming alone)**
+**Impact: LOW (Naming policy; increase only for demonstrated behavioral or performance harm)**
 
-Rust's standard library follows a strict naming convention for conversions: `as_` means a cheap reference-to-reference view (O(1), no allocation), `to_` means an expensive conversion that may allocate, and `into_` means a consuming conversion that takes ownership. When your API deviates from these conventions, callers misjudge performance characteristics and ownership transfer, leading to unnecessary clones or surprising allocations in hot paths.
+Prefer the standard conversion naming conventions. `as_` suggests a cheap borrowed view, `to_` a potentially expensive conversion, and `into_` ownership transfer. A `Copy` receiver may be passed by value to `to_`; consuming conversions can still allocate. The examples below involve an owned `String`, so their receiver and allocation comments are specific to that implementation.
 
 **Incorrect: Naming that misleads about cost and ownership**
 
@@ -111,7 +111,7 @@ impl Name {
 
 **Impact: HIGH (Blanket Into implementation comes free; accepting impl Into in parameters enables ergonomic coercion)**
 
-Always implement `From<T>` rather than `Into<T>`. The standard library provides a blanket `impl<T, U> Into<U> for T where U: From<T>`, so implementing `From` gives you `Into` for free. Implementing `Into` directly skips this blanket and also prevents callers from using `Type::from(value)` syntax. On the consumption side, accepting `impl Into<T>` in function parameters lets callers pass either `T` or any type that converts into `T` without explicit conversion at the call site.
+Prefer implementing `From<T>` rather than `Into<T>` when coherence and the supported compiler version allow it. The standard library provides a blanket `impl<T, U> Into<U> for T where U: From<T>`, so implementing `From` gives you `Into` for free. Implementing `Into` directly skips this blanket and also prevents callers from using `Type::from(value)` syntax. On the consumption side, accepting `impl Into<T>` in function parameters lets callers pass either `T` or any type that converts into `T` without explicit conversion at the call site.
 
 **Incorrect: Implementing Into directly and requiring exact types in parameters**
 
@@ -155,22 +155,22 @@ fn lookup_user(id: impl Into<UserId>) -> Option<String> {
 }
 
 fn main() {
-    let user = lookup_user(42u64);     // implicit conversion
+    let user = lookup_user(42u64);     // conversion performed explicitly inside lookup_user
     let explicit = UserId::from(42);    // From syntax also works
 }
 ```
 
 **When acceptable:**
-- Implementing conversions for types from external crates where orphan rules prevent `From` (you own neither the source nor the target type)
+- Supporting Rust before 1.41, where some local-to-foreign conversions required direct `Into`; this does not allow implementing a foreign trait for two wholly foreign types
 - When the conversion is fallible -- use `TryFrom` instead of `From` in that case
 
 ---
 
 ### RS7.3 BuilderForComplexConstruction
 
-**Impact: HIGH (Eliminates positional parameter confusion and supports backward-compatible addition of options)**
+**Impact: MEDIUM (Contextual API policy for complex configuration)**
 
-When a struct requires three or more configuration options -- especially when several share the same type or have sensible defaults -- a constructor with positional parameters becomes unreadable and fragile. A builder pattern names every parameter at the call site, makes defaults explicit, and lets you add new options in future versions without breaking existing callers.
+For APIs with several easily confused or optional configuration values, prefer a builder when it improves call-site clarity. The parameter-count threshold is a house heuristic, not a Rust requirement. Preserve existing defaults and behavior when adding options; a builder alone does not guarantee compatibility.
 
 **Incorrect: Constructor with many positional parameters**
 
@@ -264,7 +264,7 @@ let client = HttpClientBuilder::new("https://api.example.com")
 
 **Impact: MEDIUM (Eliminates ambiguous boolean parameters and makes call sites self-documenting)**
 
-Boolean parameters force readers to look up the function signature to understand what `true` and `false` mean at each call site. An enum with named variants communicates intent directly. Enums also prevent the silent swap of two booleans in adjacent parameter positions and make it easy to add a third option later without a breaking API change.
+Boolean parameters force readers to look up the function signature to understand what `true` and `false` mean at each call site. An enum with named variants communicates intent directly. Distinct enum types prevent swapping parameters with different roles. Adding a variant to an existing exhaustive public enum breaks downstream exhaustive matches; establish `#[non_exhaustive]` in the initial API if future variants are intended.
 
 **Incorrect: Boolean parameters with opaque meaning at call sites**
 
@@ -295,10 +295,11 @@ pub enum LineStyle {
 }
 
 #[derive(Debug, Clone, Copy)]
+#[non_exhaustive]
 pub enum ArrowHead {
     None,
     Forward,
-    Both, // easy to add a third variant later
+    Both, // included initially; non_exhaustive permits future variants
 }
 
 fn draw_line(
@@ -323,11 +324,11 @@ draw_line((0.0, 0.0), (10.0, 10.0), LineStyle::Dashed, ArrowHead::None);
 
 ### RS7.5 DebugAndDisplayForAll
 
-**Impact: HIGH (Enables logging, error messages, and assert output for every public type)**
+**Impact: MEDIUM (Formatting support appropriate to the public contract)**
 
-Every public type should derive or implement `Debug` so it can appear in `dbg!()`, `assert_eq!` failure messages, log output, and error chains. Types that are user-facing -- errors, identifiers, status values -- should also implement `Display` to provide human-readable formatting. Without `Debug`, generic code that bounds on `Debug` (including most test assertion macros and logging frameworks) cannot use your types.
+As an API policy, provide `Debug` where diagnostics benefit, and `Display` for an appropriate human-readable representation. `dbg!`, `assert_eq!`, and `{:?}` formatting require `Debug`; other assertions and logging can use different representations. `Error` requires `Debug + Display`, whereas arbitrary `Result<T, E>` and `?` do not. Do not expose secrets through derived formatting.
 
-**Incorrect: Public types without Debug or Display**
+**Missing support when diagnostic formatting is part of the contract**
 
 ```rust
 // No Debug -- cannot use in dbg!(), assert_eq!, or format!("{:?}", ...)
@@ -348,7 +349,7 @@ fn handle(err: AppError) {
 }
 ```
 
-**Correct: Debug on all public types, Display on user-facing types**
+**Correct for these types: Debug and user-facing Display**
 
 ```rust
 #[derive(Debug, Clone)]
@@ -381,7 +382,7 @@ fn handle(err: AppError) {
 ```
 
 **When acceptable:**
-- Types that contain fields which cannot implement Debug (e.g., raw function pointers, certain FFI types) -- implement Debug manually with placeholder output
+- Types containing fields without Debug (such as some trait objects) -- consider a manual placeholder representation; function pointers themselves support Debug
 - Internal types in a private module that are never logged, asserted on, or formatted
 - Types where Debug output would expose sensitive data (secrets, tokens) -- implement Debug manually to redact fields
 
@@ -389,9 +390,9 @@ fn handle(err: AppError) {
 
 ### RS7.6 NonExhaustiveForEvolution
 
-**Impact: MEDIUM (Prevents semver-breaking changes when adding enum variants or struct fields)**
+**Impact: MEDIUM (Reserves specific public enum and struct extension points)**
 
-Adding a variant to a public enum or a field to a public struct is a breaking change in Rust because downstream code may have exhaustive match arms or struct literals. Marking public enums and structs with `#[non_exhaustive]` forces downstream users to include a wildcard arm in match and prevents them from constructing the struct directly, preserving your ability to evolve the API in minor versions.
+An added variant can break exhaustive downstream matches; an added field can break permitted downstream struct construction. `#[non_exhaustive]`, established before release, restricts those uses outside the defining crate. It does not guarantee that every future change is compatible: preserve auto traits and other public contracts too.
 
 **Incorrect: Public enum without non_exhaustive -- adding a variant is a semver break**
 
@@ -403,6 +404,7 @@ pub enum DatabaseError {
 }
 
 // downstream code -- exhaustive match
+use my_lib::DatabaseError;
 fn handle(err: my_lib::DatabaseError) {
     match err {
         DatabaseError::ConnectionFailed => retry(),
@@ -424,6 +426,7 @@ pub enum DatabaseError {
 }
 
 // downstream code -- wildcard required by non_exhaustive
+use my_lib::DatabaseError;
 fn handle(err: my_lib::DatabaseError) {
     match err {
         DatabaseError::ConnectionFailed => retry(),
@@ -432,7 +435,7 @@ fn handle(err: my_lib::DatabaseError) {
     }
 }
 
-// v1.1 safely adds Timeout -- no downstream breakage
+// v1.1 alternative definition: adding this fieldless variant preserves these matches
 #[non_exhaustive]
 #[derive(Debug)]
 pub enum DatabaseError {
@@ -475,7 +478,9 @@ impl RateLimiter {
 }
 ```
 
-**Correct: Doc comments with examples, errors, and panics**
+**Documentation sketch: examples, errors, and panics**
+
+This is an API sketch: supply `RateLimitExceeded`, the limiter implementation, and the example crate name before running its doctest. `todo!()` is not a successful limiter implementation.
 
 ```rust
 /// A sliding-window rate limiter that tracks request counts per key.
@@ -528,7 +533,7 @@ impl RateLimiter {
 
 **Impact: MEDIUM (Every public item is a semver commitment -- less surface means more freedom to evolve)**
 
-Start every item as private. Promote to `pub(crate)` when other modules in the same crate need access, then to `pub(super)` or `pub` only when genuinely required by external consumers. Every `pub` item becomes a permanent contract: changing its signature, removing it, or altering its behavior is a semver-breaking change. A minimal public surface reduces the maintenance burden, shrinks the documentation footprint, and gives you freedom to refactor internals without releasing a new major version.
+Start private and choose the narrowest scope needed: `pub(super)` exposes an item to its parent scope, `pub(crate)` to the whole crate, and reachable `pub` items to downstream crates. Incompatible changes to that external contract are breaking; not every internal `pub` item or behavioral change is externally observable. A minimal public surface reduces the maintenance burden, shrinks the documentation footprint, and gives you freedom to refactor internals without releasing a new major version.
 
 **Incorrect: Everything public by default**
 
@@ -582,17 +587,17 @@ fn merge_adjacent_strings(tokens: &mut [Token]) { todo!() }
 
 **BuilderForComplexConstruction + ImplementFromNotInto**: Builders benefit from accepting `impl Into<T>` on their setter methods, allowing callers to pass `&str` where `String` is stored internally. This combination creates APIs that are both type-safe and ergonomic.
 
-**NonExhaustiveForEvolution + MinimizePublicSurface**: Both rules serve semver safety from different angles. MinimizePublicSurface reduces the number of items that are part of the contract. NonExhaustiveForEvolution protects the items that must be public by ensuring they can grow without breakage. Apply both: make fewer things public, and protect the public things with `#[non_exhaustive]`.
+**NonExhaustiveForEvolution + MinimizePublicSurface**: Both rules serve semver safety from different angles. MinimizePublicSurface reduces the number of items that are part of the contract. NonExhaustiveForEvolution reserves specific extension points for public types; other compatibility obligations still apply. Apply both: make fewer things public, and protect the public things with `#[non_exhaustive]`.
 
-**DebugAndDisplayForAll + DocumentPublicAPI**: Debug output and documentation are complementary windows into a type. Debug is the runtime representation (logging, assertions); documentation is the compile-time representation (IDE tooltips, rendered docs). Both must exist for a type to be a full citizen of the Rust ecosystem.
+**DebugAndDisplayForAll + DocumentPublicAPI**: Debug output and documentation are complementary windows into a type. Debug is the runtime representation (logging, assertions); documentation is the compile-time representation (IDE tooltips, rendered docs). Provide each where it supports the intended public contract.
 
 ## Anti-Patterns (Severity Calibration)
 
 ### HIGH
 
-- **`as_` method that allocates**: An `as_foo()` method that returns an owned `String` or `Vec` violates the zero-cost expectation. Callers will use it in loops without realizing they are allocating on every iteration. Rename to `to_foo()`.
-- **Implementing `Into` directly instead of `From`**: Skips the blanket impl, prevents `Type::from()` syntax, and is flagged by `clippy::from_over_into`. Always implement `From`.
-- **Public types without `Debug`**: Breaks `assert_eq!` in downstream tests, prevents `dbg!()` usage, and makes log output useless. There is almost never a reason to omit Debug.
+- **Hidden conversion cost with demonstrated impact**: Check allocation behavior at the actual call site; an owned return type alone does not prove a fresh allocation. Naming-only `as_`/`to_`/`into_` departures belong at LOW severity.
+- **Conversion interoperability**: Prefer `From` to also provide `Into`; direct `Into` is valid and a preference-only departure should not be treated as a high-severity correctness issue.
+- **Missing required diagnostic support**: Missing `Debug` prevents `dbg!` and `assert_eq!`, but is not inherently a high-severity defect. Consider manual redaction and the actual API requirements.
 - **Undocumented public function that returns `Result`**: Callers cannot know what errors to expect without reading the source. The `# Errors` section is the contract.
 
 ### MEDIUM
@@ -696,7 +701,7 @@ impl RetryPolicyBuilder {
 ## Does Not Cover
 
 - **Async API design** (async trait patterns, `Send + Sync` bounds on futures) -- covered by concurrency dimensions.
-- **Error type hierarchy design** -- covered by RS3 Error Handling dimension.
+- **Error type hierarchy design** -- covered by RS2 Error Handling dimension.
 - **Macro-based API generation** (proc macros, derive macros) -- a specialized topic beyond general API design.
 - **C FFI API design** (`#[repr(C)]`, extern functions) -- FFI has its own conventions that sometimes conflict with idiomatic Rust API guidelines.
 - **Unsafe API contracts** (safety invariants, `# Safety` doc sections) -- warrants its own dimension due to the distinct verification requirements.
@@ -710,3 +715,17 @@ impl RetryPolicyBuilder {
 - Rust API Guidelines (C-CONV, C-BUILDER, C-DEBUG, C-CUSTOM-TYPE, C-STRUCT-PRIVATE, C-CRATE-DOC)
 - Effective Rust (Items 5, 7, 22, 27) -- conversion traits, builder pattern, visibility, documentation
 - Rust Reference -- `#[non_exhaustive]` attribute semantics
+
+## Verification Sources
+
+- https://rust-lang.github.io/api-guidelines/naming.html
+- https://doc.rust-lang.org/std/convert/trait.Into.html
+- https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence
+- https://doc.rust-lang.org/std/error/trait.Error.html
+- https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator
+- https://rust-lang.github.io/api-guidelines/interoperability.html
+- https://rust-lang.github.io/api-guidelines/type-safety.html
+- https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute
+- https://doc.rust-lang.org/cargo/reference/semver.html
+- https://doc.rust-lang.org/reference/visibility-and-privacy.html
+- https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html

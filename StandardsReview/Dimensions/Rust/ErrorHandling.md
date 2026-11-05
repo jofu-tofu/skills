@@ -4,21 +4,21 @@
 
 ## Mental Model
 
-Rust's error handling is built on a single design choice: errors are values, not control flow. `Result<T, E>` forces every caller to acknowledge that a function can fail, and the compiler refuses to let you ignore it. This is the foundation, but it is not enough on its own. Without discipline, Rust code accumulates `unwrap()` calls that turn recoverable errors into panics, monolithic error enums that force callers to handle impossible variants, and bare `?` chains that propagate errors without any context about what the program was trying to do.
+Rust's error handling is built on a single design choice: errors are values, not control flow. `Result<T, E>` represents success or failure. Ignoring a must-use result normally produces a warning, not an unconditional compilation error; callers can explicitly discard it. This is the foundation, but it is not enough on its own. Without discipline, Rust code accumulates `unwrap()` calls that turn recoverable errors into panics, monolithic error enums that force callers to handle impossible variants, and bare `?` chains that propagate errors without any context about what the program was trying to do.
 
-The error handling dimension organizes around a key architectural boundary: **libraries vs. applications**. Libraries exist to serve callers they cannot predict, so they must expose structured, typed errors that callers can match on. Applications exist to serve users, so they need ergonomic error reporting with full context chains. This boundary determines which crate to use (`thiserror` vs. `anyhow`), whether to panic or return `Result`, and how granular the error types should be.
+The error handling dimension organizes around a key architectural boundary: **libraries vs. applications**. Libraries should expose stable typed categories when callers need to distinguish failures. Applications exist to serve users, so they need ergonomic error reporting with full context chains. This boundary informs a house preference for thiserror and anyhow; manual Error implementations and other error strategies remain valid when they meet caller needs.
 
-Within libraries, the primary constraint is **no panics in public APIs**. A panic in a library is a unilateral decision to terminate the caller's process. The library does not know whether the caller is a CLI tool (where a crash is acceptable) or an HTTP server (where a crash kills all in-flight requests). Every public function should return `Result`, and `expect()` should only appear where the invariant is provably guaranteed at compile time.
+Prefer Result for expected recoverable failures in public library APIs. Unwinding panics can be caught with safe catch_unwind; aborting panics cannot. Infallible functions need no Result, and documented panic contracts or internal invariant checks can be appropriate.
 
 Error type granularity follows from the caller's needs. If callers need to match on failure modes -- retry on timeout, abort on invalid input, prompt on authentication failure -- the error must be a typed enum with one variant per actionable case. If callers only need to report the error to a user or log, an erased error (`anyhow::Error`) eliminates the maintenance cost of variant enums nobody inspects.
 
-The final principle is **context preservation**. Rust's `?` operator is powerful but lossy: it converts and propagates the error but does not explain what the program was trying to accomplish. Adding `.context()` or `.map_err()` at every `?` site produces error chains like "failed to initialize pipeline: failed to read config: config.toml: permission denied" -- messages that are immediately actionable without a debugger.
+The final principle is **context preservation**. Rust's `?` propagates errors, applying the required conversion for Result. It does not intrinsically lose information or require Display. Add context where it is missing, and preserve the original cause in wrappers to produce error chains like "failed to initialize pipeline: failed to read config: config.toml: permission denied" -- messages that are immediately actionable without a debugger.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-Look for these signals: `unwrap()` or `expect()` in library code without a comment justifying the invariant. Bare `?` without `.context()` or `.map_err()` in functions more than a few lines long. A single error enum shared across the entire crate with variants that only apply to one module. `anyhow::Result` in a public library API. Manual `impl Error` that omits `source()`. `match` on `Result` where every arm just propagates -- this should be `?`. These patterns each indicate a specific failure in the error handling strategy.
+Look for these signals: `unwrap()` or `expect()` in library code without a comment justifying the invariant. Bare `?` without `.context()` or `.map_err()` in functions more than a few lines long. A single error enum shared across the entire crate with variants that only apply to one module. `anyhow::Result` in a public library API. Manual `impl Error` that omits `source()`. `match` on `Result` where every arm just propagates -- this should be `?`. These are review prompts, not automatic defects: check missing context, stored causes, caller contracts, and explicit house policy.
 
 ### When Designing / Planning
 
@@ -26,17 +26,17 @@ Decide the library/application boundary first. For each public module, list the 
 
 ### When Implementing
 
-Use `thiserror` for every library error type. Use `anyhow` in application code and binary crate entry points. Never call `unwrap()` in library code; use `ok_or()`, `ok_or_else()`, or `expect()` with an invariant explanation. Add `.context()` or `.with_context()` to every `?` in functions that are not trivial one-liners. Prefer `?` over `match` for propagation; use `match` only when you need to handle specific variants. Implement `source()` on every custom error that wraps another error.
+As a house preference, use thiserror for typed errors and anyhow for reporting; manual implementations and other crates are valid. Never call `unwrap()` in library code; use `ok_or()`, `ok_or_else()`, or `expect()` with an invariant explanation. Add context at meaningful operation boundaries when existing errors lack it. Prefer `?` over `match` for propagation; use `match` only when you need to handle specific variants. Implement `source()` on every custom error that wraps another error.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| ThiserrorForLibsAnyhowForApps | CRITICAL | Use thiserror in libraries for typed errors; anyhow in applications for ergonomic reporting |
-| NoPanicInLibraries | CRITICAL | Libraries must never panic; return Result and let callers decide on recovery |
+| ThiserrorForLibsAnyhowForApps | POLICY | Prefer typed library errors and ergonomic application reporting; crate choice is conditional |
+| NoPanicInLibraries | Context-dependent | Return Result for expected recoverable failures; document justified panic contracts |
 | ErrorTypeGranularity | HIGH | Define error enums at module level with only variants the caller can encounter |
 | ContextualErrors | HIGH | Attach .context() or .map_err() when propagating with ? to preserve the causal chain |
-| ErrorTraitImplementation | HIGH | Custom errors must implement Error + Display + Debug with source() for chain traversal |
+| ErrorTraitImplementation | HIGH | Use Error + Display + Debug for standard reporting; expose stored causes via source() |
 | QuestionMarkOverMatch | MEDIUM | Prefer ? for propagation, match for variant-specific handling, combinators for transforms |
 | TypedVsErasedErrors | MEDIUM | Typed enums when callers match on variants; erased errors when callers only report |
 
@@ -45,9 +45,9 @@ Use `thiserror` for every library error type. Use `anyhow` in application code a
 
 ### RS2.1 ThiserrorForLibsAnyhowForApps
 
-**Impact: CRITICAL (Mixing error crates breaks the library/application contract and forces callers into a single error strategy)**
+**Impact: Context-dependent (Choose an error API that supports callers; crate selection alone is policy)**
 
-Libraries must expose structured, typed errors so callers can match on variants and decide how to handle each case. Applications consume those typed errors and only need to report them, so erased errors via `anyhow` are appropriate. Using `anyhow::Error` in a library's public API strips callers of the ability to handle errors programmatically; using `thiserror` in a top-level application adds ceremony with no benefit since no downstream code will match on the variants.
+When callers need stable failure categories, expose typed errors. When they only report failures, erased errors such as anyhow are appropriate; either need can arise in libraries or applications. anyhow supports downcasting and cause traversal, although a documented typed API is usually clearer when callers need stable failure categories. Applications can also benefit from typed errors.
 
 **Incorrect: anyhow in a library's public API**
 
@@ -55,8 +55,8 @@ Libraries must expose structured, typed errors so callers can match on variants 
 // lib.rs of a published crate
 use anyhow::Result;
 
-/// Callers cannot match on specific failure modes.
-/// They receive an opaque error with no variants to inspect.
+/// Callers need stable failure categories, but the version error
+/// below is stored only as a string. Other typed causes can be downcast.
 pub fn parse_config(input: &str) -> Result<Config> {
     let raw: RawConfig = serde_json::from_str(input)?;  // erased into anyhow
     if raw.version < MIN_VERSION {
@@ -112,21 +112,21 @@ fn main() -> Result<()> {
 
 ### RS2.2 NoPanicInLibraries
 
-**Impact: CRITICAL (A library panic terminates the caller's entire process with no recovery path)**
+**Impact: Context-dependent (Unexpected panics can disrupt callers; abort terminates the process)**
 
-Libraries must never assume that a failure is unrecoverable -- that decision belongs to the caller. Every `unwrap()`, `expect()`, `panic!()`, and array index without bounds checking is a potential process abort that the caller cannot catch in safe code. Use `Result` to push the decision to the caller. When invariants truly cannot be violated, use `expect()` with a message explaining the invariant rather than bare `unwrap()`.
+Return recoverable failures through the documented API so callers can decide what to do. A documented panic precondition or invariant can be valid; judge unexpected panics against that contract. unwrap, expect, panic!, and failing checked indexing can panic. With unwinding enabled, catch_unwind can catch unwinding panics in safe code; panic=abort and some boundary conditions terminate the process. Use `Result` to push the decision to the caller. When invariants truly cannot be violated, use `expect()` with a message explaining the invariant rather than bare `unwrap()`.
 
 **Incorrect: Library function that panics on invalid input**
 
 ```rust
-// lib.rs -- this kills the caller's process
+// lib.rs -- unexpected panic on missing user
 pub fn get_user(users: &[User], id: usize) -> &User {
     // bare unwrap -- no context, no recovery
     users.iter().find(|u| u.id == id).unwrap()
 }
 
 pub fn parse_port(s: &str) -> u16 {
-    // panics on non-numeric input; caller cannot handle gracefully
+    // panics on invalid input instead of returning the expected parse failure
     s.parse().unwrap()
 }
 ```
@@ -164,7 +164,7 @@ fn internal_init() {
 ```
 
 **When acceptable:**
-- `expect()` on provably infallible operations (e.g., regex compiled from a string literal, `Vec::push` on a non-full vec)
+- `expect()` on provably infallible operations (e.g., a reviewed valid regex literal; Vec::push returns (), not a Result to expect)
 - Assertion macros (`assert!`, `debug_assert!`) that guard internal invariants which would indicate a bug in the library itself
 - Implementing traits like `Index` where the trait signature requires a panic on out-of-bounds access
 
@@ -241,11 +241,11 @@ pub enum DbError {
 
 ### RS2.4 ContextualErrors
 
-**Impact: HIGH (Bare `?` propagation strips the "what was I trying to do" context, producing error messages that point at the symptom instead of the cause)**
+**Impact: HIGH (Bare `?` propagation does not add missing operational context, producing error messages that point at the symptom instead of the cause)**
 
 When an error is propagated with `?`, the original error describes what went wrong at the lowest level (e.g., "No such file or directory") but not what the program was trying to accomplish. Adding `.context()` or `.map_err()` before `?` attaches the high-level operation, producing error chains like "failed to load user profile: config.toml: No such file or directory" that are immediately actionable.
 
-**Incorrect: Bare ? loses operational context**
+**Insufficient context: underlying errors do not identify this operation**
 
 ```rust
 use std::fs;
@@ -260,7 +260,7 @@ fn load_pipeline(path: &str) -> anyhow::Result<Pipeline> {
 }
 ```
 
-**Correct: Every ? carries context about the operation**
+**Correct: Add useful context at operation boundaries**
 
 ```rust
 use anyhow::Context;
@@ -276,9 +276,11 @@ fn load_pipeline(path: &str) -> anyhow::Result<Pipeline> {
     Ok(Pipeline::new(config, db))
 }
 
-// In library code without anyhow, use map_err:
+// A message-only validation error can use map_err. This deliberately
+// formats (and loses) the typed ParseIntError; store it as a source
+// instead when callers require cause traversal.
 fn parse_port(s: &str) -> Result<u16, ConfigError> {
-    s.parse()
+    s.parse::<u16>()
         .map_err(|e| ConfigError::InvalidValue {
             field: "port",
             reason: format!("{e}"),
@@ -297,7 +299,7 @@ fn parse_port(s: &str) -> Result<u16, ConfigError> {
 
 **Impact: HIGH (Errors that skip Display, Debug, or source() break error reporting chains and lose causal information)**
 
-Custom error types must implement `std::error::Error`, `Display`, and `Debug`. The `source()` method must return the underlying cause when one exists, so that error reporters (like anyhow's `{:?}` chain) can walk the full causal chain. Manual implementations are verbose and error-prone; `thiserror` generates correct implementations from annotations.
+For standard error-reporting interoperability, implement std::error::Error, whose supertraits are Display and Debug. Result and ? themselves do not require these traits. The `source()` method must return the underlying cause when one exists, so that error reporters (like anyhow's `{:?}` chain) can walk the full causal chain. Manual implementations are valid. thiserror can generate implementations, but its annotations still need correct source relationships.
 
 **Incorrect: Manual impl that drops the error chain**
 
@@ -313,8 +315,8 @@ pub struct ConfigError {
 impl fmt::Display for ConfigError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.message)
-        // cause is never displayed -- caller sees "config error"
-        // but not "invalid JSON at line 12"
+        // Omitting the cause from Display is valid; source() below
+        // must expose the stored cause for separate chain traversal.
     }
 }
 
@@ -343,7 +345,7 @@ pub enum ConfigError {
     MissingField(&'static str),
 }
 
-// If manual impl is needed, always implement source():
+// Manual implementation for an error with a stored cause:
 impl std::error::Error for LegacyError {
     fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
         self.cause.as_deref()  // preserves the causal chain
@@ -423,7 +425,7 @@ fn handle_db_result(result: Result<User, DbError>) -> Response {
 
 **Impact: MEDIUM (Using the wrong error strategy forces callers to downcast when they need variants, or maintain enums nobody inspects)**
 
-Typed error enums are appropriate when callers need to match on variants and take different actions per failure mode. Erased errors (`anyhow::Error`, `Box<dyn Error>`) are appropriate when callers only need to report or log the error without inspecting it. Choosing the wrong strategy creates friction: typed errors that nobody matches on add maintenance burden, while erased errors that callers need to downcast are fragile and bypass the type system.
+Typed error enums are appropriate when callers need to match on variants and take different actions per failure mode. Erased errors (`anyhow::Error`, `Box<dyn Error>`) are appropriate when callers only need to report or log the error without inspecting it. Choosing the wrong strategy creates friction: typed errors that nobody matches on add maintenance burden, while erased errors require runtime downcasts rather than exhaustive enum matching; downcasting remains type-checked and can be an intentional API contract.
 
 **Incorrect: Erased errors in a public API where callers must distinguish failures**
 
@@ -432,7 +434,7 @@ Typed error enums are appropriate when callers need to match on variants and tak
 pub fn send_request(req: Request) -> Result<Response, Box<dyn std::error::Error>> {
     // Caller must downcast to figure out what happened:
     // if let Some(timeout) = e.downcast_ref::<TimeoutError>() { ... }
-    // This is fragile, not checked by the compiler, and breaks on refactors.
+    // Downcasting is type-checked, but callers cannot exhaustively match categories.
     let body = serde_json::to_vec(&req)?;
     let resp = http_client.post(url).body(body).send()?;
     Ok(resp)
@@ -478,28 +480,30 @@ fn sync_background_cache() -> anyhow::Result<()> {
 
 ## Rule Interactions
 
-**ThiserrorForLibsAnyhowForApps + TypedVsErasedErrors**: These two rules address the same decision from different angles. The library/application boundary (RS2.1) determines the crate; the typed/erased distinction (RS2.7) determines the strategy within each side. A library uses thiserror and typed enums; an application uses anyhow and erased errors. Together they form a complete error architecture.
+**ThiserrorForLibsAnyhowForApps + TypedVsErasedErrors**: These two rules address the same decision from different angles. The library/application boundary (RS2.1) determines the crate; the typed/erased distinction (RS2.7) determines the strategy within each side. Treat thiserror/anyhow as a conditional house preference. Manual errors, typed application errors, and documented erased library errors can meet the same needs.
 
-**NoPanicInLibraries + ErrorTypeGranularity**: The no-panic rule (RS2.2) forces library functions to return `Result`, which creates the need for well-designed error types. Granularity (RS2.3) ensures those error types are useful rather than a dumping ground of every possible failure.
+**NoPanicInLibraries + ErrorTypeGranularity**: Returning Result for expected recoverable failures (RS2.2) creates the need for well-designed error types. Granularity (RS2.3) ensures those error types are useful rather than a dumping ground of every possible failure.
 
 **ContextualErrors + ErrorTraitImplementation**: Context (RS2.4) attaches operational meaning at each call site; the Error trait's `source()` method (RS2.5) ensures those layers form a traversable chain. If either is missing, the error message is incomplete: no context means "what was I doing?" is lost, no `source()` means "what went wrong underneath?" is lost.
 
-**QuestionMarkOverMatch + ContextualErrors**: The `?` operator (RS2.6) makes propagation concise, but bare `?` drops context. These rules work together: use `?` for propagation, but attach `.context()` before the `?` to preserve meaning.
+**QuestionMarkOverMatch + ContextualErrors**: The `?` operator (RS2.6) makes propagation concise, but does not add missing context. Add context where needed without duplicating information already present.
 
-## Anti-Patterns (Severity Calibration)
+## Review prompts and severity calibration
 
-### CRITICAL
+The categories below group review prompts, not predetermined finding severities. First establish the applicable project/version contract, valid alternatives and concrete consequence. A style or design preference alone is LOW or omitted; HIGH/CRITICAL requires corresponding demonstrated harm.
 
-- **`unwrap()` in library public APIs**: Converts a recoverable error into a process-terminating panic. The caller has no opportunity to handle the failure, retry, or report gracefully. This is the highest-severity error handling defect in Rust.
-- **`anyhow::Result` as a library's public return type**: Strips callers of the ability to match on error variants. The library has made a unilateral decision that all callers only need to report errors, which is rarely true.
+### Check potentially consequential contract failures
 
-### HIGH
+- **`unwrap()` in library public APIs**: Converts an expected recoverable error into a panic; severity depends on the panic strategy and caller impact. Unwinding panics can be caught.
+- **`anyhow::Result` as a library's public return type**: Use is a policy concern unless callers need a typed category contract that this API fails to supply; anyhow supports downcasting.
+
+### Check behavior and workload consequences
 
 - **Bare `?` propagation through multiple layers**: Produces error messages like "No such file or directory" with no indication of which file or what operation failed. Debugging requires a stack trace or stepping through code.
 - **Single crate-wide error enum with 15+ variants**: Forces every caller to handle or wildcard-match variants that cannot occur in their code path. The compiler's exhaustiveness checking becomes noise rather than signal.
-- **Manual `impl Error` without `source()`**: Breaks the error chain so that error reporters (anyhow's `{:#}`, tracing's error fields) cannot display the root cause.
+- **Wrapper `impl Error` hiding a stored cause**: Breaks the error chain so that error reporters (anyhow's `{:#}`, tracing's error fields) cannot display the root cause.
 
-### MEDIUM
+### Check maintainability and explicit policy
 
 - **`match` on Result where every arm just returns Err(e.into())**: This is `?` with extra syntax. The match provides no additional handling, only visual noise.
 - **Typed error enums that no caller ever matches on**: If every call site uses `?` to propagate and no code inspects the variants, the enum is wasted ceremony. Switch to anyhow or `Box<dyn Error>`.
