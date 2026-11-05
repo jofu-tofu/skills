@@ -1,6 +1,6 @@
 # Improvement attempts
 
-- 2026-11-05 — Historical scope and maintenance feedback: [record](HistoryScope/Record.md). CR-O 1.1 adds owner-grounded scope, maintenance and final-disposition contrasts. Initial increment changes criteria only; runtime remains **1.1.0-rc.1**, with comparison pending and no behavioral benefit claim.
+- 2026-11-05 — Historical scope and maintenance feedback: [record](HistoryScope/Record.md). CR-O 1.1 adds owner-grounded contrasts. Retain **1.1.0-rc.2** for consistent scope instructions: baseline and candidate both pass eight targeted final-report decisions, with no observed gain or regression. Maintenance comparison is recorded separately as it completes.
 
 - 2026-11-04 — Scope calibration follow-up: [record](ScopeCalibration/Record.md). Six final-stage contrasts and both native entry-point report outcomes pass without instruction changes. Release-gate and offline acceptance requirements survive into final reports. One CLI startup failure is preserved; delegation provenance and context isolation remain limited. Retain **1.1.0-rc.1**, with no new comparative benefit claim.
 

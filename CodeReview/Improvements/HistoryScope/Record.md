@@ -4,7 +4,7 @@
 
 ## Evidence and diagnosis
 
-Two independent retrieval tasks read recent and archived conversations plus durable issue-resolution notes. This is a purposive sample, not all sessions or a defect-rate estimate. Direct owner comments establish preferences and authorized scope. Assistant completion summaries and historical notes retain their evidence limitations; they are not freshly reproduced fixes. Proprietary examples, transcripts and issue identifiers remain in local provenance files, not this package.
+Two separate retrieval tasks read recent and archived conversations plus durable issue-resolution notes. This is a purposive sample, not all sessions or a defect-rate estimate. Direct owner comments establish preferences and authorized scope. Assistant completion summaries and historical notes retain their evidence limitations; they are not freshly reproduced fixes. Proprietary examples, transcripts and issue identifiers remain in local provenance files, not this package.
 
 | Source class | Observed lesson | Outcome |
 |---|---|---|
@@ -32,4 +32,15 @@ Budget: one matched diagnostic pass per case, then one fresh transfer batch if a
 
 ## Increment status
 
-1. Outcome/evidence increment: CR-O 1.1 defined; runtime unchanged. Behavioral comparison pending.
+1. Outcome/evidence increment: CR-O 1.1 defined; runtime unchanged. Published commit `0ac1804`.
+2. Scope instruction increment: retain **1.1.0-rc.2** as a design repair, not a demonstrated accuracy gain. GatherContext follows the latest explicit owner decision and required paths; INT traces unchanged implementation and distinguishes necessary support from unrelated behavior. Independent design inspection found no blocking issue. [Measurement](Measurement.md) and [results](ScopeResults.json) preserve the frozen comparison.
+
+## Scope comparison decision
+
+Both versions passed **8/8 targeted final-report decisions**: two intended defects detected and six scope contrasts preserved. No targeted regression, and no comparative benefit demonstrated. The instruction contradiction is repaired, but the baseline already handled this sample correctly. Retention uses the owner-authorized design correction plus observed preservation; it is not a reproduced runtime fix claim.
+
+Reference qualification executed 84 assertions on the eight source fixtures (43 primary, 41 supplemental), including deliberately faulty variants. These establish the specific behavior contrasts, not skill performance. Separate unblinded adjudication inspected all 16 final reports and verification records. Both versions also noticed missing executable tests explicitly requested in case 06: the verifier discarded the finding card but kept the unmet deliverable in the final verdict/coverage. Preserve that novel observation; neither reject it because absent from the key nor count it as a candidate gain.
+
+All six stage calls completed. Two earlier CLI startup failures occurred before model execution and are preserved separately; correcting the repository-check launch option did not change prompts or sandbox policy. Snapshots remained unchanged, 16 fixture repositories stayed clean, and paired source/request contents matched. Runtime was the configured `gpt-6-astra`, medium reasoning, without an override. User configuration was inherited, cases were batched, other lenses did not run, and usage/timing cannot establish efficiency or native orchestration reliability.
+
+External evidence: `review-evaluation/` contains exact prompts, raw events, final reports, qualification, manifests, integrity-and-execution.json and scope-adjudication.json. This package preserves generic fixtures and judgments, not private source or transcripts.

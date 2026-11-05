@@ -1,0 +1,36 @@
+{
+  "suite": "Bounded synthetic maintenance contrasts; not historical reproductions",
+  "instruction": "Review the changed code for substantive simplicity or maintenance findings. Preserve supported behavior and safeguards. Name the concrete unnecessary obligation or failure mechanism; do not treat an alternative style alone as a defect.",
+  "cases": [
+    {
+      "id": "maintenance-01",
+      "language": "typescript",
+      "ownerRequest": "Make the HTTP quantity endpoint reject non-array JSON with HTTP 400 rather than throwing. Preserve totals for number arrays. The upstream gateway validates numeric elements only when the payload is an array; it allows JSON null and object payloads through. The endpoint is the remaining shape-validation boundary.",
+      "context": "This is the complete module. JSON.parse produces any at runtime; the number[] annotation does not change the parsed payload. All valid array elements are numbers. There is no other array check. The newly added check implements the requested response before reduce executes. Numeric totals and parsing-error behavior are unchanged.",
+      "source": "function totalResponse(values: number[]) {\n  return { status: 200, total: values.reduce((sum, value) => sum + value, 0) };\n}\nexport function http(raw: string) { return totalResponse(JSON.parse(raw)); }",
+      "tipSource": "function totalResponse(values: number[]) {\n  if (!Array.isArray(values)) return { status: 400 };\n  return { status: 200, total: values.reduce((sum, value) => sum + value, 0) };\n}\nexport function http(raw: string) { return totalResponse(JSON.parse(raw)); }"
+    },
+    {
+      "id": "maintenance-02",
+      "language": "typescript",
+      "ownerRequest": "Remove the duplicate array guard in the private quantity helper. Keep HTTP shape validation and all existing response behavior.",
+      "context": "Complete module and call graph shown. The helper is private and has one caller. That caller validates runtime array shape immediately before calling it; there are no async gaps, aliases, mutation, plugins, persisted inputs or unchecked callers. The gateway validates elements of arrays as numbers. The helper's empty-array sum is already zero.",
+      "source": "function total(values: number[]) {\n  if (!Array.isArray(values)) return 0;\n  return values.reduce((sum, value) => sum + value, 0);\n}\nexport function http(raw: string) {\n  const values = JSON.parse(raw);\n  if (!Array.isArray(values)) return { status: 400 };\n  return { status: 200, total: total(values) };\n}",
+      "tipSource": "function total(values: number[]) {\n  return values.reduce((sum, value) => sum + value, 0);\n}\nexport function http(raw: string) {\n  const values = JSON.parse(raw);\n  if (!Array.isArray(values)) return { status: 400 };\n  return { status: 200, total: total(values) };\n}"
+    },
+    {
+      "id": "maintenance-03",
+      "ownerRequest": "Add classification to portal submission using the same rule mapper as import. Portal classifies every current row; import classifies only its selected rows. Keep existing classifications. Both caller-owned selection policies already exist and must remain usable independently. A small extraction is welcome; do not invent a general policy framework.",
+      "context": "Complete processing module shown. portalRows and importRows are public helpers also called by portal and import previews respectively; those preview callers are unchanged. Portal preview must show the rows portal submission classifies; import preview must show the selected rows import classifies. All selected IDs exist, rows are mutable, classify is deterministic, and there are no other policies or isolation requirements.",
+      "source": "export function portalRows(document) { return Object.values(document.rows); }\nexport function importRows(document, selectedIds) { return selectedIds.map(id => document.rows[id]); }\nfunction classify(row) { return row.amount > 100 ? 'large' : 'small'; }\nexport function importDocument(document, selectedIds) {\n  for (const row of importRows(document, selectedIds)) {\n    if (row.classification === '') row.classification = classify(row);\n  }\n}\nexport function submitPortal(document) {}",
+      "tipSource": "export function portalRows(document) { return Object.values(document.rows); }\nexport function importRows(document, selectedIds) { return selectedIds.map(id => document.rows[id]); }\nfunction classify(row) { return row.amount > 100 ? 'large' : 'small'; }\nfunction processRows(document, selectedIds, fromPortal) {\n  const rows = fromPortal ? Object.values(document.rows) : selectedIds.map(id => document.rows[id]);\n  for (const row of rows) {\n    if (row.classification === '') row.classification = classify(row);\n  }\n}\nexport function importDocument(document, selectedIds) { processRows(document, selectedIds, false); }\nexport function submitPortal(document) { processRows(document, [], true); }"
+    },
+    {
+      "id": "maintenance-04",
+      "ownerRequest": "Let the refresh action recompute classifications while normal submission preserves manually populated classifications. Both actions process all current rows. Keep one shared rule application operation; a boolean for overwrite is fine.",
+      "context": "Complete module shown. Submission and refresh both receive the current document rows. All rows are valid. These are the only callers; the request describes both supported operations.",
+      "source": "function classify(row) { return row.amount > 100 ? 'large' : 'small'; }\nfunction applyRules(rows) {\n  for (const row of rows) {\n    if (row.classification === '') row.classification = classify(row);\n  }\n}\nexport function submit(document) { applyRules(Object.values(document.rows)); }",
+      "tipSource": "function classify(row) { return row.amount > 100 ? 'large' : 'small'; }\nfunction applyRules(rows, overwrite) {\n  for (const row of rows) {\n    if (overwrite || row.classification === '') row.classification = classify(row);\n  }\n}\nexport function submit(document) { applyRules(Object.values(document.rows), false); }\nexport function refresh(document) { applyRules(Object.values(document.rows), true); }"
+    }
+  ]
+}

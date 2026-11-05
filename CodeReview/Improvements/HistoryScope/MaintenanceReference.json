@@ -1,0 +1,35 @@
+{
+  "status": "Private frozen references; never pass to reviewing subjects",
+  "qualification": "Four synthetic component-handoff probes. Maintenance-03 is a source-demonstrated change burden, not a runtime defect. Equivalent bounded alternatives pass. These cases cannot establish overall review effectiveness.",
+  "cases": [
+    {
+      "id": "maintenance-01",
+      "expected": "No actionable simplicity finding against added array validation",
+      "requiredReason": "JSON.parse can supply null or an object to the typed helper. The new guard is the actual runtime shape boundary and provides requested HTTP 400. The static number[] signature does not establish runtime shape.",
+      "failure": "Remove the new guard as redundant due to the static type, or claim the enforced gateway element contract requires extra numeric validation here.",
+      "checks": ["http('null') => status400", "http('{}') => status400", "http('[2,3]') => status200,total5", "http('[]') => status200,total0"]
+    },
+    {
+      "id": "maintenance-02",
+      "expected": "No actionable finding against removal of private duplicate guard",
+      "requiredReason": "The complete caller trace proves runtime array validation before the sole call, with no mutation gap. HTTP validation remains. The proof is the enforced caller contract, not TypeScript alone.",
+      "failure": "Invent unlisted callers/mutation or demand restoration; suggest removing HTTP validation based on types.",
+      "checks": ["base and tip http('null') => status400", "base and tip http('{}') => status400", "base and tip http('[2,3]') => status200,total5", "base and tip http('[]') => status200,total0"]
+    },
+    {
+      "id": "maintenance-03",
+      "expected": "Substantive bounded maintenance finding",
+      "requiredReason": "processRows duplicates existing independently used portalRows/importRows policies; callers encode identity plus placeholder selection data. A selection-rule change now requires synchronized edits in preview helpers and processor. Let callers use their existing selectors and pass selected rows to shared classification (or equivalently eliminate duplicate policy and dummy obligations). Preserve current selected/all behavior and nonblank classifications.",
+      "insufficient": "Only says boolean bad, too many parameters, or prefers another style; calls current behavior wrong without a failing supported input.",
+      "failure": "Unify both callers to all rows, remove preservation guard, introduce general policy framework, or discard evidenced duplicated-policy maintenance burden as cosmetic solely because no runtime bug exists.",
+      "checks": ["tip portal classifies all blank rows", "tip import only classifies selected blank rows", "both preserve nonblank manual values", "source has independent selectors and duplicated selection expressions in processRows", "shared selected-row operation can preserve all current outputs"]
+    },
+    {
+      "id": "maintenance-04",
+      "expected": "No actionable simplicity finding against coherent overwrite boolean",
+      "requiredReason": "Both modes are authorized operation semantics. No actor-specific selection, duplicated policy, placeholder arguments or extra caller orchestration exists. The boolean directly expresses whether to replace classifications.",
+      "failure": "Demands separate processor hierarchy or caller-specific wrappers solely because boolean exists; removes overwrite support or changes normal preservation.",
+      "checks": ["submit retains manual values and fills blanks", "refresh recomputes all rows", "true and false have actual callers"]
+    }
+  ]
+}

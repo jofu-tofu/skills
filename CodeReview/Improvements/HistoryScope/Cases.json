@@ -1,0 +1,54 @@
+{
+  "suite": "Synthetic scope diagnostics informed by user feedback; not historical reproductions",
+  "instruction": "Review only the proposed change against the owner's request. Report actionable scope or behavior findings with a causal explanation; allow justified implementation work. Do not invent requirements. Return findings and a short rationale, including any evidence limit.",
+  "cases": [
+    {
+      "id": "scope-01",
+      "tipSource": "function classifyLines(invoice, lineIds) {\n  for (const id of lineIds) {\n    const line = invoice.lines[id];\n    if (line.classification !== '') continue;\n    line.classification = matchRules(line);\n  }\n}\nfunction importInvoice(invoice, request) {\n  classifyLines(invoice, request.lineIds);\n  saveInvoice(invoice);\n}\nfunction submitPortalInvoice(invoice) {\n  classifyLines(invoice, Object.keys(invoice.lines));\n  saveInvoice(invoice);\n}",
+      "ownerRequest": "Let portal-origin invoices use the existing invoice classifier. Preserve manual classifications and do not change batch-import selection. Keep this small; reusing the existing classifier is preferred.",
+      "context": "Batch import selects invoice lines represented in the current import. Portal submission selects all current invoice lines. Both call saveInvoice after classification. classifyLines preserves nonblank classifications. All selected line IDs are validated by their callers before this function is reached.",
+      "source": "function classifyLines(invoice, lineIds) {\n  for (const id of lineIds) {\n    const line = invoice.lines[id];\n    if (line.classification !== '') continue;\n    line.classification = matchRules(line);\n  }\n}\nfunction importInvoice(invoice, request) {\n  classifyLines(invoice, request.lineIds);\n  saveInvoice(invoice);\n}\nfunction submitPortalInvoice(invoice) {\n  saveInvoice(invoice);\n}",
+      "diff": " function submitPortalInvoice(invoice) {\n+  classifyLines(invoice, Object.keys(invoice.lines));\n   saveInvoice(invoice);\n }"
+    },
+    {
+      "id": "scope-02",
+      "tipSource": "function classifyLines(invoice, lineIds) {\n  for (const id of lineIds) {\n    const line = invoice.lines[id];\n    if (line.classification !== '') continue;\n    line.classification = matchRules(line);\n  }\n}\nfunction importInvoice(invoice, request) {\n  classifyLines(invoice, request.lineIds);\n  saveInvoice(invoice);\n}\nfunction submitPortalInvoice(invoice) {\n  for (const line of Object.values(invoice.lines)) {\n    line.classification = matchRules(line);\n  }\n  saveInvoice(invoice);\n}",
+      "ownerRequest": "Let portal-origin invoices use the existing invoice classifier. Preserve manual classifications and do not change batch-import selection. Keep this small; reusing the existing classifier is preferred.",
+      "context": "Batch import selects invoice lines represented in the current import. Portal submission selects all current invoice lines. Both call saveInvoice after classification. classifyLines preserves nonblank classifications. All selected line IDs are validated by their callers before this function is reached.",
+      "source": "function classifyLines(invoice, lineIds) {\n  for (const id of lineIds) {\n    const line = invoice.lines[id];\n    if (line.classification !== '') continue;\n    line.classification = matchRules(line);\n  }\n}\nfunction importInvoice(invoice, request) {\n  classifyLines(invoice, request.lineIds);\n  saveInvoice(invoice);\n}\nfunction submitPortalInvoice(invoice) {\n  saveInvoice(invoice);\n}",
+      "diff": " function submitPortalInvoice(invoice) {\n+  for (const line of Object.values(invoice.lines)) {\n+    line.classification = matchRules(line);\n+  }\n   saveInvoice(invoice);\n }"
+    },
+    {
+      "id": "scope-03",
+      "tipSource": "function listInvoices(user, filter) { return listVisibleInvoices(user, filter); }\nfunction exportInvoices(user, filter) {\n  return download(csvSerialize(listVisibleInvoices(user, filter)), 'invoices.csv');\n}\nconst routes = [{ path: '/invoices', handler: listInvoices },\n  { path: '/invoices/export', handler: exportInvoices }\n];\n// UI: Export CSV passes currentFilter to /invoices/export.\n// Test: export with filter status=open contains only visible open invoices.",
+      "ownerRequest": "Add Export CSV to the invoice list. Export exactly the currently visible filtered rows, with the same access rules as the list. Do not change list behavior.",
+      "context": "listVisibleInvoices already applies access and filter rules. The UI sends its current filter to the controller. csvSerialize is a trusted existing library. The route registry is the only way endpoints become reachable. Download responses use Content-Disposition. All referenced methods and types exist.",
+      "source": "function listInvoices(user, filter) { return listVisibleInvoices(user, filter); }\nconst routes = [{ path: '/invoices', handler: listInvoices }];",
+      "diff": "+function exportInvoices(user, filter) {\n+  return download(csvSerialize(listVisibleInvoices(user, filter)), 'invoices.csv');\n+}\n const routes = [{ path: '/invoices', handler: listInvoices },\n+  { path: '/invoices/export', handler: exportInvoices }\n ];\n+// UI: Export CSV passes currentFilter to /invoices/export.\n+// Test: export with filter status=open contains only visible open invoices."
+    },
+    {
+      "id": "scope-04",
+      "tipSource": "function listInvoices(user, filter) { return listVisibleInvoices(user, filter); }\nfunction exportInvoices(user, filter) {\n  const rows = listVisibleInvoices(user, filter);\n  for (const row of rows) updateInvoice(row.id, { status: 'archived' });\n  return download(csvSerialize(rows), 'invoices.csv');\n}\nconst routes = [{ path: '/invoices', handler: listInvoices },\n  { path: '/invoices/export', handler: exportInvoices }\n];\n// UI: Export CSV passes currentFilter to /invoices/export.",
+      "ownerRequest": "Add Export CSV to the invoice list. Export exactly the currently visible filtered rows, with the same access rules as the list. Do not change list behavior.",
+      "context": "listVisibleInvoices already applies access and filter rules. The UI sends its current filter to the controller. csvSerialize is a trusted existing library. The route registry is the only way endpoints become reachable. Download responses use Content-Disposition. Status changes are persisted by updateInvoice. All referenced methods and types exist.",
+      "source": "function listInvoices(user, filter) { return listVisibleInvoices(user, filter); }\nconst routes = [{ path: '/invoices', handler: listInvoices }];",
+      "diff": "+function exportInvoices(user, filter) {\n+  const rows = listVisibleInvoices(user, filter);\n+  for (const row of rows) updateInvoice(row.id, { status: 'archived' });\n+  return download(csvSerialize(rows), 'invoices.csv');\n+}\n const routes = [{ path: '/invoices', handler: listInvoices },\n+  { path: '/invoices/export', handler: exportInvoices }\n ];\n+// UI: Export CSV passes currentFilter to /invoices/export."
+    },
+    {
+      "id": "scope-05",
+      "tipSource": "function classifyLines(invoice, lineIds) {\n  for (const id of lineIds) {\n    const line = invoice.lines[id];\n    if (line.classification !== '') continue;\n    line.classification = matchRules(line);\n  }\n}\nfunction webhook(invoice, payload) {\n  if (!Array.isArray(payload.lineIds) || payload.lineIds.some(id => !Object.hasOwn(invoice.lines, id))) {\n    return response(400);\n  }\n  classifyLines(invoice, payload.lineIds);\n  saveInvoice(invoice);\n  return response(200);\n}",
+      "ownerRequest": "Allow the partner webhook to classify invoice lines using our existing rule mapper. Unknown line IDs should produce HTTP 400 without partial updates. Preserve populated classifications.",
+      "context": "The old batch importer receives line IDs from an internal builder that validates them. The webhook receives an authenticated partner's JSON payload; authentication does not validate line IDs. classifyLines mutates lines as it loops and assumes every ID exists. The shown validation is performed before any mutation.",
+      "source": "function classifyLines(invoice, lineIds) {\n  for (const id of lineIds) {\n    const line = invoice.lines[id];\n    if (line.classification !== '') continue;\n    line.classification = matchRules(line);\n  }\n}",
+      "diff": "+function webhook(invoice, payload) {\n+  if (!Array.isArray(payload.lineIds) || payload.lineIds.some(id => !Object.hasOwn(invoice.lines, id))) {\n+    return response(400);\n+  }\n+  classifyLines(invoice, payload.lineIds);\n+  saveInvoice(invoice);\n+  return response(200);\n+}"
+    },
+    {
+      "id": "scope-06",
+      "tipSource": "function classifyLines(invoice, lineIds) {\n  for (const id of lineIds) {\n    const line = invoice.lines[id];\n    if (line.classification !== '') continue;\n    line.classification = matchRules(line);\n  }\n}\nfunction importInvoice(invoice, request) {\n  classifyLines(invoice, Object.keys(invoice.lines));\n  saveInvoice(invoice);\n}\nfunction submitPortalInvoice(invoice) {\n  classifyLines(invoice, Object.keys(invoice.lines));\n  saveInvoice(invoice);\n}\n// Tests for both entry points assert that a blank line omitted from request.lineIds is classified, and a manually classified line retains its value.",
+      "ownerRequest": "Initial request: add portal classification without changing batch selection. Follow-up after discussing the selection difference: change both portal and batch import to classify all current invoice lines. This broader behavior is intentional; keep populated classifications unchanged and update tests for both paths.",
+      "context": "The follow-up is the latest confirmed instruction. There are no other callers of importInvoice or submitPortalInvoice. classifyLines ignores nonblank classifications. All invoice lines are current and valid. saveInvoice persists the resulting classifications.",
+      "source": "function classifyLines(invoice, lineIds) {\n  for (const id of lineIds) {\n    const line = invoice.lines[id];\n    if (line.classification !== '') continue;\n    line.classification = matchRules(line);\n  }\n}\nfunction importInvoice(invoice, request) {\n  classifyLines(invoice, request.lineIds);\n  saveInvoice(invoice);\n}\nfunction submitPortalInvoice(invoice) { saveInvoice(invoice); }",
+      "diff": " function importInvoice(invoice, request) {\n-  classifyLines(invoice, request.lineIds);\n+  classifyLines(invoice, Object.keys(invoice.lines));\n   saveInvoice(invoice);\n }\n-function submitPortalInvoice(invoice) { saveInvoice(invoice); }\n+function submitPortalInvoice(invoice) {\n+  classifyLines(invoice, Object.keys(invoice.lines));\n+  saveInvoice(invoice);\n+}\n+// Tests for both entry points assert that a blank line omitted from request.lineIds is classified, and a manually classified line retains its value."
+    }
+  ]
+}

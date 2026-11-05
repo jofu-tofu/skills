@@ -63,15 +63,11 @@ git diff main...HEAD --name-only
 - New files vs modifications vs deletions
 - Commit messages (these reveal intent)
 
-**Intent signals** (attempt in priority order):
-1. PR description — `gh pr view [number] --json title,body,labels`
-2. Linked tickets — look for references in commit messages (JIRA-123, #456)
-3. Recent conversation — has the user explained what they're building?
-4. Commit messages — extract stated reasons from `git log`
+**Intent sources:** Read the current user request and explicit follow-up decisions, then the PR description (`gh pr view [number] --json title,body,labels`), linked issue/design and commit rationale. Record sources and superseded scope. A later authorized decision can expand or narrow an earlier description; an assistant proposal alone does not authorize itself. Preserve unresolved conflicts rather than choosing whichever source matches the implementation.
 
 If no intent available: note "Intent: unavailable — review will focus on technical correctness"
 
-**Stated behaviors.** From the intent sources, list each behavior the change promises and each acceptance criterion as its own bullet. Also list decisions the author has explicitly locked in or excluded ("out of scope", "intentionally not handling X"). INT checks the diff against these, and VerifyAndReport keeps findings from relitigating locked decisions.
+**Stated behaviors.** List promised behavior, acceptance criteria, required prerequisite paths, and explicit exclusions or locked decisions, with their sources. Distinguish behavior scope from pinned files/commits. Include prerequisites needed to deliver the stated outcome; neighboring consumers are not automatically included because they share a helper. INT checks these against reachable implementation, including unchanged paths; VerifyAndReport preserves settled tradeoffs.
 
 **Pinned scope.** Record the exact base and tip SHAs (`git rev-parse`), and for an explicit commit list, each commit's SHA. If the scope was ambiguous (for example "the other commit", or commits plus uncommitted changes), write down the reading you chose. If other authors' changes are interleaved in the same files in the range, list those commits so agents and the verifier can exclude their lines.
 
