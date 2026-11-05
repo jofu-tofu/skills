@@ -135,3 +135,7 @@ What this skill explicitly avoids:
 ---
 
 **Attribution**: Methodology synthesized from Google Design Docs, Amazon Working Backwards, Shape Up, ADRs (Nygard), Rust RFCs, Stripe writing culture, Phil Calcado's Structured RFC, Squarespace "Yes, if", Klaviyo "Always Write Something", Design Thinking (Stanford d.school, NNGroup), PRD best practices (Atlassian, Product School), Zinsser (On Writing Well), Fisher/Ury (Getting to Yes), Kahneman/Tversky (Prospect Theory), and Brehm (Reactance Theory).
+
+## Outcome and improvement records
+
+For evaluation or improvement, read [granular outcomes and current coverage](Quality/Outcomes.md). These records preserve open coverage and bounded evidence; they are not required context for every ordinary task or a claim of whole-skill readiness.
