@@ -1,21 +1,23 @@
 ### Proximity Prevents Rot
 
-**Source:** Winters, Manshreck & Wright, "Software Engineering at Google" (2020); GitHub Developer Survey (2023); Wen Tan et al., "An Empirical Study of Documentation Decay" (2023)
+**Source:** Winters, Manshreck & Wright, "Software Engineering at Google" (2020); [GitHub Open Source Survey](https://opensourcesurvey.org/2017/) (2017). The earlier Wen Tan et al., "An Empirical Study of Documentation Decay" (2023), attribution remains unverified; do not use it for rate or ranking claims.
 
-**Impact: CRITICAL — the single strongest predictor of documentation survival**
+**Impact: HIGH — coupling documentation updates to the maintained system reduces missed-update opportunities**
 
-> Place docs near the code they describe. Each step away reduces the probability of maintenance.
+> Keep documentation in the actual maintenance workflow while preserving access for its intended readers. Repository proximity is useful when it achieves both.
 
 ---
 
 ## The Proximity Gradient
+
+The following is an illustrative maintenance-distance model, not a measured universal ranking. External documentation can have effective review automation and ownership; inaccessible in-repository guidance cannot serve its audience merely by being near code.
 
 ```
 MOST DURABLE ──────────────────── LEAST DURABLE
 Inline comment > README > docs/ > Wiki > Confluence > Google Doc
      │              │       │        │         │           │
   Same file    Same repo  Same repo  Same org  Same org  Anywhere
-  Same commit  Same PR    Same PR    Never     Never     Never
+  Same commit  Same PR    Same PR    Separate maintenance handoff
 ```
 
 ---
@@ -24,9 +26,9 @@ Inline comment > README > docs/ > Wiki > Confluence > Google Doc
 
 | Source | Finding |
 |--------|---------|
-| **Tan et al. (2023)** | Doc-code inconsistency increases at predictable rates. In-repo docs decay significantly slower than external docs. Distance is the strongest predictor of staleness. |
+| **Earlier Tan attribution** | Unverified; no established decay rate or strongest-predictor claim follows from this citation. |
 | **Google SWE Book (2020)** | Documentation must be treated like code — owned, reviewed, tested, co-located. Google's internal wiki (GooWiki) rotted despite good tooling because of ownership gaps. |
-| **GitHub Survey (2023)** | 93% of developers say docs are important. 60% say docs are inadequate. The gap: docs are created but not maintained — a proximity failure. |
+| **GitHub Open Source Survey (2017)** | 93% of respondents had encountered incomplete or outdated documentation; 60% of contributors seldom or never contributed to docs. These are different questions from importance or adequacy ratings, and do not establish proximity as the cause. |
 
 ---
 

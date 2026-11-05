@@ -4,7 +4,7 @@
 
 **Impact: HIGH — the single most common documentation mistake is documenting the wrong layer**
 
-> Document *intent*, not *mechanics*. Code already describes what it does. Comments and docs capture *why* it does it that way.
+> Preserve the rationale that code cannot explain. Avoid comments that merely narrate obvious implementation, while keeping the API reference, operational steps and tutorials that readers need to use the system.
 
 ---
 
@@ -12,12 +12,12 @@
 
 | Layer | Expressed By | Example |
 |-------|-------------|---------|
-| **What / How** | The code itself | `users.filter(u => u.active && u.lastLogin > cutoff)` |
+| **What / How** | Code for implementation detail; accessible reference and task guidance for consumers | `users.filter(u => u.active && u.lastLogin > cutoff)` or the API's documented filtering contract |
 | **Why** | Comments, ADRs, commit messages | "Filter inactive users to comply with GDPR data minimization (Art. 5(1)(c))" |
 
-Code is the authoritative source of **what**. It executes. It's always current. Documentation's unique value is what code *cannot* express: why this approach, what was rejected, which constraints shaped the decision, when to revisit.
+The relevant code version is evidence of implemented behavior, not proof of the intended or deployed contract. Consumers may need reference or operational guidance without reading implementation. Preserve rationale as well: why this approach, what was rejected, which constraints shaped the decision, and when to revisit.
 
-If documentation restates what code says, it's redundant. Redundancy rots.
+Restating a self-evident line in an adjacent comment adds little. Explaining a public contract or a user's task can be necessary even when code implements it. Choose placement by the reader's need and the maintenance path; do not remove useful reference material merely because it describes behavior.
 
 ---
 
@@ -114,4 +114,4 @@ The diff shows *what* changed. The commit message's job is *why*.
 
 **"If I read only the code (no comments, no docs), what information would I be missing?"**
 
-That missing information — the *why* — is what documentation should capture. Everything else is noise.
+Capture the missing rationale. Also retain behavior, procedures and examples the intended reader needs to use the system; these are not noise merely because an expert could reconstruct them from code.
