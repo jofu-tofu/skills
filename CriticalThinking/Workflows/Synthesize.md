@@ -14,7 +14,7 @@
 
 ## Background
 
-Five independent reasoning chains — each operating in a different lens, each decomposing and solving the problem independently — have produced five complete perspective files. Produce something none of them could alone: a synthesis that cross-pollinates insights, surfaces contradictions, and delivers an integrated answer.
+Five independent reasoning chains — each operating in a different lens, each decomposing and solving the problem independently — have produced five complete perspective files. Produce a useful integrated answer that preserves evidence qualifications and identifies supported cross-connections or disagreements.
 
 Synthesis is not summary. A summary compresses each perspective into a bullet point. Synthesis finds patterns that span multiple perspectives, contradictions that reveal hidden complexity, and combined insights that produce a stronger answer than any single lens.
 
@@ -26,13 +26,15 @@ Read all 5 perspective files end-to-end and re-read `prompt.txt`. For each persp
 
 ### Step 2: Find Convergences and Contradictions
 
-**Convergences:** Where do multiple perspectives independently reach the same conclusion through different reasoning? This is the highest-confidence signal the pipeline produces.
+**Convergences:** Where do perspectives reach the same conclusion, and on which facts or premises? Repeated use of one source or assumption is correlated agreement, not additional empirical confirmation. Evidence quality owns confidence.
 
 **Contradictions:** Where do perspectives disagree? These reveal genuine tensions a single-perspective analysis would miss. Note whether the disagreement is about facts, values, or framing.
 
+Trace consequential rejected or qualified premises into proposed recommendations. Do not revive a rejected premise because another perspective repeats it. Resolve factual conflicts with available evidence; preserve genuine value tradeoffs. If no contradiction exists, say so without manufacturing one.
+
 ### Step 3: Cross-Pollinate
 
-Find 1-2 insights where one perspective strengthens or transforms an approach from another. The best synthesis creates combinations no single agent could have conceived.
+Identify useful cross-connections where supported. No new insight is required; do not claim an unknowable counterfactual about what one agent could have conceived.
 
 ### Step 4: Produce Integrated Answer
 
@@ -59,7 +61,7 @@ Write to `$THINK_DIR/synthesis.md`. **Target length: 80-120 lines.** Density ove
 
 ## Convergences
 
-[Where 2+ perspectives independently agree. 1-2 paragraphs. These are the highest-confidence findings.]
+[Where perspectives agree, with shared evidence/assumptions identified. Confidence follows the evidence.]
 
 ## Contradictions
 
@@ -67,7 +69,7 @@ Write to `$THINK_DIR/synthesis.md`. **Target length: 80-120 lines.** Density ove
 
 ## Cross-Pollinated Insights
 
-[1-2 novel combinations. Brief — just the insight and why it matters.]
+[Useful supported combinations, or state that none adds to the individual perspectives.]
 
 ## Integrated Answer
 
@@ -87,7 +89,7 @@ Write to `$THINK_DIR/synthesis.md`. **Target length: 80-120 lines.** Density ove
 ## Constraints
 
 1. **Produce synthesis, not summary.** Concatenating each perspective's approaches is failure — the value lives in cross-connections, convergent trade-offs, and insights that emerge from comparing across lenses.
-2. **Highlight convergences prominently.** Independent agreement through different reasoning is the strongest signal this pipeline produces.
+2. **Calibrate agreement.** Show what agrees and why; shared facts or assumptions are not independent evidence.
 3. **Present contradictions honestly.** They reveal complexity the user needs to navigate. Do not resolve them artificially — present the tension.
 4. **Answer the question.** The user asked something specific. The five perspectives are the reasoning; the synthesis is the answer. Translate to action.
 5. **Credit perspectives.** When citing an insight, note which perspective it came from so the user can drill into that perspective file for depth.

@@ -4,7 +4,7 @@
 
 This skill formalizes the observation that rigorous problem-solving follows a consistent structure: decompose to first principles, link to known patterns from diverse domains, compare solutions, and synthesize. The quality of the output depends on two things: (1) how many genuinely different starting points you explore, and (2) whether those starting points are far enough apart to avoid converging on the same local minimum.
 
-Most people (and most AI prompts) do this in a single chain of thought, which means the "different perspectives" converge almost immediately because they share a context window. CriticalThinking makes this process explicit and enforces genuine divergence through process boundaries. Five separate agents, each locked into one lens, produce five independent reasoning chains. Only the final synthesis agent sees all five.
+Most people (and most AI prompts) do this in a single chain of thought, which means the "different perspectives" converge almost immediately because they share a context window. CriticalThinking makes this process explicit and limits direct perspective sharing through process boundaries. Five separate agents, each locked into one lens, produce five separately developed reasoning chains. Only the final synthesis agent sees all five.
 
 This is critical thinking, not creative thinking. The goal is not novelty — it's rigor. Escaping local minima in reasoning, not generating novel ideas.
 
@@ -14,9 +14,9 @@ This is critical thinking, not creative thinking. The goal is not novelty — it
 
 The skill treats thinking as optimization in solution space. A single chain of reasoning is gradient descent from one starting point — it finds the nearest local minimum. Five independent chains from orthogonal starting points are multi-start optimization — they explore different regions of the space. The synthesis step then compares what each found.
 
-The key insight: genuine divergence is hard in a single context window. The LLM naturally converges because all perspectives share the same token history. Process boundaries enforce what text instructions cannot: real independence.
+The key insight: genuine divergence is hard in a single context window. The LLM naturally converges because all perspectives share the same token history. Separate contexts restrict direct sharing, but do not guarantee independent evidence or different conclusions.
 
-### Why 3 Domain + 2 Epistemic (Not All Fixed, Not All Adaptive)
+### Lens design history
 
 The lens system went through three design iterations:
 
@@ -24,9 +24,9 @@ The lens system went through three design iterations:
 
 2. **v1.1 — 3 fixed epistemic + 2 adaptive:** Structural, causal, adversarial, + 2 agent-chosen. Problem: epistemic lenses are universally applicable but don't force vocabulary change. The structural analysis of a software problem still sounds like a software problem.
 
-3. **v1.2 — 3 adaptive domain + 2 adaptive epistemic (current):** Domain reframing forces alien vocabulary (the primary mechanism for escaping local minima). Epistemic lenses add reasoning-mode diversity that domain lenses can't reach. All five are agent-chosen, but with orthogonality constraints.
+3. **v1.2 — 3 adaptive domain + 2 adaptive epistemic (historical v1.2):** Domain reframing forces alien vocabulary (the primary mechanism for escaping local minima). Epistemic lenses add reasoning-mode diversity that domain lenses can't reach. All five are agent-chosen, but with orthogonality constraints.
 
-The current design combines both mechanisms: domain lenses change what you SEE (new vocabulary reveals hidden structure), and epistemic lenses change HOW you think (new cognitive operations explore different solution regions).
+The current v2 design uses gap-driven reframing, two cross-domain lenses, a representation shift and an adaptive fifth lens, as defined in SKILL.md and Reframe.md. The historical design combined both mechanisms: domain lenses change what you SEE (new vocabulary reveals hidden structure), and epistemic lenses change HOW you think (new cognitive operations explore different solution regions).
 
 ### Why One Reframe Agent (Not Five Parallel Choosers)
 
@@ -51,9 +51,9 @@ Borrowed directly from CodeReview's architecture. The orchestrator never reads a
 ## Success Criteria
 
 From the output perspective:
-1. The synthesis contains insights that appear in ZERO individual perspective files (genuine emergence from cross-pollination)
-2. At least one convergence is identified (independent agreement from different reasoning)
-3. At least one contradiction is identified (genuine tension the user must navigate)
+1. The synthesis gives a useful integrated answer, preserving hard constraints and the status of consequential premises. New cross-connections are useful when supported, not mandatory.
+2. Agreement is described with its evidence dependence; repeated use of one premise is not independent confirmation.
+3. Genuine factual conflicts and value tradeoffs are made clear; no contradiction is invented when the perspectives agree.
 4. The user receives concrete, actionable output — not an academic exercise
 
 ## Explicit Out-of-Scope
