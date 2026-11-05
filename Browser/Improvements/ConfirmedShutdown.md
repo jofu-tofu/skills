@@ -1,0 +1,9 @@
+# Confirmed session shutdown and recovery
+
+2026-11-05. Independent review found restart discarded ownership state after HTTP503 or a false success acknowledgement while the owned service stayed active. Actual candidate12 probes reproduce both failures. Candidate14 preserves the state and reports unconfirmed stop. Restart only discards old ownership after endpoint termination is confirmed; stop also avoids claiming success from acknowledgement alone. A listening but unresponsive port is treated as occupied, including startup, using a bounded socket check. This is stale/foreign-service protection, not authentication or race-proof authorization.
+
+Evidence: `RemainingSkills20261104/deep/engineering/restart-candidate12/results.json`, `restart-candidate14/results.json`, `cold-start-candidate14/checks.json`, `browser-candidate14-portable.log`. Synthetic responder probes adapt only the disposable CLI default port to their isolated port, preventing access to user services. Actual Chromium cold start, reused identity/state, successful restart and stop pass. Portable stop controls cover genuine termination, HTTP error, still-running acknowledgement, foreign identity and malformed health.
+
+Broader OS/runtime portability is not established by these Node24/Windows/Chromium1208 checks. No installed files or configuration are changed.
+
+Current retained runtime is candidate16. Candidate15 added the same recorded-unresponsive-port guard to ensureSession; `unresponsive-candidate15/results.json` preserves restart/stop/reuse errors with state unchanged and zero stop calls. Candidate16 adds read-only status/corrupt-state handling, separately documented in ReadOnlyStatus.md; actual owned status/lifecycle and portable regressions pass. Authentication and race-proof authorization remain outside these claims.
