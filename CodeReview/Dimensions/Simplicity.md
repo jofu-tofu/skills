@@ -40,16 +40,16 @@ The kind of issue where code is more complex than its problem requires:
 
 - **Dead code and dead paths** — functions never called, parameters never used, branches that can never execute, commented-out code preserved "just in case," feature flags that are always on or always off. Every dead line is a line someone will read and try to understand.
 - **Premature abstraction** — factories, strategies or generic layers with no demonstrated reuse or isolation benefit. One implementation alone is insufficient evidence: a boundary can hide substantial complexity or isolate side effects. Name the extra concepts callers must learn and what they gain.
-- **Unnecessary indirection** — wrappers or delegation that hide no useful complexity. Count the caller's total concepts, flags, conditional fields and orchestration, not just public methods. Does one small signature conceal a configuration language or force callers to reconstruct the workflow?
+- **Unnecessary indirection** — count caller concepts, flags and orchestration, not just parameters. Does a shared operation make callers encode identity or selection policy in mode flags? Letting callers select inputs and share processing can simplify this; a coherent operation option needs no refactor.
 - **Over-engineered or out of proportion** — code designed for requirements that don't exist yet (configurable where hardcoded would work, generic where specific would work), or a new mechanism built where the codebase already has a lightweight one for the same job. Search for the existing precedent before accepting a new one.
-- **Redundant validation and defensive code** — null checks on values the type system guarantees, error handling for conditions the caller prevents, validation the framework already does. A defensive check earns its place by naming a scenario that can actually reach it. If the check guards a trust boundary, leave it to SEC.
+- **Redundant validation and defensive code** — identify the enforced invariant that makes the guarded condition unreachable and check that callers preserve it. Static types alone do not validate runtime inputs. Retain trust-boundary checks and checks whose actors or lifecycle differ; coordinate security-relevant findings with SEC. A simpler path must preserve the actual contract.
 
 ### MEDIUM — Missed Simplification
 
 The kind of issue where code works but could be expressed more simply:
 
 - **Verbose patterns** — manual iteration where a built-in method works, explicit state machines where a simple flag suffices, hand-rolled logic the standard library provides.
-- **Accidental duplication** — the same logic expressed in multiple places, by copy-paste or by convergence. Unification would create a single source of truth.
+- **Accidental duplication** — consolidate equivalent rules when it reduces change burden. Similar lines serving different actors or lifecycles may be simpler separately; shared mechanics need not imply shared policy.
 - **Complex conditionals** — deeply nested if/else trees, boolean expressions with multiple negations, switch statements that could be lookup tables. The logic is correct but the expression of it is harder to follow than necessary.
 - **Speculative generality** — parameters always passed the same value, type parameters always the same type, configuration options never changed from defaults.
 - **Over-built tests** — tests that mock everything around the unit until they only test the mocks, assert exact call counts or private steps instead of outcomes, or duplicate setup that a shared fixture would remove. They break on every refactor and catch nothing.
@@ -104,13 +104,15 @@ async function findUserById(id: string): Promise<User> {
 ### Before — Redundant defensive code
 
 ```typescript
+// Private helper: callers supply an array and non-null items
+// validated at the boundary; no mutation occurs before this call.
 function processItems(items: Item[]) {
-  if (!items) return [];           // TypeScript ensures items is Item[], not null
-  if (!Array.isArray(items)) return []; // Type system already guarantees this
+  if (!items) return [];           // Enforced caller contract excludes null
+  if (!Array.isArray(items)) return []; // Boundary already validated the array
   if (items.length === 0) return [];    // The loop below handles empty arrays fine
   const results = [];
   for (const item of items) {
-    if (item) {                    // Item type isn't optional — this can't be null
+    if (item) {                    // Boundary already validated each item
       results.push(transform(item));
     }
   }
@@ -118,7 +120,7 @@ function processItems(items: Item[]) {
 }
 ```
 
-### After — Trust the type system
+### After — Rely on the enforced contract
 
 ```typescript
 function processItems(items: Item[]) {

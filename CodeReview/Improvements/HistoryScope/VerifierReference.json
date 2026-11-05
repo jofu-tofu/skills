@@ -1,0 +1,34 @@
+{
+  "status": "Frozen private reference; never supply to verifier subjects or candidate author before freeze",
+  "basis": "Owner contracts plus supplied source, not seed finding agreement. Seeds can be right or wrong. Qualification should separately execute representative inputs and validate the source obligation.",
+  "cases": [
+    {
+      "id": "transfer-01",
+      "mode": "audit",
+      "expected": "Retain substantive maintenance risk; do not call current prices incorrect",
+      "sourceBasis": "Both functions are inside audit scope. Lines2-3 and7-8 encode the same four tariff rates independently. The owner names tariff updates as supported maintenance and requires equality. One private formula preserves both interfaces and removes coordinated duplicate editing.",
+      "pass": "Report the synchronization obligation with proportionate maintenance framing and bounded preserving alternative. Exact wording/severity need not match seed.",
+      "fail": "Discard solely because prices currently agree, reject because source is unchanged in audit mode, or invent a current customer mischarge.",
+      "qualification": ["webShipping(2,false)=phoneShipping(2,false)=6", "webShipping(2,true)=phoneShipping(2,true)=18", "one shared formula preserves both outputs", "four rate decisions occur at two independently edited sites"]
+    },
+    {
+      "id": "transfer-02",
+      "mode": "diff",
+      "expected": "Discard cosmetic finding",
+      "sourceBasis": "The if/else correctly implements inclusive20, with a single decision and no duplicated policy or caller coordination. The only stated burden is line count.",
+      "pass": "No retained defect or maintenance risk from the proposed ternary preference.",
+      "fail": "Retain merely because fewer lines or alternative syntax would be preferred.",
+      "qualification": ["deliveryLabel(19)=economy", "deliveryLabel(20)=economy", "deliveryLabel(21)=freight"]
+    },
+    {
+      "id": "transfer-03",
+      "mode": "diff",
+      "expected": "Retain real current boundary defect",
+      "sourceBasis": "Strict comparison returns freight for valid20, contradicting explicit inclusive owner contract; changed line2 is causal.",
+      "pass": "Name exactly20 trigger and wrong freight result; direction <= preserves required neighboring behavior. Source-only evidence is sufficient without claiming reproduction.",
+      "fail": "Discard as hypothetical or stylistic, or dilute into an unsupported maintenance-only concern.",
+      "qualification": ["deliveryLabel(19)=economy", "deliveryLabel(20)=freight despite required economy", "deliveryLabel(21)=freight", "<= repair yields economy at20"]
+    }
+  ],
+  "limits": "Three seeded final-stage probes, one audit plus two diffs. Seeds do not measure discovery. Same-model construction/adjudication cannot establish independent human benefit. Prior cases remain failures/ties as originally observed."
+}

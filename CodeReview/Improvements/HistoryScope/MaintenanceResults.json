@@ -1,0 +1,225 @@
+{
+  "suite_version": "history-maintenance-1",
+  "workflow": "CodeReview/SIM -> VerifyAndReport",
+  "mode": "exploratory assessment",
+  "claim": "Simplicity instruction comparison with final-consumer preservation",
+  "snapshots": {
+    "baseline": "80d6099",
+    "candidate_sim_sha256": "2362d8c733f6774930130a0ae79c4c5f3c752d9cee58e795419b8009787cb701",
+    "verifier": "unchanged baseline",
+    "cases": "MaintenanceCases.json",
+    "measurement": "CR-HS-M1",
+    "checker": "Unblinded same-model source-grounded adjudication of frozen references, qualified fixture behavior, SIM outputs, verification records and final reports. Not independent human evidence."
+  },
+  "requested_trials": 8,
+  "completed_trials": 8,
+  "runs": [
+    {
+      "case_id": "maintenance-01",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "maintenance-contract",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain actual runtime array validation and report no simplicity defect. Candidate explicitly explains static annotation does not validate JSON; baseline also traces guard before reduction. Qualification confirms null/object change from throw to400 and array totals preserved.",
+          "evidence": [
+            "external:maintenance-evaluation-v2/runs/baseline/cases/maintenance-01/review/report.md"
+          ],
+          "reason": "Source/contract evidence and final-report inspection."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-01",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "maintenance-contract",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain actual runtime array validation and report no simplicity defect. Candidate explicitly explains static annotation does not validate JSON; baseline also traces guard before reduction. Qualification confirms null/object change from throw to400 and array totals preserved.",
+          "evidence": [
+            "external:maintenance-evaluation-v2/runs/candidate/cases/maintenance-01/review/report.md"
+          ],
+          "reason": "Source/contract evidence and final-report inspection."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-02",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "maintenance-contract",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept private duplicate-guard removal because sole caller retains runtime validation. Neither invents extra callers or removes boundary validation. Qualified base/tip behavior agrees.",
+          "evidence": [
+            "external:maintenance-evaluation-v2/runs/baseline/cases/maintenance-02/review/report.md"
+          ],
+          "reason": "Source/contract evidence and final-report inspection."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-02",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "maintenance-contract",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept private duplicate-guard removal because sole caller retains runtime validation. Neither invents extra callers or removes boundary validation. Qualified base/tip behavior agrees.",
+          "evidence": [
+            "external:maintenance-evaluation-v2/runs/candidate/cases/maintenance-02/review/report.md"
+          ],
+          "reason": "Source/contract evidence and final-report inspection."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-03",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "maintenance-contract",
+          "measurement_id": "CR-HS-M1",
+          "status": "fail",
+          "observation": "Both verifiers discard as NITPICK before evidence pass because no current wrong selection exists and a future selector edit is needed for mismatch. This loses the current duplicated-policy synchronization obligation required by SIM1/MNT1 outcomes.",
+          "evidence": [
+            "external:maintenance-evaluation-v2/runs/baseline/cases/maintenance-03/review/report.md"
+          ],
+          "reason": "HIGH is not necessary to satisfy the reference; proportionate maintenance warning with bounded refactor would pass. Correct response need not claim merge-blocking defect."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-03",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "maintenance-contract",
+          "measurement_id": "CR-HS-M1",
+          "status": "fail",
+          "observation": "Both verifiers discard as NITPICK before evidence pass because no current wrong selection exists and a future selector edit is needed for mismatch. This loses the current duplicated-policy synchronization obligation required by SIM1/MNT1 outcomes.",
+          "evidence": [
+            "external:maintenance-evaluation-v2/runs/candidate/cases/maintenance-03/review/report.md"
+          ],
+          "reason": "HIGH is not necessary to satisfy the reference; proportionate maintenance warning with bounded refactor would pass. Correct response need not claim merge-blocking defect."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-04",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "maintenance-contract",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept the authorized overwrite boolean and retain submission preservation/refresh recomputation. No blanket boolean ban or extra hierarchy recommended.",
+          "evidence": [
+            "external:maintenance-evaluation-v2/runs/baseline/cases/maintenance-04/review/report.md"
+          ],
+          "reason": "Source/contract evidence and final-report inspection."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-04",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "maintenance-contract",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept the authorized overwrite boolean and retain submission preservation/refresh recomputation. No blanket boolean ban or extra hierarchy recommended.",
+          "evidence": [
+            "external:maintenance-evaluation-v2/runs/candidate/cases/maintenance-04/review/report.md"
+          ],
+          "reason": "Source/contract evidence and final-report inspection."
+        }
+      ]
+    }
+  ],
+  "decision": "fail",
+  "decision_scope": "Both versions lose supported maintenance-03 at verifier; no SIM comparative benefit",
+  "regression_coverage": "Measurement.md#second-comparison-simplicity-contracts",
+  "observations": [
+    {
+      "id": "maintenance-01",
+      "baseline": "pass",
+      "candidate": "pass",
+      "decision": "Both retain actual runtime array validation and report no simplicity defect. Candidate explicitly explains static annotation does not validate JSON; baseline also traces guard before reduction. Qualification confirms null/object change from throw to400 and array totals preserved."
+    },
+    {
+      "id": "maintenance-02",
+      "baseline": "pass",
+      "candidate": "pass",
+      "decision": "Both accept private duplicate-guard removal because sole caller retains runtime validation. Neither invents extra callers or removes boundary validation. Qualified base/tip behavior agrees."
+    },
+    {
+      "id": "maintenance-03",
+      "baseline": "fail",
+      "candidate": "fail",
+      "lensDecision": "Both SIM outputs identify duplicate public selection rules, caller actor flag and placeholder array; both recommend existing caller selectors feeding shared row processing. Supported maintenance mechanism, not current runtime defect.",
+      "handoffFailure": "Both verifiers discard as NITPICK before evidence pass because no current wrong selection exists and a future selector edit is needed for mismatch. This loses the current duplicated-policy synchronization obligation required by SIM1/MNT1 outcomes.",
+      "qualification": "Current outputs correct; nine qualification assertions cover behavior, bounded alternative parity, and a counterfactual selector-only edit demonstrating synchronization burden. Counterfactual is not proof of current runtime failure.",
+      "calibration": "HIGH is not necessary to satisfy the reference; proportionate maintenance warning with bounded refactor would pass. Correct response need not claim merge-blocking defect."
+    },
+    {
+      "id": "maintenance-04",
+      "baseline": "pass",
+      "candidate": "pass",
+      "decision": "Both accept the authorized overwrite boolean and retain submission preservation/refresh recomputation. No blanket boolean ban or extra hierarchy recommended."
+    }
+  ],
+  "totals": {
+    "baseline": {
+      "pass": 3,
+      "fail": 1,
+      "unverified": 0
+    },
+    "candidate": {
+      "pass": 3,
+      "fail": 1,
+      "unverified": 0
+    },
+    "novelFindings": 0,
+    "targetedPreservationRegressions": 0,
+    "comparativeGain": "None observed; tie"
+  },
+  "retention": "SIM text can be retained only as bounded contract clarification with no measured gain claim. Evidence supports evaluating a narrow verifier allowance for source-demonstrated maintenance burden; do not change references or inflate current correctness risk to make03 pass.",
+  "limitations": [
+    "One unblinded same-model run per arm, four synthetic cases; no reliability estimate.",
+    "Only SIM-to-VerifyAndReport component handoff tested; GatherContext and other lenses not run.",
+    "Fixture runtime qualification is separate from subject reviews, which correctly claim source-only evidence.",
+    "Gateway element guarantees, complete callers and preview use are supplied fixture facts, not deployed-system evidence.",
+    "Future policy witness establishes sync obligation, not current wrong output."
+  ]
+}
