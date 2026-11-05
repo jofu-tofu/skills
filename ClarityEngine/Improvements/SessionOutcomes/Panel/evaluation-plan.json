@@ -1,0 +1,51 @@
+{
+  "suite_version": "panel-v2",
+  "workflow": "ClarityEngine/ReadabilityGate to Verify",
+  "claim": "Correct final review-completion reports from recorded reviewer results",
+  "baseline_type": "preserved installed version",
+  "snapshots": {
+    "baseline": "80d6099f6c7c76dd0995284f7a3ae49d72cbb7d6",
+    "candidate_v1": "candidate-v1/",
+    "candidate_v2": "enclosing commit Gate/Verify; blob identities in snapshots.json",
+    "cases": [
+      "cases-v1.md",
+      "cases-v2.md"
+    ],
+    "measurement": "M1 bounded evidence reconciliation",
+    "checker": "reference.md"
+  },
+  "runtime": "Separate fresh agents, same inherited model settings; recorded evidence fixtures; no live reviewers",
+  "trials_per_case": 1,
+  "max_runs": 20,
+  "decision_rules": "Record.md stage 3 and reference.md v2 amendment; corrected baseline false Ready and all mandatory preservation controls; no favorable retry",
+  "case_roles": {
+    "C1": "development",
+    "C2": "development",
+    "C3": "development",
+    "C4": "development",
+    "C5": "development",
+    "C6": "development",
+    "C7": "development",
+    "C8": "development",
+    "C9": "validation",
+    "C10": "validation"
+  },
+  "checks": [
+    {
+      "id": "readiness-comprehension",
+      "method": "Compare reported statuses with source-derived contract key; inspect quoted rationale and C9/C10 handoffs",
+      "measurement_id": "M1-evidence-reconciliation",
+      "qualification_status": "qualified for bounded contract comparison",
+      "qualification_evidence": "report.md#diagnosis-and-qualification",
+      "required": true,
+      "missing_evidence": "unverified"
+    }
+  ],
+  "regression_coverage": "../Record.md#protected-behavior-and-coverage",
+  "limitations": [
+    "Supplied synthetic reviewer evidence; no live reviewer launches or fault injection",
+    "One execution per case/version/suite",
+    "C8 baseline judgment varied between trials",
+    "Not human comprehension or complete skill readiness"
+  ]
+}

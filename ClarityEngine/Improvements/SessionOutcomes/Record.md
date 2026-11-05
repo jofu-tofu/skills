@@ -36,3 +36,9 @@ Outcome-profile review: independent design review found no blocking contradictio
 ## Increment 2: Explanation hypothesis
 
 [Executed comparison](Explanation/report.md): six outputs across three matched cases; both configurations met the source-grounded checks. A fresh reader and separate adjudication supported the tie. The proposed extra drafting instruction was not retained. Added regression coverage instead. This preserves a null result rather than expanding the skill without demonstrated benefit.
+
+## Increment 3: Honest review completion
+
+[Panel comparison](Panel/report.md): 16 initial and 20 revised case executions. The current baseline allowed false Ready on missing, empty and stale review evidence. Candidate v2 corrected those reports and preserved complete small panels, confirmed-defect precedence, valid evidence after unrelated errors, and audience-specific results. Design review moved evidence reconciliation before scoring and clarified per-audience repair dispatch. This is a bounded recorded-evidence result, not a live orchestration or human-comprehension claim.
+
+Retained behavior: ClarityEngine 1.5.1 tracks planned and completed reviewers separately, rejects stale findings before adjudication, and does not claim complete review with missing required evidence. The prose-rule hypothesis remains rejected after a tie. Raw private session provenance remains in the task's local output, not this repository. Final sample: 14 distinct chats, selected for relevant feedback rather than sampled representatively.
