@@ -1,0 +1,87 @@
+{
+  "improvement_id": "session-outcomes-panel",
+  "parent_attempt": "session-outcomes-explanation-tie",
+  "workflow": "ClarityEngine/ReadabilityGate to Verify",
+  "baseline": "80d6099f6c7c76dd0995284f7a3ae49d72cbb7d6",
+  "candidate": "ClarityEngine 1.5.1 enclosing commit",
+  "hypothesis": {
+    "observed_failure": "Baseline reports Ready despite missing, empty or stale required reviewer evidence",
+    "evidence": [
+      "Panel/baseline-v1-reports.md",
+      "Panel/baseline-v2-reports.md"
+    ],
+    "reproduction": "synthetic",
+    "suspected_cause": "Completed-only panel handoff loses intended coverage",
+    "smallest_change": "Record planned/completed panel and reconcile before scoring",
+    "predicted_effect": "Missing required current evidence yields Unverified without erasing valid results",
+    "falsifying_outcome": "Candidate reports Ready with required evidence absent or rejects complete valid small panels"
+  },
+  "evaluation": {
+    "suite_version": "panel-v2",
+    "target_checks": [
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "preservation_checks": [
+      "C1",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10"
+    ],
+    "max_runs": 20,
+    "fresh_case_ids": [
+      "C9",
+      "C10"
+    ]
+  },
+  "targeted_failure": {
+    "baseline_status": "fail",
+    "candidate_status": "pass",
+    "evidence": [
+      "baseline-v2-reports.md",
+      "candidate-v2-reports.md"
+    ]
+  },
+  "loop_observations": [
+    {
+      "stage": "diagnosis",
+      "status": "supported",
+      "observation": "Missing planned reviewers can disappear from required coverage",
+      "evidence": [
+        "report.md"
+      ],
+      "attribution": "observed"
+    },
+    {
+      "stage": "execution",
+      "status": "supported",
+      "observation": "Final reports produced under each supplied workflow from identical recorded evidence",
+      "evidence": [
+        "baseline-v2-reports.md",
+        "candidate-v2-reports.md"
+      ],
+      "attribution": "observed"
+    },
+    {
+      "stage": "transfer",
+      "status": "not_tested",
+      "observation": "Live agent host orchestration not executed",
+      "evidence": [
+        "report.md"
+      ],
+      "attribution": "unknown"
+    }
+  ],
+  "decision": "accepted",
+  "reason": "Record.md stage 3 / SkillForge ApproveSkill: targeted reporting correction and preservation supported in bounded recorded-evidence trials",
+  "limitations": [
+    "Supplied synthetic reviewer evidence; no live reviewer launches or fault injection",
+    "One execution per case/version/suite",
+    "C8 baseline judgment varied between trials",
+    "Not human comprehension or complete skill readiness"
+  ]
+}

@@ -272,3 +272,7 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 ## Case 11: Practical distinctions and supported examples
 
 See the synthetic [cases](../Improvements/SessionOutcomes/Explanation/cases.md), [source-derived reference](../Improvements/SessionOutcomes/Explanation/reference.md), and [executed comparison](../Improvements/SessionOutcomes/Explanation/report.md). They test responsibility versus storage location, a concise ordinary explanation, and unavailable customer examples. Both versions passed the bounded comparison; no extra drafting instruction was retained. Use these as preservation cases, not evidence of improved human comprehension.
+
+## Case 12: Incomplete review evidence
+
+Use the synthetic [panel cases](../Improvements/SessionOutcomes/Panel/cases-v2.md), [frozen reference](../Improvements/SessionOutcomes/Panel/reference.md), and [executed comparison](../Improvements/SessionOutcomes/Panel/report.md). Exercise planned versus completed reviewer bookkeeping through the final readiness report. Missing, empty or old reports must not silently shrink the required panel. Reject stale findings before scoring. Preserve current valid results, intentional small panels and defect precedence. A missing intended audience Reader blocks aggregate comprehension Pass; repair selects one Reader per intended audience. These recorded-evidence trials do not replace a live orchestration test.

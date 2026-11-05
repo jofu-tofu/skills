@@ -38,7 +38,7 @@ Create `$REVIEW_DIR` as `_output/clarity-review/[YYYYMMDD-HHMMSS]` in the workin
 $REVIEW_DIR/
   brief.md, reader-questions[-audience].md, answer-key[-audience].md
   contract.md (when one exists), sources/, verification.md
-  round-1/   artifact copy, measurements.md, first-half.md, skim-layer.md, plainness.md,
+  round-1/   artifact copy, panel.md, measurements.md, first-half.md, skim-layer.md, plainness.md,
              plain-candidates.json, render/, lens-*.md, verified-findings.md, report.md,
              declined.md, contract-checks.md, moved-out.md, plain/
   round-2/   ...
@@ -75,6 +75,8 @@ For visual formats, capture the rendered output into `$ROUND_DIR/render/` as des
 | Any rendered visual output (HTML, PPTX, PDF) | Add Visual |
 | More than one audience in the brief | One Reader per audience |
 
+Before starting reviewers, write `$ROUND_DIR/panel.md` with the artifact version or hash, round, planned reviewers (including audience names), and intentional exclusions with reasons. Keep planned and completed reviewers separate. Each completion records its non-empty output path and the artifact version it reviewed; earlier-round output is not current evidence.
+
 ### Step 5: Run the Lenses in Parallel
 
 Start one fresh agent per lens, in parallel, with no inherited conversation. Give each lens exactly these inputs, as absolute paths:
@@ -100,7 +102,7 @@ Review only these inputs: [absolute paths from the table above].
 Write your review to $ROUND_DIR/lens-[Lens][-audience].md and return that path.
 ```
 
-Check that each returned file exists and is non-empty. Retry a missing lens once. Do not open the files.
+Check that each returned file exists and is non-empty. Retry a missing lens once. Record completed, missing, empty, or stale evidence in `panel.md`; after retry, leave an unresolved reviewer in the planned panel as NOT VERIFIED. Do not open the files.
 
 If fresh agents are unavailable, record the independent review as `NotVerified`. You may still check the draft against the lens files yourself, labeled as a self-check; a self-check cannot produce `Ready`.
 
@@ -110,7 +112,7 @@ Start one fresh agent:
 
 ```
 Read $SKILL_ROOT/Workflows/Verify.md and execute it.
-Review folder: $REVIEW_DIR. Round folder: $ROUND_DIR. Lenses run: [list].
+Review folder: $REVIEW_DIR. Round folder: $ROUND_DIR. Planned and completed reviewers: $ROUND_DIR/panel.md. Lenses run: [list].
 Previous round's declined.md: [path, or none].
 Write $ROUND_DIR/verified-findings.md. Return the full report as text.
 ```
@@ -127,7 +129,7 @@ Save the returned report as `$ROUND_DIR/report.md`; some agent hosts let subagen
 4. **Contract gate.** When `contract.md` exists, rerun every check in it against the revised artifact and write each result to `$ROUND_DIR/contract-checks.md`. Undo any fix that turned a passing check into a failing one or changed a locked span, and record it in `declined.md` with the check or lock ID. Then add a check for each Blocker or Major standard this round enforced, written so a later pass can test it from the document alone, and update the contract's Last result column.
 5. Start the next round at Step 2, adding `--before <previous round's artifact copy>` to the MeasureDraft command. Every sentence it lists as having lost a connective needs its link restored or stated nearby before review.
 6. Re-render and recapture visual output.
-7. Rerun a fresh Reader, the Cutter, the Navigator, and every other lens that had a verified finding in a changed section, as in Step 5. Repairs are where restatement and setup-after-use creep in, so the Cutter and Navigator run every round; add the changed section headings to their prompts so they check those sections first. Before starting Verify, check that `$ROUND_DIR` holds a `lens-*.md` file for every lens rerun. If none exist, the round fails: write `report.md` saying the lenses did not run, set readiness and comprehension to `Unverified` and `NotVerified`, and do not present the repaired artifact as reviewed.
+7. Rerun one fresh Reader per intended audience, the Cutter, the Navigator, and every other lens that had a verified finding in a changed section, as in Step 5. Repairs are where restatement and setup-after-use creep in, so the Cutter and Navigator run every round; add the changed section headings to their prompts so they check those sections first. Create this round's `panel.md` before the reruns, using the repaired artifact version and the reviewers this step requires; record completions as in Step 5. Before starting Verify, check for non-empty current-artifact evidence for every planned reviewer. Partial evidence goes to Verify with missing reviewers still NOT VERIFIED. If none exist, the round fails: write `report.md` saying the lenses did not run, set readiness and comprehension to `Unverified` and `NotVerified`, and do not present the repaired artifact as reviewed.
 
 Run at most two repair rounds. Then return the latest report with its remaining findings.
 

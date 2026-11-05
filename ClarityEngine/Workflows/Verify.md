@@ -17,10 +17,14 @@ Decide which findings stand, settle conflicts between lenses, compare the Reader
 ## Inputs
 
 - From `$REVIEW_DIR`: `brief.md`, every `reader-questions*.md` and `answer-key*.md`, `sources/`, `verification.md`, and `contract.md` when it exists.
-- From `$ROUND_DIR`: the artifact copy, every `lens-*.md`, `measurements.md`, `skim-layer.md`, `plainness.md`, and `render/` when present.
+- From `$ROUND_DIR`: the artifact copy, `panel.md`, every `lens-*.md`, `measurements.md`, `skim-layer.md`, `plainness.md`, and `render/` when present.
 - On repair rounds, the previous round's `declined.md`.
 
 ## Workflow Steps
+
+### Step 0: Reconcile the Planned Panel
+
+Reconcile `panel.md` with the evidence in this round before reading answers or adjudicating findings. It records planned reviewers, including audience-specific Readers, separately from completed reviewers and intentional exclusions. A planned reviewer with missing, empty, or earlier-artifact evidence remains NOT VERIFIED after retry; do not remove it from the required panel. If the manifest is absent and planned coverage cannot be recovered from the caller, readiness is `Unverified` unless a verified Blocker or Major requires `NeedsRevision`. An explicitly excluded reviewer is not a missing reviewer. Preserve checks already established for this artifact even if another reviewer or a later tool call fails. Only attributable current-artifact reports enter Steps 1–4. Exclude stale, empty, and unattributable reports from scoring and adjudication; list them as evidence gaps instead. A finding from an older artifact cannot establish a defect in the current one.
 
 ### Step 1: Score the Reader's Answers
 
@@ -69,11 +73,13 @@ On repair rounds, accept a declined fix when `declined.md` cites an RC, brief re
 
 ### Step 5: Set the Statuses
 
+Use the evidence reconciliation from Step 0; absence of a planned reviewer remains a required evidence gap.
+
 - **Readiness:** `NeedsRevision` if any verified Blocker or Major remains. Otherwise `Unverified` if an UNVERIFIED Blocker or Major remains, the independent Reader did not run, a required check is NOT VERIFIED, or a required verification layer did not run. Otherwise `Ready`. Report missing evidence even when the status is already `NeedsRevision`.
-- **Required checks:** every RC that a lens in this round's panel marked applicable, plus the verification layers FormatAdapters.md requires for this format. RCs owned by lenses outside the panel, such as Logician checks on a short-form message, are reported as "not in panel" and do not block `Ready`.
-- **Comprehension:** `Pass` when every answer touching the main point, ask, decision, or risk is Correct and no Major comprehension finding remains. `NotVerified` without an independent Reader. Otherwise `NeedsRevision`.
+- **Required checks:** every RC that a completed lens in this round's planned panel marked applicable, every planned reviewer whose applicable checks could not be established because its evidence is missing, plus the verification layers FormatAdapters.md requires for this format. RCs owned by lenses outside the panel, such as Logician checks on a short-form message, are reported as "not in panel" and do not block `Ready`.
+- **Comprehension:** `Pass` when every answer touching the main point, ask, decision, or risk is Correct and no Major comprehension finding remains. `NotVerified` when any intended audience lacks current independent Reader evidence; retain completed audiences' results separately. A confirmed Major comprehension finding still yields `NeedsRevision` even if another audience lacks evidence. Otherwise `NeedsRevision`.
 - **Verification:** Content, File, Rendered, and Target app, each passed, failed, not run, or not applicable, as FormatAdapters.md defines them. Content comes from the Logician's RC-13 and RC-28 results and the Reader results; it is not run without sources or a Logician. File and Target app come from `verification.md`. Rendered comes from the Visual lens's `Rendered` findings and its render evidence.
-- **Coverage:** Every applicable RC with the status its lens recorded. Coverage shows what was checked; it is not proof of readiness.
+- **Coverage:** Every applicable RC with the status its lens recorded. List missing planned reviewers as NOT VERIFIED even when no RC applicability report exists. Show intentional exclusions separately. Coverage shows what was checked; it is not proof of readiness.
 
 ### Step 6: Write the Outputs
 

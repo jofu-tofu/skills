@@ -4,7 +4,7 @@ description: Comprehension-first document and presentation authoring in a plain,
 compatibility: Designed for Claude Code, Codex, and Devin (or similar agent products)
 metadata:
   author: pai
-  version: "1.5.0"
+  version: "1.5.1"
 ---
 
 # ClarityEngine
