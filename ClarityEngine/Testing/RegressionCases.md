@@ -268,3 +268,7 @@ No minimum percentage reduction is required. Definitions, causal explanations, q
 | The repair round reruns the panel | `round-2/` holds `lens-Reader.md`, `lens-Cutter.md`, and `lens-Navigator.md`. If it holds no `lens-*.md` files, the round's report says the lenses did not run and readiness is `Unverified` |
 
 **Fail if:** RC-31 passes paragraph 2; the Reader logs no look-ahead or reconcile sticking point; the repaired paragraph still relies on a later receipt, a stored message, or another payer before introducing it; or a repair round with no lens files reports the artifact as reviewed.
+
+## Case 11: Practical distinctions and supported examples
+
+See the synthetic [cases](../Improvements/SessionOutcomes/Explanation/cases.md), [source-derived reference](../Improvements/SessionOutcomes/Explanation/reference.md), and [executed comparison](../Improvements/SessionOutcomes/Explanation/report.md). They test responsibility versus storage location, a concise ordinary explanation, and unavailable customer examples. Both versions passed the bounded comparison; no extra drafting instruction was retained. Use these as preservation cases, not evidence of improved human comprehension.

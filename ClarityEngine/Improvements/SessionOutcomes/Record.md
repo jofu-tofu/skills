@@ -32,3 +32,7 @@ Budget: one matched execution per configuration/case for each bounded diagnostic
 Initial status: outcomes established; behavioral evaluation pending. Append actual outputs, qualification, decisions, and limits before closing the attempt.
 
 Outcome-profile review: independent design review found no blocking contradictions and all 10 relative Markdown links resolved. M1 evidence reconciliation has contract-derived controls for complete, missing, optional, stale, and later-error evidence; this qualifies only bounded contract-conformance judgments, not model reliability or comprehension.
+
+## Increment 2: Explanation hypothesis
+
+[Executed comparison](Explanation/report.md): six outputs across three matched cases; both configurations met the source-grounded checks. A fresh reader and separate adjudication supported the tie. The proposed extra drafting instruction was not retained. Added regression coverage instead. This preserves a null result rather than expanding the skill without demonstrated benefit.
