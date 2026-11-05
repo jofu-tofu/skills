@@ -6,11 +6,11 @@
 
 Conventions are the lowest-severity rules in the TypeScript standards, but they compound. A single misordered import is trivial. A codebase where every file orders imports differently, names booleans without predicate prefixes, scatters types into a monolithic `types.ts`, and mixes `import type` with runtime imports creates a maintenance burden that slows every developer who touches it. Conventions are not about aesthetics — they are about reducing the number of decisions a developer must make and the number of surprises they encounter when reading unfamiliar code.
 
-The first convention is separating type imports from value imports. TypeScript's `import type` syntax tells the compiler and bundler that an import is types-only and should be completely erased in the output. Without it, the bundler may include an entire module just because a type was referenced, bloating the bundle with dead code. The `verbatimModuleSyntax` compiler flag enforces this separation: any import used only as a type must use `import type`, and the compiler errors if you forget. This creates a clean, enforceable distinction between compile-time dependencies (types) and runtime dependencies (values).
+Prefer `import type` for dependencies used only as types. Default TypeScript import elision can already remove ordinary imports. With TypeScript 5.0+ `verbatimModuleSyntax`, unmarked imports remain; type-only symbols require a type modifier, while a class import used only in annotations can remain a valid value import. Inspect the emitted code and module side effects before claiming bundle impact.
 
 The second convention is import ordering. Imports should be grouped by origin — built-in Node.js modules first, then external packages, then internal parent modules, then internal sibling modules — with blank lines between groups and alphabetical sorting within each group. This ordering makes dependency relationships immediately visible: you can glance at the top of a file and understand whether it depends on the standard library, third-party packages, shared internal modules, or only its immediate neighbors. It also reduces merge conflicts because developers adding imports to different groups are unlikely to conflict.
 
-The third convention is naming. TypeScript's ecosystem has established conventions that encode meaning in casing: PascalCase for types, interfaces, classes, and components; camelCase for variables, functions, methods, and properties; UPPER_SNAKE_CASE only for environment variables. Booleans use predicate prefixes (`isActive`, `hasPermission`, `shouldRetry`) that read as questions. Interfaces and types do not use I- or T- prefixes — TypeScript uses structural typing, not nominal typing, so the C# convention of `IUserService` is unnecessary noise. Acronyms in multi-word names capitalize only the first letter (`parseHtmlDocument`, not `parseHTMLDocument`) for consistent casing boundaries.
+The third convention is naming. This house policy uses PascalCase for types, interfaces, classes, and components; camelCase for variables, functions, methods, and properties; UPPER_SNAKE_CASE only for environment variables. Booleans use predicate prefixes (`isActive`, `hasPermission`, `shouldRetry`) that read as questions. Interfaces and types do not use I- or T- prefixes — TypeScript uses structural typing, not nominal typing, so the C# convention of `IUserService` is unnecessary noise. Acronyms in multi-word names capitalize only the first letter (`parseHtmlDocument`, not `parseHTMLDocument`) for consistent casing boundaries.
 
 The fourth convention is file organization. Types should live close to the code that uses them, not in a monolithic `types.ts` that becomes a merge-conflict magnet. Co-locate domain types with their implementation: `users/user.ts` contains the `User` type and related types, `users/user-service.ts` imports from `./user`. Only truly cross-domain types (like `ApiResponse` or `Pagination`) belong in a shared directory. This co-location makes it possible to understand a module by reading its directory without jumping across the entire project.
 
@@ -20,44 +20,44 @@ These four conventions work together as a system. Type imports are separated for
 
 ### When Reviewing Code
 
-Check that type-only imports use `import type` — a regular import that is only used as a type annotation is a bundle-size leak. Verify import ordering follows the group convention: built-in, external, internal parent, internal sibling. Check that booleans use predicate prefixes (`is`, `has`, `should`, `can`) and that types use PascalCase without I- or T- prefixes. Look for a monolithic `types.ts` file that holds types for multiple unrelated domains — these should be co-located with their implementation. Check that `verbatimModuleSyntax` is enabled in `tsconfig.json` to enforce type import separation automatically.
+Check that type-only imports use `import type` — emission of an ordinary import depends on compiler/transpiler settings and usage. Verify import ordering follows the group convention: built-in, external, internal parent, internal sibling. Check that booleans use predicate prefixes (`is`, `has`, `should`, `can`) and that types use PascalCase without I- or T- prefixes. Look for a monolithic `types.ts` file that holds types for multiple unrelated domains — these should be co-located with their implementation. Check whether `verbatimModuleSyntax` fits the project's TypeScript version and module format; stronger type-use-only import conventions may need linting.
 
 ### When Designing / Planning
 
-Establish import ordering conventions at project setup and enforce them with ESLint (`import/order` or `@trivago/prettier-plugin-sort-imports`). Enable `verbatimModuleSyntax` in `tsconfig.json` so type import separation is a compiler error, not a code review nit. Define the file organization strategy before the first module is created: where do domain types live, where do shared types live, what constitutes a module boundary. Document naming conventions once in the project README or contributing guide, especially if the team has preferences that differ from ecosystem defaults.
+Establish import ordering conventions at project setup and enforce them with ESLint (`import/order` or `@trivago/prettier-plugin-sort-imports`). Enable `verbatimModuleSyntax` in `tsconfig.json` to make emission explicit; type-only symbols require modifiers, while value symbols may still be imported normally. Define the file organization strategy before the first module is created: where do domain types live, where do shared types live, what constitutes a module boundary. Document naming conventions once in the project README or contributing guide, especially if the team has preferences that differ from ecosystem defaults.
 
 ### When Implementing
 
-Use `import type` for every import that is only used in type positions (type annotations, generic arguments, `extends` clauses). Group imports with blank line separators: built-in modules, external packages, internal parent modules, internal sibling modules. Alphabetize within each group. Name booleans with predicate prefixes that read as yes/no questions. Use PascalCase for types and interfaces without prefixes. Place types in the same directory as the code that uses them — create a `user.ts` alongside `user-service.ts` rather than adding to a global `types.ts`. Extract shared types to a `shared/` directory only when they are genuinely used across multiple unrelated domains.
+Use `import type` for every import that is only used in type positions (type annotations, generic arguments, interface `extends` clauses; class `extends` needs a runtime value). Group imports with blank line separators: built-in modules, external packages, internal parent modules, internal sibling modules. Alphabetize within each group. Name booleans with predicate prefixes that read as yes/no questions. Use PascalCase for types and interfaces without prefixes. Place types in the same directory as the code that uses them — create a `user.ts` alongside `user-service.ts` rather than adding to a global `types.ts`. Extract shared types to a `shared/` directory only when they are genuinely used across multiple unrelated domains.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| ImportTypeForTypes | MEDIUM | Use `import type` for type-only imports to eliminate unnecessary runtime module inclusion |
-| ImportOrdering | MEDIUM | Group imports by origin with blank line separators and alphabetize within each group |
-| NamingConventions | MEDIUM | Follow TypeScript ecosystem casing: PascalCase types, camelCase values, predicate-prefix booleans |
-| FileOrganization | MEDIUM | Co-locate types with implementation; avoid monolithic types files |
+| ImportTypeForTypes | LOW policy | Use `import type` for type-only imports to eliminate unnecessary runtime module inclusion |
+| ImportOrdering | LOW policy | Group imports by origin with blank line separators and alphabetize within each group |
+| NamingConventions | LOW policy | Follow House casing policy: PascalCase types, camelCase values, predicate-prefix booleans |
+| FileOrganization | LOW policy | Co-locate types with implementation; avoid monolithic types files |
 
 
 ---
 
 ### TS4.1 Import Type for Type-Only Imports
 
-**Impact: MEDIUM (Type-only imports are erased at compile time — prevents importing runtime modules just for their types, reducing bundle size)**
+**Impact: LOW policy; runtime impact depends on emission (Standalone `import type` is erased)**
 
-When you import a type from a module, `import type` tells the compiler and bundler that this import is types-only and should be completely erased in the output. Without it, the bundler may include the entire module just for a type reference, bloating the bundle.
+Use `import type` to state that a dependency is compile-time only. Default import elision often removes ordinary imports too. Under `verbatimModuleSyntax` (TypeScript 5.0+), imports without type modifiers remain. A missing modifier is not proof that an entire module reaches the bundle. If module initialization is required, use an explicit side-effect import.
 
-**Incorrect: Regular imports pull in runtime code for types**
+**Policy mismatch: Regular imports obscure type-only intent**
 
 ```typescript
-// Imports the entire module — even though we only use the type
+// Emission depends on settings; verbatimModuleSyntax preserves unmarked value imports
 import { UserService } from "./services/user-service";
 import { DatabaseConnection } from "./database";
 
 function createHandler(db: DatabaseConnection): void {
   // DatabaseConnection is only used as a type here
-  // but the import pulls in the entire database module
+  // a class value import remains under verbatimModuleSyntax; default elision can remove it
 }
 
 // Mixing runtime and type imports without distinction
@@ -80,19 +80,19 @@ function createHandler(db: DatabaseConnection): void {
 import { z } from "zod";
 import type { ZodSchema, ZodError } from "zod";
 
-// Enable in tsconfig for enforcement
+// TypeScript 5.0+: explicit emission rules; stronger type-use-only policy may need linting
 // "verbatimModuleSyntax": true
 ```
 
 **When acceptable:**
-- When the module is already imported for runtime values — adding a separate `import type` for its types is unnecessary noise
+- A mixed import may use inline modifiers: `import { value, type SomeType } from "./module"`. A standalone `import type` is fully erased; an all-inline-type import can emit `import {} from "./module"` under `verbatimModuleSyntax`, preserving side effects.
 - Barrel files (`index.ts`) that re-export both types and values — use `export type` for type re-exports
 
 ---
 
 ### TS4.2 Import Ordering
 
-**Impact: MEDIUM (Consistent import order reduces merge conflicts and makes dependency relationships immediately visible)**
+**Impact: LOW policy (Consistent import order reduces merge conflicts and makes dependency relationships immediately visible)**
 
 Imports should be grouped by origin and sorted within each group. This makes it obvious where dependencies come from (built-in vs external vs internal) and reduces merge conflicts when multiple developers add imports.
 
@@ -134,16 +134,16 @@ import { render } from "./utils/render";
 Alphabetize within each group. Enforce with ESLint `import/order` or `@trivago/prettier-plugin-sort-imports`.
 
 **When acceptable:**
-- Side-effect imports (`import "./polyfills"`) go at the top regardless of origin
+- Preserve required side-effect evaluation order. Place initialization imports (for example polyfills) according to their dependencies; do not mechanically move or alphabetize them.
 - CSS/asset imports follow framework conventions (e.g., CSS modules at the bottom in React components)
 
 ---
 
 ### TS4.3 Naming Conventions
 
-**Impact: MEDIUM (Consistent naming communicates intent — readers know what something is before reading its definition)**
+**Impact: LOW policy (Consistent naming communicates intent — readers know what something is before reading its definition)**
 
-TypeScript has ecosystem conventions that encode meaning in casing. Following them makes code readable to any TypeScript developer without needing to look up definitions.
+These naming choices are house policy, not TypeScript language requirements. Follow a project's documented conventions; a naming difference alone is low severity.
 
 **Incorrect: Inconsistent or misleading naming**
 
@@ -167,7 +167,7 @@ function parseHTMLDocument() { }
 type XMLHTTPRequest = {};
 ```
 
-**Correct: TypeScript ecosystem conventions**
+**Correct: House naming policy**
 
 ```typescript
 // No I-prefix on interfaces — TypeScript uses structural typing
@@ -205,7 +205,7 @@ type XmlHttpRequest = {};
 
 ### TS4.4 File Organization
 
-**Impact: MEDIUM (Co-locating types with implementation reduces navigation and keeps related code together)**
+**Impact: LOW policy (Co-locating types with implementation reduces navigation and keeps related code together)**
 
 Types should live close to the code that uses them. A single `types.ts` file that holds every type in the project becomes a merge-conflict magnet and forces readers to jump between files. Co-locate types with their implementation; extract shared types to domain-specific files.
 
@@ -265,7 +265,7 @@ import type { User, CreateUserInput } from "./user";
 
 **NamingConventions + FileOrganization** reinforce each other. When files are co-located with their domain (`users/user.ts`), naming conventions keep the file contents predictable: the file exports `User` (PascalCase type), `createUser` (camelCase function), and `isActiveUser` (predicate-prefixed boolean helper). A reader can predict the contents from the file name and vice versa.
 
-**ImportTypeForTypes connects to TypeSafety dimension**: Enabling `verbatimModuleSyntax` in `tsconfig.json` (a compiler configuration concern from TS1) enforces the `import type` convention automatically, turning it from a style guideline into a compiler error.
+**ImportTypeForTypes connects to TypeSafety dimension**: `verbatimModuleSyntax` preserves unmarked imports and requires modifiers for type-only symbols. It does not enforce type modifiers for every value symbol used only in annotations; use project lint policy for that stronger rule.
 
 **FileOrganization connects to TypeModeling dimension**: When types are derived using utility types (`type UserSummary = Pick<User, "id" | "name">`), co-location means the derived type lives in the same file as the source type, making the derivation relationship obvious and preventing stale parallel definitions in a distant `types.ts`.
 
@@ -275,11 +275,11 @@ import type { User, CreateUserInput } from "./user";
 
 None. Convention violations do not cause runtime bugs on their own. However, a codebase with pervasive convention violations accumulates cognitive overhead that indirectly increases bug rates by making code harder to review and understand.
 
-### HIGH
+### Context-dependent runtime effects
 
-- **Missing `verbatimModuleSyntax` with type imports used as regular imports** — When a regular `import` pulls in a module only for its types, the bundler includes the entire module at runtime. In large projects, this can meaningfully increase bundle size. The fix is mechanical: enable `verbatimModuleSyntax` and let the compiler flag every violation.
+- **Unexpected retained runtime dependency** — Inspect compiler/transpiler output and module side effects. Missing `verbatimModuleSyntax` is not a bundle defect; default elision may remove the import. Severity depends on observed consequences.
 
-### MEDIUM
+### LOW — house policy
 
 - **Random import ordering across files** — When every file orders imports differently, developers waste time finding dependencies and merge conflicts increase because unrelated import additions touch the same lines. Enforce with an ESLint rule.
 - **Booleans without predicate prefixes** — `const active = true` is ambiguous: is it a noun (the active item) or an adjective (is it active)? `const isActive = true` reads as a yes/no question, removing ambiguity.
@@ -361,3 +361,8 @@ src/
 - ESLint `import/order` plugin — import grouping and sorting rules
 - TypeScript community conventions — naming patterns, file organization practices
 - Steve Kinney, *Frontend Masters TypeScript* — project structure and naming guidance
+
+### Verification references
+
+- https://www.typescriptlang.org/tsconfig/verbatimModuleSyntax.html
+- https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html

@@ -1,24 +1,24 @@
 # Error Handling — TypeScript
 
-> Errors that are invisible in function signatures are errors that callers will forget to handle; making failure explicit in the type system transforms error handling from a discipline problem into a compiler-enforced guarantee.
+> Errors that are invisible in function signatures are errors that callers will forget to handle; making failure explicit helps callers narrow results, but does not force them to consume every result.
 
 ## Mental Model
 
-JavaScript's error handling model is built on `throw` and `try/catch`, a mechanism inherited from Java that is fundamentally at odds with TypeScript's type system. A function that throws has an invisible failure mode: its signature says `Promise<User>`, but it can also produce an `Error` — or a `string`, or a `number`, or anything else, because JavaScript lets you throw any value. Callers have no way to know a function can fail without reading its implementation, and `catch (e)` gives you `unknown` with no type information about what was caught.
+JavaScript's error handling model is built on `throw` and `try/catch`, a mechanism inherited from Java that is fundamentally at odds with TypeScript's type system. A function that throws has an invisible failure mode: its signature says `Promise<User>`, but it can also produce an `Error` — or a `string`, or a `number`, or anything else, because JavaScript lets you throw any value. Callers have no way to know a function can fail without reading its implementation, and `catch (e)` defaults to `unknown` with `useUnknownInCatchVariables` (part of strict since TypeScript 4.4); other settings may use `any`.
 
-Result types fix this by encoding success and failure in the return type itself. A function returning `Result<User, NotFoundError | NetworkError>` makes its failure modes visible in the signature. The caller must handle both branches because TypeScript's type narrowing demands it — you cannot access `result.data` without first checking `result.success`. This is not a new concept; Rust's `Result<T, E>`, Haskell's `Either`, and Go's multiple return values all solve the same problem. In TypeScript, a discriminated union with a `success` boolean discriminant is the idiomatic approach.
+Result types fix this by encoding success and failure in the return type itself. A function returning `Result<User, NotFoundError | NetworkError>` makes its failure modes visible in the signature. The caller must narrow before accessing branch-specific fields, but can ignore the result or one branch entirely. This is not a new concept; Rust's `Result<T, E>`, Haskell's `Either`, and Go's multiple return values all solve the same problem. In TypeScript, a discriminated union with a `success` boolean discriminant is the idiomatic approach.
 
-Custom error classes complement Result types by adding structure to the error branch. When everything throws `new Error("something went wrong")`, error handling degrades to string parsing. Custom Error subclasses carry structured data (`NotFoundError` has an `entity` and `id`; `InsufficientFundsError` has `balance` and `required`) and enable `instanceof` checks that are refactor-safe and type-narrowing compatible.
+Custom error classes complement Result types by adding structure to the error branch. When callers need category-specific recovery, message-only branching is fragile. Custom Error subclasses carry structured data (`NotFoundError` has an `entity` and `id`; `InsufficientFundsError` has `balance` and `required`) and enable `instanceof` checks that are refactor-safe and type-narrowing compatible.
 
-At system boundaries — API responses, user input, environment variables, JSON files — data has no type at runtime. Type assertions (`as User`) are lies: they tell the compiler to trust you without performing any validation. Zod schemas close this gap by validating the actual data structure at runtime and inferring the TypeScript type from the schema. A single Zod schema replaces both the runtime validation and the TypeScript interface, eliminating the drift that occurs when you maintain both separately. The `z.infer<typeof Schema>` pattern derives the type from the schema, making the schema the single source of truth.
+At system boundaries — API responses, user input, environment variables, JSON files — data has runtime values but no automatically verified TypeScript shape. Type assertions (`as User`) are lies: they tell the compiler to trust you without performing any validation. Zod schemas close this gap by validating the actual data structure at runtime and inferring the TypeScript type from the schema. A schema can supply validation and the parsed output type; input and domain types may intentionally differ. The `z.infer<typeof Schema>` pattern derives the type from the schema, making the schema the single source of truth.
 
-Together, these four practices create a coherent error handling strategy: Result types make failure visible in signatures, custom errors add structure to failure values, Zod validates external data at boundaries, and schema inference eliminates type drift. The result is a system where error handling is not optional — the compiler enforces it.
+Together, these four practices create a coherent error handling strategy: Result types make failure visible in signatures, custom errors add structure to failure values, Zod validates external data at boundaries, and schema inference reduces duplicate output-shape drift. This is a house architecture choice: TypeScript checks branch-specific access, not that every result or failure is handled.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-Check function signatures for functions that throw but declare no error in their return type — these should return `Result<T, E>` instead. Look for `catch (e)` blocks that use string matching (`e.message.includes(...)`) to determine error type — these should use `instanceof` with custom error classes. Scan for `as` assertions on data from external sources (API responses, JSON.parse, environment variables) — these should use Zod `.parse()` or `.safeParse()`. Check whether Zod schemas have a corresponding manually-written TypeScript interface — if so, the interface should be replaced with `z.infer<typeof Schema>`.
+Check function signatures for functions that throw but declare no error in their return type — prefer `Result<T, E>` where the project requires expected failures as values; documented exception-based APIs are valid. Look for `catch (e)` blocks that use string matching (`e.message.includes(...)`) to determine error type — these should use `instanceof` with custom error classes. Scan for `as` assertions on data from external sources (API responses, JSON.parse, environment variables) — these should use Zod `.parse()` or `.safeParse()`. Check whether Zod schemas have a corresponding manually-written TypeScript interface — derive duplicate output shapes where appropriate; wire/input and domain/output types may intentionally differ.
 
 ### When Designing / Planning
 
@@ -26,25 +26,25 @@ Decide on a Result type definition early and use it consistently across the proj
 
 ### When Implementing
 
-Define the Result type once and import it everywhere. Write functions that can fail to return `Result<T, E>` instead of throwing. Use `try/catch` internally to wrap third-party code that throws, converting thrown errors into Result values at the boundary. Create custom Error subclasses with structured properties using class declarations that extend Error and set `this.name` in the constructor. Write Zod schemas for every external data source and derive TypeScript types with `z.infer`. Never maintain both a Zod schema and a separate interface for the same data shape — one will drift from the other. Use `.extend()` and `.pick()` on Zod schemas to derive related schemas (e.g., `CreateUserSchema` from `UserSchema`).
+Define the Result type once and import it everywhere. Use `Result<T, E>` for expected failures under the project's result protocol; preserve established exception contracts. Use `try/catch` internally to wrap third-party code that throws, converting thrown errors into Result values at the boundary. Create custom Error subclasses with structured properties using class declarations that extend Error and set `this.name` in the constructor. Write Zod schemas for every external data source and derive TypeScript types with `z.infer`. Avoid unnecessary duplicate schema/output types; keep intentional input, wire and domain contracts distinct. Use `.extend()` and `.pick()` on Zod schemas to derive related schemas (e.g., `CreateUserSchema` from `UserSchema`).
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| ResultOverTryCatch | CRITICAL | Return `Result<T, E>` instead of throwing so callers see failure in the type signature |
-| CustomErrorClasses | HIGH | Use Error subclasses with structured data instead of generic `new Error(message)` strings |
-| ZodForExternalData | HIGH | Validate external data with Zod schemas instead of `as` assertions at system boundaries |
-| InferFromSchemas | HIGH | Derive TypeScript types from Zod schemas with `z.infer` — never maintain parallel definitions |
+| ResultOverTryCatch | LOW policy; contract-dependent | Return `Result<T, E>` instead of throwing so callers see failure in the type signature |
+| CustomErrorClasses | LOW policy; contract-dependent | Prefer structured errors when recovery needs categories; subclasses or typed objects can satisfy the contract |
+| ZodForExternalData | Contract-dependent validation; library policy | Validate external data with Zod schemas instead of `as` assertions at system boundaries |
+| InferFromSchemas | LOW policy; contract-dependent drift | Derive TypeScript types from Zod schemas with `z.infer` ; retain intentional input/output contracts |
 
 
 ---
 
 ### TS3.1 Result Types Over Try/Catch
 
-**Impact: CRITICAL (Try/catch hides error cases from function signatures — callers don't know a function can fail until it does)**
+**Impact: Contract-dependent (Results expose expected failures; exceptions remain valid and neither style guarantees handling)**
 
-A function that throws has an invisible failure mode. Callers must read the implementation to know what errors are possible. A `Result<T, E>` return type makes success and failure explicit in the signature — the compiler forces callers to handle both cases.
+TypeScript does not encode checked exceptions in function signatures. A Result describes returned success/failure alternatives, but callers can ignore it and functions can still throw. Prefer Results for expected failures where project policy calls for them; documentation and exception-based framework contracts remain valid.
 
 **Incorrect: Thrown errors are invisible in types**
 
@@ -58,7 +58,7 @@ async function getUser(id: string): Promise<User> {
 
 // Caller has no idea this can fail
 const user = await getUser("123");
-console.log(user.name);  // crashes if getUser threw
+console.log(user.name);  // not reached when await rejects; handle rejection at the appropriate boundary
 ```
 
 **Correct: Result type makes failure explicit**
@@ -74,14 +74,14 @@ async function getUser(id: string): Promise<Result<User>> {
     if (!res.ok) {
       return { success: false, error: new Error(`HTTP ${res.status}`) };
     }
-    const data = await res.json();
-    return { success: true, data };
+    const data: unknown = await res.json();
+    return { success: true, data: UserSchema.parse(data) }; // schema defined for User (TS3.3)
   } catch (error) {
     return { success: false, error: error instanceof Error ? error : new Error(String(error)) };
   }
 }
 
-// Caller MUST handle both cases — compiler enforces it
+// Narrow before reading branch-specific fields; the whole result can still be ignored
 const result = await getUser("123");
 if (!result.success) {
   console.error(result.error.message);
@@ -92,16 +92,16 @@ console.log(result.data.name);  // TypeScript knows this is User
 
 **When acceptable:**
 - Truly exceptional conditions (out of memory, stack overflow) that callers can't reasonably handle
-- Top-level error boundaries in frameworks (Express middleware, React error boundaries) that catch everything
+- Framework error handlers within their documented scope; no boundary should be assumed to catch every asynchronous, event-handler or background failure
 - Library functions matching ecosystem conventions (e.g., `JSON.parse` throws — wrapping every stdlib call in Result is impractical)
 
 ---
 
 ### TS3.2 Custom Error Classes
 
-**Impact: HIGH (Generic Error messages force string parsing — custom Error subclasses enable typed catch blocks and discriminated error handling)**
+**Impact: Contract-dependent (Structured errors support branching; plain Error is valid when no category-specific handling is required)**
 
-When everything throws `new Error("something went wrong")`, error handling becomes string matching. Custom Error subclasses carry structured data, enable `instanceof` checks, and make error handling as type-safe as the rest of your code.
+When callers must distinguish failure categories, relying only on message text makes branching fragile. Custom Error subclasses carry structured data, enable `instanceof` checks, and make error handling as type-safe as the rest of your code.
 
 **Incorrect: Generic errors with string messages**
 
@@ -114,7 +114,7 @@ async function transferFunds(from: string, to: string, amount: number) {
   // ...
 }
 
-// Caller must parse strings to determine error type
+// Fragile message matching; under strict catch typing, narrow e before reading message
 try {
   await transferFunds(from, to, amount);
 } catch (e) {
@@ -155,6 +155,8 @@ try {
     console.log(`Missing ${e.entity}: ${e.id}`);  // structured access
   } else if (e instanceof InsufficientFundsError) {
     console.log(`Need ${e.required - e.balance} more`);
+  } else {
+    throw e; // ValidationError and unexpected failures remain visible to the caller
   }
 }
 ```
@@ -169,7 +171,7 @@ try {
 
 **Impact: HIGH (Type assertions on external data are lies — Zod validates at runtime and infers types, closing the compile-time/runtime gap)**
 
-Data from APIs, user input, environment variables, and JSON files has no type at runtime. A type assertion (`as User`) tells the compiler "trust me" but performs zero validation. Zod schemas validate the actual data structure and infer the TypeScript type, giving you both runtime safety and compile-time types from a single source.
+External data has JavaScript runtime types, but no automatically verified TypeScript shape. A type assertion (`as User`) tells the compiler "trust me" but performs zero validation. Zod schemas validate the actual data structure and infer the TypeScript type, giving you both runtime safety and compile-time types from a single source.
 
 **Incorrect: Type assertions on unvalidated data**
 
@@ -229,14 +231,14 @@ const user = result.data;  // typed as User
 
 ### TS3.4 Infer Types From Schemas
 
-**Impact: HIGH (Manually maintaining both a Zod schema and a TypeScript interface creates drift — derive the type from the schema)**
+**Impact: LOW policy; contract-dependent drift (Derive duplicate output shapes; retain intentional input/output contracts)**
 
-When you define a Zod schema AND a separate TypeScript interface, they will diverge. Someone adds a field to the interface but forgets the schema, or vice versa. Use `z.infer<typeof Schema>` to derive the type from the schema — single source of truth, zero drift.
+Avoid duplicating the same schema output shape without a reason. `z.infer` describes the parsed output; transforms/coercion can make it differ from `z.input`. Separate wire and domain contracts may be deliberate and should be connected by explicit validation/mapping, not deleted automatically.
 
 **Incorrect: Parallel type and schema definitions**
 
 ```typescript
-// These WILL drift apart over time
+// Duplicate shape definitions can drift
 interface CreateOrderInput {
   productId: string;
   quantity: number;
@@ -253,7 +255,7 @@ const CreateOrderSchema = z.object({
 
 function createOrder(input: CreateOrderInput) {
   const validated = CreateOrderSchema.parse(input);
-  // validated is missing couponCode — type says it's there
+  // validated has the schema-inferred shape, not CreateOrderInput; couponCode is absent
 }
 ```
 
@@ -277,7 +279,8 @@ const OrderResponseSchema = CreateOrderSchema.extend({
   createdAt: z.coerce.date(),
 });
 
-type OrderResponse = z.infer<typeof OrderResponseSchema>;
+type OrderResponse = z.infer<typeof OrderResponseSchema>; // parsed output: createdAt is Date
+type OrderResponseInput = z.input<typeof OrderResponseSchema>; // input may differ
 ```
 
 **When acceptable:**
@@ -287,26 +290,26 @@ type OrderResponse = z.infer<typeof OrderResponseSchema>;
 
 ## Rule Interactions
 
-**ResultOverTryCatch + CustomErrorClasses** define the two halves of typed error handling. Result types make the error branch visible in the signature. Custom error classes give the error branch structure and `instanceof` narrowing. A `Result<User, NotFoundError | ValidationError>` signature tells callers exactly what can go wrong and gives them typed access to error details.
+**ResultOverTryCatch + CustomErrorClasses** define the two halves of typed error handling. Result types make the error branch visible in the signature. Custom error classes give the error branch structure and `instanceof` narrowing. A `Result<User, NotFoundError | ValidationError>` signature describes returned failures, not every possible thrown failure and gives them typed access to error details.
 
-**ZodForExternalData + InferFromSchemas** are always used together. ZodForExternalData says to validate external data with Zod. InferFromSchemas says to derive the TypeScript type from the schema. Using Zod without `z.infer` means you still have a parallel interface that can drift. Using `z.infer` without Zod means you have a type with no runtime validation.
+**ZodForExternalData + InferFromSchemas**: Zod is the house validator choice, not a TypeScript requirement; equivalent complete validation can satisfy a boundary contract. Infer the parsed output when useful, and distinguish input/output types. A type declaration alone never executes validation.
 
-**ResultOverTryCatch + ZodForExternalData** interact at API boundaries. A function that fetches and validates external data should use Zod's `.safeParse()` inside and return a `Result<T, ZodError>` to the caller, combining runtime validation with typed error handling in a single pattern.
+**ResultOverTryCatch + ZodForExternalData** interact at API boundaries. A function that fetches and validates external data should use Zod's `.safeParse()` inside and return an error union that also represents transport/HTTP failures to the caller, combining runtime validation with typed error handling in a single pattern.
 
 **CustomErrorClasses connects to TypeModeling dimension**: Custom error classes are discriminated by `instanceof`, which is a form of type narrowing. The error hierarchy can also be modeled as a discriminated union (`type AppError = NotFoundError | ValidationError | AuthError`) for exhaustiveness checking.
 
 ## Anti-Patterns (Severity Calibration)
 
-### CRITICAL
+### Context-dependent — assess failure and validation contracts
 
-- **Functions that throw with no indication in their return type** — A function typed as `Promise<User>` that throws on failure is a hidden landmine. Callers have no way to know it can fail from the signature alone. Every function that can fail should return `Result<T, E>`.
+- **Failure contract mismatch** — Evaluate the project's Result or exception protocol. Exceptions alone are not critical; severity follows an unhandled failure and its actual effect.
 - **`as` assertions on unvalidated external data** — `const user = data as User` performs zero runtime checks. If the API returns `{ id: 123, nm: "Alice" }` instead of `{ id: "abc", name: "Alice" }`, the assertion silently passes and the code crashes later when accessing missing properties.
 
-### HIGH
+### Context-dependent — distinguish behavior from policy
 
 - **Generic `new Error(message)` with string parsing in catch blocks** — When all errors are plain `Error` with a message string, callers must parse strings to determine the error type. This is fragile (breaks on typo changes), untypeable (no structured data), and unrefactorable (find-and-replace on strings is unsafe).
-- **Parallel Zod schema and TypeScript interface for the same data** — Maintaining both `const UserSchema = z.object(...)` and `interface User { ... }` means they will drift. One source of truth: define the schema, infer the type.
-- **Using `.parse()` without catching `ZodError`** — `schema.parse(data)` throws on invalid data. If the caller does not catch the error, validation failures become unhandled exceptions. Prefer `.safeParse()` for controlled error handling, or wrap `.parse()` in a Result-returning function.
+- **Unintentional schema/type drift** — Verify whether definitions describe the same output or intentionally different wire/input/domain contracts. Duplication alone is not a runtime defect.
+- **Unhandled validation failure** — `.parse()` throws on invalid input; an enclosing framework or caller may legitimately handle it. Use `.safeParse()` when the local contract requires a returned result.
 
 ### MEDIUM
 
@@ -321,7 +324,7 @@ type Result<T, E = Error> =
   | { success: true; data: T }
   | { success: false; error: E };
 
-async function getUser(id: string): Promise<Result<User, NotFoundError | NetworkError>> {
+async function getUser(id: string): Promise<Result<User, Error>> {
   try {
     const res = await fetch(`/api/users/${id}`);
     if (res.status === 404) {
@@ -333,11 +336,12 @@ async function getUser(id: string): Promise<Result<User, NotFoundError | Network
     const data = UserSchema.parse(await res.json());
     return { success: true, data };
   } catch (e) {
-    return { success: false, error: new NetworkError(0) };
+    return { success: false, error: e instanceof Error ? e : new Error(String(e)) };
+    // Preserve validation/transport failures instead of relabeling every failure as network.
   }
 }
 
-// Caller must handle both branches
+// This caller chooses to handle failure before reading success data
 const result = await getUser("123");
 if (!result.success) {
   if (result.error instanceof NotFoundError) {
@@ -417,3 +421,10 @@ const user: User = result.data;
 - TypeScript Handbook — Discriminated Unions (as applied to Result types)
 - Zod documentation — Schema definition, `z.infer`, `.safeParse()`, schema composition
 - Steve Kinney, *Frontend Masters TypeScript* — error handling patterns, custom error classes
+
+### Verification references
+
+- https://www.typescriptlang.org/docs/handbook/2/narrowing.html
+- https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+- https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-4.html
+- https://zod.dev/basics

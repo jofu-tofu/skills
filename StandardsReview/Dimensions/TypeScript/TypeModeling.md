@@ -8,7 +8,7 @@ Type modeling is the practice of designing types that make illegal states unrepr
 
 The foundation is discriminated unions. A union type with a literal discriminant property (like `kind` or `type`) lets TypeScript narrow the full type based on a single property check. This replaces class hierarchies, boolean flags, and optional properties with a structure the compiler can reason about exhaustively. When you add a new variant to a discriminated union, every `switch` statement that uses exhaustiveness checking (assigning the default case to `never`) becomes a compile error, turning the compiler into a changelog reviewer that tells you everywhere the new variant needs handling.
 
-Generics are the second pillar. A well-constrained generic function communicates its contract through its type signature: "I accept any T that has these properties, and I return something derived from T." Unconstrained generics (`<T>` with no `extends`) are barely better than `any` — they accept everything and know nothing. The `extends` clause is the generic's contract. But generics should be inferred, not annotated: when you call `identity(42)`, TypeScript infers `number` for `T`. Explicit type arguments like `identity<number>(42)` add noise and can lie if the argument does not actually match.
+Generics preserve relationships between inputs and outputs. Unconstrained `<T>` is useful for identity and containers and is safer than `any` inside the implementation. Add constraints only for needed operations. Prefer inference when clear, but explicit arguments are checked, valid tools for selecting the intended type; identity inference can retain the literal `42`.
 
 Utility types are the third pillar. TypeScript ships with `Partial`, `Required`, `Pick`, `Omit`, `Record`, `Readonly`, `Extract`, and `Exclude` — type-level functions that derive new types from existing ones. Using them instead of manually defining partial or subset interfaces eliminates drift: when the source type changes, derived types update automatically. When built-in utilities do not fit, mapped types let you write custom transformations that iterate over keys and transform each property programmatically, the `Array.map()` of the type system.
 
@@ -18,7 +18,7 @@ Together, these tools let you model your domain so precisely that many categorie
 
 ### When Reviewing Code
 
-Look for boolean flags or optional properties that represent mutually exclusive states — these should be discriminated unions. Check `switch` statements over unions for a `default` that returns a fallback value instead of calling `assertNever` — this hides missing cases. Scan for unconstrained generics (`<T>` without `extends`) in utility functions — they accept too much. Look for manually defined subset interfaces (e.g., `UserSummary` with copy-pasted fields from `User`) that should use `Pick` or `Omit`. Flag explicit type arguments at call sites when the compiler can infer them.
+Look for boolean flags or optional properties that represent mutually exclusive states — these should be discriminated unions. Check `switch` statements over unions for a `default` that returns a fallback value instead of calling `assertNever` — this hides missing cases. Review whether each generic constraint matches the operations required; unconstrained identity and container functions are valid. Look for manually defined subset interfaces (e.g., `UserSummary` with copy-pasted fields from `User`) that should use `Pick` or `Omit`. Flag explicit type arguments at call sites when the compiler can infer them.
 
 ### When Designing / Planning
 
@@ -32,10 +32,10 @@ Write discriminated unions with a string literal discriminant. Always add an `as
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| UnionsOverEnums | HIGH | Use string literal unions or `as const` objects instead of enums — zero runtime overhead, full narrowing |
+| UnionsOverEnums | LOW policy | Use string literal unions or `as const` objects instead of enums — erased union types or ordinary runtime objects, full narrowing |
 | ExhaustivenessChecking | HIGH | Assign the default case to `never` so the compiler catches unhandled union variants |
 | ConstrainGenerics | HIGH | Use `extends` to constrain generics to types with the properties the function needs |
-| InferOverExplicit | HIGH | Let TypeScript infer generic type arguments from usage instead of annotating them explicitly |
+| InferOverExplicit | LOW policy | Let TypeScript infer generic type arguments from usage instead of annotating them explicitly |
 | PreferBuiltinUtilities | MEDIUM | Use `Partial`, `Pick`, `Omit`, `Record` instead of manually defining subset interfaces |
 | MappedTypes | MEDIUM | Write mapped types for custom type transformations when built-in utilities do not fit |
 
@@ -44,14 +44,14 @@ Write discriminated unions with a string literal discriminant. Always add an `as
 
 ### TS2.1 Unions Over Enums
 
-**Impact: HIGH (Enums generate runtime code, can't be tree-shaken, and have surprising numeric behavior)**
+**Impact: LOW policy; runtime impact requires evidence (Ordinary enums emit objects; optimization depends on the toolchain)**
 
-TypeScript enums are not erasable syntax — they emit JavaScript objects at runtime that increase bundle size and can't be tree-shaken. String literal unions with `as const` provide the same developer experience with zero runtime overhead, full type narrowing, and better composability.
+Prefer string unions or `as const` objects as house policy. Ordinary enums emit JavaScript; removal of unused output depends on the compiler, bundler and side effects. Union types are erased, while an `as const` object is an ordinary runtime object: only the assertion is erased. Numeric enums emit reverse mappings. Since TypeScript 5.0, an out-of-domain numeric literal such as `99` is rejected for the enum below.
 
 **Incorrect: Enums generate runtime artifacts**
 
 ```typescript
-// Emits a JavaScript object — can't be tree-shaken
+// Ordinary enum emits an object; unused-code removal is toolchain-dependent
 enum Status {
   Pending = "PENDING",
   Active = "ACTIVE",
@@ -63,7 +63,7 @@ enum Direction {
   Up,    // 0
   Down,  // 1
 }
-const d: Direction = 99;  // no error — any number assignable
+const d: Direction = 99;  // error in TypeScript 5.0+; older versions accepted this literal
 ```
 
 **Correct: String literal unions with as const**
@@ -81,23 +81,23 @@ type Status = (typeof STATUS)[keyof typeof STATUS];
 // Or simpler — direct union type
 type Direction = "up" | "down" | "left" | "right";
 
-// Both provide full autocomplete, narrowing, and zero runtime cost
+// The union type is erased; STATUS remains an ordinary object when used at runtime
 function handleStatus(status: Status) {
   if (status === "PENDING") { /* narrowed */ }
 }
 ```
 
 **When acceptable:**
-- `const enum` in projects that don't use `--isolatedModules` (rare — most modern setups use isolated modules)
+- `const enum` emission depends on compiler options such as `preserveConstEnums`; ambient const enums conflict with `isolatedModules`. Check the actual toolchain and published declaration contract.
 - Interop with APIs that expect numeric enum values — but consider a mapping object instead
 
 ---
 
 ### TS2.2 Exhaustiveness Checking
 
-**Impact: HIGH (Compiler catches unhandled union cases — adding a new variant immediately shows every switch/if that needs updating)**
+**Impact: Context-dependent (A reachable never check diagnoses unhandled variants of a closed union)**
 
-When you switch over a discriminated union, assign the default case to `never`. If a new variant is added to the union, every switch statement that doesn't handle it becomes a compile error. This turns the compiler into your changelog reviewer.
+When you switch over a discriminated union, assign the default case to `never`. If a new variant reaches a `never` exhaustiveness check, that check becomes a compile error. A switch without such a check is not automatically diagnosed. This turns the compiler into your changelog reviewer.
 
 **Incorrect: Default case silently swallows new variants**
 
@@ -152,9 +152,9 @@ function area(shape: Shape): number {
 
 ### TS2.3 Constrain Generics
 
-**Impact: HIGH (Unconstrained generics accept anything — constraints make generic functions actually useful by limiting input to valid types)**
+**Impact: Context-dependent (Constrain required operations; unconstrained generics can correctly preserve type relationships)**
 
-A generic function `<T>` with no constraint is barely better than `any` — it accepts everything and knows nothing. Use `extends` to constrain generics to types that have the properties your function actually needs. This gives you autocomplete inside the function and type errors at the call site.
+An unconstrained generic accepts any input type but the implementation cannot freely access unknown members. Add `extends` when operations require specific members or relationships. Identity and container operations need no artificial constraint.
 
 **Incorrect: Unconstrained generic knows nothing about T**
 
@@ -179,6 +179,9 @@ function getProperty<T extends object, K extends keyof T>(obj: T, key: K): T[K] 
   return obj[key];  // fully typed — no assertions needed
 }
 
+// This illustration assumes disjoint own data keys. If keys overlap, b wins
+// at runtime, and T & U can misrepresent the result. Model overwrite semantics
+// separately (and test them) rather than using this intersection contract.
 function merge<T extends object, U extends object>(a: T, b: U): T & U {
   return { ...a, ...b };
 }
@@ -196,11 +199,11 @@ getProperty({ name: "Alice" }, "email");           // compile error — "email" 
 
 ### TS2.4 Infer Over Explicit Type Arguments
 
-**Impact: HIGH (Let TypeScript infer generic arguments from usage — explicit type arguments add noise and can lie)**
+**Impact: LOW policy (Prefer clear inference; explicit arguments remain type-checked and can guide inference)**
 
-TypeScript's inference engine is powerful. When you call a generic function, the compiler infers type arguments from the values you pass. Explicit type arguments (`fn<string>(...)`) add visual noise and can be wrong if the value doesn't match — they're assertions in disguise.
+Prefer inference when it expresses the intended type clearly. Explicit arguments are checked against parameters and constraints; they are not type assertions. They can deliberately select a wider type or provide an accumulator type that an empty array cannot infer.
 
-**Incorrect: Explicit type arguments add noise and can lie**
+**Redundant explicit argument, followed by a compiler-rejected mismatch**
 
 ```typescript
 const names = ["Alice", "Bob", "Charlie"];
@@ -208,16 +211,16 @@ const names = ["Alice", "Bob", "Charlie"];
 // Unnecessary — TypeScript infers string from the callback
 const upper = names.map<string>((name) => name.toUpperCase());
 
-// Dangerous — explicit type argument doesn't match actual data
+// Rejected — the callback must obey the explicit accumulator type
 const ids = [1, 2, 3];
 const result = ids.reduce<string[]>((acc, id) => {
-  acc.push(id);  // pushing number into string[] — no error with explicit type arg!
+  acc.push(id);  // compiler error: number is not assignable to string
   return acc;
 }, []);
 
 // Redundant type parameter on function declaration
 function identity<T>(value: T): T { return value; }
-const x = identity<number>(42);  // TypeScript already infers number from 42
+const x = identity<number>(42);  // TypeScript can infer the literal 42
 ```
 
 **Correct: Let inference work**
@@ -227,12 +230,12 @@ const names = ["Alice", "Bob", "Charlie"];
 const upper = names.map((name) => name.toUpperCase());  // inferred: string[]
 
 const ids = [1, 2, 3];
-const result = ids.reduce((acc, id) => {
+const result = ids.reduce<number[]>((acc, id) => {
   acc.push(id);
   return acc;
-}, [] as number[]);  // seed value drives inference
+}, []);  // useful explicit accumulator type; callback remains checked
 
-const x = identity(42);  // inferred: number — clean and correct
+const x = identity(42);  // inferred literal 42 — clean and correct
 ```
 
 **When acceptable:**
@@ -370,21 +373,21 @@ type ArraysToSets<T> = {
 
 **PreferBuiltinUtilities + MappedTypes** form a hierarchy. Always reach for built-in utilities first. Only write a custom mapped type when `Partial`, `Pick`, `Omit`, `Record`, `Readonly`, `Extract`, and `Exclude` cannot express the transformation. Mapped types are more powerful but harder to read; built-in utilities are universally understood.
 
-**UnionsOverEnums connects to TypeSafety dimension**: Unions paired with `as const` objects replace enums with zero runtime overhead. The `as const` assertion (from the TypeSafety dimension's NarrowBeforeUse rule) is the mechanism that makes the values literal types.
+**UnionsOverEnums connects to TypeSafety dimension**: Union types are erased; paired `as const` objects still exist at runtime when used as values. The `as const` assertion (from the TypeSafety dimension's NarrowBeforeUse rule) is the mechanism that makes the values literal types.
 
 ## Anti-Patterns (Severity Calibration)
 
-### CRITICAL
+### Context-dependent — require a violated state contract
 
-- **Boolean flags for mutually exclusive states** — `{ isLoading: boolean; isError: boolean; data?: T }` allows `{ isLoading: true, isError: true, data: undefined }`, which is an impossible state that the type permits. Use a discriminated union: `{ status: "loading" } | { status: "error"; error: Error } | { status: "success"; data: T }`.
+- **Boolean flags for mutually exclusive states** — `{ isLoading: boolean; isError: boolean; data?: T }` allows `{ isLoading: true, isError: true, data: undefined }`, which violates a contract that forbids loading and error simultaneously. Use a discriminated union: `{ status: "loading" } | { status: "error"; error: Error } | { status: "success"; data: T }`.
 
-### HIGH
+### Context-dependent — check the actual contract
 
-- **Switch without exhaustiveness checking** — A `default` case that returns a fallback value instead of calling `assertNever` means adding a new union variant silently falls through to the default. Every switch on a discriminated union must use exhaustiveness checking.
-- **Unconstrained generics in utility functions** — `function getProperty<T>(obj: T, key: string)` accepts anything for `T` and knows nothing about it, forcing `any` casts inside. Constrain with `<T extends object, K extends keyof T>`.
-- **TypeScript enums used for new code** — Enums generate runtime JavaScript objects, cannot be tree-shaken, and numeric enums have surprising bidirectional mapping. Use string literal unions or `as const` objects.
+- **Switch without exhaustiveness checking** — A `default` case that returns a fallback value instead of calling `assertNever` means adding a new union variant silently falls through to the default. Prefer explicit checks for closed unions; intentional catch-all behavior remains valid under its contract.
+- **Missing operation-specific constraints** — A property helper should relate its key to `keyof T`. An unconstrained identity or container is valid; absence of `extends` is not a defect by itself.
+- **TypeScript enums used for new code** — Low-severity house preference for unions/objects. Ordinary enums emit objects and numeric reverse mappings; bundle cost and dead-code removal need toolchain evidence.
 
-### MEDIUM
+### LOW policy unless a concrete mismatch is demonstrated
 
 - **Manually defined subset interfaces that duplicate fields** — `interface UserSummary { id: string; name: string }` alongside `interface User { id: string; name: string; email: string }` will drift. Use `type UserSummary = Pick<User, "id" | "name">`.
 - **Explicit type arguments where inference works** — `names.map<string>(n => n.toUpperCase())` is noise. Let the compiler infer the return type from the callback.
@@ -454,3 +457,10 @@ type ReadonlyUser = Readonly<User>;
 - Matt Pocock, *Total TypeScript* — discriminated unions, generics constraints, utility type patterns
 - TypeScript Handbook — Narrowing, Generics, Mapped Types, Conditional Types
 - Steve Kinney, *Frontend Masters TypeScript* — exhaustiveness checking, generic design patterns
+
+### Verification references
+
+- https://www.typescriptlang.org/docs/handbook/2/generics.html
+- https://www.typescriptlang.org/docs/handbook/enums.html
+- https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html
+- https://www.typescriptlang.org/docs/handbook/2/narrowing.html
