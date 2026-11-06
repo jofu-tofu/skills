@@ -1,6 +1,6 @@
 # Workflow and cross-stage outcomes — CR-W1
 
-Companion to the existing CR-O1.1 profile, preserving O1–O6 and all31 granular/history IDs. Source: CodeReview's supported entry points and contracts, original broad historical-mining request, and user's outcome-first/efficient-iteration direction. Frozen after reconciliation with the expanded history ledgers and independent scope challenge. These criteria define expected results; actual performance is recorded separately.
+Companion to the CR-O2 profile, preserving O1–O6 and all 31 granular/history IDs. Source: CodeReview's supported entry points and contracts, original broad historical-mining request, and user's outcome-first/efficient-iteration direction. Frozen after reconciliation with the expanded history ledgers and independent scope challenge. These criteria define expected results; actual performance is recorded separately.
 
 | ID | Observable outcome | Contributors | Valid contrast | Evidence method |
 |---|---|---|---|---|
@@ -18,8 +18,8 @@ Companion to the existing CR-O1.1 profile, preserving O1–O6 and all31 granular
 | P-REPORT | Distinct causal issues, severity, preserving remedies and useful verdict/coverage remain accurate; optional advice stays distinct from acceptance. | Verifier/report | One cause across lenses counts once; independent nearby faults stay distinct; refactor permission adds no gate. | Source-grounded final artifact adjudication. |
 | P-AUTHORITY | Review respects actual read-only/post/repair/merge/deploy authority. | Every stage | Review alone does not authorize repair or live publication; explicit post authority remains usable. | Actual tool/actions/artifacts under authorized and ordinary routes. |
 
-All inherit O1–O6. Expanded coverage JSON records source, purpose, contributors, valid contrast and evidence method for every row, including all37 existing IDs. Routine review does not load this entire evaluation inventory. A case can establish several separately adjudicated outcomes; a count of cases or rows is not evidence of comprehensive coverage.
+All inherit O1–O6. Expanded coverage JSON records source, purpose, contributors, valid contrast and evidence method for every row, including all 37 existing IDs. Routine review does not load this entire evaluation inventory. A case can establish several separately adjudicated outcomes; a count of cases or rows is not evidence of comprehensive coverage.
 
 The parent contract additionally requires historical-mining adequacy, independent scope review and structural resolution. The mining ledger distinguishes sources inventoried, summaries screened, full records read and complete loops established. Accepted comments, assistant completion statements and green unrelated tests retain distinct evidence strength.
 
-Completion means each required row has applicable qualified evidence or an evidenced actual blocker; a retained local revision does not close unresolved parent outcomes. A current structural contradiction can be directly repaired and checked, but behavioral benefit still requires the affected execution/final-report comparison. General production accuracy, repeatability, maintenance savings and human comprehension are separate claims requiring appropriate evidence.
+Completion requires applicable qualified evidence for each required row. Unresolved rows with an evidenced actual blocker mean blocked, not complete; a retained local revision does not close unresolved parent outcomes. A current structural contradiction can be directly repaired and checked, but behavioral benefit still requires the affected execution/final-report comparison. General production accuracy, repeatability, maintenance savings and human comprehension are separate claims requiring appropriate evidence.

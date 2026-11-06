@@ -1,6 +1,6 @@
 # Improvement attempts
 
-- 2026-11-05 — Comprehensive historical continuation: [record](ComprehensiveHistory/Record.md). Expanded mining and the complete CR-O2/CR-W1 outcome set precede runtime edits. Parent coverage, structural review and benchmark qualification remain distinct from prior scoped passes; task evaluation continues.
+- 2026-11-05 — Comprehensive historical continuation: [record](ComprehensiveHistory/Record.md). Retain **1.2.0-rc.1** after outcome-first mining and evaluation of all 50 CR-O2/CR-W1 outcomes. Candidate **37/37 tasks, 72/72 checks** versus baseline **35/37, 69/72**; causal deduplication and empty-report rejection improved. One native candidate audit and local posting probes add bounded execution evidence. See the separate [parent decision](ComprehensiveHistory/Decision.md); no population reliability claim.
 
 - 2026-11-05 — Historical scope and maintenance feedback: [record](HistoryScope/Record.md). Retain **1.1.0-rc.3**: clarify current authorized scope and enforced contracts; preserve supported maintenance findings without inventing acceptance gates. Final matched verifier replay: baseline **7/9**, candidate **9/9** on reused cases. Earlier ties and a rejected gate regression remain preserved; no population reliability or full-orchestration claim.
 

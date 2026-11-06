@@ -29,10 +29,10 @@ When several callers share the same exposure, report the pattern once and list t
 ## Adversarial Operating Rules
 
 - Assume every caller depends on the old behavior until you've read the call site.
-- Treat a contract change with no caller audit as a finding, not a gap in your knowledge.
-- Treat a fix as incomplete until it covers every input shape the old code accepted.
+- Treat unavailable or uninspected callers as a coverage gap; a breakage finding needs a supported consumer and mechanism.
+- Check every still-supported input shape, including legacy data; respect explicitly authorized compatibility changes.
 - Assume old versions and old data persist after deployment.
-- If uncertain between `HIGH` and `MEDIUM`, choose `HIGH` and name the affected consumer.
+- Calibrate severity to supported consequences and reach. Record uncertainty separately; missing evidence alone does not raise severity.
 
 ## What This Lens Reveals
 
@@ -59,7 +59,7 @@ When several callers share the same exposure, report the pattern once and list t
 
 - **CRITICAL** — a named consumer will get wrong results or fail silently after merge, or stored data becomes inconsistent with the code that reads it. Fix before merge.
 - **HIGH** — a realistic consumer path breaks or a mixed-version state fails, but the failure is visible. Fix in this PR or block the release that ships it.
-- **MEDIUM** — consumers are affected in a limited or recoverable way, or the risk depends on a deployment order the project usually controls. If no consumer was checked, escalate to HIGH.
+- **MEDIUM** — supported consumer impact is limited or recoverable, or depends on a controlled deployment order. Unchecked consumers remain a coverage limit, not greater severity.
 
 ## Language-Specific Notes
 

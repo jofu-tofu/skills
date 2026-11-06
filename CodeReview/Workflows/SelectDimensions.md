@@ -39,20 +39,20 @@ Read the `context.md` file provided as input. Extract:
 
 ## Step 3: Select Lenses
 
-1. **Baseline lenses always run:** COR (Correctness), RES (Resilience), SIM (Simplicity) and CLA (Clarity). Step 5 may run SIM and CLA in one agent to stay within the cap.
+1. **Ordinary diff/audit baseline:** COR (Correctness), RES (Resilience), SIM (Simplicity) and CLA (Clarity). An explicit ReReview policy supplied by the caller overrides this baseline: retain COR, RES and IMP plus triggered lenses; SIM, CLA and STR run only when that fix delta exceeds 50 lines. Record the override. Step 5 may run SIM and CLA in one agent to stay within the cap.
 
 2. **Triggered lenses** run whenever their signal is present, at any diff size:
    - **SEC (Security):** the change touches authentication, authorization or permissions; tokens, sessions or claims; file paths or file system access; queries; deserialization or parsing of external input; HTML rendering or sanitization; web service endpoints; values a client can set that the server reads; logging of personal or sensitive data.
    - **IMP (Impact & Compatibility):** the Impact Map has entries, or the change alters an exported or shared symbol, a default value, a data item or schema, a serialized or wire contract, or something that ships separately from its callers.
    - **INT (Intent Conformance):** Stated Behaviors lists at least one behavior.
 
-3. **STR (Structure)** runs for diffs of 50+ lines, when new files or modules are created, when changes span 3+ directories, or when module boundaries or index files change.
+3. **STR (Structure)** runs for diffs of 50+ lines, when new files or modules are created, when changes span 3+ directories, or when module boundaries or index files change. In audit mode, include STR for an architecture/ownership concern or general module-health audit even when all files are small and unchanged. Respect an explicitly narrower audit scope and the ReReview override.
 
 4. These are signals for judgment, not rigid triggers. When the context suggests a lens's concern without matching a listed signal exactly, include the lens and say why.
 
 ## Step 4: Select Standards Dimensions
 
-For each standards dimension, include it when at least one file in scope matches its `applies_to` glob. Standards dimensions have their own cap of 3 and never displace a lens.
+Each standards dimension is eligible when a file in scope matches its `applies_to` glob. Select at most 3; standards never displace a lens. When more match, prioritize explicitly requested dimensions, then supported consequence and file coverage, recording the reasons. Name every omitted matching dimension and its uninspected coverage. If more than 3 are explicitly required, preserve that unresolved requirement rather than implying full standards coverage or silently running extra dimensions.
 
 ## Step 5: Determine Sizing
 
@@ -64,10 +64,10 @@ For each standards dimension, include it when at least one file in scope matches
 
 If selected lenses exceed the cap, reduce in this order until they fit:
 1. Run SIM and CLA in one agent: one entry with `"id": "SIM+CLA"`, both paths in `path` as an array, and the union of their files.
-2. Drop STR.
-3. Drop IMP when the Impact Map is empty (it was triggered by a signal alone, with no named consumer).
+2. Drop STR only when it is incidental, not an explicitly requested architecture concern or the general-health audit's structural coverage.
+3. Drop IMP only when the Impact Map is empty and it is not required by the ReReview policy or an explicit request (it was triggered by a signal alone, with no named consumer).
 
-**COR, RES, SEC and INT are never dropped.** If they still exceed the cap, run over it: the cap limits cost, not coverage. Record every merge, drop and overrun in `coverage`.
+**COR, RES, SEC and INT are never dropped.** Preserve the required audit STR, ReReview IMP and explicitly requested concerns as well. If the selected set still exceeds the cap, run over it: lens caps limit nominal cost, not required coverage. Record every merge, drop and overrun in `coverage`; schedule agent waves within actual runtime capacity.
 
 ## Step 6: Route Files
 

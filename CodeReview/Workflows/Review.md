@@ -38,8 +38,8 @@ Spawn agent:
 - **subagent_type:** `general-purpose`
 
 **CHECK:** Read `$REVIEW_DIR/context.md` — must exist and be non-empty.
-- If missing → retry once with same prompt.
-- If missing again → output error to user: "GatherContext failed after 2 attempts. Review aborted."
+- If missing, empty or unreadable → retry once with the same inputs.
+- If still unusable → output error to user: "GatherContext failed after 2 attempts. Review aborted." Do not claim a clean inspection.
 - If its first line starts with `PLUGIN ERROR` → output that line to the user and stop.
 
 ## Step 3: Select Dimensions
@@ -49,26 +49,26 @@ Spawn agent:
 - **subagent_type:** `general-purpose`
 
 **CHECK:** Read `$REVIEW_DIR/dimensions.json` — must exist and be a JSON object with a non-empty `dimensions` array.
-- If missing → retry once. If missing again → error to user.
+- If missing, empty, unreadable, malformed JSON, or without a non-empty `dimensions` array → retry selection once with the same inputs. If still unusable, report the failed selection and stop; do not invent assignments.
 
 ## Step 4: Spawn Review Agents
 
 Read `$REVIEW_DIR/dimensions.json` — this is the only structured artifact the orchestrator parses, besides collecting agent output file paths.
 
-For each dimension in the list, spawn an agent in parallel (`run_in_background: true`):
+Schedule each selected dimension as a separate agent invocation, in parallel up to the runtime's available agent capacity. When capacity is smaller than the selected set, collect completed agents and schedule the rest in waves. Preserve every selected dimension; a concurrency limit does not authorize dropping coverage or combining unrelated reviewers into one context.
 
 - **subagent_type:** `general-purpose`
 - **prompt:**
 
 ```
-You are a principal engineer who has mass-reverted production deployments and conducted post-mortems on "obviously correct" code. You review code written by a colleague. You do not soften findings, hedge, or give the benefit of the doubt when safety is ambiguous.
+You are a principal engineer who has investigated failed deployments and apparently correct code. Challenge assumptions, trace actual contracts and report supported findings directly. Keep missing evidence and severity distinct; uncertainty alone does not establish a defect or justify greater severity.
 
 ## Evidence Standard
 A finding requires ALL of: (1) a specific file and line range, (2) [lens: a named heuristic from your dimension file | standards: the rule ID from your rule source], and (3) a concrete description of the risk condition — what could go wrong and through what mechanism. You do NOT need to prove the failure has already occurred or will occur for common inputs. If you can name the risk and the mechanism, report it.
 
 Label each finding's evidence: `source-verified` (you traced it in the code), `inferred` (follows from the code but you did not trace every path), or `needs-runtime` (only running it would confirm). Passing lint or typecheck is not evidence that behavior is correct.
 
-Do not report style preferences, linter-catchable issues, or vague "consider refactoring" suggestions. Every finding must describe a failure path, not a preference.
+Do not report style preferences, linter-catchable issues, or vague "consider refactoring" suggestions. A finding needs a supported failure path or a present source-demonstrated maintenance burden, such as duplicated policy or required caller coordination. Name the supported use/change scenario and a bounded preserving correction. A maintenance recommendation does not by itself establish an unmet functional requirement or merge gate.
 
 Report findings without praise or "looks good" commentary. Always write a non-empty result, including when there are no findings: after completing the inspection, write `No findings.` with `Reviewed:` naming the inspected scope and `Limitations:` naming any remaining evidence limits (or `none`). If required inputs could not be inspected, write `Review incomplete.` and identify what is missing; do not present that as a clean review. These status lines are coverage information, not findings or proof of safety.
 
@@ -90,9 +90,9 @@ Read $REVIEW_DIR/context.md for what changed, why, and the review scope.
 5. When done, return the absolute path to the file you wrote
 ```
 
-**Synchronization:** Store each agent's task_id and dimension id. After all spawned:
-1. Call `TaskOutput(task_id, block=true)` for each agent to collect the file path it returned
-2. Per-agent check: verify the returned path exists and is non-empty. If missing, retry that specific agent once
+**Synchronization:** Store each agent's task_id and dimension id. Collect completed waves before using their freed capacity:
+1. Use the runtime's task-result API (`TaskOutput` where available) to collect each agent's returned path
+2. Per-agent check: verify the returned path exists, is readable and is non-empty. If unusable, retry that specific agent once; after a second unusable result, pass its expected result path to verification as unavailable coverage rather than calling it clean
 3. Verify: collected path count matches `dimensions.json` entry count
 4. Build the list of agent output paths for downstream steps
 
@@ -104,6 +104,6 @@ Spawn agent:
 - **prompt:** `"Read $SKILL_ROOT/Workflows/VerifyAndReport.md and execute it. Agent output files: [list of $REVIEW_DIR/dimension-*.md paths from Step 4]. Context: $REVIEW_DIR/context.md. Dimensions: $REVIEW_DIR/dimensions.json. Plug-in manifest: $PLUGIN. Write verified findings to: $REVIEW_DIR/verified-findings.md. Write report to: $REVIEW_DIR/report.md. Return the report content AND the path to report.md."`
 - **subagent_type:** `general-purpose`
 
-**CHECK:** `$REVIEW_DIR/report.md` exists.
+**CHECK:** Both `$REVIEW_DIR/verified-findings.md` and `$REVIEW_DIR/report.md` exist, are readable and are non-empty. A zero-finding review still needs a report with its scope and limitations. If either artifact is unusable, retry the verification stage once with the same inputs. If still unusable, report delivery as incomplete and identify the missing artifact; do not output an empty result as success.
 
 Output the report to the user.

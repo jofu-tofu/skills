@@ -31,8 +31,8 @@ The attacker's test: "If I sent the request myself, with any values I want, what
 - Treat every value that crosses a trust boundary as attacker-controlled until validated on the trusted side.
 - Treat a missing, empty or unknown authorization result that grants access as a finding by default.
 - Assume client-side checks don't exist for security purposes.
-- Treat the gap between a check and the action it guards as exploitable unless the code closes it.
-- If uncertain between `CRITICAL` and `HIGH`, choose `CRITICAL` when the path exposes data or grants a permission.
+- For check/use gaps, identify attacker control and a permitted interleaving; absent locking alone does not prove exploitation.
+- Calibrate severity to supported consequences and reach. Record uncertainty separately; missing evidence alone does not raise severity.
 
 ## What This Lens Reveals
 

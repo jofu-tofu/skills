@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "task_status": "complete",
+  "candidate_decision": "retain_candidate",
+  "required_checks": 55,
+  "qualified_passes": 55,
+  "unresolved": 0,
+  "judgment": "Independent semantic scope and structural review plus per-outcome source-based adjudication; the integrity checker alone does not judge relevance.",
+  "evidence": {
+    "contract.json": "d385e36b9c2e1d1ff07d310072d904d28e65968cfa05bc6ef2aa6e10a173de36",
+    "coverage.json": "bffc5e5ebbfc692cd609d2b3ba46e4b1f4f1ec5bfa79348bb62362c5b6285b49",
+    "assessment-final.json": "1b7eede03e845192022293852536289e3e487b7e6b5eab80abf7cdc0733659d4",
+    "completion-final.json": "fc9bf41cc1661fbdbf51e3b3d8b2901c568ec96c2df5cdd2327293050f971b56",
+    "scope-final-review.md": "f2627879e40aa31c31ad8551c819381e0a6c97631f845a4ca842bd0af259b1a1",
+    "structural-resolution.md": "27580409471b07cb22dab5447fb5eb10ca8948a358df1397a5f00c000fb9fed5",
+    "final-validation.json": "d7b29ff706e3492ecda04e8f7535556bb1484eea29c5d29a2e6d18f85d126312"
+  },
+  "limits": "Completion covers the reviewed historical diagnostic task. Stronger reliability, native fault-recovery fidelity and real external delivery remain unverified as documented."
+}

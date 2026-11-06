@@ -17,7 +17,7 @@ You are a competent developer who has never seen this code before. You know the 
 
 Clarity is about comprehension: does the code explain itself to someone who isn't its author? Code is read far more often than it is written.
 
-Clarity isn't verbosity. Good code needs few *explanatory* comments, because names and structure carry intent. **Contracts are different.** The header on a public function, method, tag or export is part of its interface: what each parameter means, which are inputs and outputs, which are required, what is returned, and the shape of any structure passed in or out. A missing or wrong contract forces every caller to read the implementation, and that's a defect, not a style choice.
+Clarity isn't verbosity. Names, types, structure and applicable documentation can communicate a public contract without a prescribed header. Check consequential parameter meaning, input/output shape, ownership, defaults and failure behavior from what callers can actually see. Report missing or misleading information when it creates a specific plausible wrong call or edit; absence of a comment alone is not a defect.
 
 There are three levels of clarity:
 1. **Mechanical clarity** — can you trace what the code does, step by step? (naming, structure, flow)
@@ -31,10 +31,10 @@ The first-time reader's question: "Would I be confident modifying or calling thi
 ## Adversarial Operating Rules
 
 - Assume a future maintainer will misread ambiguous code under time pressure.
-- If intent must be inferred instead of read directly from code, flag it.
+- Identify the specific wrong call or edit invited by missing or misleading intent.
 - Treat a comment or doc the change made false as a defect, not a nit.
-- Treat a public interface without a complete contract as unusable without its author.
-- If uncertain between `HIGH` and `MEDIUM`, choose `HIGH` when ambiguity could cause a wrong edit or a wrong call.
+- Check names, types and available documentation before claiming a public contract is missing.
+- Calibrate severity to supported consequences and reach. Record uncertainty separately; missing evidence alone does not raise severity.
 
 ## What This Lens Reveals
 

@@ -1,0 +1,13 @@
+# Candidate and parent decisions
+
+Retain **1.2.0-rc.1** under CR-O2, CR-W1 and CR-CM1. The owner authorized historical mining, iterative improvement and incremental commits/pushes. The frozen parent inventory contains 50 skill outcomes plus scope, mining, structural resolution, execution and preservation checks. Candidate retention is separate from completion of those 55 required checks.
+
+The matched comparison supports two concrete gains: a single shared cause no longer becomes multiple findings merely because callers occupy different files, and a zero-byte final report no longer counts as successful delivery. All other 69 bounded checks remain passing. The structural repairs align maintenance eligibility, proportional severity, actual evidence, caller/header uncertainty, audit selection, prior statuses, standards overflow and bounded artifact recovery. Ownership and locked-decision hypotheses passed discriminating controls and required no change.
+
+The candidate's 37 tasks, 72 checks and 50 mapped outcomes pass independent source-based adjudication. A separate native audit demonstrates real stage handoffs and scheduling; it has no native baseline comparison. Local posting probes exercise conditional authority without sending a message. Reference qualification comprises 218 assertions about supplied mechanisms, including intentionally faulty fixtures; these are not 218 successful reviews. See [machine-readable results](Results.json).
+
+Parent completion additionally requires independent final scope/structural reconciliation, unchanged source/corpus verification, structural validation and the hashed completion assessment. The local completion receipt is the authority for that status; aggregate scores alone cannot close the parent. Its identity and final judgment are recorded in the published completion summary after the gate runs.
+
+Reopen the relevant outcome when a real missed defect, unsupported warning, harmful correction, scope loss or unusable delivery contradicts these bounded results. Do not infer population reliability, every-language coverage, repeated native fault recovery, real external posting, maintenance savings or human comprehension. Those need additional evidence appropriate to the claim.
+
+Parent decision: **complete** for the frozen comprehensive inventory, with **55/55 qualified required checks** and no unresolved required outcome. The initial gate returned continue; work proceeded through missing handoff/native/authority evidence before this final assessment. [Completion.json](Completion.json) preserves identities of the final scope, structure, assessment and checker receipts. The checker validates contract/evidence integrity; the independent judgments supply semantic relevance.

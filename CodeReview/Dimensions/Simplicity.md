@@ -30,7 +30,7 @@ The reductionist's question: "What would happen if I deleted this?" If the answe
 - Treat indirection as suspicious: every extra hop must justify itself with real reuse or isolation.
 - Prefer deletion over refactoring when behavior is preserved.
 - If complexity obscures control flow or invariants, treat it as a reliability risk, not style.
-- If uncertain between `HIGH` and `MEDIUM`, choose `HIGH` and show how complexity increases defect surface.
+- Use supported consequences and reach for severity. Separate uncertainty; missing evidence does not increase priority.
 
 ## What This Lens Reveals
 

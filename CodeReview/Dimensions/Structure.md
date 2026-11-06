@@ -32,8 +32,8 @@ For a new or changed reusable interface, probe three paths from public contracts
 - Assume placement-by-convenience is wrong until architectural intent is explicit.
 - Treat new coupling as harmful by default unless constrained by a stable boundary.
 - When code crosses module boundaries, require proof that ownership remains clear.
-- If conventions are mixed, presume future copy-paste propagation and flag immediately.
-- If uncertain between `CRITICAL` and `HIGH`, choose the higher level when the pattern is likely to spread.
+- Investigate mixed conventions for a concrete responsibility or change-propagation conflict; difference alone is insufficient.
+- Calibrate severity to supported consequences and reach. Record uncertainty separately; missing evidence alone does not raise severity.
 
 ## What This Lens Reveals
 
@@ -62,9 +62,9 @@ The kind of issue where placement is suboptimal and will create friction:
 
 ## Severity Calibration
 
-- **CRITICAL** — placement actively misleads developers and will cause bugs or duplication, OR the change breaks an existing convention that will be copied as precedent. Move the code or fix the convention break before merge.
-- **HIGH** — placement is suboptimal but findable with effort, OR the change is tactically correct but strategically costly. Address in this PR if the move is clean; flag with a concrete plan otherwise.
-- **MEDIUM** — placement smell indicating a default decision, not a designed one. Report when there is plausible pattern spread or ownership ambiguity.
+- **CRITICAL** — the structural change creates a supported path to severe data loss, security breach or silently wrong decisions. Convention differences alone are insufficient.
+- **HIGH** — a supported caller, extension or ordinary change exposes substantial coupling or propagated edits. Name the actual boundaries and obligations; current functionality may still be correct.
+- **MEDIUM** — a specific ownership ambiguity or change burden is localized. Do not infer the author's design process from absent rationale.
 
 ## Language-Specific Notes
 
