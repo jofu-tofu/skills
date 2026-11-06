@@ -9,6 +9,7 @@
 - `../Lenses/` — The rules behind each finding, for the lenses that ran
 - `../Standards/FormatAdapters.md` — The verification layers
 - `../Standards/DocumentContract.md` — How locks, section contracts, and checks bind every pass
+- `../Standards/ReviewIdentity.md` — Which artifact and frozen context each result can establish
 
 ## Purpose
 
@@ -16,15 +17,19 @@ Decide which findings stand, settle conflicts between lenses, compare the Reader
 
 ## Inputs
 
-- From `$REVIEW_DIR`: `brief.md`, every `reader-questions*.md` and `answer-key*.md`, `sources/`, `verification.md`, and `contract.md` when it exists.
+- From `$ROUND_DIR/inputs/`: the frozen `brief.md`, every `reader-questions*.md` and `answer-key*.md`, `sources/`, `verification.md`, and `contract.md` when it exists. Absent sources or optional inputs stay absent.
 - From `$ROUND_DIR`: the artifact copy, `panel.md`, every `lens-*.md`, `measurements.md`, `skim-layer.md`, `plainness.md`, and `render/` when present.
-- On repair rounds, the previous round's `declined.md`.
+- On repair rounds, prior reports, verified findings and dispositions, with their artifact and review-input versions; include the previous round's `declined.md`.
 
 ## Workflow Steps
 
 ### Step 0: Reconcile the Planned Panel
 
-Reconcile `panel.md` with the evidence in this round before reading answers or adjudicating findings. It records planned reviewers, including audience-specific Readers, separately from completed reviewers and intentional exclusions. A planned reviewer with missing, empty, or earlier-artifact evidence remains NOT VERIFIED after retry; do not remove it from the required panel. If the manifest is absent and planned coverage cannot be recovered from the caller, readiness is `Unverified` unless a verified Blocker or Major requires `NeedsRevision`. An explicitly excluded reviewer is not a missing reviewer. Preserve checks already established for this artifact even if another reviewer or a later tool call fails. Only attributable current-artifact reports enter Steps 1–4. Exclude stale, empty, and unattributable reports from scoring and adjudication; list them as evidence gaps instead. A finding from an older artifact cannot establish a defect in the current one.
+Apply ReviewIdentity.md before reading answers or adjudicating findings: compare the artifact and frozen context with `panel.md` and each report's actual inputs. Audience names alone cannot establish matching expertise, exposure, questions or required terms. Preserve evidence only for checks whose input identity and applicability are established; this may include unchanged evidence carried from an earlier round. Reconstruct missing identity from attributable inputs when possible; otherwise mark the affected checks NOT VERIFIED rather than assuming a match.
+
+Reconcile the planned reviewers, including audience-specific Readers, separately from completed reviewers and intentional exclusions. A planned reviewer with missing, empty or inapplicable evidence remains NOT VERIFIED after retry; do not remove it from the required panel. If planned coverage cannot be recovered from the manifest or caller, readiness is `Unverified` unless a verified current Blocker or Major requires `NeedsRevision`. An explicitly excluded reviewer is not a missing reviewer. Preserve established applicable results even if another reviewer or a later tool call fails. Only attributable applicable reports enter Steps 1–4; exclude stale, empty or unattributable reports from scoring and adjudication and list their evidence gaps. A finding from an older artifact or different audience cannot establish a current defect without current supporting evidence.
+
+On repair rounds, reconcile every earlier verified Blocker or Major that lacks an evidenced resolution. Compare its specific cause and supporting inputs with the current passage, audience, sources and constraints. Record whether current evidence retains it, resolves it, makes it inapplicable, corrects an earlier false diagnosis, or leaves it unverified. Do not copy an old severity blindly. A new lens PASS or correct Reader answers that do not test the concern are not evidence that it was fixed. Accepting a refusal to invent missing facts also does not resolve the resulting information gap. If the earlier concern still has current support, keep it; if the evidence conflicts without resolving a material concern, expose that uncertainty rather than silently selecting the cleaner report. Use these current dispositions in Steps 1–5.
 
 ### Step 1: Score the Reader's Answers
 
@@ -69,7 +74,7 @@ When findings ask for incompatible fixes to the same passage, resolve them in th
 6. An addition stands only when it answers a named reader question that the Reader got wrong or could not find. When an RC-32 cut and an addition ask about the same detail, the summary sentence with a pointer to its companion settles both.
 7. Otherwise, prefer the shorter version, unless the longer one replaces jargon or a hidden actor that an RC-2 or RC-20 finding names. Plain wording often takes more words than the term it replaces.
 
-On repair rounds, accept a declined fix when `declined.md` cites an RC, brief requirement, lock, or contract check that the fix would break. Otherwise reinstate it.
+On repair rounds, accept a declined fix when `declined.md` cites an RC, brief requirement, lock, or contract check that the fix would break. Otherwise reinstate it. This decides whether the proposed edit may be applied; Step 0 separately decides whether the underlying finding remains supported. A justified refusal must not silently turn an unresolved defect into a pass.
 
 ### Step 5: Set the Statuses
 
@@ -95,6 +100,7 @@ Return the report as text in this format; the orchestrator saves it as `report.m
 ```markdown
 # ClarityEngine Review
 **Artifact:** [path] | **Round:** [n] | **Lenses:** [list]
+**Reviewed identity:** [artifact content identity and frozen input identities] | **Audience:** [role, expertise, exposure]
 **Readiness:** [status] | **Comprehension:** [status]
 **Verification:** Content [x], File [x], Rendered [x], Target app [x]
 
@@ -107,6 +113,10 @@ Return the report as text in this format; the orchestrator saves it as `report.m
 
 ## Conflicts Resolved
 - [location]: [lens] vs [lens] — resolved by rule [n]: [outcome]
+
+## Earlier Findings (repair rounds)
+| Earlier Blocker or Major | Current evidence and applicability | Disposition and reason |
+|---|---|---|
 
 ## Proposals for the Author
 - [location] — [lock, check, or section it touches] — [proposed change and the finding behind it] [— Flagged by N lenses]

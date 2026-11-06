@@ -79,12 +79,9 @@ Check context.md `Mode:` field to determine verification method.
 
 #### Verification Principle
 
-A finding is a FALSE POSITIVE only when the verifier can point to a specific reason it is safe. Discard requires one of:
-1. **Documented convention** — a CLAUDE.md entry, ADR, linter rule, or inline code comment that explicitly explains why this pattern is used. The convention must be in-repo and readable by the agent — tribal knowledge or external runbooks don't count.
-2. **Explicit safeguard in code** — defensive code visible in the diff or file that addresses the flagged risk: a catch block that re-throws or returns an error, a validation check, a circuit breaker, a bounds check. "Logs and continues" is NOT a safeguard.
-3. **Heuristic misapplication** — the finding doesn't match the dimension's heuristic definition (e.g., agent flagged a "boundary error" on code that doesn't do array/index access).
+A FALSE POSITIVE needs a specific fact that defeats the alleged mechanism: an applicable current contract/convention, an enforced safeguard on that path, or a misapplied heuristic. A reassuring comment or convention alone is insufficient when code or authoritative requirements contradict it. Trace the relevant actor, input and lifecycle; a check elsewhere counts only when it actually covers this path. "Logs and continues" does not establish failure handling.
 
-If none of these three conditions are met, the finding is RISK-ACKNOWLEDGED (not FALSE POSITIVE).
+A retained finding first needs a supported failure mechanism or present maintenance burden. Missing evidence or absence of a safeguard alone does not create one. When inspection cannot establish the mechanism, record the unresolved fact and next check as coverage or a qualified question. RISK-ACKNOWLEDGED is for an evidenced conditional risk with stated preconditions and an unresolved owner decision, not a default for every unrefuted suspicion. A demonstrated requirement violation stays VERIFIED even when intentional.
 
 #### Diff Mode Verification
 
@@ -93,8 +90,8 @@ Use `git blame` to confirm each finding's line was introduced by a commit in the
 | Condition | Result | Action |
 |---|---|---|
 | Commit in range AND genuine problem | VERIFIED | Keep |
-| Commit in range BUT matches documented convention OR has explicit safeguards | FALSE POSITIVE | Discard |
-| Commit in range, plausibly intentional but creates risk conditions with no documented safeguard | RISK-ACKNOWLEDGED | Keep, mark "Risk: [description]" |
+| Commit in range BUT an applicable convention or enforced safeguard defeats the claimed mechanism | FALSE POSITIVE | Discard |
+| Commit in range with an evidenced conditional risk, stated preconditions and unresolved owner decision under Verification Principle | RISK-ACKNOWLEDGED | Keep with conditions; a demonstrated requirement violation remains VERIFIED |
 | Finding lacks file:line, named heuristic, or failure mechanism | INVALID | Discard — does not meet Evidence Standard |
 | Commit NOT in range, tagged MADE-RELEVANT with a named causal changed line | MADE-RELEVANT | Keep in "Made Relevant by This Change" |
 | Commit NOT in range, no causal link to a changed line | PRE-EXISTING | Move to the Pre-existing Issues section |
@@ -108,8 +105,8 @@ No commit range. Verify the cited code actually exists at the cited location.
 | Condition | Result | Action |
 |---|---|---|
 | File + lines exist AND genuine problem | VERIFIED | Keep |
-| File + lines exist BUT matches documented convention OR has explicit safeguards | FALSE POSITIVE | Discard |
-| File + lines exist, plausibly intentional but creates risk conditions with no documented safeguard | RISK-ACKNOWLEDGED | Keep, mark "Risk: [description]" |
+| File + lines exist BUT an applicable convention or enforced safeguard defeats the claimed mechanism | FALSE POSITIVE | Discard |
+| File + lines exist with an evidenced conditional risk, stated preconditions and unresolved owner decision under Verification Principle | RISK-ACKNOWLEDGED | Keep with conditions; a demonstrated requirement violation remains VERIFIED |
 | Finding lacks file:line, named heuristic, or failure mechanism | INVALID | Discard — does not meet Evidence Standard |
 | File exists BUT lines don't match description | MISLOCATED | Mark "Location uncertain" |
 | File does not exist | INVALID | Discard |
@@ -135,6 +132,7 @@ For each finding in the prior verified findings file, check the current tip and 
 - **Partly fixed:** some instances or paths remain; name them.
 - **Not fixed:** unchanged.
 - **Regressed:** the fix introduced a new failure. Also record that failure as a finding.
+- **Unverified:** necessary current source, prior context or other evidence is unavailable or conflicting. Name the missing evidence and next check; do not substitute Not fixed or Fixed. Preserve separately established statuses for other findings.
 
 ### Write Verified Findings
 
@@ -152,7 +150,7 @@ The relevance tally is as important as the evidence tally — it shows the verif
 
 ## Synthesize
 
-- **Deduplicate:** Same file + overlapping lines (within 5 lines) + same issue category = merge. Keep higher severity, combine recommendations, note multi-agent agreement.
+- **Deduplicate by cause:** Merge reports of the same causal failure and preserving correction, including shared causes across files or lenses. Location and category help compare evidence but do not establish identity: independently fixable nearby faults remain distinct. Keep severity supported by the combined evidence, preserve affected sites and do not inflate confidence merely from agent agreement.
 - **Architectural map:** Group files by module. Summarize which modules have findings vs. clean.
 - **Clean domains:** Record what each agent reviewed and found clean — this becomes the "What Looks Good" section.
 
@@ -214,16 +212,16 @@ Source: Agentic Coding School, [What Counts as a Pass](https://www.agenticcoding
 **Evidence:** [source-verified | reproduced | inferred | needs-runtime]
 ```
 
-Findings flagged by multiple agents: note `**Confidence:** Flagged by N agents independently`.
+For a finding reported by multiple agents, name its `**Contributors:**` lens/agent IDs. Agreement records provenance; it is not additional verification or a statistical independence claim.
 
 ### Additional Sections
 
 - **What Looks Good** — dimensions/domains that reviewed and found clean. Format: "[Dimension]: reviewed [N files in scope], no findings." Do not praise code quality or editorialize — this section proves coverage, not quality.
-- **Risk-Acknowledged Patterns** — findings where the code is plausibly intentional but creates risk conditions with no documented safeguard. Listed separately so the fixer can make an informed accept/reject decision. Each entry includes: the risk description, the mechanism, and what a safeguard would look like. Cap at 5 per review — if more qualify, keep the 5 with highest severity heuristics. RISK-ACKNOWLEDGED findings do not affect the merge verdict.
+- **Risk-Acknowledged Patterns** — conditional risks meeting Verification Principle, with mechanism, preconditions and unresolved owner decision. Missing evidence alone is coverage, not a risk. List up to five highest-consequence risks separately with the applicable safeguard/decision; do not move demonstrated requirement violations here to remove them from the verdict.
 - **Made Relevant by This Change** _(diff mode, if any)_ — defects in unchanged code that the change made reachable or more consequential. Each card adds **Caused by:** `[changed file:line]`. These count toward the merge verdict.
 - **Standards** _(if any)_ — findings from standards dimensions and plug-in `external_findings`, grouped by source, one line each: `file:line — rule — message [evidence label]`. They count toward the verdict only when CRITICAL or HIGH.
 - **Ask the Author** _(if any)_ — findings that would relitigate a locked decision, phrased as questions. Cap at 5.
-- **Prior Findings** _(ReReview only)_ — a table of each prior finding with its status (Fixed, Partly fixed, Not fixed, Regressed).
+- **Prior Findings** _(ReReview only)_ — a table of each prior finding with its status (Fixed, Partly fixed, Not fixed, Regressed, Unverified), applicable current-tip evidence and any missing check.
 - **Series Notes** _(series review only)_ — commits that are redundant or obsoleted by later commits in the range, from the Series Map, and which commit introduced each finding.
 - **Pre-existing Issues** _(diff mode, if any)_ — issues predating the change with no causal link to it, listed for awareness
 - **Coverage** — always present. Which lenses and standards ran; which were merged, dropped or skipped and why (from `dimensions.json` `coverage`); skipped addenda; Coverage Notes from context.md; whether the Impact Map was truncated; and what this review could not verify without running the code.

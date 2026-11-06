@@ -21,3 +21,7 @@ Retain the separate creation, conversion, review and plain-rewrite workflows: th
 Keep measurement and candidate scoring separate from semantic acceptance. The actual decimal extraction defect belongs in MeasureDraft, whose output feeds triage; the signed-number gate belongs in ScorePlainness. Neither can replace the independent meaning check. Existing local NLP and format specialists remain declared dependencies rather than copied runtime instructions. Actual standalone and integrated consumers justify retaining this structure without a folder migration. Granular evidence and remaining work are in [Quality/Outcomes.md](../Quality/Outcomes.md).
 
 - 2026-11-05 — [Merge preservation](MergePreservation/Record.md): reconcile the panel-completeness and severity repairs while preserving both outcome profiles; evidence is specific to the combined version.
+
+Expanded follow-up: [40-chat census](SessionOutcomes/ExpandedCensus.md), including 26 additional chats and five load/reference leads. Added outcome distinctions and challenge specifications; their later execution is recorded separately below.
+
+- 2026-11-06 — [Final wording, audience and unresolved findings](FinalDelivery/Record.md): executed all three expanded cases, sixteen targeted boundary/consumer checks and required repair continuations. Retain 1.5.2-rc.2 for frozen inputs, final-delivery/meaning checks and explicit current-evidence reconciliation of earlier findings. Preserve baseline/v1 failures and source-limited outputs; no general performance advantage claimed.

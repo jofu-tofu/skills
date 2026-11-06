@@ -1,0 +1,1378 @@
+{
+  "schema_version": 1,
+  "profile": "CR-CM1",
+  "baseline": "bf5c092d3787b40b61df95d0a0d93ccc41edf97c",
+  "candidate": "1.2.0-rc.1",
+  "candidate_snapshot": "candidate-v1",
+  "corpus_sha256": "f6a3ce40161cec20a1792bcfe28adbae115f5da48790b258d6eb2dd00bfe84f2",
+  "baseline_counts": {
+    "cases": 37,
+    "case_statuses": {
+      "pass": 35,
+      "fail": 2
+    },
+    "case_checks": 72,
+    "case_check_statuses": {
+      "pass": 69,
+      "fail": 3
+    },
+    "finalcase_checks": 53,
+    "finalcase_statuses": {
+      "unverified": 3,
+      "pass": 43,
+      "not_applicable": 3,
+      "fail": 4
+    },
+    "outcome_checks": 50
+  },
+  "candidate_counts": {
+    "cases": 37,
+    "case_statuses": {
+      "pass": 37
+    },
+    "case_checks": 72,
+    "case_check_statuses": {
+      "pass": 72
+    },
+    "finalcase_checks": 53,
+    "finalcase_statuses": {
+      "pass": 50,
+      "not_applicable": 3
+    },
+    "outcome_checks": 50
+  },
+  "qualification_receipts": {
+    "feedback": {
+      "assertions": 62,
+      "passed": 62,
+      "failed": 0
+    },
+    "context": {
+      "assertions": 68,
+      "passed": 68,
+      "failed": 0
+    },
+    "protocol": {
+      "assertions": 88,
+      "passed": 88,
+      "failed": 0
+    },
+    "interpretation": "218 bounded reference assertions qualify fixture mechanisms, including intentional faults; not 218 successful CodeReview checks."
+  },
+  "paired_improvements": [
+    {
+      "benefit": "Single shared cause counted once while both callers retained.",
+      "after": "pass",
+      "before": "fail",
+      "check": "P05/checks[0]"
+    },
+    {
+      "benefit": "Unusable final artifact explicitly rejected with incomplete delivery rather than empty success.",
+      "after": "pass",
+      "before": "fail",
+      "check": "P10--empty-final-report/checks[3-4]"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "A1",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "proof-claims",
+          "status": "pass",
+          "outcome_ids": [
+            "COR2",
+            "SIM3",
+            "SEC2",
+            "O2",
+            "O5"
+          ],
+          "reason": "One MEDIUM test-proof finding preserves substituted policy, returning denial, absent effect checks and source-safe production defaults; optional callback contract clarification retained."
+        }
+      ]
+    },
+    {
+      "case_id": "A2",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "safe-capability",
+          "status": "pass",
+          "outcome_ids": [
+            "IMP2",
+            "SEC2",
+            "RES2",
+            "INT2"
+          ],
+          "reason": "Traces absent/false/true representation choices and trusted authorization; no upgrade gate or bypass invented."
+        }
+      ]
+    },
+    {
+      "case_id": "A3",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "fix-regression",
+          "status": "pass",
+          "outcome_ids": [
+            "COR3",
+            "IMP1",
+            "O3",
+            "O5"
+          ],
+          "reason": "Original member issue explicitly Fixed; separate parent-preservation requirement Regressed; HIGH final source finding retains changed-caller cause and bounded correction."
+        }
+      ]
+    },
+    {
+      "case_id": "A4",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "lock-input-boundary",
+          "status": "pass",
+          "outcome_ids": [
+            "RES1",
+            "COR1",
+            "O2"
+          ],
+          "reason": "Explains wrong returned identity and duplicate insertion; allows optimistic hit with in-lock miss recheck."
+        }
+      ]
+    },
+    {
+      "case_id": "A5",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "lifecycle-check",
+          "status": "pass",
+          "outcome_ids": [
+            "SIM2",
+            "RES1",
+            "SEC1",
+            "COR2"
+          ],
+          "reason": "Retains pre-hook and post-hook safety boundaries; identifies count-test obstruction without discarding external-write assertions."
+        }
+      ]
+    },
+    {
+      "case_id": "A6",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "diagnosis-and-setup",
+          "status": "pass",
+          "outcome_ids": [
+            "INT1",
+            "O2",
+            "O5",
+            "COR2",
+            "IMP3"
+          ],
+          "reason": "Explains disabled panel, undeployed guard, unpatched current success and unknown historical cause. Missing caller/UI proof remains uncertainty."
+        }
+      ]
+    },
+    {
+      "case_id": "B1",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "formal-clock",
+          "status": "pass",
+          "outcome_ids": [
+            "COR1",
+            "CLA1",
+            "O2"
+          ],
+          "reason": "Retains ignored formal clock and supplies differing-clock example without claiming current scheduler failure."
+        },
+        {
+          "check": "unit-contract",
+          "status": "pass",
+          "outcome_ids": [
+            "COR3",
+            "CLA1"
+          ],
+          "reason": "Retains independent milliseconds/seconds defect and bounded conversion."
+        },
+        {
+          "check": "semantic-restraint",
+          "status": "pass",
+          "outcome_ids": [
+            "O2",
+            "CLA3"
+          ],
+          "reason": "Preserves undefined-to-zero behavior and rejects invented crash/comment requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "B2",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "all-effects",
+          "status": "pass",
+          "outcome_ids": [
+            "MNT2",
+            "COR1"
+          ],
+          "reason": "Retains third-record omitted effect and complete-processing remedy; separately source-supported duplicate-agreement maintenance risk is bounded."
+        },
+        {
+          "check": "empty-and-agree",
+          "status": "pass",
+          "outcome_ids": [
+            "COR1",
+            "SIM2"
+          ],
+          "reason": "Preserves empty true and pure helper short circuit with bounded repair."
+        }
+      ]
+    },
+    {
+      "case_id": "B3",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "accumulated-limit",
+          "status": "pass",
+          "outcome_ids": [
+            "RES3",
+            "COR1",
+            "O2"
+          ],
+          "reason": "Retains aggregate workspace cap across sequential requests; no global database limit invented."
+        },
+        {
+          "check": "cleanup-and-reuse",
+          "status": "pass",
+          "outcome_ids": [
+            "RES1",
+            "RES2"
+          ],
+          "reason": "Retains cancel release/clear and reuse under nonthrowing distinct-ID contract."
+        }
+      ]
+    },
+    {
+      "case_id": "B4",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "write-authorization",
+          "status": "pass",
+          "outcome_ids": [
+            "SEC1",
+            "SEC2"
+          ],
+          "reason": "Retains foreign preference mutation and required 403 before assignment."
+        },
+        {
+          "check": "bounded-impact",
+          "status": "pass",
+          "outcome_ids": [
+            "SEC3",
+            "O2"
+          ],
+          "reason": "Intact read owner check defeats disclosure; no foreign-board mutation claimed."
+        }
+      ]
+    },
+    {
+      "case_id": "B5",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "private-mechanics",
+          "status": "pass",
+          "outcome_ids": [
+            "STR1",
+            "STR2",
+            "SIM1"
+          ],
+          "reason": "Retains concrete duplicated private paging maintenance burden; does not call counterfactual provider a current runtime failure."
+        },
+        {
+          "check": "bounded-remedy-and-adapter",
+          "status": "pass",
+          "outcome_ids": [
+            "SIM2",
+            "SCP3",
+            "INT3"
+          ],
+          "reason": "Reuses nextPage, preserves serialization/AuditWriter, and does not impose framework or functional acceptance gate."
+        }
+      ]
+    },
+    {
+      "case_id": "B6",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "legacy-default",
+          "status": "pass",
+          "outcome_ids": [
+            "IMP1",
+            "IMP2",
+            "COR1"
+          ],
+          "reason": "Retains absent/null compatibility through table/mail and preserves explicit urgent creation."
+        },
+        {
+          "check": "test-claim-scope",
+          "status": "pass",
+          "outcome_ids": [
+            "COR2",
+            "O5"
+          ],
+          "reason": "Creation receipt remains narrow; absent/null controls named without mandatory external-suite execution."
+        }
+      ]
+    },
+    {
+      "case_id": "P01",
+      "stage": "selection-and-plugin",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Selection retains protected COR/RES/SEC/INT and named IMP, merges SIM/CLA and explains cap overrun."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Selects AAS/BBS/DDS, explicitly omits CCS at standards cap without complete assurance."
+        },
+        {
+          "check": "checks[2]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Skips actual 201-word SEC and attaches valid IMP."
+        },
+        {
+          "check": "checks[3]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Gather names missing fragment and merges actual readable fragment with provenance."
+        },
+        {
+          "check": "checks[4]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Executed integration verifier preserves deterministic line/file/change scope, producer provenance, and CRITICAL-to-HIGH for blocking:false, explicitly not semantic/runtime validation."
+        }
+      ]
+    },
+    {
+      "case_id": "P01--plain",
+      "stage": "selection-and-plugin",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Same endpoint/consumer signals retained without plugin resources."
+        },
+        {
+          "check": "checks[3]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "plugin_source null; no standards/addenda invented."
+        }
+      ]
+    },
+    {
+      "case_id": "P01--unsupported",
+      "stage": "gather",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[3]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Shared actual GatherContext stops on contract 99. Baseline/candidate GatherContext source SHA256 identical; reused producer result, not an independent candidate Gather execution."
+        }
+      ]
+    },
+    {
+      "case_id": "P01--boundary-addendum",
+      "stage": "selection-and-plugin",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Protected concerns retained with explicit overrun."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Capped standards retain owner-requested DDS and disclose CCS omission."
+        },
+        {
+          "check": "checks[2]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Actual 200-word SEC attached despite stale supplied-context 201 label; IMP attached."
+        },
+        {
+          "check": "checks[3]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Missing fragment named in selection coverage."
+        },
+        {
+          "check": "checks[4]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-SELECT",
+            "P-PLUGIN",
+            "P-ARTIFACT",
+            "P-AUTHORITY",
+            "O6"
+          ],
+          "reason": "Executed integration verifier preserves deterministic line/file/change scope, producer provenance, and CRITICAL-to-HIGH for blocking:false, explicitly not semantic/runtime validation."
+        }
+      ]
+    },
+    {
+      "case_id": "P02",
+      "stage": "selection-or-native-entry",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-AUDIT",
+            "P-SELECT",
+            "STR1",
+            "STR2",
+            "O3"
+          ],
+          "reason": "STR explicitly selected for small architecture audit with no diff trigger."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-AUDIT",
+            "P-SELECT",
+            "STR1",
+            "STR2",
+            "O3"
+          ],
+          "reason": "Completed source-only STR and final verifier retain get/set-only backend failure from _rows read, recommend store.get, and disclose missing other reviewers without new framework."
+        },
+        {
+          "check": "checks[2]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-AUDIT",
+            "P-SELECT",
+            "STR1",
+            "STR2",
+            "O3"
+          ],
+          "reason": "Completed source-only STR and final verifier retain get/set-only backend failure from _rows read, recommend store.get, and disclose missing other reviewers without new framework."
+        }
+      ]
+    },
+    {
+      "case_id": "P03",
+      "stage": "selection",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-REREVIEW",
+            "P-SELECT",
+            "O6"
+          ],
+          "reason": "Explicit ReReview policy selects COR/RES/IMP/INT and excludes ordinary SIM/CLA baseline."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-REREVIEW",
+            "P-SELECT",
+            "O6"
+          ],
+          "reason": "Pinned arithmetic target and actual selection reason retained."
+        }
+      ]
+    },
+    {
+      "case_id": "P04",
+      "stage": "verifier",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-REPORT",
+            "O4",
+            "COR1",
+            "COR3"
+          ],
+          "reason": "Two independently fixable causes remain separately actionable."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-REPORT",
+            "O4",
+            "COR1",
+            "COR3"
+          ],
+          "reason": "Both ceil and manual-label corrections/consequences preserved; no shared-fix conflation."
+        }
+      ]
+    },
+    {
+      "case_id": "P05",
+      "stage": "verifier",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-REPORT",
+            "O4",
+            "IMP1"
+          ],
+          "reason": "One shared fee cause, both web/phone consequences, changed helper attribution and single correction retained; two raw seeds explicitly deduplicated."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-REPORT",
+            "O4",
+            "IMP1"
+          ],
+          "reason": "Unchanged phone consumer consequence and changed helper attribution preserved."
+        }
+      ]
+    },
+    {
+      "case_id": "P06",
+      "stage": "verifier",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-EVIDENCE",
+            "SEC1",
+            "SEC2",
+            "O2"
+          ],
+          "reason": "Rejects reassuring gateway comment in favor of trusted record versus client body mechanism."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-EVIDENCE",
+            "SEC1",
+            "SEC2",
+            "O2"
+          ],
+          "reason": "Retains two-identity bypass and owner-check correction; explicitly source-only, no deployed exploitation claim."
+        }
+      ]
+    },
+    {
+      "case_id": "P07",
+      "stage": "verifier",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "IMP3",
+            "P-EVIDENCE",
+            "O2",
+            "O5"
+          ],
+          "reason": "Filters seed's unsupported broken-caller claim and auto-HIGH assumption."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "IMP3",
+            "P-EVIDENCE",
+            "O2",
+            "O5"
+          ],
+          "reason": "Names unavailable consumer sources/versions and next inspection without rejecting authorized loader change."
+        }
+      ]
+    },
+    {
+      "case_id": "P08",
+      "stage": "verifier-or-native-entry",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-REREVIEW",
+            "EVD1",
+            "O5",
+            "COR3",
+            "P-ARTIFACT"
+          ],
+          "reason": "All five statuses correct; zero regression retained and unavailable dependency unverified."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-REREVIEW",
+            "EVD1",
+            "O5",
+            "COR3",
+            "P-ARTIFACT"
+          ],
+          "reason": "No blanket inference from passing tests or one unavailable dependency; missing contributors disclosed."
+        }
+      ]
+    },
+    {
+      "case_id": "P09",
+      "stage": "verifier-or-native-entry",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-SERIES",
+            "EVD1",
+            "O3",
+            "P-EVIDENCE"
+          ],
+          "reason": "Final authorization restored; C1 superseded behavior excluded with series notes."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-SERIES",
+            "EVD1",
+            "O3",
+            "P-EVIDENCE"
+          ],
+          "reason": "Final shipping defect correctly attributed to C2."
+        },
+        {
+          "check": "checks[2]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-SERIES",
+            "EVD1",
+            "O3",
+            "P-EVIDENCE"
+          ],
+          "reason": "Final-tip verdict matches surviving defect."
+        }
+      ]
+    },
+    {
+      "case_id": "P10",
+      "stage": "verifier-and-artifact",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Nonempty report and verified-findings delivered; actual SEC defect retained despite incomplete RES."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Clean COR/STD are status, not findings; RES incomplete rather than clean."
+        }
+      ]
+    },
+    {
+      "case_id": "P10--missing-contributor",
+      "stage": "verifier-and-artifact",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "SEC survives missing RES in usable report/artifact."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "RES missing explicitly unavailable; completed clean inspections not counted as findings."
+        }
+      ]
+    },
+    {
+      "case_id": "P10--empty-contributor",
+      "stage": "verifier-and-artifact",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "SEC survives empty RES in usable report/artifact."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Empty RES explicitly unavailable; completed clean inspections not findings."
+        }
+      ]
+    },
+    {
+      "case_id": "P10--clean-only",
+      "stage": "verifier-and-artifact",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[2]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Nonempty zero-findings result with incomplete RES; no defect or blanket safety invented."
+        }
+      ]
+    },
+    {
+      "case_id": "P10--malformed-selection",
+      "stage": "artifact-gate",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[3]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Unusable selection detected; one controlled adapter retry remains unusable and yields explicit stopped/error delivery without invented assignments or clean coverage. Native retry not exercised."
+        },
+        {
+          "check": "checks[4]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Unusable selection detected; one controlled adapter retry remains unusable and yields explicit stopped/error delivery without invented assignments or clean coverage. Native retry not exercised."
+        }
+      ]
+    },
+    {
+      "case_id": "P10--empty-selection",
+      "stage": "artifact-gate",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[3]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Unusable selection detected; one controlled adapter retry remains unusable and yields explicit stopped/error delivery without invented assignments or clean coverage. Native retry not exercised."
+        },
+        {
+          "check": "checks[4]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Unusable selection detected; one controlled adapter retry remains unusable and yields explicit stopped/error delivery without invented assignments or clean coverage. Native retry not exercised."
+        }
+      ]
+    },
+    {
+      "case_id": "P10--empty-final-report",
+      "stage": "artifact-gate",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[3]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Assigned controller gate rejects empty report/missing verified-findings; one record-only failed-worker retry then explicit delivery-incomplete result. Adapter failure is simulated, not native retry proof."
+        },
+        {
+          "check": "checks[4]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-ARTIFACT",
+            "O5",
+            "O6",
+            "P-REPORT"
+          ],
+          "reason": "Assigned controller gate rejects empty report/missing verified-findings; one record-only failed-worker retry then explicit delivery-incomplete result. Adapter failure is simulated, not native retry proof."
+        }
+      ]
+    },
+    {
+      "case_id": "P11",
+      "stage": "verifier",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-EVIDENCE",
+            "P-REPORT",
+            "SEC3",
+            "O2",
+            "O4"
+          ],
+          "reason": "Rejects fabricated production corruption/deployment consequence; records bounded off-by-one."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "P-EVIDENCE",
+            "P-REPORT",
+            "SEC3",
+            "O2",
+            "O4"
+          ],
+          "reason": "Filters LOW optional preview issue without invented staging/release gate."
+        }
+      ]
+    },
+    {
+      "case_id": "P12",
+      "stage": "verifier",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "checks[0]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-DIFF",
+            "IMP1",
+            "O3",
+            "P-SCOPE"
+          ],
+          "reason": "Retains own changed route failure and C2 cause even while primary location remains helper."
+        },
+        {
+          "check": "checks[1]",
+          "status": "pass",
+          "outcome_ids": [
+            "F-DIFF",
+            "IMP1",
+            "O3",
+            "P-SCOPE"
+          ],
+          "reason": "Other developer C1 helper is dependency evidence, not assigned new fault; caller remedy bounded."
+        }
+      ]
+    },
+    {
+      "case_id": "REUSE-SCOPE06",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "requiredReason",
+          "status": "pass",
+          "outcome_ids": [
+            "SCP1",
+            "P-SCOPE",
+            "INT1"
+          ],
+          "reason": "Fresh handoff consumes shared actual unchanged-code GatherContext plus candidate lenses; preserves latest both-path authorization, blank/manual semantics, supplied save premise and absent executable tests/runtime evidence."
+        }
+      ]
+    },
+    {
+      "case_id": "REUSE-MNT03",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "requiredReason",
+          "status": "pass",
+          "outcome_ids": [
+            "MNT1",
+            "STR1",
+            "SIM1"
+          ],
+          "reason": "Retains independently used selectors, duplicate policy and placeholder obligations; selected-row seam preserves all/selected and manual values without runtime-bug claim or framework."
+        }
+      ]
+    },
+    {
+      "case_id": "REUSE-MNT04",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "requiredReason",
+          "status": "pass",
+          "outcome_ids": [
+            "MNT1",
+            "SIM2",
+            "STR3"
+          ],
+          "reason": "Accepts coherent authorized overwrite boolean and both real callers; no unnecessary wrappers or removed behavior."
+        }
+      ]
+    },
+    {
+      "case_id": "B7",
+      "stage": "discovery",
+      "status": "pass",
+      "checks": [
+        {
+          "check": "failure-propagation",
+          "status": "pass",
+          "outcome_ids": [
+            "RES2",
+            "COR1",
+            "O2"
+          ],
+          "reason": "Retains hidden Boolean failure and receipt-after-header-failure; allows partial saved header."
+        },
+        {
+          "check": "intentional-throw-boundary",
+          "status": "pass",
+          "outcome_ids": [
+            "RES2",
+            "SIM2",
+            "O3"
+          ],
+          "reason": "Preserves caller-owned extension exception propagation; no rollback/catch framework demanded."
+        }
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "O1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "O2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "O3",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "O4",
+      "status": "pass",
+      "reason": "P04 keeps independently fixable causes; P05 correctly merges shared fee cause while preserving web/phone consequences. B2 novel maintenance cause adjudicated on actual source."
+    },
+    {
+      "id": "O5",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "O6",
+      "status": "pass",
+      "reason": "Ordinary and clean-only reports usable; controller rejects malformed/empty selections and empty final artifacts with bounded local-adapter failure handling and explicit incomplete/error."
+    },
+    {
+      "id": "COR1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "COR2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "COR3",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "RES1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "RES2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "RES3",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "SIM1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "SIM2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "SIM3",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "CLA1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "CLA2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "CLA3",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "SEC1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "SEC2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "SEC3",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "IMP1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "IMP2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "IMP3",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "INT1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "INT2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "INT3",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "STR1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "STR2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "STR3",
+      "status": "pass",
+      "reason": "B5 and REUSE-MNT03 final findings use MEDIUM bounded maintenance consequences and public seams without claiming current output failure or refactor acceptance gate."
+    },
+    {
+      "id": "SCP1",
+      "status": "pass",
+      "reason": "Shared actual unchanged-code GatherContext chronology consumed in fresh candidate handoff; final explicit both-path owner expansion, preservation and supplied save premise survive. Test comment is not executable test proof."
+    },
+    {
+      "id": "SCP2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "SCP3",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "SCP4",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "MNT1",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "MNT2",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "EVD1",
+      "status": "pass",
+      "reason": "A6 and P08/P09 retain partial fixes, reversals, unavailable historical/current evidence and final-tip attribution."
+    },
+    {
+      "id": "F-DIFF",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "F-AUDIT",
+      "status": "pass",
+      "reason": "Fixed-concern and actual native B5 audits preserve bounded maintenance cause; completed P02 STR/verifier preserve current get/set backend failure with partial audit coverage honest."
+    },
+    {
+      "id": "F-REREVIEW",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "F-SERIES",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "P-SCOPE",
+      "status": "pass",
+      "reason": "Latest REUSE-SCOPE06 expansion, P12 owned caller, B5 optional bounded maintenance and B7 allowed partial saves preserved; no harmful correction or unrequested functional gate established."
+    },
+    {
+      "id": "P-SELECT",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "P-CONTEXT",
+      "status": "pass",
+      "reason": "Native B5 actual GatherContext consumed downstream with owner API, CSV/writer, private-state, valid-input and missing-preview-source constraints preserved. Shared unchanged-code Gather producer tests also preserve A6/B6/P12 settings/identity limits."
+    },
+    {
+      "id": "P-ARTIFACT",
+      "status": "pass",
+      "reason": "One native B5 run delivers nonempty context, selection, six contributor results and verified/report artifacts. Controlled fault gates reject unusable outputs with explicit limits; native fault retry remains unverified."
+    },
+    {
+      "id": "P-PROCESS",
+      "status": "pass",
+      "reason": "Actual candidate B5 native entry uses separate gather/select/six dimension/verify agents; capacity error followed by waves with no selected concern dropped. One audit establishes bounded execution, not orchestration reliability across families."
+    },
+    {
+      "id": "P-PLUGIN",
+      "status": "pass",
+      "reason": "Actual selector resource boundaries plus shared Gather and executed verifier preserve plain/unsupported/200/201 variants, missing fragment, deterministic scope/provenance and contract-required CRITICAL downgrade. No synthetic precheck semantic correctness inferred."
+    },
+    {
+      "id": "P-EVIDENCE",
+      "status": "pass",
+      "reason": "Bounded executed stage evidence retains mapped behavior and valid/unknown contrasts; no population or native execution inference."
+    },
+    {
+      "id": "P-REPORT",
+      "status": "pass",
+      "reason": "Distinct and shared causes synthesized appropriately, source mechanisms retained, supported bounded remedies reach final reports; no lost discovery defect observed."
+    },
+    {
+      "id": "P-AUTHORITY",
+      "status": "pass",
+      "reason": "Native read-only audit retains frozen B5 source hash; explicit review-only/post-request local probes distinguish zero external action from recorded gh comment invocation. Adapter has no network: real delivery is not proved or authorized."
+    }
+  ],
+  "evidence_identity": {
+    "candidate_adjudication_sha256": "3ebf877fa836ce19766dbb0a9801e1565e15768d67c30d3a5d90b98b8874800b",
+    "baseline_v2_adjudication_sha256": "966ab41a737454402d92ff51cd4d33a6a5c996f658be83ef350c03c9c6f63e1e",
+    "native_manifest_sha256": "e2778b5fdcf6b4a172f6d59782ff193d256108d6771537225c806e1a331082d6"
+  },
+  "limits": "No measured population accuracy, review comprehension, maintenance savings, all-family reliability or real external delivery."
+}

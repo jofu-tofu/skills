@@ -1,0 +1,4 @@
+# Raw evidence bytes and hashes are preserved in the archive.
+Evidence/attempt.zip -text
+Evidence/*.md text eol=lf
+Fixtures/*.md text eol=lf

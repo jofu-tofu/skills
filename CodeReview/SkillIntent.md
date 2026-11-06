@@ -6,7 +6,7 @@ Comprehensive multi-agent code review that is trustworthy, proportional, and sin
 
 This skill solves all three problems with three core mechanisms:
 1. **Parallel specialization** — multiple agents each go deep in one domain rather than one agent going shallow across all
-2. **Claim verification** — every issue is git-blame confirmed to have been introduced in the changed commits
+2. **Claim verification** — diff findings trace to the requested commits or their causal effects; audit findings trace to in-target code and applicable contracts.
 3. **Report design** — output is structured so the user reads every word, not skims
 
 ## Design Philosophy
@@ -28,7 +28,7 @@ Everything else happens inside agents. The orchestrator has no opinion about how
 
 ### Judgment Over Triggers
 
-Dimension selection uses agent judgment, not trigger syntax. Trigger syntax was another layer of indirection that agents skipped reading. The SelectDimensions agent reads context, reads dimension descriptions, and picks what's relevant, guided by signals written in plain language. Baseline lenses (COR, RES, SIM, CLA) always run. SEC, IMP and INT run whenever what the change touches calls for them, regardless of diff size: a three-line change to a permission check needs SEC more than a thousand lines of layout code does. STR runs for medium+ diffs and new modules.
+Dimension selection uses agent judgment, not trigger syntax. The SelectDimensions agent reads context and dimension descriptions, then picks relevant concerns using plain-language signals. Ordinary reviews use COR, RES, SIM and CLA; ReReview supplies its documented override. SEC, IMP and INT follow the change's concerns regardless of size. STR also serves requested architecture and general-health audits of existing modules. SelectDimensions owns sizing, required coverage and explicit standards-overflow dispositions; runtime concurrency controls scheduling waves, not which selected concerns disappear.
 
 ### Self-Contained Dimensions
 
@@ -54,7 +54,7 @@ Agents are expensive. Giving each agent the full codebase context + full diff + 
 
 Verification has two failure modes. The obvious one: rubber-stamping agent findings without checking if the code actually changed. The subtle one: confirming that every finding is *technically correct* while letting through a flood of nitpicks, preferences, and theoretical fragility that trains the reader to skim. A report with 20 verified findings where 12 are nitpicks is worse than a report with 8 findings — the reader loses trust in the signal and stops reading carefully.
 
-Pass 1 (Relevance) asks four questions before any git-blame work: Is this finding in scope? Does it describe a concrete failure mode or just a preference? Is the severity proportional to the actual risk? Does it relitigate a decision the author locked in? Findings that fail the first three are discarded with a tag (OUT-OF-SCOPE, NITPICK, DISPROPORTIONATE); findings that fail the fourth move to an Ask the Author list (ASK-AUTHOR). The key test for substance: *"If this finding were ignored, what specific bad thing would happen?"* — if you can't name a concrete failure, it's not a finding.
+Pass 1 (Relevance) checks scope, substantive consequence, proportionate severity and locked decisions. Substance can be a supported failure path or a present source-demonstrated maintenance burden, with a supported use/change scenario and bounded preserving correction. A preference or lack of proof alone is insufficient; optional advice does not become an acceptance gate. VerifyAndReport owns the detailed disposition rules; reviewer prompts and lenses must agree with them. Failed relevance checks use OUT-OF-SCOPE, NITPICK, DISPROPORTIONATE or ASK-AUTHOR as that workflow specifies.
 
 Pass 2 (Evidence) is the git-blame verification that was always there — confirming findings trace to actual changed lines. But it now operates on a pre-filtered set, which means the evidence check focuses attention on findings that matter rather than spending tokens confirming nitpicks are technically accurate.
 
@@ -65,10 +65,10 @@ The relevance tally in the report is as important as the evidence tally — it s
 Findings have three main dispositions after verification, plus MADE-RELEVANT (a defect in unchanged code that names the changed line making it reachable; reported in its own section and counted in the verdict) and PRE-EXISTING (no causal link; listed for awareness):
 
 - **VERIFIED** — finding confirmed against changed commits (diff mode) or actual code (audit mode). Kept in the main findings section.
-- **FALSE POSITIVE** — finding matches a documented convention (CLAUDE.md, ADR, linter config, inline code comment) or has an explicit safeguard in code (catch-and-rethrow, validation check, circuit breaker). Discarded.
-- **RISK-ACKNOWLEDGED** — code is plausibly intentional but creates risk conditions with no documented safeguard. Kept in a separate "Risk-Acknowledged Patterns" section so the fixer can make an informed decision.
+- **FALSE POSITIVE** — an applicable current contract, convention, enforced safeguard or heuristic correction defeats the alleged mechanism. A stale reassuring comment cannot do so. Discarded.
+- **RISK-ACKNOWLEDGED** — an evidenced conditional risk has stated preconditions and an unresolved owner decision. Kept separately; missing evidence alone creates no finding.
 
-RISK-ACKNOWLEDGED lifecycle: the fixer either (1) fixes the risk, (2) adds a safeguard or code comment explaining why it's safe — converting future occurrences to FALSE POSITIVE, or (3) accepts the risk and moves on. The category makes risk acceptance explicit rather than silent. Review agents follow the Evidence Standard defined in Review.md Step 4.
+RISK-ACKNOWLEDGED lifecycle: the owner resolves the risk, establishes an actual safeguard/contract that defeats it, or explicitly accepts the tradeoff. Documentation records that decision; it does not override contradictory behavior. Review agents follow the Evidence Standard defined in Review.md Step 4.
 
 ### Credibility Through Evidence of Work
 
@@ -76,7 +76,7 @@ The absence of issues is signal, not silence. The report includes a "What Looks 
 
 ## Success Criteria
 
-1. Every flagged issue exists in lines introduced by the commit range being reviewed, or names the changed line that made it reachable
+1. Diff findings trace to the reviewed range or a named causal changed line; audit findings concern the requested existing target
 2. Agent count and skill selection are proportional to the size and nature of the changes
 3. The full review runs in a single session without context overflow
 4. The report is readable without skimming — the user engages with every finding

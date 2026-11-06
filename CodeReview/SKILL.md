@@ -4,7 +4,7 @@ description: Comprehensive multi-agent code review and codebase audit system. US
 compatibility: Designed for Codex and Devin (or similar agent products). Requires git.
 metadata:
   author: pai
-  version: "1.1.0-rc.3"
+  version: "1.2.0-rc.1"
 ---
 
 # CodeReview
@@ -13,16 +13,16 @@ Multi-agent code review and codebase audit system with **process-boundary enforc
 
 ## Success Criteria
 
-For evaluation and improvement, [Quality/Outcomes.md](Quality/Outcomes.md) defines granular results and valid contrasts for all eight dimensions; [Quality/Measurement.md](Quality/Measurement.md) defines evidence rules. [Improvements/Index.md](Improvements/Index.md) records tested scope and decisions. These records do not require every review agent to load the full profile or produce a finding for each outcome.
+For evaluation and improvement, [Quality/Outcomes.md](Quality/Outcomes.md) defines granular results and valid contrasts for all eight dimensions; [Quality/WorkflowOutcomes.md](Quality/WorkflowOutcomes.md) covers supported modes and cross-stage results; [Quality/Measurement.md](Quality/Measurement.md) defines evidence rules. [Improvements/Index.md](Improvements/Index.md) records tested scope and decisions. These records do not require every review agent to load the full profile or produce a finding for each outcome.
 
 These criteria orient every workflow decision:
 
 1. **Comprehensive** — No significant issue category goes unchecked (security, performance, architecture, correctness, style)
 2. **Single-session** — Entire review fits in one context window, achieved via agents + context compression
-3. **Credible** — Every flagged issue traces to an actual changed line in the specified commit range, or to a stated causal link from one; no false positives from pre-existing code
+3. **Credible** — Diff findings trace to the requested changed lines or their causal effects; audit findings trace to in-target code and its contract. Unrelated existing work is not blamed on a diff.
 4. **Believable output** — Report is clear and concise enough that the user reads every word, not skims. No wall-of-text syndrome.
 5. **Proportional** — Agent count and dimension selection scale with the size and nature of the changes
-6. **Verified claims** — Issues discovered are cross-checked against the correct diff before reporting, and each carries an evidence label
+6. **Verified claims** — Claims are checked against the pinned review target and applicable evidence before reporting; every kept finding carries an evidence label.
 7. **Domain-neutral core** — Domain knowledge arrives through the plug-in contract (`Standards/PluginContract.md`), never in this skill's own files
 
 ## Orchestrator Architecture (MANDATORY)
@@ -48,9 +48,9 @@ Previous architecture had all workflow files read in a single LLM session. The L
 |------|-------|-------|--------|---------------|
 | 1 | Setup | User request, optional `--plugin` manifest | `$REVIEW_DIR` created, `plugin.json` copied | Directory exists |
 | 2 | GatherContext | Commit range or target path, manifest | `context.md` | File exists, non-empty, no `PLUGIN ERROR` |
-| 3 | SelectDimensions | `context.md` + `Dimensions/` + manifest | `dimensions.json` | Valid JSON object with a `dimensions` array |
-| 4 | Review Agents (parallel) | Dimension file + addenda + `context.md` + file list | `dimension-[id].md` per agent | All agent output files exist |
-| 5 | VerifyAndReport | Agent output paths + `context.md` + `dimensions.json` + manifest | `verified-findings.md` + `report.md` | `report.md` exists, output to user |
+| 3 | SelectDimensions | `context.md` + `Dimensions/` + manifest | `dimensions.json` | Valid object with a nonempty `dimensions` array |
+| 4 | Review Agents (available parallel capacity) | Dimension file + addenda + `context.md` + file list | `dimension-[id].md` per agent | Usable nonempty results, or explicit unavailable coverage after bounded retry |
+| 5 | VerifyAndReport | Agent output paths + `context.md` + `dimensions.json` + manifest | `verified-findings.md` + `report.md` | Both readable/nonempty; bounded failure yields incomplete delivery |
 
 When triggered, you MUST:
 1. Read `Workflows/Review.md` FIRST — before reading any source code or diffs
@@ -87,7 +87,7 @@ Running the **Review** workflow from the **CodeReview** skill...
 | SEC | **Security** | The Attacker — "Which input do you trust that I control?" | Triggered, any size |
 | IMP | **Impact & Compatibility** | The Downstream Consumer — "What did you just break for me?" | Triggered |
 | INT | **Intent Conformance** | The Spec Checker — "Where was this asked for?" | When intent is stated |
-| STR | **Structure** | The Architect — "Is this where it belongs?" | Medium+ or new modules |
+| STR | **Structure** | The Architect — "Is this where it belongs?" | Medium+ or new modules; requested architecture/general-health audits, subject to mode override |
 
 SelectDimensions picks lenses by what the change touches as well as by its size, and never drops SEC or INT for the agent cap.
 

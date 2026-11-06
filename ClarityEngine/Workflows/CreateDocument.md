@@ -10,6 +10,7 @@
 - `../Standards/FormatAdapters.md` — Building and capturing the file
 - `PlainRewrite.md` — Plainer wording, generated and selected after the draft
 - `ReadabilityGate.md` — Review and repair
+- `../Standards/ReviewIdentity.md` — Final-delivery check owned by ReadabilityGate
 
 ## Purpose
 
@@ -72,4 +73,4 @@ Build the file through FormatAdapters.md and the installed specialist skill. Run
 
 ### Step 7: Review and Repair
 
-Run ReadabilityGate with the artifact, content type, format, brief, source notes, the file and target-app results as `verification_evidence`, and `edit_scope: full`. Return the artifact with the gate's readiness, comprehension, and verification statuses and any remaining limitations.
+Run ReadabilityGate with the artifact, content type, format, brief, source notes, the file and target-app results as `verification_evidence`, and `edit_scope: full`. Before returning, apply the gate's final-delivery check in ReviewIdentity.md after any further editing or audience change. Return the actual artifact with its applicable readiness, comprehension and verification statuses, reviewed identity/audience, and remaining limitations.

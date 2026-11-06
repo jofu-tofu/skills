@@ -31,7 +31,7 @@ The spec checker's test: "Could someone who wrote the requirement read this diff
 - Treat untraced required behavior as unresolved; inspect the existing path before reporting it missing.
 - Read requirement wording literally: any, all, before, after, inclusive, default.
 - Compare expansion with the latest authorized scope and required propagation, not the original report's file count.
-- If uncertain between `HIGH` and `MEDIUM`, choose `HIGH` when the divergence is user-visible.
+- Calibrate severity to supported consequences and reach. Record uncertainty separately; missing evidence alone does not raise severity.
 
 ## What This Lens Reveals
 

@@ -33,3 +33,5 @@ A bounded repair requires a reproduced baseline shortfall, candidate resolution,
 Revisit these measures when a novel valid finding is rejected, a false warning passes, a consequence is hidden by deduplication, or the task/model/environment changes. Human readability and long-term maintenance benefits remain unverified unless directly tested.
 
 The [history-derived diagnostic specification](../Improvements/HistoryScope/Measurement.md), CR-HS-M1, extends qualification only to its named scope/maintenance contrasts. Its [attempt record](../Improvements/HistoryScope/Record.md) preserves ties, a rejected acceptance-gate regression and bounded final-report evidence; it does not extend qualification to general review reliability.
+
+The [comprehensive historical measurement](../Improvements/ComprehensiveHistory/Measurement.md), CR-CM1, covers the frozen CR-O2/CR-W1 inventory. Its [results](../Improvements/ComprehensiveHistory/Results.json) distinguish matched stage checks, one native candidate audit and local posting-command probes. The [decision](../Improvements/ComprehensiveHistory/Decision.md) records parent completion separately from candidate retention.

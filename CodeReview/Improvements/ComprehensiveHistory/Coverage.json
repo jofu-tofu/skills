@@ -1,0 +1,1367 @@
+{
+  "schema_version": 1,
+  "proposal": false,
+  "basis": {
+    "request": "More exhaustive past-DLG feedback mining to improve CodeReview; complete the outcome set first, then improve efficiently until those outcomes are met.",
+    "target": "CodeReview1.1.0-rc.3",
+    "baseline": "bf5c092",
+    "reconciliation": "Frozen after broad historical-ledger reconciliation and independent scope challenge. Performance statuses remain external; no runtime edits yet.",
+    "historySummary": {
+      "listedChats": 130,
+      "newHistoriesInspected": 28,
+      "totalDistinctAcrossPasses": 35,
+      "contextFolders": 101,
+      "distinctLogIds": 79,
+      "contextArtifactsIndexed": 4622,
+      "markdownSearched": 1608,
+      "documentsFullyRead": 25,
+      "evidenceFamilies": 34
+    }
+  },
+  "parent_checks": [
+    {
+      "id": "scope",
+      "description": "Independent scope challenge against original request and full supported surface."
+    },
+    {
+      "id": "mining",
+      "description": "Quantified historical inventory and evidence ledger, with read/skim/selection counts, final dispositions and confidence."
+    },
+    {
+      "id": "structure-codereview",
+      "description": "Whole-skill structural review plus resolution or justified rejection of each finding."
+    }
+  ],
+  "targets": [
+    {
+      "id": "CodeReview",
+      "purpose": "Help the maintainer decide required changes, supported maintenance advice and unverified evidence for the scoped target.",
+      "structure_check": "structure-codereview",
+      "families": [
+        {
+          "id": "shared",
+          "outcomes": [
+            {
+              "id": "O1",
+              "description": "Identify consequential in-scope problems, including failures across module boundaries.",
+              "check_id": "outcome-o1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify consequential in-scope problems, including failures across module boundaries.",
+              "contributors": [
+                "all relevant lenses"
+              ],
+              "validContrast": "A valid implementation or enforced safeguard is accepted; no finding quota.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [],
+              "historyEvidence": [
+                "FB12"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "O2",
+              "description": "Support each claim with a concrete causal path, applicable conditions and evidence; preserve uncertainty.",
+              "check_id": "outcome-o2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Support each claim with a concrete causal path, applicable conditions and evidence; preserve uncertainty.",
+              "contributors": [
+                "all reviewers",
+                "verifier"
+              ],
+              "validContrast": "Missing or conflicting evidence remains unverified rather than a fabricated mechanism or safety claim.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [],
+              "historyEvidence": [
+                "FB01",
+                "FB02",
+                "FB06",
+                "FB12",
+                "FB15",
+                "FB16",
+                "FB17",
+                "FB18"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "O3",
+              "description": "Apply the requested scope and intended behavior; distinguish introduced, newly exposed and unrelated existing defects.",
+              "check_id": "outcome-o3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Apply the requested scope and intended behavior; distinguish introduced, newly exposed and unrelated existing defects.",
+              "contributors": [
+                "GatherContext",
+                "INT",
+                "IMP",
+                "verifier"
+              ],
+              "validContrast": "Necessary implementation support and accepted limitations remain valid; unrelated old work is awareness only.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [],
+              "historyEvidence": [
+                "FB01",
+                "FB04",
+                "FB16",
+                "FB18"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "O4",
+              "description": "Help the maintainer act through a concise trigger, consequence, location and correction direction, with proportionate severity and no duplicate issue count.",
+              "check_id": "outcome-o4",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Help the maintainer act through a concise trigger, consequence, location and correction direction, with proportionate severity and no duplicate issue count.",
+              "contributors": [
+                "all reviewers",
+                "verifier/report"
+              ],
+              "validContrast": "Equivalent preserving remedies pass; one shared cause is not counted twice and distinct nearby causes are not merged.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "O5",
+              "description": "Describe actual coverage and remaining uncertainty; absence of findings is not proof of safety, and a fix status needs evidence.",
+              "check_id": "outcome-o5",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Describe actual coverage and remaining uncertainty; absence of findings is not proof of safety, and a fix status needs evidence.",
+              "contributors": [
+                "all stages",
+                "verifier/report"
+              ],
+              "validContrast": "Completed zero-finding review differs from unavailable inspection; a known defect survives another contributor failure.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [],
+              "historyEvidence": [
+                "FB01",
+                "FB02",
+                "FB04",
+                "FB11",
+                "FB15",
+                "FB17"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "O6",
+              "description": "Spend effort where it can affect the decision; preserve review modes, process boundaries, plug-in contracts and domain neutrality.",
+              "check_id": "outcome-o6",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Spend effort where it can affect the decision; preserve review modes, process boundaries, plug-in contracts and domain neutrality.",
+              "contributors": [
+                "orchestrator",
+                "SelectDimensions",
+                "plugin contract"
+              ],
+              "validContrast": "Irrelevant lenses or unrequested live work need not run; required selected coverage is not silently dropped for cost.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [],
+              "historyEvidence": [
+                "FB11",
+                "FB15"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "COR",
+          "outcomes": [
+            {
+              "id": "COR1",
+              "description": "Expose a valid input or state transition that violates the required output or invariant, including aggregation, precision and configuration boundaries.",
+              "check_id": "outcome-cor1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Expose a valid input or state transition that violates the required output or invariant, including aggregation, precision and configuration boundaries.",
+              "contributors": [
+                "COR"
+              ],
+              "validContrast": "A different algorithm with identical required outcomes is accepted.",
+              "evidenceMethod": "Executable/source counterexample, equivalent safe behavior, assertion sensitivity; inspect actual final report.",
+              "parentOutcomes": [
+                "O1"
+              ],
+              "historyEvidence": [
+                "FB01",
+                "FB03",
+                "FB05",
+                "FB06",
+                "FB07",
+                "FB14"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "COR2",
+              "description": "Explain which consequential behavior lacks a discriminating assertion, without claiming that missing tests prove a runtime bug.",
+              "check_id": "outcome-cor2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Explain which consequential behavior lacks a discriminating assertion, without claiming that missing tests prove a runtime bug.",
+              "contributors": [
+                "COR"
+              ],
+              "validContrast": "Renamed tests, changed internals or no changed test file do not alone establish missing coverage.",
+              "evidenceMethod": "Executable/source counterexample, equivalent safe behavior, assertion sensitivity; inspect actual final report.",
+              "parentOutcomes": [
+                "O1",
+                "O5"
+              ],
+              "historyEvidence": [
+                "FB01",
+                "FB02",
+                "FB10",
+                "FB11",
+                "FB12",
+                "FB17"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "COR3",
+              "description": "Detect behavior drift in an alleged refactor by tracing changed ordering, defaults or branches.",
+              "check_id": "outcome-cor3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Detect behavior drift in an alleged refactor by tracing changed ordering, defaults or branches.",
+              "contributors": [
+                "COR"
+              ],
+              "validContrast": "Behavior-preserving extraction is not a defect.",
+              "evidenceMethod": "Executable/source counterexample, equivalent safe behavior, assertion sensitivity; inspect actual final report.",
+              "parentOutcomes": [
+                "O1"
+              ],
+              "historyEvidence": [
+                "FB04",
+                "FB18"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "RES",
+          "outcomes": [
+            {
+              "id": "RES1",
+              "description": "Identify the state left after interruption, retry or concurrency and the resulting loss, duplication or inconsistent outcome.",
+              "check_id": "outcome-res1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify the state left after interruption, retry or concurrency and the resulting loss, duplication or inconsistent outcome.",
+              "contributors": [
+                "RES"
+              ],
+              "validContrast": "An enforced idempotency/transaction contract can make retries safe without extra caller checks.",
+              "evidenceMethod": "Controlled interruption/retry/order or bounded cost witness with actual state/resource observations and safe contract contrast.",
+              "parentOutcomes": [
+                "O1"
+              ],
+              "historyEvidence": [
+                "FB04",
+                "FB05",
+                "FB07",
+                "FB08",
+                "FB14",
+                "FB17"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "RES2",
+              "description": "Identify failures that are hidden, unbounded or propagated beyond the intended boundary, naming the caller and consequence.",
+              "check_id": "outcome-res2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify failures that are hidden, unbounded or propagated beyond the intended boundary, naming the caller and consequence.",
+              "contributors": [
+                "RES"
+              ],
+              "validContrast": "Deliberate propagation or bounded degradation consistent with the contract is valid.",
+              "evidenceMethod": "Controlled interruption/retry/order or bounded cost witness with actual state/resource observations and safe contract contrast.",
+              "parentOutcomes": [
+                "O1"
+              ],
+              "historyEvidence": [
+                "FB03"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "RES3",
+              "description": "Explain a resource or per-item cost problem using a reachable workload and mechanism.",
+              "check_id": "outcome-res3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Explain a resource or per-item cost problem using a reachable workload and mechanism.",
+              "contributors": [
+                "RES"
+              ],
+              "validContrast": "A bounded local loop is not a production scaling defect without supporting context.",
+              "evidenceMethod": "Controlled interruption/retry/order or bounded cost witness with actual state/resource observations and safe contract contrast.",
+              "parentOutcomes": [
+                "O1",
+                "O6"
+              ],
+              "historyEvidence": [
+                "FB14",
+                "FB15"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "SIM",
+          "outcomes": [
+            {
+              "id": "SIM1",
+              "description": "Identify unnecessary concepts or duplicated decisions that create a concrete change/error burden; explain a simpler behavior-preserving direction.",
+              "check_id": "outcome-sim1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify unnecessary concepts or duplicated decisions that create a concrete change/error burden; explain a simpler behavior-preserving direction.",
+              "contributors": [
+                "SIM"
+              ],
+              "validContrast": "A one-implementation adapter that isolates a real dependency is useful.",
+              "evidenceMethod": "Source-demonstrated current obligations and a behavior-preserving alternative; preserve safeguards and valid adapters/tests.",
+              "parentOutcomes": [
+                "O1",
+                "O4"
+              ],
+              "historyEvidence": [
+                "FB13"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "SIM2",
+              "description": "Distinguish removable complexity from safeguards, domain policy and supported extension requirements.",
+              "check_id": "outcome-sim2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Distinguish removable complexity from safeguards, domain policy and supported extension requirements.",
+              "contributors": [
+                "SIM"
+              ],
+              "validContrast": "Fewer lines that remove authorization, recovery or compatibility are not an improvement.",
+              "evidenceMethod": "Source-demonstrated current obligations and a behavior-preserving alternative; preserve safeguards and valid adapters/tests.",
+              "parentOutcomes": [
+                "O1",
+                "O2"
+              ],
+              "historyEvidence": [
+                "FB08",
+                "FB12",
+                "FB13"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "SIM3",
+              "description": "Identify tests coupled to incidental internal steps when that coupling hides a meaningful failure or obstructs a supported refactor.",
+              "check_id": "outcome-sim3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify tests coupled to incidental internal steps when that coupling hides a meaningful failure or obstructs a supported refactor.",
+              "contributors": [
+                "SIM"
+              ],
+              "validContrast": "An interaction assertion is valid when the interaction is itself the required side effect.",
+              "evidenceMethod": "Source-demonstrated current obligations and a behavior-preserving alternative; preserve safeguards and valid adapters/tests.",
+              "parentOutcomes": [
+                "O1",
+                "O5"
+              ],
+              "historyEvidence": [
+                "FB02"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "CLA",
+          "outcomes": [
+            {
+              "id": "CLA1",
+              "description": "Identify a misleading contract, unit, default, ownership rule or lifecycle description and show the wrong call/edit it invites.",
+              "check_id": "outcome-cla1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify a misleading contract, unit, default, ownership rule or lifecycle description and show the wrong call/edit it invites.",
+              "contributors": [
+                "CLA"
+              ],
+              "validContrast": "Clear types, names or nearby authoritative docs can communicate a contract without a prescribed comment format.",
+              "evidenceMethod": "Public-contract/caller walkthrough with a specific misread and a clear valid alternative; do not claim unmeasured human comprehension.",
+              "parentOutcomes": [
+                "O1"
+              ],
+              "historyEvidence": [
+                "FB06",
+                "FB08",
+                "FB16"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "CLA2",
+              "description": "Locate hidden control flow or ambiguous meaning that leads to a specific plausible mistake, and state what information resolves it.",
+              "check_id": "outcome-cla2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Locate hidden control flow or ambiguous meaning that leads to a specific plausible mistake, and state what information resolves it.",
+              "contributors": [
+                "CLA"
+              ],
+              "validContrast": "Unfamiliar but consistent idioms are not defects merely because another style is easier for the reviewer.",
+              "evidenceMethod": "Public-contract/caller walkthrough with a specific misread and a clear valid alternative; do not claim unmeasured human comprehension.",
+              "parentOutcomes": [
+                "O1",
+                "O4"
+              ],
+              "historyEvidence": [
+                "FB05"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "CLA3",
+              "description": "Separate a demonstrated contradiction from missing context; do not claim the author is required to explain self-evident code.",
+              "check_id": "outcome-cla3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Separate a demonstrated contradiction from missing context; do not claim the author is required to explain self-evident code.",
+              "contributors": [
+                "CLA"
+              ],
+              "validContrast": "Absence of a header alone is not proof of unusability.",
+              "evidenceMethod": "Public-contract/caller walkthrough with a specific misread and a clear valid alternative; do not claim unmeasured human comprehension.",
+              "parentOutcomes": [
+                "O2",
+                "O5"
+              ],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "SEC",
+          "outcomes": [
+            {
+              "id": "SEC1",
+              "description": "Trace attacker-controlled data across a trust boundary to an unauthorized read, write or execution.",
+              "check_id": "outcome-sec1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Trace attacker-controlled data across a trust boundary to an unauthorized read, write or execution.",
+              "contributors": [
+                "SEC"
+              ],
+              "validContrast": "Trusted in-process inputs with enforced upstream validation need no invented attacker capability.",
+              "evidenceMethod": "Controlled input/identity to sink or authorization witness with enforced safe contrast; calibrate unknown deployment separately.",
+              "parentOutcomes": [
+                "O1"
+              ],
+              "historyEvidence": [
+                "FB09",
+                "FB10",
+                "FB13"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "SEC2",
+              "description": "Identify missing or bypassable authorization, including cross-identity access and check/use gaps.",
+              "check_id": "outcome-sec2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify missing or bypassable authorization, including cross-identity access and check/use gaps.",
+              "contributors": [
+                "SEC"
+              ],
+              "validContrast": "An explicit enforced safeguard that covers the claimed attack defeats that finding.",
+              "evidenceMethod": "Controlled input/identity to sink or authorization witness with enforced safe contrast; calibrate unknown deployment separately.",
+              "parentOutcomes": [
+                "O1"
+              ],
+              "historyEvidence": [
+                "FB02",
+                "FB03",
+                "FB09",
+                "FB10"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "SEC3",
+              "description": "State attack preconditions and affected assets without inventing deployment facts or promoting hypothetical exposure to a reproduced exploit.",
+              "check_id": "outcome-sec3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "State attack preconditions and affected assets without inventing deployment facts or promoting hypothetical exposure to a reproduced exploit.",
+              "contributors": [
+                "SEC"
+              ],
+              "validContrast": "Unavailable configuration is uncertainty, not automatic exploitable severity.",
+              "evidenceMethod": "Controlled input/identity to sink or authorization witness with enforced safe contrast; calibrate unknown deployment separately.",
+              "parentOutcomes": [
+                "O2",
+                "O4"
+              ],
+              "historyEvidence": [
+                "FB07",
+                "FB08",
+                "FB09",
+                "FB10",
+                "FB16"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "IMP",
+          "outcomes": [
+            {
+              "id": "IMP1",
+              "description": "Trace a changed producer contract to an actual consumer that breaks, naming the causal changed line even when the consumer is unchanged.",
+              "check_id": "outcome-imp1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Trace a changed producer contract to an actual consumer that breaks, naming the causal changed line even when the consumer is unchanged.",
+              "contributors": [
+                "IMP"
+              ],
+              "validContrast": "Unrelated old defects remain outside a diff's main findings.",
+              "evidenceMethod": "Actual unchanged consumer/persisted or mixed-version witness and unavailable-consumer contrast.",
+              "parentOutcomes": [
+                "O1",
+                "O3"
+              ],
+              "historyEvidence": [
+                "FB01",
+                "FB04",
+                "FB05",
+                "FB06",
+                "FB13",
+                "FB16",
+                "FB18"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "IMP2",
+              "description": "Identify incompatibility with supported older callers, stored state or mixed-version deployment.",
+              "check_id": "outcome-imp2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify incompatibility with supported older callers, stored state or mixed-version deployment.",
+              "contributors": [
+                "IMP"
+              ],
+              "validContrast": "An explicit migration or unchanged supported contract defeats speculative compatibility warnings.",
+              "evidenceMethod": "Actual unchanged consumer/persisted or mixed-version witness and unavailable-consumer contrast.",
+              "parentOutcomes": [
+                "O1"
+              ],
+              "historyEvidence": [
+                "FB03",
+                "FB09",
+                "FB10"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "IMP3",
+              "description": "Separate a demonstrated broken caller from an incomplete caller audit and state remaining coverage honestly.",
+              "check_id": "outcome-imp3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Separate a demonstrated broken caller from an incomplete caller audit and state remaining coverage honestly.",
+              "contributors": [
+                "IMP"
+              ],
+              "validContrast": "Failure to inspect every caller is not itself proof of breakage.",
+              "evidenceMethod": "Actual unchanged consumer/persisted or mixed-version witness and unavailable-consumer contrast.",
+              "parentOutcomes": [
+                "O2",
+                "O5"
+              ],
+              "historyEvidence": [
+                "FB03",
+                "FB11"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "INT",
+          "outcomes": [
+            {
+              "id": "INT1",
+              "description": "Trace explicit acceptance requirements to behavior, including off states, boundaries and error cases.",
+              "check_id": "outcome-int1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Trace explicit acceptance requirements to behavior, including off states, boundaries and error cases.",
+              "contributors": [
+                "INT"
+              ],
+              "validContrast": "A requirement already satisfied by unchanged code is not missing merely because absent from the diff.",
+              "evidenceMethod": "Authoritative request chronology and reachable complete-path source, valid support/locked-decision contrast.",
+              "parentOutcomes": [
+                "O1",
+                "O3"
+              ],
+              "historyEvidence": [
+                "FB11",
+                "FB12",
+                "FB14"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "INT2",
+              "description": "Identify consequential unrequested behavior changes with their requirement source or unresolved conflict.",
+              "check_id": "outcome-int2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify consequential unrequested behavior changes with their requirement source or unresolved conflict.",
+              "contributors": [
+                "INT"
+              ],
+              "validContrast": "Necessary implementation choices are not scope creep solely because the request omits their details.",
+              "evidenceMethod": "Authoritative request chronology and reachable complete-path source, valid support/locked-decision contrast.",
+              "parentOutcomes": [
+                "O1",
+                "O3"
+              ],
+              "historyEvidence": [
+                "FB14"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "INT3",
+              "description": "Respect locked choices and exclusions while surfacing a concrete failure they cause.",
+              "check_id": "outcome-int3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Respect locked choices and exclusions while surfacing a concrete failure they cause.",
+              "contributors": [
+                "INT"
+              ],
+              "validContrast": "A different preferred design is not a requirement violation.",
+              "evidenceMethod": "Authoritative request chronology and reachable complete-path source, valid support/locked-decision contrast.",
+              "parentOutcomes": [
+                "O2",
+                "O3"
+              ],
+              "historyEvidence": [
+                "FB01",
+                "FB09",
+                "FB14"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "STR",
+          "outcomes": [
+            {
+              "id": "STR1",
+              "description": "Identify a responsibility or dependency boundary that creates concrete coupling or change propagation.",
+              "check_id": "outcome-str1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify a responsibility or dependency boundary that creates concrete coupling or change propagation.",
+              "contributors": [
+                "STR"
+              ],
+              "validContrast": "Directory names, file counts or mixed style alone do not prove architectural harm.",
+              "evidenceMethod": "Supported caller/extension/internal-change walkthrough and concrete ownership/change propagation; valid coherent-boundary contrast.",
+              "parentOutcomes": [
+                "O1"
+              ],
+              "historyEvidence": [
+                "FB13",
+                "FB18"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "STR2",
+              "description": "Explain how an ordinary caller, supported extension or internal replacement must know private mechanics or coordinate scattered policy.",
+              "check_id": "outcome-str2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Explain how an ordinary caller, supported extension or internal replacement must know private mechanics or coordinate scattered policy.",
+              "contributors": [
+                "STR"
+              ],
+              "validContrast": "Necessary public policy choices are not accidental implementation leakage.",
+              "evidenceMethod": "Supported caller/extension/internal-change walkthrough and concrete ownership/change propagation; valid coherent-boundary contrast.",
+              "parentOutcomes": [
+                "O1",
+                "O4"
+              ],
+              "historyEvidence": [
+                "FB08",
+                "FB09",
+                "FB13",
+                "FB18"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "STR3",
+              "description": "Distinguish systemic maintenance risk from an immediate runtime bug and support its consequence and severity.",
+              "check_id": "outcome-str3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Distinguish systemic maintenance risk from an immediate runtime bug and support its consequence and severity.",
+              "contributors": [
+                "STR"
+              ],
+              "validContrast": "A coherent small module need not acquire more layers to fit a preferred architecture.",
+              "evidenceMethod": "Supported caller/extension/internal-change walkthrough and concrete ownership/change propagation; valid coherent-boundary contrast.",
+              "parentOutcomes": [
+                "O1",
+                "O2"
+              ],
+              "historyEvidence": [
+                "FB12"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "history",
+          "outcomes": [
+            {
+              "id": "SCP1",
+              "description": "GatherContext preserves the latest explicit owner decision, its source, included consumers, exclusions and required prerequisites; INT checks that meaning.",
+              "check_id": "outcome-scp1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "GatherContext preserves the latest explicit owner decision, its source, included consumers, exclusions and required prerequisites; INT checks that meaning.",
+              "contributors": [
+                "GatherContext",
+                "INT"
+              ],
+              "validContrast": "A later authorized expansion can supersede an older narrow ticket. An assistant's proposed expansion does not authorize itself.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [
+                "O3",
+                "INT1",
+                "INT3"
+              ],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "SCP2",
+              "description": "INT and IMP trace the complete required path, including unchanged helpers and sibling entry points governed by the same invariant.",
+              "check_id": "outcome-scp2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "INT and IMP trace the complete required path, including unchanged helpers and sibling entry points governed by the same invariant.",
+              "contributors": [
+                "INT",
+                "IMP"
+              ],
+              "validContrast": "Reachable unchanged code can already fulfill the requirement; superficially similar consumers may have different policies or identities.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [
+                "O1",
+                "INT1",
+                "IMP1"
+              ],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "SCP3",
+              "description": "Distinguish necessary implementation support and cleanup caused by the change from unrelated new behavior or speculative hardening.",
+              "check_id": "outcome-scp3",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Distinguish necessary implementation support and cleanup caused by the change from unrelated new behavior or speculative hardening.",
+              "contributors": [
+                "INT",
+                "SIM"
+              ],
+              "validContrast": "Caller updates, an extraction and newly dead wiring may belong in scope without being enumerated in the ticket; unrelated normalization does not.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [
+                "O3",
+                "INT2",
+                "SIM2"
+              ],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "SCP4",
+              "description": "Establish a reachable failure and check producer guarantees before requesting defensive work or dismissing a safeguard.",
+              "check_id": "outcome-scp4",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Establish a reachable failure and check producer guarantees before requesting defensive work or dismissing a safeguard.",
+              "contributors": [
+                "RES",
+                "SIM",
+                "SEC"
+              ],
+              "validContrast": "Trusted validated in-process state differs from external input, persisted legacy state or concurrent mutation. Neither add nor remove validation by slogan.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [
+                "O2",
+                "RES1",
+                "SIM2"
+              ],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "MNT1",
+              "description": "Identify caller-specific selection or policy leaking into a shared operation when it creates concrete caller obligations; recommend a bounded behavior-preserving seam.",
+              "check_id": "outcome-mnt1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Identify caller-specific selection or policy leaking into a shared operation when it creates concrete caller obligations; recommend a bounded behavior-preserving seam.",
+              "contributors": [
+                "SIM",
+                "STR"
+              ],
+              "validContrast": "A coherent boolean option is valid. Parameter count or a preferred abstraction alone is not a finding.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [
+                "O1",
+                "SIM1",
+                "STR2"
+              ],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "MNT2",
+              "description": "Distinguish required effects for every item from a short-circuitable aggregate decision; explain actual skipped work or a demonstrated comprehension trap.",
+              "check_id": "outcome-mnt2",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Distinguish required effects for every item from a short-circuitable aggregate decision; explain actual skipped work or a demonstrated comprehension trap.",
+              "contributors": [
+                "COR",
+                "CLA"
+              ],
+              "validContrast": "Stopping a pure comparison after all required effects complete is valid; do not label this a runtime defect.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [
+                "O1",
+                "COR1",
+                "CLA2"
+              ],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "EVD1",
+              "description": "Re-review and historical evaluation follow final issue disposition and exact evidence scope, retaining reversals, partial fixes and accepted limits.",
+              "check_id": "outcome-evd1",
+              "source": "CodeReview/Quality/Outcomes.md (CR-O1.1)",
+              "purpose": "Re-review and historical evaluation follow final issue disposition and exact evidence scope, retaining reversals, partial fixes and accepted limits.",
+              "contributors": [
+                "ReReview",
+                "verifier"
+              ],
+              "validContrast": "A green unrelated suite or an intermediate published fix does not prove the disputed behavior; source evidence can still establish a defect without live reproduction.",
+              "evidenceMethod": "Applicable source/contract evidence and final-report contrasts with honest missingness; linked historical final disposition.",
+              "parentOutcomes": [
+                "O2",
+                "O5"
+              ],
+              "historyEvidence": [
+                "FB02"
+              ],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "review-families",
+          "outcomes": [
+            {
+              "id": "F-DIFF",
+              "description": "Exact scoped range and current tip govern findings, with introduced/newly exposed causes separated from unrelated baseline issues.",
+              "check_id": "outcome-f-diff",
+              "source": "Review/GatherContext/VerifyAndReport; O3/IMP1/EVD1",
+              "purpose": "Exact scoped range and current tip govern findings, with introduced/newly exposed causes separated from unrelated baseline issues.",
+              "contributors": [
+                "GatherContext",
+                "IMP",
+                "verifier"
+              ],
+              "validContrast": "Unrelated old fault and superseded intermediate fault remain outside current main findings.",
+              "evidenceMethod": "Tiny Git history with actual source witnesses and final report attribution.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "F-AUDIT",
+              "description": "Existing in-target defects and maintenance burdens are eligible regardless of line age; requested structural concern receives relevant inspection.",
+              "check_id": "outcome-f-audit",
+              "source": "Review audit mode/GatherContext/SelectDimensions; O1/O3/O6",
+              "purpose": "Existing in-target defects and maintenance burdens are eligible regardless of line age; requested structural concern receives relevant inspection.",
+              "contributors": [
+                "GatherContext",
+                "SelectDimensions",
+                "STR",
+                "verifier"
+              ],
+              "validContrast": "Benign coherent module and excluded dependency do not produce invented architectural work.",
+              "evidenceMethod": "Small existing-module source contract plus actual selected lenses and final audit report.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "F-REREVIEW",
+              "description": "Each prior issue receives truthful current-tip status, including partial fix, regression, revert and unavailable evidence.",
+              "check_id": "outcome-f-rereview",
+              "source": "ReReview/VerifyAndReport; EVD1/O2/O5",
+              "purpose": "Each prior issue receives truthful current-tip status, including partial fix, regression, revert and unavailable evidence.",
+              "contributors": [
+                "GatherContext",
+                "COR",
+                "RES",
+                "IMP",
+                "verifier"
+              ],
+              "validContrast": "Unrelated green tests and missing source do not establish Fixed or Not fixed.",
+              "evidenceMethod": "Exact before/after/reverted revisions, prior findings and final disposition table.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "F-SERIES",
+              "description": "Series verdict covers final state with actual introducing-commit attribution and useful superseded/redundant notes.",
+              "check_id": "outcome-f-series",
+              "source": "SeriesReview/GatherContext/VerifyAndReport; O3/EVD1",
+              "purpose": "Series verdict covers final state with actual introducing-commit attribution and useful superseded/redundant notes.",
+              "contributors": [
+                "GatherContext",
+                "verifier"
+              ],
+              "validContrast": "Intermediate defect fixed before tip is not a current defect; live defect is retained.",
+              "evidenceMethod": "Tiny multi-commit fixture with final-state witnesses and report.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        },
+        {
+          "id": "pipeline-and-report",
+          "outcomes": [
+            {
+              "id": "P-SCOPE",
+              "description": "Current owner behavior, prerequisite paths, exclusions and accepted tradeoffs survive compression and verdict without invented gates.",
+              "check_id": "outcome-p-scope",
+              "source": "Current user request; O3/SCP1-4/INT1-3",
+              "purpose": "Current owner behavior, prerequisite paths, exclusions and accepted tradeoffs survive compression and verdict without invented gates.",
+              "contributors": [
+                "GatherContext",
+                "INT",
+                "verifier"
+              ],
+              "validContrast": "Necessary implementation work and explicitly accepted limitations are valid; unresolved conflicts remain uncertainty.",
+              "evidenceMethod": "Authoritative request chronology through context and final report.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "P-SELECT",
+              "description": "Required/triggered concerns and requested rules receive inspection or honest coverage; mode overrides and finite caps are explicit.",
+              "check_id": "outcome-p-select",
+              "source": "SelectDimensions/ReReview/GatherContext; O1/O6",
+              "purpose": "Required/triggered concerns and requested rules receive inspection or honest coverage; mode overrides and finite caps are explicit.",
+              "contributors": [
+                "SelectDimensions",
+                "orchestrator"
+              ],
+              "validContrast": "Small security/consumer change survives caps; small general audit gets STR; re-review follows own lens policy.",
+              "evidenceMethod": "Actual dimensions.json against frozen file/risk/mode facts; downstream coverage.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "P-CONTEXT",
+              "description": "Fresh reviewers receive usable exact target identity, intent, relevant settings/consumers/conventions and evidence limits.",
+              "check_id": "outcome-p-context",
+              "source": "GatherContext; O2/O3/O5/O6",
+              "purpose": "Fresh reviewers receive usable exact target identity, intent, relevant settings/consumers/conventions and evidence limits.",
+              "contributors": [
+                "GatherContext"
+              ],
+              "validContrast": "Missing intent/tool/consumer is recorded rather than guessed; supplied enforced guarantee can narrow checks.",
+              "evidenceMethod": "Actual context artifact and downstream decisions, including unavailable-input contrast.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "P-ARTIFACT",
+              "description": "Usable stage artifacts and final delivery distinguish completed clean inspection from missing/incomplete inspection with bounded recovery.",
+              "check_id": "outcome-p-artifact",
+              "source": "Review artifact checks/VerifyAndReport; O5/O6",
+              "purpose": "Usable stage artifacts and final delivery distinguish completed clean inspection from missing/incomplete inspection with bounded recovery.",
+              "contributors": [
+                "orchestrator",
+                "all stages"
+              ],
+              "validContrast": "Nonempty No findings is completed; empty artifact or missing source is not clean coverage.",
+              "evidenceMethod": "Observed artifact existence/content/schema and actual error/clean final result.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "P-PROCESS",
+              "description": "Stages run in separate contexts and routing/artifact orchestration respects available concurrency without silently dropping review concerns.",
+              "check_id": "outcome-p-process",
+              "source": "SKILL process invariant/Review; O6",
+              "purpose": "Stages run in separate contexts and routing/artifact orchestration respects available concurrency without silently dropping review concerns.",
+              "contributors": [
+                "orchestrator",
+                "native runtime"
+              ],
+              "validContrast": "A simulated harness or separate files alone cannot prove native delegation; sequential waves may preserve independent stage boundaries.",
+              "evidenceMethod": "Native entry-to-final execution with delegation/tool evidence; no parent-step reimplementation.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "P-PLUGIN",
+              "description": "Standards, addenda, fragments and deterministic findings route, attribute and scope correctly; unsupported/missing/overflow inputs are explicit; wrapper code is not executed.",
+              "check_id": "outcome-p-plugin",
+              "source": "Standards/PluginContract/SelectDimensions/GatherContext/VerifyAndReport",
+              "purpose": "Standards, addenda, fragments and deterministic findings route, attribute and scope correctly; unsupported/missing/overflow inputs are explicit; wrapper code is not executed.",
+              "contributors": [
+                "wrapper contract",
+                "GatherContext",
+                "SelectDimensions",
+                "verifier"
+              ],
+              "validContrast": "No manifest is a plain review; skipped oversized or unreadable inputs are not fabricated checks.",
+              "evidenceMethod": "Valid/invalid manifest and line/file/change findings; actual selection/report and no-wrapper-execution observation.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "P-EVIDENCE",
+              "description": "Consequential claims retain supported mechanisms, conditions and provenance; contrary code defeats stale comments and missing knowledge stays unverified.",
+              "check_id": "outcome-p-evidence",
+              "source": "CR-M1.1; O2/CLA3/SEC3/IMP3/EVD1",
+              "purpose": "Consequential claims retain supported mechanisms, conditions and provenance; contrary code defeats stale comments and missing knowledge stays unverified.",
+              "contributors": [
+                "reviewers",
+                "verifier"
+              ],
+              "validContrast": "Actual enforced guard defeats a false allegation; no guard alone does not establish a risk mechanism.",
+              "evidenceMethod": "Source/executable reference and uncertainty contrasts, final findings and dispositions.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "P-REPORT",
+              "description": "Accurate distinct causes, severity, bounded preserving recommendations and useful coverage/verdict reach the maintainer without optional advice becoming acceptance.",
+              "check_id": "outcome-p-report",
+              "source": "CR-O1.1/CR-M1.1; O4/O5/SIM2/STR3",
+              "purpose": "Accurate distinct causes, severity, bounded preserving recommendations and useful coverage/verdict reach the maintainer without optional advice becoming acceptance.",
+              "contributors": [
+                "verifier/report"
+              ],
+              "validContrast": "One shared cause across lenses counts once; two independent nearby causes remain distinct; permission is not a requirement.",
+              "evidenceMethod": "Final artifact source-grounded adjudication plus exact dedup/priority/authority contrasts.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            },
+            {
+              "id": "P-AUTHORITY",
+              "description": "Review respects read-only, posting, repair, merge and deployment authority and actual evidence scope.",
+              "check_id": "outcome-p-authority",
+              "source": "Review/VerifyAndReport/PluginContract; O6",
+              "purpose": "Review respects read-only, posting, repair, merge and deployment authority and actual evidence scope.",
+              "contributors": [
+                "all stages"
+              ],
+              "validContrast": "Ordinary review does not imply fixing/posting; explicit posting request carries only that authority.",
+              "evidenceMethod": "Observe actual tool actions/artifacts under ordinary and explicitly authorized routes.",
+              "parentOutcomes": [],
+              "historyEvidence": [],
+              "historyInterpretation": "Contribution mapping, not causal attribution or a performance pass."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "required_checks": [
+    {
+      "id": "scope",
+      "kind": "outcome",
+      "description": "Scope complete against request."
+    },
+    {
+      "id": "mining",
+      "kind": "outcome",
+      "description": "Historical inventory and evidence recovered."
+    },
+    {
+      "id": "structure-codereview",
+      "kind": "outcome",
+      "description": "Structural findings resolved or justified rejected."
+    },
+    {
+      "id": "outcome-o1",
+      "kind": "outcome",
+      "description": "Identify consequential in-scope problems, including failures across module boundaries."
+    },
+    {
+      "id": "outcome-o2",
+      "kind": "outcome",
+      "description": "Support each claim with a concrete causal path, applicable conditions and evidence; preserve uncertainty."
+    },
+    {
+      "id": "outcome-o3",
+      "kind": "outcome",
+      "description": "Apply the requested scope and intended behavior; distinguish introduced, newly exposed and unrelated existing defects."
+    },
+    {
+      "id": "outcome-o4",
+      "kind": "outcome",
+      "description": "Help the maintainer act through a concise trigger, consequence, location and correction direction, with proportionate severity and no duplicate issue count."
+    },
+    {
+      "id": "outcome-o5",
+      "kind": "outcome",
+      "description": "Describe actual coverage and remaining uncertainty; absence of findings is not proof of safety, and a fix status needs evidence."
+    },
+    {
+      "id": "outcome-o6",
+      "kind": "outcome",
+      "description": "Spend effort where it can affect the decision; preserve review modes, process boundaries, plug-in contracts and domain neutrality."
+    },
+    {
+      "id": "outcome-cor1",
+      "kind": "outcome",
+      "description": "Expose a valid input or state transition that violates the required output or invariant, including aggregation, precision and configuration boundaries."
+    },
+    {
+      "id": "outcome-cor2",
+      "kind": "outcome",
+      "description": "Explain which consequential behavior lacks a discriminating assertion, without claiming that missing tests prove a runtime bug."
+    },
+    {
+      "id": "outcome-cor3",
+      "kind": "outcome",
+      "description": "Detect behavior drift in an alleged refactor by tracing changed ordering, defaults or branches."
+    },
+    {
+      "id": "outcome-res1",
+      "kind": "outcome",
+      "description": "Identify the state left after interruption, retry or concurrency and the resulting loss, duplication or inconsistent outcome."
+    },
+    {
+      "id": "outcome-res2",
+      "kind": "outcome",
+      "description": "Identify failures that are hidden, unbounded or propagated beyond the intended boundary, naming the caller and consequence."
+    },
+    {
+      "id": "outcome-res3",
+      "kind": "outcome",
+      "description": "Explain a resource or per-item cost problem using a reachable workload and mechanism."
+    },
+    {
+      "id": "outcome-sim1",
+      "kind": "outcome",
+      "description": "Identify unnecessary concepts or duplicated decisions that create a concrete change/error burden; explain a simpler behavior-preserving direction."
+    },
+    {
+      "id": "outcome-sim2",
+      "kind": "outcome",
+      "description": "Distinguish removable complexity from safeguards, domain policy and supported extension requirements."
+    },
+    {
+      "id": "outcome-sim3",
+      "kind": "outcome",
+      "description": "Identify tests coupled to incidental internal steps when that coupling hides a meaningful failure or obstructs a supported refactor."
+    },
+    {
+      "id": "outcome-cla1",
+      "kind": "outcome",
+      "description": "Identify a misleading contract, unit, default, ownership rule or lifecycle description and show the wrong call/edit it invites."
+    },
+    {
+      "id": "outcome-cla2",
+      "kind": "outcome",
+      "description": "Locate hidden control flow or ambiguous meaning that leads to a specific plausible mistake, and state what information resolves it."
+    },
+    {
+      "id": "outcome-cla3",
+      "kind": "outcome",
+      "description": "Separate a demonstrated contradiction from missing context; do not claim the author is required to explain self-evident code."
+    },
+    {
+      "id": "outcome-sec1",
+      "kind": "outcome",
+      "description": "Trace attacker-controlled data across a trust boundary to an unauthorized read, write or execution."
+    },
+    {
+      "id": "outcome-sec2",
+      "kind": "outcome",
+      "description": "Identify missing or bypassable authorization, including cross-identity access and check/use gaps."
+    },
+    {
+      "id": "outcome-sec3",
+      "kind": "outcome",
+      "description": "State attack preconditions and affected assets without inventing deployment facts or promoting hypothetical exposure to a reproduced exploit."
+    },
+    {
+      "id": "outcome-imp1",
+      "kind": "outcome",
+      "description": "Trace a changed producer contract to an actual consumer that breaks, naming the causal changed line even when the consumer is unchanged."
+    },
+    {
+      "id": "outcome-imp2",
+      "kind": "outcome",
+      "description": "Identify incompatibility with supported older callers, stored state or mixed-version deployment."
+    },
+    {
+      "id": "outcome-imp3",
+      "kind": "outcome",
+      "description": "Separate a demonstrated broken caller from an incomplete caller audit and state remaining coverage honestly."
+    },
+    {
+      "id": "outcome-int1",
+      "kind": "outcome",
+      "description": "Trace explicit acceptance requirements to behavior, including off states, boundaries and error cases."
+    },
+    {
+      "id": "outcome-int2",
+      "kind": "outcome",
+      "description": "Identify consequential unrequested behavior changes with their requirement source or unresolved conflict."
+    },
+    {
+      "id": "outcome-int3",
+      "kind": "outcome",
+      "description": "Respect locked choices and exclusions while surfacing a concrete failure they cause."
+    },
+    {
+      "id": "outcome-str1",
+      "kind": "outcome",
+      "description": "Identify a responsibility or dependency boundary that creates concrete coupling or change propagation."
+    },
+    {
+      "id": "outcome-str2",
+      "kind": "outcome",
+      "description": "Explain how an ordinary caller, supported extension or internal replacement must know private mechanics or coordinate scattered policy."
+    },
+    {
+      "id": "outcome-str3",
+      "kind": "outcome",
+      "description": "Distinguish systemic maintenance risk from an immediate runtime bug and support its consequence and severity."
+    },
+    {
+      "id": "outcome-scp1",
+      "kind": "outcome",
+      "description": "GatherContext preserves the latest explicit owner decision, its source, included consumers, exclusions and required prerequisites; INT checks that meaning."
+    },
+    {
+      "id": "outcome-scp2",
+      "kind": "outcome",
+      "description": "INT and IMP trace the complete required path, including unchanged helpers and sibling entry points governed by the same invariant."
+    },
+    {
+      "id": "outcome-scp3",
+      "kind": "outcome",
+      "description": "Distinguish necessary implementation support and cleanup caused by the change from unrelated new behavior or speculative hardening."
+    },
+    {
+      "id": "outcome-scp4",
+      "kind": "outcome",
+      "description": "Establish a reachable failure and check producer guarantees before requesting defensive work or dismissing a safeguard."
+    },
+    {
+      "id": "outcome-mnt1",
+      "kind": "outcome",
+      "description": "Identify caller-specific selection or policy leaking into a shared operation when it creates concrete caller obligations; recommend a bounded behavior-preserving seam."
+    },
+    {
+      "id": "outcome-mnt2",
+      "kind": "outcome",
+      "description": "Distinguish required effects for every item from a short-circuitable aggregate decision; explain actual skipped work or a demonstrated comprehension trap."
+    },
+    {
+      "id": "outcome-evd1",
+      "kind": "outcome",
+      "description": "Re-review and historical evaluation follow final issue disposition and exact evidence scope, retaining reversals, partial fixes and accepted limits."
+    },
+    {
+      "id": "outcome-f-diff",
+      "kind": "outcome",
+      "description": "Exact scoped range and current tip govern findings, with introduced/newly exposed causes separated from unrelated baseline issues."
+    },
+    {
+      "id": "outcome-f-audit",
+      "kind": "outcome",
+      "description": "Existing in-target defects and maintenance burdens are eligible regardless of line age; requested structural concern receives relevant inspection."
+    },
+    {
+      "id": "outcome-f-rereview",
+      "kind": "outcome",
+      "description": "Each prior issue receives truthful current-tip status, including partial fix, regression, revert and unavailable evidence."
+    },
+    {
+      "id": "outcome-f-series",
+      "kind": "outcome",
+      "description": "Series verdict covers final state with actual introducing-commit attribution and useful superseded/redundant notes."
+    },
+    {
+      "id": "outcome-p-scope",
+      "kind": "outcome",
+      "description": "Current owner behavior, prerequisite paths, exclusions and accepted tradeoffs survive compression and verdict without invented gates."
+    },
+    {
+      "id": "outcome-p-select",
+      "kind": "outcome",
+      "description": "Required/triggered concerns and requested rules receive inspection or honest coverage; mode overrides and finite caps are explicit."
+    },
+    {
+      "id": "outcome-p-context",
+      "kind": "outcome",
+      "description": "Fresh reviewers receive usable exact target identity, intent, relevant settings/consumers/conventions and evidence limits."
+    },
+    {
+      "id": "outcome-p-artifact",
+      "kind": "outcome",
+      "description": "Usable stage artifacts and final delivery distinguish completed clean inspection from missing/incomplete inspection with bounded recovery."
+    },
+    {
+      "id": "outcome-p-process",
+      "kind": "outcome",
+      "description": "Stages run in separate contexts and routing/artifact orchestration respects available concurrency without silently dropping review concerns."
+    },
+    {
+      "id": "outcome-p-plugin",
+      "kind": "outcome",
+      "description": "Standards, addenda, fragments and deterministic findings route, attribute and scope correctly; unsupported/missing/overflow inputs are explicit; wrapper code is not executed."
+    },
+    {
+      "id": "outcome-p-evidence",
+      "kind": "outcome",
+      "description": "Consequential claims retain supported mechanisms, conditions and provenance; contrary code defeats stale comments and missing knowledge stays unverified."
+    },
+    {
+      "id": "outcome-p-report",
+      "kind": "outcome",
+      "description": "Accurate distinct causes, severity, bounded preserving recommendations and useful coverage/verdict reach the maintainer without optional advice becoming acceptance."
+    },
+    {
+      "id": "outcome-p-authority",
+      "kind": "outcome",
+      "description": "Review respects read-only, posting, repair, merge and deployment authority and actual evidence scope."
+    }
+  ]
+}

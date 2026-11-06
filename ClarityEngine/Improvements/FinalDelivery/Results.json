@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "bf1cccee77c60a45a7678c3f7b66fd0278a5d5d2",
+  "candidate_version": "1.5.2-rc.2",
+  "candidate_decision": "retain_candidate",
+  "status": "complete",
+  "primary_case_count": 3,
+  "targeted_boundary_checks": {
+    "final_meaning": 4,
+    "delivery": 8,
+    "repair_snapshot": 1,
+    "prior_finding_reconciliation": 3,
+    "total": 16
+  },
+  "tool_tests": {
+    "passed": 33,
+    "failed": 0,
+    "assertions": 85
+  },
+  "package_checks": {
+    "failed": 0,
+    "passed": 17
+  },
+  "workflow_outcomes_reviewed": 20,
+  "reader_outcome_parents": 8,
+  "census_refinements": 5,
+  "final_candidate_guide": {
+    "sha256": "d1c935570bf16c270c2b12a5defd3c94d3614c811cda2aa5a618df718fa9b0c5",
+    "evidence": "runs/final-candidate-delivery/report.md",
+    "comprehension": "Pass",
+    "readiness": "NeedsRevision"
+  },
+  "preserved_failures": [
+    "Baseline X omitted explicit matching-shipment/both-choice testing instruction.",
+    "Baseline X and candidate v1 drifted from NeedsRevision to Ready without new observation details.",
+    "Final candidate re-adjudication retains the current supported gap; older Ready reports are not replaced."
+  ],
+  "limits": [
+    "Model readers, not human comprehension or live product testing.",
+    "No general or causal authoring advantage established.",
+    "R1 reuses actual existing lens evidence; only amended Verify newly executes.",
+    "R2/R3 are synthetic dependency controls with no fresh current panel.",
+    "Unchanged native-format and other responsibilities use published accepted evidence; original external raw runs not newly located or regraded.",
+    "All initial errors, unsuccessful rewrites, normal repair continuations and status variance preserved."
+  ],
+  "implementation_commit": "83095fc1795c4035c9baa47f6bb2af66da408d7a",
+  "evidence_commit": "8995935523c9ed52c858da186bd5ddba58ef7fee",
+  "completion": {
+    "schema_version": 1,
+    "valid": true,
+    "contract_sha256": "fae3075f8ebc653f735a7249b1152681780b03b39165495afb50f4a2baa60025",
+    "candidate_decision": "retain_candidate",
+    "task_status": "complete",
+    "unresolved": [],
+    "next_actions": []
+  },
+  "evidence_archive_sha256": "3df1dd1027aeb6c61b58ac40183f1371ed917d65e94cd22d75f76d19512a6bf8"
+}

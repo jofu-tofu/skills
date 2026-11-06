@@ -6,6 +6,7 @@
 
 - `ReadabilityGate.md` — The review panel
 - `../Standards/FormatAdapters.md` — Building and capturing the file when fixes require re-rendering
+- `../Standards/ReviewIdentity.md` — Final-delivery check owned by ReadabilityGate
 
 ## Purpose
 
@@ -17,4 +18,4 @@ Review an existing document or presentation. An audit request returns findings w
 2. Gather the sources the document relies on, when available.
 3. Run the format's file check, and the target-app check when the request depends on that app, as FormatAdapters.md describes.
 4. Run ReadabilityGate with the sources, those results as `verification_evidence`, and `edit_scope: none` for an audit or `full` for a polish or fix request.
-5. Return the gate's report. For a polish or fix request, also return the revised artifact.
+5. Apply the gate's final-delivery check in ReviewIdentity.md after any further editing or audience change, preserving the requested audit or repair scope. Return the applicable report with its reviewed identity/audience. For a polish or fix request, also return the actual revised artifact; an audit still leaves the source unchanged.

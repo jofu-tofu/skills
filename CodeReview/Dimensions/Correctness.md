@@ -29,9 +29,9 @@ When context.md lists **Settings Read**, evaluate the changed logic under each v
 
 - Start from disproof, not trust. Assume behavior is wrong until code and tests prove otherwise.
 - Hunt counterexamples first: boundaries, nullability, ordering, empty sets, and malformed input before the happy path.
-- Treat undocumented or unenforced preconditions as defects.
+- Trace preconditions through supported callers before claiming that a valid input can violate them.
 - After each finding, sweep the change for the same bug class.
-- If uncertain between `HIGH` and `MEDIUM`, choose `HIGH` and state the concrete failure path.
+- Calibrate severity to supported consequences and reach. Record uncertainty separately; missing evidence alone does not raise severity.
 
 ## What This Lens Reveals
 
@@ -56,9 +56,9 @@ When context.md lists **Settings Read**, evaluate the changed logic under each v
 
 ## Severity Calibration
 
-- **CRITICAL** — code produces wrong results silently (no error, no crash, just wrong output). The user or downstream system acts on incorrect data. Fix before merge.
-- **HIGH** — code crashes or behaves unexpectedly for valid inputs that will realistically occur, relies on unproven assumptions, or ships a behavior change nothing would catch regressing. Fix in this PR.
-- **MEDIUM** — code is correct for current usage but fragile — a plausible input or nearby change would break it. If no enforcement exists, escalate to HIGH.
+- **CRITICAL** — a supported path silently corrupts data or drives severe wrong decisions. A minor incorrect display is not automatically critical.
+- **HIGH** — realistic valid input causes consequential wrong behavior or a crash, or a consequential promised behavior lacks a discriminating assertion. State the actual consequence.
+- **MEDIUM** — a supported correctness risk has limited impact. Missing enforcement or unexecuted tests alone neither establish a failure nor increase its severity.
 
 ## Language-Specific Notes
 

@@ -25,6 +25,6 @@ Run the steps in `Review.md` with these differences:
 2. **Gather Context.** The review target is the fix range. Add to the prompt: `"This is a re-review. Prior findings: $PRIOR. List each prior finding under Stated Behaviors as 'Fix: [title] at [file:line]'."`
 3. **Select Dimensions.** Add to the prompt: `"Re-review: always select COR, RES and IMP for the fix range, plus any triggered lens. SIM, CLA and STR run only if the fix range is over 50 lines."`
 4. **Review Agents.** Unchanged.
-5. **Verify and Report.** Add to the prompt: `"Prior verified findings: $PRIOR. Assign each prior finding a status against the new tip, and include the Prior Findings section."`
+5. **Verify and Report.** Add to the prompt: `"Prior verified findings: $PRIOR. Assign each prior finding an evidenced status against the new tip (Fixed, Partly fixed, Not fixed, Regressed, or Unverified when necessary evidence is unavailable), and include the Prior Findings section."`
 
 The report leads with the Prior Findings table, then any new findings from the fix range. A regression a fix introduced appears both as a Regressed status and as a finding card.

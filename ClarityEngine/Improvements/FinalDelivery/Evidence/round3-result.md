@@ -1,0 +1,13 @@
+# Independent round-3 consumer grading
+
+Reviewed the pre-existing round3-reference.md, plan/design review, actual R1/R2/R3 reports and current artifact/source/audience facts. Independently rehashed all 280 entries in runs/round3-consumers/input-identities.json: zero mismatches. This is grading of saved consumer executions, not another execution of Verify or its lenses.
+
+| Case | Result | Actual supported reasoning |
+|---|---|---|
+| R1 | PASS | Current Y still asks a novice to check queue entry, pending status and no submission without supplying observation locations. The brief and sole source preserve that dependency. Verify explicitly retains a current-supported Major, distinguishes refusal to invent facts from resolution, and bounds Reader Pass to the five questions actually asked. NeedsRevision/Pass is supported. It also rejects the proposed deletion that conflates testing both branches with checking both Cancel outcomes. |
+| R2 | PASS | The controlled observation-update source and appended current paragraph supply the specific locations/values. Verify resolves that absence without treating old lens reports or old Q3 answers as a new panel. Unverified/NotVerified, Content/File not run, and preserved narrower unchanged observations are appropriate. These are synthetic facts only. |
+| R3 | PASS | Artifact bytes remain unchanged, but declared current audience already knows the observation locations. Verify makes the novice-specific finding inapplicable, not repaired or retrospectively false. It excludes novice Reader results from expert comprehension and returns Unverified/NotVerified. Same-byte File evidence and mechanical observations remain applicable. |
+
+R1/R3 artifact SHA256: D1C935570BF16C270C2B12A5DEFD3C94D3614C811CDA2AA5A618DF718FA9B0C5, also matching actual final Y. R2: BC7979E4A26D216DCAE0FC60490C009A6BC968754D0701E793A403442838581D. I inspected the actual synthetic source and changed expertise brief, not only report labels.
+
+Qualification: R1 uses actual completed Y and its existing independent review evidence; only amended Verify was newly executed. R2/R3 are controlled dependency mutations with explicitly unavailable current reviewers, not complete Gate recovery runs. This demonstrates the named reconciliation boundary and positive controls against sticky old findings. It does not establish general reliability, native product usability, human comprehension, or a causal performance improvement from one pair. Both baseline X and candidate v1 previously drifted to Ready without resolving the source gap; those failures remain valid evidence. No further source amendment or new consumer was indicated by these three results.
