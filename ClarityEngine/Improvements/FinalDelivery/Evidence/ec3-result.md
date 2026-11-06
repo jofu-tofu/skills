@@ -1,0 +1,11 @@
+# EC3 final independent assessment
+
+Actual original A audit, baseline X follow-up, candidate-v1 Y follow-up and both repair continuations executed. Initial and final artifacts/reports are preserved. Both X and Y used their two authorized repair rounds; further polishing is not required past the bound. Neither current status nor historical failure is silently replaced.
+
+The independent prose reviewer saw anonymous documents before configuration exposure: document 17 is final Y and document 42 is final X. Y preserves prerequisites, both choice outcomes, matching pending shipments for testing both choices, policy boundary and expected-results qualification. X preserves the core actions/outcomes but omits the explicit matching-shipment/both-choice testing instruction. Both have minor ambiguity in Cancel's “Check both.” My inspection of the actual final texts agrees. These are fixture-specific prose observations, not proof that the identity amendment improves authoring.
+
+Both runs initially identified a novice observation-location Major, then returned Ready/Pass after repairs that did not supply the missing source information. Their statuses disclose the variation, but that disclosure does not validate the later Ready decision. Candidate v1 did not solve this uncovered reconciliation boundary. Correct answers about outcomes did not answer where to observe them.
+
+The final amendment was made after v1 execution and preserved its runtime/results. The independently graded R1 consumer re-adjudicates actual final Y with prior evidence and retains the current supported gap: NeedsRevision/Pass. R2/R3 independently show that resolved or inapplicable prior concerns are not blindly retained. See round3-result.md for limits. Final Y's reader text remains useful but source-limited; the applicable final-candidate assessment is R1, not v1's Ready. No extra repair round or invented navigation is justified.
+
+EC3's changed final delivery, current evidence and truthful limitations requirement is supported through these actual artifacts and bounded consumers. This is not a claim that every tested document became Ready or that baseline behavior failed the entire writing task. Preserve X's lost testing instruction, both earlier status failures, the shared source limitation and model-proxy limits in the final account.

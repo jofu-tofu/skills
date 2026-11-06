@@ -1,6 +1,6 @@
 # Expanded outcome challenge specifications
 
-Synthetic development specifications derived from the expanded census. **Not executed results.** Reference facts below are authoritative only inside these cases. Preserve sources, final artifacts, audience assumptions and exact review versions when executing a comparison. These cases challenge outcome coverage; they do not qualify a general-purpose scorer by themselves.
+Synthetic development specifications derived from the expanded census. These specifications preceded execution; actual results and limits are now in [FinalDelivery](../FinalDelivery/Record.md). Reference facts below are authoritative only inside these cases. Preserve sources, final artifacts, audience assumptions and exact review versions when executing a comparison. These cases challenge outcome coverage; they do not qualify a general-purpose scorer by themselves.
 
 ## EC1: The right question at the right stage
 

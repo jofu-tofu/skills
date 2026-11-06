@@ -1,0 +1,11 @@
+# EC1 independent result
+
+Assessed baseline-EC1/artifact/kickoff.md against frozen cases/EC1.md and grading/reference.md, then compared the actual round-2 Reader answers and report. No candidate execution or human comprehension study is implied.
+
+**Explicit facts/template/scope: PASS.** All three required headings appear exactly. The document preserves the multi-source trigger, investigation-only authorization, no measured production improvement/problem rate, completed-request visibility with source hidden from analysts, representative test cases plus a later measurement method, unavailable future search capability, and missing owner/rollout date/design/release approval. It assigns analysts no unavailable source-identification task and invents no metric, implementation commitment, actor or tool. The evidence-gathering section remains necessarily high-level because the supplied facts contain no approved method. That is faithful uncertainty, not an invented execution plan.
+
+**Reader exposure: PASS for the supplied model-proxy questions.** The actual round-2 Reader correctly answers all five questions about trigger/results, authorization/success, source visibility, next work and missing approvals/ownership/timing. Each answer is supported by the delivered text. The document expands UI on first use and makes no reliance on unavailable team notes apparent. This establishes agreement with this explicit fixture, not real human comprehension or broad audience generalization.
+
+**Artifact attribution: PASS.** SHA256 of the delivered kickoff.md equals the round-2 reviewed kickoff.md and panel identity: E3D4E5DDB2732EEE7E28E11F35AC7B1224B5CF74A1A410667AE7005F78BBA96F. The round-2 panel records completed Reader, Cutter, Navigator and AudienceFit reports. The report separates Ready/Pass from Content not run, File passed and absent target-app proof. Two remaining findings are Polish, not mandatory meaning failures. This review did not independently rerun those lenses or audit their host isolation.
+
+**Outcome:** baseline succeeds on this frozen EC1 case. Do not claim a baseline drafting failure or a candidate improvement from this result. Maintain separate evidence for the candidate identity/final-delivery repair.
