@@ -4,59 +4,38 @@
 
 ## Reference Material
 
-- [Intent](../SkillIntent.md) and [shared requirements](../Quality/Shared.md): read at entry.
-- [Context](../Quality/UpdateSkill/Context.md) and [Outcomes](../Quality/UpdateSkill/Outcomes.md): read at entry.
-- [Tradeoffs](../Quality/UpdateSkill/Tradeoffs.md): read before planning or deciding.
-- [Feedback](../Quality/UpdateSkill/Feedback.md): read before evaluation.
-- [ChallengeCases](../Quality/UpdateSkill/ChallengeCases.md): read when designing cases.
-- [ComprehensiveImprovement](../Procedures/ComprehensiveImprovement.md): read and apply for broad or whole-skill improvement; owns parent scope, structural baseline and successive rounds.
-- [DesignMeasurement](../Procedures/DesignMeasurement.md): qualify new, changed or unsupported measures before relying on them for improvement claims; reuse qualified evidence only within scope.
-- [DiagnoseGap](../Procedures/DiagnoseGap.md): read and call when a gap or unexpected behavior motivates the request.
-- [EstablishQuality](../Procedures/EstablishQuality.md), [PlanChange](../Procedures/PlanChange.md), [DraftCandidate](../Procedures/DraftCandidate.md), [ReviewDesign](../Procedures/ReviewDesign.md), [EvaluateCandidate](../Procedures/EvaluateCandidate.md), [ApproveSkill](../Procedures/ApproveSkill.md), [RecordLearning](../Procedures/RecordLearning.md): read the relevant procedure when called.
+- [Intent](../SkillIntent.md), [shared requirements](../Quality/Shared.md), [Context](../Quality/UpdateSkill/Context.md) and [Outcomes](../Quality/UpdateSkill/Outcomes.md): read at entry.
+- [Tradeoffs](../Quality/UpdateSkill/Tradeoffs.md): before planning/deciding; [Feedback](../Quality/UpdateSkill/Feedback.md): before evaluation; [ChallengeCases](../Quality/UpdateSkill/ChallengeCases.md): when designing cases.
+- Read each linked procedure when called. Procedures are reusable operations, not separate required agent calls; reference adequate existing records.
 
-## Purpose
+## Purpose and scope
 
 Deliver a scoped revision and a justified retain/reject/defer decision while preserving required existing behavior.
 
-## Workflow Steps
+Classify by the requested effect. Short approvals inherit the preceding goal and evaluation scope; choosing a mechanism does not mean design-only. Changes to agent decisions or execution are behavioral even when written only in Markdown. Broad improvement uses [ComprehensiveImprovement](../Procedures/ComprehensiveImprovement.md); an easy first round cannot narrow its parent scope. Explicit focused repairs and maintenance remain proportional.
 
-Classify scope from the requested effect before choosing a path. A short approval such as "make that improvement" carries forward the preceding improvement goal and its evaluation scope. A user-selected mechanism is not a request for design-only delivery. Changes to when an agent researches, tests, decides or stops are behavioral changes even when implemented entirely in Markdown; use the numbered loop. Use a maintenance shortcut only when the requested effect fits that shortcut, and design-only delivery only when the user explicitly limits execution.
-
-Choose the lightest path that fits the user's **requested result**, not the easiest experiment. Broad improvement follows ComprehensiveImprovement alongside the numbered loop: establish full supported-family outcomes and baseline structural review before choosing rounds. A small first round cannot redefine the parent task. Mentioning structure as a first step does not limit the request to formatting or mandate a rewrite. Explicitly bounded maintenance keeps the short paths below.
-
-| Request | Path |
+| Requested result | Path |
 |---|---|
-| Typo, formatting, or small wording correction without intended behavior change | Read target intent and affected text, edit, inspect the diff and relevant links. Validate if structure/routing changed. Report checks; skip quality regeneration, experiment plans, and approval gate. |
-| Add/rename workflow or refactor structure | Read [Authoring](../Standards/Authoring.md), preserve intent and routing, change only the affected structure, run bundled validation and link checks. Evaluate affected handoffs before claiming behavioral equivalence. |
-| Integrate research or add intent | Read Authoring and its KnowledgeIntegration reference; preserve rationale and limits. If findings change decisions or behavior, continue through the numbered loop. Citation/rationale-only maintenance may remain narrow. Existing explicit user goals supply intent; clarify only material gaps. |
-| Repair description/triggering | Use [TestTriggering](../Procedures/TestTriggering.md) for provisional candidates and target-runtime confirmation evidence. Apply the authoring review below, then call ApproveSkill and RecordLearning before final retention. Failed or unavailable confirmation cannot establish improvement. |
-| Improve behavior or repair a failure | Use the numbered loop below. |
+| Typo, formatting or wording without intended behavior change | Read target intent and affected text, edit, inspect diff/relevant links; validate if structure/routing changed. Skip quality regeneration, experiments and gate. |
+| Add/rename workflow or refactor structure | Read [Authoring](../Standards/Authoring.md), preserve intent/routing, make affected changes and validate structure/links. Evaluate affected handoffs before claiming behavioral equivalence. |
+| Integrate research or add intent | Read Authoring and its KnowledgeIntegration reference. Preserve rationale/limits and use existing explicit user goals. Citation/rationale-only maintenance stays narrow; changed decisions/behavior use the loop below. |
+| Repair description/triggering | Use [TestTriggering](../Procedures/TestTriggering.md), authoring review below, ApproveSkill and RecordLearning. Missing/failed confirmation cannot establish improvement. |
+| Improve behavior or repair failure | Use the loop below, including proportionate outcome evaluation. |
+| Explicit design-only revision | Plan/draft and complete authoring review; record unexecuted behavioral checks and next step. Return unverified without unrequested execution. |
 
-After substantive edits on any path, call ReviewDesign on the changed instructions and affected callers before structural completion or a retention decision. Resolve blocking contradictions and missing handoffs, recheck affected paths, and record deferred risks. Typo/formatting edits without changed meaning keep the lightweight checks above.
+After substantive edits on any path, call [ReviewDesign](../Procedures/ReviewDesign.md) on affected instructions/callers. Resolve blocking contradictions and missing handoffs, recheck affected paths and record deferred risks. Typo/formatting-only edits keep lightweight checks.
 
-Shared procedures are reusable operations, not required separate agent calls. Existing adequate records can be linked. A requested behavioral enhancement needs evaluation of its desired difference and preservation, not an invented prior failure.
+## Improvement loop
 
-### Execution scope and stopping
+1. Read target intent, applicable workflows/quality and latest decisions; preserve the baseline. Freeze a pre-edit [completion contract](../Templates/Improvement/Completion.md). For broad work, first establish ComprehensiveImprovement's reviewed parent inventory and whole-skill structural baseline; focused work uses a compact contract.
+2. For a reported/observed gap, call [DiagnoseGap](../Procedures/DiagnoseGap.md). Call [EstablishQuality](../Procedures/EstablishQuality.md) for purpose-derived outcomes, relevant contribution mapping and operational efficiency, revisiting only affected scope for focused work. Preserve criterion IDs and record authorized changes. Its [DesignMeasurement](../Procedures/DesignMeasurement.md) handoff qualifies new/changed/unsupported measures; a requested enhancement need not invent a prior failure.
+3. Call [PlanChange](../Procedures/PlanChange.md) for the smallest useful change, protected behavior, evidence, budget and decision rule. Apply its research decision when required and experiment-adequacy check before trials. Name actual outcome evaluation and separate benefit/preservation gates, including affected shared branches and handoffs. Compare baseline/candidate under the same applicable measures and conditions. A checker/case gap may justify retaining the skill unchanged.
+4. Call [DraftCandidate](../Procedures/DraftCandidate.md); complete authoring review above before evaluation. Avoid unrelated changes.
+5. Call [EvaluateCandidate](../Procedures/EvaluateCandidate.md), then [ApproveSkill](../Procedures/ApproveSkill.md). Evaluate the intended result and required preservation, not just instruction compliance or structure. For SkillForge itself, distinguish better improvement decisions from improved downstream skill behavior; evidence for one does not establish the other.
+6. For broad work, reconcile each round through ComprehensiveImprovement and execute the next useful round. Consume ApproveSkill's owning-task status: `continue` executes its named next action through planning/evaluation/repair; `blocked` reports the evidenced limit and resume action; `complete` permits closure. [RecordLearning](../Procedures/RecordLearning.md) preserves round and parent decisions separately, including failures and ties. Retention is not task completion.
 
-Before launching experiments, use PlanChange's experiment adequacy check: test the user's decision at the necessary level, not only the easiest intermediate artifact. If human checkpoints are not requested or have been withdrawn, make the evidence-based decisions within existing authority and continue. Do not invent a human review dependency for ordinary experiment choices.
+## Authority and completion
 
-Before closing, resolve identified in-scope outcome uncertainties with available checks. Reporting an uncertainty honestly does not by itself finish work that is authorized and feasible. Preserve genuine scope and resource limits; do not expand a focused request into unrelated repairs.
+Behavioral improvement includes evaluation within scope; missing measures or a completed edit do not make it design-only. Qualify/refine checks and continue feasible required work. ApproveSkill owns scope/composition checks, evidence gates, completion rules and the required CheckCompletion invocation; consume its result rather than substituting a structural pass or local round verdict.
 
-A request to improve behavior or repair a failure includes proportionate outcome evaluation within the user's scope. Do not silently downgrade it to design-only because the change is written as instructions, measures are missing, or the first edit is finished. Qualify or refine missing checks before using them to judge improvement. Explicit requests for a proposal or design-only revision keep that narrower scope; the maintenance shortcuts above remain proportional.
-
-For human-in-the-loop work, stop at the agreed outcome, measurement or result checkpoints with a concrete review artifact and the next action recorded. After the user resolves that checkpoint, continue the existing evaluation plan without requesting the same authorization again. Actual unavailable dependencies, resources or unresolved material choices may prevent execution: report what was attempted, the specific missing evidence and the next step, keeping improvement unverified. Do not treat a static validation pass or the candidate author's example as an outcome trial.
-
-1. Read target intent, applicable workflows/quality records and latest decisions. Preserve the baseline. For broad work, apply ComprehensiveImprovement's parent inventory, independent scope challenge and whole-skill structural review before selecting rounds; freeze a comprehensive [completion contract](../Templates/Improvement/Completion.md). Focused behavioral repairs use a compact contract. Include actual execution and preservation. Do not replace user scope with a per-round budget or narrow it because easier checks pass.
-2. For a reported or observed gap, call DiagnoseGap before planning. Then call EstablishQuality: for broad improvement, make the purpose-to-outcome reasoning visible before proposing metrics or edits; for a focused repair, revisit only the affected purpose and outcomes. Include DesignMeasurement for new/changed/unsupported measures even without a gap. Preserve criterion IDs and measurement versions; record authorized changes separately. Use the same qualified definition for baseline and candidate comparisons.
-3. Call PlanChange with the diagnosis or requested change, suspected cause, protected behavior, budget, and decision rule. For broad improvement, complete its research decision before ranking changes; reuse existing evidence and search academic literature when a consequential question remains that research could inform. Name the outcome-level evaluation and when it runs; for an improvement claim compare the preserved baseline and candidate under the same applicable checks and comparable conditions. Include its regression-coverage map and separate benefit/preservation gates for behavioral updates; shared instructions may affect other branches beyond the reported failure. A design hypothesis need not be presented as an observed failure. A case/checker gap may require only evaluation changes; retain the target when no skill edit is justified.
-4. Call DraftCandidate for the smallest coherent revision; avoid unrelated changes. Apply the authoring review above before evaluation.
-5. For behavioral improvement or repair, call EvaluateCandidate then ApproveSkill before closing the attempt. Test the intended result and required preservation, not just instruction compliance or package structure. When improving SkillForge, separate better authoring/evaluation decisions from improved downstream skill behavior; evidence for one does not establish the other. For an explicit design-only revision, record evaluation as not run with its next step and return unverified status.
-6. For broad work, reconcile the round with the parent inventory and structural findings through ComprehensiveImprovement, rerank remaining work and execute the next useful round. Then consume ApproveSkill's **parent task** status: `continue` executes the next action; `blocked` reports the evidenced limit and resume action; `complete` permits closure. Call RecordLearning for round and task decisions separately. A retained candidate, passing sample, local no-change verdict or exhausted pilot cannot close uncovered parent outcomes. Preserve prior results rather than repeating until a candidate wins.
-
-If ApproveSkill identifies a feasible missing check for a required outcome, continue the bounded evaluation instead of advancing to final closure. Amend the plan/checker explicitly when needed, preserve earlier observations, and rerun affected comparisons fairly. If the check reveals a defect, return to the smallest justified revision. Final retention and completion are different decisions when a requested outcome remains unresolved.
-
-## Completion
-
-The user receives the owned result, evidence status, and unresolved limitations. Do not silently expand a design-only or assessment-only request into execution, edits, installation, or release.
-
-For an improvement request, "draft edited; structural checks pass" is an intermediate state. Finish only when ApproveSkill returns task status `complete`, or report its actual `blocked` condition and resume action. A candidate retain/reject/defer decision is not task completion. Missing qualification prevents a confirmed improvement claim; it does not justify skipping authorized exploratory or qualification work.
+Honor agreed human checkpoints with a concrete artifact. Once resolved, continue without requesting the same authorization again. Otherwise decide within existing authority; ordinary experiment choices need no invented approval. Report genuine runtime/resource/authority limits and missing evidence accurately. Preserve explicit design-only and maintenance completion rules, and do not expand into unrelated repairs, installation or release.

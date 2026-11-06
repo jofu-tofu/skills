@@ -61,4 +61,6 @@ The plan permits findings that contradict the claim and does not require a candi
 
 Use [Plan](../Templates/Improvement/Plan.md).
 
+For a focused attempt, the optional [CompactAttempt](../Templates/Improvement/CompactAttempt.md) combines plan, results and decision prose. Use an adequate existing record instead when available. Keep required machine-readable contracts/results and raw evidence; link them rather than repeating their contents. Broad work retains its parent inventory.
+
 Status: proposed and unvalidated. Shared requirements: [Quality/Shared](../Quality/Shared.md). Test this procedure with fixed input artifacts independently, then test its handoffs.
