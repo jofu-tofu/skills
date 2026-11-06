@@ -4,7 +4,7 @@ description: Comprehension-first document and presentation authoring in a plain,
 compatibility: Designed for Claude Code, Codex, and Devin (or similar agent products)
 metadata:
   author: pai
-  version: "1.5.2-rc.1"
+  version: "1.5.2-rc.2"
 ---
 
 # ClarityEngine
@@ -61,6 +61,7 @@ Reviewers who know a subject read its terms as plain, so finding jargon one quot
 | `Standards/Philosophy.md` | Four core principles and the RC index; usable by other skills on its own |
 | `Standards/PersonalStyleGuide.md` | The plain, direct, connected voice, and which lenses enforce it |
 | `Standards/ReviewContract.md` | Evidence standard, severity, and output format shared by every reviewer |
+| `Standards/ReviewIdentity.md` | Frozen review inputs, evidence reuse, and final delivered-version checks |
 | `Standards/FormatAdapters.md` | Choosing and building the format, capturing render evidence, verification layers |
 | `Standards/ToolingLandscape.md` | Optional tool and design references; check availability before use |
 | `Standards/DocumentContract.md` | Shared contract format: section contracts, author locks, and checks that a review must keep passing |
