@@ -188,14 +188,15 @@ const server = serve({
         const errors = allLogs.filter(l => l.type === 'error')
         const warnings = allLogs.filter(l => l.type === 'warning')
 
-        const networkLogs = browser.getNetworkLogs({ type: 'response' })
+        const networkLogs = browser.getNetworkLogs()
         const failedRequests = networkLogs
-          .filter(l => l.status && l.status >= 400)
+          .filter(l => l.type === 'failure' || (l.status !== undefined && l.status >= 400))
           .map(l => ({
             url: l.url,
             method: l.method,
-            status: l.status!,
-            statusText: l.statusText
+            status: l.status,
+            statusText: l.statusText,
+            errorText: l.errorText
           }))
 
         const stats = browser.getNetworkStats()

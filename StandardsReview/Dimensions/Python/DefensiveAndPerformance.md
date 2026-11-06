@@ -33,11 +33,11 @@ Defensive programming and performance optimization are two sides of the same coi
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| DefensiveLbyl | CRITICAL | Prefer Look Before You Leap over exception-based flow to make intent explicit |
+| DefensiveLbyl | Contextual | Prefer clear local checks where equivalent; accept precise exception handling and preserve the input contract |
 | DefensiveNeverSwallow | CRITICAL | Never catch exceptions without handling, transforming, or re-raising them |
-| DefensivePathChecking | CRITICAL | Verify file and directory existence before performing file system operations |
+| DefensivePathChecking | Contextual | Handle actual filesystem failures; optional prechecks cannot guarantee a later operation succeeds |
 | DefensiveVerifyCasts | CRITICAL | Validate types at runtime before or instead of using typing.cast() |
-| PerfMagicMethodsO1 | HIGH | Magic methods must be O(1) to prevent implicit quadratic behavior in loops |
+| PerfMagicMethodsO1 | Contextual | Check implicit-operation cost against the workload; preserve equality, membership and cache correctness |
 | PerfDeferImportTime | HIGH | Defer expensive computation from import time to first access |
 | OrgNoMutableDefaults | HIGH | Never use mutable objects as default argument values |
 
@@ -47,40 +47,38 @@ Defensive programming and performance optimization are two sides of the same coi
 
 ### PY1.1 LBYL over EAFP
 
-**Impact: CRITICAL (Makes intent explicit, reader sees conditions immediately)**
+**Impact: Contextual (Readability preference alone is not a critical defect)**
 
-"Look Before You Leap" makes code intent visible at the point of execution. When you check conditions first, readers understand the logic without tracing exception handlers.
+Prefer a simple local check when it preserves the operation's contract. EAFP is also an ordinary Python idiom, not inherently a violation. Judge narrow exception handling, actual accepted inputs and failure behavior. Honor an explicit project style preference without turning it into a correctness claim.
 
-**Incorrect: Exception-based flow hides intent**
+**Valid: Narrow exception handling preserves conversion semantics**
 
 ```python
-# Reader must trace exception to understand the fallback
+# An explicit missing-key fallback is valid.
 try:
     value = config[key]
 except KeyError:
     value = default
 
-# Exception handling for expected conditions
+# int accepts signs and surrounding whitespace; invalid text falls back.
 try:
     result = int(user_input)
 except ValueError:
     result = 0
 ```
 
-**Correct: Explicit checks show intent**
+**Valid equivalent for a plain mapping; not an equivalent integer parser**
 
 ```python
 # Intent is immediately clear
 value = config.get(key, default)
 
-# Explicit validation before conversion
-if user_input.isdigit():
-    result = int(user_input)
-else:
-    result = 0
+# Do not replace the int/ValueError parser with isdigit():
+# '-12' and ' +7 ' are valid int inputs but fail isdigit().
+# '²'.isdigit() is true, while int('²') raises ValueError.
 ```
 
-**When EAFP is acceptable:**
+**EAFP is particularly useful for:**
 - Race conditions where checking and acting aren't atomic (file existence)
 - Performance-critical paths where exceptions are rare
 - Third-party APIs that only signal errors via exceptions
@@ -135,22 +133,20 @@ except RequestException as e:
     raise ServiceUnavailableError("External service down") from e
 ```
 
-**The only acceptable "swallow":**
-- Cleanup code in `finally` blocks where you must continue regardless
-- Even then, log the suppressed exception
+Expected failure may be deliberately handled without re-raising: for example, an optional cache miss with a documented fallback. Verify that the caller receives the promised result and important failures remain visible. Do not flag every suppressed exception or require logging harmless expected conditions; broad suppression of unexpected failures remains a finding.
 
 ---
 
 ### PY1.3 Check Path Existence
 
-**Impact: CRITICAL (Prevents OSError on non-existent paths)**
+**Impact: Contextual (Unexpected I/O failure can break the operation; prechecks are not guarantees)**
 
-File operations on non-existent paths raise `FileNotFoundError` or `OSError`. Checking paths before operations provides clear error messages and prevents cascading failures.
+File operations can fail after a successful existence or permission check. Handle the operation's relevant exceptions or intentionally propagate them according to the caller's contract. An optional precheck can improve diagnostics but is not a safety or authorization boundary.
 
-**Incorrect: Assume paths exist**
+**Needs context: Failure propagation may be intentional**
 
 ```python
-# Crashes with cryptic OSError if path missing
+# Valid if the caller is meant to handle FileNotFoundError/JSON errors.
 with open(config_path) as f:
     config = json.load(f)
 
@@ -158,18 +154,18 @@ with open(config_path) as f:
 output_path.write_text(content)
 ```
 
-**Correct: Verify paths explicitly**
+**Correct when the API promises a configuration-specific missing-file error**
 
 ```python
 from pathlib import Path
 
-# Check file exists with clear error
+# Handle the actual operation; an earlier check can race.
 config_path = Path(config_path)
-if not config_path.exists():
-    raise ConfigurationError(f"Config file not found: {config_path}")
-
-with open(config_path) as f:
-    config = json.load(f)
+try:
+    with config_path.open() as f:
+        config = json.load(f)
+except FileNotFoundError as error:
+    raise ConfigurationError(f"Config file not found: {config_path}") from error
 
 # Ensure parent directory exists before write
 output_path = Path(output_path)
@@ -177,16 +173,15 @@ output_path.parent.mkdir(parents=True, exist_ok=True)
 output_path.write_text(content)
 ```
 
-**Additional defensive checks:**
+**Optional diagnostics, never substitutes for handling the operation:**
 
 ```python
 # Check it's actually a file, not a directory
 if not config_path.is_file():
     raise ConfigurationError(f"Expected file, got directory: {config_path}")
 
-# Check permissions before attempting write
-if output_path.exists() and not os.access(output_path, os.W_OK):
-    raise PermissionError(f"Cannot write to: {output_path}")
+# Do not use os.access() as authorization for a later write.
+# Permissions and the target may change between check and operation.
 ```
 
 ---
@@ -248,13 +243,13 @@ if not is_user(entity):
 
 ---
 
-### PY3.1 Magic Methods Must Be O(1)
+### PY3.1 Account for Implicit Operation Cost
 
-**Impact: HIGH (Called implicitly/frequently, O(n) becomes O(n²))**
+**Impact: Contextual (Repeated scans can dominate a demonstrated workload)**
 
-Magic methods like `__len__`, `__bool__`, `__hash__`, and `__eq__` are called implicitly and frequently. An O(n) implementation turns simple operations into O(n²) performance traps.
+Special methods can be invoked repeatedly. Inspect the actual call pattern and data size before reporting a performance defect. Linear equality or membership can be correct and appropriate; Python imposes no general O(1) requirement. An index or cached count helps only if it preserves semantics and remains valid after every supported mutation.
 
-**Incorrect: O(n) magic methods**
+**Potential repeated-scan cost to evaluate against the workload**
 
 ```python
 class ItemCollection:
@@ -275,7 +270,7 @@ for item in collection:
         ...
 ```
 
-**Correct: O(1) magic methods with cached state**
+**Possible optimization for controlled append-only items**
 
 ```python
 class ItemCollection:
@@ -304,12 +299,7 @@ for item in collection:
         ...
 ```
 
-**Magic methods that must be O(1):**
-- `__len__` - called by `len()`, boolean contexts
-- `__bool__` - called in every `if` statement
-- `__hash__` - called for dict/set operations
-- `__eq__` - called for comparisons, dict lookups
-- `__contains__` - called by `in` operator
+This cache sketch assumes item IDs/activity never change after insertion and no removal occurs. Mutable items require invalidation or a different design. Do not recommend changing equality to hash-only comparison, adding stale caches, or replacing required ordered/duplicate semantics with a set merely to obtain constant-time operations. Small bounded scans and correct value comparisons are valid alternatives.
 
 ---
 
@@ -348,15 +338,12 @@ def get_config() -> dict:
     return json.loads(Path("config.json").read_text())
 
 @cache
-def get_db_connection() -> Connection:
-    """Create connection on first access."""
-    return create_database_connection(get_config()["database"])
-
-@cache
 def get_processed_data() -> ProcessedData:
     """Compute on first access."""
     return expensive_computation()
 ```
+
+`cache` keeps its cache coherent but concurrent first calls may run the function more than once. Use it here only when duplicate computation and shared cached values are acceptable; define configuration refresh separately. Manage database connections through a scoped owner or pool with explicit disposal. A required singleton needs synchronized initialization, an appropriate thread-sharing contract and shutdown ownership.
 
 **Alternative: Lazy module pattern**
 
@@ -466,4 +453,7 @@ def configure(options: tuple[str, ...] = ()) -> Config: ...
 
 - Effective Python by Brett Slatkin
 - Python documentation on exceptions and data model
+- [Python EAFP glossary](https://docs.python.org/3/glossary.html#term-EAFP)
+- [Filesystem access checks and races](https://docs.python.org/3/library/os.html#os.access)
+- [String digit classification](https://docs.python.org/3/library/stdtypes.html#str.isdigit)
 - High Performance Python by Gorelick & Ozsvald

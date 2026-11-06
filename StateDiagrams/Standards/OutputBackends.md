@@ -33,6 +33,7 @@ Rules:
 - Use `<<choice>>` for conditional branches that would otherwise hide decision logic.
 - Use composite states only when child states share parent behavior.
 - Add a transition table when guards or actions are important.
+- Preserve composite-state entry/exit actions in an attached note and the transition table when the target Mermaid renderer rejects description lines on group nodes. Mermaid11.12.0 rejects `Parent : entry / action` on a composite group; plain-state descriptions and PlantUML rules are different. Do not make an entry action into a child transition merely to render it: that would change when it runs. Parse and render the actual target artifact after this adaptation.
 
 ## Mermaid Flowchart Rules
 

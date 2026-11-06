@@ -1,15 +1,15 @@
 ---
 name: CriticalThinking
-description: Multi-agent critical thinking pipeline that escapes local minima by analyzing problems through five orthogonal lenses — gap-driven reframing, cross-domain synthesis, representation shift, and an adaptive fifth lens. Lens types are backed by empirical analysis of 3,819 top-tier research papers (Sci-Reasoning, arXiv:2601.04577). USE WHEN critical thinking OR think critically OR analyze problem OR think about this from different angles OR multiple perspectives OR escape local minima OR orthogonal analysis OR think deeply OR attack this problem OR break down this problem OR think harder OR rigorous analysis OR five perspectives OR cross-domain reasoning OR avoid blind spots OR stress test an idea.
+description: Multi-agent critical thinking pipeline that escapes local minima by analyzing problems through five orthogonal lenses — gap-driven reframing, cross-domain synthesis, representation shift, and an adaptive fifth lens. Lens types draw on a descriptive study of 3,819 selected AI research papers (Sci-Reasoning, arXiv:2601.04577). USE WHEN critical thinking OR think critically OR analyze problem OR think about this from different angles OR multiple perspectives OR escape local minima OR orthogonal analysis OR think deeply OR attack this problem OR break down this problem OR think harder OR rigorous analysis OR five perspectives OR cross-domain reasoning OR avoid blind spots OR stress test an idea.
 compatibility: Designed for Codex and Devin (or similar agent products).
 metadata:
   author: pai
-  version: "2.0.0"
+  version: "2.0.1-rc.1"
 ---
 
 # CriticalThinking
 
-Multi-agent critical thinking pipeline with **process-boundary enforcement**. Takes any problem and analyzes it through five **orthogonal lenses** using four empirically-backed lens types: gap-driven reframing, cross-domain synthesis, representation shift, and an adaptive fifth lens chosen from three constrained options. Lens types are derived from analysis of 3,819 top-tier AI research papers (Sci-Reasoning, arXiv:2601.04577) which identified the dominant thinking patterns behind breakthroughs.
+Multi-agent critical thinking pipeline with **process-boundary enforcement**. Takes any problem and analyzes it through five **orthogonal lenses** using four lens types: gap-driven reframing, cross-domain synthesis, representation shift, and an adaptive fifth lens chosen from three constrained options. Lens types are derived from analysis of 3,819 top-tier AI research papers (Sci-Reasoning, arXiv:2601.04577) which classified patterns in published contribution narratives.
 
 The purpose is **escaping local minima**: when you think about a problem one way, you converge on the nearest "good enough" answer. Five genuinely orthogonal reasoning chains, developed independently, explore different regions of the solution space. Gap-driven reframing sharpens the problem to its exact failure point. Cross-domain synthesis forces alien vocabulary that reveals hidden structure. Representation shift changes the fundamental primitive to simplify what was previously hard. The adaptive fifth lens fills whatever analytical gap remains.
 
@@ -20,7 +20,7 @@ The pipeline produces **six files**: five perspective files (one per lens) and o
 1. **Orthogonality** — The five lenses must be genuinely independent reasoning modes, not surface relabelings. Each must ask questions the others structurally cannot.
 2. **Independence** — Decomposer and solver agents never see each other's work; cross-pollination happens only at synthesis
 3. **Depth** — Each perspective produces a real first-principles decomposition, not a shallow restatement
-4. **Escape velocity** — The synthesis must contain insights that no single-perspective analysis would reach — evidence that the pipeline escaped a local minimum
+4. **Useful integration** — The synthesis preserves constraints and evidence qualifications, identifies useful cross-connections when present, and gives an actionable calibrated answer. No invented novelty or disagreement is required.
 5. **Process integrity** — Agent isolation is enforced by process boundaries, not text instructions
 
 ## Orchestrator Architecture (MANDATORY)
@@ -38,7 +38,7 @@ Each pipeline wave runs as **separate agent invocations** (separate LLM sessions
 
 ### Why Process Boundaries Matter
 
-The entire value of this skill is that five independent reasoning chains explore different regions of solution space. When a single LLM session handles all perspectives, it converges — the biology-framed and economics-framed analyses end up suspiciously similar because the same context window holds both. Process boundaries make convergence impossible: each decomposer and solver only sees one perspective file. This is the mechanism that escapes local minima.
+The entire value of this skill is that five independent reasoning chains explore different regions of solution space. When a single LLM session handles all perspectives, it converges — the biology-framed and economics-framed analyses end up suspiciously similar because the same context window holds both. Separate contexts restrict direct sharing of perspective files. They do not make convergence impossible or establish statistical independence: agents can share training, facts and assumptions. Judge contributions by useful distinctions and evidence, not agent count.
 
 ### Pipeline Waves
 
@@ -160,4 +160,8 @@ The synthesis file (Wave 4) is the only file that draws from all five perspectiv
 
 **Why this lens split works:** The four lens types operate on different aspects of the problem. Gap-driven reframing changes *what question you're answering* (zooming into the specific failure). Cross-domain synthesis changes *what vocabulary you use* (alien language reveals hidden structure). Representation shift changes *what objects you manipulate* (new primitives simplify previously hard operations). The adaptive fifth lens fills whichever analytical gap remains — more vocabulary diversity, causal tracing, or failure analysis. Together, the five lenses explore genuinely different regions of solution space.
 
-**Empirical basis:** The lens types correspond to the top three innovation patterns identified in the Sci-Reasoning dataset (arXiv:2601.04577): Gap-Driven Reframing (24.2%), Cross-Domain Synthesis (18.0%), and Representation Shift (10.5%). These three patterns account for 52.7% of all innovations in 3,819 Oral and Spotlight papers at NeurIPS, ICML, and ICLR (2023-2025). The most powerful innovation combinations pair these patterns: Gap-Driven + Representation Shift (318 co-occurrences), Cross-Domain + Representation Shift (233), and Gap-Driven + Cross-Domain (204).
+**Descriptive source basis:** The lens types correspond to the top three innovation patterns identified in the Sci-Reasoning dataset (arXiv:2601.04577): Gap-Driven Reframing (24.2%), Cross-Domain Synthesis (18.0%), and Representation Shift (10.5%). These three patterns account for 52.7% of all innovations in 3,819 Oral and Spotlight papers at NeurIPS, ICML, and ICLR (2023-2025). The study reports these frequent combinations: Gap-Driven + Representation Shift (318 co-occurrences), Cross-Domain + Representation Shift (233), and Gap-Driven + Cross-Domain (204).
+
+The paper analyzes how selected published papers justify their contributions, not the authors' observed discovery process (§6). Its venue/period and mainstream-ML scope limit generalization. These patterns motivate lens choices; they do not validate this five-lens agent pipeline, guarantee independent reasoning or establish improved decisions. Those claims require actual task evidence. [Source and limitations](https://arxiv.org/html/2601.04577v1#S6).
+
+Current granular outcomes and evaluated limits: [Quality/Outcomes.md](Quality/Outcomes.md).

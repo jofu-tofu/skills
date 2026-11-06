@@ -53,7 +53,7 @@ function checkCompletion(contract, assessment, root, contractDigest) {
   else if (!fs.readFileSync(path.resolve(root, basis.path), 'utf8').includes(basis.quote)) errors.push('Scope quote is absent from its source.');
   if (typeof assessment.contract_sha256 !== 'string' || assessment.contract_sha256.toLowerCase() !== contractDigest)
     errors.push('Assessment does not match the frozen contract digest.');
-  for (const field of ['scope', 'requested_result', 'task_status'])
+  for (const field of ['scope', 'requested_result', 'task_status', 'depth', 'coverage_inventory', 'scope_review_check'])
     if (Object.hasOwn(assessment, field)) errors.push('Assessment cannot redefine ' + field + '.');
   if (!['retain_candidate', 'retain_baseline', 'reject_candidate', 'revise', 'defer'].includes(assessment.candidate_decision)) errors.push('Invalid candidate_decision.');
   const requirements = contract.required_checks;
@@ -65,8 +65,49 @@ function checkCompletion(contract, assessment, root, contractDigest) {
     if (!['outcome', 'behavioral_execution', 'preservation', 'deliverable'].includes(requirement?.kind) || !text(requirement?.description))
       errors.push('Each required check needs a supported kind and description.');
   }
-  if (contract.scope === 'behavioral' && !(requirements || []).some(r => r?.kind === 'behavioral_execution'))
+  if (contract.scope === 'behavioral' && !(list(requirements) ? requirements : []).some(r => r?.kind === 'behavioral_execution'))
     errors.push('Behavioral scope requires a behavioral_execution check.');
+  if (contract.depth !== undefined && !['focused', 'comprehensive'].includes(contract.depth)) errors.push('Invalid improvement depth.');
+  // Broad work binds the parent inventory independently of a round's selected checks.
+  // Hashes cannot prove semantic completeness; the scope-review outcome supplies that review.
+  if (contract.depth === 'comprehensive') {
+    const coverage = evidenceStatus(contract.coverage_inventory ? [contract.coverage_inventory] : [], root);
+    if (!coverage.valid) errors.push('Comprehensive depth requires a valid parent coverage inventory: ' + coverage.reason);
+    else {
+      try {
+        const inventory = JSON.parse(fs.readFileSync(path.resolve(root, contract.coverage_inventory.path), 'utf8'));
+        const byId = new Map((list(requirements) ? requirements : []).map(r => [r.id, r]));
+        const ownedChecks = new Set();
+        function ownCheck(id, role) {
+          const check = byId.get(id);
+          if (!text(id) || !check || check.kind === 'deliverable' || ownedChecks.has(id))
+            errors.push(role + ' needs its own declared non-deliverable check; evidence may be shared, judgments may not.');
+          ownedChecks.add(id);
+        }
+        ownCheck(contract.scope_review_check, 'Parent scope review');
+        if (inventory.schema_version !== 1 || !list(inventory.targets) || !inventory.targets.length)
+          errors.push('Coverage inventory needs schema_version 1 and nonempty targets.');
+        const targetIds = new Set(), outcomeIds = new Set();
+        for (const target of list(inventory.targets) ? inventory.targets : []) {
+          if (!text(target?.id) || targetIds.has(target.id) || !text(target?.purpose)) errors.push('Coverage targets need unique IDs and a purpose.');
+          targetIds.add(target?.id);
+          ownCheck(target?.structure_check, 'Structural review for ' + target?.id);
+          if (!list(target?.families) || !target.families.length) errors.push('Each target needs supported task families.');
+          const familyIds = new Set();
+          for (const family of list(target?.families) ? target.families : []) {
+            if (!text(family?.id) || familyIds.has(family.id)) errors.push('Task family IDs must be nonempty and unique within their target.');
+            familyIds.add(family?.id);
+            if (!list(family?.outcomes) || !family.outcomes.length) errors.push('Each family needs observable outcomes.');
+            for (const outcome of list(family?.outcomes) ? family.outcomes : []) {
+              if (!text(outcome?.id) || outcomeIds.has(outcome.id) || !text(outcome?.description)) errors.push('Coverage outcomes need unique IDs and descriptions.');
+              outcomeIds.add(outcome?.id);
+              ownCheck(outcome?.check_id, 'Outcome ' + outcome?.id);
+            }
+          }
+        }
+      } catch (error) { errors.push('Cannot read parent coverage inventory: ' + error.message); }
+    }
+  }
   if (!list(assessment.checks) || !list(assessment.actions) || !list(assessment.blockers)) errors.push('checks, actions and blockers must be arrays.');
   const judgments = new Map();
   for (const check of list(assessment.checks) ? assessment.checks : []) {

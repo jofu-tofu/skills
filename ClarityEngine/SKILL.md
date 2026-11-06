@@ -4,10 +4,12 @@ description: Comprehension-first document and presentation authoring in a plain,
 compatibility: Designed for Claude Code, Codex, and Devin (or similar agent products)
 metadata:
   author: pai
-  version: "1.5.1"
+  version: "1.5.2-rc.1"
 ---
 
 # ClarityEngine
+
+Improvement evidence and limits: [Improvements/Index.md](Improvements/Index.md).
 
 Create documents and presentations that help readers understand the subject, follow the reasoning, and know what to do next. Start with the audience and main point, gather the evidence, write the explanation, make the wording plain, and build the file. Then a panel of independent reviewers checks it, a Verifier decides which findings stand, and the author applies the verified fixes.
 
@@ -63,6 +65,7 @@ Reviewers who know a subject read its terms as plain, so finding jargon one quot
 | `Standards/ToolingLandscape.md` | Optional tool and design references; check availability before use |
 | `Standards/DocumentContract.md` | Shared contract format: section contracts, author locks, and checks that a review must keep passing |
 | `Quality/Outcomes.md` | Reader results and their contribution map; load when evaluating or improving this skill |
+| `Quality/WorkflowOutcomes.md` | Granular workflow outcomes and preserved source-branch evidence; load for skill evaluation |
 | `Quality/Measurement.md` | Outcome checks and evidence limits; load for skill evaluation |
 | `Testing/RegressionCases.md` | Sample tasks for comparing skill versions; load when testing updates |
 | `Testing/RuleTraceability.md` | Historical record of the pre-1.1.0 rules; not current instructions |
@@ -119,3 +122,7 @@ User: "Run a readability check on this document"
 -> Measures the draft and runs the lens panel
 -> Returns the Verifier's report: what the reader understood, which findings stand, and the top fixes
 ```
+
+## Outcome and improvement records
+
+For evaluation or improvement, read [granular outcomes and current coverage](Quality/Outcomes.md). These records preserve open coverage and bounded evidence; they are not required context for every ordinary task or a claim of whole-skill readiness.

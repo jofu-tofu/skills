@@ -16,13 +16,13 @@ Variable declaration distance is a readability issue that compounds in longer fu
 
 Single responsibility is the structural constraint that keeps functions short enough for the other organizational rules to matter. A 200-line function with five responsibilities cannot have variables close to use, because each responsibility creates its own variable cluster spread across the function body. Decomposition into focused functions solves this organically.
 
-Error handling bridges organization and correctness. Context managers ensure deterministic cleanup regardless of exception paths. Specific exception types prevent bug-masking (a `NameError` from a typo should not be caught by a broad `except Exception`). Meaningful error messages provide the context needed to debug failures without reproducing them.
+Error handling bridges organization and correctness. Context managers ensure deterministic cleanup regardless of exception paths. Specific exception handling can avoid masking bugs; a broad cleanup-and-reraise boundary also preserves a `NameError`. The lost failure signal, rather than catch width alone, is the concern. Meaningful error messages provide the context needed to debug failures without reproducing them.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-Check function call sites for positional arguments: any call with three or more positional arguments, or any call with boolean arguments, should use keyword arguments. Look for variables declared at the top of a function that are not used until much later -- these should be moved closer to their point of use. Check for functions longer than 30-40 lines and assess whether they have multiple responsibilities that could be extracted. Verify that every try/except catches specific exception types (not bare `except` or `except Exception`), and that error messages include the values that caused the failure. Check that every resource acquisition (file opens, locks, connections) uses a context manager.
+Check positional arguments, declaration distance and function responsibilities against actual ambiguity and project policy, not a fixed severity from syntax alone. Prefer precise exception handling; a broad catch with a deliberate boundary policy is not automatically swallowed failure. Error messages should identify the failure without exposing credentials or sensitive values. Verify exception-safe cleanup for resources owned by this scope; a context manager or correct try/finally can provide it.
 
 ### When Designing / Planning
 
@@ -30,19 +30,19 @@ When designing function interfaces, start with keyword-only parameters for anyth
 
 ### When Implementing
 
-Use `*` in function signatures to enforce keyword-only arguments for functions with three or more parameters or any boolean parameters. Place variable declarations immediately before their first use, not at the top of the function. When a function exceeds 20-30 lines, look for natural responsibility boundaries and extract helper functions with clear names that describe their purpose. Use `with` statements for all resource management. Catch the most specific exception type that matches the expected failure mode. In error messages, include the actual value that failed validation, the expected value or constraint, and enough context (IDs, file paths, parameter names) to locate the problem without a debugger.
+Use keyword-only parameters and local declarations when they improve the intended interface. Function length is a prompt to inspect responsibilities, not a defect by itself. Prefer `with` when the resource supports its protocol; otherwise use exception-safe cleanup with explicit ownership. Catch exceptions according to the boundary's recovery policy. Error messages should include safe identifiers and constraints, redacting secrets and sensitive input.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| OrgKeywordArguments | HIGH | Use keyword-only arguments for functions with 3+ parameters or boolean params |
-| OrgDeclareCloseToUse | HIGH | Declare variables immediately before their first use, not at function top |
-| OrgDefaultValuesDangerous | HIGH | Remove defaults from parameters where callers should make explicit decisions |
-| OrgSingleResponsibility | HIGH | Each function should have exactly one responsibility |
-| ErrorContextManagers | MEDIUM | Use context managers for all resource acquisition and cleanup |
-| ErrorSpecificExceptions | MEDIUM | Catch specific exception types, never bare except or except Exception |
-| ErrorMeaningfulMessages | MEDIUM | Include failed value, expected constraint, and context in error messages |
+| OrgKeywordArguments | Context-dependent | Prefer clear call sites; respect positional-only APIs and explicit project policy |
+| OrgDeclareCloseToUse | LOW policy | Keep declarations near use when that clarifies data flow |
+| OrgDefaultValuesDangerous | Context-dependent | Require explicit choices when the actual contract makes defaults unsafe |
+| OrgSingleResponsibility | LOW policy | Inspect cohesion and independent reasons to change; length alone is not harm |
+| ErrorContextManagers | MEDIUM | Ensure exception-safe cleanup of owned resources; prefer supported context managers |
+| ErrorSpecificExceptions | Context-dependent | Preserve failure signals and deliberate recovery; cleanup/reraise and narrow suppression are valid |
+| ErrorMeaningfulMessages | Context-dependent | Include safe context and constraints; redact secrets and sensitive values |
 
 
 ---
@@ -341,11 +341,11 @@ def register_user(data: dict) -> User:
 
 ### PY4.5 Use Context Managers
 
-**Impact: MEDIUM (Guarantees resource cleanup)**
+**Impact: Contextual (Missing cleanup can leak an owned resource)**
 
-Context managers ensure resources are properly released even when exceptions occur. Without them, files stay open, locks remain held, and connections leak under error conditions.
+Context managers can ensure cleanup on normal and exceptional exits when their implementation honors that contract. Correct try/finally is also valid, especially for an interface without context-manager support. Inspect who owns cleanup; closing a borrowed caller-owned resource can itself be wrong. Neither mechanism guarantees cleanup after process termination, and some context managers manage transactions without closing a connection.
 
-**Incorrect: Manual resource management**
+**Incorrect: Cleanup occurs only on success**
 
 ```python
 # File may stay open if exception occurs
@@ -421,9 +421,9 @@ class DatabaseTransaction:
 
 ### PY4.6 Catch Specific Exceptions
 
-**Impact: MEDIUM (Bare except hides bugs)**
+**Impact: Context-dependent (Handling must preserve the intended failure and recovery contract)**
 
-Catching `Exception` or using bare `except:` hides bugs by treating all failures the same. A typo causing `NameError` looks identical to the network error you intended to handle.
+A broad catch that substitutes a default for every failure can hide a programming error such as `NameError`. Broad cleanup followed by re-raising, explicit translation and deliberate boundary handling are valid when they preserve the intended failure contract. Prefer narrow recovery when only a specific expected failure should be handled.
 
 **Incorrect: Overly broad exception handling**
 
@@ -562,32 +562,34 @@ except json.JSONDecodeError as e:
 
 **OrgDeclareCloseToUse + OrgSingleResponsibility**: Single responsibility naturally solves declaration distance. When a function does one thing, its variables cluster tightly around the operations that use them. Long declaration distances are often a symptom of multi-responsibility functions.
 
-**ErrorSpecificExceptions + DefensiveProgramming dimension (DefensiveNeverSwallow)**: SpecificExceptions determines which exceptions to catch; NeverSwallow determines what to do with them. Together: catch specific types, then handle meaningfully, transform to domain exceptions, or re-raise. Never catch broad and never swallow.
+**ErrorSpecificExceptions + DefensiveProgramming dimension (DefensiveNeverSwallow)**: SpecificExceptions determines which exceptions to catch; NeverSwallow determines what to do with them. Together: catch specific types, then handle meaningfully, transform to domain exceptions, or re-raise. A broad cleanup-and-reraise boundary preserves the failure signal. Deliberate narrow suppression can implement an expected absence policy; silently losing a required failure is the defect.
 
-**ErrorContextManagers + ErrorSpecificExceptions**: Context managers handle the cleanup path; specific exceptions handle the error path. A `with` block ensures resources are released, while the except blocks inside or outside the `with` handle specific failure modes. The `__exit__` method must not suppress exceptions (`return False`); leave exception handling to explicit except blocks.
+**ErrorContextManagers + ErrorSpecificExceptions**: Context managers handle the cleanup path; specific exceptions handle the error path. A `with` block ensures resources are released, while the except blocks inside or outside the `with` handle specific failure modes. A cleanup-only `__exit__` normally propagates exceptions. A context manager may intentionally suppress specified expected failures when its documented recovery contract requires it, as with `contextlib.suppress(FileNotFoundError)`.
 
 **ErrorMeaningfulMessages + OrgKeywordArguments**: When functions use keyword arguments, the parameter names are available at the call site and in error messages. A meaningful error message can reference parameter names that match the call site, making it easy to trace from error message back to the exact call that caused it.
 
 **OrgSingleResponsibility + ErrorContextManagers**: When each function has a single responsibility, the resource lifecycle is contained within one function. This makes context manager usage straightforward -- the `with` block wraps the entire function body rather than being nested alongside unrelated logic.
 
-## Anti-Patterns (Severity Calibration)
+## Review prompts and severity calibration
 
-### CRITICAL
+The categories below group review prompts, not predetermined finding severities. First establish the applicable project/version contract, valid alternatives and concrete consequence. A style or design preference alone is LOW or omitted; HIGH/CRITICAL requires corresponding demonstrated harm.
 
-- **Bare `except:` or `except Exception:` in production code**: Catches programming errors (`NameError`, `TypeError`, `AttributeError`) alongside operational errors. Bugs become invisible. The only acceptable broad catch is in top-level error handlers that log and terminate.
-- **Boolean positional arguments**: `process(data, True, False, True)` is completely unreadable. Boolean parameters must always be keyword-only because their meaning cannot be inferred from the value.
+### Check potentially consequential contract failures
 
-### HIGH
+- **Lost failure signals**: A broad catch that silently continues after failed required work can conceal consequential errors. Establish the actual recovery contract and consequence before assigning severity. Cleanup followed by `raise`, explicit error translation and deliberate boundary handling are valid; catch width alone is not critical harm.
+- **Boolean positional arguments:** inspect ambiguity and the actual interface. Prefer keyword arguments when useful; a style preference alone is not critical harm and positional-only APIs may require the existing call.
+
+### Check behavior and workload consequences
 
 - **Function with 5+ responsibilities**: A function that validates, transforms, persists, notifies, and logs is untestable in isolation and changes for five different reasons. Extract each responsibility into a named function and compose them in an orchestrator.
 - **Variables declared 20+ lines before use**: Forces readers to hold values in working memory across unrelated code. Move declarations to the line immediately before first use.
 - **Dangerous defaults on security-sensitive parameters**: `verify_ssl=True` as a default is fine (secure by default). `verify_ssl=False` as a default is dangerous. `role="admin"` as a default is dangerous. Parameters that affect security or authorization must require explicit values.
-- **Error messages without the failing value**: `raise ValueError("Invalid input")` gives no debugging context. Always include what was received and what was expected.
+- **Unhelpful error messages:** provide safe diagnostic context. Never expose passwords, tokens or other sensitive input merely to include the failing value.
 
-### MEDIUM
+### Check maintainability and explicit policy
 
 - **Three positional parameters of the same type**: `create_rect(10, 20, 100, 200)` -- which is x, which is y, which is width? Same-type positional arguments invite ordering mistakes.
-- **Context manager not used for file operations**: `f = open(path); data = f.read(); f.close()` -- if `f.read()` raises, `f.close()` is never reached. Always use `with open(path) as f:`.
+- **Missing exception-safe file cleanup:** a close placed only after read can be skipped on failure. Use `with` or correct try/finally according to ownership; absence of `with` alone is not the defect.
 - **Overly granular exception handling**: Catching five specific exceptions with identical handling in separate except blocks. Group related exceptions: `except (ConnectionError, TimeoutError) as e:`.
 
 ## Examples

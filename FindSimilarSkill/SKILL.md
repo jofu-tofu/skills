@@ -4,12 +4,12 @@ description: Search for existing skills similar to what you want. USE WHEN user 
 compatibility: Designed for Codex and Devin (or similar agent products). Benefits from internet access for external skill discovery.
 metadata:
   author: pai
-  version: "1.0.0"
+  version: "1.0.1-rc.1"
 ---
 
 # FindSimilarSkill
 
-Searches for skills and capabilities that match what you're looking for — both inside PAI and across the community online.
+Searches available local inventories and relevant community sources for capabilities that fit the user's task. See [scope and evidence](Improvements/DiscoveryContracts.md) for evaluated limits.
 
 ## Workflow Routing
 
@@ -23,8 +23,8 @@ Searches for skills and capabilities that match what you're looking for — both
 ```
 User: "Is there a skill for resizing images?"
 → Invokes Search workflow
-→ Searches PAI internal skills via SkillSearch.ts
-→ Searches GitHub for Codex community skills
+→ Inspects the host's actual local skill inventory
+→ Searches relevant community sources when in scope
 → Returns: Internal matches + External community results
 ```
 
@@ -33,7 +33,7 @@ User: "Is there a skill for resizing images?"
 User: "Find a similar skill to what I want to build for note-taking"
 → Invokes Search workflow
 → Queries: "note-taking notes writing"
-→ Returns PAI skills + GitHub repos matching the intent
+→ Returns local skills + external sources matching the intent
 ```
 
 **Example 3: Check if skill already exists**

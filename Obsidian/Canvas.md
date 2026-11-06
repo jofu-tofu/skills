@@ -30,10 +30,13 @@ Canvas is Obsidian's infinite whiteboard for visual thinking.
 ```json
 {
   "nodes": [
-    {"id": "1", "type": "text", "x": 0, "y": 0, "width": 250, "height": 100, "text": "Content"}
+    {"id": "1", "type": "text", "x": 0, "y": 0, "width": 250, "height": 100, "text": "Content"},
+    {"id": "2", "type": "text", "x": 350, "y": 0, "width": 250, "height": 100, "text": "Related content"}
   ],
   "edges": [
     {"id": "e1", "fromNode": "1", "toNode": "2"}
   ]
 }
 ```
+
+Before delivering a `.canvas` file, parse its JSON and check that node IDs and edge IDs are unique and every edge's `fromNode` and `toNode` identify existing nodes. Then check the intended relationship and direction separately: valid endpoints alone do not establish correct meaning or a usable rendered layout.

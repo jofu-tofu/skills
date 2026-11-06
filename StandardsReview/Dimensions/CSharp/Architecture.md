@@ -8,7 +8,7 @@ C# architecture revolves around a single governing idea: **boundaries define qua
 
 Think of a well-architected C# project as a collection of small, sealed rooms connected by narrow doors. Each room (class) does one thing. The doors (interfaces) expose only what the next room needs. No room reaches into another's drawers (encapsulation), and rooms are bolted together with screws (composition), not welded into a rigid frame (inheritance). When requirements change, you unbolt and replace a single room rather than re-welding the frame.
 
-The four rules in this dimension enforce that mental model from different angles. **SingleResponsibility** ensures each class has one reason to change, so a modification to email logic never risks breaking database persistence. **InterfaceSegregation** keeps the doors narrow: a consumer that only reads users should never see write or notification methods. **PreferComposition** replaces fragile inheritance trees with pluggable behavior objects, allowing runtime flexibility and eliminating Liskov Substitution violations. **EncapsulateState** locks the drawers: internal collections and fields are hidden behind controlled methods, so callers cannot corrupt invariants.
+The four rules in this dimension enforce that mental model from different angles. **SingleResponsibility** ensures each class has one reason to change, so a modification to email logic never risks breaking database persistence. **InterfaceSegregation** keeps the doors narrow: a consumer that only reads users should never see write or notification methods. **PreferComposition** replaces fragile inheritance trees with pluggable behavior objects, allowing runtime flexibility; either design still needs to honor its behavioral contracts. **EncapsulateState** locks the drawers: internal collections and fields are hidden behind controlled methods, so callers cannot corrupt invariants.
 
 These four rules reinforce each other. A class that follows SingleResponsibility naturally produces small interfaces (InterfaceSegregation). A class assembled from composed behaviors (PreferComposition) has less internal state to protect, and what remains is easier to encapsulate (EncapsulateState). Violating any one rule weakens the others -- a god class with public mutable fields and a deep inheritance tree is the predictable result when all four fail simultaneously.
 
@@ -18,7 +18,7 @@ These four rules reinforce each other. A class that follows SingleResponsibility
 
 - Check that each class has a single, clearly statable responsibility. If you struggle to describe what a class does in one sentence without the word "and", it likely violates SingleResponsibility.
 - Look for interfaces with more than five or six methods. Large interfaces are a smell -- consumers depend on methods they never call.
-- Flag inheritance hierarchies deeper than two levels. Ask whether composition would give the same behavior with less coupling.
+- Inspect deeper inheritance for concrete coupling or substitution problems. Depth beyond two levels is a house heuristic, not a defect; composition is an alternative when it improves the actual contract.
 - Scan for public fields, public setters on collection properties, or methods that return mutable internal collections. Each is an encapsulation breach that invites external corruption.
 
 ### When Designing / Planning
@@ -32,24 +32,24 @@ These four rules reinforce each other. A class that follows SingleResponsibility
 
 - Apply the "one constructor, few dependencies" heuristic. If a constructor takes more than three or four dependencies, the class likely has too many responsibilities.
 - When two classes share behavior, extract a shared component and inject it rather than creating a base class.
-- Use `private set`, `init`, or `readonly` on every property unless external mutation is explicitly required.
-- Return `IReadOnlyList<T>` or `IReadOnlyCollection<T>` for collection properties. Never expose the backing `List<T>` directly.
+- Prefer get-only properties, `private set`, or `init` where appropriate. Use `readonly` for backing fields; it is not a general class-property modifier.
+- Expose a read-only wrapper or immutable collection through `IReadOnlyList<T>` or `IReadOnlyCollection<T>`. The interface alone does not protect a backing `List<T>` from a cast.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| SingleResponsibility | CRITICAL | Each class should have exactly one reason to change |
-| InterfaceSegregation | CRITICAL | Keep interfaces small so consumers depend only on what they use |
-| PreferComposition | CRITICAL | Assemble behavior from injected components instead of inheriting it |
-| EncapsulateState | CRITICAL | Hide internal fields and collections behind controlled access |
+| SingleResponsibility | LOW policy; impact-dependent | Each class should have exactly one reason to change |
+| InterfaceSegregation | LOW policy; impact-dependent | Keep interfaces small so consumers depend only on what they use |
+| PreferComposition | LOW policy; impact-dependent | Assemble behavior from injected components instead of inheriting it |
+| EncapsulateState | Impact-dependent | Hide internal fields and collections behind controlled access |
 
 
 ---
 
 ### CS1.1 Single Responsibility Principle
 
-**Impact: CRITICAL (Classes with multiple responsibilities break unpredictably)**
+**Impact: LOW design policy; raise only for demonstrated harm**
 
 A class should have only one reason to change. When a class handles multiple concerns, a change to one concern risks breaking unrelated functionality.
 
@@ -130,9 +130,9 @@ public class WelcomeEmailSender
 
 ### CS1.2 Interface Segregation
 
-**Impact: CRITICAL (Small interfaces enable testing and flexibility)**
+**Impact: LOW design policy; raise only for demonstrated harm**
 
-Clients shouldn't depend on methods they don't use. Large interfaces force implementers to stub unused methods and make mocking difficult.
+Clients shouldn't depend on methods they don't use. Large interfaces can burden implementations that do not provide all operations; consumers need not implement the interfaces they use. Splitting cohesive roles is a design preference, not a language requirement.
 
 **Incorrect: Fat interface**
 
@@ -150,7 +150,8 @@ public interface IUserService
     AuditLog GetAuditHistory(int userId);
 }
 
-// Component that only needs to read users must implement everything
+// Poor design choice: making a reader component implement the service.
+// A consumer can instead depend on IUserService without implementing it.
 public class UserDisplayComponent : IUserService
 {
     public User GetById(int id) { /* actual implementation */ }
@@ -216,7 +217,7 @@ public class UserDisplayComponent
 
 ### CS1.3 Prefer Composition Over Inheritance
 
-**Impact: CRITICAL (Inheritance creates fragile hierarchies)**
+**Impact: LOW design policy; raise only for demonstrated harm**
 
 Inheritance creates tight coupling between base and derived classes. Changes to base classes ripple through all descendants, and deep hierarchies become difficult to understand and modify.
 
@@ -237,12 +238,12 @@ public class Bird : Animal
 
 public class Penguin : Bird
 {
-    // Problem: Penguins can't fly but inherit from Bird
-    public override void Move() { /* walk - violates Liskov */ }
+    // A problem only if Bird.Move promises flight to callers
+    public override void Move() { /* walk - violates a flight contract, if one exists */ }
     public override void Sing() { /* ... */ }
 }
 
-// Fragile: Adding MigrateSouth() to Bird breaks Penguin
+// A flight-only MigrateSouth contract would be unsuitable for Penguin
 ```
 
 **Correct: Composition with behaviors**
@@ -291,13 +292,13 @@ var eagle = new Animal(new FlyingBehavior(), new MeatEatingBehavior());
 **When inheritance is appropriate:**
 - True "is-a" relationships with stable base classes
 - Framework requirements (Controller, DbContext)
-- Sealed classes that won't be extended further
+- Sealing an appropriate derived class can prevent further extension; a sealed class cannot itself be a base class
 
 ---
 
 ### CS1.4 Encapsulate State
 
-**Impact: CRITICAL (Exposed internals invite misuse)**
+**Impact: Depends on the exposed invariants and actual misuse risk**
 
 Public fields and settable properties expose internal state, allowing callers to put objects in invalid states. Encapsulation protects invariants and makes changes safe.
 
@@ -332,7 +333,7 @@ public class BankAccount
 
     public decimal Balance { get; private set; }
 
-    public IReadOnlyList<Transaction> Transactions => _transactions;
+    public IReadOnlyList<Transaction> Transactions => _transactions.AsReadOnly();
 
     public void Deposit(decimal amount)
     {
@@ -355,7 +356,8 @@ public class BankAccount
     }
 }
 
-// State changes only through controlled methods
+// Collection membership changes only through controlled methods.
+// Transaction elements must also be immutable or independently protected.
 var account = new BankAccount();
 account.Deposit(100);  // Valid operation
 // account.Balance = -1000;  // Won't compile - private set
@@ -364,7 +366,7 @@ account.Deposit(100);  // Valid operation
 
 **Guidelines:**
 - Use `private set` or `init` for properties that shouldn't change externally
-- Return `IReadOnlyList<T>` or `IReadOnlyCollection<T>` for collections
+- Return a wrapper or immutable collection through read-only interfaces. `AsReadOnly()` is a live view; use a copy for snapshot membership. Neither makes mutable elements immutable.
 - Validate all inputs in mutation methods
 
 
@@ -375,19 +377,23 @@ account.Deposit(100);  // Valid operation
 - **InterfaceSegregation + PreferComposition**: Narrow interfaces become the injection points for composed behaviors. A class accepts `IMovementBehavior` rather than a concrete `Bird` base class, enabling runtime flexibility.
 - **All four together**: A class with one responsibility, narrow interface contracts, composed dependencies, and encapsulated state is inherently testable, loosely coupled, and resilient to change.
 
-## Anti-Patterns (Severity Calibration)
+## Review prompts and severity calibration
 
-### CRITICAL
+The categories below group review prompts, not predetermined finding severities. First establish the applicable project/version contract, valid alternatives and concrete consequence. A style or design preference alone is LOW or omitted; HIGH/CRITICAL requires corresponding demonstrated harm.
 
-- **God class**: A single class handling validation, persistence, notification, and reporting. Every change to any concern risks breaking the others. Refactor immediately by extracting each responsibility into its own class.
+The architectural thresholds above are house heuristics, not language guarantees. Method counts, dependency counts, and inheritance depth alone are low-severity design preferences. Apply HIGH/CRITICAL only when a concrete contract breach and corresponding harm are established.
+
+### Potentially CRITICAL when invariants or data are actually compromised
+
+- **Multiple responsibilities**: Consider extracting independently changing concerns. This is a design heuristic, not a critical defect by itself.
 - **Publicly mutable collections**: `public List<Order> Orders { get; set; }` allows callers to replace or clear the collection. Internal invariants (ordering, capacity limits) are unenforceable.
 
-### HIGH
+### Check behavior and workload consequences
 
-- **Deep inheritance hierarchies**: Three or more levels of inheritance create fragile chains where base class changes cascade unpredictably. Extract shared behavior into components and compose.
+- **Deep inheritance hierarchies**: Review coupling and behavioral contracts; three levels alone do not demonstrate a high-severity defect. Composition is the house default when it simplifies those contracts.
 - **Fat interfaces**: An interface with ten methods forces every implementer and mock to address all ten, even when only two are relevant. Split into focused role interfaces.
 
-### MEDIUM
+### Check maintainability and explicit policy
 
 - **Premature abstraction**: Creating interfaces and composition layers for code that has a single implementation and no foreseeable variation. This adds indirection without benefit. Wait for the second use case before abstracting.
 - **Anemic domain models**: Classes that are pure data bags with no behavior, where all logic lives in external service classes. Some state and its directly related behavior should live together.
@@ -430,7 +436,7 @@ public class ShoppingCart
 {
     private readonly List<CartItem> _items = [];
 
-    public IReadOnlyList<CartItem> Items => _items;
+    public IReadOnlyList<CartItem> Items => _items.AsReadOnly();
     public decimal Total => _items.Sum(i => i.Price * i.Quantity);
 
     public void AddItem(CartItem item)
@@ -460,3 +466,11 @@ public class ShoppingCart
 - C# Coding Guidelines (csharpcodingguidelines.com) -- AV1000 series (Type Design)
 - .NET Framework Design Guidelines -- Type Design Guidelines
 - Robert C. Martin, *Clean Architecture* -- Single Responsibility Principle, Dependency Inversion
+
+### Primary verification references
+
+- https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ireadonlylist-1?view=net-10.0
+- https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.asreadonly?view=net-10.0
+- https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/readonly
+- https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed
+- https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/basic-concepts

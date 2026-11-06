@@ -344,7 +344,10 @@ export function computeSignals(text: string, context: TermContext): Signals {
 // ---------- Gates ----------
 
 function normalizedNumbers(text: string): string[] {
-  const numbers = (text.match(/\d[\d,.]*%?/g) ?? []).map((number: string) => number.replace(/,/g, "").replace(/\.$/, ""));
+  // Keep unary signs: -5 and 5 are different quantities. A hyphen after a digit
+  // is a range separator, not the sign of its second endpoint (5-10 vs 5–10).
+  const numbers = (text.match(/(?<![\p{L}\p{N}])[+\-−]?(?:\d[\d,.]*|\.\d+)(?:[eE][+\-−]?\d+)?%?|(?:\d[\d,.]*|\.\d+)(?:[eE][+\-−]?\d+)?%?/gu) ?? [])
+    .map((number: string) => number.replaceAll("−", "-").replace(/^\+/, "").replace(/^(-?)\./, (_, sign) => `${sign}0.`).replace(/[eE]\+?/, "e").replace(/,/g, "").replace(/\.$/, ""));
   for (const token of text.toLowerCase().match(/[a-z]+/g) ?? []) if (NUMBER_WORDS[token]) numbers.push(NUMBER_WORDS[token]);
   return numbers.sort();
 }

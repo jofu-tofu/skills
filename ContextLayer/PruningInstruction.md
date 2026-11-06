@@ -19,8 +19,9 @@ the code, and it belongs at this scope (project-wide rule → root CLAUDE.md; WH
 → inline comment or ADR; inferable from code → nowhere).
 
 **Remove** any entry that fails the falsifiability test: if removing it would not change
-how an agent acts here, remove it. If a convention here conflicts with the codebase,
-the codebase wins — update this file, do not work around it. Prune aggressively.
+how an agent acts here, remove it. Correct descriptive convention claims using source
+evidence. Preserve binding user requirements even when code violates them; record that
+conflict as work to resolve rather than rewriting the requirement to match the defect.
 
 **Track follow-up work:** After modifying files, evaluate whether changes create incomplete
 work, shift a phase status, or break an assumption tracked elsewhere. If so, create a task

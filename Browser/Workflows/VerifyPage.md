@@ -25,9 +25,9 @@ Verify that a page renders correctly and surface browser-side failures with evid
 
 3. **Check a target selector when the task names one**
    ```bash
-   bun run examples/verify-page.ts <url> "<selector>"
+   bun run Tools/Browse.ts check "<selector>"
    ```
-   Use this when the user cares about a specific heading, button, form, or region.
+   Check the current session when the user cares about a specific heading, button, form, or region. The default requires one visible target; use `attached` only when the request needs DOM presence rather than visibility. Missing, hidden or ambiguous targets must not be reported as verified. Do not open a second browser or reload away an already-reached interaction state.
 
 4. **Drill deeper only where needed**
    ```bash

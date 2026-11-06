@@ -1,65 +1,65 @@
 # Async Patterns -- C\#
 
-> Async/await in C# exists to release threads during I/O waits; misusing it for CPU-bound work, mixing it with synchronous blocking, or ignoring cancellation turns a concurrency tool into a source of deadlocks and resource waste.
+> Async/await composes asynchronous operations. Use asynchronous I/O to avoid blocking and deliberate CPU offloading for responsiveness; assess blocking and cancellation against the actual execution context.
 
 ## Mental Model
 
-The async/await machinery in C# is fundamentally about **thread efficiency during waiting**. When a method hits `await _httpClient.GetAsync(url)`, the thread is released back to the thread pool while the network request completes. No thread is consumed during the wait. When the response arrives, a thread picks up execution from where it left off. This is the entire value proposition: under load, a server can handle thousands of concurrent I/O operations without thousands of blocked threads.
+The async/await machinery in C# is fundamentally about **thread efficiency during waiting**. If an awaited I/O task is incomplete, the method suspends without blocking its caller. Continuation scheduling depends on the awaiter and current context; an already-completed await can continue synchronously. Async I/O need not dedicate a blocked thread to the wait. This is the entire value proposition: under load, a server can handle thousands of concurrent I/O operations without thousands of blocked threads.
 
-The model breaks down in three predictable ways, and the four rules in this dimension address each failure mode. First, developers apply async to **CPU-bound work** where no waiting occurs. Wrapping a computation in `Task.FromResult` or `Task.Run` inside an async method adds overhead without releasing any thread during actual work. **AsyncForIoBound** draws the line: async is for database queries, HTTP calls, and file operations -- not for number crunching or data transformation.
+The model breaks down in three predictable ways, and the four rules in this dimension address each failure mode. First, developers apply async to **CPU-bound work** where no waiting occurs. `Task.FromResult(Compute())` computes synchronously before wrapping the result. `Task.Run` moves CPU work to a pool thread and can preserve UI responsiveness, though it does not make CPU work free. **AsyncForIoBound** prefers a synchronous computational core with deliberate offloading when the application needs it.
 
-Second, developers **mix async and sync** by calling `.Result`, `.Wait()`, or `.GetAwaiter().GetResult()` on a task from synchronous code. In environments with a synchronization context (ASP.NET pre-Core, WPF, WinForms), this creates a deadlock: the calling thread blocks waiting for the task, while the task is waiting for the calling thread to become available so it can resume on the sync context. **NoMixingAsyncSync** enforces the principle of "async all the way" -- once a call chain goes async, every caller must also be async up to the entry point.
+Second, developers **mix async and sync** by calling `.Result`, `.Wait()`, or `.GetAwaiter().GetResult()` on a task from synchronous code. In environments with a synchronization context (ASP.NET pre-Core, WPF, WinForms), this can deadlock when completion requires a continuation on the blocked context. Already-completed tasks and continuations independent of that context do not have this particular cycle. **NoMixingAsyncSync** enforces the principle of "async all the way" -- prefer task-aware callers up to the entry point; forwarding a Task does not require the async keyword.
 
-Third, long-running operations ignore **cancellation tokens**. A user navigates away or a request times out, but the server continues processing a report nobody wants. **CancellationTokens** mandates that every async method accepts a `CancellationToken`, passes it to all inner async calls, and checks it in loops.
+Third, long-running operations ignore **cancellation tokens**. A user navigates away or a request times out, but the server continues processing a report nobody wants. **CancellationTokens** recommends a token for cancellable operations, propagation to supporting dependencies, and checks during long loops.
 
-Fourth, **library code captures the synchronization context** unnecessarily. When a library awaits without `ConfigureAwait(false)`, it insists on resuming on the original context, which can deadlock when that context is blocked. **ConfigureAwaitContext** establishes the rule: library code always uses `ConfigureAwait(false)`; application code (which needs UI thread access or request context) omits it.
+Fourth, **library code captures the synchronization context** unnecessarily. An incomplete Task await normally schedules its continuation through an applicable SynchronizationContext or non-default TaskScheduler. Blocking that executor can deadlock the chain. **ConfigureAwaitContext** establishes the rule: context-independent library awaits prefer `ConfigureAwait(false)`; code requiring a particular context preserves it. ASP.NET Core has no custom synchronization context by default.
 
-These four rules form a complete async discipline. Apply async only to I/O. Never block on it from sync. Always support cancellation. And configure the context correctly based on whether you are writing library or application code.
+These four rules form a complete async discipline. Use asynchronous I/O and deliberate CPU offloading. Prefer awaiting over blocking. Support cancellation where operations can honor it. And configure the context correctly based on whether you are writing library or application code.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-- Check every `async` method for what it actually awaits. If the awaited operations are all CPU-bound computations wrapped in `Task.Run` or `Task.FromResult`, the method should not be async.
-- Search for `.Result`, `.Wait()`, and `.GetAwaiter().GetResult()` in the codebase. Each is a potential deadlock. Verify that they only appear in console application entry points or other contexts without a synchronization context.
+- Inspect CPU wrappers: `Task.FromResult` does not offload; `Task.Run` may intentionally preserve responsiveness. Prefer a synchronous core with caller-controlled offloading as house policy.
+- Search for `.Result`, `.Wait()`, and `.GetAwaiter().GetResult()` in the codebase. Each is a potential deadlock. Assess captured contexts, schedulers, locks, and pool starvation; absence of a synchronization context alone does not prove blocking is safe.
 - Verify that every async method accepting a `CancellationToken` actually uses it: passing it to inner async calls and checking `ThrowIfCancellationRequested()` in loops.
-- In library or shared code, confirm that every `await` is followed by `.ConfigureAwait(false)`. In ASP.NET Core application code, `ConfigureAwait` is unnecessary (no sync context by default).
+- In context-independent library or shared code, prefer `.ConfigureAwait(false)` for supported awaits. In ASP.NET Core application code, `ConfigureAwait` is unnecessary (no sync context by default).
 
 ### When Designing / Planning
 
-- Identify which operations in your feature are I/O-bound (database, HTTP, file system) versus CPU-bound (calculations, transformations). Only the I/O-bound operations should be async.
-- Plan the async chain from the entry point (controller action, event handler) down to the lowest I/O call. Every method in the chain must be async. Do not plan for synchronous wrappers around async internals.
-- Include `CancellationToken` in every service interface method signature from the start. Adding it later requires changing every implementation and caller.
+- Identify which operations in your feature are I/O-bound (database, HTTP, file system) versus CPU-bound (calculations, transformations). Use asynchronous I/O; offload CPU work only when responsiveness or scheduling requirements justify it.
+- Plan the async chain from the entry point (controller action, event handler) down to the lowest I/O call. Each caller must handle task completion appropriately; a forwarding method can return a Task without the `async` keyword. Do not plan for synchronous wrappers around async internals.
+- Include `CancellationToken` in service methods whose operations support cancellation. Adding it later requires changing every implementation and caller.
 - Decide whether code is library-level (shared across projects/contexts) or application-level. This determines `ConfigureAwait` usage.
 
 ### When Implementing
 
 - Suffix async methods with `Async`: `GetUserAsync`, `SaveOrderAsync`. This convention signals to callers that they must await or handle the Task.
-- Accept `CancellationToken ct` as the last parameter. Pass it to every `async` call: `await _db.SaveChangesAsync(ct)`.
+- Accept `CancellationToken ct` as the last parameter for cancellable operations. Pass it to supporting calls in that scope: `await _db.SaveChangesAsync(ct)`.
 - In loops that process items with async calls, add `ct.ThrowIfCancellationRequested()` at the beginning of each iteration.
 - For CPU-bound work that must run off the calling thread, let the caller use `Task.Run(() => CpuBoundMethod())` rather than hiding `Task.Run` inside the method.
-- In library code, chain `.ConfigureAwait(false)` on every await expression. In ASP.NET Core controllers and middleware, omit it.
+- In context-independent library code, prefer `.ConfigureAwait(false)` on supported awaits. In ASP.NET Core controllers and middleware, omit it.
 - Never return `async void` except in event handlers. Use `async Task` so callers can observe exceptions and await completion.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| AsyncForIoBound | HIGH | Reserve async/await for I/O operations; keep CPU work synchronous |
-| NoMixingAsyncSync | HIGH | Never call .Result or .Wait() on tasks from synchronous code |
-| CancellationTokens | HIGH | Accept, propagate, and check cancellation tokens in all async paths |
-| ConfigureAwaitContext | HIGH | Use ConfigureAwait(false) in library code to prevent context capture |
+| AsyncForIoBound | Impact-dependent | Use async I/O and intentional CPU offloading; prefer a synchronous CPU core |
+| NoMixingAsyncSync | Impact-dependent | Prefer awaiting; assess exceptional synchronous bridges for completion dependencies |
+| CancellationTokens | Impact-dependent | Honor supported cancellation according to the operation contract |
+| ConfigureAwaitContext | LOW policy; impact-dependent | Use ConfigureAwait(false) in library code to prevent context capture |
 
 
 ---
 
-### CS3.1 Async for I/O-Bound Operations Only
+### CS3.1 Async I/O and Deliberate CPU Offloading
 
-**Impact: HIGH (Async releases threads during waits, not CPU work)**
+**Impact: Depends on responsiveness and resource cost; CPU offloading can be valid**
 
-Async/await is designed for I/O-bound operations where the thread waits for external resources. Using async for CPU-bound work adds overhead without benefit - use `Task.Run` instead.
+Async/await supports asynchronous composition, including awaiting CPU work scheduled with `Task.Run`. Asynchronous I/O avoids blocked waits; CPU work still consumes a thread. Choose offloading for responsiveness, not automatic throughput gains.
 
-**Incorrect: Async for CPU-bound work**
+**CPU wrappers: needless wrapping versus deliberate offloading**
 
 ```csharp
 // Wasteful: async for computation
@@ -69,10 +69,10 @@ public async Task<int> CalculatePrimeAsync(int n)
     return await Task.FromResult(CalculatePrime(n));
 }
 
-// Worse: Wrapping sync in Task.Run inside async method
+// Valid for responsiveness; house policy prefers caller-controlled offloading
 public async Task<Report> GenerateReportAsync(Data data)
 {
-    // This just moves CPU work to thread pool, defeating async purpose
+    // Moves CPU work to a pool thread so the caller can remain responsive
     return await Task.Run(() => GenerateCpuIntensiveReport(data));
 }
 ```
@@ -117,7 +117,7 @@ var report = await Task.Run(() => service.GenerateReport(data));
 - File I/O
 - Network calls
 
-**CPU-bound (don't use async):**
+**CPU-bound (prefer synchronous core; await deliberate offloading when needed):**
 - Calculations
 - Data transformations
 - Image processing
@@ -127,25 +127,24 @@ var report = await Task.Run(() => service.GenerateReport(data));
 
 ### CS3.2 Never Mix Async and Sync
 
-**Impact: HIGH (Task.Wait causes deadlocks in sync contexts)**
+**Impact: HIGH when blocking prevents completion or exhausts resources**
 
-Calling `.Result` or `.Wait()` on a task from synchronous code blocks the thread. In contexts with a synchronization context (UI, ASP.NET), this causes deadlocks.
+Calling `.Result` or `.Wait()` on a task from synchronous code blocks the thread. In UI or classic ASP.NET contexts this can deadlock if completion needs that blocked context. ASP.NET Core lacks such a context by default, but blocking can still waste threads or contribute to pool starvation.
 
 **Incorrect: Blocking on async from sync code**
 
 ```csharp
-// Deadlock in ASP.NET/UI: sync context captured, then blocked
+// Can deadlock in classic ASP.NET/UI if completion needs the blocked context
 public string GetData()
 {
-    // DEADLOCK: Thread blocks waiting for task
-    // Task is waiting for thread to continue (sync context)
+    // Blocks waiting for task; deadlock if its continuation needs this context
     return GetDataAsync().Result;
 }
 
 public void ProcessData()
 {
     // Same problem with .Wait()
-    ProcessDataAsync().Wait();  // Deadlock
+    ProcessDataAsync().Wait();  // Deadlock risk if completion needs this context
 }
 
 // Also problematic: GetAwaiter().GetResult() can deadlock
@@ -173,7 +172,8 @@ public async Task ProcessDataAsync()
 // If you must call async from sync (rare), use proper patterns
 public string GetDataSync()
 {
-    // Only use in console apps or when no sync context exists
+    // Exceptional bridge: requires independent completion, no shared-lock cycle,
+    // and acceptable thread-pool cost; not a general deadlock cure
     return Task.Run(async () => await GetDataAsync()).Result;
 }
 ```
@@ -195,11 +195,10 @@ public static async Task Main(string[] args)
 }
 ```
 
-**When blocking is acceptable:**
-- Console applications without sync context
-- Test methods (with caution)
-- Truly synchronous APIs that can't be changed
-- Use `ConfigureAwait(false)` to avoid capturing context
+**Exceptional blocking boundaries:**
+- Prefer async entry points and async tests.
+- If an unchangeable synchronous API needs a bridge, establish that completion does not require a blocked context, scheduler, or held lock, and assess pool starvation.
+- `ConfigureAwait(false)` affects the await where it is applied; it cannot retroactively fix context capture inside another method.
 
 ---
 
@@ -207,7 +206,7 @@ public static async Task Main(string[] args)
 
 **Impact: HIGH (Long operations need graceful cancellation)**
 
-Cancellation tokens allow callers to abort long-running operations. Ignoring tokens wastes resources and leaves users waiting for operations they've already abandoned.
+Cancellation tokens request cooperative cancellation; they do not forcibly abort work. Ignoring tokens wastes resources and leaves users waiting for operations they've already abandoned.
 
 **Incorrect: Ignoring cancellation tokens**
 
@@ -284,17 +283,17 @@ public List<Result> ProcessItems(IEnumerable<Item> items, CancellationToken ct)
 
 **Guidelines:**
 - Accept `CancellationToken ct` as last parameter
-- Pass token to all async method calls
+- Pass the token to operations that support cancellation and belong to the cancellable scope
 - Check `ThrowIfCancellationRequested()` in loops
-- Use `ct.Register()` for cleanup on cancellation
+- Use `ct.Register()` only when an API requires a cancellation callback; dispose registrations appropriately and use `finally`/disposal for normal resource cleanup
 
 ---
 
 ### CS3.4 ConfigureAwait Correctly
 
-**Impact: HIGH (Library code shouldn't capture sync context)**
+**Impact: LOW policy alone; higher when context dependence causes concrete harm**
 
-By default, `await` captures the synchronization context and resumes on it. Library code should use `ConfigureAwait(false)` to avoid capturing context, preventing deadlocks and improving performance.
+For Task awaits, the default scheduling considers a custom SynchronizationContext, then a non-default TaskScheduler. Context-independent libraries should prefer `ConfigureAwait(false)` to avoid that scheduling dependency. It neither guarantees a thread switch nor suppresses ExecutionContext (including AsyncLocal data), and it is not a universal deadlock cure.
 
 **Incorrect: Library code captures context**
 
@@ -305,7 +304,7 @@ public class DataService  // Shared library
     public async Task<Data> GetDataAsync()
     {
         // Captures sync context - can cause deadlock when called from UI
-        var response = await _httpClient.GetAsync(url);
+        using var response = await _httpClient.GetAsync(url);
         var content = await response.Content.ReadAsStringAsync();
         return Parse(content);
     }
@@ -314,7 +313,7 @@ public class DataService  // Shared library
 // UI code calls library
 public void Button_Click()
 {
-    // Deadlock: UI thread blocked, awaiter wants to resume on UI thread
+    // Can deadlock if an incomplete await captured this blocked UI context
     var data = _dataService.GetDataAsync().Result;
 }
 ```
@@ -327,7 +326,7 @@ public class DataService  // Shared library
 {
     public async Task<Data> GetDataAsync()
     {
-        var response = await _httpClient.GetAsync(url)
+        using var response = await _httpClient.GetAsync(url)
             .ConfigureAwait(false);
         var content = await response.Content.ReadAsStringAsync()
             .ConfigureAwait(false);
@@ -335,8 +334,8 @@ public class DataService  // Shared library
     }
 }
 
-// Application code (UI, ASP.NET) can omit ConfigureAwait
-// because it DOES need to resume on the sync context
+// UI code retains its synchronization context to update controls.
+// ASP.NET Core has no custom synchronization context by default.
 public async void Button_Click()
 {
     var data = await _dataService.GetDataAsync();
@@ -349,49 +348,41 @@ public async void Button_Click()
 
 | Code Type | ConfigureAwait |
 |-----------|---------------|
-| Library/shared code | Always use `ConfigureAwait(false)` |
+| Context-independent library/shared code | Prefer `ConfigureAwait(false)`; preserve a context when the contract requires it |
 | ASP.NET Core | Not needed (no sync context by default) |
 | UI applications | Omit when you need UI thread, use `false` otherwise |
-| Console applications | Not needed (no sync context) |
+| Console applications | Usually unnecessary unless a custom context/scheduler is installed |
 
-**Modern alternative - SuppressFlow:**
+**ExecutionContext flow is a separate mechanism:**
 
-```csharp
-// For entire async method, suppress flow
-[MethodImpl(MethodImplOptions.AggressiveInlining)]
-public async ValueTask<Data> GetDataAsync()
-{
-    await using var _ = ExecutionContext.SuppressFlow();
-    // All awaits in this method won't capture context
-    var response = await _httpClient.GetAsync(url);
-    return Parse(await response.Content.ReadAsStringAsync());
-}
-```
+`ExecutionContext.SuppressFlow()` returns an `AsyncFlowControl` implementing synchronous `IDisposable`, not `IAsyncDisposable`; `await using` is invalid. It does not replace `ConfigureAwait(false)`. If suppression is deliberately needed when scheduling work, restore it synchronously on the originating thread before awaiting the scheduled task. Do not span an await with the suppression scope.
 
 
 ## Rule Interactions
 
-- **AsyncForIoBound + NoMixingAsyncSync**: When async is correctly reserved for I/O, the temptation to wrap sync-over-async disappears. Developers who incorrectly make CPU methods async often create the blocking calls that NoMixingAsyncSync forbids.
+- **AsyncForIoBound + NoMixingAsyncSync**: Await I/O and deliberately offloaded CPU work rather than blocking for either. CPU offloading can be appropriate for UI responsiveness.
 - **NoMixingAsyncSync + ConfigureAwaitContext**: Deadlocks from `.Result` occur because the awaiter tries to resume on a captured sync context while the thread owning that context is blocked. `ConfigureAwait(false)` mitigates (but does not eliminate) this by not capturing the context. Both rules together provide defense in depth.
-- **CancellationTokens + AsyncForIoBound**: Cancellation is most valuable in I/O-bound chains where operations involve external latency. A cancelled HTTP request stops the network wait; cancelling a CPU computation inside `Task.Run` requires cooperative checks via the same token mechanism.
-- **All four together**: A well-structured async method awaits only I/O, propagates cancellation, configures context correctly, and never calls itself synchronously. This combination eliminates deadlocks, resource waste, and unresponsive operations.
+- **CancellationTokens + AsyncForIoBound**: Cancellation is most valuable in I/O-bound chains where operations involve external latency. An HTTP operation that honors the token can stop its local wait; cancellation does not roll back remote effects; cancelling a CPU computation inside `Task.Run` requires cooperative checks via the same token mechanism.
+- **All four together**: A well-structured async method awaits its asynchronous work, propagates supported cancellation, and chooses context behavior deliberately. These practices reduce risks but do not eliminate lock cycles, resource limits, or uncooperative work.
 
 ## Anti-Patterns (Severity Calibration)
 
+Policy deviations alone are LOW severity. Escalate based on demonstrated blocking, cancellation, or exception consequences; overhead claims need measurement.
+
 ### CRITICAL
 
-- **Deadlock from sync-over-async**: `var result = GetDataAsync().Result;` in ASP.NET or UI code. The thread blocks, the continuation cannot resume, and the application hangs permanently. This is a production outage waiting to happen.
-- **async void in non-event-handler methods**: Exceptions from `async void` methods crash the process because they cannot be observed or caught by callers.
+- **Deadlock from sync-over-async**: A blocked UI/classic ASP.NET context can prevent a required continuation from completing. Establish that dependency before claiming a deadlock; `.Result` alone is not proof.
+- **async void in non-event-handler methods**: Callers cannot await completion or catch asynchronous exceptions through a returned task. Unhandled exceptions can terminate the process depending on the host/context.
 
 ### HIGH
 
 - **Ignoring CancellationToken parameter**: Accepting a token but never passing it to inner calls or checking it in loops. The operation runs to completion regardless of cancellation, wasting server resources and delaying responses.
-- **Wrapping CPU-bound work in Task.FromResult**: `return await Task.FromResult(ComputeHash(data))` adds async overhead to purely synchronous computation with zero benefit.
+- **Wrapping CPU-bound work in Task.FromResult**: The computation remains synchronous. Simplify if the task-shaped API is unnecessary; overhead alone is a LOW preference without measurements.
 
-### MEDIUM
+### LOW policy unless concrete harm is established
 
-- **Missing ConfigureAwait(false) in library code**: Not an immediate crash in ASP.NET Core (no sync context), but creates deadlock risk when the library is consumed from WPF, WinForms, or legacy ASP.NET.
-- **Unnecessary async method wrapping**: An async method that does nothing but await a single inner call adds a state machine allocation for no benefit. Return the Task directly instead: `return _inner.GetAsync(id, ct)`.
+- **Missing ConfigureAwait(false) in context-independent library code**: Review the intended contexts and completion dependencies. Its absence is not itself a deadlock, including in UI consumers that await correctly.
+- **Unnecessary async method wrapping**: Consider returning the inner Task directly when equivalent. Allocation depends on completion/runtime, and removing await can change exception timing or disposal/try-finally scope; this is not automatically a defect.
 
 ## Examples
 
@@ -458,3 +449,9 @@ var report = await Task.Run(() => _generator.GenerateReport(data));
 - Stephen Cleary, *Concurrency in C# Cookbook* -- async/await best practices
 - C# Coding Guidelines (csharpcodingguidelines.com) -- AV2235 (Async patterns)
 - .NET documentation -- ConfigureAwait FAQ
+
+### Primary verification references
+
+- https://devblogs.microsoft.com/dotnet/configureawait-faq/
+- https://learn.microsoft.com/en-us/dotnet/api/system.threading.asyncflowcontrol?view=net-10.0
+- https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios

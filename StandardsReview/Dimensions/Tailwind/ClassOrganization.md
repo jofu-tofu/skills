@@ -6,15 +6,15 @@
 
 Tailwind markup can accumulate dozens of utility classes on a single element. Without organizational discipline, class lists become unreadable walls of text where conflicting properties hide in plain sight and merge conflicts occur on every PR. The solution operates at three levels: automated sorting, conflict prevention, and modifier hygiene.
 
-Automated sorting via `prettier-plugin-tailwindcss` eliminates all ordering debates. The plugin enforces a consistent order following the box model: layout and positioning first, then box model properties, borders, backgrounds, typography, and finally decorative utilities. The order is intentionally not customizable, applying the same "one true format" philosophy as Prettier itself. With sorting automated, developers never argue about whether `flex` comes before `p-4`, and merge conflicts on class reordering disappear.
+Automated sorting via `prettier-plugin-tailwindcss` eliminates all ordering debates. The plugin enforces a consistent order following the box model: layout and positioning first, then box model properties, borders, backgrounds, typography, and finally decorative utilities. The order is intentionally not customizable, applying the same "one true format" philosophy as Prettier itself. With sorting automated, developers never argue about whether `flex` comes before `p-4`, and unnecessary class reordering is reduced.
 
-Conflict prevention addresses a subtler problem. When two utilities target the same CSS property (like `p-3 p-4` or `text-sm text-lg`), the winning value depends on CSS source order, not the order in the class attribute. This means the result is unpredictable from reading the markup alone. The `eslint-plugin-tailwindcss/no-contradicting-classname` rule catches these statically. The fix is always to keep exactly one utility per CSS property on each element.
+Conflict prevention addresses a subtler problem. When two utilities target the same CSS property (like `p-3 p-4` or `text-sm text-lg`), the winning value depends on CSS source order, not the order in the class attribute. The class-list order alone therefore does not tell you the winner. The `eslint-plugin-tailwindcss/no-contradicting-classname` rule catches these statically. Remove accidental same-scope conflicts; breakpoint/state overrides and deliberate shorthand-plus-longhand composition are valid.
 
-Shorthand utilities reduce class count without losing expressiveness. When horizontal margins are equal, `mx-4` replaces `ml-4 mr-4`. The `eslint-plugin-tailwindcss/enforces-shorthand` rule automates this check. The `!important` modifier (`!`) should be treated as a last resort, used only to override third-party styles you cannot control. In Tailwind v4, cascade layers handle specificity correctly, making `!important` even less necessary.
+Shorthand utilities reduce class count without losing expressiveness. When horizontal margins are equal, `mx-4` replaces `ml-4 mr-4`. The `eslint-plugin-tailwindcss/enforces-shorthand` rule automates this check. The `!important` modifier (`!`) should be treated as a last resort, normally reserved for third-party overrides under the house policy. In v4, account for cascade-layer priority as well as specificity before choosing an override.
 
 State modifiers (`group`, `peer`) enable pure-CSS parent-child and sibling-state interactions without JavaScript. The `group` modifier on a parent lets children react to the parent's hover, focus, or other states. When groups nest, named groups (`group/card`, `group/item`) disambiguate which ancestor is being targeted. The `peer` modifier works similarly for siblings, but has a strict DOM ordering requirement: the peer element must appear before the element that reacts to it, because it relies on the CSS `~` general sibling combinator.
 
-For layout, the choice between flexbox and grid should follow dimensionality: flex for one-dimensional flows (nav bars, button groups), grid for two-dimensional layouts (card grids, page layouts). The `gap` property is universally preferred over `space-x`/`space-y` because gap works correctly with wrapping, does not use margin hacks, and has no issues with conditionally rendered children.
+For layout, the choice between flexbox and grid should follow dimensionality: flex for one-dimensional flows (nav bars, button groups), grid for two-dimensional layouts (card grids, page layouts). Prefer `gap` for grid and wrapping flex layouts. Margin-based `space-x`/`space-y` remains useful for simple linear stacks; conditional rendering alone does not make it invalid.
 
 ## Consumer Guide
 
@@ -28,16 +28,20 @@ Establish tooling requirements early: `prettier-plugin-tailwindcss` for sorting,
 
 ### When Implementing
 
-Install and configure `prettier-plugin-tailwindcss` so class sorting happens on save. Use shorthand utilities wherever axes are symmetric. Never place two utilities that target the same CSS property on one element. Use `group` on parent elements and `group-hover:`/`group-focus:` on children for state propagation. Name groups when nesting: `group/card` on the outer container, `group/item` on the inner. Place `peer` elements before their styled siblings. Use `flex` for one-dimensional layouts and `grid` for two-dimensional ones. Default to `gap-*` for spacing children in both flex and grid containers.
+Install and configure `prettier-plugin-tailwindcss` so class sorting happens on save. Use shorthand utilities wherever axes are symmetric. Avoid accidental same-scope conflicts; allow intentional variants and shorthand/longhand overrides. Use `group` on parent elements and `group-hover:`/`group-focus:` on children for state propagation. Name groups when nesting: `group/card` on the outer container, `group/item` on the inner. Place `peer` elements before their styled siblings. Use `flex` for one-dimensional layouts and `grid` for two-dimensional ones. Default to `gap-*` for spacing children in both flex and grid containers.
+
+## Applicability
+
+Sorting, shorthand, flex/grid selection and override restrictions are house preferences unless a concrete layout failure is shown. Keep valid established layouts; do not infer functional severity from stylistic differences. Version-match optional lint/format plugins before relying on their diagnostics.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
 | AutomaticClassSorting | HIGH | Use prettier-plugin-tailwindcss for consistent class ordering |
-| NoContradictingClasses | HIGH | Never apply two utilities targeting the same CSS property |
+| NoContradictingClasses | HIGH | Avoid accidental conflicting values in the same variant scope |
 | UseShorthandUtilities | MEDIUM | Prefer axis/all-sides shorthands to reduce class count |
-| ImportantUsageSparingly | MEDIUM | Use ! modifier only for third-party style overrides |
+| ImportantUsageSparingly | MEDIUM | Use ! sparingly; third-party-only restriction is house policy |
 | GroupModifierForParentState | HIGH | Use group/group-hover for parent-child state styling |
 | NamedGroupsForNesting | HIGH | Use named groups (group/card) when nesting group contexts |
 | PeerModifierOrdering | HIGH | Peer element must come before styled siblings in DOM |
@@ -69,9 +73,9 @@ Install `prettier-plugin-tailwindcss` to automatically sort utility classes in a
 
 ### TW2.2 Never Apply Conflicting Utility Classes
 
-**Impact: HIGH (contradicting classes produce unpredictable results)**
+**Impact: HIGH (accidental conflicts obscure the effective style)**
 
-Never apply two utilities that set the same CSS property to different values on the same element. The winning class depends on CSS source order, not class attribute order, making the result unpredictable. The `eslint-plugin-tailwindcss/no-contradicting-classname` rule catches this automatically.
+Avoid accidental competing utilities in the same variant scope. With equal cascade priority, CSS source order decides the winner, not class-attribute order; a fixed stylesheet is deterministic. Responsive/state overrides (`p-2 md:p-4`) and deliberate shorthand/longhand composition (`p-4 pt-2`) are valid. A compatible configured lint rule can catch some accidental conflicts.
 
 **Incorrect: conflicting padding values**
 
@@ -111,7 +115,7 @@ Use axis-based (`mx-`, `py-`) or all-sides (`p-`, `m-`) utilities when values ar
 
 **Impact: MEDIUM (overusing ! creates specificity wars)**
 
-Tailwind's `!` modifier (e.g., `!text-red-500`) maps to CSS `!important`. Use it only to override third-party styles you cannot control. In Tailwind v4, cascade layers handle specificity correctly, making `!important` even less necessary. If you find yourself using `!` on your own components, the real fix is restructuring your class application.
+Tailwind's important modifier maps to CSS `!important`: v3 uses `!text-red-500`; v4 prefers `text-red-500!` (the leading spelling remains compatible but deprecated). Prefer resolving conflicts at their source. Restricting important declarations to third-party overrides is a house policy, not a CSS requirement; cascade layers do not eliminate every need for overrides.
 
 **Incorrect: ! modifier to fix self-inflicted specificity issue**
 
@@ -157,7 +161,7 @@ Use `group` on a parent and `group-hover:`, `group-focus:`, etc. on children to 
 
 **Impact: HIGH (unnamed nested groups cause ambiguous targeting)**
 
-When group contexts are nested, use named groups (`group/card`, `group/item`) so inner children can target the correct ancestor. Without naming, `group-hover:` targets the nearest `group` parent, which may not be intended.
+When group contexts are nested, use named groups (`group/card`, `group/item`) so inner children can target the correct ancestor. Without naming, `group-hover:` can match any hovered `group` ancestor, not only the nearest one. Named groups distinguish intended ancestors; use distinct names where that distinction matters.
 
 **Incorrect: ambiguous unnamed nested groups**
 
@@ -165,7 +169,7 @@ When group contexts are nested, use named groups (`group/card`, `group/item`) so
 <div class="group">
   <div class="group">
     <span class="group-hover:text-red-500">
-      <!-- Targets inner group, but was outer intended? -->
+      <!-- Either matching hovered group ancestor can activate this. -->
     </span>
   </div>
 </div>
@@ -215,7 +219,7 @@ The `peer` modifier only works on elements that come AFTER the peer in the DOM, 
 
 Use flexbox (`flex`) for one-dimensional layouts: nav bars, button groups, centering. Use CSS grid (`grid`) for two-dimensional layouts: card grids, page layouts, form layouts. Do not force grid behavior with flex or vice versa.
 
-**Incorrect: flex with manual widths to simulate a grid**
+**Valid layout; prefer grid when aligned columns/rows are the requirement**
 
 ```html
 <div class="flex flex-wrap">
@@ -239,9 +243,9 @@ Use flexbox (`flex`) for one-dimensional layouts: nav bars, button groups, cente
 
 ### TW2.9 Prefer gap-* Over space-x-*/space-y-* for Flex and Grid Spacing
 
-**Impact: MEDIUM (space-* breaks with wrapping and conditionally rendered children)**
+**Impact: MEDIUM (margin-based space-* does not model wrapped rows or grids)**
 
-Prefer `gap-*` over `space-x-*`/`space-y-*` for spacing flex and grid children. `gap` works correctly with wrapping, doesn't use margin hacks (`> * + *` selectors), and has no issues with conditionally rendered children.
+Prefer `gap-*` over `space-x-*`/`space-y-*` for spacing flex and grid children. `gap` models spacing between flex/grid tracks and wrapped lines. `space-*` uses version-specific child selectors and margins; it remains valid for suitable linear layouts.
 
 **Incorrect: space-x breaks on wrap**
 
@@ -274,11 +278,11 @@ Prefer `gap-*` over `space-x-*`/`space-y-*` for spacing flex and grid children. 
 
 ### CRITICAL
 
-- **Contradicting utilities without awareness**: Applying `p-3 p-4` and relying on one to "win." The result depends on Tailwind's internal CSS ordering, not class attribute order. Production behavior may differ from development.
+- **Contradicting utilities without awareness**: Applying `p-3 p-4` and relying on one to "win." The result depends on Tailwind's internal CSS ordering, not class attribute order. Identical generated CSS has the same cascade in development and production.
 
 ### HIGH
 
-- **Unnamed nested groups**: Using `group` inside `group` without names. `group-hover:` targets the nearest ancestor, which in nested contexts may not be the intended one. Subtle hover effects break silently.
+- **Unnamed nested groups**: Using `group` inside `group` without names. `group-hover:` can match any qualifying group ancestor, which may not be the intended one. Subtle hover effects break silently.
 - **Reversed peer ordering**: Placing the styled element before the `peer` in DOM. The CSS `~` combinator only selects forward siblings. The styling silently fails with no error.
 - **Forced grid with flex**: Using `flex flex-wrap` with `w-1/3` to simulate a grid. Grid with `grid-cols-3 gap-4` is cleaner, more predictable, and handles content of varying height.
 
@@ -346,8 +350,9 @@ Prefer `gap-*` over `space-x-*`/`space-y-*` for spacing flex and grid children. 
 
 ## Sources
 
-- prettier-plugin-tailwindcss documentation
-- eslint-plugin-tailwindcss rules: no-contradicting-classname, enforces-shorthand
-- Tailwind CSS documentation: "Hover, Focus, and Other States"
-- CSS Flexible Box Layout Module Level 1 specification
-- CSS Grid Layout Module Level 2 specification
+- https://tailwindcss.com/docs/hover-focus-and-other-states
+- https://tailwindcss.com/docs/styling-with-utility-classes
+- https://tailwindcss.com/docs/upgrade-guide
+- https://tailwindcss.com/docs/margin
+- https://tailwindcss.com/blog/automatic-class-sorting-with-prettier
+- https://www.w3.org/TR/selectors-4/#subsequent-sibling-combinators

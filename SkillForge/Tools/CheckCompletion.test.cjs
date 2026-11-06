@@ -37,6 +37,71 @@ function fixture(t, scope = 'behavioral') {
   return { root, evidence, contract, assessment, run };
 }
 
+function broadFixture(t) {
+  const f = fixture(t);
+  f.contract.depth = 'comprehensive';
+  f.contract.scope_review_check = 'scope-review';
+  const proof = f.evidence('coverage-review.txt', 'Reviewed original request, all public task families, structure and their actual outputs.');
+  const rows = [
+    ['scope-review', 'outcome'], ['structure-one', 'outcome'],
+    ['create', 'outcome'], ['merge', 'outcome'], ['export', 'outcome']
+  ];
+  f.contract.required_checks.push(...rows.map(([id, kind]) => ({ id, kind, description: id })));
+  f.assessment.checks.push(...rows.map(([id]) => ({ id, status: 'pass', qualification: 'qualified', evidence: [proof] })));
+  f.inventory = { schema_version: 1, targets: [{ id: 'one', purpose: 'Create, merge and export records', structure_check: 'structure-one',
+    families: rows.slice(2).map(([id]) => ({ id, outcomes: [{ id: 'O-' + id, description: 'Required ' + id + ' result', check_id: id }] })) }] };
+  f.bindInventory = () => {
+    f.contract.coverage_inventory = f.evidence('coverage.json', JSON.stringify(f.inventory));
+    delete f.assessment.contract_sha256;
+  };
+  f.bindInventory(); return f;
+}
+
+test('a completed sampled round does not close untested parent families', t => {
+  const f = broadFixture(t);
+  f.assessment.checks.find(c => c.id === 'export').status = 'unverified';
+  f.assessment.actions.push({ id: 'next-round', description: 'Evaluate export and its consumer', resolves: ['export'], authorized: true, feasible: true });
+  const r = f.run(); assert.equal(r.code, 3); assert.equal(r.result.task_status, 'continue');
+  assert.deepEqual(r.result.unresolved.map(x => x.id), ['export']);
+  assert.equal(r.result.next_actions[0].id, 'next-round');
+});
+test('parent inventory cannot silently omit outcomes from the contract checks', t => {
+  const f = broadFixture(t); f.contract.required_checks = f.contract.required_checks.filter(c => c.id !== 'export');
+  const r = f.run(); assert.equal(r.code, 2); assert.notEqual(r.result.task_status, 'complete');
+});
+test('one aggregate skill pass cannot replace distinct parent outcomes', t => {
+  const f = broadFixture(t); f.inventory.targets[0].families[2].outcomes[0].check_id = 'create'; f.bindInventory();
+  assert.equal(f.run().code, 2);
+});
+test('broad work needs an evidenced scope challenge and structural review', t => {
+  const f = broadFixture(t); f.assessment.checks = f.assessment.checks.filter(c => c.id !== 'scope-review' && c.id !== 'structure-one');
+  const r = f.run(); assert.equal(r.code, 3); assert.deepEqual(r.result.unresolved.map(x => x.id), ['scope-review', 'structure-one']);
+});
+test('complete reviewed broad coverage permits an unchanged skill without forced rounds', t => {
+  const f = broadFixture(t); f.assessment.candidate_decision = 'retain_baseline';
+  assert.equal(f.run().result.task_status, 'complete');
+});
+test('an unresolved portfolio child prevents broad closure', t => {
+  const f = broadFixture(t); f.inventory.targets.push({ id: 'two', purpose: 'Restore archived records', structure_check: 'structure-two', families: [{ id: 'restore', outcomes: [{ id: 'O-restore', description: 'Restore without corrupting active data', check_id: 'restore' }] }] });
+  f.contract.required_checks.push({ id: 'structure-two', kind: 'outcome', description: 'Second target structure' }, { id: 'restore', kind: 'outcome', description: 'Restore output' });
+  f.bindInventory(); const r = f.run(); assert.equal(r.code, 3); assert.deepEqual(r.result.unresolved.map(x => x.id), ['structure-two', 'restore']);
+});
+test('new in-scope outcomes remain work after an explicit inventory amendment', t => {
+  const f = broadFixture(t); f.inventory.targets[0].families[2].outcomes.push({ id: 'O-export-conflict', description: 'Do not overwrite a conflicting destination', check_id: 'export-conflict' });
+  f.contract.required_checks.push({ id: 'export-conflict', kind: 'preservation', description: 'Conflicting destination preserved' });
+  f.bindInventory(); assert.equal(f.run().result.task_status, 'continue');
+});
+test('missing or tampered broad inventory cannot establish completion', t => {
+  const f = broadFixture(t); fs.appendFileSync(path.join(f.root, 'coverage.json'), ' '); assert.equal(f.run().code, 2);
+});
+test('coverage judgments cannot be disguised as deliverables', t => {
+  const f = broadFixture(t); f.contract.required_checks.find(c => c.id === 'merge').kind = 'deliverable';
+  assert.equal(f.run().code, 2);
+});
+test('assessment cannot downgrade comprehensive depth or replace parent inventory', t => {
+  const f = broadFixture(t); f.assessment.depth = 'focused'; assert.equal(f.run().code, 2);
+});
+
 test('supported requested outcomes complete the task independently of candidate choice', t => {
   const f = fixture(t); f.assessment.candidate_decision = 'retain_baseline';
   const r = f.run(); assert.equal(r.code, 0); assert.equal(r.result.task_status, 'complete');

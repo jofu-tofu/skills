@@ -25,6 +25,8 @@ A measurement may be designed before it is qualified. Qualification tests whethe
 
 ## Separation rule
 
+Broad UpdateSkill tasks additionally use [ComprehensiveImprovement](Procedures/ComprehensiveImprovement.md). It owns the parent outcome/task-family inventory, whole-skill structural baseline and reconciliation across successive rounds. EstablishQuality owns criteria, PlanChange owns a round's selection, ReviewDesign owns structural findings, and ApproveSkill owns the final parent decision. Round budgets and round-complete verdicts cannot redefine the parent scope. This is an internal lifecycle operation, not another user entry point.
+
 ReviewDesign is required during creation and substantive updates; typo/formatting-only edits retain lightweight checks. ConstructCases and TestTriggering are selected when relevant alongside the existing gap diagnosis. EvaluateSkill selects review, cases-only, triggering, or execution mode. UpdateSkill selects a short maintenance path or the full behavioral loop. No new top-level workflow is required. Bundled standards and tools load only where relevant; see [tool status](Tools/README.md).
 
 Create a user workflow when the request has a distinct end result and completion condition. Extract a procedure when several workflows reuse an operation with a stable input/output contract. A heading or reasoning step alone does not need its own file or agent.

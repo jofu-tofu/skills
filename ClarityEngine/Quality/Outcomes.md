@@ -31,3 +31,15 @@ CE-O4 and CE-O6 constrain every editing outcome. CE-O8 constrains every verifica
 - An informative artifact need not invent a recommendation, and a small edit need not acquire a full document workflow (O1/O6).
 
 These distinctions set the evaluation questions. See [Measurement](Measurement.md) for methods and evidence limits; do not turn the table into an aggregate quality score or another mandatory authoring pass.
+
+## Workflow evidence and contribution mapping
+
+The [workflow outcomes](WorkflowOutcomes.md) decompose these reader results into creation, conversion, audit, review, verification, repair, wording and format responsibilities. Preserve both ID sets: these are complementary views, not 28 independent scores or extra mandatory authoring passes. The recorded source-branch passes retain their original limits; combined-version evidence is recorded in [MergePreservation](../Improvements/MergePreservation/Record.md).
+
+| Reader results | Main workflow contributors |
+|---|---|
+| CE-O1, CE-O2, CE-O3 | CE-CREATE, CE-REVIEW, CE-PLAIN |
+| CE-O4, CE-O6 | CE-CREATE, CE-CONVERT, CE-REPAIR, CE-PLAIN |
+| CE-O5 | CE-AUDIT, CE-REVIEW, CE-REPAIR; Cutter retains RC-32 ownership |
+| CE-O7 | CE-CONVERT, CE-FORMAT |
+| CE-O8 | CE-REVIEW, CE-VERIFY, CE-FORMAT |

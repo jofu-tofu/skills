@@ -1,3 +1,5 @@
+> Historical vendor-specific reference, not a current capability guarantee. NativeDesign requires an explicitly available chosen app; verify capabilities through its current supported tools before relying on these notes.
+
 # Claude Design Capabilities
 
 What Claude Design and the `/design` surface can and cannot do, for NativeDesign briefs. Source: the official Anthropic announcement at https://www.anthropic.com/news/claude-design-anthropic-labs (April 17, 2026) and related coverage. Every capability here is a per-build fact: verify it in-session before promising it.

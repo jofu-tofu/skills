@@ -2,6 +2,8 @@
 
 > Internal workflow — invoked by Review.md, not user-facing.
 
+Read [ReviewContract](../Standards/ReviewContract.md) for scope/path/artifact semantics. Use native available tools; shell snippets illustrate information to gather, not a mandatory shell.
+
 ## Input / Output
 
 **Input:**
@@ -30,7 +32,7 @@ This step operates differently depending on review mode.
 
 ### Diff Mode — Gather Change Context
 
-Establish the commit range, then capture everything about what changed.
+Resolve the exact requested range to base/head commits. Distinguish literal endpoint comparison from merge-base branch comparison and record the chosen semantics. Never substitute main...HEAD for an explicit range. Missing history/PR access or unresolved scope stays explicit; gather independent available evidence without inventing a base.
 
 **Commit range** (ask or infer):
 - Branch name (vs main/master)
@@ -40,10 +42,10 @@ Establish the commit range, then capture everything about what changed.
 
 ```bash
 # Get the full picture
-git diff main...HEAD --stat
-git diff main...HEAD -U5
-git log main...HEAD --format="%H %s%n%b"
-git diff main...HEAD --name-only
+git diff <resolved-base> <resolved-head> --stat
+git diff <resolved-base> <resolved-head> -U5
+git log <resolved-base>..<resolved-head> --format="%H %s%n%b"
+git diff <resolved-base> <resolved-head> --name-status
 ```
 
 **Capture:**
@@ -64,12 +66,7 @@ git diff main...HEAD --name-only
 
 Establish the target path, then capture the target's language composition.
 
-```bash
-# Understand the target
-find [target-path] -type f -name '*.ts' -o -name '*.tsx' -o -name '*.rs' -o -name '*.py' -o -name '*.svelte' -o -name '*.cs' -o -name '*.m' | head -200
-find [target-path] -type f | wc -l
-find [target-path] -type d | head -50
-```
+Enumerate the actual target with `rg --files` or native tools, including all supported extensions and relevant configuration. Record generated/vendor exclusions, inaccessible paths and unsupported files. Do not silently truncate at a fixed count or treat an empty/missing target as clean. Keep the complete scoped manifest even when gathering in batches. An audit need not have Git history.
 
 **Target fingerprint:**
 ```
@@ -81,7 +78,7 @@ find [target-path] -type d | head -50
 
 ## Step 2: Detect Languages
 
-From the file list, identify all languages present using file extension signals:
+From the complete file list, identify language and framework responsibilities using extensions plus module roles, imports, directives, routes and configuration. The following signals are nonexclusive. React server actions/loaders may be JS/TS without JSX; SvelteKit loaders/actions/endpoints and hooks may be JS/TS without a Svelte component. Include those framework owners when the project evidence supports them. Do not infer a framework for an unrelated TypeScript utility merely from its extension.
 
 | Extensions | Language | Dimension Directory |
 |-----------|----------|-------------------|
@@ -93,9 +90,9 @@ From the file list, identify all languages present using file extension signals:
 | `.py` | Python | `Dimensions/Python/` |
 | `.m`, `.mac`, `.int` | MUMPS | `Dimensions/MUMPS/` |
 
-**Tailwind:** detected if any HTML/JSX/Svelte file contains utility class patterns or if `tailwind.config.*` exists. Maps to `Dimensions/Tailwind/`.
+**Tailwind:** inspect utility usage, CSS imports/directives (including v4 `@theme`), plugins and configuration. A CSS-only or configuration-only change can require Tailwind dimensions without class-bearing markup. Maps to `Dimensions/Tailwind/`; establish the version and role from actual project evidence.
 
-**File-to-language mapping:** Build a map of which files belong to which language(s). A `.tsx` file maps to both React and TypeScript. A `.svelte` file maps to both Svelte and potentially Tailwind.
+**File-to-language mapping:** Assign every applicable responsibility. TSX can require React, TypeScript and Tailwind; Svelte with `lang="ts"` or `.svelte.ts` can require Svelte, TypeScript and Tailwind. Confirm framework/configuration/version signals rather than suffixes alone. In particular `.m` can be another language: require MUMPS syntax/project evidence. Deleted files remain relevant change evidence without pretending they are currently readable.
 
 ## Step 3: Gather Config Context
 
@@ -139,12 +136,16 @@ Compress everything into a structured context layer:
 ### Config Context
 [For each relevant config file found, what standards it enforces]
 [Note which linters/formatters are active — avoid duplicating their work]
+[Framework/runtime versions, project exceptions, requested exclusions and unresolved applicability]
 
 ### Size Tier
 [Small (1-50 lines / 1-10 files) | Medium (50-300 / 10-50) | Large (300+ / 50+)]
 
 ### Full Diff
 [Attached below or referenced by path]
+
+### Coverage limits
+[Complete scoped manifest; unavailable history/source, generated/vendor exclusions and unsupported languages. No silent sampling.]
 ```
 
 Write context layer to: `$REVIEW_DIR/context.md`

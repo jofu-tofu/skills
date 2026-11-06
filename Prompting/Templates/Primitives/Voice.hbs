@@ -1,13 +1,13 @@
 {{!--
-  VOICE Template - Personality Calibration
+  VOICE Template - Agent Voice Configuration
 
-  Purpose: Generate voice configuration for agents and notifications.
+  Purpose: Generate agent voice and archetype configuration JSON.
 
   Use Cases:
   - Voice settings
-  - Agent personality calibration
-  - Notification type configuration
-  - Voice preset documentation
+  - Agent voice configuration
+  - Per-agent voice metadata
+  - Voice archetype configuration
 
   Input Data Structure:
   ```yaml
@@ -19,43 +19,44 @@
         rate_wpm: number
         stability: number
         similarity_boost: number
-  presets:
-    preset_name:
-      stability: number
-      similarity_boost: number
-      rate_modifier: number
+  archetypes:
+    archetype_name:
+      stability_range: [number, number]
+      similarity_range: [number, number]
+      rate_range: [number, number]
+      description: string
   ```
 
   Usage:
   bun run RenderTemplate.ts -t Primitives/Voice.hbs -d Data/Agents.yaml -o Compiled/VoiceConfig.json
 --}}
 
-{{!-- JSON output for VoiceServer consumption --}}
+{{!-- JSON voice configuration; rendering does not verify consumer integration --}}
 {
-  "version": "{{default version '1.0.0'}}",
-  "generated": "{{now 'date'}}",
+  "version": {{{json (default version '1.0.0')}}},
+  "generated": {{{json (now 'date')}}},
   "default_rate": {{default defaults.rate_wpm 175}},
   "voices": {
 {{#each agents}}
-    "{{@key}}": {
-      "voice_id": "{{voice.voice_id}}",
-      "voice_name": "{{voice.voice_name}}",
-      "name": "{{name}}",
+    {{{json @key}}}: {
+      "voice_id": {{{json (default voice.voice_id '')}}},
+      "voice_name": {{{json (default voice.voice_name '')}}},
+      "name": {{{json (default name '')}}},
       "rate_wpm": {{voice.rate_wpm}},
       "stability": {{voice.stability}},
       "similarity_boost": {{voice.similarity_boost}},
-      "archetype": "{{archetype}}",
-      "description": "{{personality.perspective}}"
+      "archetype": {{{json (default archetype '')}}},
+      "description": {{{json (default personality.perspective '')}}}
     }{{#unless @last}},{{/unless}}
 {{/each}}
   },
   "archetypes": {
 {{#each archetypes}}
-    "{{@key}}": {
+    {{{json @key}}}: {
       "stability_range": [{{stability_range.[0]}}, {{stability_range.[1]}}],
       "similarity_range": [{{similarity_range.[0]}}, {{similarity_range.[1]}}],
       "rate_range": [{{rate_range.[0]}}, {{rate_range.[1]}}],
-      "description": "{{description}}"
+      "description": {{{json (default description '')}}}
     }{{#unless @last}},{{/unless}}
 {{/each}}
   }

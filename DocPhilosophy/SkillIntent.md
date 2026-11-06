@@ -12,9 +12,9 @@
 
 2. **Three forces govern survival** — Proximity (docs near code survive), Ownership (every doc needs one accountable owner), Signal Density (small dense docs outperform large comprehensive ones). Every placement decision must satisfy all three.
 
-3. **Evidence-backed philosophy** — Every principle is grounded in cited academic research or industry data (Google SWE Book, Cognitive Load Theory, empirical decay studies). Opinions without evidence do not belong.
+3. **Evidence-backed philosophy** — Distinguish verified source findings, practical heuristics and unresolved attribution. Cite evidence for empirical claims; do not turn an unverified study into a decay rate or universal placement ranking.
 
-4. **Binary testable guidance** — Each rule file ends with a "Test Question" that converts the principle into a concrete, binary decision tool. Abstract philosophy is insufficient — practitioners need actionable tests.
+4. **Testable guidance** — Each rule file ends with a "Test Question" that guides an actionable placement decision. Answer from evidence; an unknown input remains unknown rather than forcing an unsupported yes/no verdict.
 
 5. **AI agents are a distinct audience** — Documentation for AI agents has fundamentally different constraints than documentation for humans (finite context windows, no cross-session memory, linear consumption). This distinction is first-class, not an afterthought.
 
@@ -24,7 +24,7 @@
 
 ## Problem This Skill Solves
 
-Documentation placement decisions are made ad-hoc, leading to predictable failure modes: docs placed far from code rot within months, docs without owners become harmful fiction, comprehensive docs go unread due to cognitive overload, and AI context files bloat with low-value tokens. Without a unified philosophy, each decision reinvents first principles. DocPhilosophy provides 7 evidence-backed principles that convert placement decisions from intuition into structured reasoning with binary test questions.
+Ad-hoc documentation placement can leave maintenance detached from system changes, ownership unclear and relevant knowledge hard to find. DocPhilosophy supplies seven placement principles and concrete test questions. Distinguish verified evidence, practical heuristics and unverified attributions; neither distance nor age alone establishes that content is inaccurate.
 
 ---
 
@@ -35,7 +35,7 @@ Documentation placement decisions are made ad-hoc, leading to predictable failur
 | Reference skill, no workflows | Principles invoked directly from Rules/ files | Workflow-based decision wizards | Placement decisions require judgment, not procedures. A workflow would either be too rigid or too generic. |
 | 7 separate rule files | One file per principle in Rules/ directory | Single monolithic principles file | Each principle is independently referenceable. Other skills (ContextLayer, CodeReview) can reference specific rules without loading all 7. |
 | Consistent rule file structure | Every rule file: Source, Impact, Evidence, Problem, Solution, Test Question | Freeform per-principle formatting | Consistency enables agents to extract information predictably. The structure itself is a signal density decision. |
-| Test Question as anchor | Every rule ends with a single binary test question | Checklists, flowcharts, scoring rubrics | One question is memorable and actionable. Checklists become compliance exercises; the test question forces genuine engagement with the principle. |
+| Test Question as anchor | Every rule ends with a focused decision question | Checklists, flowcharts, scoring rubrics | One question makes the principle usable; missing evidence is recorded instead of forced into a binary answer. |
 | Authoritative sources table | Centralized sources in SKILL.md with per-rule citations | Inline citations only, or bibliography file | Dual citation: per-rule for context when reading one rule, centralized for credibility overview. |
 | AI context as first-class category | Dedicated rule file (AIContextLayers.md) and placement category | Subsection within another principle | AI agent documentation is a distinct domain with unique constraints (token budgets, context decay, multi-agent isolation). It deserves equal treatment to code-level documentation. |
 | Decision tree in SKILL.md | Visual ASCII tree routing by audience | Prose-based routing, or per-rule routing guidance | The tree is scannable in <10 seconds. Prose routing requires reading paragraphs. The tree IS signal density applied to itself. |
@@ -58,9 +58,9 @@ Documentation placement decisions are made ad-hoc, leading to predictable failur
 What "DocPhilosophy successfully executed" looks like:
 
 - [ ] Every placement recommendation traces to one or more of the 7 named principles
-- [ ] Every principle has cited empirical evidence from peer-reviewed or industry sources
-- [ ] The decision tree routes any documentation type to exactly one placement category
-- [ ] Each rule file's Test Question produces a binary YES/NO answer for any concrete scenario
+- [ ] Empirical claims identify checked sources and scope; heuristics and unverified attributions are labeled without fabricated authority
+- [ ] Placement recommendations identify canonical authority and justified audience views without creating divergent editable sources of truth
+- [ ] Test Questions yield evidence-grounded decisions or specific unresolved inputs and the next useful check
 - [ ] AI agent documentation is treated as a distinct placement category with unique constraints
 
 **Quality gate — reject any criterion that:**

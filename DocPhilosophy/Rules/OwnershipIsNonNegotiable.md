@@ -1,10 +1,10 @@
 ### Ownership Is Non-Negotiable
 
-**Source:** Winters, Manshreck & Wright, "Software Engineering at Google" (2020); GitHub Developer Survey (2023)
+**Sources:** [Software Engineering at Google, Documentation](https://abseil.io/resources/swe-book/html/ch10.html) (2020); [GitHub Open Source Survey](https://opensourcesurvey.org/2017/) (2017).
 
-**Impact: CRITICAL — ownerless documentation dies within months**
+**Impact: CRITICAL — unclear ownership makes maintenance and correction harder**
 
-> Assign exactly one accountable owner to every document. Not a team. Not "everyone." One person or role with authority, responsibility, and accountability.
+> Make maintenance accountability explicit. A person, role or team can own a document if its update and escalation path is clear. Do not invent a named owner or discard unique knowledge merely because ownership is unresolved.
 
 ---
 
@@ -12,7 +12,7 @@
 
 | Component | Definition |
 |-----------|-----------|
-| **Authority** | Can update or delete the document |
+| **Authority** | Can update the document within its approval and retention rules |
 | **Responsibility** | Reviews it when its subject changes |
 | **Accountability** | Answers when it's found inaccurate |
 
@@ -24,8 +24,8 @@ Without all three, you have a suggestion, not an owner.
 
 | Source | Finding |
 |--------|---------|
-| **Google GooWiki** | Internal wiki used by thousands. Many pages rotted because no individual owned them. Tooling alone cannot solve ownership. Google later emphasized treating docs like code — with explicit owners via CODEOWNERS. |
-| **GitHub Gap (2023)** | 93% call docs important. 60% say inadequate. The 33-point gap is an ownership problem: docs get created enthusiastically, then nobody maintains them. |
+| **Software Engineering at Google** | Treat documentation as maintained engineering work, with review and ownership. This supports an explicit maintenance process, not a universal ownerless-document lifespan. |
+| **GitHub Open Source Survey (2017)** | 93% encountered incomplete or outdated documentation; 60% of contributors seldom or never contributed to documentation. These different questions do not define a 33-point quality gap or establish ownership as its cause. |
 
 ---
 
@@ -35,13 +35,13 @@ Before creating documentation:
 
 1. **Who will update this when the subject changes?**
    - A specific person or role → Proceed
-   - "The team" → Assign a specific owner or skip creation
-   - Nobody → Skip creation; it will become harmful fiction
+   - A team → Identify its responsible role, update path and escalation route
+   - Nobody known → Mark ownership unresolved and propose a responsible role; preserve necessary knowledge with its status and limitations
 
 2. **How will the owner know the subject changed?**
-   - Same PR / same commit → Automatic awareness
+   - Same PR / same commit → Couple the change to documentation review
    - Code review catches it → Semi-automatic
-   - Relies on memory → It won't happen
+   - Relies on memory → Establish a more dependable trigger
 
 3. **What happens if the owner leaves?**
    - Ownership transfers to replacement → Sustainable
@@ -68,28 +68,28 @@ No owner. No updates. The document became harmful — worse than nothing, becaus
 
 Prefer ownership that survives personnel changes:
 
-| Ownership Type | Mechanism | Reliability |
+| Ownership Type | Mechanism | Condition to check |
 |---------------|-----------|-------------|
-| **Co-located** | Doc in same dir as code; code owner owns doc | Highest |
-| **CODEOWNERS** | Explicit file-level ownership via git | High |
-| **Role-based** | "The API team owns API docs" | Medium |
-| **Assigned** | "Alice owns this page" | Low (person-dependent) |
-| **Implied** | "Whoever wrote it" | Minimal |
+| **Co-located** | Doc near the code | Does the code owner's remit include these docs? |
+| **Explicit review ownership** | Repository owner/reviewer configuration | Does the host actually route and require the review? |
+| **Role-based** | "The API team owns API docs" | Is there an update and escalation path? |
+| **Assigned** | "Alice owns this page" | Is there a transfer plan? |
+| **Implied** | "Whoever wrote it" | Has anyone accepted maintenance responsibility? |
 
-When the doc lives next to the code and CODEOWNERS covers the directory, ownership is automatic and survives personnel changes.
+Location and configuration support ownership; they do not prove that someone is maintaining the document or that personnel changes are handled.
 
 ---
 
-## The Deletion Principle
+## Correct, Transfer or Retire Deliberately
 
-Delete documents with no owner. Stale documentation is actively harmful:
+Misleading current guidance can harm readers:
 
 - Wastes reader time
 - Builds false confidence ("the docs say X")
 - Contradicts actual system behavior
 - Occupies space where accurate documentation could live
 
-Deleting a stale document is an act of service. Preserving it "just in case" is negligence.
+Correct or clearly withdraw misleading current instructions within the user's authority. Preserve unique rationale and required history; propose an owner or a reachable canonical home. Retire redundant material with a replacement link when appropriate. Missing ownership or age alone does not authorize deletion or prove the content false.
 
 ---
 

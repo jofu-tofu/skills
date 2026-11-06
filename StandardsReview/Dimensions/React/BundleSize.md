@@ -4,13 +4,13 @@
 
 ## Mental Model
 
-Bundle size optimization sits at the critical path of web performance. Before any React component renders, before any data fetches, before any interaction handler fires, the browser must download and parse the JavaScript bundle. A 300KB increase in bundle size adds approximately 1 second to Time to Interactive on a median mobile connection. This cost is paid on every cold visit and cannot be optimized away by better rendering or smarter data fetching.
+JavaScript transfer, parsing and evaluation can delay client interactivity. SSR content and server fetching need not wait for the client bundle. Measure the actual production graph and target devices; bytes alone do not determine a fixed load-time cost.
 
-The 5 rules in this dimension address three distinct attack vectors for bundle bloat. The first is **import granularity**: barrel file imports (`import { X } from 'library'`) force the bundler to evaluate the entire module graph of a library even when only one export is needed. `BundleBarrelImports` eliminates this by targeting direct file imports. The second is **load timing**: not all JavaScript is needed on initial render. `BundleDynamicImports` defers heavy components to on-demand loading, `BundleDeferThirdParty` delays non-critical third-party scripts, and `BundlePreload` ensures that deferred chunks are available by the time they are needed. The third is **conditional inclusion**: `BundleConditional` prevents shipping code for features that are disabled for the current user or environment.
+The 5 rules address import granularity, load timing and optional features. Barrel imports can increase development or external-module evaluation cost, but bundled ESM may tree-shake effectively. Dynamic imports split code; conditional rendering controls when optional components are needed. Preloading trades earlier network work for lower interaction latency.
 
-These five rules interact as a pipeline: first reduce what is imported (BarrelImports), then defer what is not immediately needed (DynamicImports, DeferThirdParty), then preload what will be needed soon (Preload), and finally exclude what may not be needed at all (Conditional). Applied in this order, they produce the smallest possible initial bundle with the fastest perceived load time.
+These five rules interact as a pipeline: first reduce what is imported (BarrelImports), then defer what is not immediately needed (DynamicImports, DeferThirdParty), then preload what will be needed soon (Preload), and finally exclude what may not be needed at all (Conditional). Choose the order from the actual critical path; these strategies trade initial work against later loading and do not guarantee a minimal bundle or fastest load.
 
-The impact is measurable and significant: direct imports alone provide 15-70% faster dev boot, 28% faster builds, and 40% faster production cold starts. Dynamic imports can remove 100-500KB from the initial chunk. Together, these rules routinely cut initial bundle size by 40-60%.
+Validate savings with the project's bundler, package versions, compressed transfer sizes and loading traces. Published benchmark percentages are not guarantees for this application.
 
 ## Consumer Guide
 
@@ -18,11 +18,11 @@ The impact is measurable and significant: direct imports alone provide 15-70% fa
 
 Scan for these violations in priority order:
 
-1. **Barrel imports from large libraries** (CRITICAL) — `import { Icon } from 'lucide-react'` or `import { Button } from '@mui/material'`. These libraries have hundreds or thousands of re-exports. Check if `optimizePackageImports` is configured in next.config.js — if not, every barrel import loads the full library.
-2. **Static import of heavy components** (CRITICAL) — Large editors (Monaco, CodeMirror), chart libraries (D3, Recharts), or rich text editors (TipTap, Slate) imported at the top of a file that is in the main bundle. These should always be dynamically imported.
+1. **Costly imports** — Inspect the build graph before changing public imports. Current Next.js optimizes several packages, including lucide-react and MUI, by default; defaults vary by version.
+2. **Static import of heavy components** (CRITICAL) — Large editors (Monaco, CodeMirror), chart libraries (D3, Recharts), or rich text editors (TipTap, Slate) imported at the top of a file that is in the main bundle. Split optional UI when it improves the measured loading path; static imports remain valid for required initial content.
 3. **Third-party scripts in critical path** (HIGH) — Analytics, chat widgets, or tracking scripts loaded synchronously via `<script>` or imported in the main bundle. These block rendering even though they provide no user-visible content.
 4. **Feature code without conditional loading** (MEDIUM) — Admin panels, debug toolbars, or premium features imported unconditionally even when the current user will never see them.
-5. **Dynamic imports without preloading** (MEDIUM) — Components loaded via `next/dynamic` or `React.lazy` without `<link rel="preload">` or `router.prefetch()`, causing a visible loading delay when the user navigates to them.
+5. **Measured interaction delay** — Consider intent-based preload when latency justifies extra network/evaluation work. Automatic framework prefetching may already cover navigation.
 
 ### When Designing / Planning
 
@@ -31,23 +31,23 @@ Before adding a new dependency or feature:
 - **Check the bundle cost.** Use `bundlephobia.com` or `npx cost-of-modules` to understand the size impact before adding a dependency. A 50KB library for a single utility function is rarely justified.
 - **Decide the loading strategy upfront.** For each new component/library, decide: is it needed on initial render (static import), needed on interaction (dynamic import), or needed only for some users (conditional import)?
 - **Plan preload hints.** If a dynamically imported component is needed immediately after a predictable user action (clicking a tab, hovering a button), add a preload hint so the chunk is already downloading before the user acts.
-- **Audit existing barrel imports.** When adding a new import from a library already in use, check if the library supports direct file imports. Switch all imports from that library at once rather than mixing barrel and direct imports.
+- **Audit existing barrel imports.** When adding a new import from a library already in use, check if the library supports direct file imports. Change only supported entry points where the measured graph or project policy warrants it; mixed public imports are not inherently wrong.
 
 ### When Implementing
 
 Apply rules in this order:
 
-1. **Switch barrel imports to direct imports** (BundleBarrelImports) — For each import from a library's root entry, find the direct file path. If using Next.js 13.5+, configure `optimizePackageImports` as an alternative.
-2. **Dynamic-import heavy components** (BundleDynamicImports) — Use `next/dynamic` for components over 50KB that are not visible on initial render. Add `{ ssr: false }` for browser-only components.
+1. **Inspect import cost** (BundleBarrelImports) — Retain valid public root imports when tree-shaking or existing optimization suffices. Consider documented subpaths or version-supported optimizePackageImports for measured overhead.
+2. **Dynamic-import heavy components** (BundleDynamicImports) — Use `next/dynamic` for components over 50KB that are not visible on initial render. Use `{ ssr: false }` only from a Client Component for browser-dependent modules.
 3. **Defer third-party scripts** (BundleDeferThirdParty) — Move analytics, tracking, and widget scripts to `next/script` with `strategy="lazyOnload"` or `strategy="afterInteractive"`.
-4. **Add preload hints** (BundlePreload) — For dynamically imported chunks that follow predictable navigation patterns, add `<link rel="preload" as="script">` or use `router.prefetch()`.
+4. **Choose preload scope** (BundlePreload) — router.prefetch targets a framework route, not an arbitrary dynamic component. Module chunks need module-aware hints/framework support; import-on-intent also evaluates the module. Check automatic prefetching before adding hints.
 5. **Conditionally load feature code** (BundleConditional) — Wrap admin-only, premium-only, or environment-specific code in dynamic imports gated by feature flags or user roles.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| BundleBarrelImports | CRITICAL | Import from specific file paths instead of barrel files to avoid loading entire libraries |
+| BundleBarrelImports | CRITICAL | Use supported public subpaths or import optimization when measured cost warrants it |
 | BundleDynamicImports | CRITICAL | Use next/dynamic or React.lazy for heavy components not needed on initial render |
 | BundleDeferThirdParty | HIGH | Defer non-critical third-party scripts to after page load |
 | BundleConditional | MEDIUM | Load feature code conditionally based on user roles or feature flags |
@@ -58,58 +58,29 @@ Apply rules in this order:
 
 ### R5.1 Avoid Barrel File Imports
 
-**Impact: CRITICAL (200-800ms import cost, slow builds)**
+**Impact: workload-dependent (development graph or bundle cost)**
 
-Import directly from source files instead of barrel files to avoid loading thousands of unused modules. **Barrel files** are entry points that re-export multiple modules (e.g., `index.js` that does `export * from './module'`).
+Barrels re-export modules. Tree shaking can remove unused bundled exports; externalized modules may still incur runtime evaluation cost. Inspect the actual graph before flagging an import.
 
-Popular icon and component libraries can have **up to 10,000 re-exports** in their entry file. For many React packages, **it takes 200-800ms just to import them**, affecting both development speed and production cold starts.
-
-**Why tree-shaking doesn't help:** When a library is marked as external (not bundled), the bundler can't optimize it. If you bundle it to enable tree-shaking, builds become substantially slower analyzing the entire module graph.
-
-**Incorrect: imports entire library**
+**Valid public imports (verify the pinned library and bundler):**
 
 ```tsx
 import { Check, X, Menu } from 'lucide-react'
-// Loads 1,583 modules, takes ~2.8s extra in dev
-// Runtime cost: 200-800ms on every cold start
-
-import { Button, TextField } from '@mui/material'
-// Loads 2,225 modules, takes ~4.2s extra in dev
-```
-
-**Correct: imports only what you need**
-
-```tsx
-import Check from 'lucide-react/dist/esm/icons/check'
-import X from 'lucide-react/dist/esm/icons/x'
-import Menu from 'lucide-react/dist/esm/icons/menu'
-// Loads only 3 modules (~2KB vs ~1MB)
-
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-// Loads only what you use
 ```
 
-**Alternative: Next.js 13.5+**
+Do not invent private `dist/esm/...` paths: package exports and internal layouts can change. On Next.js 13.5+ use the version's documented optimizePackageImports where appropriate; current versions optimize several popular libraries by default.
 
 ```js
-// next.config.js - use optimizePackageImports
 module.exports = {
-  experimental: {
-    optimizePackageImports: ['lucide-react', '@mui/material']
-  }
+  experimental: { optimizePackageImports: ['package-name'] }
 }
-
-// Then you can keep the ergonomic barrel imports:
-import { Check, X, Menu } from 'lucide-react'
-// Automatically transformed to direct imports at build time
 ```
 
-Direct imports provide 15-70% faster dev boot, 28% faster builds, 40% faster cold starts, and significantly faster HMR.
+No fixed module count, byte saving or percentage follows from import syntax alone.
 
-Libraries commonly affected: `lucide-react`, `@mui/material`, `@mui/icons-material`, `@tabler/icons-react`, `react-icons`, `@headlessui/react`, `@radix-ui/react-*`, `lodash`, `ramda`, `date-fns`, `rxjs`, `react-use`.
-
-Reference: [https://vercel.com/blog/how-we-optimized-package-imports-in-next-js](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js)
+Reference: https://nextjs.org/docs/app/api-reference/config/next-config-js/optimizePackageImports
 
 ---
 
@@ -119,7 +90,7 @@ Reference: [https://vercel.com/blog/how-we-optimized-package-imports-in-next-js]
 
 Use `next/dynamic` to lazy-load large components not needed on initial render.
 
-**Incorrect: Monaco bundles with main chunk ~300KB**
+**Potential issue: optional editor statically imported**
 
 ```tsx
 import { MonacoEditor } from './monaco-editor'
@@ -129,9 +100,11 @@ function CodePanel({ code }: { code: string }) {
 }
 ```
 
-**Correct: Monaco loads on demand**
+**Alternative: browser-only editor loads when opened (Client Component)**
 
 ```tsx
+'use client'
+import { useState } from 'react'
 import dynamic from 'next/dynamic'
 
 const MonacoEditor = dynamic(
@@ -140,56 +113,37 @@ const MonacoEditor = dynamic(
 )
 
 function CodePanel({ code }: { code: string }) {
-  return <MonacoEditor value={code} />
+  const [open, setOpen] = useState(false)
+  return <><button onClick={() => setOpen(true)}>Open editor</button>
+    {open && <MonacoEditor value={code} />}</>
 }
 ```
+
+The local monaco-editor module is an application wrapper exporting MonacoEditor. Splitting a component rendered immediately still loads it immediately in a separate chunk.
 
 ---
 
 ### R5.3 Defer Non-Critical Third-Party Libraries
 
-**Impact: MEDIUM (loads after hydration)**
+**Impact: workload-dependent (noncritical script loading)**
 
-Analytics, logging, and error tracking don't block user interaction. Load them after hydration.
+Choose a loading strategy for optional analytics/widgets. A package import alone does not prove that its script blocks rendering; inspect the SDK. Delaying error reporting can lose early events.
 
-**Incorrect: blocks initial bundle**
+**Example: noncritical external script in a Next.js layout:**
 
 ```tsx
-import { Analytics } from '@vercel/analytics/react'
-
+import Script from 'next/script'
 export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body>
-        {children}
-        <Analytics />
-      </body>
-    </html>
-  )
+  return <html><body>
+    {children}
+    <Script src="https://analytics.example.com/tracker.js" strategy="lazyOnload" />
+  </body></html>
 }
 ```
 
-**Correct: loads after hydration**
+The URL is illustrative, not a real service to invoke. lazyOnload targets idle loading; afterInteractive loads earlier after some hydration. Do not put next/dynamic with ssr:false directly in a Server Component layout: use a separate Client Component if a browser-only SDK requires it.
 
-```tsx
-import dynamic from 'next/dynamic'
-
-const Analytics = dynamic(
-  () => import('@vercel/analytics/react').then(m => m.Analytics),
-  { ssr: false }
-)
-
-export default function RootLayout({ children }) {
-  return (
-    <html>
-      <body>
-        {children}
-        <Analytics />
-      </body>
-    </html>
-  )
-}
-```
+Reference: https://nextjs.org/docs/app/api-reference/components/script
 
 ---
 
@@ -218,7 +172,7 @@ function AnimationPlayer({ enabled, setEnabled }: { enabled: boolean; setEnabled
 }
 ```
 
-The `typeof window !== 'undefined'` check prevents bundling this module for SSR, optimizing server bundle size and build speed.
+The window guard controls runtime execution; it does not guarantee exclusion from the server build graph. Effects already run only on the client. Inspect framework output to establish bundle inclusion.
 
 ---
 
@@ -234,7 +188,7 @@ Preload heavy bundles before they're needed to reduce perceived latency.
 function EditorButton({ onClick }: { onClick: () => void }) {
   const preload = () => {
     if (typeof window !== 'undefined') {
-      void import('./monaco-editor')
+      void import('./monaco-editor').catch(() => {})
     }
   }
 
@@ -266,39 +220,40 @@ function FlagsProvider({ children, flags }: Props) {
 }
 ```
 
-The `typeof window !== 'undefined'` check prevents bundling preloaded modules for SSR, optimizing server bundle size and build speed.
+This guard does not guarantee exclusion from the server bundle. import() fetches and evaluates the module; use a side-effect-safe module and handle failures. Network-only preload hints have different semantics.
 
 
 ## Rule Interactions
 
-- **BundleBarrelImports + BundleDynamicImports** address different bundle problems and should both be applied. BarrelImports reduces the size of each chunk by eliminating unused module evaluation. DynamicImports splits chunks so that large components are not in the initial bundle. A component that is both barrel-imported and statically imported incurs both penalties simultaneously — fixing only one still leaves significant waste.
-- **BundleDynamicImports + BundlePreload** are sequential: you must dynamic-import first (creating a separate chunk), then preload that chunk. Preloading without dynamic imports has no effect because the code is already in the main bundle. The ideal pattern is: dynamic import for code splitting, preload on hover/focus for perceived performance.
+- **BundleBarrelImports + BundleDynamicImports**: import optimization can reduce graph cost, while splitting changes load timing. Neither syntax proves a particular byte saving.
+- **BundleDynamicImports + BundlePreload**: splitting and preloading are separate tools. Import-on-hover also evaluates the module. Choose hints based on module versus classic-script format and actual framework prefetch behavior.
 - **BundleDeferThirdParty + BundlePreload** can conflict. Deferring a script means it loads later; preloading means it loads earlier. For third-party scripts, defer is almost always correct — preload should be reserved for your own dynamically-imported code, not third-party analytics.
-- **BundleConditional + BundleDynamicImports** work together for feature-gated code. The pattern is: check the feature flag, then `dynamic(() => import('./AdminPanel'))` only when the flag is true. The dynamic import ensures the admin code is never even downloaded for non-admin users.
+- **BundleConditional + BundleDynamicImports**: declare dynamic components at module scope, then conditionally render them. Framework prefetching can still download chunks. Feature flags/client code splitting are not authorization boundaries.
 
 ## Anti-Patterns (Severity Calibration)
 
 ### CRITICAL
-- **Barrel import from icon library without optimizePackageImports**: `import { Check, X } from 'lucide-react'` loads 1,583 modules and adds ~2.8s to dev startup and 200-800ms to every production cold start. This single import pattern is the most common bundle size violation in Next.js applications.
-- **Static import of code editor**: `import { MonacoEditor } from '@monaco-editor/react'` adds ~300KB to the initial bundle for a component that most users interact with after page load. Must be dynamically imported with `ssr: false`.
+- **Measured import overhead**: Optimize a costly package graph using public imports or supported build configuration; a root import alone is not a critical defect.
+- **Optional editor on the initial path**: Consider a conditional dynamic import. Required initial editors may be static; ssr:false depends on browser-only APIs, not size.
 
 ### HIGH
 - **Synchronous analytics script**: `<script src="https://analytics.example.com/tracker.js" />` in `_document.tsx` or root layout blocks the entire page render. Switch to `next/script` with `strategy="lazyOnload"`.
-- **Unconditional admin panel import**: `import AdminDashboard from './AdminDashboard'` at the top of a page visible to all users, even though only admins see the component. The 150KB admin bundle is downloaded by every visitor.
+- **Unconditional admin panel import**: `import AdminDashboard from './AdminDashboard'` at the top of a page visible to all users, even though only admins see the component. Inspect the client graph to establish what each visitor downloads.
 
 ### MEDIUM
-- **Dynamic import without preload on predictable navigation**: A settings page loaded via `dynamic(() => import('./Settings'))` with no preload hint on the settings navigation link. Users see a loading spinner for 200-500ms on every navigation. Add `router.prefetch('/settings')` or `<link rel="preload">` on the nav item.
-- **Mixed barrel and direct imports from same library**: Half the codebase uses `import { Button } from '@mui/material'` and the other half uses `import Button from '@mui/material/Button'`. The barrel imports negate the savings from direct imports because the full module graph is still evaluated.
+- **Measured delay on likely interaction**: consider prefetching a route or preloading a module after inspecting framework defaults; lack of a manual hint alone is not a defect.
+- **Mixed import paths**: Check actual duplicated code/evaluation. Mixing supported entry points does not universally negate tree-shaking.
 
 ## Examples
 
 ### Example 1: Import Optimization Pipeline (BarrelImports + DynamicImports + Preload)
 
 ```tsx
-// BEFORE: Barrel imports + static heavy component — 2.1MB initial bundle
-import { Check, X, Menu, Settings, User } from 'lucide-react' // 1,583 modules
-import { MonacoEditor } from '@monaco-editor/react'             // 300KB
-import { Chart } from 'recharts'                                 // 200KB
+// Separate before/after Client Component modules ('use client' before imports).
+// BEFORE: static optional editor; sizes require a build measurement
+import { Check, X, Menu, Settings, User } from 'lucide-react' // inspect actual build graph
+import { MonacoEditor } from './monaco-editor'             // measured size depends on version/build
+import { Chart } from './chart'                                 // app-specific chart wrapper
 
 function CodeReviewPage({ code, metrics }: Props) {
   const [showEditor, setShowEditor] = useState(false)
@@ -311,21 +266,24 @@ function CodeReviewPage({ code, metrics }: Props) {
   )
 }
 
-// AFTER: Direct imports + dynamic loading + preload — 180KB initial bundle
-import Check from 'lucide-react/dist/esm/icons/check'
-import Menu from 'lucide-react/dist/esm/icons/menu'
-import Settings from 'lucide-react/dist/esm/icons/settings'
-import UserIcon from 'lucide-react/dist/esm/icons/user'
+// Separate module: code-review-page.tsx
+'use client'
+import { useState } from 'react'
+// AFTER: supported imports + optional editor split + intent preload
+import { Check } from 'lucide-react'
+import { Menu } from 'lucide-react'
+import { Settings } from 'lucide-react'
+import { User as UserIcon } from 'lucide-react'
 
 import dynamic from 'next/dynamic'
 
 const MonacoEditor = dynamic(
-  () => import('@monaco-editor/react').then(m => m.MonacoEditor),
+  () => import('./monaco-editor').then(m => m.MonacoEditor),
   { ssr: false, loading: () => <EditorSkeleton /> }
 )
 
 const Chart = dynamic(
-  () => import('recharts').then(m => m.Chart),
+  () => import('./chart').then(m => m.Chart),
   { loading: () => <ChartSkeleton /> }
 )
 
@@ -336,7 +294,8 @@ function CodeReviewPage({ code, metrics }: Props) {
       <Menu /> <Settings /> <UserIcon />
       {/* Preload editor chunk on button hover */}
       <button
-        onMouseEnter={() => import('@monaco-editor/react')}
+        onMouseEnter={() => { void import('./monaco-editor').catch(() => {}) }}
+        onFocus={() => { void import('./monaco-editor').catch(() => {}) }}
         onClick={() => setShowEditor(true)}
       >
         Open Editor
@@ -348,13 +307,13 @@ function CodeReviewPage({ code, metrics }: Props) {
 }
 ```
 
-BarrelImports saves ~1MB of module evaluation. DynamicImports removes 500KB from initial chunk. Preload on hover ensures the editor is ready before the user clicks.
+Inspect the generated chunks to confirm savings. Hover preloading starts earlier work but cannot guarantee completion before the click.
 
 ### Example 2: Conditional Feature Loading (Conditional + DynamicImports + DeferThirdParty)
 
 ```tsx
 // BEFORE: Admin panel + analytics loaded for every user
-import AdminDashboard from './AdminDashboard'  // 150KB — all users download it
+import AdminDashboard from './AdminDashboard'  // inspect initial graph to establish cost
 import Script from 'next/script'
 
 function AppLayout({ children, user }: Props) {
@@ -378,16 +337,16 @@ function AppLayout({ children, user }: Props) {
     <>
       <Script
         src="https://analytics.example.com/track.js"
-        strategy="lazyOnload"  // loads after everything else
+        strategy="lazyOnload"  // noncritical idle loading
       />
       {children}
-      {user.isAdmin && <AdminDashboard />} {/* chunk only downloaded for admins */}
+      {user.isAdmin && <AdminDashboard />} {/* optional render; prefetch behavior depends on framework */}
     </>
   )
 }
 ```
 
-Non-admin users save 150KB of JavaScript. All users benefit from deferred analytics script (no more render-blocking).
+Measure the actual initial-byte change and analytics timing; no fixed savings are established here.
 
 ### Example 3: Next.js optimizePackageImports Alternative (BarrelImports)
 
@@ -426,3 +385,11 @@ This approach maintains ergonomic imports while getting the bundle size benefits
 - Vercel Engineering — React Best Practices (January 2026), MIT
 - Vercel Blog — How We Optimized Package Imports in Next.js
 - Web Almanac — JavaScript Byte Weight and Performance Correlation
+
+## Candidate verification references
+
+- https://nextjs.org/docs/app/api-reference/config/next-config-js/optimizePackageImports
+- https://nextjs.org/docs/app/guides/lazy-loading
+- https://vercel.com/blog/how-we-optimized-package-imports-in-next-js
+- https://nextjs.org/docs/app/api-reference/components/script
+- https://react.dev/reference/rsc/use-client

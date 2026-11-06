@@ -19,7 +19,7 @@ Templates/
 │   └── Gate.hbs      # Validation checklists
 ├── Data/             # YAML data sources
 │   ├── Agents.yaml   # All agent definitions
-│   ├── VoicePresets.yaml    # Voice calibration presets
+│   ├── VoicePresets.yaml    # Voice calibration reference (not Voice.hbs input)
 │   └── ValidationGates.yaml # Standard validation gates
 └── Compiled/         # Generated output (gitignored)
 ```
@@ -93,7 +93,7 @@ Use an explicitly chosen evaluation tool or human review; record the baseline, c
 
 ### Basic Rendering
 
-Relative template, data and output paths are looked up under `Templates/` first (then, for template and data, the current directory), so `Primitives/Roster.hbs` and `Data/Agents.yaml` below are `Templates/Primitives/Roster.hbs` and `Templates/Data/Agents.yaml`. Without `--output` the result prints to stdout.
+Relative template, data and output paths are looked up under `Templates/` first (then, for template and data, the current directory), so `Primitives/Roster.hbs` and `Data/Agents.yaml` below are `Templates/Primitives/Roster.hbs` and `Templates/Data/Agents.yaml`. Without `--output` the result prints to stdout. Create the destination parent directory first when using `--output` (for example, `Templates/Compiled`); the renderer does not create missing directories. `Voice.hbs` consumes the `agents` and `archetypes` shape in `Agents.yaml`; `VoicePresets.yaml` is a separate reference catalogue, not that template's input.
 
 ```bash
 bun run <skill-dir>/Tools/RenderTemplate.ts \
@@ -126,7 +126,7 @@ bun run <skill-dir>/Tools/RenderTemplate.ts \
    - Enable A/B testing of structures
 
 4. **Validate Before Rendering**
-   - Check variables against a data file with `-d`; the check reports each variable the data lacks (an error under `--strict`, a warning otherwise), and a data file you name that is missing is an error. Without `-d` only syntax and block balance are checked
+   - With `-d`, check lookups in active built-in `if`/`unless`/`each`/`with` scopes for that data, including aliases and parent/root references. Missing checked values are errors under `--strict`, warnings otherwise. Missing or malformed data is an error. Custom helpers, subexpressions and partials remain unchecked and produce a scope warning; render representative data to verify them. Without `-d`, validation checks syntax and reports approximate metadata, not runtime data validity.
    - Validate data against schema
    - Test with edge cases
 
@@ -227,7 +227,7 @@ bun run <skill-dir>/Tools/ValidateTemplate.ts \
 | I want to... | Use Template | With Data |
 |--------------|--------------|-----------|
 | Generate agent roster | `Roster.hbs` | `Agents.yaml` |
-| Configure voice settings | `Voice.hbs` | `VoicePresets.yaml` |
+| Configure agent voices/archetypes | `Voice.hbs` | `Agents.yaml` |
 | Create workflow structure | `Structure.hbs` | Custom YAML |
 | Brief an agent | `Briefing.hbs` | Task context |
 | Create validation checklist | `Gate.hbs` | `ValidationGates.yaml` |

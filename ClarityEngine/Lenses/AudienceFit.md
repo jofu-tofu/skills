@@ -33,7 +33,7 @@ You know the subject, so its terms read as plain to you even when they are not p
 
 Example: In a kickoff summary, replace "The checked export sender code excludes draft invoices" with "The export API does not currently send draft invoices." Keep the evidence limit nearby: "Based on a code review; this still needs testing in a running system."
 
-**Fail when:** Unnecessary jargon remains, even if the reader understood the overall point. It is Major when it obscures the main point or action or recurs throughout audience-facing text; an isolated phrase with no material effect is Polish. Defining an unnecessary term does not pass.
+**Fail when:** Unnecessary jargon remains, even if the reader understood the overall point. It is Major when it materially impairs understanding or action, including recurring barriers whose cumulative effect is supported by the passage and reader evidence. Recurrence alone does not establish that impact; minor translation or nearby lookup can remain Polish. Defining an unnecessary term does not pass.
 
 ### RC-20: Sentences state who does what, directly
 

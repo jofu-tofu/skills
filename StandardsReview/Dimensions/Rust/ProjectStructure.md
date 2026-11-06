@@ -4,17 +4,17 @@
 
 ## Mental Model
 
-Rust's project structure is inseparable from Cargo. Unlike ecosystems where project layout is a matter of convention, Cargo's workspace system, feature flags, and semver resolution are compiler-enforced mechanisms that directly affect whether code compiles, how large the binary is, and whether downstream consumers can use your crate at all.
+Rust's project structure is inseparable from Cargo. Unlike ecosystems where project layout is a matter of convention, Cargo's workspace system, feature flags, and semver resolution are Cargo and compiler mechanisms that directly affect whether code compiles, how large the binary is, and whether downstream consumers can use your crate at all.
 
-The foundational unit is the **workspace**. Any project with two or more crates should use `[workspace]` and `[workspace.dependencies]` to share a single `Cargo.lock` and unified dependency versions. Without a workspace, each crate resolves dependencies independently, leading to version divergence where `serde 1.0.180` in one crate is a different type than `serde 1.0.193` in another -- even though they are semver-compatible. The workspace eliminates this class of bug entirely.
+For related crates maintained together, prefer a **workspace** with shared dependency declarations. It shares a lockfile and build directory. Cargo ordinarily unifies compatible requirements such as `serde = "1.0.180"` and `"1.0.193"` even without workspace inheritance. Workspaces do not prevent all duplicate versions, particularly incompatible requirements.
 
-**Feature flags** are Cargo's mechanism for conditional compilation, and they carry a critical constraint: features must be additive. Cargo resolves features by taking the union of all features requested by all crates in the dependency tree. If crate A enables your `json` feature and crate B enables your `yaml` feature, both features are active simultaneously. If those features are mutually exclusive -- defining the same module, the same function, or toggling incompatible behavior -- compilation fails and the downstream consumer has no fix. Designing features to be additive from day one is not optional; it is a correctness requirement imposed by the resolver.
+**Feature flags** are Cargo's mechanism for conditional compilation, and they carry a critical constraint: features must be additive. Cargo resolves features by taking the union of all features requested by all crates in the dependency tree. If crate A enables your `json` feature and crate B enables your `yaml` feature, both features are active simultaneously. If those features are mutually exclusive -- defining the same module, the same function, or toggling incompatible behavior -- compilation can fail; consumers may need to change dependency or feature selections. For composable libraries, design additive features. Cargo permits mutually exclusive features, but they constrain downstream composition.
 
-Default features deserve equal care. They determine what every consumer gets unless they explicitly opt out with `default-features = false`. Overly broad defaults force unnecessary dependencies (and compile time) on every consumer. Overly narrow defaults force every consumer to discover and enable the features they need. The sweet spot is the 80% use case: the set of features that most consumers need, with everything else available as explicit opt-in.
+Default features deserve equal care. They determine what every consumer gets unless they explicitly opt out with `default-features = false`. Overly broad defaults force unnecessary dependencies (and compile time) on every consumer. Overly narrow defaults force every consumer to discover and enable the features they need. Choose defaults from the actual consumer needs; an 80% target is a house heuristic, not a measured Cargo rule. Disabling defaults on one dependency edge does not prevent another edge from enabling them.
 
-**Module organization** follows from Rust's visibility system. The `pub(crate)` modifier enables feature-based module layouts where each domain concept lives in its own subtree, exposes a narrow public API through `mod.rs`, and keeps implementation details invisible to sibling modules. This is a structural advantage over layer-based layouts (models/, handlers/, services/) where a single feature change touches files across the entire tree.
+**Module organization** follows from Rust's visibility system. The `pub(crate)` modifier enables feature-based module layouts where each domain concept lives in its own subtree, exposes a narrow public API through `mod.rs`, and keeps private implementation details hidden; `pub(crate)` items remain accessible across the crate. Choose a layout that fits actual change patterns; neither feature nor layer organization is required by Rust.
 
-**Re-exporting public dependencies** is a semver obligation. When your public API returns or accepts types from a dependency, consumers are transitively coupled to that dependency's version. Without a `pub use` re-export, consumers must independently depend on the same crate at a compatible version -- and a major version bump in your dependency silently becomes a breaking change in yours.
+**Public dependency types** create semver obligations whether or not they are re-exported. When your public API returns or accepts types from a dependency, consumers are transitively coupled to that dependency's version. A re-export gives callers a naming path; otherwise they may use type inference or declare a compatible dependency. Incompatible changes to exposed dependency types require semver review either way.
 
 **Semver discipline** ties everything together. The Rust ecosystem's dependency resolution assumes that semver is followed faithfully. A breaking change in a patch release can cascade through the dependency tree, breaking builds for crates that never directly depend on yours. Automated checking with `cargo-semver-checks` catches the most common accidental breakages: removed public items, changed signatures, tightened trait bounds.
 
@@ -22,7 +22,7 @@ Default features deserve equal care. They determine what every consumer gets unl
 
 ### When Reviewing Code
 
-Check workspace setup first: if the repository contains more than one `Cargo.toml` with `[package]`, verify that a root `[workspace]` exists and that shared dependencies use `dep.workspace = true`. Look for duplicate dependency versions across crate `Cargo.toml` files -- these indicate missing `[workspace.dependencies]` entries. Examine feature flags for additivity: search for `#[cfg(feature = "...")]` blocks that define the same item name or module. Check that `cargo test --all-features` is in CI. Verify that public API types from dependencies are re-exported with `pub use`. Look for `use foo::*` outside of test modules and preludes.
+Check workspace setup first: if the repository contains more than one `Cargo.toml` with `[package]`, verify that a root `[workspace]` exists and that shared dependencies use `dep.workspace = true`. Inspect resolved duplicates and their constraints; differing manifest requirements alone do not establish duplicate compiled crates. Examine feature flags for additivity: search for `#[cfg(feature = "...")]` blocks that define the same item name or module. Check default, no-default, and supported individual/combined feature configurations in CI; `--all-features` tests only the all-enabled configuration. Verify that public API types from dependencies are re-exported with `pub use`. Look for `use foo::*` outside of test modules and preludes.
 
 ### When Designing / Planning
 
@@ -30,16 +30,16 @@ Decide on workspace structure before writing code. Identify the crate boundaries
 
 ### When Implementing
 
-Use `[workspace.dependencies]` for every shared dependency. Use the `dep:` syntax in feature definitions to avoid implicit feature activation. Organize modules by feature domain, not technical layer. Mark internal types `pub(crate)`. Import symbols explicitly rather than with wildcards. Re-export any dependency type that appears in a public function signature, struct field, or trait bound. Add `cargo-semver-checks` to CI for any published crate.
+Use `[workspace.dependencies]` for every shared dependency. Use the `dep:` syntax in feature definitions to avoid implicit feature activation. Prefer feature-domain organization when it fits the project; technical-layer organization is also valid. Mark internal types `pub(crate)`. Import symbols explicitly rather than with wildcards. Re-export any dependency type that appears in a public function signature, struct field, or trait bound. Add `cargo-semver-checks` to CI for any published crate.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
 | WorkspaceForMultiCrate | HIGH | Use Cargo workspaces with shared dependencies for multi-crate projects |
-| AdditiveFeatureFlags | CRITICAL | Feature flags must be additive; test all combinations in CI |
+| AdditiveFeatureFlags | CRITICAL | Feature flags must be additive; test supported feature combinations in CI |
 | MinimalDefaultFeatures | MEDIUM | Default features cover the 80% use case; core works without defaults |
-| ModulePerFeature | MEDIUM | Organize by feature domain, not technical layer; use pub(crate) internally |
+| ModulePerFeature | MEDIUM | Prefer domain grouping when useful; restrict internal visibility |
 | AvoidWildcardImports | MEDIUM | No wildcard imports except in tests and curated preludes |
 | ReExportPublicDependencies | HIGH | Re-export dependency types exposed in public API signatures |
 | SemverDiscipline | HIGH | Run cargo-semver-checks in CI; understand what constitutes a breaking change |
@@ -49,11 +49,11 @@ Use `[workspace.dependencies]` for every shared dependency. Use the `dep:` synta
 
 ### RS10.1 WorkspaceForMultiCrate
 
-**Impact: HIGH (Prevents dependency version divergence and duplicated build artifacts across crates)**
+**Impact: HIGH when uncoordinated builds cause demonstrated maintenance or compatibility problems**
 
-Any project with two or more crates should use a Cargo workspace. Without one, each crate resolves dependencies independently, leading to version conflicts, duplicated compilation, and inconsistent dependency trees that only surface at integration time.
+Prefer a Cargo workspace for related crates maintained together. Independent builds can have separate lockfiles and build outputs; this is a maintenance concern, not proof of incompatible dependency types.
 
-**Incorrect: Separate projects with independent Cargo.toml files**
+**Less centralized for related projects: Separate dependency declarations**
 
 ```rust
 // crate-a/Cargo.toml
@@ -71,10 +71,11 @@ name = "crate-b"
 version = "0.1.0"
 
 [dependencies]
-serde = "1.0.180"  # different version than crate-a
+serde = "1.0.180"  # different lower bound, compatible with crate-a
 tokio = { version = "1.35", features = ["rt"] }  # different features
 crate-a = { path = "../crate-a" }
-// Two different serde versions compiled, types are incompatible across crates
+// These compatible requirements normally resolve to one serde version.
+// This example demonstrates duplicated declarations, not incompatible types.
 ```
 
 **Correct: Workspace with shared dependency definitions**
@@ -106,7 +107,7 @@ version = "0.1.0"
 serde = { workspace = true }
 tokio = { workspace = true }
 crate-a = { path = "../crate-a" }
-// Single version of each dependency, single Cargo.lock, shared build cache
+// Shared declarations, Cargo.lock and build directory; transitive duplicates remain possible.
 ```
 
 **When acceptable:**
@@ -119,7 +120,7 @@ crate-a = { path = "../crate-a" }
 
 **Impact: CRITICAL (Mutually exclusive features cause compilation failures in dependency trees)**
 
-Cargo features must be additive: enabling any combination of features must compile and produce correct behavior. When a downstream crate enables features from two of its dependencies that transitively activate conflicting features in your crate, compilation fails or behavior silently changes. This is unfixable by the downstream consumer.
+For libraries intended to compose freely, require additive features as policy: supported combinations should compile and preserve existing functionality. When a downstream crate enables features from two of its dependencies that transitively activate conflicting features in your crate, compilation fails or behavior silently changes. Consumers may have to change dependency or feature selections; additivity avoids imposing that constraint.
 
 **Incorrect: Mutually exclusive features that break when combined**
 
@@ -173,8 +174,8 @@ pub mod yaml {
 
 // CI: test feature combinations
 // cargo test --no-default-features
-// cargo test --features json
-// cargo test --features yaml
+// cargo test --no-default-features --features json
+// cargo test --no-default-features --features yaml
 // cargo test --all-features
 ```
 
@@ -188,7 +189,7 @@ pub mod yaml {
 
 **Impact: MEDIUM (Bloated defaults force unnecessary dependencies on all consumers)**
 
-Default features should cover the common use case (roughly 80% of consumers) without pulling in heavy or optional dependencies. Consumers who specify `default-features = false` must still get a functional core crate that compiles and passes its own tests.
+As a project policy, default features should cover the common use case without pulling in heavy or optional dependencies. Consumers who specify `default-features = false` must still get a functional core crate that compiles and passes its own tests.
 
 **Incorrect: Kitchen-sink defaults that penalize minimal consumers**
 
@@ -241,9 +242,9 @@ flate2 = { version = "1.0", optional = true }
 
 **Impact: MEDIUM (Layer-based organization scatters related logic and increases coupling)**
 
-Organize modules by feature or domain concept, not by technical layer. A change to a feature should touch files in one module subtree, not scatter across `models/`, `handlers/`, `services/`, and `repositories/`. Use `pub(crate)` for internal types to keep the public surface minimal.
+As a project organization preference, group by feature or domain when it keeps related changes together. Layer-based layouts are valid Rust and can suit the project. A change to a feature should touch files in one module subtree, not scatter across `models/`, `handlers/`, `services/`, and `repositories/`. Use `pub(crate)` for internal types to keep the public surface minimal.
 
-**Incorrect: Layer-based organization**
+**Less suitable when changes cross many layers: Layer-based organization**
 
 ```rust
 // src/
@@ -262,7 +263,7 @@ Organize modules by feature or domain concept, not by technical layer. A change 
 
 // Adding "order cancellation" touches 4 directories
 // user_handler.rs imports from models, services, repositories
-// Every layer depends on every other layer's types
+// Inspect actual dependencies; this layout alone does not imply coupling.
 ```
 
 **Correct: Feature-based organization**
@@ -290,7 +291,7 @@ pub fn endpoints() -> Router {
         .route("/orders/:id/cancel", post(cancel))
 }
 
-// Internal implementation hidden from other modules
+// Visible throughout this crate, hidden from downstream crates
 pub(crate) use storage::save_order;
 
 // Adding "order cancellation" only touches src/order/
@@ -306,7 +307,7 @@ pub(crate) use storage::save_order;
 
 **Impact: MEDIUM (Wildcard imports cause name collisions and obscure where symbols originate)**
 
-Glob imports (`use foo::*`) pull every public symbol into scope. When two glob imports export the same name, the code fails to compile. Even without collisions, readers cannot determine where a type or function comes from without checking every imported module. Explicit imports serve as documentation.
+Glob imports (`use foo::*`) pull every public symbol into scope. Conflicting glob imports can coexist until an ambiguous name is used; explicit imports can disambiguate. Even without collisions, readers cannot determine where a type or function comes from without checking every imported module. Explicit imports serve as documentation.
 
 **Incorrect: Wildcard imports causing ambiguity and collision**
 
@@ -358,9 +359,9 @@ fn handle(stream: TcpStream) {
 
 ### RS10.6 ReExportPublicDependencies
 
-**Impact: HIGH (Consumers forced to find and match exact dependency versions you use internally)**
+**Impact: HIGH when unmanaged public dependency changes break consumers**
 
-When your public API exposes types from a dependency (in function signatures, trait bounds, or struct fields), you must re-export those types. Otherwise consumers must add the same dependency at a compatible version, and a semver-incompatible upgrade in your dependency becomes a silent breaking change for them.
+When your public API exposes types from a dependency (in function signatures, trait bounds, or struct fields), consider re-exporting those types so callers can name them without another dependency declaration. Re-exports do not remove version coupling: incompatible public dependency changes can break callers either way.
 
 **Incorrect: Public API leaks dependency types without re-export**
 
@@ -369,14 +370,15 @@ When your public API exposes types from a dependency (in function signatures, tr
 use http::StatusCode;  // from the `http` crate
 
 pub struct Response {
-    pub status: StatusCode,  // consumers must depend on `http` crate directly
+    pub status: StatusCode,  // naming this type requires a public path; inference may suffice
     pub body: Vec<u8>,
 }
 
 pub fn get(url: &str) -> Response { /* ... */ }
 
-// Consumer's Cargo.toml must add:
-//   http = "0.2"  # must match exact major version my-http-client uses
+// To name http::StatusCode directly, the consumer can add:
+//   http = "0.2"  # compatible with the exposed type
+// Inference can avoid explicitly naming the type.
 // If my-http-client upgrades to http 1.0, consumer's code silently breaks
 // because http::StatusCode 0.2 != http::StatusCode 1.0
 ```
@@ -468,17 +470,17 @@ pub struct Config {
 ```
 
 **When acceptable:**
-- Pre-1.0 crates (`0.x.y`) where the API is explicitly unstable and consumers expect breakage
+- Pre-1.0 releases still follow Cargo compatibility ranges: `0.1.x` patch releases are compatible; breaking changes normally move to `0.2.0`. For `0.0.x`, each patch version is incompatible.
 - Internal crates in a workspace that are never published to crates.io
 
 
 ## Rule Interactions
 
-**AdditiveFeatureFlags + MinimalDefaultFeatures**: These rules work together to define the feature surface. Additive flags ensure any combination compiles; minimal defaults ensure consumers are not burdened with unnecessary dependencies. A feature that is additive but included in defaults unnecessarily still increases compile time for every consumer.
+**AdditiveFeatureFlags + MinimalDefaultFeatures**: These rules work together to define the feature surface. Additive feature design supports composition; test the supported matrix to catch implementation defects. Small defaults can reduce dependency work, but actual build cost depends on enabled features and use.
 
-**ReExportPublicDependencies + SemverDiscipline**: Re-exporting isolates consumers from dependency version changes, but it also means that bumping the re-exported dependency's major version is a breaking change in your crate. Semver checks catch this: if you upgrade `http` from 0.2 to 1.0 and re-export `StatusCode`, `cargo-semver-checks` will flag the type change.
+**ReExportPublicDependencies + SemverDiscipline**: Re-exporting supplies a convenient type path, but does not isolate consumers from incompatible public dependency changes. An exposed type changing from `http` 0.2 to 1.0 requires compatibility review. Automated checks supplement review; a pass is not proof that every source or behavioral compatibility issue is absent.
 
-**WorkspaceForMultiCrate + ModulePerFeature**: Workspace structure handles inter-crate organization while module-per-feature handles intra-crate organization. Together they ensure that both levels of the project hierarchy are organized around domain concepts rather than technical layers.
+**WorkspaceForMultiCrate + ModulePerFeature**: Workspaces coordinate packages; domain grouping is an independent organization preference. A workspace does not impose module boundaries.
 
 **AvoidWildcardImports + ModulePerFeature**: Feature-based modules with narrow `pub(crate)` exports make explicit imports natural -- there are fewer symbols to import, and each one maps directly to a domain concept.
 
@@ -486,19 +488,19 @@ pub struct Config {
 
 ### CRITICAL
 
-- **Mutually exclusive feature flags in a library crate**: Two features that define the same symbol or toggle incompatible behavior. Downstream crates cannot resolve this conflict because Cargo takes the union of all requested features.
+- **Mutually exclusive feature flags in a library crate**: Two features that define the same symbol or toggle incompatible behavior. Cargo feature unification can force both on; resolving the conflict may require dependency changes. Resolver versions also have documented contexts where features are not unified.
 - **Shipping breaking changes in patch releases**: Removing public items, changing function signatures, or tightening trait bounds in a patch or minor release. Silent build failures cascade through the dependency tree.
 
 ### HIGH
 
-- **Missing workspace for multi-crate projects**: Each crate resolves dependencies independently, leading to duplicate compilation, version conflicts, and type incompatibility across crate boundaries.
-- **Public API exposing dependency types without re-export**: Consumers must find and match the exact dependency version, and any major version bump silently breaks their code.
-- **No CI testing of `--all-features`**: Feature combinations that fail to compile are only discovered when a downstream consumer happens to activate the right combination.
+- **Missing workspace for jointly maintained crates**: Consider shared tooling and build outputs under project policy; absence alone does not establish type incompatibility.
+- **Unmanaged public dependency coupling**: Re-exports can simplify naming, but compatibility must be reviewed with or without them; a compatible requirement need not pin the exact version.
+- **Missing feature-matrix checks**: Test supported configurations, including defaults disabled. `--all-features` alone misses code under `cfg(not(feature = "..."))`.
 
 ### MEDIUM
 
 - **Wildcard imports in production code**: Name collisions surface as cryptic "ambiguous import" errors, and readers lose the ability to trace where symbols originate.
-- **Layer-based module organization**: Adding a feature requires touching files in every layer directory, increasing the scope and risk of every change.
+- **Layout mismatched to project needs**: Evaluate actual change locality; a layer-based layout alone is not a correctness defect.
 - **Kitchen-sink default features**: Every consumer pays the compile-time and binary-size cost of dependencies they do not use.
 
 ## Does Not Cover
@@ -520,3 +522,13 @@ pub struct Config {
 - The Rust Programming Language, Chapter 7: Managing Growing Projects with Packages, Crates, and Modules
 - The Rust Programming Language, Chapter 14.3: Cargo Workspaces
 - Rust API Guidelines, C-STABLE: Public dependencies of a stable crate are stable
+
+### Verified primary references for candidate corrections
+
+- https://doc.rust-lang.org/cargo/reference/resolver.html
+- https://doc.rust-lang.org/cargo/reference/workspaces.html
+- https://doc.rust-lang.org/cargo/reference/features.html
+- https://doc.rust-lang.org/cargo/reference/semver.html
+- https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
+- https://doc.rust-lang.org/reference/visibility-and-privacy.html
+- https://doc.rust-lang.org/reference/items/use-declarations.html

@@ -2,10 +2,11 @@
 
 **Contents:** Core Doctrine (upstream, current) · Retained Reference (from the 2026-05 upstream; superseded upstream, kept for the workflows) · the host Extensions
 
-> **Attribution.** The aesthetic doctrine in this file is mirrored from Anthropic's open-source `frontend-design` skill, MIT-licensed.
+> **Attribution.** The aesthetic doctrine in this file is mirrored from Anthropic's open-source `frontend-design` skill, licensed under Apache-2.0.
 > Source: https://github.com/anthropics/skills/tree/main/skills/frontend-design
 > Authors: Prithvi Rajasekaran, Alexander Bricken (Anthropic).
-> License: MIT (see Webdesign/References/FrontendDesignPhilosophy.LICENSE.txt for full terms).
+> License: Apache-2.0; see [bundled upstream terms](FrontendDesignPhilosophy.LICENSE.txt), retrieved from the recorded upstream commit41bbe19d. Local contributor terms remain separately in ../LICENSE.txt.
+> Local modification: attribution/license pointer corrected2026-11-05; the imported doctrine is unchanged.
 > Imported: 2026-09-03 from upstream commit `41bbe19d` ("Update frontend-design skill to avoid generic design defaults", #1713). Previous import 2026-05-08. The upstream text was replaced wholesale in that commit; § Core Doctrine below is the current upstream verbatim, § Retained Reference keeps the prior version's register list and type recipes because the `🎨 AESTHETIC:` and `🔠 TYPE:` lines in `Intents/DirectDesign.md` draw on them, and § the host Extensions carries the the host-specific overrides, clearly marked.
 
 This file is the load-bearing reference for the **DirectDesign** workflow and the brief source for **NativeDesign** artboards. The intents route here for the actual aesthetic content.

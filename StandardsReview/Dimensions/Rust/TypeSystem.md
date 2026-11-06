@@ -6,15 +6,15 @@
 
 Rust's type system is not just a bug-prevention mechanism -- it is a design language. Every struct, enum, trait bound, and generic parameter is a statement about what a program means and what it is allowed to do. The goal of this dimension is to shift correctness guarantees from runtime checks and documentation into the type system itself, where the compiler enforces them for free.
 
-The foundational insight is **zero-cost abstraction at the type level**. Newtypes, phantom types, and typestate markers are all erased by the compiler -- they exist only during type checking and generate no runtime code. This means you can encode rich invariants (units of measurement, state machine transitions, semantic identity) without paying any performance cost. The only cost is a few lines of type definitions, and the payoff is that entire categories of bugs become impossible.
+Newtypes distinguish meanings while retaining their wrapped data. Zero-sized state markers and `PhantomData` can encode distinctions without storing a runtime tag. Operations, validation, and stored fields still have their normal costs; wrappers do not guarantee arbitrary implementations are costless.
 
-Traits are Rust's primary tool for abstraction. The choice between generics (static dispatch) and trait objects (dynamic dispatch) is a fundamental architecture decision. Generics produce specialized machine code for each concrete type -- the compiler can inline and optimize across the abstraction boundary, giving you the performance of hand-written specialized code with the expressiveness of polymorphism. Trait objects (`dyn Trait`) use vtable indirection, which costs a pointer dereference per call but enables heterogeneous collections and runtime polymorphism. The default should be generics; reach for `dyn Trait` when you need runtime flexibility or want to reduce binary size.
+Traits are Rust's primary tool for abstraction. The choice between generics (static dispatch) and trait objects (dynamic dispatch) is a fundamental architecture decision. Generics produce specialized machine code for each concrete type -- the compiler can inline and optimize across the abstraction boundary, giving you the performance of hand-written specialized code with the expressiveness of polymorphism. Trait objects (`dyn Trait`) support runtime dispatch through a vtable, enabling heterogeneous collections and runtime polymorphism; optimization may eliminate known indirect calls. The default should be generics; reach for `dyn Trait` when you need runtime flexibility or want to reduce binary size.
 
 Associated types and generic parameters serve different purposes. An associated type says "there is exactly one natural choice of this type for each implementor" (e.g., `Iterator::Item`). A generic parameter says "this trait can be implemented multiple times for different type arguments" (e.g., `From<T>`). Choosing correctly eliminates ambiguity and reduces annotation noise.
 
-Trait design has a forward-compatibility dimension that is unique to Rust's ecosystem. Because adding a required method to a trait is a breaking change for all implementors, library authors must think ahead. Sealed traits prevent external implementations, preserving the freedom to evolve the trait. Default method implementations let you add new methods without breaking existing code. These patterns are not optional niceties -- they are structural requirements for any public trait that will exist across semver boundaries.
+Trait evolution needs compatibility review. Sealing controls the implementor set; default methods reduce implementation burden. Neither makes all changes nonbreaking: method-name collisions, loss of dyn compatibility, and changed behavior can affect callers. Open extension traits are also legitimate.
 
-Finally, the "derive what you can" principle recognizes that types in Rust are social contracts. A type that lacks `Debug` cannot appear in assert messages. A type that lacks `Clone` cannot be duplicated when ownership rules demand it. A type that lacks `PartialEq` cannot be compared in tests. Eagerly deriving common traits on public types is not boilerplate -- it is the minimum social contract that makes a type a good citizen in the ecosystem.
+Implement common traits when their semantics fit. `Debug` supports diagnostic formatting, `Clone` explicit duplication, and `PartialEq` equality operators. Omit inappropriate traits: unique resources may deliberately be non-Clone, secrets may need redacted Debug, and a type without a meaningful valid default should omit Default.
 
 ## Consumer Guide
 
@@ -28,7 +28,7 @@ Identify the domain invariants that should be compile-time guarantees. Map out s
 
 ### When Implementing
 
-Start every new domain concept by asking: "Should this be a newtype?" If two values of the same primitive type have different meanings, the answer is almost always yes. Use `PhantomData` for type-level tags that carry no data. Default to generics for trait bounds; switch to `dyn Trait` only when you need heterogeneous collections or plugin-style extensibility. Provide default implementations for trait methods where a sensible baseline exists. Derive `Debug, Clone, PartialEq, Eq, Hash, Default` on every public struct unless a specific trait is semantically inappropriate for the type.
+Start every new domain concept by asking: "Should this be a newtype?" If two values of the same primitive type have different meanings, the answer is almost always yes. Use `PhantomData` for type-level tags that carry no data. Choose generics or `dyn Trait` for the needed interface, code size, compile time, and measured performance. Provide default implementations for trait methods where a sensible baseline exists. Derive `Debug, Clone, PartialEq, Eq, Hash, Default` on every public struct unless a specific trait is semantically inappropriate for the type.
 
 ## Rules in This Dimension
 
@@ -38,10 +38,10 @@ Start every new domain concept by asking: "Should this be a newtype?" If two val
 | TypestatePattern | MEDIUM | Encode state machines in generics so invalid transitions are compile errors |
 | AssociatedTypesOverGenerics | MEDIUM | Use associated types when a trait has one natural implementation per type |
 | TraitObjectsVsGenerics | HIGH | Default to generics for performance; use dyn Trait for runtime polymorphism |
-| SealedTraitsForExtensibility | MEDIUM | Seal public traits to preserve the ability to add methods across versions |
+| SealedTraitsForExtensibility | MEDIUM | Seal library-controlled traits; still review caller compatibility |
 | PhantomDataForTypeConstraints | MEDIUM | Use PhantomData for type parameters that encode invariants without storing data |
 | DefaultTraitImplementations | MEDIUM | Provide default method implementations to reduce implementor burden |
-| EagerCommonTraitImpls | HIGH | Derive Debug, Clone, PartialEq, Eq, Hash, Default on public types |
+| EagerCommonTraitImpls | MEDIUM | Implement common traits when their semantics fit the public contract |
 
 
 ---
@@ -50,7 +50,7 @@ Start every new domain concept by asking: "Should this be a newtype?" If two val
 
 **Impact: HIGH (Prevents accidental mixing of semantically distinct values that share a primitive type)**
 
-When two parameters have the same primitive type but different meanings, nothing stops you from swapping them at the call site. The compiler sees two `u64` values and is satisfied. A newtype wrapper -- `struct UserId(u64)` -- makes each meaning a distinct type, turning argument-order bugs into compile errors at zero runtime cost.
+When two parameters have the same primitive type but different meanings, nothing stops you from swapping them at the call site. The compiler sees two `u64` values and is satisfied. Different wrappers, such as `AccountId` and `Cents`, reject cross-domain arguments. Two values of the same `AccountId` type can still be swapped; distinguishing source and destination would require separate role types or another API choice.
 
 **Incorrect: Bare primitives allow silent misuse**
 
@@ -72,7 +72,7 @@ fn main() {
 }
 ```
 
-**Correct: Newtypes make misuse a compile error**
+**Correct: Newtypes reject mixing amounts with account IDs**
 
 ```rust
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -90,7 +90,8 @@ fn main() {
     let bob = AccountId(2002);
     let amount = Cents(500);
 
-    transfer(alice, bob, amount); // correct -- types guide the call
+    transfer(alice, bob, amount); // types distinguish IDs from money
+    transfer(bob, alice, amount); // also compiles: AccountId does not encode direction
     // transfer(amount, alice, bob); // compile error: expected AccountId, found Cents
 }
 ```
@@ -106,7 +107,7 @@ fn main() {
 
 **Impact: MEDIUM (Encodes state machines in the type system so invalid transitions are compile errors)**
 
-The typestate pattern uses generic type parameters to represent the current state of an object. Transitions between states consume the old value and return a new value with a different type parameter, making it impossible to call methods that are invalid for the current state. The state types are zero-sized, so the pattern has no runtime cost.
+The typestate pattern uses generic type parameters to represent the current state of an object. Transitions between states consume the old value and return a new value with a different type parameter, making it impossible to call methods that are invalid for the current state. Zero-sized state markers need no runtime tag; connecting, storing data, and transitions can still perform work. The state records the API protocol, not proof that a remote connection remains live.
 
 **Incorrect: Runtime state checks that can be forgotten**
 
@@ -190,12 +191,12 @@ fn main() {
 
 **Impact: MEDIUM (Associated types clarify that a trait has one natural implementation per type, reducing annotation noise)**
 
-When a trait has a type that is determined by the implementor and there is only one sensible choice per implementing type, use an associated type instead of a generic parameter. Generic parameters allow multiple implementations of the same trait for one type (`impl Trait<A> for X` and `impl Trait<B> for X`), which creates ambiguity and forces callers to use turbofish syntax. Associated types express the "one implementation per type" contract directly.
+When a trait has a type that is determined by the implementor and there is only one sensible choice per implementing type, use an associated type instead of a generic parameter. Generic parameters allow multiple implementations of the same trait for one type (`impl Trait<A> for X` and `impl Trait<B> for X`), which can require disambiguation when inference cannot determine the intended implementation. Associated types express the "one implementation per type" contract directly.
 
 **Incorrect: Generic parameter where associated type belongs**
 
 ```rust
-// Callers must always specify the output type
+// The implementation may support several Node/Edge pairs
 trait Graph<N, E> {
     fn edges(&self, node: &N) -> Vec<E>;
     fn nodes(&self) -> Vec<N>;
@@ -209,7 +210,7 @@ impl Graph<i32, i32> for MyGraph {
     fn nodes(&self) -> Vec<i32> { vec![1, 2, 3] }
 }
 
-// Callers need turbofish everywhere
+// This bound fixes the pair; callers can often rely on inference
 fn count_nodes<G: Graph<i32, i32>>(g: &G) -> usize {
     g.nodes().len()
 }
@@ -253,9 +254,9 @@ fn count_nodes<G: Graph>(g: &G) -> usize {
 
 **Impact: HIGH (Choosing wrong dispatch mechanism costs either runtime performance or binary size)**
 
-Static dispatch via generics (monomorphization) produces specialized machine code for each concrete type -- zero overhead at runtime but increased binary size. Dynamic dispatch via `dyn Trait` uses a vtable pointer -- single compiled function, smaller binary, but indirect call overhead and loss of inlining. Default to generics for performance-critical paths; use `dyn Trait` when you need heterogeneous collections, plugin architectures, or to reduce compile times on cold paths.
+Generics permit specialization for concrete types. Trait objects dispatch through a vtable unless optimization resolves the target. Specialization can help optimization and increase code size, but neither dispatch choice guarantees speed, inlining, vectorization, or binary size. Prefer generics where useful in hot paths; retain intentional dynamic dispatch and measure before treating it as a performance defect.
 
-**Incorrect: Trait objects in a hot loop where static dispatch is free**
+**Potential cost: Trait-object dispatch in a measured hot loop**
 
 ```rust
 trait Processor {
@@ -267,15 +268,15 @@ impl Processor for Doubler {
     fn process(&self, value: f64) -> f64 { value * 2.0 }
 }
 
-// Dynamic dispatch prevents inlining -- bad in a tight loop
+// Indirect dispatch may constrain optimization; inspect and measure the actual build
 fn process_batch(processor: &dyn Processor, data: &mut [f64]) {
     for v in data.iter_mut() {
-        *v = processor.process(*v); // vtable call on every iteration
+        *v = processor.process(*v); // runtime dispatch unless optimized away
     }
 }
 ```
 
-**Correct: Generics allow inlining and vectorization**
+**Alternative: Generics expose a concrete target to optimization**
 
 ```rust
 trait Processor {
@@ -310,9 +311,9 @@ fn run_pipeline(steps: &[Box<dyn Processor>], value: f64) -> f64 {
 
 ### RS5.5 SealedTraitsForExtensibility
 
-**Impact: MEDIUM (Sealed traits let library authors add methods without breaking downstream crates)**
+**Impact: MEDIUM (Sealing controls who implements a trait)**
 
-A sealed trait is one that external crates cannot implement. This is achieved by requiring a private supertrait that lives in a private module. Because no external type can implement the private supertrait, the library author retains the freedom to add new required methods, change default implementations, or refine the trait's contract without causing a semver-breaking change. Without sealing, adding any required method to a public trait is a breaking change.
+A sealed trait is one that external crates cannot implement. This is achieved by requiring a private supertrait that lives in a private module. Sealing lets the author update the known implementors when adding required methods. It does not protect callers from method ambiguity, loss of dyn compatibility, or changed behavior. Adding a required method to an open trait can break downstream implementations.
 
 **Incorrect: Public trait that anyone can implement -- adding methods breaks users**
 
@@ -338,7 +339,7 @@ mod private {
 pub trait Backend: private::Sealed {
     fn read(&self, key: &str) -> Option<Vec<u8>>;
     fn write(&self, key: &str, value: &[u8]);
-    // Safe to add later -- no external implementors exist
+    // All implementors are controlled here; still review caller compatibility
     fn delete(&self, key: &str);
 }
 
@@ -367,7 +368,7 @@ impl Backend for FileBackend {
 
 **Impact: MEDIUM (PhantomData lets you use type parameters without storing data, enabling zero-cost type-level distinctions)**
 
-When a struct has a generic type parameter that does not correspond to any stored field, Rust requires `PhantomData<T>` to tell the compiler how the type parameter relates to the struct. This enables patterns like units of measurement, tagged IDs, and typestate markers where the type parameter exists solely for compile-time safety -- it occupies zero bytes at runtime.
+A struct cannot leave a type parameter unused. A suitable `PhantomData` field can express its relationship without storing a value of that type. `PhantomData<T>` is one form; choose the marker to reflect intended variance, auto traits, and drop checking. The marker has size zero and alignment one.
 
 **Incorrect: Storing unnecessary data or ignoring type safety**
 
@@ -429,7 +430,7 @@ fn main() {
 **When acceptable:**
 - The struct only has one meaningful interpretation and adding a phantom type parameter would be over-engineering
 - The generic is used only in a single internal location where the type distinction provides no safety benefit
-- You are working with FFI types where phantom data may confuse layout expectations
+- At FFI boundaries, verify the complete representation and ABI; PhantomData itself has size zero and alignment one
 
 ---
 
@@ -437,7 +438,7 @@ fn main() {
 
 **Impact: MEDIUM (Default methods minimize the burden on implementors and make traits evolvable)**
 
-A trait with many required methods forces every implementor to write boilerplate even when most methods have an obvious default behavior. Providing default implementations for methods that have a sensible baseline lets implementors override only what differs for their type. This also makes traits forward-compatible: adding a new method with a default does not break existing implementors.
+A trait with many required methods forces every implementor to write boilerplate even when most methods have an obvious default behavior. Providing default implementations for methods that have a sensible baseline lets implementors override only what differs for their type. A new defaulted method avoids requiring a new method body from implementors, but can still affect name resolution or dyn compatibility.
 
 **Incorrect: All methods required -- implementor writes redundant boilerplate**
 
@@ -499,9 +500,9 @@ impl Logger for FileLogger {
 
 ### RS5.8 EagerCommonTraitImpls
 
-**Impact: HIGH (Missing common trait derives make public types painful to use in collections, debugging, and tests)**
+**Impact: MEDIUM (Applicable common traits improve interoperability)**
 
-Public types that lack `Debug`, `Clone`, `PartialEq`, or `Hash` become second-class citizens in the Rust ecosystem. They cannot be printed in assert messages, stored in `HashSet`/`HashMap`, compared in tests, or cloned when needed. Deriving these traits eagerly on public types costs nothing at the definition site and prevents friction everywhere the type is used. Omitting them forces downstream users to wrap your type or write boilerplate.
+Consider each common trait against the domain contract. `Debug` enables debug formatting and `assert_eq!` diagnostics; `Eq + Hash` are needed for hash keys and set elements, not arbitrary map values. `Clone` permits duplication and may share underlying state. Derive `Default` only when field defaults form a useful valid value, and redact sensitive diagnostics. These are API choices, not mandatory derives.
 
 **Incorrect: Missing derives make the type unusable in common contexts**
 
@@ -523,7 +524,7 @@ fn main() {
 }
 ```
 
-**Correct: Eagerly derive common traits on public types**
+**Correct when these fieldwise operations and defaults fit the domain**
 
 ```rust
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
@@ -547,6 +548,8 @@ fn main() {
 **When acceptable:**
 - Types containing fields that cannot derive the trait (e.g., `f64` prevents `Eq` and `Hash` -- derive what you can)
 - Types where `Clone` would be semantically misleading (e.g., unique handles, RAII guards)
+- Types without a useful valid default; omit Default or implement an appropriate valid default
+- Types containing secrets; redact Debug manually or omit it if no suitable representation exists
 - Internal types with very narrow usage where the derive would be dead code
 - Types where `PartialEq` has domain-specific semantics that differ from field-by-field comparison
 
@@ -555,28 +558,28 @@ fn main() {
 
 **NewtypeForSemantics + PhantomDataForTypeConstraints**: Newtypes wrap a concrete value to give it a distinct type. PhantomData goes further -- it attaches a type parameter that carries no data at all. Together they cover the spectrum from "this u64 means AccountId" (newtype) to "this struct is parameterized by a unit of measurement" (phantom).
 
-**TypestatePattern + PhantomDataForTypeConstraints**: The typestate pattern relies on PhantomData to carry the state type parameter. Understanding phantom types is prerequisite to implementing typestate.
+**TypestatePattern + PhantomDataForTypeConstraints**: PhantomData is one way to carry a zero-sized state parameter; typestate can also store an actual state value. Choose its marker form with variance, auto traits, and drop checking in mind.
 
 **TraitObjectsVsGenerics + AssociatedTypesOverGenerics**: The dispatch mechanism (static vs. dynamic) interacts with how trait type parameters are defined. Traits with associated types work naturally with both generics and trait objects. Traits with generic parameters can be used as trait objects only when the generic is specified (`dyn Trait<Concrete>`).
 
-**SealedTraitsForExtensibility + DefaultTraitImplementations**: Both patterns address trait evolution. Sealing prevents external implementations so you can add required methods. Defaults let you add methods without breaking existing implementations. In practice, library traits often use both: sealed to control the implementation set, and defaults to minimize boilerplate.
+**SealedTraitsForExtensibility + DefaultTraitImplementations**: Both patterns address trait evolution. Sealing controls implementations and defaults reduce required bodies; both still need caller-compatibility review. In practice, library traits often use both: sealed to control the implementation set, and defaults to minimize boilerplate.
 
-**EagerCommonTraitImpls + NewtypeForSemantics**: Newtypes must manually derive common traits since they do not inherit them from the wrapped type. Forgetting to derive `Debug` or `Clone` on a newtype makes it less usable than the bare primitive it replaced.
+**EagerCommonTraitImpls + NewtypeForSemantics**: Newtypes must manually derive common traits since they do not inherit them from the wrapped type. Derive only traits whose semantics remain appropriate for the new domain type.
 
 ## Anti-Patterns (Severity Calibration)
 
 ### HIGH
 
 - **Primitive obsession**: Using `u64`, `String`, or `bool` for semantically distinct domain concepts. Two `u64` parameters in a function signature that mean "user ID" and "account ID" are a swap-bug waiting to happen.
-- **Missing derives on public types**: A public struct without `Debug` cannot be printed in test assertions. A public struct without `Clone` forces users to restructure their ownership model. This is a usability defect.
-- **`dyn Trait` in hot loops**: Virtual dispatch prevents inlining and auto-vectorization. In tight loops, the cost per iteration adds up. Use generics when the concrete type is known at compile time.
+- **Missing required trait support**: Report a missing implementation only when the domain contract calls for it; deliberately non-Clone resources and types without meaningful defaults are valid.
+- **Measured dispatch overhead**: An indirect call can inhibit optimization, but `dyn Trait` alone is not a defect. Compare representative builds before replacing an intentional interface.
 
 ### MEDIUM
 
 - **Turbofish everywhere**: If callers constantly need `::<Type>` annotations to disambiguate, the trait likely uses generic parameters where associated types would be cleaner.
 - **Boolean state flags**: `is_connected: bool` fields that control which methods are valid. The compiler cannot help if you call `send()` when `is_connected` is false. Typestate makes this a compile error.
 - **All-required trait methods**: A trait with 8 required methods when 6 could have defaults. Every implementor writes the same boilerplate for the methods that rarely vary.
-- **Unsealed library traits**: A public trait in a library crate that anyone can implement. The first time you need to add a method, you face a semver-breaking change.
+- **Unplanned trait evolution**: Choose an open trait for extension or a sealed trait for library-controlled implementations. Review additions for implementor and caller compatibility.
 
 ## Does Not Cover
 
@@ -598,3 +601,16 @@ fn main() {
 - The Rust Programming Language (RBOOK) -- Ch 18.2 (trait objects), Ch 20.2 (associated types)
 - Rust by Example (RBE) -- Phantom Types, Associated Types
 - Cliffle -- Typestate pattern in Rust
+
+## Verification Sources
+
+- https://doc.rust-lang.org/book/ch20-03-advanced-types.html
+- https://doc.rust-lang.org/std/marker/struct.PhantomData.html
+- https://doc.rust-lang.org/reference/items/traits.html
+- https://doc.rust-lang.org/reference/types/trait-object.html
+- https://doc.rust-lang.org/book/ch18-02-trait-objects.html
+- https://doc.rust-lang.org/cargo/reference/semver.html
+- https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility
+- https://rust-lang.github.io/api-guidelines/interoperability.html
+- https://doc.rust-lang.org/std/default/trait.Default.html
+- https://doc.rust-lang.org/std/clone/trait.Clone.html

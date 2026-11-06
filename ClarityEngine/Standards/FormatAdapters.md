@@ -33,7 +33,7 @@ For `docx`, use the installed document skill; for `pdf`, use the installed PDF s
 
 ## Render Evidence
 
-Save what the Visual lens and the Reader need into `$REVIEW_DIR/render/`, named by page or slide:
+During ReadabilityGate, save what the Visual lens and the Reader need into the current `$ROUND_DIR/render/`, named by page or slide. ReadabilityGate owns `$ROUND_DIR` (`$REVIEW_DIR/round-[n]`); Visual and Verify consume that round's evidence. When rendering outside the gate, record the caller's evidence directory and artifact version. A later gate may reuse those captures only after confirming they match its current artifact and placing them in its current round directory.
 
 - **HTML:** full-page captures at desktop and narrow widths, plus print layout when it applies. Record console errors and failed asset loads. For offline delivery, capture with network access disabled.
 - **PPTX:** an image of every slide, and the presenter notes as text.

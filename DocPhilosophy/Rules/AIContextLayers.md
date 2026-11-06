@@ -1,6 +1,6 @@
 ### AI Context Layers
 
-**Source:** Kaushik Gopal et al., "Agent READMEs: Grounding LLM Agents" (2024); Chroma Research, "Context Window Decay" (2024); Anthropic, CLAUDE.md conventions (2024-2025)
+**Source:** [Chroma, Context Rot](https://www.trychroma.com/research/context-rot) (2025), within its tested task/model scope. The earlier Kaushik Gopal et al., "Agent READMEs: Grounding LLM Agents" (2024), attribution remains unverified. Host loading conventions must be checked for the actual runtime.
 
 **Impact: HIGH — AI agents consume documentation differently than humans; optimizing for agents requires different strategies**
 
@@ -18,7 +18,7 @@ Layer 3: File-level context    (loaded when reading specific files)
 Layer 4: Retrieved context     (search results, fetched docs)
 ```
 
-Each layer deeper is less reliably consumed. Place critical instructions in earlier layers.
+This is a conceptual map, not a universal loading or authority contract. Check which files the actual host loads, how directory scope works, and what fresh workers inherit. Put critical instructions where their intended consumers receive them; keep global requirements reachable across sibling scopes and local exceptions local.
 
 ---
 
@@ -26,8 +26,8 @@ Each layer deeper is less reliably consumed. Place critical instructions in earl
 
 | Source | Finding |
 |--------|---------|
-| **Gopal et al. (2024)** | Agents perform better with explicit, scoped instructions than comprehensive documentation. Layered context outperforms flat context. Instructions closer to point of use are followed more reliably. Contradictions across layers degrade performance unpredictably. |
-| **Chroma Research (2024)** | Middle-positioned content suffers "lost in the middle" effects. Shorter high-density context outperforms longer low-density context. Duplicate or contradictory information amplifies retrieval errors. |
+| **Earlier Gopal attribution** | Unverified; do not use it to assert universal layer-performance rankings. |
+| **Chroma Research (2025)** | Controlled tests show nonuniform performance as input length changes. This does not establish a universal repository-file loading order or guarantee that shorter instructions preserve necessary context. |
 
 ---
 
@@ -103,7 +103,7 @@ Conversation history:           ~50,000+ tokens  ← grows during session
 Working space:              remainder of window  ← code, search results, tool output
 ```
 
-Larger context windows do not reduce the importance of density. Every token in CLAUDE.md permanently reduces working space for every interaction — and "lost in the middle" effects (Chroma, 2024) mean that mid-window content is retrieved less reliably regardless of total window size. Make each token earn its place.
+Keep context useful within the actual host's loading and token constraints. Chroma's 2025 input-length experiments motivate testing relevance and retrieval; they do not prove permanent loading or a universal position penalty for every host and task. Remove needless text while preserving necessary instructions and their scope.
 
 ---
 

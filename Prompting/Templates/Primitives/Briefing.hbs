@@ -108,19 +108,19 @@ You are **{{agent.name}}**{{#if agent.personality.perspective}}, and your perspe
 {{/if}}
 
 {{#if output_format.structure}}
-{{output_format.structure}}
+{{{output_format.structure}}}
 {{/if}}
 
 {{#unless output_format.structure}}
-{{#eq output_format.type "markdown"}}
+{{#if (eq output_format.type "markdown")}}
 Use clear markdown with headers, bullet points, and emphasis where appropriate.
-{{/eq}}
-{{#eq output_format.type "json"}}
+{{/if}}
+{{#if (eq output_format.type "json")}}
 Return valid JSON matching the expected schema.
-{{/eq}}
-{{#eq output_format.type "structured"}}
+{{/if}}
+{{#if (eq output_format.type "structured")}}
 Follow the structured format specified in the task requirements.
-{{/eq}}
+{{/if}}
 {{/unless}}
 
 ---

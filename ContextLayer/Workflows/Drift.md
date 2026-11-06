@@ -65,8 +65,9 @@ git rev-list --count HEAD -- {directory}/
 ```
 
 If the CLAUDE.md contains `dir-commits-at-audit={N}` in its freshness timestamp:
-- Compute delta: `current_count - N`
-- **0:** No activity since last audit → mark `FRESH`
+- Require a numeric available baseline and successful Git queries. Nonnumeric/unavailable fields or failed queries mean unknown.
+- Compute delta: `current_count - N`; a negative delta means history/baseline mismatch, not NO OBSERVED DRIFT. Re-establish provenance through Audit.
+- **0:** No observed commit-count drift → mark `NO OBSERVED DRIFT`; this is not source-accuracy proof
 - **1–5:** Low activity → mark `LOW DRIFT`
 - **6–20:** Moderate activity → mark `MODERATE DRIFT` (consider Audit)
 - **21+:** High activity → mark `HIGH DRIFT` (run Audit)
@@ -76,6 +77,8 @@ If `dir-commits-at-audit` field is missing (legacy format): fall back to time-ba
 git log --oneline --since="{CLAUDE.md last modified date}" -- {directory}/
 ```
 Apply same thresholds. Flag as `[LEGACY FORMAT]` in report.
+
+Count signatures cannot detect same-count renames or substitutions. When history is available, inspect scoped name-status changes since the review anchor as well; retain additions, deletions and renames. Missing/rewritten anchors remain unknown.
 
 **Signal B — Structural Fingerprint (secondary):**
 
@@ -91,10 +94,10 @@ If the CLAUDE.md contains `tree-sig={stored_sig}`:
 
 If `tree-sig` field is missing (legacy format): fall back to git-based structural detection:
 ```
-git log --oneline --diff-filter=A --since="{date}" --name-only -- {directory}/
+git log --oneline --diff-filter=ADR --find-renames --since="{date}" --name-only -- {directory}/
 ```
 
-**Staleness priority:** `STRUCTURAL CHANGE > HIGH DRIFT > MODERATE DRIFT > LOW DRIFT > FRESH`
+**Staleness priority:** `STRUCTURAL CHANGE > HIGH DRIFT > MODERATE DRIFT > LOW DRIFT > NO OBSERVED DRIFT`
 
 ### Step 4 — Parse Freshness Timestamps
 
@@ -102,7 +105,7 @@ If a CLAUDE.md contains a line matching `<!-- context-layer: generated=... -->`:
 
 **Parse all fields:** `generated`, `last-audited`, `version`, `dir-commits-at-audit`, `tree-sig`
 
-**Time-based flags (tiebreaker — used when commit delta and tree-sig both show FRESH):**
+**Time-based flags (tiebreaker — used when commit delta and tree-sig both show NO OBSERVED DRIFT):**
 - If `last-audited=never` and file is >30 days old: add `NEVER AUDITED` flag
 - If `last-audited` date is >90 days ago: add `STALE (CALENDAR)` flag
 
@@ -132,7 +135,7 @@ MODERATE DRIFT (consider Audit):
 LOW DRIFT (monitor):
   ~ {path} — {N} commits since audit
 
-FRESH (no action needed):
+NO OBSERVED DRIFT (accuracy not established):
   ✓ {path} — 0 commits since audit, tree-sig unchanged
 
 LEGACY FORMAT (upgrade on next Audit/Generate):

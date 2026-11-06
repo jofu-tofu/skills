@@ -14,6 +14,9 @@ and produces a clear, actionable evidence map for the user.
   tensions, gaps, risk assessment
 - `seed-papers.md` — original seed context
 - `question.md` — the research question
+- `pipeline-state.md` when present, and cited source records needed to trace expansion-only findings
+
+Read `../Standards/EvidenceStandard.md`. Carry identity, access/verification, source correction/version and study-lineage qualifications into final claims and confidence. Do not revive superseded findings or promote recalled/abstract-only candidates to inspected full-text evidence.
 
 ## Output Format
 
@@ -39,7 +42,7 @@ Write to `$RESEARCH_DIR/evidence-map.md`:
 [continue for major findings]
 
 ## Convergences
-[Where 3+ sources agree — highest confidence claims]
+[Where evidence agrees, with dependence and quality stated; source count alone does not determine confidence.]
 
 ## Tensions
 [Where the evidence disagrees. Do not smooth over disagreements.]
@@ -60,7 +63,7 @@ Write to `$RESEARCH_DIR/evidence-map.md`:
 
 - Confidence levels must be justified by the evaluation, not guessed
 - "What This Evidence Cannot Tell You" is mandatory and substantive
-- Tensions are more valuable than convergences — surface them prominently
+- Surface genuine tensions and explain factual, methodological or applicability differences; absence of contradiction is valid
 - If the evidence base is weak, say so clearly
 - Distinguish "no evidence of effect" from "evidence of no effect"
 - The evidence map should be useful standalone — a reader who sees only

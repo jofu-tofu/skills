@@ -1,3 +1,5 @@
+> Historical provider-specific guide. Current routing, capabilities and prerequisites are owned by ../SKILL.md and ../Intents/. Named services, slash commands and login assumptions below are not active requirements; verify any provider-specific fact on use.
+
 # Webdesign — complete guide
 
 ## What It Does

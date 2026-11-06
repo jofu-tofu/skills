@@ -1,5 +1,7 @@
 # LandscapeScan Workflow
 
+Read `../Standards/EvidenceStandard.md`; preserve source access/verification, identity/version and search provenance in every relevant record. A recalled candidate is not verified evidence, and zero relevant sources is a valid result.
+
 > **Trigger:** Internal — called by Orchestrate.md Step 1. Not user-facing.
 
 ## Purpose

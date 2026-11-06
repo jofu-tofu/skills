@@ -12,16 +12,21 @@
 
 Self-validation mini-workflow for design artifacts. Auto-chained by CreateDesign and RecordDecision. Also user-triggerable directly.
 
-The same agent that generated the document runs this as a self-check. On FAIL, revise the document inline before delivering.
+When called by CreateDesign or RecordDecision, the author runs this as a self-check and repairs permitted failures before delivering. A direct validation request defaults to assessment without editing unless the user also authorizes corrections. Existing edit authority carries forward; do not ask again merely because this procedure is called.
 
 ## Input Interface
 
 - `artifact` (string) — The completed design document or ADR to validate
 - `scale` (quick | standard | full) — Controls which checks run
+- `edit_scope` (assessment | authorized corrections) — Inherited from the user request or owning authoring workflow; never inferred from a FAIL result
 
 ---
 
 ## Workflow Steps
+
+### Step 0: Preserve the Requested Scope
+
+Identify the artifact, applicable scale, and edit authority before checking. Assessment reports findings and proposed corrections separately without changing the source, its contract or posted copy. Authorized corrections remain subject to the document contract and the owner's permitted concerns. The repair and compression steps below apply only within that authority; their “fix before delivery” rules do not convert an assessment into permission to edit.
 
 ### Step 1: Load Rules
 
@@ -73,18 +78,18 @@ Standard scale runs 12 checks total. This is the practical ceiling — do not ad
 
 ### Step 5: Fix Failures
 
-On any FAIL result:
+On any FAIL result in authorized correction scope:
 1. Identify the specific violation (section, paragraph, or term)
 2. Revise the artifact inline to fix it
 3. Note what was found and what was changed
 
-Do not deliver an artifact with known FAIL results. Fix first, then deliver.
+Do not call an artifact ready while known applicable FAIL results remain. In assessment scope, deliver the findings and proposed fixes; in correction scope, fix what is authorized and disclose unresolved failures rather than inventing evidence or overriding a lock.
 
 With a contract, rerun every check in it after fixing. Undo any fix that turns a passing check into a failing one, or that touches a locked span, and list it as a proposal for the author instead. Add a check for each standard you enforced so later passes keep it, and record the results in the contract.
 
 ### Step 5.5: Run Compression Protocol
 
-Run the four-level Compression Protocol from `../OutputQuality.md` Section 6:
+Within authorized correction scope, run the four-level Compression Protocol from `../OutputQuality.md` Section 6. In assessment scope, report consequential compression issues without applying them:
 
 1. **Lexical**: Replace wordy phrases per the Wordy Phrase Table
 2. **Sentential**: Delete sentences that fail Signal Tests (Section 5)
@@ -97,7 +102,7 @@ For a document going to reviewers, run the fresh-reader and cut passes in `Revie
 
 ### Step 6: Append Self-Check Summary
 
-After the design artifact, append this summary:
+For authoring/correction, append this summary after the design artifact. For assessment, return it in the separate validation report; do not modify the artifact to add a self-check section:
 
 ```markdown
 ### Self-Check Summary

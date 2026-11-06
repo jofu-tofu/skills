@@ -1,52 +1,14 @@
-# Webdesign
+# WebDesign
 
-the host skill for designing and integrating web interfaces — inline aesthetic design plus the first-party **Claude Design** surface (claude.ai/design, `/design`, `/design-sync`).
+Implement or improve usable web interfaces in the user's actual environment.
 
-## What It Does
+- **DirectDesign:** create code or a scoped existing-app change, preserving framework, tokens, components and behavior. Inspect the rendered result and relevant interactions with available host browser tools.
+- **NativeDesign:** use an explicitly selected and available design app for meaningful variants or authorized design-system synchronization. User selection drives implementation. Unavailable app access does not imply a particular subscription or login is required.
 
-Two paths, one skill:
+Start with SKILL.md and the applicable intent. No separate screenshot/critique service or context loader is required. A mocked design, implemented interface, verified interface and published site are different completion states. Report actual evidence and unresolved limits. Publication requires the user's authorization and References/SiteLaunch.md.
 
-- **DirectDesign** — writes the design inline with Anthropic's open-source frontend-design philosophy loaded as doctrine. No Claude Design auth or round-trip; the rendered page is checked in real Chrome and critiqued before you see it. The default workhorse.
+For an existing app, supply the task, project files and output destination. Explicit brand/font/no-motion requirements override generic aesthetic defaults. Use the existing project's dependencies; do not replace its framework or introduce a paid provider for an ordinary code task.
 
-- **NativeDesign** — drives the native `/design` artboard workflow (research preview: editable artboard variants built on artifacts — pick one, tweak, implement) and `/design-sync` design-system sync between a codebase and a Claude Design project.
+References/FrontendDesignPhilosophy.md retains design guidance and attribution. CompleteGuide.md and ClaudeDesignCapabilities.md contain historical provider-specific notes, not current prerequisites. Context.json is an optional reference index; the entry and intents own current behavior.
 
-## Key Capability: Integration-Aware
-
-Most design tools assume greenfield. Webdesign assumes the opposite: you already have an app and need to land a new page or component into it cleanly. Both paths produce diffs on top of existing code, respecting existing tokens and component patterns.
-
-## Prerequisites
-
-- **DirectDesign:** no Claude Design access or auth; the browser screenshot verification skill (rendered check) and the visual critique skill (critique loop).
-- **NativeDesign:** a Claude subscription with Claude Design access, a harness build carrying the `/design` skill, and (for sync) a claude.ai login with design scopes.
-- For integration: the target project's framework, token file, and component directory.
-
-## Quick Start
-
-```
-Skill("Webdesign")
-
-# Then ask:
-"Design a settings panel for this app"                  → DirectDesign
-"Give me three directions for the pricing page"         → NativeDesign (artboards)
-"Pull this repo's design system into Claude Design"     → NativeDesign (sync)
-```
-
-The skill routes your request to the right intent automatically.
-
-## Intents
-
-| Intent | Purpose |
-|----------|---------|
-| DirectDesign | Brief → inline design as code, aesthetic doctrine loaded |
-| NativeDesign | Artboard variants → pick → implement; design-system sync |
-
-## Relationship to Other Tools
-
-- **`frontend-design` philosophy** (Anthropic, MIT): mirrored into `References/FrontendDesignPhilosophy.md` — the aesthetic doctrine for DirectDesign.
-- **browser screenshot verification skill**: verification of rendered output (real Chrome screenshots).
-- **visual critique skill**: the critique loop every design passes before it reaches you.
-- **Art skill**: for illustrations, diagrams, header images — not overlapping scope.
-
-## License
-
-See LICENSE.txt.
+Granular outcomes, contribution map and coverage limits are in Quality/Outcomes.md. See LICENSE.txt and SOURCE.md for attribution.

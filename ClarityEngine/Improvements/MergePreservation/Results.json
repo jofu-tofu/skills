@@ -1,0 +1,113 @@
+{
+  "version": "1.5.2-rc.1",
+  "parents": {
+    "main": "87535e3",
+    "comprehensive": "f33bff8"
+  },
+  "decision": "retain merged candidate within tested scope",
+  "method": "Independent semantic fixture/reference review, actual merged workflow consumers, independent result adjudication and root review. Status extraction alone is not the grader.",
+  "deterministic": {
+    "skillforge": {
+      "pass": 34,
+      "fail": 0
+    },
+    "clarity": {
+      "pass": 33,
+      "fail": 0,
+      "assertions": 85
+    }
+  },
+  "input_files_preserved": 83,
+  "runs": [
+    {
+      "id": "MERGE-VERIFY",
+      "seconds": 387.863,
+      "completed": true,
+      "skill_snapshot_files": 28,
+      "skill_snapshot_unchanged": true,
+      "visible_command_note_path_indicators": 0
+    },
+    {
+      "id": "MERGE-GATE",
+      "seconds": 266.425,
+      "completed": true,
+      "skill_snapshot_files": 28,
+      "skill_snapshot_unchanged": true,
+      "visible_command_note_path_indicators": 0
+    }
+  ],
+  "verification_cases": [
+    {
+      "id": "V1-complete-mild",
+      "readiness": "Ready",
+      "comprehension": "Pass",
+      "independently_adjudicated": "pass",
+      "predicates": [
+        "Mild concern at most Polish; no severity from unrelated same-sentence flag",
+        "Current evidence survives later unrelated error",
+        "No demand for intentionally excluded lenses"
+      ],
+      "report_sha256": "a6a08d90955b83d3d0f98d787b0d97eb75521e031d2ed2f01ea2bbfbc21bc6f2"
+    },
+    {
+      "id": "V2-missing-mild",
+      "readiness": "Unverified",
+      "comprehension": "Pass",
+      "independently_adjudicated": "pass",
+      "predicates": [
+        "Cutter required gap disclosed",
+        "Valid Reader evidence retained",
+        "No unsupported Major"
+      ],
+      "report_sha256": "7f62dddadd9112325081db56893ccf1a2f7632d42c38b21e11d12e1be80ad942"
+    },
+    {
+      "id": "V3-major-missing-audience",
+      "readiness": "NeedsRevision",
+      "comprehension": "NeedsRevision",
+      "independently_adjudicated": "pass",
+      "predicates": [
+        "Attributable current wrong release action retained as Major",
+        "Missing operator remains evidence gap",
+        "No second audience fabricated"
+      ],
+      "report_sha256": "8a652feb12bbb35deace7ab535f97324275fd3cb398e1d9bcd96d1fdc15611e5"
+    },
+    {
+      "id": "V4-stale-negative",
+      "readiness": "Unverified",
+      "comprehension": "Pass",
+      "independently_adjudicated": "pass",
+      "predicates": [
+        "Old Major excluded from fixes",
+        "Current Navigator gap disclosed",
+        "Current mild concerns not inflated"
+      ],
+      "report_sha256": "bcd468a28b5e37eb24a2327501a686a3ae229e7f3b512d121eff05bb0aee4c25"
+    },
+    {
+      "id": "V5-audience-skim",
+      "readiness": "Ready",
+      "comprehension": "Pass",
+      "independently_adjudicated": "pass",
+      "predicates": [
+        "Each reader uses matching audience key",
+        "Risk skim question N/A by explicit convention",
+        "No prohibited bold-risk fix",
+        "Equivalent faithful answer prose accepted"
+      ],
+      "report_sha256": "4b6aee5c3cda36668c30459eeb3318156d066637dc0b47bb5851699c97126c0c"
+    }
+  ],
+  "gate": {
+    "actual_result": "Unverified / NotVerified",
+    "supported": "Actual seven provider calls, exactly two operator failures, both audiences planned, no stale substitution, current artifact/hash/render and locked text preserved, operator gap explicitly reported.",
+    "qualification_limits": "Provider returns only two approver answers for three generated questions and aggregate lens reports without per-RC tables. Additional gaps are correctly disclosed. This does not isolate the missing operator as sole cause of aggregate readiness, certify complete question delivery, or demonstrate native independent-reviewer orchestration."
+  },
+  "limitations": [
+    "Representative synthetic merge preservation, not a general accuracy or human-comprehension result.",
+    "Normal configured CLI sessions are guarded, not certified hermetic; absence of note-path command indicators is limited evidence.",
+    "Two original attempts failed before execution because the installed CLI path changed; current CLI0.166.0-alpha.6 completed the preserved merged2 trials.",
+    "Unchanged skills retain their parent evidence; exact Git identity is not a new behavioral run."
+  ]
+}

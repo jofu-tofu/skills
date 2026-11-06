@@ -9,13 +9,13 @@
  *
  * Examples:
  *   bun run RenderTemplate.ts --template Primitives/Roster.hbs --data Data/Agents.yaml
- *   bun run RenderTemplate.ts -t Primitives/Voice.hbs -d Data/VoicePresets.yaml -o Compiled/voice.md
- *   bun run RenderTemplate.ts --template Primitives/Gate.hbs --data Data/Gates.yaml --preview
+ *   bun run RenderTemplate.ts -t Primitives/Voice.hbs -d Data/Agents.yaml -o Compiled/voice.json
+ *   bun run RenderTemplate.ts --template Primitives/Gate.hbs --data Data/ValidationGates.yaml --preview
  */
 
 import Handlebars from 'handlebars';
 import { parse as parseYaml } from 'yaml';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, dirname, basename } from 'path';
 import { parseArgs } from 'util';
 
@@ -186,12 +186,17 @@ function loadData(dataPath: string): Record<string, unknown> {
   return parseYaml(dataSource) as Record<string, unknown>;
 }
 
+const loadedPartials = new Set<string>();
+
 function registerPartials(templatesDir: string): void {
+  // These names belong to the local partial directory, not later independent calls.
+  for (const name of loadedPartials) Handlebars.unregisterPartial(name);
+  loadedPartials.clear();
   const partialsDir = resolve(templatesDir, 'Partials');
 
   if (!existsSync(partialsDir)) return;
 
-  const files = Bun.spawnSync(['ls', partialsDir]).stdout.toString().trim().split('\n');
+  const files = readdirSync(partialsDir).sort();
 
   for (const file of files) {
     if (file.endsWith('.hbs')) {
@@ -199,6 +204,7 @@ function registerPartials(templatesDir: string): void {
       const partialPath = resolve(partialsDir, file);
       const partialSource = readFileSync(partialPath, 'utf-8');
       Handlebars.registerPartial(partialName, partialSource);
+      loadedPartials.add(partialName);
     }
   }
 }
@@ -271,13 +277,13 @@ Usage:
 Options:
   -t, --template <path>  Template file (.hbs)
   -d, --data <path>      Data file (.yaml or .json)
-  -o, --output <path>    Output file (optional, prints to stdout if omitted)
+  -o, --output <path>    Output file (parent directory must exist; stdout if omitted)
   -p, --preview          Show preview in console
   -h, --help             Show this help
 
 Examples:
   bun run RenderTemplate.ts -t Primitives/Roster.hbs -d Data/Agents.yaml -p
-  bun run RenderTemplate.ts -t Primitives/Voice.hbs -d Data/VoicePresets.yaml -o Compiled/voice.md
+  bun run RenderTemplate.ts -t Primitives/Voice.hbs -d Data/Agents.yaml -o Compiled/voice.json
 
 Available Helpers:
   {{uppercase str}}           - Convert to uppercase

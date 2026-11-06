@@ -1,6 +1,10 @@
 # SkillForge 2.1.0 release candidate
 
-Current version: 2.1.0-rc.8. Adds a conditional research decision before selecting improvements and separates candidate retention from task completion. Behavioral updates use a frozen outcome contract and the executable completion gate; unresolved feasible work returns to the workflow. The [completion-gate record](Improvements/CompletionGate/Record.md) preserves 24 passing CLI tests, two historical false-closure replays, the completed live caller check and narrow-scope controls. Interrupted runs and ties remain explicit; this is bounded evidence, not universal reliability. The user authorized local merge and installed update on 2026-11-04.
+Current draft: 2.1.0-rc.9. Broad improvement now owns comprehensive parent outcome coverage and baseline structural review independently of successive experiment rounds. Matched completion checks improve from 29/34 to 34/34. Two actual improvement comparisons tie on independent outcomes; proportionality and corrected adequate-skill controls pass. Retained for bounded completion protections, with no general behavioral superiority established. Deeper target application remains in progress; no installation or publication is implied. See [current record](Improvements/ComprehensiveImprovement/Record.md).
+
+## Prior rc.8 scope
+
+Version 2.1.0-rc.8 added conditional research planning and separate candidate/task decisions. Its [completion-gate record](Improvements/CompletionGate/Record.md) preserves prior tests and live checks. It did not prevent an operator from initially substituting a narrow sampled task for broad user intent; current work addresses that distinct gap. Earlier installation authority does not install this draft.
 
 ## Prior rc.7 scope
 

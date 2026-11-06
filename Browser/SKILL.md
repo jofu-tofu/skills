@@ -4,7 +4,7 @@ description: Debug-first browser automation for Playwright page verification and
 compatibility: Designed for Codex and Devin (or similar agent products). Requires Playwright.
 metadata:
   author: pai
-  version: "2.0.0"
+  version: "2.0.1-rc.1"
 ---
 
 # Browser
@@ -49,6 +49,8 @@ User: "Fill the login form and verify the dashboard loads"
 
 ## Execution Notes
 
+Resolve commands from this skill's installed directory. A working Node TypeScript invocation reuses that runtime for its session server; Node24 was checked on Windows with a skill path containing spaces. Other Node versions may require an already available TypeScript loader. Playwright and a browser executable remain prerequisites; a missing dependency is not a successful page verification.
+
 - Start with `bun run Tools/Browse.ts <url>` whenever you need the clearest diagnostic picture.
 - Use `a11y` when text structure is enough; use screenshots when visual proof matters.
 - Use `click`, `fill`, and `type` only to reach the state you need to inspect or verify.
@@ -65,6 +67,7 @@ bun run Tools/Browse.ts network
 bun run Tools/Browse.ts failed
 bun run Tools/Browse.ts screenshot [path]
 bun run Tools/Browse.ts click <selector>
+bun run Tools/Browse.ts check <selector> [visible|attached]
 bun run Tools/Browse.ts fill <selector> <value>
 bun run Tools/Browse.ts type <selector> <text>
 bun run Tools/Browse.ts status
@@ -75,3 +78,5 @@ bun run Tools/Browse.ts stop
 ## Verification Standard
 
 Run the Browser skill against the rendered page before you call a web change verified. Screenshot evidence and diagnostics are the default proof, not optional extras.
+
+Evaluation criteria and bounded repair evidence: [Quality/Outcomes.md](Quality/Outcomes.md) and [Improvements/Diagnostics.md](Improvements/Diagnostics.md). Uncaught page exceptions appear in errors; transport failures appear as `NETWORK` failures without an invented HTTP status.
