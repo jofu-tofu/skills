@@ -1,6 +1,6 @@
 # Final wording, audience and unresolved findings
 
-Retain **ClarityEngine 1.5.2-rc.2** within the evidence below. Baseline: `bf1cccee77c60a45a7678c3f7b66fd0278a5d5d2` (1.5.2-rc.1). Behavioral evaluation is complete; the separate [publication receipt](Evidence/publication.md) records integration and remote proof.
+Retain **ClarityEngine 1.5.2-rc.2** within the evidence below. Baseline: `bf1cccee77c60a45a7678c3f7b66fd0278a5d5d2` (1.5.2-rc.1). The [completion gate](Evidence/completion.md) is complete; the [publication receipt](Evidence/publication.md) records integration and remote proof.
 
 ## Scope
 

@@ -3,7 +3,7 @@
   "baseline_commit": "bf1cccee77c60a45a7678c3f7b66fd0278a5d5d2",
   "candidate_version": "1.5.2-rc.2",
   "candidate_decision": "retain_candidate",
-  "status": "runtime_published_evidence_pending",
+  "status": "complete",
   "primary_case_count": 3,
   "targeted_boundary_checks": {
     "final_meaning": 4,
@@ -43,5 +43,16 @@
     "Unchanged native-format and other responsibilities use published accepted evidence; original external raw runs not newly located or regraded.",
     "All initial errors, unsuccessful rewrites, normal repair continuations and status variance preserved."
   ],
-  "implementation_commit": "83095fc1795c4035c9baa47f6bb2af66da408d7a"
+  "implementation_commit": "83095fc1795c4035c9baa47f6bb2af66da408d7a",
+  "evidence_commit": "8995935523c9ed52c858da186bd5ddba58ef7fee",
+  "completion": {
+    "schema_version": 1,
+    "valid": true,
+    "contract_sha256": "fae3075f8ebc653f735a7249b1152681780b03b39165495afb50f4a2baa60025",
+    "candidate_decision": "retain_candidate",
+    "task_status": "complete",
+    "unresolved": [],
+    "next_actions": []
+  },
+  "evidence_archive_sha256": "3df1dd1027aeb6c61b58ac40183f1371ed917d65e94cd22d75f76d19512a6bf8"
 }
