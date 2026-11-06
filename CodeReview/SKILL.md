@@ -13,7 +13,7 @@ Multi-agent code review and codebase audit system with **process-boundary enforc
 
 ## Success Criteria
 
-For evaluation and improvement, [Quality/Outcomes.md](Quality/Outcomes.md) defines granular results and valid contrasts for all eight dimensions; [Quality/Measurement.md](Quality/Measurement.md) defines evidence rules. [Improvements/Index.md](Improvements/Index.md) records tested scope and decisions. These records do not require every review agent to load the full profile or produce a finding for each outcome.
+For evaluation and improvement, [Quality/Outcomes.md](Quality/Outcomes.md) defines granular results and valid contrasts for all eight dimensions; [Quality/WorkflowOutcomes.md](Quality/WorkflowOutcomes.md) covers supported modes and cross-stage results; [Quality/Measurement.md](Quality/Measurement.md) defines evidence rules. [Improvements/Index.md](Improvements/Index.md) records tested scope and decisions. These records do not require every review agent to load the full profile or produce a finding for each outcome.
 
 These criteria orient every workflow decision:
 

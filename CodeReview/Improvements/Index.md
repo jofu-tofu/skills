@@ -1,5 +1,7 @@
 # Improvement attempts
 
+- 2026-11-05 — Comprehensive historical continuation: [record](ComprehensiveHistory/Record.md). Expanded mining and the complete CR-O2/CR-W1 outcome set precede runtime edits. Parent coverage, structural review and benchmark qualification remain distinct from prior scoped passes; task evaluation continues.
+
 - 2026-11-05 — Historical scope and maintenance feedback: [record](HistoryScope/Record.md). Retain **1.1.0-rc.3**: clarify current authorized scope and enforced contracts; preserve supported maintenance findings without inventing acceptance gates. Final matched verifier replay: baseline **7/9**, candidate **9/9** on reused cases. Earlier ties and a rejected gate regression remain preserved; no population reliability or full-orchestration claim.
 
 - 2026-11-04 — Scope calibration follow-up: [record](ScopeCalibration/Record.md). Six final-stage contrasts and both native entry-point report outcomes pass without instruction changes. Release-gate and offline acceptance requirements survive into final reports. One CLI startup failure is preserved; delegation provenance and context isolation remain limited. Retain **1.1.0-rc.1**, with no new comparative benefit claim.

@@ -1,6 +1,6 @@
 # Review outcomes and dimension contributions
 
-Version CR-O 1.1, 2026-11-05. Source: owner request for granular outcomes; SkillIntent's credibility, systemic-risk, proportionality and scope requirements; [mined feedback and issue dispositions](../Improvements/HistoryScope/Record.md). Applies to scoped diff review, audit, fix re-review and commit-series review. These criteria define useful results, not finding quotas or proof that a lens caused a gain.
+Version CR-O 2, 2026-11-05. Source: owner request for granular outcomes; SkillIntent's credibility, systemic-risk, proportionality and scope requirements; [initial feedback](../Improvements/HistoryScope/Record.md) and [expanded historical mining](../Improvements/ComprehensiveHistory/Record.md). Applies to scoped diff review, audit, fix re-review and commit-series review. Preserve all existing IDs; [WorkflowOutcomes.md](WorkflowOutcomes.md) completes the task-family and cross-stage profile. These criteria define useful results, not finding quotas or proof that a lens caused a gain.
 
 The job is to help a maintainer decide whether code is fit for its intended use and what needs changing. The review should find consequential defects and credible maintenance risks, explain supported causes, and avoid unnecessary work or false reassurance. It cannot promise to find every defect.
 
@@ -47,6 +47,20 @@ All rows inherit O2–O6. Contributors overlap deliberately: one failure may nee
 | STR3 / O1,O2 | Distinguish systemic maintenance risk from an immediate runtime bug and support its consequence and severity. | STR traces the likely change and affected sites; verifier preserves substantive risks. | A coherent small module need not acquire more layers to fit a preferred architecture. |
 
 ## Challenge and limits
+
+### Historical refinements of existing outcomes
+
+The expanded history strengthens these distinctions without creating a new lens or requiring every ordinary review to load past transcripts:
+
+| Existing outcomes | Required distinction | Valid contrast |
+|---|---|---|
+| COR2,SIM3,SEC2,EVD1 | A test claim depends on the actual policy and failure semantics exercised. Mocking the governing authorization decision or making a terminating fault return cannot prove that policy or termination. Follow later test rejection/removal and final disposition. | Stubbing an external dependency can be valid while the governing policy runs; an interaction assertion is meaningful when that interaction is the required effect. |
+| O2,O5,CLA3,P-EVIDENCE | Verify relevant language/default/lifecycle semantics before alleging a mechanism. Distinguish current source behavior, a mitigation's effect, a historical initiating cause, and environment/setup evidence. | A current unpatched success neither disproves an old incident nor proves a proposed fix; an enforced runtime guarantee can defeat a crash theory while leaving a narrower contract concern. |
+| RES1,RES2,RES3,COR1 | Trace state read, lock, mutation, returned identity and accumulated resource lifetime, including retry/cancellation. Qualify concurrency and whole-flow claims at the level actually exercised. | Sequential retries or a helper probe do not prove contention safety or complete cancellation cleanup; bounded work and necessary lifecycle rechecks remain valid. |
+| IMP1,IMP2,IMP3,COR3 | A fix can expose a new state/path in unchanged consumers. Supported historical data, client capability and dependent suites remain part of the actual contract. Report inspected surfaces rather than available agents/files. | New-record guardrails do not establish that old records are absent; an error-presentation capability need not change authorization; a warm-up fixture failure is not automatically a timing regression. |
+| CLA1,SEC3,O4 | Trace messages and ownership failures through actual consumers; distinguish failed effects, misleading wording, integrity, disclosure and unsupported deployment assumptions. | Error-looking text does not alone prove transaction rejection or data disclosure. Preserve demonstrated consequences without exaggerating reach. |
+
+These refine the existing definitions and benchmark coverage. They do not establish runtime performance or authorize speculative defenses, blanket de-duplication or broad framework changes.
 
 ### Scope and maintenance contrasts from historical feedback
 
