@@ -4,13 +4,13 @@
 
 ## Mental Model
 
-Ownership is Rust's defining feature and its primary source of both safety and confusion. The ownership system enforces three rules at compile time: every value has exactly one owner, when the owner goes out of scope the value is dropped, and you can have either one mutable reference or any number of shared references -- but not both simultaneously. These rules eliminate data races, use-after-free, and double-free bugs without a garbage collector. The cost is that developers must think about who owns data and how long borrows last, decisions that other languages defer to runtime.
+Ownership is Rust's defining feature and its primary source of both safety and confusion. The ownership system enforces three rules at compile time: every value has exactly one owner, ordinary scope exit drops owned values (destruction can be skipped by abort, forgetting, or cycles), and you can have either one mutable reference or any number of shared references -- but not both simultaneously. These rules eliminate data races, use-after-free, and double-free bugs without a garbage collector. The cost is that developers must think about who owns data and how long borrows last, decisions that other languages defer to runtime.
 
 The fundamental design question in Rust is not "how do I make this compile" but "who should own this data." When the answer is clear, the code compiles naturally. When the answer is unclear, developers reach for escape hatches -- `.clone()`, `Rc<T>`, `RefCell<T>`, raw pointers -- that silence the compiler but leave the ownership question unresolved. This dimension exists to ensure that ownership decisions are made intentionally and expressed through the type system, not papered over with runtime mechanisms.
 
 Borrowing is the mechanism that makes ownership practical. Without borrowing, every function call would require transferring ownership and returning it -- an ergonomic nightmare. References (`&T` and `&mut T`) allow functions to access data without taking ownership, and the borrow checker ensures these references never outlive the data they point to. The hierarchy of access is clear: prefer `&T` (shared, immutable) over `&mut T` (exclusive, mutable) over owned `T` (full control). Each step up the hierarchy increases the caller's burden and narrows the set of valid call sites.
 
-Smart pointers (`Box<T>`, `Rc<T>`, `Arc<T>`) and interior mutability (`Cell<T>`, `RefCell<T>`) are legitimate tools, but each one trades a compile-time guarantee for runtime flexibility. `Rc<T>` replaces the single-owner rule with reference counting and the possibility of reference cycles. `RefCell<T>` replaces the compile-time borrow check with a runtime check that panics on violation. `Arc<T>` adds atomic operations to every clone and drop. These costs are acceptable when the problem genuinely requires shared ownership or interior mutation, but they should never be the first tool reached for. The hierarchy is: `&T` first, then `Box<T>`, then `Rc<T>`, then `Arc<T>`, and interior mutability only with documented justification.
+Smart pointers (`Box<T>`, `Rc<T>`, `Arc<T>`) and interior mutability (`Cell<T>`, `RefCell<T>`) are legitimate tools with different ownership and access contracts. Box does not replace compile-time borrow checking, and Cell does not use RefCell-style dynamic borrow guards. `Rc<T>` replaces the single-owner rule with reference counting and the possibility of reference cycles. `RefCell<T>` replaces the compile-time borrow check with a runtime check that panics on violation. `Arc<T>` adds atomic operations to every clone and drop. These costs are acceptable when the problem genuinely requires shared ownership or interior mutation, but they should never be the first tool reached for. The hierarchy is: `&T` first, then `Box<T>`, then `Rc<T>`, then `Arc<T>`, and interior mutability only with documented justification.
 
 ## Consumer Guide
 
@@ -24,29 +24,29 @@ Map out data ownership before writing code. For each major data structure, decid
 
 ### When Implementing
 
-Start every function parameter as a reference (`&T` or `&str`). Escalate to owned types only when the function must store the data beyond the call or send it to another thread. Use `Cow<'a, T>` when a function sometimes needs to allocate and sometimes can return the input unchanged. Avoid self-referential structs entirely -- use index-based designs or arena allocation instead. When interior mutability is genuinely needed (shared observers, lazy initialization, thread-safe mutation), add a comment explaining why the compile-time borrow check is insufficient. Treat every `.clone()` as a decision point: either justify it or restructure to eliminate it.
+For read-only access, prefer borrowing when appropriate. Use owned parameters for consuming or storing data; Copy values are often simplest by value. Scoped threads can borrow inputs. Use `Cow<'a, T>` when a function sometimes needs to allocate and sometimes can return the input unchanged. Avoid self-referential structs entirely -- use index-based designs or arena allocation instead. When interior mutability is genuinely needed (shared observers, lazy initialization, thread-safe mutation), add a comment explaining why the compile-time borrow check is insufficient. Treat every `.clone()` as a decision point: either justify it or restructure to eliminate it.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| PreferBorrowOverClone | CRITICAL | Use references instead of cloning to satisfy the borrow checker |
+| PreferBorrowOverClone | Context-dependent | Use references instead of cloning to satisfy the borrow checker |
 | UseSlicesOverVecs | HIGH | Accept &[T] and &str instead of &Vec<T> and &String |
 | SmartPointerHierarchy | HIGH | Start with &T, escalate to Box/Rc/Arc only when required |
 | InteriorMutabilityJustification | HIGH | Cell/RefCell require documented justification for bypassing compile-time checks |
 | AvoidSelfReferentialStructs | HIGH | Use arenas or index-based designs instead of self-referential types |
 | CowForConditionalOwnership | MEDIUM | Use Cow<'a, T> when a function may or may not need to allocate |
 | LifetimeElisionAwareness | MEDIUM | Annotate lifetimes explicitly when elision obscures the borrowing contract |
-| MoveSemanticsByDefault | MEDIUM | Take ownership by default in APIs; use impl Into<T> for flexible conversion |
+| MoveSemanticsByDefault | MEDIUM | Take ownership when storing or consuming data; use impl Into<T> for conversion |
 
 
 ---
 
 ### RS1.1 PreferBorrowOverClone
 
-**Impact: CRITICAL (Clone used to silence the borrow checker masks ownership design flaws and adds hidden allocations)**
+**Impact: Context-dependent (Unnecessary clones may obscure ownership or add material allocation cost)**
 
-Calling `.clone()` to make the borrow checker happy is the most common Rust anti-pattern. It converts a compile-time ownership error into a runtime performance penalty and hides the real question: who should own this data? Every clone is an allocation and a copy; in hot paths this compounds into measurable overhead. More importantly, gratuitous clones obscure the data-flow contract -- readers cannot tell whether the clone is structurally necessary or was added to "just make it compile."
+Calling `.clone()` to make the borrow checker happy is the most common Rust anti-pattern. It converts a compile-time ownership error into a runtime performance penalty and hides the real question: who should own this data? Clone cost depends on the type: cloning an Rc shares its allocation, and cloning a Copy value need not allocate. String and Vec clones can duplicate owned storage; measure their cost in hot paths. More importantly, gratuitous clones obscure the data-flow contract -- readers cannot tell whether the clone is structurally necessary or was added to "just make it compile."
 
 **Incorrect: Cloning to satisfy the borrow checker**
 
@@ -103,7 +103,7 @@ fn find_longest<'a>(items: &'a [String]) -> &'a str {
 ```
 
 **When acceptable:**
-- Data must cross a thread boundary and the source cannot be moved (clone is the only safe option)
+- Data must cross a thread boundary and independent ownership is needed; scoped borrowing or shared ownership may also be suitable
 - Small Copy types (integers, booleans, small fixed-size structs) where clone is a bitwise copy
 - Prototype or test code where allocation cost is irrelevant and clarity is prioritized
 - The value is needed in a `'static` context and no borrowed alternative exists
@@ -168,7 +168,7 @@ fn main() {
 **When acceptable:**
 - The function needs to inspect `Vec`-specific metadata like `capacity()` that slices do not expose
 - The function will call `Vec`-mutating methods (push, pop, truncate) on a `&mut Vec<T>`
-- FFI boundaries where the exact container type is part of the ABI contract
+- Rust-to-Rust interfaces whose container-specific contract requires that type; Vec and String are not general C ABI containers
 
 ---
 
@@ -176,7 +176,7 @@ fn main() {
 
 **Impact: HIGH (Reaching for Arc or Rc prematurely adds synchronization overhead and obscures ownership boundaries)**
 
-Rust provides a hierarchy of pointer types with increasing capability and cost: `&T` (zero-cost borrow) < `Box<T>` (single owner, heap) < `Rc<T>` (reference-counted, single-thread) < `Arc<T>` (atomic reference-counted, thread-safe). Each step up the hierarchy adds runtime overhead: `Box` adds a heap allocation, `Rc` adds a reference count increment/decrement on clone and drop, and `Arc` adds atomic operations that inhibit CPU caching optimizations. Start at the cheapest level that satisfies the ownership requirement and escalate only when the compiler or architecture demands it.
+Rust provides a hierarchy of pointer types with increasing capability and cost: `&T` (zero-cost borrow) < `Box<T>` (single owner, heap) < `Rc<T>` (reference-counted, single-thread) < `Arc<T>` (atomic reference-counted, thread-safe). Each step up the hierarchy adds runtime overhead: `Box` adds a heap allocation, `Rc` adds a reference count increment/decrement on clone and drop, and `Arc` uses atomic reference counting whose performance depends on access patterns and hardware. Start at the cheapest level that satisfies the ownership requirement and escalate only when the compiler or architecture demands it.
 
 **Incorrect: Jumping to Arc when simpler alternatives work**
 
@@ -219,7 +219,7 @@ fn format_report(data: &ReportData) -> String {
     format!("{}: {}", data.title, data.summary)
 }
 
-// Arc only when data genuinely crosses thread boundaries
+// Arc supports shared ownership across threads when Config: Send + Sync
 fn spawn_workers(data: Arc<Config>) {
     for i in 0..4 {
         let data = Arc::clone(&data);
@@ -232,16 +232,16 @@ fn spawn_workers(data: Arc<Config>) {
 
 **When acceptable:**
 - `Rc<T>` is appropriate when multiple owners in a single thread genuinely need to keep data alive (tree structures with parent back-references, observer patterns)
-- `Arc<T>` is required when shared data must cross thread or async task boundaries
+- `Arc<T>` is useful for shared ownership across threads when its Send/Sync bounds hold; scoped borrows, ownership transfer, and local tasks may avoid it
 - `Box<T>` is needed for recursive types, trait objects, or large stack values that must move to the heap
 
 ---
 
 ### RS1.4 InteriorMutabilityJustification
 
-**Impact: HIGH (Cell/RefCell bypass compile-time borrow checking, moving safety guarantees to runtime where violations become panics)**
+**Impact: HIGH when conflicting RefCell borrows cause runtime failure; documentation alone is a policy concern**
 
-Interior mutability types (`Cell<T>`, `RefCell<T>`, `OnceCell<T>`, `Mutex<T>`) allow mutation through a shared reference, deliberately circumventing Rust's core compile-time borrow-checking guarantee. This is sometimes necessary, but every use should be accompanied by a comment explaining why compile-time borrowing is insufficient. Without justification, readers cannot distinguish intentional design from a workaround that hides an ownership modeling problem. `RefCell` in particular replaces compile-time borrow errors with runtime panics, which are strictly worse.
+Interior mutability permits controlled mutation through shared references. RefCell checks conflicting borrows at runtime; Cell instead exposes operations that avoid handing out conflicting references. As a house policy, document nonobvious reasons for interior mutability. Legitimate shared observers and caches need not be redesigned solely to avoid RefCell.
 
 **Incorrect: RefCell used without justification or where restructuring would eliminate it**
 
@@ -309,7 +309,7 @@ struct SharedProcessor {
 
 **Impact: HIGH (Self-referential structs fight Rust's move semantics and lead to unsafe code, pin complexity, or runtime crashes)**
 
-A struct that holds a reference to its own data is fundamentally at odds with Rust's ownership model. When a value moves in memory (which Rust does freely), all internal pointers become dangling. The language prevents this at compile time, so developers reach for `unsafe`, raw pointers, or `Pin` -- all of which add significant complexity and maintenance burden. Index-based designs and arena allocators achieve the same logical relationships without fighting the borrow checker.
+A struct that holds a reference to its own data is fundamentally at odds with Rust's ownership model. Moving inline referents can invalidate pointers to them. Moving a String owner alone does not move its heap buffer; buffer reallocation or destruction can invalidate pointers into that buffer. The language prevents this at compile time, so developers reach for `unsafe`, raw pointers, or `Pin` -- all of which add significant complexity and maintenance burden. Index-based designs and arena allocators achieve the same logical relationships without fighting the borrow checker.
 
 **Incorrect: Self-referential struct requiring unsafe or Pin**
 
@@ -329,7 +329,9 @@ struct UnsafeParser {
 impl UnsafeParser {
     fn new(input: String) -> Self {
         let ptr = input.as_str() as *const str;
-        // BUG: if UnsafeParser moves, ptr is dangling
+        // Moving the owner alone preserves the heap buffer address.
+        // This design must prevent reallocation/drop while ptr is used;
+        // raw pointers do not enforce that invariant.
         Self { input, current_token: ptr }
     }
 }
@@ -384,7 +386,7 @@ impl Graph {
 
 **Impact: MEDIUM (Cow eliminates unnecessary allocations when a function may or may not need to modify borrowed data)**
 
-`Cow<'a, T>` (Clone on Write) defers allocation until mutation is actually needed. Functions that sometimes return input unchanged and sometimes return a modified copy benefit from `Cow` because the common path avoids allocation entirely. Without `Cow`, developers either always clone (wasteful) or return an enum they invent themselves (reinventing `Cow` poorly). The standard library type communicates the intent clearly and integrates with `Deref` for transparent read access.
+Cow holds either a borrow or an owned value. Calling to_mut on a borrowed Cow creates an owned value via ToOwned; allocation depends on that type. For str, this can avoid copying unchanged input. Prefer Cow when its ownership alternatives fit the API; other return designs can be valid.
 
 **Incorrect: Always cloning or using ad-hoc enums**
 
@@ -453,8 +455,8 @@ Rust's lifetime elision rules allow omitting lifetime annotations in common case
 **Incorrect: Elided lifetimes obscure the actual contract**
 
 ```rust
-// Which input does the return value borrow from? Elision says `s`
-// (first input), but the function actually borrows from `default`.
+// Does not compile: two distinct input lifetimes and no receiver.
+// Elision does not choose the first input; specify the output relationship.
 fn get_or_default(s: &str, default: &str) -> &str {
     if s.is_empty() {
         default  // Returns a borrow of `default`, not `s`
@@ -515,9 +517,9 @@ impl DataStore {
 
 ### RS1.8 MoveSemanticsByDefault
 
-**Impact: MEDIUM (APIs that take ownership by default give callers maximum flexibility over allocation and lifetime management)**
+**Impact: MEDIUM (Ownership-taking constructors can reuse owned inputs rather than cloning borrowed inputs)**
 
-Rust's default is move semantics: when a function takes a parameter by value, ownership transfers to the callee. This is the most flexible default for API design because callers who have owned data can pass it directly (zero-cost move), while callers who need to retain ownership can explicitly clone. Using `impl Into<String>` or `impl AsRef<T>` at API boundaries lets callers pass either owned or borrowed data, with conversion handled at the call site. This follows the Rust API Guidelines principle of caller-controlled allocation.
+By-value parameters move non-Copy values and copy Copy values. Prefer ownership when the callee stores or consumes data; prefer borrowing for read-only access. Into<String> lets a constructor reuse a String or allocate from &str. AsRef<T> provides a borrowed view, not an ownership conversion.
 
 **Incorrect: Borrowing when the function will clone internally anyway**
 
@@ -588,25 +590,27 @@ let user = User::new("Alice", "alice@example.com");
 
 **AvoidSelfReferentialStructs + LifetimeElisionAwareness**: Self-referential structs often arise when developers try to store a reference alongside the data it borrows from. Understanding lifetime elision and explicit annotation helps developers recognize why the compiler rejects these patterns and guides them toward index-based alternatives.
 
-**CowForConditionalOwnership + PreferBorrowOverClone**: `Cow` is the bridge between borrowing and owning. When PreferBorrowOverClone pushes toward references but the function sometimes must allocate, `Cow` provides the optimal solution without forcing the caller to always clone.
+**CowForConditionalOwnership + PreferBorrowOverClone**: `Cow` is the bridge between borrowing and owning. When PreferBorrowOverClone pushes toward references but the function sometimes must allocate, Cow can express that choice without cloning the unchanged input; it is an option, not a universal optimum.
 
-## Anti-Patterns (Severity Calibration)
+## Review prompts and severity calibration
 
-### CRITICAL
+The categories below group review prompts, not predetermined finding severities. First establish the applicable project/version contract, valid alternatives and concrete consequence. A style or design preference alone is LOW or omitted; HIGH/CRITICAL requires corresponding demonstrated harm.
 
-- **Gratuitous `.clone()` in hot paths**: Cloning strings, vectors, or complex structs inside loops to satisfy the borrow checker. Each iteration allocates and copies data that could be borrowed. This is the single most common performance bug in Rust codebases.
-- **`.clone()` as the default response to borrow checker errors**: When a developer's first instinct is to add `.clone()` whenever the compiler complains, the ownership model is not being used -- it is being silenced. The resulting code has the syntax of Rust but the allocation profile of a garbage-collected language.
+### Check potentially consequential contract failures
 
-### HIGH
+- **Gratuitous `.clone()` in hot paths**: Cloning strings, vectors, or complex structs inside loops to satisfy the borrow checker. Such clones may duplicate owned buffers that could be borrowed; establish the actual type, allocation cost, and hot-path impact before assigning severity.
+- **`.clone()` as the default response to borrow checker errors**: When a developer's first instinct is to add `.clone()` whenever the compiler complains, the ownership model is not being used -- it is being silenced. Review whether independent ownership is needed; a clone is not inherently a correctness defect.
 
-- **`Rc<RefCell<T>>` without documented justification**: This pattern completely opts out of compile-time borrow checking. It has legitimate uses (shared mutable state in single-threaded event loops, tree structures with mutable nodes), but without a comment explaining why, reviewers cannot verify the design decision.
-- **`Arc<T>` in single-threaded code**: Atomic reference counting has measurable overhead compared to `Rc<T>` (which itself has overhead compared to references). Using `Arc` when the data never crosses a thread boundary wastes CPU cycles on atomic operations.
+### Check behavior and workload consequences
+
+- **`Rc<RefCell<T>>` without documented justification**: RefCell dynamically checks access to its contents while Rust still checks references and guard lifetimes. It has legitimate uses (shared mutable state in single-threaded event loops, tree structures with mutable nodes), but without a comment explaining why, reviewers cannot verify the design decision.
+- **`Arc<T>` in single-threaded code**: Atomic reference counting has measurable overhead compared to `Rc<T>` (which itself has overhead compared to references). Consider Rc or borrowing when the API permits; Arc may remain appropriate for API compatibility or future cross-thread use. Measure before treating its overhead as material.
 - **Self-referential structs with raw pointers**: Using `*const T` or `*mut T` to create self-referential structures introduces undefined behavior risk that the borrow checker was designed to prevent. The resulting `unsafe` blocks are difficult to audit and easy to break during refactoring.
 - **Accepting `&String` or `&Vec<T>` in public API signatures**: Forces callers to allocate containers they may not need and signals unfamiliarity with Rust's deref coercion system.
 
-### MEDIUM
+### Check maintainability and explicit policy
 
-- **Missing lifetime annotations on multi-reference functions**: When a function accepts two or more reference parameters and returns a reference, relying on elision can produce incorrect lifetime relationships that only manifest as confusing compiler errors at the call site.
+- **Missing lifetime annotations on multi-reference functions**: When a function accepts two or more reference parameters and returns a reference, a free function with distinct input lifetimes cannot elide the output lifetime. Methods may use the receiver rule; annotate when a different relationship is intended.
 - **Always returning `String` when `Cow<str>` would avoid allocation**: Functions that sometimes transform input and sometimes return it unchanged allocate unnecessarily when they always return `String`.
 - **Taking `&str` for a constructor that stores the value**: The constructor will call `.to_owned()` internally, hiding the allocation from the caller. `impl Into<String>` communicates the ownership transfer and lets callers who have a `String` avoid the clone.
 
@@ -631,3 +635,18 @@ let user = User::new("Alice", "alice@example.com");
 ## See Also
 
 - **RS9 Memory & Lifetimes** -- covers lifetime mechanics in depth, including lifetime variance, higher-ranked trait bounds (`for<'a>`), and `'static` lifetime semantics. The LifetimeElisionAwareness rule (RS1.7) in this dimension addresses when to annotate lifetimes for clarity; RS9 covers the full lifetime system including complex multi-lifetime structs, lifetime bounds on trait implementations, and the interaction between lifetimes and async/await. If a review finding involves lifetime annotations beyond simple function signatures, escalate to the RS9 dimension.
+
+## Verified primary references
+
+- https://doc.rust-lang.org/std/clone/trait.Clone.html
+- https://doc.rust-lang.org/std/rc/index.html
+- https://doc.rust-lang.org/std/cell/index.html
+- https://doc.rust-lang.org/std/convert/trait.AsRef.html
+- https://rust-lang.github.io/api-guidelines/flexibility.html#c-caller-control
+- https://doc.rust-lang.org/std/string/struct.String.html
+- https://doc.rust-lang.org/reference/lifetime-elision.html
+- https://doc.rust-lang.org/std/sync/struct.Arc.html
+- https://doc.rust-lang.org/std/thread/fn.scope.html
+- https://doc.rust-lang.org/std/borrow/enum.Cow.html
+- https://doc.rust-lang.org/reference/destructors.html
+- https://doc.rust-lang.org/std/mem/fn.forget.html

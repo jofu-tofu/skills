@@ -6,11 +6,11 @@
 
 React's rendering model is declarative: you describe the desired UI state, and React determines the minimal DOM operations needed. But "minimal" only holds when the component tree cooperates. The 21 rules in this dimension address the gap between React's theoretical efficiency and the practical reality of components that re-render too often, hydrate incorrectly, or miss opportunities to skip work entirely.
 
-These rules form three conceptual layers. The first layer is **re-render prevention** (12 rules): avoiding renders that produce no visible change. This includes memoization (`RerenderMemo`, `RerenderMemoWithDefaultValue`), derived state elimination (`RerenderDerivedState`, `RerenderDerivedStateNoEffect`), deferred reads (`RerenderDeferReads`), and transitions (`RerenderTransitions`). The core insight is that preventing a render is always cheaper than optimizing one. Every component subscription (to context, searchParams, stores) is a re-render trigger — subscribe to less, render less.
+These rules form three conceptual layers. The first layer is **re-render prevention** (12 rules): avoiding renders that produce no visible change. This includes memoization (`RerenderMemo`, `RerenderMemoWithDefaultValue`), derived state elimination (`RerenderDerivedState`, `RerenderDerivedStateNoEffect`), deferred reads (`RerenderDeferReads`), and transitions (`RerenderTransitions`). Avoid unnecessary work where profiling shows a benefit; memo comparisons and caches also have costs. Every component subscription (to context, searchParams, stores) is a re-render trigger — subscribe to less, render less.
 
-The second layer is **rendering efficiency** (9 rules): making renders that do happen as cheap as possible. `RenderingHoistJsx` prevents re-creating JSX elements. `RenderingContentVisibility` uses CSS containment to skip off-screen layout calculations. `RenderingActivity` (React 19's experimental `<Activity>` component) preserves component state while hiding subtrees. `RenderingConditionalRender` and `RenderingAnimateSvgWrapper` avoid unnecessary DOM operations for conditional and animated content.
+The second layer is **rendering efficiency** (9 rules): making renders that do happen as cheap as possible. `RenderingHoistJsx` prevents re-creating JSX elements. `RenderingContentVisibility` uses CSS containment to skip off-screen layout calculations. `RenderingActivity` (React 19.2+'s stable `<Activity>` component) preserves component state while hiding subtrees. `RenderingConditionalRender` and `RenderingAnimateSvgWrapper` avoid unnecessary DOM operations for conditional and animated content.
 
-The third layer is **hydration correctness** (2 rules): ensuring server-rendered HTML matches client-rendered output. `RenderingHydrationNoFlicker` handles client-only data (localStorage, cookies) without visual flash. `RenderingHydrationSuppressWarning` handles intentional mismatches (timestamps, random values) cleanly. Hydration mismatches are uniquely costly because they force React to discard server-rendered DOM and re-render from scratch — negating all SSR benefits.
+The third layer is **hydration correctness** (2 rules): ensuring server-rendered HTML matches client-rendered output. `RenderingHydrationNoFlicker` handles client-only data (localStorage, cookies) without visual flash. `RenderingHydrationSuppressWarning` handles intentional mismatches (timestamps, random values) cleanly. Hydration mismatches are bugs: React may recover a subtree or root, and mismatched attributes are not guaranteed to be patched.
 
 When applied together, these rules ensure that the component tree renders only when necessary, renders efficiently when it must, and hydrates without error or flicker.
 
@@ -20,8 +20,8 @@ When applied together, these rules ensure that the component tree renders only w
 
 Scan for these violations in severity order:
 
-1. **State in effects that derives from props** (HIGH) — `useEffect(() => setX(derive(props)), [props])` causes double renders. The first render uses stale state; the effect triggers a synchronous re-render with correct state. Both hit the DOM.
-2. **Hydration mismatch with client-only data** (HIGH) — Components that read `localStorage`, `window.innerWidth`, or `Date.now()` during initial render without a hydration-safe pattern. These produce mismatches that force full re-render.
+1. **State in effects that derives from props** (HIGH) — `useEffect(() => setX(derive(props)), [props])` causes double renders. The first render may use stale state; the Effect schedules another render. A render does not necessarily change the DOM.
+2. **Hydration mismatch with client-only data** (HIGH) — Components that read `localStorage`, `window.innerWidth`, or `Date.now()` during initial render without a hydration-safe pattern. These can throw during SSR or produce hydration mismatches; recovery scope varies.
 3. **Missing memo on expensive pure components** (MEDIUM) — Components receiving stable props that re-render because a parent re-renders. Check if React Compiler is enabled first — if it is, manual memo is unnecessary.
 4. **Context subscriptions for callback-only data** (MEDIUM) — Components subscribed to `useSearchParams()` or similar dynamic state when they only read the value inside event handlers, not during render.
 5. **Object/array literals in JSX** (MEDIUM) — `style={{ color: 'red' }}` or `options={[1, 2, 3]}` in render body creates new references every render, defeating memo on child components.
@@ -34,7 +34,7 @@ Before implementing a feature with rendering concerns:
 - **Map the re-render propagation path.** When state X changes, which components re-render? Trace from the state source through context providers and prop chains. Each unnecessary component in the path is a candidate for memo or restructuring.
 - **Decide on derived vs. synced state.** If a value can be computed from props/state during render, it must be derived inline — never synced via useEffect. This eliminates an entire class of double-render bugs.
 - **Plan hydration strategy for client-only data.** Themes, user preferences, auth state — anything from localStorage or cookies needs a hydration-safe pattern decided upfront, not patched after seeing console warnings.
-- **Identify off-screen content.** Tabs, collapsed sections, below-fold content — these are candidates for `content-visibility: auto` or React 19's `<Activity>` component.
+- **Identify off-screen content.** Tabs, collapsed sections, below-fold content — these are candidates for `content-visibility: auto` or React 19.2+'s `<Activity>` component.
 
 ### When Implementing
 
@@ -45,7 +45,7 @@ Apply rules in this order of priority:
 3. **Use transitions for non-urgent updates** — Wrap `startTransition()` around state updates that drive expensive re-renders (RerenderTransitions).
 4. **Memoize expensive pure components** — Apply `memo()` to components that receive stable props from frequently-updating parents (RerenderMemo). Provide sensible defaults to avoid breaking memo (RerenderMemoWithDefaultValue).
 5. **Hoist static JSX** — Move JSX that does not depend on props/state outside the component body (RenderingHoistJsx).
-6. **Handle hydration correctly** — Use synchronous scripts for client-only DOM updates (RenderingHydrationNoFlicker). Use `suppressHydrationWarning` only for intentional mismatches like timestamps (RenderingHydrationSuppressWarning).
+6. **Handle hydration correctly** — Match server/client initial values (RenderingHydrationNoFlicker). Use `suppressHydrationWarning` only for intentional mismatches like timestamps (RenderingHydrationSuppressWarning).
 7. **Apply CSS containment** — Add `content-visibility: auto` to off-screen sections (RenderingContentVisibility).
 
 ## Rules in This Dimension
@@ -54,7 +54,7 @@ Apply rules in this order of priority:
 |------|--------|---------|
 | RerenderDeferReads | MEDIUM | Read dynamic state on-demand in callbacks instead of subscribing in render |
 | RerenderMemo | MEDIUM | Extract expensive subtrees into memo'd components for early bailout |
-| RerenderMemoWithDefaultValue | MEDIUM | Provide stable default values to prevent breaking memo comparisons |
+| RerenderMemoWithDefaultValue | MEDIUM | Use stable internal defaults when identity affects children or Effects |
 | RerenderDependencies | MEDIUM | Ensure hook dependency arrays contain only values that should trigger re-execution |
 | RerenderDerivedState | HIGH | Compute derived values inline during render instead of storing in state |
 | RerenderDerivedStateNoEffect | HIGH | Never sync props to state via useEffect — derive inline or use useMemo |
@@ -68,10 +68,10 @@ Apply rules in this order of priority:
 | RenderingContentVisibility | MEDIUM | Use CSS content-visibility: auto to skip layout of off-screen content |
 | RenderingHoistJsx | MEDIUM | Hoist static JSX outside render to prevent recreation every render cycle |
 | RenderingSvgPrecision | LOW | Reduce SVG coordinate precision to minimize DOM size |
-| RenderingHydrationNoFlicker | MEDIUM | Use synchronous scripts for client-only DOM updates to prevent flicker |
-| RenderingHydrationSuppressWarning | LOW | Use suppressHydrationWarning only for intentional mismatches (timestamps, IDs) |
-| RenderingActivity | MEDIUM | Use React 19 Activity component to preserve state of hidden subtrees |
-| RenderingConditionalRender | MEDIUM | Avoid mounting/unmounting components that toggle frequently — hide instead |
+| RenderingHydrationNoFlicker | MEDIUM | Match initial server/client values; coordinate pre-hydration scripts explicitly |
+| RenderingHydrationSuppressWarning | LOW | Use suppressHydrationWarning only for unavoidable text/attribute differences |
+| RenderingActivity | MEDIUM | Use React 19.2+ Activity component to preserve state of hidden subtrees |
+| RenderingConditionalRender | MEDIUM | Use explicit boolean conditions to avoid rendering 0/NaN |
 | RenderingUsetransitionLoading | MEDIUM | Show loading indicators during transitions using useTransition's isPending |
 
 
@@ -152,41 +152,35 @@ function Profile({ user, loading }: Props) {
 }
 ```
 
-**Note:** If your project has [React Compiler](https://react.dev/learn/react-compiler) enabled, manual memoization with `memo()` and `useMemo()` is not necessary. The compiler automatically optimizes re-renders.
+**Note:** If your project has [React Compiler](https://react.dev/learn/react-compiler) enabled, manual memoization is often unnecessary in compiled components. Verify compiler coverage and preserve correctness independently of memoization.
 
 ---
 
 ### R4.3 Extract Default Non-primitive Parameter Value from Memoized Component to Constant
 
-**Impact: MEDIUM (restores memoization by using a constant for default value)**
+**Impact: LOW-MEDIUM (stable dependencies for downstream consumers)**
 
-When memoized component has a default value for some non-primitive optional parameter, such as an array, function, or object, calling the component without that parameter results in broken memoization. This is because new value instances are created on every rerender, and they do not pass strict equality comparison in `memo()`.
+An omitted prop stays omitted for the outer memo comparison. An internal default is created only when that component renders; it cannot itself defeat that comparison. A stable default helps when passed to a memoized child or used as an Effect dependency.
 
-To address this issue, extract the default value into a constant.
-
-**Incorrect: `onClick` has different values on every rerender**
+**Potential downstream churn:**
 
 ```tsx
-const UserAvatar = memo(function UserAvatar({ onClick = () => {} }: { onClick?: () => void }) {
-  // ...
+const UserAvatar = memo(function UserAvatar({ label, onClick = () => {} }: Props) {
+  return <><span>{label}</span><MemoizedButton onClick={onClick} /></>
 })
-
-// Used without optional onClick
-<UserAvatar />
+// Changing label renders UserAvatar; its new default callback changes the button prop.
 ```
 
-**Correct: stable default value**
+**Stable downstream default:**
 
 ```tsx
-const NOOP = () => {};
-
-const UserAvatar = memo(function UserAvatar({ onClick = NOOP }: { onClick?: () => void }) {
-  // ...
+const NOOP = () => {}
+const UserAvatar = memo(function UserAvatar({ label, onClick = NOOP }: Props) {
+  return <><span>{label}</span><MemoizedButton onClick={onClick} /></>
 })
-
-// Used without optional onClick
-<UserAvatar />
 ```
+
+Reference: https://react.dev/reference/react/memo
 
 ---
 
@@ -302,7 +296,7 @@ Reference: [https://react.dev/learn/you-might-not-need-an-effect](https://react.
 
 **Impact: MEDIUM (prevents stale closures and unnecessary callback recreations)**
 
-When updating state based on the current state value, use the functional update form of setState instead of directly referencing the state variable. This prevents stale closures, eliminates unnecessary dependencies, and creates stable callback references.
+When updating state based on the current state value, use the functional update form of setState instead of directly referencing the state variable. This composes updates against pending state and can remove that state dependency from a useCallback. Other captured values still need correct dependencies; the updater form alone does not stabilize a callback.
 
 **Incorrect: requires state as dependency**
 
@@ -332,7 +326,7 @@ The first callback is recreated every time `items` changes, which can cause chil
 function TodoList() {
   const [items, setItems] = useState(initialItems)
   
-  // Stable callback, never recreated
+  // Callback can remain stable across ordinary updates when other dependencies stay fixed
   const addItems = useCallback((newItems: Item[]) => {
     setItems(curr => [...curr, ...newItems])
   }, [])  // ✅ No dependencies needed
@@ -352,7 +346,7 @@ function TodoList() {
 
 2. **No stale closures** - Always operates on the latest state value
 
-3. **Fewer dependencies** - Simplifies dependency arrays and reduces memory leaks
+3. **Fewer dependencies** - Can remove an otherwise-needed state dependency; cleanup still controls resource lifetime
 
 4. **Prevents bugs** - Eliminates the most common source of React closure bugs
 
@@ -406,11 +400,11 @@ function UserProfile() {
 }
 ```
 
-**Correct: runs only once**
+**Correct: avoids recomputation on ordinary updates**
 
 ```tsx
 function FilteredList({ items }: { items: Item[] }) {
-  // buildSearchIndex() runs ONLY on initial render
+  // Initial-props snapshot; remount/key or recompute if items should update the index
   const [searchIndex, setSearchIndex] = useState(() => buildSearchIndex(items))
   const [query, setQuery] = useState('')
   
@@ -418,7 +412,7 @@ function FilteredList({ items }: { items: Item[] }) {
 }
 
 function UserProfile() {
-  // JSON.parse runs only on initial render
+  // Browser-only component; not an SSR hydration pattern
   const [settings, setSettings] = useState(() => {
     const stored = localStorage.getItem('settings')
     return stored ? JSON.parse(stored) : {}
@@ -428,7 +422,7 @@ function UserProfile() {
 }
 ```
 
-Use lazy initialization when computing initial values from localStorage/sessionStorage, building data structures (indexes, maps), reading from the DOM, or performing heavy transformations.
+Keep initializers pure. React may call them twice in development Strict Mode or retry a mount. Build indexes this way only for an intentional initial snapshot. Browser storage examples require a client-only mount; SSR should use matching initial data and read storage after hydration. DOM measurements belong in Effects, not initializers.
 
 For simple primitives (`useState(0)`), direct references (`useState(props.value)`), or cheap literals (`useState({})`), the function form is unnecessary.
 
@@ -515,9 +509,9 @@ Reference: [https://react.dev/learn/removing-effect-dependencies#should-this-cod
 
 **Impact: MEDIUM (maintains UI responsiveness)**
 
-Mark frequent, non-urgent state updates as transitions to maintain UI responsiveness.
+For React 18+, transitions mark React state updates as interruptible non-urgent rendering. The callback executes immediately; synchronous computation, DOM writes and network work are not deferred or cancelled. Do not transition controlled-input state. Measure expensive rendering before applying this optimization.
 
-**Incorrect: blocks UI on every scroll**
+**Ordinary update (only problematic if its render work is costly):**
 
 ```tsx
 function ScrollTracker() {
@@ -530,7 +524,7 @@ function ScrollTracker() {
 }
 ```
 
-**Correct: non-blocking updates**
+**Alternative: lower-priority React update:**
 
 ```tsx
 import { startTransition } from 'react'
@@ -622,11 +616,11 @@ function Tracker() {
 
 ### R4.13 Animate SVG Wrapper Instead of SVG Element
 
-**Impact: LOW (enables hardware acceleration)**
+**Impact: LOW (browser-dependent animation optimization)**
 
-Many browsers don't have hardware acceleration for CSS3 animations on SVG elements. Wrap SVG in a `<div>` and animate the wrapper instead.
+If profiling identifies a problem with SVG animation on target browsers, compare animating a wrapper. Compositing depends on the browser, property and layer conditions; a wrapper does not guarantee GPU acceleration.
 
-**Incorrect: animating SVG directly - no hardware acceleration**
+**Valid baseline: animate the SVG directly**
 
 ```tsx
 function LoadingSpinner() {
@@ -643,7 +637,7 @@ function LoadingSpinner() {
 }
 ```
 
-**Correct: animating wrapper div - hardware accelerated**
+**Alternative to profile: animate a wrapper**
 
 ```tsx
 function LoadingSpinner() {
@@ -661,7 +655,7 @@ function LoadingSpinner() {
 }
 ```
 
-This applies to all CSS transforms and transitions (`transform`, `opacity`, `translate`, `scale`, `rotate`). The wrapper div allows browsers to use GPU acceleration for smoother animations.
+Compare visual behavior, transform origin and frame timing before choosing the wrapper. No hardware-acceleration guarantee follows from the markup.
 
 ---
 
@@ -697,7 +691,7 @@ function MessageList({ messages }: { messages: Message[] }) {
 }
 ```
 
-For 1000 messages, browser skips layout/paint for ~990 off-screen items (10× faster initial render).
+The browser may skip eligible off-screen layout/paint; this does not skip React rendering, data mapping or DOM creation. Measure the workload and verify intrinsic-size estimates, focus and accessibility behavior.
 
 ---
 
@@ -741,7 +735,7 @@ function Container() {
 
 This is especially helpful for large and static SVG nodes, which can be expensive to recreate on every render.
 
-**Note:** If your project has [React Compiler](https://react.dev/learn/react-compiler) enabled, the compiler automatically hoists static JSX elements and optimizes component re-renders, making manual hoisting unnecessary.
+**Note:** If your project has [React Compiler](https://react.dev/learn/react-compiler) enabled, the compiler can memoize eligible JSX and component work. Check its coverage; manual hoisting may be unnecessary.
 
 ---
 
@@ -773,81 +767,38 @@ npx svgo --precision=1 --multipass icon.svg
 
 ### R4.17 Prevent Hydration Mismatch Without Flickering
 
-**Impact: MEDIUM (avoids visual flicker and hydration errors)**
+**Impact: MEDIUM (matching initial server/client markup)**
 
-When rendering content that depends on client-side storage (localStorage, cookies), avoid both SSR breakage and post-hydration flickering by injecting a synchronous script that updates the DOM before React hydrates.
+Keep the server output and first client render consistent. If the server knows a theme preference (for example from a cookie), pass that same value to the client. Reading localStorage during SSR throws; mutating React-owned markup with a script does not automatically make hydration agree.
 
-**Incorrect: breaks SSR**
+**Incorrect: browser-only API during SSR**
 
 ```tsx
 function ThemeWrapper({ children }: { children: ReactNode }) {
-  // localStorage is not available on server - throws error
   const theme = localStorage.getItem('theme') || 'light'
-  
-  return (
-    <div className={theme}>
-      {children}
-    </div>
-  )
+  return <div className={theme}>{children}</div>
 }
 ```
 
-Server-side rendering will fail because `localStorage` is undefined.
-
-**Incorrect: visual flickering**
+**Correct when the server supplies the preference (separate client module):**
 
 ```tsx
-function ThemeWrapper({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState('light')
-  
-  useEffect(() => {
-    // Runs after hydration - causes visible flash
-    const stored = localStorage.getItem('theme')
-    if (stored) {
-      setTheme(stored)
-    }
-  }, [])
-  
-  return (
-    <div className={theme}>
-      {children}
-    </div>
-  )
+'use client'
+import { useState, type ReactNode } from 'react'
+export function ThemeWrapper({ initialTheme, children }: {
+  initialTheme: 'light' | 'dark'; children: ReactNode
+}) {
+  const [theme, setTheme] = useState(initialTheme)
+  return <div className={theme}>
+    <button onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}>Toggle theme</button>
+    {children}
+  </div>
 }
 ```
 
-Component first renders with default value (`light`), then updates after hydration, causing a visible flash of incorrect content.
+If only localStorage knows the preference, a matching default followed by an Effect is valid but may flash. A framework-supported pre-hydration theme script needs explicit DOM ownership, matching React expectations and CSP handling; it cannot promise zero flicker generically. Never derive server authorization from a client theme/auth-storage script.
 
-**Correct: no flicker, no hydration mismatch**
-
-```tsx
-function ThemeWrapper({ children }: { children: ReactNode }) {
-  return (
-    <>
-      <div id="theme-wrapper">
-        {children}
-      </div>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function() {
-              try {
-                var theme = localStorage.getItem('theme') || 'light';
-                var el = document.getElementById('theme-wrapper');
-                if (el) el.className = theme;
-              } catch (e) {}
-            })();
-          `,
-        }}
-      />
-    </>
-  )
-}
-```
-
-The inline script executes synchronously before showing the element, ensuring the DOM already has the correct value. No flickering, no hydration mismatch.
-
-This pattern is especially useful for theme toggles, user preferences, authentication states, and any client-only data that should render immediately without flashing default values.
+Reference: https://react.dev/reference/react-dom/client/hydrateRoot
 
 ---
 
@@ -855,7 +806,7 @@ This pattern is especially useful for theme toggles, user preferences, authentic
 
 **Impact: LOW-MEDIUM (avoids noisy hydration warnings for known differences)**
 
-In SSR frameworks (e.g., Next.js), some values are intentionally different on server vs client (random IDs, dates, locale/timezone formatting). For these *expected* mismatches, wrap the dynamic text in an element with `suppressHydrationWarning` to prevent noisy warnings. Do not use this to hide real bugs. Don’t overuse it.
+In SSR frameworks, dates or locale formatting can unavoidably differ. Keep IDs stable (for example useId or a server-provided ID), rather than generating mismatched random IDs. For these *expected* mismatches, wrap the dynamic text in an element with `suppressHydrationWarning` to prevent noisy warnings. This works one level deep; React does not patch mismatched text under suppression. It silences a warning, not the underlying difference.
 
 **Incorrect: known mismatch warnings**
 
@@ -883,7 +834,7 @@ function Timestamp() {
 
 **Impact: MEDIUM (preserves state/DOM)**
 
-Use React's `<Activity>` to preserve state/DOM for expensive components that frequently toggle visibility.
+On React 19.2+, consider `<Activity>` to preserve state/DOM while hiding content. Older supported React versions need conditional rendering or CSS hiding with explicit lifecycle tradeoffs.
 
 **Usage:**
 
@@ -899,7 +850,7 @@ function Dropdown({ isOpen }: Props) {
 }
 ```
 
-Avoids expensive re-renders and state loss.
+Hidden Activity preserves state/DOM, cleans up Effects, and can still render new props at lower priority. Effects restart when shown; it is not a guarantee of no rendering.
 
 ---
 
@@ -943,95 +894,66 @@ function Badge({ count }: { count: number }) {
 
 ### R4.21 Use useTransition Over Manual Loading States
 
-**Impact: LOW (reduces re-renders and improves code clarity)**
+**Impact: LOW (pending state for React transitions)**
 
-Use `useTransition` instead of manual `useState` for loading states. This provides built-in `isPending` state and automatically manages transitions.
+Use `useTransition` for transition-related pending UI. Manual loading state or a data library remains valid, especially on React 18, whose transitions do not track async Actions. The example requires React 19 async Action support; post-await state is wrapped in another transition. Requests are not automatically cancelled or ordered.
 
-**Incorrect: manual loading state**
-
-```tsx
-function SearchResults() {
-  const [query, setQuery] = useState('')
-  const [results, setResults] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleSearch = async (value: string) => {
-    setIsLoading(true)
-    setQuery(value)
-    const data = await fetchResults(value)
-    setResults(data)
-    setIsLoading(false)
-  }
-
-  return (
-    <>
-      <input onChange={(e) => handleSearch(e.target.value)} />
-      {isLoading && <Spinner />}
-      <ResultsList results={results} />
-    </>
-  )
-}
-```
-
-**Correct: useTransition with built-in pending state**
+**React 19 example with stale-result guard:**
 
 ```tsx
-import { useTransition, useState } from 'react'
-
+import { useRef, useState, useTransition } from 'react'
 function SearchResults() {
   const [query, setQuery] = useState('')
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState<Result[]>([])
+  const [error, setError] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
-
-  const handleSearch = (value: string) => {
-    setQuery(value) // Update input immediately
-    
+  const latestRequest = useRef(0)
+  function handleSearch(value: string) {
+    setQuery(value) // Controlled input remains urgent.
+    const requestId = ++latestRequest.current
+    setError(null)
     startTransition(async () => {
-      // Fetch and update results
-      const data = await fetchResults(value)
-      setResults(data)
+      try {
+        const data = await fetchResults(value)
+        if (requestId === latestRequest.current) {
+          startTransition(() => setResults(data))
+        }
+      } catch {
+        if (requestId === latestRequest.current) {
+          startTransition(() => setError('Search failed'))
+        }
+      }
     })
   }
-
-  return (
-    <>
-      <input onChange={(e) => handleSearch(e.target.value)} />
-      {isPending && <Spinner />}
-      <ResultsList results={results} />
-    </>
-  )
+  return <>
+    <input value={query} onChange={e => handleSearch(e.target.value)} />
+    {isPending && <Spinner />}
+    {error && <p role="alert">{error}</p>}
+    <ResultsList results={results} />
+  </>
 }
 ```
 
-**Benefits:**
+The guard prevents old responses replacing newer results; it does not abort requests. isPending can include older outstanding Actions. Adapt cancellation and loading semantics to the data layer.
 
-- **Automatic pending state**: No need to manually manage `setIsLoading(true/false)`
-
-- **Error resilience**: Pending state correctly resets even if the transition throws
-
-- **Better responsiveness**: Keeps the UI responsive during updates
-
-- **Interrupt handling**: New transitions automatically cancel pending ones
-
-Reference: [https://react.dev/reference/react/useTransition](https://react.dev/reference/react/useTransition)
-
+Reference: https://react.dev/reference/react/useTransition
 
 ## Rule Interactions
 
-- **RerenderDerivedState + RerenderDerivedStateNoEffect** are two sides of the same coin. DerivedState says: compute inline. DerivedStateNoEffect says: never use useEffect for this. When reviewing, finding a useEffect that calls setState with a value derived from props/state is a violation of both rules simultaneously. The fix is always the same: derive inline or use useMemo.
-- **RerenderMemo + RerenderMemoWithDefaultValue + RenderingHoistJsx** form the memoization chain. Memo wraps the component; DefaultValue ensures default props do not create new references that break memo; HoistJsx ensures static children do not break the parent's memo. Applying Memo alone without the other two often produces no measurable improvement because new references from defaults or inline JSX defeat the shallow comparison.
-- **RerenderDeferReads + RerenderTransitions + RerenderMoveEffectToEvent** are all strategies for reducing how often renders happen. DeferReads avoids subscribing to state that is only needed in callbacks. Transitions mark updates as non-urgent so React can batch them. MoveEffectToEvent moves logic out of the render cycle entirely. These three rules should be evaluated together when diagnosing a component that renders too often.
-- **RenderingHydrationNoFlicker + RenderingHydrationSuppressWarning** handle opposite sides of the hydration problem. NoFlicker is for values that must be correct immediately (themes, auth). SuppressWarning is for values that are intentionally different between server and client (timestamps, random IDs). Using the wrong pattern causes either flicker (SuppressWarning where NoFlicker is needed) or suppressed real bugs (NoFlicker where SuppressWarning suffices).
-- **RenderingActivity + RenderingConditionalRender + RenderingContentVisibility** address hidden content from different angles. Activity preserves React state of hidden subtrees (tabs). ConditionalRender avoids mount/unmount cycles for frequently toggled UI. ContentVisibility defers browser layout calculations for off-screen content. For a tabbed interface, combine Activity (state preservation) with ContentVisibility (layout optimization).
+- **RerenderDerivedState + RerenderDerivedStateNoEffect** are two sides of the same coin. DerivedState says: compute inline. DerivedStateNoEffect says: never use useEffect for this. When reviewing, finding a useEffect that calls setState with a value derived from props/state is a violation of both rules simultaneously. For redundant derived state, derive inline or use useMemo. Effects synchronizing external systems remain appropriate.
+- **RerenderMemo + RerenderMemoWithDefaultValue + RenderingHoistJsx**: compare the props actually received by each memoized boundary. Internal defaults affect downstream consumers after rendering; fresh children JSX can still defeat a parent boundary.
+- **RerenderDeferReads + RerenderTransitions + RerenderMoveEffectToEvent** are all strategies for reducing how often renders happen. DeferReads avoids subscribing to state that is only needed in callbacks. Transitions mark React updates as non-urgent and interruptible; they do not move JavaScript work off the main thread. MoveEffectToEvent moves logic out of the render cycle entirely. These three rules should be evaluated together when diagnosing a component that renders too often.
+- **RenderingHydrationNoFlicker + RenderingHydrationSuppressWarning**: prefer matching initial values. Suppression is a one-level escape hatch for unavoidable text/attribute differences; it does not reconcile state or validate auth.
+- **RenderingActivity + RenderingConditionalRender + RenderingContentVisibility** address hidden content from different angles. Activity preserves React state of hidden subtrees (tabs). ConditionalRender avoids accidental numeric output; it does not itself preserve mounted state. ContentVisibility defers browser layout calculations for off-screen content. For a tabbed interface, combine Activity (state preservation) with ContentVisibility (layout optimization).
 
 ## Anti-Patterns (Severity Calibration)
 
 ### CRITICAL
-- **Derived state in useEffect causing render loop**: `useEffect(() => { setFilteredItems(items.filter(predicate)) }, [items, predicate])` — every state change causes a double render. With large lists, this can cause visible jank on every keystroke. Replace with `const filteredItems = useMemo(() => items.filter(predicate), [items, predicate])`.
-- **Hydration mismatch on auth state**: Reading `document.cookie` or `localStorage.getItem('token')` during initial server render, causing React to discard all server-rendered HTML and re-render the entire page client-side. This negates all SSR/streaming benefits.
+- **Redundant derived state in an Effect**: `useEffect(() => setFilteredItems(items.filter(predicate)), [items, predicate])` adds a render when dependencies change. It loops only if its state update also causes dependencies to change again. Derive the list during render; memoize if expensive. Severity depends on observed harm.
+- **Browser-only APIs during SSR**: `document.cookie` or localStorage may throw on the server. Different initial client output can cause hydration recovery, whose scope varies. Keep server authorization independent of client storage.
 
 ### HIGH
-- **Memo defeated by inline objects**: `<MemoizedList items={items} style={{ padding: 8 }} />` — the style object is a new reference every render, causing MemoizedList to re-render every time its parent renders. The `memo()` call provides zero benefit.
+- **Memo defeated by inline objects**: `<MemoizedList items={items} style={{ padding: 8 }} />` — the style object is a new reference every render, causing MemoizedList to re-render every time its parent renders. The default memo comparison cannot skip those parent-triggered renders; Compiler/custom comparisons and other call paths can differ.
 - **Entire context subscription for partial read**: A component consuming a large context object (`const { theme, user, settings, notifications } = useContext(AppContext)`) when it only uses `theme`. Any change to notifications triggers a re-render of this theme-only component.
 
 ### MEDIUM
@@ -1071,47 +993,9 @@ function SearchResults({ query, items }: Props) {
 
 DerivedState eliminates the double render. Memo on ResultList prevents re-rendering when `filtered` produces the same array (e.g., when an unrelated parent state changes).
 
-### Example 2: Hydration-Safe Theme with Transitions (HydrationNoFlicker + Transitions + DeferReads)
+### Example 2: Hydration-Safe Theme (HydrationNoFlicker + Transitions)
 
-```tsx
-// BEFORE: Theme flickers from light to dark after hydration
-function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState('light')
-  useEffect(() => {
-    setTheme(localStorage.getItem('theme') || 'light')
-  }, [])
-  return <div className={theme}>{children}</div>
-}
-
-// AFTER: Synchronous script prevents flicker + transition for toggling
-function ThemeProvider({ children }: { children: ReactNode }) {
-  return (
-    <>
-      <div id="theme-root">{children}</div>
-      <script dangerouslySetInnerHTML={{ __html: `
-        (function() {
-          try {
-            var theme = localStorage.getItem('theme') || 'light';
-            document.getElementById('theme-root').className = theme;
-          } catch(e) {}
-        })();
-      `}} />
-    </>
-  )
-}
-
-// Theme toggle uses transition — non-urgent, does not block typing
-function ThemeToggle() {
-  const handleToggle = () => {
-    const next = document.getElementById('theme-root')?.className === 'dark' ? 'light' : 'dark'
-    localStorage.setItem('theme', next)
-    startTransition(() => {
-      document.getElementById('theme-root')!.className = next
-    })
-  }
-  return <button onClick={handleToggle}>Toggle Theme</button>
-}
-```
+Use the R4.17 ThemeWrapper with a server-provided initialTheme. The first client render matches SSR, and its button updates React state. A theme change may be urgent; use a Transition only for measured non-urgent React rendering. Wrapping `element.className = next` in `startTransition` still performs that write immediately.
 
 ### Example 3: Memoization Chain (Memo + MemoWithDefaultValue + HoistJsx + LazyStateInit)
 
@@ -1128,23 +1012,20 @@ function Dashboard({ config = {} }: { config?: DashboardConfig }) {
   )
 }
 
-// AFTER: Stable defaults + hoisted JSX + lazy init
+// AFTER: Stable defaults + memoized children + lazy init
 const DEFAULT_CONFIG: DashboardConfig = {}
 const chartContainerStyle = { padding: 16 }
 
 function Dashboard({ config = DEFAULT_CONFIG }: { config?: DashboardConfig }) {
   const [data] = useState(() => parseExpensiveConfig(rawConfig)) // lazy
-  return (
-    <MemoizedPanel config={config}>
-      <div style={chartContainerStyle}>
-        <Chart data={data} />
-      </div>
-    </MemoizedPanel>
-  )
+  const content = useMemo(() => (
+    <div style={chartContainerStyle}><Chart data={data} /></div>
+  ), [data])
+  return <MemoizedPanel config={config}>{content}</MemoizedPanel>
 }
 ```
 
-Four rules interact: MemoWithDefaultValue provides `DEFAULT_CONFIG` so memo is not broken by `{}`. HoistJsx moves the style object outside render. LazyStateInit wraps the expensive parser in a function. Memo on the panel can now actually skip renders.
+Four rules interact: MemoWithDefaultValue provides `DEFAULT_CONFIG` so memo is not broken by `{}`. The style is hoisted and children JSX is memoized by data identity. LazyStateInit wraps the expensive parser in a function. Memo on the panel can now actually skip renders.
 
 ## Does Not Cover
 
@@ -1159,3 +1040,16 @@ Four rules interact: MemoWithDefaultValue provides `DEFAULT_CONFIG` so memo is n
 - Vercel Engineering — React Best Practices (January 2026), MIT
 - React Documentation — useMemo, memo, useTransition, Suspense, Activity
 - Web.dev — content-visibility, CSS Containment
+
+## Candidate verification references
+
+- https://react.dev/reference/react/memo
+- https://react.dev/reference/react/useEffect
+- https://react.dev/reference/react-dom/client/hydrateRoot
+- https://react.dev/reference/react/useState
+- https://react.dev/reference/react/startTransition
+- https://www.w3.org/TR/css-contain-2/
+- https://www.w3.org/TR/css-transforms-1/
+- https://react.dev/reference/react/Activity
+- https://react.dev/blog/2025/10/01/react-19-2
+- https://react.dev/reference/react/useTransition

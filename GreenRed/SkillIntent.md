@@ -46,6 +46,6 @@ TestDriven has the philosophy (BehaviorOverImplementation, CharacterizationTests
 ## Constraints
 
 1. All test examples in SKILL.md and Rules/ use pseudocode. Real framework code is only produced when the skill is invoked.
-2. Cross-references to TestDriven rules must use absolute paths to actual files.
+2. Cross-references to TestDriven resolve through sibling skill paths or the available catalog, never a personal installation path; unavailable references are explicit.
 3. No trigger phrase overlap with TestDriven's triggers.
 4. The skill creates no runtime dependencies — it is 5 markdown files with no tools, hooks, or scripts.

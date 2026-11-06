@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * RenderTemplate.ts - PAI Templating Engine
+ * RenderTemplate.ts - standalone skill Templating Engine
  *
  * Renders Handlebars templates with YAML data sources.
  *
@@ -9,13 +9,13 @@
  *
  * Examples:
  *   bun run RenderTemplate.ts --template Primitives/Roster.hbs --data Data/Agents.yaml
- *   bun run RenderTemplate.ts -t Evals/Judge.hbs -d Data/JudgeConfig.yaml -o Compiled/judge.md
- *   bun run RenderTemplate.ts --template Primitives/Gate.hbs --data Data/Gates.yaml --preview
+ *   bun run RenderTemplate.ts -t Primitives/Voice.hbs -d Data/Agents.yaml -o Compiled/voice.json
+ *   bun run RenderTemplate.ts --template Primitives/Gate.hbs --data Data/ValidationGates.yaml --preview
  */
 
 import Handlebars from 'handlebars';
 import { parse as parseYaml } from 'yaml';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, dirname, basename } from 'path';
 import { parseArgs } from 'util';
 
@@ -130,18 +130,32 @@ Handlebars.registerHelper('repeat', (count: number, options: Handlebars.HelperOp
 
 interface RenderOptions {
   templatePath: string;
-  dataPath: string;
+  /** A data file (.yaml or .json). Either this or `data` is required. */
+  dataPath?: string;
+  /** The data itself, in place of a data file. */
+  data?: Record<string, unknown>;
   outputPath?: string;
   preview?: boolean;
 }
 
-function resolveTemplatePath(path: string): string {
-  // If absolute, use as-is
+/** The Templates directory beside Prompting/Tools (a copy placed inside Templates/ also resolves). */
+export function templatesRoot(): string {
+  const base = dirname(dirname(import.meta.path));
+  return basename(base) === 'Templates' ? base : resolve(base, 'Templates');
+}
+
+/**
+ * Absolute paths are used as given. A relative path is looked up under Templates/ first (Primitives/Roster.hbs,
+ * Data/Agents.yaml), then under the current directory (a data file of your own); when neither exists it names the
+ * Templates/ location so the "not found" error points at the documented place.
+ */
+export function resolveTemplatePath(path: string): string {
   if (path.startsWith('/')) return path;
 
-  // Resolve relative to Templates directory
-  const templatesDir = dirname(dirname(import.meta.path));
-  return resolve(templatesDir, path);
+  const underTemplates = resolve(templatesRoot(), path);
+  if (existsSync(underTemplates)) return underTemplates;
+  const underCwd = resolve(process.cwd(), path);
+  return existsSync(underCwd) ? underCwd : underTemplates;
 }
 
 function loadTemplate(templatePath: string): HandlebarsTemplateDelegate {
@@ -172,12 +186,17 @@ function loadData(dataPath: string): Record<string, unknown> {
   return parseYaml(dataSource) as Record<string, unknown>;
 }
 
+const loadedPartials = new Set<string>();
+
 function registerPartials(templatesDir: string): void {
+  // These names belong to the local partial directory, not later independent calls.
+  for (const name of loadedPartials) Handlebars.unregisterPartial(name);
+  loadedPartials.clear();
   const partialsDir = resolve(templatesDir, 'Partials');
 
   if (!existsSync(partialsDir)) return;
 
-  const files = Bun.spawnSync(['ls', partialsDir]).stdout.toString().trim().split('\n');
+  const files = readdirSync(partialsDir).sort();
 
   for (const file of files) {
     if (file.endsWith('.hbs')) {
@@ -185,12 +204,22 @@ function registerPartials(templatesDir: string): void {
       const partialPath = resolve(partialsDir, file);
       const partialSource = readFileSync(partialPath, 'utf-8');
       Handlebars.registerPartial(partialName, partialSource);
+      loadedPartials.add(partialName);
     }
   }
 }
 
-export function renderTemplate(options: RenderOptions): string {
-  const templatesDir = dirname(dirname(import.meta.path));
+export function renderTemplate(options: RenderOptions): string;
+export function renderTemplate(templatePath: string, data: Record<string, unknown>): string;
+export function renderTemplate(first: RenderOptions | string, second?: Record<string, unknown>): string {
+  const options: RenderOptions = typeof first === 'string' ? { templatePath: first, data: second } : first;
+  if (typeof options.templatePath !== 'string' || !options.templatePath) {
+    throw new Error('renderTemplate needs a template path: renderTemplate(path, data) or renderTemplate({ templatePath, dataPath | data })');
+  }
+  if (options.data === undefined && !options.dataPath) {
+    throw new Error('renderTemplate needs data: pass a data object, or { dataPath } for a .yaml or .json file');
+  }
+  const templatesDir = templatesRoot();
 
   // Register any partials
   registerPartials(templatesDir);
@@ -199,7 +228,7 @@ export function renderTemplate(options: RenderOptions): string {
   const template = loadTemplate(options.templatePath);
 
   // Load data
-  const data = loadData(options.dataPath);
+  const data = options.data ?? loadData(options.dataPath!);
 
   // Render
   const rendered = template(data);
@@ -240,7 +269,7 @@ function main(): void {
 
   if (values.help || !values.template || !values.data) {
     console.log(`
-PAI Template Renderer
+standalone skill Template Renderer
 
 Usage:
   bun run RenderTemplate.ts --template <path> --data <path> [options]
@@ -248,13 +277,13 @@ Usage:
 Options:
   -t, --template <path>  Template file (.hbs)
   -d, --data <path>      Data file (.yaml or .json)
-  -o, --output <path>    Output file (optional, prints to stdout if omitted)
+  -o, --output <path>    Output file (parent directory must exist; stdout if omitted)
   -p, --preview          Show preview in console
   -h, --help             Show this help
 
 Examples:
   bun run RenderTemplate.ts -t Primitives/Roster.hbs -d Data/Agents.yaml -p
-  bun run RenderTemplate.ts -t Evals/Judge.hbs -d Data/JudgeConfig.yaml -o Compiled/judge.md
+  bun run RenderTemplate.ts -t Primitives/Voice.hbs -d Data/Agents.yaml -o Compiled/voice.json
 
 Available Helpers:
   {{uppercase str}}           - Convert to uppercase
@@ -279,12 +308,14 @@ Available Helpers:
   }
 
   try {
-    renderTemplate({
+    const rendered = renderTemplate({
       templatePath: values.template,
       dataPath: values.data,
       outputPath: values.output,
       preview: values.preview,
     });
+    // Help says stdout when --output is omitted; --preview already printed it.
+    if (!values.output && !values.preview) process.stdout.write(rendered + '\n');
   } catch (error) {
     console.error(`Error: ${(error as Error).message}`);
     process.exit(1);

@@ -6,19 +6,19 @@
 
 Rust's concurrency story is built on three pillars: the ownership system, the Send/Sync marker traits, and the async runtime's cooperative scheduling model. Understanding how these interact is essential to writing correct concurrent Rust.
 
-**Ownership eliminates data races at compile time.** The borrow checker enforces that mutable access is exclusive -- you cannot have a `&mut T` while any other reference to that `T` exists. This guarantee, which costs nothing at runtime, means that the entire class of "concurrent modification" bugs that plague other languages simply cannot compile in Rust. Shared state requires explicit synchronization primitives (Mutex, RwLock, channels), and the compiler verifies that they are used.
+**Safe Rust prevents data races when its unsafe abstractions are sound.** Borrowing and Send/Sync constrain conflicting access; synchronization can enforce access dynamically. Logic races, deadlocks, and bugs in unsafe implementations remain possible. Reborrowing is permitted under the reference access rules.
 
-**Send and Sync define the thread-safety contract.** `Send` means a type can be transferred to another thread. `Sync` means a type can be shared between threads via reference. These are auto-traits -- the compiler derives them from the type's fields. `Rc` is not Send (its reference count is not atomic); `Arc` is Send + Sync (its count is atomic). When you write `tokio::spawn(async { ... })`, the future must be `Send + 'static` because the runtime may move it between worker threads at any .await point. Types that are alive across .await points become part of the future's state and must satisfy these bounds. Understanding this is the key to deciphering the otherwise cryptic error messages that arise from non-Send types in async code.
+**Send and Sync define the thread-safety contract.** `Send` means a type can be transferred to another thread. `Sync` means a type can be shared between threads via reference. These are auto-traits -- the compiler derives them from the type's fields. `Rc` is not Send (its reference count is not atomic); `Arc<T>` is Send + Sync when `T: Send + Sync` (for the default allocator); atomic reference counting does not make its contents thread-safe. When you write `tokio::spawn(async { ... })`, the future must be `Send + 'static` because the runtime may move it between worker threads at any .await point. Types that are alive across .await points become part of the future's state and must satisfy these bounds. Understanding this is the key to deciphering the otherwise cryptic error messages that arise from non-Send types in async code.
 
-**The async runtime is cooperatively scheduled.** Unlike OS threads, async tasks yield control voluntarily at .await points. Between .await points, a task has exclusive use of its worker thread. This means CPU-intensive work that does not yield will starve every other task on that thread. It also means that std::sync::Mutex -- which blocks the OS thread -- will block the worker thread and potentially deadlock the runtime if the lock holder is suspended on the same worker. The solution is to use async-aware primitives (tokio::sync::Mutex) when locks must be held across .await, and spawn_blocking for CPU-bound work.
+**The async runtime is cooperatively scheduled.** An `.await` is a potential suspension point, not a guaranteed task switch. Awaiting a ready future continues in the same poll; even a loop containing many `ready(()).await` expressions can monopolize a worker. The executor regains control when polling returns. Bound work per poll and use actual yielding or offloading where the workload requires it. This means CPU-intensive work that does not yield will starve every other task on that thread. It also means that std::sync::Mutex -- which blocks the OS thread -- will block the worker thread and potentially deadlock the runtime if the lock holder is suspended on the same worker. The solution is to use async-aware primitives (tokio::sync::Mutex) when locks must be held across .await, and spawn_blocking for CPU-bound work.
 
-**Channels encode protocols in the type system.** Arc<Mutex<T>> gives every holder unrestricted read-write access with no indication of the intended data flow. Channels (mpsc, oneshot, broadcast, watch) make the communication pattern explicit: who sends, who receives, how many messages, whether it is one-shot or streaming. This makes the concurrent architecture legible to readers and allows the compiler to enforce protocol violations (sending on a closed channel, receiving from a dropped sender).
+**Channels encode protocols in the type system.** Arc<Mutex<T>> gives every holder unrestricted read-write access with no indication of the intended data flow. Channels (mpsc, oneshot, broadcast, watch) make the communication pattern explicit: who sends, who receives, how many messages, whether it is one-shot or streaming. This makes data flow explicit; channel closure is reported at runtime through send/receive results, not rejected by the compiler.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-Scan for these patterns: std::sync::Mutex guards that are alive across .await points (look for `let guard = mutex.lock()` without a closing brace before the next `.await`). Arc<Mutex<T>> used where a channel would make the data flow explicit. tokio::spawn of CPU-intensive closures that do not use spawn_blocking. Rc or RefCell used in async code that will be spawned. Unbounded channels in production paths. Multiple mutexes acquired without a consistent ordering convention. async-trait macro on codebases targeting Rust 1.75+. Flag any fire-and-forget tokio::spawn where the JoinHandle is discarded -- errors from that task are silently lost.
+Scan for these patterns: std::sync::Mutex guards that are alive across .await points (look for `let guard = mutex.lock()` without a closing brace before the next `.await`). Arc<Mutex<T>> used where a channel would make the data flow explicit. tokio::spawn of CPU-intensive closures that do not use spawn_blocking. Rc held across suspension in a future passed to tokio::spawn, or shared RefCell without the required Sync bound. Unbounded channels in production paths. Multiple mutexes acquired without a consistent ordering convention. async-trait use where native traits meet the required MSRV, dispatch, and Send contracts. Flag any fire-and-forget tokio::spawn where the JoinHandle is discarded -- errors from that task are silently lost.
 
 ### When Designing / Planning
 
@@ -26,7 +26,7 @@ Decide on communication patterns early. For request-response between tasks, use 
 
 ### When Implementing
 
-Default to channels over shared state. Use bounded channels and choose capacity based on the expected burst size and acceptable latency. Drop std::sync::Mutex guards before .await -- use block scoping to make this visually obvious. Reach for tokio::sync::Mutex only when you genuinely need to hold a lock across an await point; it is slower than std::sync::Mutex for non-async use. Offload any computation that takes more than a few hundred microseconds to spawn_blocking. Use JoinSet to manage groups of spawned tasks -- it provides structured cancellation (all tasks cancelled on drop) and error propagation. Prefer native async fn in traits over the async-trait crate on Rust 1.75+.
+Default to channels over shared state. Use bounded channels and choose capacity based on the expected burst size and acceptable latency. Drop std::sync::Mutex guards before .await -- use block scoping to make this visually obvious. Reach for tokio::sync::Mutex only when you genuinely need to hold a lock across an await point; it is slower than std::sync::Mutex for non-async use. Offload blocking or lengthy CPU work according to measured scheduling needs; limit concurrent CPU jobs with a semaphore or dedicated CPU pool. Use JoinSet to manage groups of spawned tasks -- it aborts remaining async tasks on drop and returns results for explicit error handling; started spawn_blocking jobs cannot generally be aborted. Prefer native async fn in traits on Rust 1.75+ when static dispatch and the future bounds meet the API contract; retain async-trait for appropriate dyn dispatch or compatibility needs.
 
 ## Rules in This Dimension
 
@@ -37,8 +37,8 @@ Default to channels over shared state. Use bounded channels and choose capacity 
 | SpawnBlockingForCpuWork | CRITICAL | Offload CPU-intensive work to spawn_blocking to avoid starving the async runtime |
 | SendSyncAwareness | HIGH | Ensure types across .await points are Send + 'static for spawned tasks |
 | StructuredConcurrency | HIGH | Use JoinSet, select!, or FuturesUnordered instead of fire-and-forget spawns |
-| ChannelCapacityBounds | HIGH | Always use bounded channels in production to enforce back-pressure |
-| AsyncTraitConsiderations | MEDIUM | Prefer native async fn in traits (1.75+) over the async-trait crate |
+| ChannelCapacityBounds | HIGH | Bound queues where producer backlog can exceed the memory budget |
+| AsyncTraitConsiderations | MEDIUM | Prefer native async traits (compiler 1.75+) when dispatch and future bounds permit |
 | DeadlockPrevention | HIGH | Establish consistent lock ordering and prefer RwLock for read-heavy workloads |
 
 
@@ -48,7 +48,7 @@ Default to channels over shared state. Use bounded channels and choose capacity 
 
 **Impact: CRITICAL (Holding std::sync::Mutex across .await can deadlock the entire tokio runtime)**
 
-A std::sync::Mutex blocks the OS thread while waiting to acquire the lock. In an async runtime, that thread is a worker thread shared among many tasks. If a task holds a std::sync::Mutex guard and then yields at an .await point, the worker thread is blocked for the entire duration the task is suspended -- potentially forever if the task that needs to release the lock is scheduled on the same (now-blocked) worker thread. This is a deadlock that only manifests under load.
+A std::sync::Mutex blocks the OS thread while waiting to acquire the lock. In an async runtime, that thread is a worker thread shared among many tasks. Holding the guard while suspended does not itself block a worker. A contending synchronous lock call blocks that worker and can prevent the suspended holder from resuming, especially on a current-thread runtime. Deadlock does not require load.
 
 **Incorrect: Mutex guard held across .await**
 
@@ -62,8 +62,8 @@ async fn update_and_notify(
 ) {
     let mut guard = state.lock().unwrap();
     guard.push(msg);
-    // Guard is still alive here -- the worker thread is blocked
-    // while waiting for the network call to complete
+    // Guard remains locked across suspension; a contending lock()
+    // can block the worker needed to resume this task.
     notify_subscribers(&guard).await;
     // guard dropped here, far too late
 }
@@ -106,7 +106,7 @@ async fn update_and_notify_async(
 **When acceptable:**
 - Using tokio::sync::Mutex, which is designed to be held across .await points
 - The critical section is guaranteed to contain no .await points and is wrapped in a block scope that makes this visually obvious
-- Single-threaded runtime (flavor = "current_thread") where deadlock from thread starvation cannot occur
+- A current-thread runtime is NOT an exception: a contending blocking lock can deadlock its only worker.
 
 ---
 
@@ -114,7 +114,7 @@ async fn update_and_notify_async(
 
 **Impact: HIGH (Shared mutable state via Arc<Mutex<T>> scatters synchronization logic and invites deadlocks)**
 
-Channels encode the communication protocol in the type system: a sender and receiver make the data flow direction explicit and the compiler ensures only one consumer receives each message. Arc<Mutex<T>> hides the protocol -- any holder can read or write at any time, and the synchronization discipline exists only in the developer's head. Channels also eliminate lock contention entirely; senders never block on receivers and vice versa (with bounded back-pressure as the exception, which is desirable).
+Channels encode the communication protocol in the type system: a sender and receiver make the data flow direction explicit and mpsc provides one receiver, whereas broadcast distributes messages to multiple receivers. Arc<Mutex<T>> hides the protocol -- any holder can read or write at any time, and the synchronization discipline exists only in the developer's head. Channels can reduce application-level shared locking, but their synchronization has costs and receive operations may wait for a sender. Bounded sends wait for capacity.
 
 **Incorrect: Shared counter with Arc<Mutex<T>>**
 
@@ -150,7 +150,7 @@ use tokio::sync::mpsc;
 use tokio::task;
 
 async fn count_events(urls: Vec<String>) -> usize {
-    let (tx, mut rx) = mpsc::channel::<usize>(urls.len());
+    let (tx, mut rx) = mpsc::channel::<usize>(urls.len().max(1));
 
     for url in urls {
         let tx = tx.clone();
@@ -221,7 +221,7 @@ async fn hash_password(password: String) -> Vec<u8> {
 **When acceptable:**
 - Computation completes in microseconds (e.g., a single SHA-256 hash of a short input) where the overhead of spawn_blocking exceeds the work itself
 - You are already running on a dedicated thread (inside spawn_blocking or a non-async context)
-- The runtime is configured with a large thread pool specifically for mixed workloads and the CPU work is bounded
+- A larger async worker pool alone is not a guarantee against starvation; bound work per poll and measure responsiveness.
 
 ---
 
@@ -229,7 +229,7 @@ async fn hash_password(password: String) -> Vec<u8> {
 
 **Impact: HIGH (Using non-Send types across .await points causes confusing compiler errors and incorrect fixes)**
 
-When you spawn a tokio task, the future must be Send + 'static because the runtime may move it between worker threads at any .await point. Types like Rc, RefCell, and MutexGuard (from std) are not Send. If they are alive across an .await, the compiler rejects the future with an error that points at the spawn call, not at the offending type -- making diagnosis difficult. Understanding Send/Sync boundaries prevents developers from reaching for incorrect fixes like unsafe impl Send.
+When you spawn a tokio task, the future must be Send + 'static because the runtime may move it between worker threads at any .await point. Rc and std::sync::MutexGuard are not Send. RefCell<T> is Send when T is Send, but is not Sync. If they are alive across an .await, the compiler rejects the future with an error that points at the spawn call, not at the offending type -- making diagnosis difficult. Understanding Send/Sync boundaries prevents developers from reaching for incorrect fixes like unsafe impl Send.
 
 **Incorrect: Rc<RefCell<T>> across .await**
 
@@ -256,7 +256,7 @@ use std::sync::Arc;
 use tokio::sync::Mutex;
 
 async fn process(data: Arc<Mutex<Vec<String>>>) {
-    // Arc is Send + Sync, tokio::sync::Mutex is Send + Sync
+    // Here Vec<String>: Send, so Arc<Mutex<Vec<String>>> is Send + Sync.
     let snapshot = {
         let guard = data.lock().await;
         guard.clone()
@@ -270,7 +270,7 @@ async fn process(data: Arc<Mutex<Vec<String>>>) {
 ```
 
 **When acceptable:**
-- Single-threaded runtime (flavor = "current_thread") where futures are never moved between threads, making Send unnecessary
+- Directly awaited local futures can be non-Send, but tokio::spawn still requires Send on a current-thread runtime.
 - Local tasks spawned with tokio::task::spawn_local, which does not require Send
 - Non-async code or synchronous threads where Rc/RefCell is the correct lightweight choice
 
@@ -280,7 +280,7 @@ async fn process(data: Arc<Mutex<Vec<String>>>) {
 
 **Impact: HIGH (Unstructured task spawning leaks tasks, loses errors, and makes cancellation impossible to reason about)**
 
-Fire-and-forget tokio::spawn scatters tasks across the runtime with no parent-child relationship. Errors from spawned tasks are silently dropped if the JoinHandle is not awaited. Cancellation requires manually tracking every handle. Structured concurrency tools -- select!, JoinSet, and FuturesUnordered -- bind task lifetimes to a scope, propagate errors to the caller, and make cancellation automatic when the scope exits.
+Fire-and-forget tokio::spawn scatters tasks across the runtime with no parent-child relationship. Errors from spawned tasks are silently dropped if the JoinHandle is not awaited. Cancellation requires manually tracking every handle. JoinSet owns spawned tasks and aborts remaining async tasks on drop. Errors still require explicit handling. select! drops losing branch futures, and dropping FuturesUnordered drops its contained futures; neither automatically aborts spawned tasks represented only by JoinHandles. JoinSet does not cap concurrency; add a separate limit when needed.
 
 **Incorrect: Manual handle tracking with fire-and-forget**
 
@@ -331,7 +331,7 @@ async fn process_batch(items: Vec<Item>) -> Vec<Result<Output, Error>> {
             }
         }
     }
-    // When set is dropped, all remaining tasks are cancelled
+    // Dropping the set aborts remaining async tasks; no concurrency cap is imposed.
     results
 }
 ```
@@ -406,9 +406,9 @@ async fn ingest_events(mut stream: EventStream) {
 
 **Impact: MEDIUM (The async-trait crate introduces hidden heap allocations and obscures error messages)**
 
-Since Rust 1.75, async fn is supported natively in traits. The async-trait crate, which was necessary before this stabilization, works by desugaring every async method into a `Pin<Box<dyn Future + Send>>` -- a heap allocation per call that also erases the concrete future type. This makes error messages harder to read, prevents the compiler from optimizing across await points, and adds a performance tax on every invocation. Native async fn in traits avoids all of these costs.
+Since Rust 1.75, async fn is supported natively in traits. async-trait is one compatibility approach; its default expansion returns a boxed trait-object future. The default expansion uses boxed Send futures (with ?Send available), which can add allocation and dynamic-dispatch costs. Native async methods avoid this mandatory boxing but are not dyn-compatible and do not automatically promise Send futures to generic callers. Performance and diagnostic quality depend on the program.
 
-**Incorrect: async-trait macro when native is available**
+**Policy preference: consider replacing async-trait when static dispatch and bounds suffice**
 
 ```rust
 use async_trait::async_trait;
@@ -452,8 +452,8 @@ impl DataStore for RedisStore {
 ```
 
 **When acceptable:**
-- Targeting Rust editions before 1.75 where native async fn in traits is not available
-- The trait must be object-safe (dyn Trait) -- native async fn in traits does not support dynamic dispatch without the trait_variant crate or manual desugaring
+- Targeting compiler versions before Rust 1.75; 1.75 is a compiler release, not an edition.
+- The trait must be object-safe (dyn Trait) -- native async methods are not dyn-compatible; async-trait or a manually boxed-future interface can support dyn dispatch. trait_variant supplies Send variants, not automatic dyn support
 - Libraries that must support a wide range of Rust compiler versions where async-trait provides compatibility
 
 ---
@@ -497,6 +497,8 @@ struct Bank {
 
 impl Bank {
     fn transfer(&self, from: usize, to: usize, amount: f64) {
+        // Account slots must refer to distinct mutexes.
+        if from == to { return; } // do not recursively lock one mutex
         // Always lock the lower-indexed account first
         let (first, second) = if from < to {
             (from, to)
@@ -530,7 +532,7 @@ impl Bank {
 
 **MessagePassingOverSharedState + ChannelCapacityBounds**: Adopting channels without bounding them trades one failure mode (deadlock) for another (OOM). These rules form a pair: first choose channels over shared state, then choose bounded channels with explicit capacity.
 
-**SpawnBlockingForCpuWork + StructuredConcurrency**: spawn_blocking returns a JoinHandle that must be awaited to retrieve the result and detect panics. StructuredConcurrency ensures these handles are not discarded. Using JoinSet with spawn_blocking tasks provides structured lifecycle management for CPU-offloaded work.
+**SpawnBlockingForCpuWork + StructuredConcurrency**: spawn_blocking returns a JoinHandle that must be awaited to retrieve the result and detect panics. StructuredConcurrency ensures these handles are not discarded. JoinSet can track spawn_blocking results, but dropping or aborting the set cannot stop blocking jobs that have already started; use cooperative shutdown for such work.
 
 **DeadlockPrevention + NoMutexAcrossAwait**: Deadlock prevention through lock ordering applies to both sync and async contexts. In async code, the additional constraint from NoMutexAcrossAwait means that even correctly-ordered std::sync::Mutex locks can deadlock the runtime if held across .await. Both rules must be satisfied simultaneously.
 
@@ -538,20 +540,20 @@ impl Bank {
 
 ### CRITICAL
 
-- **std::sync::Mutex guard held across .await**: Blocks the tokio worker thread, potentially deadlocking the entire runtime when the lock holder is parked on the same thread as the task waiting for the lock.
+- **std::sync::Mutex guard held across .await**: A contending lock call can block the worker needed to resume the holder, causing deadlock.
 - **CPU-intensive loop in an async fn without spawn_blocking**: Starves all tasks on the same worker thread. Under load, cascades into timeout failures and apparent service hangs.
 
 ### HIGH
 
-- **Arc<Mutex<T>> as the default sharing mechanism**: Scatters synchronization logic across the codebase, makes data-flow direction invisible, and introduces lock contention. Channels are almost always a better choice.
+- **Arc<Mutex<T>> as the default sharing mechanism**: Scatters synchronization logic across the codebase, makes data-flow direction invisible, and introduces lock contention. Prefer channels as a house policy when they clarify ownership and flow; short synchronous mutex sections are valid for shared data.
 - **Unbounded channels in production code**: Converts back-pressure failures into silent memory growth that ends with an OOM kill. The process gives no warning before termination.
 - **Fire-and-forget tokio::spawn**: Discarding the JoinHandle means panics and errors in the spawned task are silently lost. The parent task has no way to detect or recover from child failures.
 - **Inconsistent lock ordering across multiple mutexes**: Creates deadlocks that only manifest under specific thread scheduling, making them nearly impossible to reproduce in testing.
 
 ### MEDIUM
 
-- **Using async-trait crate on Rust 1.75+**: Adds unnecessary heap allocation per call and erases concrete future types, degrading both performance and compiler diagnostics.
-- **Rc/RefCell in code that may later be spawned**: Works initially in synchronous or single-threaded contexts but causes confusing Send errors when the code is moved into an async task.
+- **Unnecessary async-trait boxing**: Review only when static dispatch, MSRV, and future bounds permit replacement; dyn dispatch can justify it.
+- **Non-Send future passed to tokio::spawn**: Rc can prevent Send; RefCell<T> itself is Send for T: Send, while sharing it across threads requires Sync, which it lacks.
 
 ## Examples
 
@@ -565,7 +567,7 @@ use tokio::sync::watch;
 
 let (tx, rx) = watch::channel(Config::load()?);
 
-// Readers: cheap, non-blocking, always see the latest value
+// borrow() holds an internal read lock; clone promptly and release it.
 let config = rx.borrow().clone();
 
 // Writer: sends new config, all readers see it on next borrow

@@ -28,10 +28,12 @@ When a workflow is matched, **read its file and follow the steps within it.**
 **Quick decision:**
 
 ```
-Does the code already exist?
-├── YES → Green (capture current behavior as passing tests)
-└── NO  → Red (define expected behavior as failing tests)
+What behavior does the user want to specify?
+├── Current observable behavior → Green (including known current bugs)
+└── Desired missing/changed behavior → Red (whether code exists or not)
 ```
+
+Honor an explicit requested mode. If the request mixes characterization and a behavior change, separate those obligations or resolve the material conflict; code existence alone does not choose the mode.
 
 ## Examples
 

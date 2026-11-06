@@ -2,7 +2,7 @@
 name: SkillForge
 description: Create, update, or evaluate reusable agent skills with explicit quality criteria and preserved evidence. USE WHEN create a skill OR improve a skill OR evaluate a skill OR a skill keeps missing expected behavior OR diagnose a skill gap.
 metadata:
-  version: "2.1.0-rc.7"
+  version: "2.1.0-rc.9"
 ---
 # SkillForge
 
@@ -18,7 +18,7 @@ When a workflow is matched, read its file and follow the steps within it.
 | UpdateSkill | Change or improve an existing skill | `Workflows/UpdateSkill.md` |
 | EvaluateSkill | Test, assess, or check readiness without changing a skill | `Workflows/EvaluateSkill.md` |
 
-Workflows orchestrate user tasks. [Procedures](Architecture.md) perform reusable operations. Approval is a shared evidence-based decision gate, not a separate user workflow. A readiness-only request routes through EvaluateSkill and then the gate. A design-only request ends with an explicitly unverified candidate.
+Workflows orchestrate user tasks. [Procedures](Architecture.md) perform reusable operations. Approval is a shared evidence-based decision gate, not a separate user workflow. It returns candidate retention separately from task completion: behavioral updates use a pre-edit completion contract and consume `complete`/`continue`/`blocked`; retaining an experimental candidate cannot close unfinished required work. A readiness-only request routes through EvaluateSkill and then the gate. A design-only request ends with an explicitly unverified candidate. Classify updates by their intended effect: changing agent decisions or execution requires behavioral evaluation even when only instructions change. Short approvals inherit the preceding task scope; choosing a proposed mechanism does not make an improvement design-only.
 
 All workflows use [DesignMeasurement](Procedures/DesignMeasurement.md) for new, changed, unsupported, or out-of-scope measures, including new skills without a reported gap. Record the intended outcome, evidence method, scoring rule, and qualification scope before using a measure to establish improvement or readiness. Results distinguish pass, fail, and unverified; missing evidence cannot establish success or failure.
 
@@ -26,7 +26,9 @@ For a reported skill gap, route by requested result: “fix/improve it” select
 
 ## Examples
 
-Review/audit requests use EvaluateSkill's design-review mode. Description or triggering repairs use UpdateSkill with TestTriggering. Research integration and refactoring use UpdateSkill's maintenance paths. A typo uses its short path. See [tool capabilities and limits](Tools/README.md).
+Broad improvement uses [ComprehensiveImprovement](Procedures/ComprehensiveImprovement.md): reviewed whole-skill outcomes and structure define the parent scope; successive rounds resolve that scope. A small passing sample or a retained local fix cannot substitute for comprehensive coverage. Focused repairs and explicit maintenance remain proportional.
+
+Review/audit requests use EvaluateSkill's design-review mode. Description or triggering repairs use UpdateSkill with TestTriggering. Research integration and refactoring use UpdateSkill's scope check: behavioral changes follow its improvement loop; bounded maintenance keeps its short paths. A typo uses its short path. See [tool capabilities and limits](Tools/README.md).
 
 - “Create a review skill” → CreateSkill scopes the need, establishes quality, drafts a candidate, and evaluates it within the authorized scope.
 - “Fix missed boundary bugs in this skill” → UpdateSkill preserves the baseline, plans a targeted revision, evaluates it, and applies the shared decision gate.

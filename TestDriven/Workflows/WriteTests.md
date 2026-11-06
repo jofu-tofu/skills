@@ -32,6 +32,10 @@ Answer these four questions:
 
 ## Step-by-Step Process
 
+### Step 0: Preserve the requested scope
+
+Choose the objective before applying the red/green/refactor sequence. Characterization captures current observable behavior, including known defects, without silently correcting production. A tests-only request may add expected-red tests for desired behavior but does not authorize implementation or refactoring. Run Steps 3–4 only when the task includes those production changes. Report expected-red, preserved-pass, unavailable and not-run evidence separately; do not claim a full TDD cycle when only tests were requested. For authorized new-feature TDD, retain the complete sequence below.
+
 ### Step 1: Identify What to Test
 
 **Focus on public interface only.** Ask: "What would break if I called this wrong?"

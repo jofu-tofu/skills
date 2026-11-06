@@ -57,7 +57,7 @@ stripe_mock.charges.create.returns({charge_id: "ch_123"})
 
 *"If the provider changes their API, will my tests catch it before I deploy?"*
 
-With mocks: No. With contracts: Yes.
+Only when the relevant provider version is actually verified against the consumer contract. A mock or declaration-only pass cannot establish that.
 
 ---
 
@@ -90,7 +90,7 @@ Provider-driven: provider defines contracts (as Groovy DSL or YAML), generates t
 
 ### WireMock / API Mocking with Contracts
 
-Record real API interactions → replay in tests → use recordings as contracts.
+Recorded interactions can support consumer tests, but recordings may become stale. Verify the relevant provider implementation separately before claiming compatibility.
 
 ---
 
@@ -108,7 +108,7 @@ Record real API interactions → replay in tests → use recordings as contracts
  /─────────────────\
 ```
 
-Contract tests sit between unit and integration. They're faster than integration (no real services needed) but more reliable than mocks (contracts are verified against real providers).
+Consumer and provider checks can run separately without all services running together. Provider implementation verification still needs a real implementation/test instance and relevant state; report versions, setup/cleanup and unavailable evidence. Broker publication is a separate authorized external action.
 
 ---
 

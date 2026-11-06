@@ -4,11 +4,11 @@
 
 ## Mental Model
 
-TypeScript's type system is opt-in at every level. Without `strict: true`, the compiler permits implicit `any`, unchecked null access, and unsafe function binds — all of which compile cleanly and crash at runtime. Strict mode is not a preference; it is the minimum configuration that makes TypeScript meaningfully different from JavaScript.
+The house default is `strict: true`. It enables a family of stronger checks; individual strict flags can also be enabled or overridden. A missing umbrella flag does not disable all type checking or prove a runtime defect. Inspect the effective inherited configuration and migration contract.
 
-Beyond the compiler, type safety is a layered defense. The first layer is the `tsconfig.json` flags: `strict: true` enables `strictNullChecks`, `noImplicitAny`, `strictFunctionTypes`, and `strictBindCallApply`. The second layer is `noUncheckedIndexedAccess`, which closes the gap where TypeScript lies about array and record indexing — treating `array[n]` as `T` when it should be `T | undefined`. These two layers eliminate the most common source of production null-reference errors.
+`noUncheckedIndexedAccess` is a separate check, outside `strict`. With strict null checking, it adds `undefined` to unchecked array and index-signature lookups; declared properties and known tuple indices retain their appropriate types. These checks reduce risk but do not guarantee runtime safety.
 
-The third layer is discipline in how you handle types at runtime. `any` is not a flexible type — it is the absence of type checking, and it spreads virally. Every value that touches `any` loses its type information, and every function that returns `any` infects its callers. The antidote is `unknown`, which forces you to prove what a value is before using it. Type assertions (`as`) are the opposite: they tell the compiler to trust you without evidence. Type guards (`typeof`, `instanceof`, `in`, custom predicates) prove the type through runtime checks that the compiler can verify. Assertions hide bugs; narrowing catches them.
+Use `unknown` at untrusted boundaries and validate before use. `any` bypasses checks on that value and can propagate through inferred expressions, but does not erase every surrounding explicit type. Assertions perform no runtime validation. Built-in guards support control-flow narrowing; explicit user-defined predicates are trusted declarations whose implementation must establish every promised property.
 
 The final layer is branded types. TypeScript is structurally typed, so `UserId` and `OrderId` are interchangeable if both are strings. Branded types add a phantom property that makes them nominally distinct at the type level, while remaining plain strings at runtime. Combined with validation functions that brand on creation, they close the gap between "this is a string" and "this is a validated, domain-specific identifier."
 
@@ -18,7 +18,7 @@ Together, these layers form a defense-in-depth strategy: the compiler catches st
 
 ### When Reviewing Code
 
-Check `tsconfig.json` first. If `strict` is not `true`, flag it as CRITICAL regardless of what the rest of the code looks like — the compiler is not doing its job. Next, search for `noUncheckedIndexedAccess` — its absence means every array and record access is silently unsafe. Then scan for `any` in type annotations, function parameters, and return types. Each instance is a hole in the type system. Finally, look for `as` assertions that are not preceded by a runtime check — these are assertions without evidence. Legitimate uses of `as` include `as const` (safe) and post-Zod-parse casting (validated).
+Check the effective `tsconfig.json`, including inherited settings and individual strict options. Preserve the strict-by-default house policy, but assess missing flags, `any`, and assertions against actual unsafe operations and migration exceptions. Prefer `unknown` at external boundaries. A predicate must validate the full promised shape; an assertion may be justified by an independently established invariant.
 
 ### When Designing / Planning
 
@@ -32,10 +32,10 @@ Enable all strict flags before writing the first line of code. Use `unknown` ins
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| StrictModeAlways | CRITICAL | Enable `strict: true` in every tsconfig — without it, TypeScript is JavaScript with extra syntax |
-| NoUncheckedIndexAccess | CRITICAL | Enable `noUncheckedIndexedAccess` so array and record indexing returns `T \| undefined` |
-| NeverAny | CRITICAL | Replace `any` with `unknown` and narrow — `any` disables type checking and spreads virally |
-| NarrowBeforeUse | CRITICAL | Use type guards to prove types at runtime instead of `as` assertions that bypass safety |
+| StrictModeAlways | LOW policy; context-dependent risk | Prefer `strict: true`; assess effective settings and migration policy |
+| NoUncheckedIndexAccess | LOW policy; context-dependent risk | Enable `noUncheckedIndexedAccess` to include `undefined` in unchecked lookups |
+| NeverAny | Context-dependent | Prefer `unknown` at uncertain boundaries; isolate justified `any` |
+| NarrowBeforeUse | Context-dependent | Validate before use; audit predicates as well as assertions |
 | BrandedForValidation | MEDIUM | Use branded types to distinguish semantically different values that share the same primitive type |
 
 
@@ -43,9 +43,9 @@ Enable all strict flags before writing the first line of code. Use `unknown` ins
 
 ### TS1.1 Strict Mode Always
 
-**Impact: CRITICAL (Catches entire classes of bugs — null errors, implicit any, unsafe binds — at compile time instead of production)**
+**Impact: LOW policy; context-dependent risk (Strict checks detect many mistakes, not every runtime failure)**
 
-TypeScript without `strict: true` is JavaScript with extra syntax. Strict mode enables `strictNullChecks`, `noImplicitAny`, `strictFunctionTypes`, and other flags that make the type system actually useful. Enabling it on an existing codebase surfaces real bugs.
+The house default is `strict: true`. It enables strict checks including nullability and implicit-any diagnostics, subject to individual overrides. Non-strict TypeScript still performs type checking; enabling strictness in an existing codebase can reveal bugs and migration work.
 
 **Incorrect: Permissive compiler misses real bugs**
 
@@ -55,11 +55,11 @@ TypeScript without `strict: true` is JavaScript with extra syntax. Strict mode e
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext"
-    // strict defaults to false — silent bugs everywhere
+    // strict defaults to false; individual strict options can still be enabled
   }
 }
 
-// This compiles without error but crashes at runtime
+// With users declared, this can compile without strict checks and fail if no match exists
 function getUser(id) {           // id is implicitly 'any'
   return users.find(u => u.id === id);
 }
@@ -80,7 +80,7 @@ const name = getUser(1).name;    // potential null dereference — no warning
   }
 }
 
-// Compiler now requires explicit types and null handling
+// Compiler requires a parameter type here (inference handles many other sites) and null handling
 function getUser(id: number): User | undefined {
   return users.find(u => u.id === id);
 }
@@ -97,9 +97,9 @@ const name = user?.name ?? "Unknown";  // forced to handle undefined
 
 ### TS1.2 No Unchecked Index Access
 
-**Impact: CRITICAL (Prevents undefined-at-runtime from array/object indexing that TypeScript normally assumes safe)**
+**Impact: LOW policy; context-dependent risk (Detects potentially missing indexed values; does not prevent runtime undefined)**
 
-By default, TypeScript treats `array[0]` as the element type, not `T | undefined`. This is a lie — the index may not exist. `noUncheckedIndexedAccess` forces you to handle the `undefined` case, catching a class of bugs that `strict: true` alone misses.
+Ordinary array indexing is typed as the element type by default. With strict null checking, `noUncheckedIndexedAccess` adds `undefined` for unchecked lookups. This is separate from `strict`, and does not change runtime behavior. Declared keys and known tuple indices are treated according to their types.
 
 **Incorrect: Array indexing assumed safe**
 
@@ -130,16 +130,16 @@ const lang = config["language"] ?? "en-US"; // explicit fallback
 ```
 
 **When acceptable:**
-- After a bounds check: `if (i < array.length)` followed by `array[i]` — but narrowing with `at()` or optional chaining is still preferred
+- A numeric index check must exclude negatives and nonintegers too; even valid bounds do not prove a sparse array has an element. Read once and check `value !== undefined`. `at()` also returns a possibly undefined value, and a length check alone need not narrow indexed access.
 - Tuple types with known length already have correct types at specific indices
 
 ---
 
 ### TS1.3 Never Use Any
 
-**Impact: CRITICAL (Any disables type checking and spreads virally — one `any` infects every value it touches)**
+**Impact: Context-dependent (Unsafe uses of `any` can hide defects; deliberate isolated escape hatches are not automatically critical)**
 
-`any` is a type-checking escape hatch that turns TypeScript back into JavaScript. It's not "flexible" — it's invisible. Values typed as `any` pass through every check silently, and `any` propagates: a function returning `any` makes its callers untyped too. Use `unknown` when you genuinely don't know the type.
+`any` bypasses checking on that value and often propagates through expressions inferred from it. Explicitly typed surrounding values retain their declared types. Prefer `unknown` when the value is not yet known; isolate deliberate dynamic boundaries.
 
 **Incorrect: Any disables the type system**
 
@@ -151,7 +151,7 @@ function parseConfig(raw: any): any {
 const config = parseConfig(null); // config is any
 config.nonexistent.deep.access;   // no error — crashes at runtime
 
-// any spreads to everything it touches
+// These expressions infer any from an any-valued property access
 const theme = config.theme;       // theme is any
 const upper = theme.toUpperCase(); // any — no safety
 ```
@@ -159,11 +159,14 @@ const upper = theme.toUpperCase(); // any — no safety
 **Correct: Use unknown and narrow**
 
 ```typescript
+interface AppConfig { theme: string; }
+
 function parseConfig(raw: unknown): AppConfig {
-  if (!isRecord(raw) || !isRecord(raw.settings)) {
+  if (!isRecord(raw) || !isRecord(raw.settings) ||
+      typeof raw.settings.theme !== "string") {
     throw new Error("Invalid config structure");
   }
-  return raw.settings as AppConfig; // validated before assertion
+  return { theme: raw.settings.theme };
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -174,15 +177,15 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 **When acceptable:**
 - Inside generic function implementations where the type parameter constrains the public API (Matt Pocock's "any in generics" pattern)
 - Typing third-party libraries with no `@types` package — isolate in a `.d.ts` file
-- `JSON.parse()` return — but immediately validate with Zod (see Rule 8.1)
+- `JSON.parse()` return — assign to `unknown` and validate with the project validator (see TS3.3)
 
 ---
 
 ### TS1.4 Narrow Before Use
 
-**Impact: CRITICAL (Type assertions lie to the compiler — type guards prove correctness)**
+**Impact: Context-dependent (Unvalidated external data can be unsafe; predicates require implementation review)**
 
-Type assertions (`as`) tell the compiler "trust me" without evidence. Type guards (`typeof`, `in`, `instanceof`, custom predicates) prove the type through runtime checks that the compiler can verify. Assertions hide bugs; narrowing catches them.
+Assertions do not validate at runtime. Built-in guards narrow through control flow. An explicit `value is T` predicate is not checked for logical correctness: verify that its true branch establishes the complete promised type. Correct assertions remain useful when an invariant is established elsewhere.
 
 **Incorrect: Type assertions bypass safety**
 
@@ -194,15 +197,15 @@ interface AdminUser {
 
 function getPermissions(user: unknown): string[] {
   const admin = user as AdminUser;     // no runtime check
-  return admin.permissions;            // crashes if user isn't AdminUser
+  return admin.permissions;            // nullish user throws; missing permissions can return undefined
 }
 
 // Even with known types, 'as' is dangerous
 const input = document.getElementById("email") as HTMLInputElement;
-input.value = "test";  // crashes if element is null or not an input
+input.value = "test";  // null throws; a non-input does not satisfy the intended DOM contract
 ```
 
-**Correct: Type guards prove the type**
+**Correct: Check the full shape before claiming the type**
 
 ```typescript
 function isAdminUser(user: unknown): user is AdminUser {
@@ -210,7 +213,10 @@ function isAdminUser(user: unknown): user is AdminUser {
     typeof user === "object" &&
     user !== null &&
     "role" in user &&
-    (user as { role: unknown }).role === "admin"
+    user.role === "admin" &&
+    "permissions" in user &&
+    Array.isArray(user.permissions) &&
+    Array.from(user.permissions).every((permission: unknown) => typeof permission === "string")
   );
 }
 
@@ -230,7 +236,7 @@ if (input instanceof HTMLInputElement) {
 
 **When acceptable:**
 - `as const` for literal type assertions — this is safe and encouraged
-- After Zod `.parse()` which performs runtime validation (see Rule 8.1)
+- After Zod `.parse()` which performs runtime validation (see TS3.3)
 - Double assertion `as unknown as T` in test factories where you intentionally create partial mocks
 
 ---
@@ -298,19 +304,19 @@ getUser(userId);   // works
 
 **BrandedForValidation + NarrowBeforeUse** interact at the validation boundary. Branded type constructors validate and brand in one step. The type guard pattern from NarrowBeforeUse can also be used to create brand-checking predicates (e.g., `isUserId(value): value is UserId`).
 
-**NeverAny connects to ErrorHandling dimension**: `JSON.parse()` returns `any` — the immediate fix is to validate with Zod (see ErrorHandling dimension), which eliminates the `any` at the source.
+**NeverAny connects to ErrorHandling dimension**: `JSON.parse()` returns `any` — the immediate fix is to assign to `unknown` and validate with the chosen boundary validator (see ErrorHandling dimension).
 
 ## Anti-Patterns (Severity Calibration)
 
-### CRITICAL
+### Context-dependent — verify unsafe behavior
 
-- **`strict: false` or missing strict in tsconfig.json** — The compiler is not checking nulls, implicit any, or unsafe binds. Every line of code is unverified. No amount of careful coding compensates for a permissive compiler.
-- **`any` in function signatures** — A function parameter or return typed as `any` infects every caller. The infection is invisible because the code compiles without error while losing all type safety.
-- **`as` assertion without preceding runtime check** — Casting `user as AdminUser` without verifying the value is an admin creates a type-level lie that crashes at runtime when the assumption is wrong.
+- **Missing strict policy** — Inspect inherited configuration and individual options. This is a configuration policy finding unless a concrete unsafe path establishes greater severity; non-strict code still receives type checking.
+- **`any` in function signatures** — Review unchecked operations and propagation. Isolated dynamic boundaries may be intentional; assign severity from demonstrated consequences.
+- **Unjustified assertion or incomplete predicate** — Both can misrepresent runtime data. Review the invariant or full validation and the consequence of a mismatch, rather than treating syntax alone as critical.
 
-### HIGH
+### Configuration policy and potential unsafe access
 
-- **Missing `noUncheckedIndexedAccess`** — Array and record indexing silently returns `T` instead of `T | undefined`. Every `array[i]` and `record[key]` is an unguarded access that can crash.
+- **Missing `noUncheckedIndexedAccess`** — Retain the house default, but an absent flag does not make every lookup unsafe. Check optional results, bounds, declared keys and actual use.
 - **Non-null assertion operator (`!`) used to silence the compiler** — `value!.property` tells the compiler to ignore a null check. If the value is actually null, this crashes. Use optional chaining or narrow first.
 
 ### MEDIUM
@@ -351,7 +357,10 @@ interface AppEvent {
 function isAppEvent(value: unknown): value is AppEvent {
   return (
     typeof value === "object" && value !== null &&
-    "type" in value && "payload" in value
+    "type" in value && typeof value.type === "string" &&
+    "payload" in value &&
+    typeof value.payload === "object" && value.payload !== null &&
+    "data" in value.payload
   );
 }
 
@@ -391,3 +400,11 @@ sendEmail(Email("user@example.com"), "Hello");  // works
 - Matt Pocock, *Total TypeScript* — strict mode advocacy, branded types patterns, `unknown` over `any`
 - TypeScript Handbook — Strict Mode, Type Narrowing, Branded Types sections
 - Steve Kinney, *Frontend Masters TypeScript* — compiler configuration best practices
+
+### Verification references
+
+- https://www.typescriptlang.org/tsconfig/strict.html
+- https://www.typescriptlang.org/tsconfig/noUncheckedIndexedAccess.html
+- https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+- https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-5.html
+- https://www.typescriptlang.org/docs/handbook/2/narrowing.html

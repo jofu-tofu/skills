@@ -8,19 +8,19 @@ Python's type system is optional and gradual -- the interpreter ignores annotati
 
 The mental model for this dimension is: **types are the first line of defense**. Before defensive runtime checks (dimension PY1), before tests, before code review, the type checker can verify that functions receive and return the correct types, that nullable values are handled, that string constants match a known set, and that generic containers preserve their element types through transformations. Every function signature without type hints is a missed opportunity to catch bugs automatically.
 
-The key insight is that `Any` is viral. When a function accepts or returns `Any`, every downstream consumer inherits that `Any`, and the type checker stops verifying their code too. A single `Any` at a system boundary can disable type checking across an entire call chain. This is why avoiding `Any` is rated CRITICAL -- it is not about one function, it is about the cascading loss of verification across the codebase.
+`Any` allows unchecked operations and can propagate through derived expressions. It does not disable all checking in every consumer: an explicitly annotated variable can retain its declared static type after assignment from `Any`. Review the actual loss of checking against the project contract. Gradual migration and intentional dynamic boundaries may legitimately use `Any`; its presence alone does not establish critical harm. See [mypy dynamic typing](https://mypy.readthedocs.io/en/stable/dynamic_typing.html) and the [typing specification](https://typing.python.org/en/latest/spec/special-types.html#any).
 
 `Literal` types take this a step further by restricting values, not just types. A parameter typed as `str` accepts any string; a parameter typed as `Literal["GET", "POST", "PUT", "DELETE"]` only accepts those four values. The type checker catches typos at development time rather than runtime, and the set of valid values is documented directly in the signature. This is especially valuable for configuration options, status strings, mode flags, and any parameter where only specific values are meaningful.
 
-`Optional` (or the modern `X | None` syntax) forces callers to handle the null case. Without it, a function that sometimes returns `None` appears to always return a value, and callers skip the null check. With explicit nullability, the type checker flags every use site that does not handle `None`, turning a category of `AttributeError: 'NoneType' has no attribute` crashes into compile-time errors.
+`Optional[X]` (or `X | None`) records that absence is permitted. A configured checker can reject operations requiring a non-null value until the type is narrowed; operations that already accept `None` remain valid. Incorrect annotations, `Any`, casts and suppressed diagnostics can still hide a mismatch, so inspect the actual boundary rather than treating annotations as runtime enforcement.
 
-The practical goal is a codebase where `mypy --strict` (or `pyright` in strict mode) passes with zero errors. This means every function has complete annotations, `Any` is used only in genuinely dynamic code (JSON parsing boundaries, gradual migration stubs), `Literal` replaces bare `str` for known value sets, and `X | None` replaces implicit nullability. The type checker then becomes a continuous verification tool that catches regressions automatically on every commit.
+Set the checking goal from project policy and migration scope. A clean strict-checker run supplies useful static evidence, but does not prove that every closed set uses `Literal`, every dynamic boundary is justified, or runtime inputs satisfy annotations. Inspect those contracts separately and preserve checker/version limits.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-Check that every function and method has complete type annotations on all parameters and the return type. Look specifically for: functions with no annotations, functions that use `Any` where a specific type or generic would work, string parameters that accept only a known set of values (candidates for `Literal`), and functions that can return `None` but whose return type does not include `| None`. Verify that `TypeVar` is used for generic functions instead of `Any`. Check that class attributes are annotated, especially in `__init__` methods and dataclasses. Flag any `# type: ignore` comment that does not include a specific error code (e.g., `# type: ignore[arg-type]` is acceptable; bare `# type: ignore` is not).
+Read the project's typing policy and checker configuration first. Check required annotations, unintended loss of checking through `Any`, closed value sets that could use `Literal`, and mismatches between nullable results and caller assumptions. Generic types can preserve input/output relationships. Documented gradual migration, dynamic boundaries and checker-specific suppressions may be valid. Narrow suppression codes where the checker supports them; establish an actual policy violation or hidden error rather than assigning severity from syntax alone.
 
 ### When Designing / Planning
 
@@ -28,25 +28,25 @@ When designing interfaces, start with the type signatures before writing impleme
 
 ### When Implementing
 
-Annotate every function signature completely. Use modern syntax: `list[int]` instead of `List[int]`, `dict[str, Any]` instead of `Dict[str, Any]`, `X | None` instead of `Optional[X]` (Python 3.10+, or with `from __future__ import annotations`). Prefer `collections.abc` abstract types (`Mapping`, `Sequence`, `Iterator`) over concrete types (`dict`, `list`) in function parameters to accept the widest range of compatible inputs. Use `TypeVar` for functions that preserve input types. Create `Literal` type aliases for any parameter where the set of valid values is known and small. When dealing with third-party untyped libraries, create typed wrapper functions rather than letting `Any` propagate into your codebase.
+Follow the project's typing and gradual-migration policy; complete annotations where that contract requires them. Use modern syntax: `list[int]` instead of `List[int]`, `dict[str, Any]` instead of `Dict[str, Any]`, `X | None` instead of `Optional[X]` (Python 3.10+, or with `from __future__ import annotations`). Prefer `collections.abc` abstract types (`Mapping`, `Sequence`, `Iterator`) over concrete types (`dict`, `list`) in function parameters to accept the widest range of compatible inputs. Use `TypeVar` for functions that preserve input types. Create `Literal` type aliases for any parameter where the set of valid values is known and small. When dealing with third-party untyped libraries, create typed wrapper functions rather than letting `Any` propagate into your codebase.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| TypeHintsRequired | CRITICAL | Every function must have complete type annotations on parameters and return type |
-| TypeLiteralValues | CRITICAL | Use Literal types instead of bare str/int for parameters with known value sets |
-| TypeAvoidAny | CRITICAL | Avoid Any -- use specific types, generics, or Protocol for structural typing |
-| TypeOptionalNullable | CRITICAL | Mark nullable values explicitly with X | None to force callers to handle None |
+| TypeHintsRequired | Context-dependent | Apply the project typing policy; allow documented gradual-migration boundaries |
+| TypeLiteralValues | Context-dependent | Use Literal types instead of bare str/int for parameters with known value sets |
+| TypeAvoidAny | Context-dependent | Avoid Any -- use specific types, generics, or Protocol for structural typing |
+| TypeOptionalNullable | Context-dependent | Describe nullable contracts accurately and check callers under the configured checker |
 
 
 ---
 
 ### PY2.1 Type Hints Required
 
-**Impact: CRITICAL (Types are documentation that runs)**
+**Impact: Context-dependent (Check the project typing contract and demonstrated consequence)**
 
-Type hints catch bugs before runtime, serve as always-accurate documentation, and enable IDE features like autocomplete and refactoring. Untyped code accumulates maintenance debt.
+Type hints can expose errors to a configured checker and support IDE navigation. They are not guaranteed accurate documentation or runtime enforcement; inspect actual checked boundaries and deliberate dynamic interfaces before reporting a defect.
 
 **Incorrect: No type information**
 
@@ -102,9 +102,9 @@ class Config:
 
 ### PY2.2 Use Literal Types
 
-**Impact: CRITICAL (Catches typos at type-check time)**
+**Impact: Context-dependent (Check the project typing contract and demonstrated consequence)**
 
-`Literal` types restrict values to specific constants, catching typos and invalid values before runtime. The type checker enforces valid values at every call site.
+`Literal` describes allowed constants to a static checker. It can catch incompatible checked calls, but Python does not enforce it at runtime; unchecked callers, `Any` and external data can bypass that evidence. Keep runtime validation at untrusted boundaries. A validated internal caller need not repeat the same check solely because annotations exist.
 
 **Incorrect: String accepts any value**
 
@@ -120,7 +120,7 @@ def set_log_level(level: str) -> None:
 set_log_level("DEUBG")  # Typo passes type check, fails at runtime
 ```
 
-**Correct: Literal restricts to valid values**
+**Correct: Literal supports checked calls; the public boundary still validates**
 
 ```python
 from typing import Literal
@@ -128,7 +128,8 @@ from typing import Literal
 LogLevel = Literal["DEBUG", "INFO", "WARNING", "ERROR"]
 
 def set_log_level(level: LogLevel) -> None:
-    # No runtime validation needed - type system guarantees valid input
+    if level not in {"DEBUG", "INFO", "WARNING", "ERROR"}:
+        raise ValueError(f"Invalid level: {level}")
     ...
 
 # Type checker catches the typo immediately
@@ -169,9 +170,9 @@ def fetch(url: str, format: Literal["json", "text"]) -> dict | str:
 
 ### PY2.3 Avoid Any Type
 
-**Impact: CRITICAL (Any defeats the purpose of type checking)**
+**Impact: Context-dependent (Check the project typing contract and demonstrated consequence)**
 
-`Any` is a type-checking escape hatch that disables all verification. Code using `Any` can't be validated, and `Any` spreads virally - one `Any` infects everything it touches.
+`Any` permits operations without ordinary static type constraints and can propagate through inferred expressions. It does not erase unrelated checking or explicit type boundaries. Determine whether that loss of checking is intentional and acceptable before proposing a narrower type.
 
 **Incorrect: Any disables type safety**
 
@@ -235,9 +236,9 @@ result = untyped_library.call()  # type: ignore[no-untyped-call]
 
 ### PY2.4 Optional for Nullable
 
-**Impact: CRITICAL (Explicit null handling prevents surprises)**
+**Impact: Context-dependent (Check the project typing contract and demonstrated consequence)**
 
-Use `X | None` (or `Optional[X]`) to explicitly mark values that can be null. This forces callers to handle the null case and lets the type checker catch missing null checks.
+Use `X | None` (or `Optional[X]`) to mark permitted absence. A configured checker can catch an operation that requires a non-null value without appropriate narrowing; operations that accept `None` need no extra guard. An annotation does not validate runtime input.
 
 **Incorrect: Implicit nullability**
 
@@ -248,7 +249,8 @@ def find_user(user_id: int) -> User:
     return result  # Could be None!
 
 # Caller assumes non-null
-user = find_user(123)
+user_id = 123
+user = find_user(user_id)
 print(user.name)  # AttributeError if user is None
 ```
 
@@ -259,16 +261,19 @@ def find_user(user_id: int) -> User | None:
     return db.query(User).filter_by(id=user_id).first()
 
 # Type checker forces null handling
-user = find_user(123)
+user_id = 123
+user = find_user(user_id)
 print(user.name)  # Error: user might be None
 
 # Caller must handle null
-user = find_user(123)
+user_id = 123
+user = find_user(user_id)
 if user is not None:
     print(user.name)  # OK - type narrowed to User
 
 # Or use guard clause
-user = find_user(123)
+user_id = 123
+user = find_user(user_id)
 if user is None:
     raise NotFoundError(f"User {user_id} not found")
 print(user.name)  # OK - type narrowed to User
@@ -282,12 +287,15 @@ def greet(name: str | None = None) -> str:
     return f"Hello, {name or 'stranger'}!"
 
 # Distinguishing "not provided" from "explicitly None"
-from typing import Literal
+from enum import Enum
 
-_UNSET: Literal["_UNSET"] = "_UNSET"
+class _Missing(Enum):
+    TOKEN = 0
 
-def update(value: str | None | Literal["_UNSET"] = _UNSET) -> None:
-    if value is _UNSET:
+_UNSET = _Missing.TOKEN
+
+def update(value: str | None | _Missing = _UNSET) -> None:
+    if value is _Missing.TOKEN:
         return  # Not provided, don't update
     # value is str | None here - explicitly provided
 
@@ -299,29 +307,31 @@ def get_values() -> dict[str, int | None]:
 
 ## Rule Interactions
 
-**TypeHintsRequired + TypeAvoidAny**: These form a progression. TypeHintsRequired ensures annotations exist; TypeAvoidAny ensures they are meaningful. A function annotated as `def process(data: Any) -> Any` satisfies TypeHintsRequired but violates TypeAvoidAny -- the annotations exist but provide no verification.
+**TypeHintsRequired + TypeAvoidAny**: These form a progression. TypeHintsRequired ensures annotations exist; TypeAvoidAny ensures they are meaningful. A function annotated as `def process(data: Any) -> Any` has annotations but does not constrain that input/output relationship. Check whether it is an intentional dynamic or migration boundary before reporting a policy violation.
 
 **TypeLiteralValues + TypeAvoidAny**: Literal types are a stronger alternative to `str` the same way specific types are a stronger alternative to `Any`. Both rules push in the same direction: narrowing types to carry maximum information about valid values.
 
-**TypeOptionalNullable + DefensiveProgramming dimension**: Explicit nullability in the type system creates the contract; defensive LBYL checks enforce it at runtime. When a function returns `User | None`, the type checker forces callers to handle `None`, and LBYL patterns (`if user is None: raise`) provide the runtime safety net.
+**TypeOptionalNullable + DefensiveProgramming dimension**: Explicit nullability documents the static contract. Choose runtime handling from the actual boundary and required behavior: a guard, pattern match, deliberate exception policy or operation accepting `None` may be appropriate. Neither an annotation nor a `None` guard validates every aspect of an external value.
 
 **TypeHintsRequired + Performance dimension (OrgNoMutableDefaults)**: Type annotations on default parameters reveal mutable default bugs. `def f(items: list[str] = [])` is visually obvious when typed -- the annotation draws attention to the mutable default in a way that untyped code does not.
 
-## Anti-Patterns (Severity Calibration)
+## Review prompts and severity calibration
 
-### CRITICAL
+The categories below group review prompts, not predetermined finding severities. First establish the applicable project/version contract, valid alternatives and concrete consequence. A style or design preference alone is LOW or omitted; HIGH/CRITICAL requires corresponding demonstrated harm.
+
+### Check potentially consequential contract failures
 
 - **Untyped public API functions**: Public functions without type annotations cannot be verified by the type checker and force all consumers to guess at the contract. This is the most impactful typing failure because it disables verification across module boundaries.
 - **`Any` as a convenience type**: Using `Any` because the correct type is complex (e.g., nested generics) rather than investing in a proper type alias or Protocol. The short-term convenience creates long-term verification blackholes.
 - **Implicit None returns**: A function that has a code path returning `None` but whose return type does not include `| None`. The type checker may not catch the `None` and callers will crash with `AttributeError`.
 
-### HIGH
+### Check behavior and workload consequences
 
-- **Bare `# type: ignore` without error code**: Suppresses all type errors on the line, masking unrelated issues. Always specify the error code: `# type: ignore[assignment]`.
+- **Bare `# type: ignore` without error code**: Suppresses all type errors on the line, masking unrelated issues. Prefer a specific code such as `# type: ignore[assignment]` when supported by the configured checker and project policy.
 - **Using `dict` where `TypedDict` fits**: When a dictionary has a known, fixed schema (configuration objects, API response shapes), `TypedDict` provides key-level type checking that `dict[str, Any]` cannot.
 - **String parameters that should be Literal**: A function parameter typed as `str` that only accepts a known set of values (log levels, HTTP methods, sort directions). Runtime validation catches mistakes late; `Literal` catches them at development time.
 
-### MEDIUM
+### Check maintainability and explicit policy
 
 - **Using concrete collection types in parameters**: `def process(items: list[int])` rejects tuples and other sequences. Using `Sequence[int]` or `Iterable[int]` accepts a wider range of compatible inputs without losing type safety.
 - **Missing TypeVar in utility functions**: A utility function that accepts one type and returns the same type, annotated as `def identity(x: object) -> object`, loses the input type. `TypeVar` preserves it: `def identity(x: T) -> T`.
@@ -351,7 +361,7 @@ set_log_level("DEUBG")  # Type error caught immediately
 **Protocol for structural typing instead of Any:**
 
 ```python
-# BAD: Any disables all checking
+# Any leaves this attribute access unchecked unless the boundary is constrained elsewhere
 def serialize(obj: Any) -> str:
     return json.dumps(obj.to_dict())  # No guarantee .to_dict() exists
 
@@ -363,7 +373,7 @@ def serialize(obj: Serializable) -> str:
     return json.dumps(obj.to_dict())  # Type checker verifies .to_dict() exists
 ```
 
-**Explicit nullability forcing null handling:**
+**Explicit nullability documents permitted absence:**
 
 ```python
 # BAD: implicit None confuses callers
@@ -371,11 +381,12 @@ def find_user(user_id: int) -> User:
     result = db.query(User).filter_by(id=user_id).first()
     return result  # Could be None, but signature says User
 
-# GOOD: explicit None forces handling
+# Explicit None supports narrowing before operations requiring a User
 def find_user(user_id: int) -> User | None:
     return db.query(User).filter_by(id=user_id).first()
 
-user = find_user(123)
+user_id = 123
+user = find_user(user_id)
 if user is None:
     raise NotFoundError(f"User {user_id} not found")
 # Type narrowed to User from here
@@ -394,3 +405,4 @@ if user is None:
 - Dagster's "Dignified Python" (strict typing philosophy)
 - mypy documentation on strict mode and type narrowing
 - PEP 484 (Type Hints), PEP 586 (Literal Types), PEP 604 (Union syntax with |)
+- [Python typing: annotations are not enforced at runtime](https://docs.python.org/3/library/typing.html)

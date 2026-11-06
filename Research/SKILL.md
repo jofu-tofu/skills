@@ -1,13 +1,11 @@
 ---
 name: Research
 description: Evidence-based scientific literature discovery and synthesis using a multi-wave agent pipeline — seed finding, citation chaining, cross-domain reframing, and evidence quality assessment. USE WHEN literature review OR find research papers OR academic research OR scientific evidence OR what does the research say OR find papers OR systematic review OR evidence map OR citation search OR paper discovery OR cross-domain papers OR evaluate research quality OR lit review OR survey the literature OR what studies exist OR research synthesis OR find academic sources.
-compatibility:
-  platforms: [Codex, windsurf]
-  models: [Codex-sonnet-4-20250514, Codex-opus-4-20250514]
-version: "2.0"
+compatibility: Native pipeline uses host delegation and available research sources; supplied-corpus assessment can run offline with explicit coverage limits.
+version: "2.0.1-rc.1"
 ---
 
-# Research v2.0
+# Research
 
 Multi-wave agent pipeline for scientific literature discovery and evidence
 synthesis. Finds papers through citation chaining and cross-domain reframing,
@@ -76,3 +74,5 @@ User: "What does the research say about microservices vs monoliths for performan
 -> Evidence map explicitly flags: low evidence quality, mostly grey literature
 -> "What This Evidence Cannot Tell You" section is substantive
 ```
+
+Current granular outcomes, contribution map and evidence limits: [Quality/Outcomes.md](Quality/Outcomes.md).

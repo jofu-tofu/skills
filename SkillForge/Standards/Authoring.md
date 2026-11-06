@@ -12,4 +12,6 @@ Load when drafting instructions or changing routing, not for every evaluation.
 
 For research integration, read [KnowledgeIntegration](KnowledgeIntegration.md). Extract a supported implication, record evidence limits, and integrate the rationale where it belongs. A research citation alone does not demonstrate that a revision helps.
 
+For broad improvement, [PlanChange](../Procedures/PlanChange.md#research-decision) owns the research decision before changes are ranked. The library below is an optional source, not a substitute for that decision.
+
 Optional project research: [skill authoring evidence](../ResearchLibrary/Skill%20Authoring%20-%20Evidence%20and%20Use.md) covers content, examples, structure and formatting; the [research library](../ResearchLibrary/SkillForge%20Research%20Library.md) routes other questions. Consult the relevant section when choosing a change, not the entire archive. These working syntheses distinguish platform requirements from advice and hypotheses. Missing external research files do not block this skill's execution.

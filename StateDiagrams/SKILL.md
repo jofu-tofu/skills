@@ -47,3 +47,7 @@ User: "This Mermaid state diagram is a mess. Fix the links and make the decision
 -> Audits semantics, shape choice, edge labels, syntax fragility, and render risks
 -> Returns concrete findings and a corrected diagram when requested
 ```
+
+## Outcome and improvement records
+
+For evaluation or improvement, read [granular outcomes and current coverage](Quality/Outcomes.md). These records preserve open coverage and bounded evidence; they are not required context for every ordinary task or a claim of whole-skill readiness.

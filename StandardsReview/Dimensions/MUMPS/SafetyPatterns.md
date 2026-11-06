@@ -4,45 +4,45 @@
 
 ## Mental Model
 
-M processes share mutable symbol tables and global storage with minimal guardrails, so runtime safety is entirely the programmer's responsibility. Variable scope discipline — NEWing locals, avoiding argumentless KILL, validating parameters — prevents cross-call contamination that is nearly impossible to diagnose in production. Data access discipline means preferring Chronicles APIs over direct global references; raw global coupling is fast but brittle to schema changes, and raw `$order` traversal encodes storage assumptions that break silently. Concurrency discipline closes the loop: wrapper-driven locking prevents deadlocks and inconsistency, while standard trap initialization ensures failures route through common logging rather than disappearing. These three layers — scope isolation, API-first access, and defensive concurrency — form the runtime safety net that keeps Chronicles systems stable under operational load.
+Local symbol tables belong to a process; calls within it can share locals. Globals can provide shared persistent storage. Variable scope discipline — NEWing locals, avoiding argumentless KILL, validating parameters — prevents cross-call contamination that is nearly impossible to diagnose in production. For a Chronicles project, use supported APIs established by its actual contract. Direct global access and `$order` are normal M operations; suitability depends on data ownership and application requirements. Concurrency discipline closes the loop: consistent lock ordering, timeouts, and cleanup reduce concurrency failures; wrappers do not guarantee deadlock freedom. Error handling must follow the runtime/project contract. These three layers — scope isolation, API-first access, and defensive concurrency — form the runtime safety net that keeps Chronicles systems stable under operational load.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-- Confirm local variables are NEWed before mutation in reusable routines.
+- Confirm owned scratch locals are NEWed and initialized; preserve formal inputs and intentional shared outputs.
 - Flag argumentless KILL and broad kill patterns.
-- Flag direct global access where released APIs exist.
-- Reject naked global references and null-valued subscripts.
-- Ensure lock acquisition follows approved wrapper patterns.
-- Verify standard trap setup exists before risky operations.
+- Flag proprietary storage coupling where the actual project requires its verified API.
+- Apply explicit-global house policy; distinguish null-key data from valid traversal sentinels.
+- Where required, check the actual project lock-wrapper contract.
+- Verify the error-handler contract, including valid inherited handlers.
 
 ### When Designing / Planning
 
 - Decide variable ownership at routine boundaries.
-- Design data workflows around supported Chronicles APIs.
+- For Chronicles projects, use APIs verified for the actual runtime/project contract.
 - Define lock scope, ordering strategy, and timeout behavior.
 
 ### When Implementing
 
-- NEW all routine-local mutable variables.
-- Prefer API wrappers for data access and iteration.
-- Use standard lock wrappers and initialize error traps early.
+- NEW and initialize owned scratch locals; preserve formal inputs and intentional shared outputs.
+- Prefer verified project API wrappers where the data-access contract requires them.
+- Use project-required lock wrappers and establish or preserve the applicable error handler.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| NewVariablesBeforeUse | CRITICAL | NEW local variables to isolate symbol-table side effects |
+| NewVariablesBeforeUse | CRITICAL | NEW owned scratch locals and initialize before reading |
 | AvoidArgumentlessKill | CRITICAL | Never clear symbol tables with broad or implicit KILL patterns |
 | ProtectScratchVariables | HIGH | Avoid unsafe assumptions about shared scratch variables |
 | ValidateRequiredParameters | HIGH | Verify required arguments before executing business logic |
-| PreferChroniclesApisOverDirectGlobals | CRITICAL | Use released APIs before direct global reads/writes |
-| UseApiLoopingInsteadOfRawOrder | CRITICAL | Prefer API loop primitives over raw `$order` on data globals |
-| AvoidNakedGlobalReferences | CRITICAL | Keep every global reference explicit and stable |
-| AvoidNullValuedSubscripts | CRITICAL | Never create or rely on null-valued subscripts |
-| UseChroniclesLockWrappers | CRITICAL | Use shared lock/unlock wrappers for predictable behavior |
-| SetStandardErrorTrap | CRITICAL | Initialize standard trap handling before mutation-heavy logic |
+| PreferChroniclesApisOverDirectGlobals | CONDITIONAL | Use project-verified APIs for proprietary data where required |
+| UseApiLoopingInsteadOfRawOrder | CONDITIONAL | Use verified application APIs for proprietary traversal where required |
+| AvoidNakedGlobalReferences | CONDITIONAL | Keep every global reference explicit and stable |
+| AvoidNullValuedSubscripts | CONDITIONAL | Reject unintended empty data keys; permit valid traversal sentinels |
+| UseChroniclesLockWrappers | CONDITIONAL | Use verified project lock contracts and check ordering, timeouts, cleanup |
+| SetStandardErrorTrap | CONDITIONAL | Establish or preserve the applicable error-handling contract |
 
 #### VariableScope
 
@@ -52,17 +52,18 @@ M processes share mutable symbol tables and global storage with minimal guardrai
 
 **Impact: CRITICAL (Leaked symbol-table state causes cross-call corruption)**
 
-Routine-local mutable variables should be `NEW`ed before use in reusable code paths.
+NEW owned scratch locals, then initialize them before reading. NEW saves prior state and leaves the local undefined, not zero. Formal parameters already receive parameter-passing scope treatment; do not blindly NEW inputs or intentional shared outputs.
 
 **Avoid:**
 ```m
-set tmp=tmp+1
+  set tmp=tmp+1
 ```
 
 **Prefer:**
 ```m
-new tmp
-set tmp=tmp+1
+  new tmp
+  set tmp=0
+  set tmp=tmp+1
 ```
 
 ---
@@ -89,7 +90,7 @@ Prefer routine-local variables with explicit `NEW` and clear ownership.
 
 ### M4.4 Validate Required Parameters
 
-**Impact: HIGH (Unchecked inputs produce undefined behavior in deep call stacks)**
+**Impact: HIGH when missing or invalid inputs cause errors or corrupt results**
 
 Validate required parameters at tag entry and return explicit error values on precondition failure.
 
@@ -101,33 +102,25 @@ Fail fast before any data mutation or lock acquisition.
 
 ### M5.1 Prefer Chronicles APIs Over Direct Globals
 
-**Impact: CRITICAL (Direct global coupling is brittle to data-layout change)**
+**Impact: CONDITIONAL (Policy alone is low severity; assess demonstrated data or concurrency harm)**
 
-Use released Chronicles APIs and wrappers for data reads/writes whenever available.
+For an actual Chronicles project, use APIs documented as supported by its runtime/version and project contract. General M documentation cannot establish their existence, signatures, or guarantees. Direct globals can be appropriate for application-owned M storage.
 
-**Avoid:**
-```m
-set val=$get(^ERX(ini,id,item))
-```
-
-**Prefer:**
-```m
-set val=$$zGetItem^%Zelibh(ini,id,item)
-```
+Avoid undocumented proprietary storage coupling. Prefer the project-verified API and signature. No proprietary global or wrapper call is asserted here to be available or compatible.
 
 ---
 
 ### M5.2 Use API Looping Instead of Raw `$ORDER`
 
-**Impact: CRITICAL (Raw traversal encodes storage assumptions)**
+**Impact: CONDITIONAL (Policy alone is low severity; assess demonstrated data or concurrency harm)**
 
-For Chronicles structures, prefer supported looping APIs (`$$zoID`, `$$zoDT`, index wrappers) over direct `$order` loops on physical globals.
+For Chronicles structures, prefer looping APIs verified for the actual runtime/project contract over undocumented storage-layout traversal. Raw `$order` remains appropriate for owned arrays and globals where their contract permits it.
 
 ---
 
 ### M5.3 Avoid Naked Global References
 
-**Impact: CRITICAL (Naked references are fragile and context-dependent)**
+**Impact: CONDITIONAL (Policy alone is low severity; assess demonstrated data or concurrency harm)**
 
 Do not rely on implicit naked global state. Keep each global reference explicit to prevent accidental reads/writes to unintended nodes.
 
@@ -135,9 +128,11 @@ Do not rely on implicit naked global state. Keep each global reference explicit 
 
 ### M5.4 Avoid Null-Valued Subscripts
 
-**Impact: CRITICAL (Null subscript behavior differs across implementations)**
+**Impact: CONDITIONAL (Policy alone is low severity; assess demonstrated data or concurrency harm)**
 
-Never construct or depend on null-valued subscripts in local or global references. Guard subscript inputs before composing references.
+House policy: reject unintended empty-string data keys. YottaDB null-key support depends on local settings or global-region settings (ALWAYS, NEVER, EXISTING); check the deployed version/configuration.
+
+An empty-string sentinel in `$order(array(""))` starts traversal without creating a null-key node. If null-key data is intentionally supported, ordinary `$order` traversal needs special handling for it.
 
 #### ConcurrencyAndErrors
 
@@ -145,9 +140,9 @@ Never construct or depend on null-valued subscripts in local or global reference
 
 ### M6.1 Use Chronicles Lock Wrappers
 
-**Impact: CRITICAL (Ad hoc locking creates contention and inconsistency)**
+**Impact: CONDITIONAL (Policy alone is low severity; assess demonstrated data or concurrency harm)**
 
-Use approved lock/unlock wrappers (for example `$$zlock`/`$$zunlock`) instead of custom lock-string handling in application routines.
+Use wrappers when the actual project requires and documents them; general M documentation does not establish their signatures or guarantees. Standalone M may use LOCK directly. Review ordering, acquisition success, timeouts, and ownership; a wrapper alone cannot prevent deadlocks.
 
 Acquire locks before mutation and release them on every exit path.
 
@@ -155,9 +150,9 @@ Acquire locks before mutation and release them on every exit path.
 
 ### M6.2 Set Standard Error Trap
 
-**Impact: CRITICAL (Without a standard trap, failures become untraceable)**
+**Impact: CONDITIONAL (Depends on error propagation, logging, and recovery requirements)**
 
-Initialize the standard trap pattern (for example via shared wrapper conventions) before mutation-heavy logic.
+Establish the error-handling contract before mutation-heavy logic. A valid inherited handler can satisfy it; do not overwrite one merely to add local setup. Use project trap wrappers only where their contract is known.
 
 Trap setup should be consistent across routines so failures route through common logging and recovery behavior.
 
@@ -169,8 +164,10 @@ Trap setup should be consistent across routines so failures route through common
 
 ## Sources
 
-- Epic coding standards recommendations for custom M code variable hygiene
-- Chronicles programmer best-practice guidance
-- Epic Chronicles coding guidance on data APIs and global safety
-- Epic Chronicles locking guidance
-- Epic programming guidelines for trap and failure handling
+- [YottaDB NEW, KILL, LOCK](https://docs.yottadb.com/ProgrammersGuide/commands.html)
+- [YottaDB language features and null subscripts](https://docs.yottadb.com/ProgrammersGuide/langfeat.html)
+- [YottaDB $ORDER](https://docs.yottadb.com/ProgrammersGuide/functions.html)
+- [YottaDB error processing](https://docs.yottadb.com/ProgrammersGuide/errproc.html)
+- [YottaDB local/global storage](https://docs.yottadb.com/ProgrammersGuide/about.html)
+
+These public sources do not verify proprietary Chronicles APIs. Application-specific rules require the actual runtime/project contract.

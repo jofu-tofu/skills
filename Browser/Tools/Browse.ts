@@ -22,8 +22,9 @@
 
 import { tmpdir } from 'os'
 import { join } from 'path'
+import { fileURLToPath } from 'url'
 import { PlaywrightBrowser } from '../index.ts'
-import { fileExists, readFileCompat, sleep, isWindows } from './compat.ts'
+import { fileExists, readFileCompat, sleep, isWindows, isBun } from './compat.ts'
 
 const isMacOS = process.platform === 'darwin'
 
@@ -96,8 +97,9 @@ interface Diagnostics {
   failedRequests: Array<{
     url: string
     method: string
-    status: number
+    status?: number
     statusText?: string
+    errorText?: string
   }>
   stats: {
     totalRequests: number
@@ -141,70 +143,50 @@ function formatAccessibilityTree(tree: string): string {
 
 async function getSessionState(): Promise<SessionState | null> {
   try {
-    if (await fileExists(STATE_FILE)) {
-      const content = await readFileCompat(STATE_FILE)
-      if (content.trim()) {
-        return JSON.parse(content)
-      }
+    const state = JSON.parse(await readFileCompat(STATE_FILE)) as SessionState
+    if (!state || !Number.isInteger(state.port) || state.port < 1 || state.port > 65535 ||
+        typeof state.sessionId !== 'string' || state.sessionId.length === 0) {
+      throw new Error('invalid state fields')
     }
-  } catch {}
-  return null
+    return state
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null
+    throw new Error(`Browser session state is unreadable or invalid at ${STATE_FILE}; preserved for inspection`)
+  }
 }
 
-async function isSessionRunning(): Promise<boolean> {
-  const state = await getSessionState()
-  if (!state) return false
-
+async function sessionIdentity(state: SessionState): Promise<'owned' | 'unavailable' | 'mismatch'> {
+  let res: Response
   try {
-    const res = await fetch(`http://localhost:${state.port}/health`, {
-      signal: AbortSignal.timeout(1000)
-    })
-    return res.ok
-  } catch {
-    // Server not responding - clean up orphan state
-    try {
-      const fs = await import('fs/promises')
-      await fs.unlink(STATE_FILE)
-    } catch {}
-    return false
-  }
+    res = await fetch(`http://localhost:${state.port}/health`, { signal: AbortSignal.timeout(1000) })
+  } catch { return 'unavailable' }
+  try {
+    const payload = await res.json() as any
+    return res.ok && payload.success === true && payload.data?.status === 'ok' &&
+      typeof state.sessionId === 'string' && state.sessionId.length > 0 &&
+      payload.data?.sessionId === state.sessionId ? 'owned' : 'mismatch'
+  } catch { return 'mismatch' }
 }
 
 async function ensureSession(): Promise<number> {
   // Check if already running
   const state = await getSessionState()
   if (state) {
-    try {
-      const res = await fetch(`http://localhost:${state.port}/health`, {
-        signal: AbortSignal.timeout(1000)
-      })
-      if (res.ok) {
-        return state.port
-      }
-    } catch {}
+    const identity = await sessionIdentity(state)
+    if (identity === 'owned') return state.port
+    if (identity === 'mismatch') throw new Error('Browser session identity mismatch; refusing to control another service')
+    if (await portMayBeActive(state.port)) throw new Error('Recorded browser session is unresponsive; session state preserved')
   }
 
   // Need to start session
   const port = DEFAULT_PORT
 
-  // Check port availability
-  try {
-    const res = await fetch(`http://localhost:${port}/health`, {
-      signal: AbortSignal.timeout(500)
-    })
-    if (res.ok) {
-      return port // Already running on this port
-    }
-  } catch {}
+  // A listening but unresponsive service still owns its port.
+  if (await portMayBeActive(port)) throw new Error('Browser port is occupied without matching session state; refusing to reuse it')
 
   // Start server in background
-  const { spawn } = await import('child_process')
-  const serverPath = new URL('./BrowserSession.ts', import.meta.url).pathname
-
-  // On Windows, remove leading slash from path if it looks like /C:/...
-  const normalizedPath = isWindows && serverPath.match(/^\/[A-Za-z]:/)
-    ? serverPath.slice(1)
-    : serverPath
+  const { spawn, spawnSync } = await import('child_process')
+  const normalizedPath = fileURLToPath(new URL('./BrowserSession.ts', import.meta.url))
 
   const env: Record<string, string> = {
     ...process.env as Record<string, string>,
@@ -212,18 +194,24 @@ async function ensureSession(): Promise<number> {
     BROWSER_HEADLESS: process.env.BROWSER_HEADLESS === 'false' ? 'false' : 'true'
   }
 
-  // On Windows, Bun + Playwright chromium.launch() hangs.
-  // Use npx tsx (Node) on Windows, bun on other platforms.
-  const runner = isWindows ? 'npx' : 'bun'
-  const runnerArgs = isWindows
-    ? ['tsx', normalizedPath]
-    : ['run', normalizedPath]
+  // On Windows, run the Playwright server under Node even when the CLI uses Bun.
+  // Prefer available native TypeScript support; never download a loader implicitly.
+  const nativeNode = isBun && isWindows && spawnSync('node',
+    ['--experimental-strip-types', '-e', ''],
+    { timeout: 2000, windowsHide: true, stdio: 'ignore' }).status === 0
+  // A working Node invocation already has its required TypeScript support.
+  // Reuse that runtime/loader instead of silently requiring an npx download.
+  const runner = !isBun ? process.execPath : nativeNode ? 'node' : isWindows ? 'npx' : process.execPath
+  const runnerArgs = !isBun
+    ? [...process.execArgv, normalizedPath]
+    : nativeNode ? ['--experimental-strip-types', normalizedPath]
+    : isWindows ? ['--offline', '--no-install', 'tsx', normalizedPath] : ['run', normalizedPath]
 
   const child = spawn(runner, runnerArgs, {
     detached: true,
     stdio: 'ignore',
     env,
-    ...(isWindows ? { shell: true, windowsHide: true } : {})
+    ...(isWindows ? { shell: isBun && !nativeNode, windowsHide: true } : {})
   })
   child.unref()
 
@@ -232,10 +220,8 @@ async function ensureSession(): Promise<number> {
   for (let i = 0; i < maxAttempts; i++) {
     await sleep(200)
     try {
-      const res = await fetch(`http://localhost:${port}/health`, {
-        signal: AbortSignal.timeout(1000)
-      })
-      if (res.ok) {
+      const started = await getSessionState()
+      if (started?.port === port && await sessionIdentity(started) === 'owned') {
         return port
       }
     } catch {}
@@ -320,7 +306,7 @@ function formatDiagnostics(
     lines.push(`Failed Requests (${diag.failedRequests.length}):`)
     for (const req of diag.failedRequests.slice(0, 5)) {
       const urlPath = new URL(req.url).pathname
-      lines.push(`   - ${req.method} ${truncate(urlPath, 50)} -> ${req.status} ${req.statusText || ''}`)
+      lines.push(`   - ${req.method} ${truncate(urlPath, 50)} -> ${req.status ?? 'NETWORK'} ${req.errorText || req.statusText || ''}`)
     }
     if (diag.failedRequests.length > 5) {
       lines.push(`   ... and ${diag.failedRequests.length - 5} more`)
@@ -330,6 +316,8 @@ function formatDiagnostics(
 
   // Network summary
   lines.push(`Network: ${diag.stats.totalRequests} requests | ${formatBytes(diag.stats.totalSize)} | avg ${Math.round(diag.stats.avgDuration)}ms`)
+
+  lines.push(`URL: ${diag.pageUrl}`)
 
   // Final status
   const hasIssues = diag.errors.length > 0 || diag.failedRequests.length > 0
@@ -431,6 +419,7 @@ async function showNetwork(): Promise<void> {
     status?: number
     duration?: number
     size?: number
+    errorText?: string
   }>
 
   if (logs.length === 0) {
@@ -438,17 +427,17 @@ async function showNetwork(): Promise<void> {
     return
   }
 
-  // Show only responses (more useful)
-  const responses = logs.filter(l => l.type === 'response')
+  // Include transport failures, which never receive an HTTP response.
+  const responses = logs.filter(l => l.type === 'response' || l.type === 'failure')
 
-  console.log(`Network Activity (${responses.length} responses):\n`)
+  console.log(`Network Activity (${responses.length} responses/failures):\n`)
   for (const log of responses.slice(-20)) {
     const urlPath = new URL(log.url).pathname
-    const status = log.status || 0
-    const icon = status >= 400 ? '[FAIL]' : status >= 300 ? '[REDIR]' : '[OK]'
+    const status = log.status ?? 'NETWORK'
+    const icon = log.type === 'failure' || (log.status ?? 0) >= 400 ? '[FAIL]' : (log.status ?? 0) >= 300 ? '[REDIR]' : '[OK]'
     const size = log.size ? formatBytes(log.size) : ''
     const duration = log.duration ? `${log.duration}ms` : ''
-    console.log(`${icon} ${status} ${log.method} ${truncate(urlPath, 50)} ${size} ${duration}`)
+    console.log(`${icon} ${status} ${log.method} ${truncate(urlPath, 50)} ${size} ${duration}${log.errorText ? ` ${log.errorText}` : ''}`)
   }
 }
 
@@ -462,7 +451,7 @@ async function showFailed(): Promise<void> {
 
   console.log(`Failed Requests (${diag.failedRequests.length}):\n`)
   for (const req of diag.failedRequests) {
-    console.log(`[FAIL] ${req.status} ${req.method} ${req.url}`)
+    console.log(`[FAIL] ${req.status ?? 'NETWORK'} ${req.method} ${req.url}${req.errorText ? ` ${req.errorText}` : ''}`)
   }
 }
 
@@ -511,6 +500,18 @@ async function click(selector: string): Promise<void> {
   await printA11yTree()
 }
 
+async function checkTarget(selector: string, state: string = 'visible'): Promise<void> {
+  if (state !== 'visible' && state !== 'attached') throw new Error('Target state must be visible or attached')
+  await sessionCommand('wait', { selector, state, timeout: 5000 })
+  // Text lookup is strict: ambiguous selectors must not silently verify the first match.
+  const { text } = await sessionCommand('text', { selector }, 'GET')
+  const session = await sessionCommand('session', {}, 'GET')
+  console.log(`Target ${state}: ${selector}`)
+  console.log(`URL: ${session.url}`)
+  console.log(`Text: ${text}`)
+  console.log('This verifies the target condition only; inspect diagnostics and rendering for page-level claims.')
+}
+
 async function fill(selector: string, value: string): Promise<void> {
   await sessionCommand('fill', { selector, value })
   console.log(`Filled: ${selector}`)
@@ -529,46 +530,80 @@ async function evaluate(script: string): Promise<void> {
 }
 
 async function showStatus(): Promise<void> {
-  try {
-    const state = await getSessionState()
-    if (!state) {
-      console.log('No session running')
-      return
-    }
+  const state = await getSessionState()
+  if (!state) {
+    console.log('No recorded browser session')
+    return
+  }
+  const identity = await sessionIdentity(state)
+  if (identity !== 'owned') throw new Error(`Recorded session ${identity}; status did not start or change a browser`)
+  const response = await fetch(`http://localhost:${state.port}/session`, { signal: AbortSignal.timeout(2000) })
+  const payload = await response.json() as any
+  if (!response.ok || payload.success !== true || payload.data?.sessionId !== state.sessionId) {
+    throw new Error('Unable to verify recorded session status')
+  }
+  const session = payload.data
+  console.log('Browser Session:')
+  console.log(`  ID: ${session.sessionId}`)
+  console.log(`  Port: ${session.port}`)
+  console.log(`  URL: ${session.url || '(none)'}`)
+  console.log(`  Title: ${session.title || '(none)'}`)
+  console.log(`  Started: ${session.startedAt}`)
+  console.log(`  Idle timeout: ${session.idleTimeout}`)
+}
 
-    const session = await sessionCommand('session', {}, 'GET')
-    console.log('Browser Session:')
-    console.log(`  ID: ${session.sessionId}`)
-    console.log(`  Port: ${session.port}`)
-    console.log(`  URL: ${session.url || '(none)'}`)
-    console.log(`  Title: ${session.title || '(none)'}`)
-    console.log(`  Started: ${session.startedAt}`)
-    console.log(`  Idle timeout: ${session.idleTimeout}`)
-  } catch {
-    console.log('Session not responding')
+async function portMayBeActive(port: number): Promise<boolean> {
+  const { createConnection } = await import('node:net')
+  return new Promise(resolve => {
+    const socket = createConnection({ host: 'localhost', port })
+    let settled = false
+    const finish = (active: boolean) => {
+      if (settled) return
+      settled = true
+      socket.destroy()
+      resolve(active)
+    }
+    socket.once('connect', () => finish(true))
+    socket.once('error', (error: NodeJS.ErrnoException) => finish(error.code !== 'ECONNREFUSED'))
+    socket.setTimeout(1000, () => finish(true)) // Unknown is not confirmed termination.
+  })
+}
+
+async function waitForSessionStop(port: number): Promise<void> {
+  const deadline = Date.now() + 3000
+  while (await portMayBeActive(port)) {
+    if (Date.now() >= deadline) throw new Error('Stop is unconfirmed; session state preserved')
+    await sleep(100)
   }
 }
 
 async function restart(): Promise<void> {
-  // Stop if running
-  try {
-    const state = await getSessionState()
-    if (state) {
-      await fetch(`http://localhost:${state.port}/stop`, {
-        method: 'POST',
-        signal: AbortSignal.timeout(2000)
-      })
-      await sleep(500)
+  const current = await getSessionState()
+  if (current) {
+    const identity = await sessionIdentity(current)
+    if (identity === 'mismatch') throw new Error('Browser session identity mismatch; refusing to restart another service')
+    if (identity === 'owned') {
+      try {
+        const response = await fetch(`http://localhost:${current.port}/stop`, {
+          method: 'POST', signal: AbortSignal.timeout(2000)
+        })
+        if (!response.ok) throw new Error(`Stop failed: HTTP ${response.status}`)
+      } catch (error) {
+        if (await portMayBeActive(current.port)) {
+          throw new Error(`Restart could not confirm stop; session state preserved: ${error instanceof Error ? error.message : error}`)
+        }
+      }
+      await waitForSessionStop(current.port)
+    } else if (await portMayBeActive(current.port)) {
+      throw new Error('Browser session is unresponsive; restart refused and session state preserved')
     }
-  } catch {}
+  }
 
-  // Clean up state file
+  // Remove stale ownership only after the recorded endpoint is unavailable.
   try {
     const fs = await import('fs/promises')
     await fs.unlink(STATE_FILE)
   } catch {}
-
-  // Start fresh
   await ensureSession()
   console.log('Session restarted')
 }
@@ -576,18 +611,27 @@ async function restart(): Promise<void> {
 async function stop(): Promise<void> {
   const state = await getSessionState()
   if (!state) {
-    console.log('No session running')
+    console.log('No recorded browser session')
     return
   }
 
+  const identity = await sessionIdentity(state)
+  if (identity === 'mismatch') throw new Error('Browser session identity mismatch; refusing to stop another service')
+  if (identity === 'unavailable') {
+    if (await portMayBeActive(state.port)) throw new Error('Session is unresponsive; unable to confirm stop')
+    console.log('Session already stopped')
+    return
+  }
   try {
-    await fetch(`http://localhost:${state.port}/stop`, {
+    const response = await fetch(`http://localhost:${state.port}/stop`, {
       method: 'POST',
       signal: AbortSignal.timeout(2000)
     })
+    if (!response.ok) throw new Error(`Stop failed: HTTP ${response.status}`)
+    await waitForSessionStop(state.port)
     console.log('Session stopped')
-  } catch {
-    console.log('Session already stopped')
+  } catch (error) {
+    throw new Error(`Unable to confirm session stop: ${error instanceof Error ? error.message : error}`)
   }
 }
 
@@ -681,6 +725,7 @@ Usage:
   bun run Browse.ts failed                   Show failed requests (4xx, 5xx)
   bun run Browse.ts screenshot [path]        Take screenshot of current page
   bun run Browse.ts click <selector>         Click element
+  bun run Browse.ts check <selector> [visible|attached]  Check current target without navigating
   bun run Browse.ts fill <selector> <value>  Fill input field
   bun run Browse.ts type <selector> <text>   Type with delay
   bun run Browse.ts status                   Show session info
@@ -774,8 +819,13 @@ async function main(): Promise<void> {
         await click(args[1])
         break
 
+      case 'check':
+        if (!args[1]) throw new Error('Selector required')
+        await checkTarget(args[1], args[2])
+        break
+
       case 'fill':
-        if (!args[1] || !args[2]) {
+        if (!args[1] || args.length < 3) {
           console.error('Selector and value required')
           process.exit(1)
         }
@@ -849,7 +899,7 @@ async function main(): Promise<void> {
     }
   } catch (err: any) {
     handleError(err)
-    process.exit(1)
+    process.exitCode = 1
   }
 }
 
@@ -906,4 +956,4 @@ function handleError(err: any): void {
   console.error(`Error: ${msg}`)
 }
 
-main()
+await main()

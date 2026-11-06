@@ -7,7 +7,7 @@ All Generate and Audit workflows dispatch agents using this pattern.
 
 ## JSON Schema (Required Output)
 
-Every haiku agent must return ONLY valid JSON matching this schema:
+The calling workflow owns the output mode. Generate agents return ONLY valid JSON matching the schema below. Audit agents use the Audit schema declared in `Workflows/Audit.md` (`still_accurate`, `stale`, `missing`, `unverified`); do not replace an Audit result with empty Generate fields. Use the selected mode consistently in dispatch, validation, retry and synthesis.
 
 ```json
 {
@@ -42,7 +42,7 @@ Every haiku agent must return ONLY valid JSON matching this schema:
 
 ## Verbatim Prompt Template
 
-Use this exact prompt when dispatching each haiku agent. Replace `{DIRECTORY}` and `{FILES_LIST}`:
+Use this prompt for Generate agents. Audit uses its workflow's claim-verification prompt instead. Replace `{DIRECTORY}` and `{FILES_LIST}`:
 
 ```
 You are summarizing code in the {DIRECTORY} directory for a CLAUDE.md context file.
@@ -78,9 +78,9 @@ Before using any haiku agent response:
 
 0. **Fence strip** — If the response starts with ` ``` ` (with or without a language tag like `json`), strip the opening and closing fence lines before parsing. Haiku agents frequently wrap valid JSON in markdown fences despite the instruction.
 1. **Parse check** — `JSON.parse(stripped_response)` must succeed
-2. **Schema check** — All 5 top-level keys must be present (values may be empty arrays)
-3. **Type check** — `commands` is array of objects with `cmd`+`purpose`; `conventions` is string array; `key_files` is array of objects with `path`+`role`; `constraints` is string array; `cross_refs` is array of objects with `name`+`owns`+`entry`
-4. **Path check** — `key_files[].path` values must be project-relative (e.g., `skills/ContextLayer/SKILL.md`), NOT absolute (e.g., `/home/user/project/skills/...`). If absolute paths appear, strip the project root prefix.
+2. **Schema check** — The selected mode's required keys must be present (values may be empty arrays): Generate uses its five keys above; Audit uses `still_accurate`, `stale`, `missing`, `unverified`.
+3. **Type check** — Generate: `commands` is array of objects with `cmd`+`purpose`; `conventions` is string array; `key_files` is array of objects with `path`+`role`; `constraints` is string array; `cross_refs` is array of objects with `name`+`owns`+`entry`. Audit: `still_accurate` and `missing` are string arrays; `stale` is an array of objects with string `entry`, `reason`, `fix`; `unverified` is an array of objects with string `entry`, `reason`, `needed`.
+4. **Generate-only path check** — `key_files[].path` values must be project-relative (e.g., `skills/ContextLayer/SKILL.md`), NOT absolute (e.g., `/home/user/project/skills/...`). If absolute paths appear, strip the project root prefix.
 
 If validation fails after fence-stripping → go to retry protocol below.
 
@@ -96,10 +96,12 @@ Re-prompt the same agent ONCE with this exact message:
 Your previous response was not valid JSON. Return ONLY the JSON object — no markdown, no prose, no code fences.
 
 Required format:
-{"commands": [], "conventions": [], "key_files": [], "constraints": [], "cross_refs": []}
+{SELECTED_MODE_SCHEMA}
 
 Fill in the arrays with findings from the files you read. Return nothing else.
 ```
+
+Substitute the same Generate or Audit schema used in the initial dispatch for `{SELECTED_MODE_SCHEMA}`. Do not reinterpret an Audit payload as Generate merely to satisfy validation.
 
 **On second failure:**
 
@@ -107,7 +109,7 @@ Do NOT retry again. The orchestrator handles the subsystem directly:
 1. Read the subsystem files yourself (1-2 key files maximum)
 2. Extract what you can manually
 3. Log: "Haiku agent failed for {DIRECTORY} — orchestrator handled directly"
-4. Continue with partial data — do not block the overall workflow
+4. Continue with explicitly partial data — do not block independent work. Preserve unverified existing constraints, record unread claims and evidence limits, and mark the synthesized context/review as partial. A fallback log is not a complete audit.
 
 **Token limit guidance to haiku:** Include "Return in under 200 tokens total" in the prompt. This is a hint, not enforced — but it primes the agent toward brevity.
 

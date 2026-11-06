@@ -16,7 +16,7 @@ Ask yourself: *"If someone looks at this for 5 seconds, what should they underst
 
 Write this down as a single sentence. This is your north star.
 
-**Why this matters:** Diagrams exploit parallel visual processing (10M bits/sec) vs sequential reading (200 words/min). That power only works when there's one clear message.
+Keep the main relationship visible; a visual hierarchy is a design goal, not proof of reader comprehension.
 
 ### Decision 2: What type of diagram?
 
@@ -31,9 +31,9 @@ Match your prompt to a diagram pattern. Scan for keywords:
 | concept map, mind map, relationships | Mind map | Ellipses in radial layout | 1-2 |
 | presentation, slides, deck | Presentation | Frames containing groups | 0 |
 
-**Default:** Architecture with roughness 1 if unclear.
+If the intended relationship is unclear, ask for the missing purpose or offer a labeled layout proposal. Do not assume every request is architecture.
 
-For detailed patterns with code examples, see [UseCaseGuide.md](Workflows/Excalidraw/UseCaseGuide.md).
+Use the pattern table above and the Common Use Cases section below. This skill does not bundle a separate pattern-code workflow.
 
 ### Decision 3: What do elements mean?
 
@@ -50,7 +50,7 @@ Assign semantic colors to element categories. Same color = same meaning, always.
 
 **The 60-30-10 rule:** 60% whitespace, 30% primary elements, 10% accent highlights. If your diagram feels crowded, add more whitespace.
 
-For complete styling reference, see [StylingSystem.md](Workflows/Excalidraw/StylingSystem.md).
+Treat this palette and spacing as suggested defaults. Preserve an existing visual language when it communicates the same meaning clearly; do not encode essential distinctions only in color.
 
 ### Decision 4: Build the file
 
@@ -66,9 +66,9 @@ Create the `.excalidraw` file using these specifications:
 | Font (sketch) | Virgil (fontFamily: 1) | Hand-drawn aesthetic |
 | Font (code) | Cascadia (fontFamily: 3) | Monospace for technical |
 
-**File location:** `Diagrams/{Category}/{DescriptiveName}.excalidraw`
+**File location:** Honor the requested path and vault conventions. If neither specifies a destination, suggest `Diagrams/{Category}/{DescriptiveName}.excalidraw`.
 
-For API methods and JSON structure, see [AutomateAPI.md](Workflows/Excalidraw/AutomateAPI.md).
+For an actual file request, use the File Formats and Automation sections below. This skill supplies guidance, not a bundled Excalidraw generator.
 
 ### Decision 5: Verify quality
 
@@ -82,7 +82,7 @@ Before delivering, run these tests:
 
 **Why verification matters:** These tests catch the most common failure mode—adding complexity that feels helpful but actually obscures the message.
 
-For the full philosophy and additional tests, see [Philosophy.md](Workflows/Excalidraw/Philosophy.md).
+These are author self-checks, not measured reader results. For an actual file, also open it with the selected consumer, inspect labels and relationship direction, and distinguish successful parsing from rendering or live Obsidian behavior.
 
 ---
 
@@ -97,7 +97,7 @@ For the full philosophy and additional tests, see [Philosophy.md](Workflows/Exca
 
 ### Creating Diagrams
 - **Interactive:** Click "New Excalidraw Drawing" in Obsidian
-- **Programmatic:** Use workflows below for automated generation
+- **Programmatic:** Use a documented, available API or file consumer matching its actual version; no dedicated automation workflow is bundled here.
 
 ---
 
@@ -119,7 +119,7 @@ For the full philosophy and additional tests, see [Philosophy.md](Workflows/Exca
 ## Key Features
 
 - **Freehand drawing**: Sketch-style diagrams with adjustable roughness (0-2)
-- **9 element types**: Rectangle, ellipse, diamond, arrow, line, freedraw, text, image, frame
+- **Common element types**: Rectangle, ellipse, diamond, arrow, line, freedraw, text, image, frame
 - **LaTeX support**: Embed math formulas with `\LaTeX` syntax
 - **SVG/PNG export**: High-quality exports with auto-export option
 - **Obsidian integration**: Embed in notes, link to other notes, Canvas integration
@@ -145,35 +145,14 @@ The Obsidian skill now consults this file mainly through `ChooseVisualForm.md` w
 
 ---
 
-## Automate API Quick Reference
+## Automation
 
-```javascript
-const ea = ExcalidrawAutomate.plugin;
+The Obsidian plugin automation API and the standalone Excalidraw library are different interfaces. Do not assume the plugin is installed or copy guessed method signatures between them. Identify the available runtime and version first, then use its documentation. The earlier quick-reference code was not a qualified executable adapter and is intentionally removed.
 
-// Create elements
-ea.addRect(x, y, width, height, {text: "Label"});
-ea.addEllipse(x, y, width, height, {fillStyle: "solid"});
-ea.addDiamond(x, y, width, height);
-ea.addArrow([[x1, y1], [x2, y2]], {endArrowhead: "arrow"});
-ea.addText(x, y, "Text", {fontSize: 20});
-ea.addLaTeX(x, y, "E = mc^2");
+- [Official Obsidian plugin API declarations](https://github.com/zsviczian/obsidian-excalidraw-plugin/blob/master/docs/API/ExcalidrawAutomate.d.ts): select the matching installed release before relying on signatures.
+- [Official Excalidraw library source](https://github.com/excalidraw/excalidraw/tree/master/packages/excalidraw): use the pinned version's import, serialization and export interfaces for a standalone consumer.
 
-// Style elements
-ea.setStrokeColor("#1e90ff", elementId);
-ea.setBackgroundColor("#e0f7fa", elementId);
-ea.setFillStyle("solid", elementId);
-
-// Layout
-ea.group([id1, id2, id3]);
-ea.alignVertical([id1, id2, id3], "middle");
-ea.distributeHorizontal([id1, id2, id3]);
-
-// Canvas management
-ea.clear();
-ea.create("DiagramName", "Diagrams/");
-```
-
-For deeper API details, use the Excalidraw plugin's own documentation or community references if the user explicitly wants implementation-level help.
+If only a layout plan is requested, no automation runtime is required. If an actual file is requested, produce and validate that file with an available documented consumer, or state the exact missing capability; a plan is not a created file. Never label standalone parsing/rendering as live Obsidian-plugin verification.
 
 ---
 
@@ -194,11 +173,11 @@ When creating Excalidraw files programmatically, use **plain JSON** with `.excal
 }
 ```
 
-This format is reliably parsed by the Excalidraw plugin.
+This is only an illustrative scene envelope, not a complete runnable drawing. Use the selected consumer to supply and validate complete elements, IDs, labels and bindings; record the tested version and actual result. Verify the installed Obsidian plugin separately before claiming its import behavior.
 
-### `.excalidraw.md` (Plugin-Created Only)
+### Plugin-managed Markdown drawings
 
-The Excalidraw plugin creates `.excalidraw.md` files with YAML frontmatter when you create diagrams interactively in Obsidian. **Do NOT create this format programmatically** - it causes JSON parsing errors ("no number after minus sign").
+The Obsidian plugin also manages Markdown-backed drawings. Do not invent that wrapper or assume plain JSON and plugin-managed Markdown are interchangeable. Use a documented API/export for the installed plugin version and verify the resulting file in that plugin. Without that check, report plugin compatibility as unverified.
 
 ### Linter Compatibility
 
@@ -245,7 +224,7 @@ Obsidian Vault/
 
 Excalidraw files are **JSON-based**, making them:
 - ✅ Git-friendly (text-based, diffable)
-- ✅ Merge-friendly (human-readable conflicts)
+- ⚠️ Text conflicts require semantic checks of IDs, bindings and element versions
 - ⚠️ Verbose (large diagrams = large JSON)
 
 **Tip:** Use auto-export to generate images on-demand, keep only `.excalidraw` source in git.

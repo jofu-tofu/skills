@@ -1,8 +1,8 @@
 ### Context Rot Is Real
 
-**Source:** Wen Tan et al., "An Empirical Study of Documentation Decay" (2023); Chroma Research, "Context Window Decay" (2024); Winters et al., "Software Engineering at Google" (2020)
+**Sources:** [Software Engineering at Google, Documentation](https://abseil.io/resources/swe-book/html/ch10.html) (2020); [Chroma, Context Rot](https://www.trychroma.com/research/context-rot) (2025). The earlier attribution to Wen Tan et al., "An Empirical Study of Documentation Decay" (2023), remains unverified and must not support rate or ranking claims.
 
-**Impact: HIGH — documentation decay is measurable, predictable, and inevitable without intervention**
+**Impact: HIGH — documentation can diverge when its subject or operating context changes**
 
 > Documentation progressively diverges from reality. In codebases, this is doc-code inconsistency. In AI contexts, it's stale instructions degrading agent performance. Both are empirically measurable.
 
@@ -10,12 +10,12 @@
 
 ## Two Fronts of Rot
 
-| Front | Manifestation | Speed |
-|-------|-------------|-------|
-| **Code-level rot** | Docs become inconsistent with the codebase | API docs rot fastest; architecture docs slowest |
-| **AI context rot** | Instructions in CLAUDE.md/AGENTS.md become stale or contradictory | Accelerates when tooling changes |
+| Front | Manifestation | Review trigger |
+|-------|-------------|----------------|
+| **Code-level rot** | Docs become inconsistent with the codebase | Relevant behavior, interface or architecture changed |
+| **AI context rot** | Instructions in CLAUDE.md/AGENTS.md become stale or contradictory | Tooling, runtime loading or project constraints changed |
 
-Both are inevitable without maintenance coupling (see `Rules/ProximityPreventsRot.md`). The question is not *whether* to fight rot, but *how fast* to detect it.
+Couple review to relevant changes (see `Rules/ProximityPreventsRot.md`). Detect divergence from evidence rather than assuming that every document decays at the same rate.
 
 ---
 
@@ -23,22 +23,22 @@ Both are inevitable without maintenance coupling (see `Rules/ProximityPreventsRo
 
 | Source | Finding |
 |--------|---------|
-| **Tan et al. (2023)** | Doc-code inconsistency increases at predictable rates. API docs rot fastest. The strongest predictor of freshness is proximity to code. |
-| **Chroma Research (2024)** | Information at the beginning and end of context windows is retrieved most reliably. Middle content suffers "lost in the middle" effects. Stale or contradictory content degrades overall agent performance. Signal-to-noise ratio directly impacts response quality. |
+| **Earlier Tan attribution** | Unverified. Do not use it to claim universal decay rates, a fastest-decaying document type, or a strongest predictor. |
+| **Chroma Research (2025)** | Evaluates model performance under increasing input length in controlled tasks. This concerns context processing, not calendar-based documentation freshness; it does not validate the review intervals below. |
 | **Google SWE Book (2020)** | Even with sophisticated tooling, freshness requires active ownership. Automated checks catch some decay, but human review remains essential. |
 
 ---
 
-## The Rot Timeline
+## Review Cadence Is Not an Accuracy Verdict
 
-| Time Since Last Review | Status | Action |
-|----------------------|--------|--------|
-| 0-3 months | Fresh | Likely accurate |
-| 3-6 months | Aging | Verify critical details before relying on them |
-| 6-12 months | Stale | Assume inaccuracies exist |
-| 12+ months | Rotten | Treat as unreliable unless verified against current code |
+| Evidence state | Reliance decision | Action |
+|----------------|------------------|--------|
+| Relevant claims verified against the current subject | Supported within the checked scope | Record what was checked and recheck when its subject changes |
+| Subject changed or current sources conflict | Affected claims need review | Compare the actual claims and resolve current authority |
+| Last review or relevant changes unknown | Accuracy unverified | Check consequential details; preserve the distinction between missing evidence and a false claim |
+| Old document with stable, currently verified content | Age alone does not invalidate it | Retain useful guidance and historical rationale |
 
-Timelines assume active development. Stable codebases decay slower; rapidly evolving codebases decay faster.
+Choose review intervals from change frequency, consequence and ownership capacity. An interval is a maintenance policy, not an empirically established expiry date. A newly edited document can be wrong and an older verified one can remain accurate.
 
 ---
 
@@ -85,7 +85,7 @@ Month 8: Agent follows whichever instruction it hits first in context
 3. **Does any content contradict current behavior?** (spot-check claims)
 4. **Are there competing/duplicate documents?** (search for similar content)
 
-If any answer raises concern, review or delete.
+If an answer raises concern, review the affected claims. Correct current guidance and preserve relevant history; delete only within authorized scope when the material is genuinely redundant or no longer useful.
 
 ---
 
@@ -93,4 +93,4 @@ If any answer raises concern, review or delete.
 
 **"When was this document last verified against the system it describes — and what changed in the system since?"**
 
-If you can't answer both parts, the document's accuracy is unknown. Unknown accuracy is effectively zero accuracy.
+If you cannot answer both parts, mark the relevant accuracy unverified. Missing evidence does not establish zero accuracy; verify consequential claims before relying on them.

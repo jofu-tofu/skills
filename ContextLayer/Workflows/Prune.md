@@ -51,9 +51,9 @@ For each CLAUDE.md file, examine each entry against the full Signal Tests batter
 | Test | Question | Fails → mark for removal |
 |------|----------|---------|
 | **Falsifiability** | If removed, would agent behavior degrade? | Remove |
-| **Prediction** | Would an agent infer this from the code alone? | Remove |
+| **Prediction** | Does the supplied context itself establish that this is obvious general knowledge? | Remove only when established; content-only pruning cannot inspect code to prove redundancy |
 | **One New Fact** | Does this duplicate another bullet in this file? | Keep more specific, remove other |
-| **State Once** | Does this appear in both root and subdirectory CLAUDE.md? | Keep in more specific file only |
+| **State Once** | Does this appear in both root and subdirectory CLAUDE.md? | Preserve the scope where the rule applies: global rules stay at root; local rules stay local. Remove a duplicate only if every intended consumer still receives the rule |
 | **Project-Specificity** | Is this true of most projects, or just this one? | If most → remove |
 
 **Secondary test (for infrequent-but-critical conventions):**
@@ -82,9 +82,9 @@ Mark for removal or rewrite any entry that:
 | General programming knowledge | "Use meaningful variable names" | Remove — agent already knows |
 | General best practices | "Don't commit secrets to git" | Remove — not project-specific |
 | Prose paragraphs | Any multi-sentence explanatory block | Convert to bullet or remove |
-| "See also" references | "See: docs/architecture.md" | Remove — agent won't follow |
-| Duplicate instructions | Same convention stated twice | Keep most specific version |
-| Outdated version numbers | "React 17" when it's clearly 18+ | Remove — high rot risk |
+| "See also" references | "See: docs/architecture.md" | Preserve intentional delegation of needed instructions; remove only references shown to be unnecessary by the supplied context |
+| Duplicate instructions | Same convention stated twice | Keep the authoritative applicable scope; preserve exceptions and sibling inheritance |
+| Potentially outdated version numbers | "React 17" with uncertain current version | Flag for source-aware Audit; do not infer a replacement or remove a potentially required compatibility constraint during content-only pruning |
 | Empty sections | Section headers with no content | Remove the header too |
 | "This project uses X" statements | "This project uses TypeScript" | Remove — agent infers from .ts files |
 | Bullets over 15 words | Long, wordy convention descriptions | Rewrite to ≤15 words, active imperative |

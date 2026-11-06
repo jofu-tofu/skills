@@ -1,0 +1,7 @@
+# Excalidraw supported-file branch
+
+Retain the source repair and bounded actual-file result; no model superiority claim. Four nonexistent reference links and unqualified API snippets were replaced with existing in-file guidance and version-aware official API references. Unsupported processing-rate numbers and automatic architecture assumptions were removed. Actual file requests must still produce a file, with import/render proof distinguished from live plugin behavior.
+
+Earlier Canvas evidence did not cover Excalidraw despite the previous broad pass. That closure is preserved externally and corrected by OB07: actual editable .excalidraw, exact punctuation, readable cards and Intake→Approved direction; independently imported/exported by @excalidraw/excalidraw0.18.1 and rendered in Chromium. Valid alternate layout/IDs/style accepted; invalid JSON, duplicate identity, dangling binding and reverse meaning rejected. Importer repair is not silently accepted as source correctness.
+
+Native Obsidian plugin and its Markdown wrapper remain unverified; no shared app or extension used. Evidence: SkillForge project 20-working-T1-T3/RemainingSkills20261104/deep/authoring/evaluations/OB07-excalidraw-review.md and OB07-semantic-grading.json, with immutable run and source hashes. Preserve optional reference routing; adding missing placeholder workflows or a mandatory plugin dependency would not improve the outcome.

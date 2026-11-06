@@ -32,13 +32,13 @@ When both forces align, documentation thrives. When they diverge, it rots. Every
 
 | Law | Statement | Consequence |
 |-----|-----------|-------------|
-| **Proximity** | Docs near code survive; distant docs decay | Prefer inline > repo > wiki > external |
-| **Ownership** | Every doc needs exactly one accountable owner | Ownerless docs die within months |
-| **Signal Density** | Small, dense docs outperform large, comprehensive ones | Cognitive load kills consumption |
+| **Proximity** | Keep the canonical source close to its maintenance workflow and accessible to its readers | Prefer repo-local code-coupled facts; use linked accessible views where needed |
+| **Ownership** | Make maintenance accountability explicit through a person, role or team | Unknown ownership is a maintenance risk, not an expiry date or deletion instruction |
+| **Signal Density** | Keep the information needed for the reader's task and remove avoidable noise | Brevity must not remove necessary behavior, rationale or safety detail |
 
-Every placement decision satisfies all three. When tensions arise — e.g., Proximity pushes toward inline comments but Signal Density warns against bloat — resolve in favor of the law whose violation causes faster decay. Proximity violations rot in months; Signal Density violations reduce consumption immediately. Judge by the specific scenario.
+Consider all three when choosing placement. Resolve tensions using actual maintenance paths, audience access and the consequence of missing or incorrect information. No universal number of weeks or months establishes decay; verify consequential claims against current evidence and preserve unique historical rationale.
 
-**Signal Density for AI context files:** Root-level files are always-on — permanent token cost per interaction. Directory-level files are on-demand — cost paid only during scoped work. Apply a stricter density and falsifiability bar to root content than to directory-local content.
+**Signal Density for AI context files:** Root and directory loading depend on the host. Verify its actual inheritance and discovery rules; keep broadly loaded content concise while retaining critical global rules. See `Rules/AIContextLayers.md` before assuming which files an agent receives.
 
 ---
 
@@ -51,7 +51,7 @@ Who is the primary audience?
 │
 ├─ AI AGENTS (Codex, Copilot, etc.)
 │  └─ AI Context Files
-│     AGENTS.md, AGENTS.md, skill files
+│     AGENTS.md, host-specific instructions, skill files
 │     See: Rules/AIContextLayers.md
 │
 ├─ FUTURE DEVELOPERS (including future-you)
@@ -87,7 +87,7 @@ Who is the primary audience?
 
 ### 1. Inline Code Comments
 
-Capture intent behind non-obvious decisions. The *why*, never the *what*.
+Capture intent behind non-obvious decisions. Avoid restating obvious mechanics; retain behavior, contracts and operational detail the reader cannot reliably infer.
 
 ```
 // BAD: Increment counter by one
@@ -102,7 +102,7 @@ counter += 1;
 
 ### 2. AI Context Files
 
-Instructions shaping AI agent behavior: AGENTS.md, AGENTS.md, skill files, system prompts.
+Instructions shaping AI agent behavior: AGENTS.md, host-specific instruction files, skill files, system prompts.
 
 These are documentation *for* agents operating within the system — not documentation *about* the system. Different audience, different density requirements.
 
@@ -110,7 +110,7 @@ These are documentation *for* agents operating within the system — not documen
 
 ### 3. Architecture Decision Records (ADRs)
 
-The *why* behind architectural choices. Immutable once written — record a new ADR to supersede, never edit the old one.
+The *why* behind architectural choices. Preserve accepted decision content and rationale; record a new ADR to supersede it, with explicit status and links. Draft proposals can still change before acceptance.
 
 | Field | Content |
 |-------|---------|
@@ -125,7 +125,7 @@ The *why* behind architectural choices. Immutable once written — record a new 
 
 Onboarding material, API reference, contribution guides, deployment procedures — anything a new team member needs to become productive.
 
-**Test:** If the code moves, does this doc move with it? If yes → repo. If no → reconsider whether it belongs at all.
+**Test:** If the code moves, should this doc move with it? Code-coupled reference usually belongs with the repository. Public guidance, cross-repository policy and operational material may need another canonical home with appropriate access, ownership and links.
 
 ### 5. Personal Knowledge Base
 
@@ -137,7 +137,7 @@ Human-readable insights, learning notes, cross-project patterns, personal reflec
 
 Design documents that evolve as understanding deepens. Unlike ADRs (immutable records), these track *current* design thinking.
 
-**Warning:** Most susceptible to context rot. Require active ownership and review on the cadence defined in `Rules/ContextRotIsReal.md` (fresh <3 months, aging 3-6, stale 6-12, rotten 12+) to survive.
+**Maintenance:** Assign active ownership and a review cadence based on change and consequence, as described in `Rules/ContextRotIsReal.md`. Age alone does not establish accuracy or inaccuracy.
 
 ---
 
@@ -146,7 +146,7 @@ Design documents that evolve as understanding deepens. Unlike ADRs (immutable re
 | Anti-Pattern | Why It Fails | Place Here Instead |
 |--------------|-------------|-------------------|
 | **Monolithic wiki** | No ownership, no proximity, infinite scope | Docs in repo near code |
-| **README that explains everything** | Cognitive overload, stale within weeks | Thin README pointing to specific docs |
+| **README that explains everything** | Harder navigation and more content to maintain; accuracy depends on actual changes and upkeep | Thin README pointing to specific docs |
 | **Comment every line** | Noise destroys signal, maintenance cost explodes | Comment only non-obvious *why* |
 | **Documentation sprint** | Creates docs nobody maintains after sprint ends | Continuous docs alongside code changes |
 | **Duplicating across locations** | One copy rots, contradictions emerge | Single source of truth, link elsewhere |
@@ -178,9 +178,9 @@ User: "We picked PostgreSQL over MongoDB. Where does this go?"
 ```
 User: "Codex keeps formatting PRs wrong in this repo"
 → AGENTS.md with PR formatting rules (AI Context File)
-→ Dense, scannable, no prose — context window is finite
+→ Concise, actionable rules with the context needed to apply them
 → NOT in README (humans don't need this; agents do)
-→ NOT in wiki (agents can't read your wiki)
+→ A wiki is sufficient only if the host reliably discovers and reads it; do not assume access
 ```
 
 ---
@@ -190,16 +190,16 @@ User: "Codex keeps formatting PRs wrong in this repo"
 | File | Principle | Read When |
 |------|-----------|-----------|
 | `Rules/ProximityPreventsRot.md` | Docs near code survive; distant docs decay | Choosing between repo, wiki, or external |
-| `Rules/OwnershipIsNonNegotiable.md` | Ownerless docs die | Setting up documentation governance |
+| `Rules/OwnershipIsNonNegotiable.md` | Explicit maintenance accountability | Setting up documentation governance |
 | `Rules/SignalOverNoise.md` | Cognitive load theory applied to docs | Docs are too long or going unread |
 | `Rules/WhyNotWhat.md` | Document intent, not mechanics | Writing comments or ADRs |
 | `Rules/ContextRotIsReal.md` | Documentation decays in code and AI contexts | Evaluating doc freshness strategy |
-| `Rules/AIContextLayers.md` | How AI agents consume documentation | Writing AGENTS.md, AGENTS.md, or skill files |
+| `Rules/AIContextLayers.md` | How AI agents consume documentation | Writing AGENTS.md, host instructions, or skill files |
 | `Rules/KnowledgeIsPerishable.md` | Organizational forgetting; externalize or lose | Deciding what to capture and where |
 
 ---
 
-## Authoritative Sources
+## Sources and Attribution Status
 
 | Source | Author(s) | Year | Key Contribution |
 |--------|-----------|------|------------------|
@@ -208,10 +208,14 @@ User: "Codex keeps formatting PRs wrong in this repo"
 | Documenting Architecture Decisions | Michael Nygard | 2011 | ADR format and immutable decision records |
 | Cognitive Load Theory | John Sweller | 1988 | Extraneous load reduces learning; signal density matters |
 | The Software Engineer's Guidebook | Gergely Orosz | 2023 | Practical documentation culture in engineering teams |
-| An Empirical Study of Documentation Decay | Wen Tan et al. | 2023 | Measured rates of doc-code inconsistency in real projects |
-| GitHub Developer Survey | GitHub | 2023 | 93% say docs are important; 60% say docs are inadequate |
+| An Empirical Study of Documentation Decay — attribution unverified | Wen Tan et al. (as previously attributed) | 2023 | Do not use as evidence for decay rates or proximity rankings without locating and checking the source |
+| [Open Source Survey](https://opensourcesurvey.org/2017/) | GitHub and collaborators | 2017 | Documentation problems and contribution frequency; not importance/adequacy ratings or a causal proximity study |
 | 18F Documentation Guide | 18F (US Government) | 2020 | Docs-as-code principles and ADR adoption |
 | Organizational Forgetting | Argote, Beckman, Epple | 1990 | Knowledge depreciation curves in organizations |
 | Knowledge Management in Project-Based Organizations | Klammer, Gueldenberg | 2019 | Externalization prevents knowledge loss |
-| Agent READMEs: Grounding LLM Agents | Kaushik Gopal et al. | 2024 | How AI agents consume repository-level documentation |
-| Chroma Research: Context Window Decay | Chroma | 2024 | Token position effects on retrieval accuracy in LLM contexts |
+| Agent READMEs: Grounding LLM Agents — attribution unverified | Kaushik Gopal et al. (as previously attributed) | 2024 | Do not treat as established evidence for host loading or layer-performance rankings |
+| [Context Rot: How Increasing Input Tokens Impacts LLM Performance](https://www.trychroma.com/research/context-rot) | Hong, Troynikov, Huber (Chroma) | 2025 | Controlled input-length effects; not a documentation expiry timeline |
+
+## Outcome and improvement records
+
+For evaluation or improvement, read [granular outcomes and current coverage](Quality/Outcomes.md). These records preserve open coverage and bounded evidence; they are not required context for every ordinary task or a claim of whole-skill readiness.

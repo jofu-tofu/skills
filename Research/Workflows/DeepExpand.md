@@ -1,5 +1,7 @@
 # DeepExpand Workflow
 
+Read `../Standards/EvidenceStandard.md`; retain source identity, access/verification, study lineage, correction/version and actual citation/search path for additions. No new or contradictory source is a valid result; do not fill a quota with irrelevant or invented evidence.
+
 > **Trigger:** Internal — called by Orchestrate.md Step 2. Not user-facing.
 
 ## Purpose

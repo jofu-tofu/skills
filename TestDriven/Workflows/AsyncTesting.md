@@ -18,7 +18,7 @@ Async tests have two failure modes regular tests don't:
 1. **Silent pass** — The assertion never runs because the test ends before the async operation completes
 2. **Unhandled rejection** — An error is thrown but not caught by the test framework
 
-Both make tests pass when they should fail. Apply FIRST (→ `Rules/FIRST.md`) — specifically the "Self-Validating" property: if the test can pass silently without running your assertion, it is not self-validating.
+Either can prevent reliable attribution of a failure; whether the whole run passes depends on the framework. Apply FIRST (→ `Rules/FIRST.md`) — specifically the "Self-Validating" property: if the test can pass silently without running its required assertion, it is not self-validating.
 
 ---
 
@@ -97,8 +97,14 @@ async function test():
 // Option 2: Framework "done" parameter
 function test(done):
     get_user(123, function(err, user):
-        assert user.name == "alice"
-        done()  // signal test is complete
+        if err:
+            done(err)
+            return
+        try:
+            assert user.name == "alice"
+            done()  // signal test is complete
+        catch assertion_error:
+            done(assertion_error)  // propagate callback failure to the runner
     )
 ```
 
@@ -110,16 +116,34 @@ async function test_stream_emits_data():
     stream = create_data_stream()
 
     await new Promise((resolve, reject) =>
-        stream.on("data", chunk => received.push(chunk))
-        stream.on("end", resolve)
-        stream.on("error", reject)
-        setTimeout(() => reject(new Error("timeout")), 5000)
+        settled = false
+        function finish(error):
+            if settled: return
+            settled = true
+            clearTimeout(timer)
+            stream.off("data", on_data)
+            stream.off("end", on_end)
+            stream.off("error", on_error)
+            if error: reject(error)
+            else: resolve()
+
+        on_data = chunk => received.push(chunk)
+        on_end = () => finish(null)
+        on_error = error => finish(error)
+        timer = setTimeout(() => finish(new Error("timeout")), 5000)
+        stream.on("data", on_data)
+        stream.on("end", on_end)
+        stream.on("error", on_error)
     )
 
     assert length(received) > 0
 ```
 
+Release test-owned timers and listeners on success, source failure and timeout; do not remove another consumer's listeners. Verify cleanup against the state before the test installed its resources, including any outer test observers: a producer may already own valid listeners. An unconditional zero-listener or empty-event-list assertion rejects such valid implementations even when cleanup is correct. Preserve pre-existing listener identities and remove only the test's additions. Cancel or close a test-owned source when its API supports that and it can keep producing after completion. Choose a deadline appropriate to the fixture, then verify error/timeout paths and repeated execution. A passing content assertion alone does not prove cleanup.
+
 ### Pattern E — Parallel operations
+
+Separate a concurrency ceiling from a throughput or scheduling requirement. An API promising at most N active operations may validly run fewer; do not require exactly N immediate starts or a particular microtask sequence unless the contract says so. Use controllable completion and observe maximum active work, final ordering and error behavior. Drive whichever work has actually started so a valid serial alternative can complete; qualify it alongside an unbounded or wrongly ordered implementation. In error tests, distinguish already-running work from forbidden new starts after the failure is observed.
 
 ```pseudocode
 async function test_all_users_loaded():
@@ -148,9 +172,11 @@ async function test_all_users_loaded():
 
 ## The "Liar" Risk
 
-Async tests are the most common source of The Liar anti-pattern (→ `Rules/AntiPatterns.md`). If you can delete your assertion and the test still passes, the async operation is completing after the test exits.
+An async test can pass without checking its contract when the runner does not observe its assertion or failure (→ `Rules/AntiPatterns.md`). Deleting an assertion is not a diagnostic check: a correct awaited test also passes after its assertion is removed.
 
-**Quick check:** Delete your assertion. If the test still passes — you have a Liar.
+**Sensitivity check:** Apply the detection and restoration procedure in `Rules/AntiPatterns.md` → The Liar using this test's actual runner. A setup/import failure does not demonstrate assertion sensitivity.
+
+Check the complete runner result. Some frameworks report late assertions or unhandled rejections as failures even after the test callback ends; do not call those silent passes. Still repair missing completion ownership when it makes timing or cleanup unreliable. Preserve a valid awaited/returned test as a control, and use the actual contract to judge whether its assertions are useful. One observed assertion failure does not prove every branch is covered.
 
 ---
 

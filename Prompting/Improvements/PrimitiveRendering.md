@@ -1,0 +1,13 @@
+# Primitive rendering consumer repair
+
+Purpose: rendered reusable prompts retain the caller's requested output instructions, and Voice configuration preserves caller data as usable JSON. These contribute to PR09 (Briefing semantics), PR11 (JSON fidelity), PR12 (composition) and PR15 (output contract). They do not establish downstream model effectiveness or whole-skill readiness.
+
+Baseline consumer execution found three Briefing branches emitting boolean helper results instead of their instructions. `eq` is an inline/subexpression helper, so the template now wraps it with `if`; helper behavior remains unchanged. Explicit custom output structure remains an accepted override.
+
+Voice manually quoted HTML-escaped interpolations produced invalid JSON for backslashes and altered supplied string values. String values and keys now use the existing JSON serializer with unescaped insertion of its serialized result. Optional text retains its former empty-string default. This is serialization of caller data, not execution of it.
+
+The matched 21-check disposable suite changed from 17 pass / 4 fail to 21 pass. Three included checks qualify the JSON consumer oracle with valid, entity-corrupted and malformed controls; they are not additional skill outcomes. Seven prior validator tests remained passing. Evidence: project `RemainingSkills20261104/deep/reasoning/tool-runs/{baseline,candidate1}/results.json`; candidate recovery logs preserve execution. Initial sandbox Bun startup/temp failures are recorded separately from target failures. The portable regression tests are `Tools/RenderTemplate.test.ts`.
+
+Structure decision: repair the two affected templates rather than change global helper semantics or redesign all primitives. API overload equivalence, relative/absolute output destination, missing inputs/output directory, Gate single/multiple modes, Structure content and inline/subexpression helpers passed the same checks. Later EmptyGate, ParentDataScopes, OwnPropertyLookup, ScopedDataAndPartials and BundledExamples records cover additional observed failures and preservation; current portable tests total 37. Actual generated/optimized and composed-prompt downstream use remains separately open in Quality/Outcomes.md.
+
+Follow-up literal-format boundary: the explicit output-format string was HTML-escaped, changing requested tags, JSON quotes and ampersands. A direct caller-contract test failed7/8 on candidate4; Briefing now inserts that instruction field literally, without changing general Handlebars escaping. This field is the caller's output instruction, not untrusted record content. Downstream authority remains a separate outcome. Candidate5 preservation evidence is stored separately; earlier results are not relabeled.

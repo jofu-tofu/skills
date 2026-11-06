@@ -4,38 +4,42 @@
 
 ## Mental Model
 
-Layout and theming are the structural backbone of any Tailwind project. Responsive design starts mobile-first — base styles define the smallest screen, and breakpoint prefixes (sm:, md:, lg:) layer on complexity. This prevents the common anti-pattern of designing for desktop first and then patching for mobile. Container queries extend this further, letting components respond to their parent's size rather than the viewport. Theming completes the picture: design tokens (colors, spacing, typography) defined in the Tailwind config create a single source of truth that CSS variables can expose for runtime switching (dark mode, brand themes). The discipline is using these tokens everywhere instead of hardcoded values — when every color is a token and every spacing value comes from the scale, theme changes propagate instantly and consistently.
+Layout and theming are the structural backbone of any Tailwind project. Responsive design starts mobile-first — base styles define the smallest screen, and breakpoint prefixes (sm:, md:, lg:) layer on complexity. This prevents the common anti-pattern of designing for desktop first and then patching for mobile. Container queries extend this further, letting components respond to their parent's size rather than the viewport. Theming completes the picture: design tokens (colors, spacing, typography) defined in v3 configuration or v4 `@theme` create a single source of truth that CSS variables can expose for runtime switching (dark mode, brand themes). The discipline is using these tokens everywhere instead of hardcoded values — when every color is a token and every spacing value comes from the scale, theme changes propagate instantly and consistently.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-- Verify mobile-first breakpoint ordering (no reverse breakpoints).
+- Verify breakpoint semantics against the configured theme; max-width and range variants are valid.
 - Check for hardcoded pixel values that should use the spacing scale.
-- Flag non-token colors and missing dark mode variants.
-- Confirm container queries are used for reusable components.
+- Apply adopted token policies; verify dark appearance through explicit variants or shared variables.
+- Use container queries when responsiveness should follow available container space.
 
 ### When Designing / Planning
 
 - Define breakpoint strategy before building layouts.
-- Establish design token palette in tailwind.config.
+- Establish tokens in v3 tailwind.config or v4 @theme.
 - Plan dark mode and theme switching approach upfront.
 
 ### When Implementing
 
 - Start with base (mobile) styles, add breakpoint prefixes for larger screens.
 - Use CSS custom properties for runtime theme values.
-- Apply dark: variant consistently alongside default styles.
+- Use explicit dark: variants or shared theme variables consistently.
+
+## Applicability
+
+Breakpoint/token consistency, spacing ownership and abstraction choices are conditional house policies. Examples marked incorrect for these preferences are valid CSS unless they violate the stated layout contract. Tailwind v3 and v4 configuration syntax is not interchangeable.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| MobileFirstBreakpoints | CRITICAL | Unprefixed = all screens; sm: = 640px+, not "small screens" |
-| BreakpointConsistency | HIGH | Use standard breakpoints, not arbitrary min-[...] values |
+| MobileFirstBreakpoints | CRITICAL | Unprefixed = all screens; default sm: = 40rem (normally 640px)+, not "small screens" |
+| BreakpointConsistency | HIGH | Prefer shared breakpoints under policy; custom ranges are valid |
 | ContainerQueryUsage | HIGH | Use @container queries for component-level responsive design [v4] |
 | ConsistentSpacingDirection | MEDIUM | Pick one margin direction or use gap/space-y on parents |
-| DarkModeStrategyChoice | CRITICAL | Choose media (OS-only) vs selector (user toggle) deliberately |
+| DarkModeStrategyChoice | CRITICAL | Choose OS preference or a version-appropriate manual dark variant |
 | SemanticColorTokens | HIGH | Use semantic names (primary, surface) instead of raw palette colors |
 | DarkModeCustomProperties | HIGH | Use CSS custom properties to reduce dark: repetition |
 | ThemeOverRootForTokens | HIGH | In v4, use @theme for tokens that need utility classes |
@@ -48,12 +52,12 @@ Layout and theming are the structural backbone of any Tailwind project. Responsi
 
 **Impact: CRITICAL (misunderstanding breakpoints causes broken layouts)**
 
-Tailwind uses min-width breakpoints. Unprefixed utilities apply to ALL screen sizes. `sm:` means "640px and above," NOT "small screens." Style mobile first with unprefixed utilities, then add overrides for larger screens with `sm:`, `md:`, `lg:`.
+Tailwind's named breakpoint prefixes are min-width variants. Unprefixed utilities apply to ALL screen sizes. With default settings, `sm:` starts at 640px in v3 and 40rem in v4 (normally 640px), not exclusively small screens. Custom themes may change that threshold; max-width/range variants are also supported. Style mobile first with unprefixed utilities, then add overrides for larger screens with `sm:`, `md:`, `lg:`.
 
 **Incorrect: wrong mental model — trying to target "small screens" with sm:**
 
 ```html
-<!-- This makes it flex on mobile, block on 640px+ (backwards!) -->
+<!-- Wrong only if the requirement is block on mobile, flex from default sm upward. -->
 <div class="flex sm:block">
 ```
 
@@ -69,7 +73,7 @@ Tailwind uses min-width breakpoints. Unprefixed utilities apply to ALL screen si
 
 **Impact: HIGH (ad-hoc breakpoints create visual inconsistency)**
 
-Use Tailwind's default breakpoints consistently. Avoid `min-[840px]` or `max-[1100px]` — they create inconsistency and are harder to maintain. If your design system needs different breakpoints, redefine them in the Tailwind config globally.
+When a project adopts a shared breakpoint policy, prefer its named breakpoints. Arbitrary min/max variants are supported and can correctly address content-specific layout needs. Define repeated custom thresholds in v3 theme.screens or v4 --breakpoint-* theme variables; do not replace a needed threshold merely for stylistic consistency.
 
 **Incorrect: ad-hoc arbitrary breakpoints**
 
@@ -89,7 +93,7 @@ Use Tailwind's default breakpoints consistently. Avoid `min-[840px]` or `max-[11
 
 **Impact: HIGH (makes components truly portable across layout contexts)**
 
-Use `@container` queries for components that must adapt to their parent's width, not the viewport. Mark the parent with `@container` and use `@sm:`, `@md:` on children. This makes components work correctly whether placed in a full-width area or a narrow sidebar.
+Use `@container` queries when a component must adapt to available container width. These utilities are built into v4; v3.2+ requires the compatible official @tailwindcss/container-queries plugin. Viewport variants remain valid when viewport size is the intended input. Mark the parent with `@container` and use `@sm:`, `@md:` on children. This makes components work correctly whether placed in a full-width area or a narrow sidebar.
 
 **Incorrect: viewport-based — breaks when component is in a sidebar**
 
@@ -110,9 +114,9 @@ Use `@container` queries for components that must adapt to their parent's width,
 
 ### TW3.4 Pick One Spacing Direction Convention or Use Gap
 
-**Impact: MEDIUM (mixing margin directions causes unpredictable spacing)**
+**Impact: LOW (consistent spacing ownership is a house convention)**
 
-Pick one margin direction convention (`mt-`/`ml-` or `mb-`/`mr-`) and stick with it. Better yet, use `space-y-*` on parent containers or `gap-*` on flex/grid parents to eliminate the problem entirely.
+If the project adopts a spacing ownership convention, follow it consistently. Mixed margins are valid CSS; block margins may collapse according to CSS rules, rather than behaving unpredictably. Better yet, use `space-y-*` on parent containers or `gap-*` on flex/grid parents to eliminate the problem entirely.
 
 **Incorrect: inconsistent margin directions**
 
@@ -138,7 +142,7 @@ Pick one margin direction convention (`mt-`/`ml-` or `mb-`/`mr-`) and stick with
 
 **Impact: CRITICAL (wrong strategy prevents user-togglable dark mode)**
 
-Choose between `media` (follows OS preference automatically) and `selector` (manual toggle via class or data attribute). Use `selector` if you need a user-controlled toggle. Use `media` only if you never need manual control. In v3.4.1+, `selector` replaces the older `class` strategy with more flexibility.
+Choose between `media` (follows OS preference automatically) and `selector` (manual toggle via class or data attribute). Use `selector` if you need a user-controlled toggle. Use `media` only if you never need manual control. In v3.4.1+, use the `selector` strategy; earlier v3 supports `class`. In v4, override the dark variant with `@custom-variant`; a v3 configuration fragment is not a universal v4 recipe. A selector controller may also honor OS preference when no user override exists.
 
 **Incorrect: using media strategy but trying to toggle with JS**
 
@@ -151,12 +155,17 @@ document.documentElement.classList.add('dark');
 **Correct: selector strategy for user-controlled toggle**
 
 ```js
-// tailwind.config.js
+// tailwind.config.js, v3.4.1+ configuration fragment
 darkMode: 'selector',
 ```
 ```js
 // Toggle in JS
 document.documentElement.classList.toggle('dark');
+```
+```css
+/* Tailwind v4 equivalent */
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 ```
 
 ---
@@ -165,7 +174,7 @@ document.documentElement.classList.toggle('dark');
 
 **Impact: HIGH (raw palette colors allow inconsistent usage across a codebase)**
 
-Replace Tailwind's default palette (`blue-500`, `gray-200`) with project-specific semantic names (`primary`, `surface`, `on-surface`). Semantic tokens enforce design system consistency and make theming/rebranding trivial.
+When semantic tokens are the agreed design-system policy, prefer names such as `primary` and `surface` for shared roles. Raw palette colors are supported; tokens simplify coordinated changes but do not guarantee consistency or contrast.
 
 **Incorrect: raw palette colors scattered throughout**
 
@@ -195,7 +204,7 @@ Replace Tailwind's default palette (`blue-500`, `gray-200`) with project-specifi
 
 Define light/dark color values as CSS custom properties and reference them via Tailwind config. This avoids duplicating `dark:` on every element and enables multi-theme support beyond just light/dark.
 
-**Incorrect: dark: prefix on every single element**
+**Valid alternative: explicit dark: variants (prefer shared variables when repetition warrants it)**
 
 ```html
 <div class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
@@ -211,8 +220,8 @@ Define light/dark color values as CSS custom properties and reference them via T
 .dark { --color-bg: #111827; --color-text: #ffffff; --color-muted: #d1d5db; }
 ```
 ```html
-<div class="bg-[var(--color-bg)] text-[var(--color-text)]">
-  <p class="text-[var(--color-muted)]">Body</p>
+<div class="bg-[var(--color-bg)] text-[color:var(--color-text)]">
+  <p class="text-[color:var(--color-muted)]">Body</p>
 </div>
 ```
 
@@ -220,9 +229,9 @@ Define light/dark color values as CSS custom properties and reference them via T
 
 ### TW4.4 In v4, Use @theme for Tokens That Need Utility Classes [v4]
 
-**Impact: HIGH (only @theme generates corresponding utility classes)**
+**Impact: HIGH (theme namespaces connect tokens to utility APIs)**
 
-In Tailwind v4, `@theme` both defines CSS custom properties AND generates utility classes. Use `@theme` for design tokens that should be usable as utilities (colors, spacing, fonts). Use `:root` for values that don't need utilities (transition speeds, z-index layers).
+In Tailwind v4, recognized `@theme` namespaces define CSS variables and make corresponding utilities available; source detection controls which utilities are emitted. Custom utilities and arbitrary-value classes are also supported, so `@theme` is not the only way to generate styles. Use `@theme` for design tokens that should be usable as utilities (colors, spacing, fonts). Use `:root` for values that don't need utilities (transition speeds, z-index layers).
 
 **Incorrect: :root for values you want as utilities**
 
@@ -250,6 +259,9 @@ In Tailwind v4, `@theme` both defines CSS custom properties AND generates utilit
 
 ## Sources
 
-- Tailwind CSS official documentation — Responsive Design
-- Tailwind CSS official documentation — Dark Mode and Theming
-- Adam Wathan — Utility-First CSS
+- https://tailwindcss.com/docs/responsive-design
+- https://tailwindcss.com/docs/theme
+- https://tailwindcss.com/docs/dark-mode
+- https://v3.tailwindcss.com/docs/dark-mode
+- https://tailwindcss.com/blog/tailwindcss-v3-2#container-queries
+- https://tailwindcss.com/docs/adding-custom-styles

@@ -4,9 +4,9 @@
 
 ## Mental Model
 
-React Server Components (RSC) represent a fundamental architectural shift: components that execute exclusively on the server, sending only their rendered output to the client. This eliminates client-side JavaScript for those components entirely — no hydration, no bundle cost, direct database access. But this power comes with a sharp boundary: the server/client divide is a serialization wall. Every prop passed from a Server Component to a Client Component must be serializable to JSON and embedded in the HTML response.
+React Server Components (RSC) represent a fundamental architectural shift: components that execute exclusively on the server, sending only their rendered output to the client. This eliminates client-side JavaScript for those components entirely — no hydration, no bundle cost, direct database access. But this power comes with a sharp boundary: the server/client divide is a serialization wall. Every prop passed from a Server Component to a Client Component must use React-supported serializable values. This is not ordinary JSON; the framework transports an RSC payload, sometimes embedded alongside initial HTML.
 
-The 5 primary rules in this dimension address the three failure modes of RSC adoption. The first failure mode is security: Server Actions (functions with `"use server"`) are exposed as public HTTP endpoints, yet developers often treat them like private functions. `ServerAuthActions` exists because a single unauthenticated Server Action can expose the entire database. The second failure mode is performance: without request-scoped caching (`ServerCacheReact`) or cross-request caching (`ServerCacheLru`), server components re-execute expensive queries on every render, negating the performance benefits of server-side execution. The third failure mode is data bloat: `ServerSerialization` and `ServerDedupProps` prevent the common mistake of passing entire database objects across the boundary when only a few fields are needed, inflating page weight and breaking the streaming model.
+The 5 primary rules in this dimension address the three failure modes of RSC adoption. The first failure mode is security: Server Actions (functions with `"use server"`) are exposed as public HTTP endpoints, yet developers often treat them like private functions. `ServerAuthActions` exists because a single unauthenticated Server Action can expose the entire database. The second failure mode is performance: repeated reads can add cost when neither React nor the framework/data layer deduplicates them. Request caching and cross-request caching have distinct scope and freshness tradeoffs. The third failure mode is data bloat: `ServerSerialization` and `ServerDedupProps` prevent the common mistake of passing entire database objects across the boundary when only a few fields are needed, potentially increasing transferred data; extra props do not themselves disable streaming.
 
 The two cross-referenced rules from DataFetching (`ServerParallelFetching`, `ServerAfterNonblocking`) extend the server-side story by ensuring that multiple server components fetch data concurrently and that non-critical work (analytics, logging) does not block the response stream.
 
@@ -18,18 +18,18 @@ When these rules work together, RSC delivers on its architectural promise: zero-
 
 Scan for these violations in priority order:
 
-1. **Unauthenticated Server Actions** (CRITICAL) — Any function with `"use server"` that does not call `verifySession()` or equivalent auth check inside the function body. Middleware-only auth is insufficient because Server Actions are directly callable endpoints.
+1. **Unprotected sensitive actions** (CRITICAL when exploitable) — Directly callable actions must enforce the resource policy in the action or its trusted data layer. Intentionally public actions may allow anonymous use.
 2. **Over-serialization at RSC boundaries** (HIGH) — A Server Component passing a full database entity (e.g., `user` with 50 fields) to a Client Component that uses 3 fields. Look for `<ClientComponent user={user} />` patterns.
-3. **Missing React.cache() on repeated server queries** (HIGH) — The same database query or auth check called from multiple server components in one request without `React.cache()` wrapping. Each call hits the database independently.
-4. **Duplicate props across sibling Client Components** (MEDIUM) — Two Client Components receiving the same large object. The data is serialized twice in the RSC payload.
-5. **Non-serializable props at the boundary** (MEDIUM) — Attempting to pass functions, Dates, Maps, Sets, or class instances from Server to Client Components. These fail silently or cause hydration mismatches.
+3. **Missing React.cache() on repeated server queries** (HIGH) — The same database query or auth check called from multiple server components in one request without `React.cache()` wrapping. Check whether the data layer already deduplicates before reporting repeated work.
+4. **Redundant derived props** (LOW) — Check whether both original and transformed data are needed. Shared references across siblings do not by themselves prove duplicate serialization.
+5. **Unsupported boundary props** — Ordinary function closures and unsupported class instances cannot cross the RSC boundary. React supports Date, Map and Set (with serializable contents); check the pinned framework integration. Do not expect silent JSON coercion.
 
 ### When Designing / Planning
 
 Before adding Server Components to a feature:
 
 - **Draw the server/client boundary explicitly.** List which components are Server Components and which are Client Components. Every prop crossing the boundary will be serialized — design the interface to be minimal.
-- **Identify all mutations.** Each Server Action needs its own auth + authz + validation chain. Plan these before implementation, not after.
+- **Identify all mutations.** Each Server Action needs validation and enforcement of its resource policy; protected operations need authentication and authorization. Plan these before implementation, not after.
 - **Map data access patterns.** If multiple components need the same data, wrap the fetcher in `React.cache()` for request-scoped dedup, or use an LRU cache for data that is stable across requests (configuration, feature flags).
 - **Decide what stays on the server.** Sensitive logic (pricing calculations, authorization checks, API keys) should never reach Client Components. RSC makes this natural — but only if the boundary is correctly placed.
 
@@ -37,20 +37,20 @@ Before adding Server Components to a feature:
 
 Apply rules in this sequence:
 
-1. **Secure all Server Actions first** — Before any other work, add authentication and authorization checks to every `"use server"` function (ServerAuthActions). Add input validation with Zod or similar. This is a security requirement, not an optimization.
-2. **Wrap shared queries in React.cache()** — Any async function called from multiple server components should be wrapped in `React.cache()` (ServerCacheReact). Pay attention to argument types — only primitive args or same-reference objects produce cache hits.
-3. **Add LRU caching for stable data** — Configuration, feature flags, and other cross-request stable data should use an LRU cache (ServerCacheLru) rather than re-fetching on every request.
+1. **Secure all Server Actions first** — Before any other work, enforce each `"use server"` function's resource policy and validate inputs (ServerAuthActions). Add input validation with Zod or similar. This is a security requirement, not an optimization.
+2. **Wrap shared queries in React.cache()** — Repeated pure reads with measured cost can be wrapped in `React.cache()` (ServerCacheReact). Pay attention to argument types — only primitive args or same-reference objects produce cache hits.
+3. **Consider cross-request caching** — For suitable stable shared reads, choose a cache only after defining freshness and deployment scope. An in-process LRU is one option.
 4. **Minimize serialization** — At every Server-to-Client boundary, pass only the fields the Client Component actually uses (ServerSerialization). Destructure on the server side.
-5. **Deduplicate shared props** — When sibling Client Components need the same data, extract it into a shared Server Component parent or use context (ServerDedupProps).
+5. **Avoid redundant derived props** — Share references where convenient and measure payloads; a client wrapper or context is optional, not required for shared sibling props.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| ServerAuthActions | CRITICAL | Authenticate and authorize inside every Server Action — they are public endpoints |
+| ServerAuthActions | CRITICAL | Enforce the resource policy inside directly callable Server Actions |
 | ServerCacheReact | MEDIUM | Wrap server queries in React.cache() for per-request deduplication |
 | ServerCacheLru | MEDIUM | Use LRU cache for cross-request stable data (config, feature flags) |
-| ServerDedupProps | MEDIUM | Avoid serializing the same data to multiple Client Components |
+| ServerDedupProps | MEDIUM | Avoid unnecessary original-plus-derived props; measure payload duplication |
 | ServerSerialization | HIGH | Pass only needed fields across the RSC boundary to minimize payload |
 
 ### Cross-Referenced Rules (from other dimensions)
@@ -67,9 +67,9 @@ Apply rules in this sequence:
 
 **Impact: CRITICAL (prevents unauthorized access to server mutations)**
 
-Server Actions (functions with `"use server"`) are exposed as public endpoints, just like API routes. Always verify authentication and authorization **inside** each Server Action—do not rely solely on middleware, layout guards, or page-level checks, as Server Actions can be invoked directly.
+Server Actions (functions with `"use server"`) are exposed as public endpoints, just like API routes. For protected operations, verify authentication and authorization **inside** each Server Action or its trusted data-access layer—do not rely solely on middleware, layout guards, or page-level checks, as Server Actions can be invoked directly.
 
-Next.js documentation explicitly states: "Treat Server Actions with the same security considerations as public-facing API endpoints, and verify if the user is allowed to perform a mutation."
+Treat the action as a public entry point. Public signup or feedback actions can deliberately accept anonymous calls; validation and abuse controls still apply.
 
 **Incorrect: no authentication check**
 
@@ -159,7 +159,7 @@ Reference: [https://nextjs.org/docs/app/guides/authentication](https://nextjs.or
 
 **Impact: MEDIUM (deduplicates within request)**
 
-Use `React.cache()` for server-side request deduplication. Authentication and database queries benefit most.
+Use a shared `React.cache()` wrapper for repeated pure reads during a Server Component render. Its cache is invalidated between server requests; calls outside React's cache context may execute normally. Do not use memoization to skip mutation or authorization work.
 
 **Usage:**
 
@@ -175,7 +175,7 @@ export const getCurrentUser = cache(async () => {
 })
 ```
 
-Within a single request, multiple calls to `getCurrentUser()` execute the query only once.
+Within the same RSC cache context, matching calls to this shared wrapper reuse its result (including errors).
 
 **Avoid inline objects as arguments:**
 
@@ -205,7 +205,7 @@ If you must pass objects, pass the same reference:
 
 **Next.js-Specific Note:**
 
-In Next.js, the `fetch` API is automatically extended with request memoization. Requests with the same URL and options are automatically deduplicated within a single request, so you don't need `React.cache()` for `fetch` calls. However, `React.cache()` is still essential for other async tasks:
+Next.js request memoization can deduplicate eligible identical GET/HEAD fetches during a React render. It is distinct from persistent fetch caching, depends on the framework version/options, and does not cover arbitrary Route Handler or mutation work. React.cache is one option for repeated non-fetch reads:
 
 - Database queries (Prisma, Drizzle, etc.)
 
@@ -227,7 +227,7 @@ Reference: [https://react.dev/reference/react/cache](https://react.dev/reference
 
 **Impact: HIGH (caches across requests)**
 
-`React.cache()` only works within one request. For data shared across sequential requests (user clicks button A then button B), use an LRU cache.
+`React.cache()` only works within one request. For stable shared reads, a bounded process cache is an option. Define freshness, invalidation and tenant/access keys; authorization still runs for each protected request.
 
 **Implementation:**
 
@@ -239,13 +239,13 @@ const cache = new LRUCache<string, any>({
   ttl: 5 * 60 * 1000  // 5 minutes
 })
 
-export async function getUser(id: string) {
-  const cached = cache.get(id)
+export async function getPublicConfig(key: string) {
+  const cached = cache.get(key)
   if (cached) return cached
 
-  const user = await db.user.findUnique({ where: { id } })
-  cache.set(id, user)
-  return user
+  const config = await readPublicConfig(key)
+  cache.set(key, config)
+  return config
 }
 
 // Request 1: DB query, result cached
@@ -254,9 +254,9 @@ export async function getUser(id: string) {
 
 Use when sequential user actions hit multiple endpoints needing the same data within seconds.
 
-**With Vercel's [Fluid Compute](https://vercel.com/docs/fluid-compute):** LRU caching is especially effective because multiple concurrent requests can share the same function instance and cache. This means the cache persists across requests without needing external storage like Redis.
+**Deployment scope:** A module cache is local to a warm process or function instance. Requests may reuse an instance, but eviction, restarts and multiple instances prevent a shared or durable guarantee.
 
-**In traditional serverless:** Each invocation runs in isolation, so consider Redis for cross-process caching.
+Use an external store when cross-instance consistency or durability is required. Never use an unkeyed shared cache for user-specific authorization results.
 
 Reference: [https://github.com/isaacs/node-lru-cache](https://github.com/isaacs/node-lru-cache)
 
@@ -264,64 +264,30 @@ Reference: [https://github.com/isaacs/node-lru-cache](https://github.com/isaacs/
 
 ### R3.4 Avoid Duplicate Serialization in RSC Props
 
-**Impact: LOW (reduces network payload by avoiding duplicate serialization)**
+**Impact: LOW (potential payload reduction; measure the RSC response)**
 
-RSC→client serialization deduplicates by object reference, not value. Same reference = serialized once; new reference = serialized again. Do transformations (`.toSorted()`, `.filter()`, `.map()`) in client, not server.
+Avoid sending both original and derived collections when the client only needs one. React may reuse references in its RSC transport; equal values in separately created objects are not the same reference. Exact wire deduplication and byte counts are implementation details, not a public serialization-size contract.
 
-**Incorrect: duplicates array**
+**Potential redundancy (when the client needs the original and can cheaply sort):**
 
 ```tsx
-// RSC: sends 6 strings (2 arrays × 3 items)
-<ClientList usernames={usernames} usernamesOrdered={usernames.toSorted()} />
+<ClientList usernames={usernames} usernamesOrdered={[...usernames].sort()} />
 ```
 
-**Correct: sends 3 strings**
+**Alternative (separate client module):**
 
 ```tsx
-// RSC: send once
-<ClientList usernames={usernames} />
-
-// Client: transform there
 'use client'
-const sorted = useMemo(() => [...usernames].sort(), [usernames])
+import { useMemo } from 'react'
+export function ClientList({ usernames }: { usernames: string[] }) {
+  const sorted = useMemo(() => [...usernames].sort(), [usernames])
+  return <ul>{sorted.map((name, i) => <li key={i}>{name}</li>)}</ul>
+}
 ```
 
-**Nested deduplication behavior:**
+Keep authorization filtering on the server. Prefer sending only the derived result when the original is unnecessary; expensive transformations may also belong on the server. Shared references passed to sibling clients are not automatically duplicate payloads. Measure before introducing a client wrapper merely for deduplication.
 
-```tsx
-// string[] - duplicates everything
-usernames={['a','b']} sorted={usernames.toSorted()} // sends 4 strings
-
-// object[] - duplicates array structure only
-users={[{id:1},{id:2}]} sorted={users.toSorted()} // sends 2 arrays + 2 unique objects (not 4)
-```
-
-Deduplication works recursively. Impact varies by data type:
-
-- `string[]`, `number[]`, `boolean[]`: **HIGH impact** - array + all primitives fully duplicated
-
-- `object[]`: **LOW impact** - array duplicated, but nested objects deduplicated by reference
-
-**Operations breaking deduplication: create new references**
-
-- Arrays: `.toSorted()`, `.filter()`, `.map()`, `.slice()`, `[...arr]`
-
-- Objects: `{...obj}`, `Object.assign()`, `structuredClone()`, `JSON.parse(JSON.stringify())`
-
-**More examples:**
-
-```tsx
-// ❌ Bad
-<C users={users} active={users.filter(u => u.active)} />
-<C product={product} productName={product.name} />
-
-// ✅ Good
-<C users={users} />
-<C product={product} />
-// Do filtering/destructuring in client
-```
-
-**Exception:** Pass derived data when transformation is expensive or client doesn't need original.
+Reference: https://react.dev/reference/rsc/use-client
 
 ---
 
@@ -329,32 +295,46 @@ Deduplication works recursively. Impact varies by data type:
 
 **Impact: HIGH (reduces data transfer size)**
 
-The React Server/Client boundary serializes all object properties into strings and embeds them in the HTML response and subsequent RSC requests. This serialized data directly impacts page weight and load time, so **size matters a lot**. Only pass fields that the client actually uses.
+The React Server/Client boundary encodes supported values in an RSC payload; it does not simply stringify every property as JSON. Values sent to the browser are exposed to it, even if not rendered. This serialized data directly impacts page weight and load time, so **size matters a lot**. Only pass fields that the client actually uses.
 
-**Incorrect: serializes all 50 fields**
+**Before: passes all 50 fields across the client boundary**
+
+Server module `page.tsx` (with the application's existing `fetchUser` import):
 
 ```tsx
-async function Page() {
-  const user = await fetchUser()  // 50 fields
+import Profile from './Profile'
+export default async function Page() {
+  const user = await fetchUser()
   return <Profile user={user} />
-}
-
-'use client'
-function Profile({ user }: { user: User }) {
-  return <div>{user.name}</div>  // uses 1 field
 }
 ```
 
-**Correct: serializes only 1 field**
+Separate client module `Profile.tsx` (using the application's `User` type):
 
 ```tsx
-async function Page() {
+'use client'
+export default function Profile({ user }: { user: User }) {
+  return <div>{user.name}</div>
+}
+```
+
+**After: passes only the field the client needs**
+
+Server module `page.tsx`:
+
+```tsx
+import Profile from './Profile'
+export default async function Page() {
   const user = await fetchUser()
   return <Profile name={user.name} />
 }
+```
 
+Separate client module `Profile.tsx`:
+
+```tsx
 'use client'
-function Profile({ name }: { name: string }) {
+export default function Profile({ name }: { name: string }) {
   return <div>{name}</div>
 }
 ```
@@ -365,7 +345,7 @@ function Profile({ name }: { name: string }) {
 
 **Impact: CRITICAL (eliminates server-side waterfalls)**
 
-React Server Components execute sequentially within a tree. Restructure with composition to parallelize data fetching.
+An async parent that awaits before returning children delays starting those children. Independent sibling work can overlap; React does not universally execute the whole tree sequentially. Preserve authorization/data prerequisites.
 
 **Incorrect: Sidebar waits for Page's fetch to complete**
 
@@ -386,7 +366,7 @@ async function Sidebar() {
 }
 ```
 
-**Correct: both fetch simultaneously**
+**Alternative: independent sibling fetches can overlap**
 
 ```tsx
 async function Header() {
@@ -446,7 +426,7 @@ export default function Page() {
 
 **Impact: MEDIUM (faster response times)**
 
-Use Next.js's `after()` to schedule work that should execute after a response is sent. This prevents logging, analytics, and other side effects from blocking the response.
+On Next.js 15.1+ with a supported deployment runtime, `after()` schedules work after a response or prerender finishes. Use it only when response success does not depend on that work. Keep required audits, authorization and consistency-critical invalidation awaited or durably enqueued before success. Execution is bounded by the route's runtime duration.
 
 **Incorrect: blocks response**
 
@@ -472,7 +452,7 @@ export async function POST(request: Request) {
 
 ```tsx
 import { after } from 'next/server'
-import { headers, cookies } from 'next/headers'
+import { headers } from 'next/headers'
 import { logUserAction } from '@/app/utils'
 
 export async function POST(request: Request) {
@@ -482,9 +462,7 @@ export async function POST(request: Request) {
   // Log after response is sent
   after(async () => {
     const userAgent = (await headers()).get('user-agent') || 'unknown'
-    const sessionCookie = (await cookies()).get('session-id')?.value || 'anonymous'
-    
-    logUserAction({ sessionCookie, userAgent })
+    await logUserAction({ userAgent }) // noncritical telemetry; never log session credentials
   })
   
   return new Response(JSON.stringify({ status: 'success' }), {
@@ -494,17 +472,17 @@ export async function POST(request: Request) {
 }
 ```
 
-The response is sent immediately while logging happens in the background.
+The response no longer awaits this telemetry. after is not a durable queue; static prerenders can run it at build/revalidation time.
 
 **Common use cases:**
 
 - Analytics tracking
 
-- Audit logging
+- Noncritical diagnostic logging (required audit persistence stays awaited or durably queued)
 
-- Sending notifications
+- Best-effort notifications (durably queue required delivery)
 
-- Cache invalidation
+- Optional cache warming (keep required invalidation in the success contract)
 
 - Cleanup tasks
 
@@ -512,31 +490,31 @@ The response is sent immediately while logging happens in the background.
 
 - `after()` runs even if the response fails or redirects
 
-- Works in Server Actions, Route Handlers, and Server Components
+- Works in supported Server Actions, Route Handlers and Server Components. Request APIs inside the callback are allowed in actions/handlers; capture needed values before scheduling from Server Components.
 
 Reference: [https://nextjs.org/docs/app/api-reference/functions/after](https://nextjs.org/docs/app/api-reference/functions/after)
 
 
 ## Rule Interactions
 
-- **ServerAuthActions + ServerCacheReact** interact directly. Auth checks (`getCurrentUser()`) are the most commonly deduplicated server-side call. Wrapping the auth check in `React.cache()` means that 5 Server Components calling `getCurrentUser()` only hit the auth system once per request. But the cache must be applied to the right function — caching the Server Action itself would cache across users, which is a security vulnerability.
-- **ServerSerialization + ServerDedupProps** are complementary strategies for payload reduction. Serialization minimizes per-component data; dedup eliminates redundancy across components. Apply Serialization first (reduce what is sent), then DedupProps (eliminate duplicates of what remains).
+- **ServerAuthActions + ServerCacheReact** interact directly. Auth checks (`getCurrentUser()`) are the most commonly deduplicated server-side call. Wrapping the auth check in `React.cache()` means that 5 Server Components calling `getCurrentUser()` only hit the auth system once per request. Wrapping an action with React.cache does not turn it into a cross-user cache. Keep actions callable on every invocation; separate request deduplication of reads from persistent caching.
+- **ServerSerialization + ServerDedupProps** are complementary checks: send only needed fields, then inspect whether original-plus-derived values add unnecessary payload. Shared references across siblings do not alone prove duplicate wire copies or require a wrapper.
 - **ServerCacheReact + ServerCacheLru** address different cache scopes. React.cache() is request-scoped — it deduplicates within a single server render. LRU cache is process-scoped — it caches across requests. Use React.cache() for user-specific data (auth, user preferences); use LRU for shared data (site config, feature flags). Nesting them (LRU inside React.cache()) provides both layers.
-- **ServerParallelFetching (cross-ref) + ServerCacheReact** work together: parallel fetching ensures multiple server components start their queries simultaneously, while React.cache() ensures that overlapping queries (e.g., two components both needing the current user) do not result in duplicate database calls.
+- **ServerParallelFetching (cross-ref) + ServerCacheReact** work together: parallel fetching ensures multiple server components can overlap their queries, while React.cache() ensures that overlapping queries (e.g., two components both needing the current user) do not result in duplicate database calls.
 
 ## Anti-Patterns (Severity Calibration)
 
 ### CRITICAL
-- **Unauthenticated Server Action**: A `"use server"` function that deletes, updates, or reads sensitive data without checking the session. This is a security vulnerability — Server Actions are HTTP POST endpoints that anyone can call with the right payload. Every mutation must verify identity and permissions.
-- **Cached auth across users**: Wrapping a Server Action in a process-level cache (LRU) that returns the same user's data for all requests. `React.cache()` (request-scoped) is correct for auth; LRU cache is not.
+- **Unauthenticated Server Action**: A `"use server"` function that deletes, updates, or reads sensitive data without checking the session. This is a security vulnerability — Server Actions are HTTP POST endpoints that anyone can call with the right payload. Each mutation must enforce its intended access policy; anonymous mutations may be intentional.
+- **Cached auth across users**: A process-level cache (LRU) that returns the same user's data for other users violates isolation. Persistent caches need appropriate user/tenant keys, freshness and invalidation; neither an LRU nor request-scoped `React.cache()` replaces authorization of the current operation.
 
 ### HIGH
-- **Full entity serialization**: `<ClientProfile user={user} />` where `user` contains 50 database fields, timestamps, relations, and internal IDs, but the Client Component only renders `name` and `avatar`. Every extra field increases page weight and is visible in the HTML source.
-- **Missing React.cache() on auth**: Five Server Components each independently calling `await auth()`, resulting in 5 authentication round-trips per request instead of 1.
+- **Full entity serialization**: `<ClientProfile user={user} />` where `user` contains 50 database fields, timestamps, relations, and internal IDs, but the Client Component only renders `name` and `avatar`. Unneeded fields may increase transfer size and expose data in the client-visible RSC payload.
+- **Repeated expensive auth reads**: Report observed redundant work when neither the auth library nor the data layer deduplicates it. Missing React.cache alone is not a defect.
 
 ### MEDIUM
-- **Duplicate prop serialization**: Two sibling Client Components both receiving `comments: Comment[]` (100 items), serialized twice in the RSC payload. Solution: lift the shared data to a parent Server Component and pass it through a single Client Component wrapper or context.
-- **Passing Dates across RSC boundary**: `<ClientComponent createdAt={new Date()} />` — Date objects are not serializable. The component silently receives a string or null. Pass ISO strings explicitly.
+- **Redundant derived payloads**: Report unnecessary data actually transferred; passing the same object to two Client Components is not sufficient evidence.
+- **Unsupported class instances across RSC boundary**: Project custom class instances to supported values. `createdAt={new Date()}` is supported by React RSC; ISO strings are an optional application contract, not a universal fix.
 
 ## Examples
 
@@ -549,38 +527,47 @@ export async function deletePost(postId: string) {
   await db.post.delete({ where: { id: postId } })  // Anyone can delete any post!
 }
 
-// Elsewhere, 3 server components each call:
-const user = await auth()  // 3 separate auth round-trips
+// Separate Server Component call sites may repeat auth work unless already deduplicated.
 
-// AFTER: Auth inside action + cached auth helper
+// Separate module: lib/current-user.ts (no module-level 'use server')
 import { cache } from 'react'
 import { verifySession } from '@/lib/auth'
 
-// Cached: called by multiple server components, runs once per request
+// Matching calls reuse results inside an RSC cache context; action calls may execute uncached.
 export const getCurrentUser = cache(async () => {
   const session = await verifySession()
   if (!session?.user?.id) return null
   return db.user.findUnique({ where: { id: session.user.id } })
 })
 
+```
+
+```tsx
+// Separate module: actions.ts
 'use server'
+import { getCurrentUser } from './lib/current-user'
+
 export async function deletePost(postId: string) {
+  if (typeof postId !== 'string' || !postId) throw new Error('Invalid post ID')
   const user = await getCurrentUser()
   if (!user) throw new Error('Unauthorized')
 
-  const post = await db.post.findUnique({ where: { id: postId } })
-  if (post?.authorId !== user.id && user.role !== 'admin') {
-    throw new Error('Forbidden')
-  }
-
-  await db.post.delete({ where: { id: postId } })
+  // Prisma-style illustrative API: authorization predicate and delete are one operation.
+  const result = await db.post.deleteMany({
+    where: user.role === 'admin' ? { id: postId } : { id: postId, authorId: user.id }
+  })
+  if (result.count !== 1) throw new Error('Not found or forbidden')
 }
 ```
 
 ### Example 2: Minimal Serialization + Dedup (Serialization + DedupProps)
 
+Before, server `ProfilePage.tsx` imports the existing client components and the application's `getUser` helper:
+
 ```tsx
-// BEFORE: Full user object serialized twice
+import ClientHeader from './ClientHeader'
+import ClientSidebar from './ClientSidebar'
+// BEFORE: Full user object crosses the boundary (same reference may be reused)
 async function ProfilePage() {
   const user = await getUser()  // 50 fields
   return (
@@ -590,8 +577,13 @@ async function ProfilePage() {
     </>
   )
 }
+```
 
-// AFTER: Minimal fields, single serialization via shared wrapper
+After, replace that server module with the following (retaining its `getUser` import):
+
+```tsx
+import ProfileLayout from './ProfileLayout'
+// AFTER: Minimal fields; shared client wrapper is optional composition
 async function ProfilePage() {
   const user = await getUser()
   const profileData = {
@@ -601,9 +593,13 @@ async function ProfilePage() {
   }
   return <ProfileLayout profile={profileData} />
 }
+```
 
+Separate client `ProfileLayout.tsx`, using the application's `ProfileData`, `Header` and `Sidebar` imports:
+
+```tsx
 'use client'
-function ProfileLayout({ profile }: { profile: ProfileData }) {
+export default function ProfileLayout({ profile }: { profile: ProfileData }) {
   return (
     <>
       <Header name={profile.name} avatar={profile.avatar} />
@@ -613,7 +609,7 @@ function ProfileLayout({ profile }: { profile: ProfileData }) {
 }
 ```
 
-Serialized data drops from ~4KB (2 x 50 fields) to ~200 bytes (3 fields, once).
+This sends fewer fields. A shared reference does not imply two full copies; byte savings require measuring the actual RSC response.
 
 ### Example 3: Layered Caching (CacheReact + CacheLru + ParallelFetching)
 
@@ -637,7 +633,7 @@ async function getFeatureFlags(): Promise<FeatureFlags> {
 
 // Server components fetch in parallel — no waterfall
 async function DashboardPage() {
-  // Both kick off simultaneously via parallel server component rendering
+  // Independent sibling rendering allows these reads to overlap
   return (
     <>
       <Suspense fallback={<HeaderSkeleton />}>
@@ -665,3 +661,14 @@ async function DashboardPage() {
 - Vercel Engineering — React Best Practices (January 2026), MIT
 - React Documentation — Server Components, React.cache(), Server Actions Security
 - Next.js Documentation — Server Actions and Mutations, Caching, Authentication
+
+## Candidate verification references
+
+- https://react.dev/reference/rsc/use-server
+- https://nextjs.org/docs/app/guides/authentication
+- https://react.dev/reference/react/cache
+- https://nextjs.org/docs/app/getting-started/fetching-data
+- https://vercel.com/docs/fluid-compute
+- https://react.dev/reference/rsc/use-client
+- https://nextjs.org/docs/app/api-reference/functions/after
+- https://nextjs.org/blog/next-15-1

@@ -5,8 +5,10 @@
 ## Reference Material
 
 - **IO Contract Principle:** `../Rules/IOContract.md`
-- **Characterization Tests (TestDriven):** `/home/fujos/.claude/skills/TestDriven/Rules/CharacterizationTests.md`
-- **Behavior Over Implementation (TestDriven):** `/home/fujos/.claude/skills/TestDriven/Rules/BehaviorOverImplementation.md`
+- **Characterization Tests (TestDriven):** `../../TestDriven/Rules/CharacterizationTests.md`
+- **Behavior Over Implementation (TestDriven):** `../../TestDriven/Rules/BehaviorOverImplementation.md`
+
+If TestDriven is installed elsewhere, resolve these references through the available skill catalog. If absent, report the unavailable reference and use this self-contained workflow; do not install or search unrelated private paths.
 
 ## Purpose
 
@@ -27,7 +29,7 @@ Before writing any tests, discover and confirm the test environment.
 
 1. **Find the test command:** Look for `package.json` scripts (`test`, `test:unit`), `Makefile` targets, `pytest.ini`/`setup.cfg`, `go.mod`, `Cargo.toml`. In monorepos, identify which workspace/package is relevant.
 2. **Find existing test files:** Use Glob to find `**/*.test.*`, `**/*.spec.*`, `**/__tests__/**`, `**/test_*.py`. Read 1-2 to learn conventions (imports, describe/it vs test(), fixtures, assertion style).
-3. **Confirm runner works:** Run the existing test command. If it fails, stop and report to user — don't fix test infrastructure.
+3. **Confirm runner works:** Run the relevant package test command. Distinguish an operational runner with pre-existing assertion failures from unavailable/broken infrastructure. Preserve unrelated failures; when the target can run independently, continue scoped tests and report full-suite and isolated results separately. If the runner cannot execute the target, stop that blocked scope and report it; do not repair infrastructure without authorization.
 4. **Record the command:** Note the exact test command (e.g., `bun test`, `pytest tests/`, `go test ./...`) for use in later steps.
 
 If no test infrastructure exists, tell the user. Suggest a minimal setup but don't install dependencies or modify build configs — that's out of scope.
@@ -50,12 +52,12 @@ For each public entry point, document what it does from the outside:
 - **Errors:** What errors/exceptions does it throw and when? (If none, note "no error path")
 - **Side effects** — only things observable from outside the module:
   - **Observable:** Database writes (query after), files written (check filesystem), HTTP calls (intercept at boundary), events emitted (subscribe and assert)
-  - **Not observable (skip):** Internal logging, metrics, cache warming, internal state mutations callers can't see
+  - **Not contractual (skip):** Incidental internal logging, metrics, cache warming or private state. Explicitly promised CLI diagnostics, audit events or monitoring outputs are observable contracts; test those at their actual public boundary.
 - **Nondeterministic behavior** (time, randomness, I/O, network):
   - Prefer injectable seams (pass clock/RNG as parameter)
   - Use recorded fixtures or golden-master snapshots for complex I/O
   - Use range/property assertions ("result is between X and Y") when exact values are unstable
-  - If no clean seam exists and behavior is inherently flaky, skip that assertion rather than writing a flaky test
+  - If no reliable seam exists, record the requirement as uncovered with the missing control/evidence; do not silently skip it or imply complete behavior coverage
 
 ### Behavior-to-Proof Map
 

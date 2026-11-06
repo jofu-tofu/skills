@@ -238,7 +238,9 @@ export function countWords(text: string): number {
 }
 
 export function splitSentences(text: string): string[] {
-  const sentenceMatches: string[] = text.match(/[^.!?]+(?:[.!?]+["')\]]*(?=\s|$)|$)/g) ?? [];
+  // Internal punctuation (decimals, versions, URLs) must not discard the
+  // preceding text while looking for a punctuation-plus-whitespace boundary.
+  const sentenceMatches: string[] = text.match(/[\s\S]+?(?:[.!?]+["')\]]*(?=\s|$)|$)/g) ?? [];
   return sentenceMatches
     .map((sentence) => sentence.trim())
     .filter((sentence) => countWords(sentence) > 0);

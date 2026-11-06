@@ -1,0 +1,11 @@
+# Partial audit and drift provenance
+
+2026-11-05. Lifecycle baseline correctly retained user policy and unavailable approval evidence, corrected the stale command, preserved runbook delegation, and generated documentation-project context without invented software commands. It compensated for source instructions that could delete policies attached to moved paths. Its embedded maintenance template still told later agents that code wins over a conflicting convention; source now distinguishes descriptive claims from binding user requirements.
+
+Audit now carries `unverified` claims through the shared schema and synthesis, marks partial review provenance, and does not equate unchanged content or a review date with full accuracy. Drift treats unavailable/nonnumeric/negative commit baselines as unknown and includes deletions/renames; count signatures alone cannot identify same-count substitutions.
+
+The original lifecycle baseline's copied Git repository was unreadable under the worker account's ownership check. It correctly reported unavailable history. Preserve that infrastructure result; a frozen-source recovery uses only per-command safe.directory for the exact synthetic repository, without writing Git settings. Matched candidate and recovery evidence are pending; no behavioral improvement is yet claimed for these changes.
+
+Evidence: `RemainingSkills20261104/deep/engineering/context-lifecycle-plan.md` and `runs/context-lifecycle-baseline`. Context files are explicitly supplied/read as fixtures; native automatic context loading and later compliance remain separate unverified behaviors.
+
+Matched lifecycle comparison and frozen Git recovery are now complete. Both correctly retained actual addition/deletion/rename history and invalid negative baselines, preserved policy and generated usable documentation context. Candidate native Audit synthesis additionally emits explicit partial/unresolved provenance in the actual context; original baseline compensating behavior and infrastructure failure remain preserved. See `runs/context-lifecycle-baseline-git-recovery/report.md` and `runs/context-lifecycle-candidate/report.md`. Malformed-stage recovery and downstream consumer/budget continuity remain separately planned, not implicitly certified by clean native handoffs.

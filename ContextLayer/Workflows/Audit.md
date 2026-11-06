@@ -99,14 +99,15 @@ Return JSON:
 {
   "still_accurate": ["entry text that is still correct"],
   "stale": [{"entry": "entry text", "reason": "why stale", "fix": "corrected text or empty string if should be removed"}],
-  "missing": ["new high-value entry not in CLAUDE.md but found in files"]
+  "missing": ["new high-value entry not in CLAUDE.md but found in files"],
+  "unverified": [{"entry": "claim", "reason": "missing or inaccessible evidence", "needed": "evidence needed to decide"}]
 }
 ```
 
 **Scope:** Each agent reads ONLY the files/paths referenced in its assigned CLAUDE.md.
 Do NOT scan the full project — only what the CLAUDE.md claims to know about.
 
-**Missing path handling:** If a referenced path (file or directory) no longer exists on disk, do NOT attempt to read it. Instead, immediately mark every CLAUDE.md entry that references that path as stale with reason "path no longer exists on disk" and fix set to empty string (remove the entry). Do not wait for the haiku agent to discover this — check path existence before dispatching.
+**Missing or unavailable evidence:** Check referenced paths before dispatch. A missing path proves the path reference is stale, not that every attached policy is invalid. Correct a verified moved reference; preserve still-valid user constraints and intentional delegation. If the underlying claim cannot be established, return it as `unverified` with the evidence needed. Do not convert unreadable or unavailable evidence into deletion or verified accuracy.
 
 ### Step 4 — Synthesize and Update
 
@@ -122,11 +123,11 @@ For each CLAUDE.md, apply agent results:
 5. **Missing task tracking rule** → insert the "Track follow-up work" rule from
    PruningInstruction.md into the existing `## Context Maintenance` section (between
    the "Remove" rule and the "Staleness anchor" line)
-6. **Still accurate entries** → keep unchanged
+6. **Still accurate entries** → keep unchanged. **Unverified entries** → retain applicable constraints, mark the uncertainty and required evidence; do not silently drop them.
 7. **Update freshness timestamp** → In the `<!-- context-layer: ... -->` comment:
-   - Set `last-audited` to today's date
+   - Set `last-audited` to today's date as review-attempt provenance; record `audit-status=partial` and unresolved claim count when evidence is incomplete. A review date is not full certification.
    - Increment `version` by 1
-   - Recompute `dir-commits-at-audit`: run `git rev-list --count HEAD -- {directory}/`
+   - When Git evidence is unavailable, use `unavailable`, never an invented count; downstream readers must treat it as unknown. Otherwise recompute `dir-commits-at-audit`: run `git rev-list --count HEAD -- {directory}/`
    - Recompute `tree-sig`: count subdirs, files, extensions in covered directory (format: `dirs:{N},files:{N},exts:{ext}:{N},...`)
    - If `dir-commits-at-audit` or `tree-sig` fields are missing (legacy format), add them now
 
@@ -158,7 +159,7 @@ ContextLayer Audit complete:
   Entries added (missing): Z
 ```
 
-If zero changes: "All CLAUDE.md files are accurate — no changes needed."
+If zero changes and every claim was verified: "No corrections needed within inspected scope." Otherwise report unresolved claims and unavailable evidence; unchanged does not mean accurate.
 
 ---
 

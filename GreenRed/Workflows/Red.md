@@ -5,7 +5,9 @@
 ## Reference Material
 
 - **IO Contract Principle:** `../Rules/IOContract.md`
-- **Red-Green-Refactor (TestDriven):** `/home/fujos/.claude/skills/TestDriven/Rules/RedGreenRefactor.md`
+- **Red-Green-Refactor (TestDriven):** `../../TestDriven/Rules/RedGreenRefactor.md`
+
+If TestDriven is installed elsewhere, resolve these references through the available skill catalog. If absent, report the unavailable reference and use this self-contained workflow; do not install or search unrelated private paths.
 
 ## Purpose
 
@@ -24,7 +26,7 @@ Before writing any tests, discover and confirm the test environment.
 
 1. **Find the test command:** Look for `package.json` scripts (`test`, `test:unit`), `Makefile` targets, `pytest.ini`/`setup.cfg`, `go.mod`, `Cargo.toml`. In monorepos, identify which workspace/package is relevant.
 2. **Find existing test files:** Use Glob to find `**/*.test.*`, `**/*.spec.*`, `**/__tests__/**`, `**/test_*.py`. Read 1-2 to learn conventions (imports, describe/it vs test(), fixtures, assertion style).
-3. **Confirm runner works:** Run the existing test command. If it fails, stop and report to user — don't fix test infrastructure.
+3. **Confirm runner works:** Run the relevant package test command. Distinguish an operational runner with pre-existing assertion failures from unavailable/broken infrastructure. Preserve unrelated failures; when the target can run independently, continue scoped tests and report full-suite and isolated results separately. If the runner cannot execute the target, stop that blocked scope and report it; do not repair infrastructure without authorization.
 4. **Record the command:** Note the exact test command for use in later steps.
 
 If no test infrastructure exists, tell the user. Suggest a minimal setup but don't install dependencies or modify build configs — that's out of scope.
@@ -93,7 +95,7 @@ Check coverage of the behavior space:
 
 ## Done When
 
-Every behavior scenario from the user's spec (Step 2) has a corresponding test. All tests fail for the right reason (missing implementation, not infrastructure errors).
+Every behavior scenario from the user's spec (Step 2) has a corresponding test. Tests for missing behavior fail for that behavior, not infrastructure errors. Existing-behavior preservation tests may pass and should be reported separately; do not force them to fail merely to make the entire suite red.
 
 Include the behavior-to-proof map with exact commands and failure evidence. Results are expected-red only when they fail for the specified missing behavior; distinguish infrastructure failures and checks not run. This handoff specifies future correctness; it does not claim implementation or runtime success.
 

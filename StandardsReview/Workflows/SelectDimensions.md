@@ -2,6 +2,8 @@
 
 > Internal workflow — invoked as a standalone agent by the orchestrator (Review.md), not user-facing.
 
+Read [ReviewContract](../Standards/ReviewContract.md); it owns the selection-object schema and scheduling/coverage semantics.
+
 ## Input / Output
 
 **Input:**
@@ -32,10 +34,10 @@ Read the `context.md` file provided as input. Extract:
 
 Glob `Dimensions/**/*.md` (relative to the skill root) to find all dimension files. Exclude any INDEX.md files if present.
 
-For each dimension file found:
+Filter to detected language families first. For each applicable dimension file:
 1. Read the first section to understand what the dimension covers and what rules it contains
 2. Note which language directory it belongs to
-3. Identify if it's a baseline dimension for that language (the first/primary dimension per language is typically baseline)
+3. Use the explicit baseline list in Step 3, not filesystem order
 
 Build a list of all available dimensions grouped by language.
 
@@ -45,15 +47,15 @@ Using the context from Step 1 and the dimension inventory from Step 2:
 
 1. **Only select dimensions for detected languages** — if no `.rs` files are present, no Rust dimensions are selected regardless of context.
 
-2. **Baseline dimensions always included** — for each detected language, the primary dimension is always included unless the review has fewer than 10 changed lines. Typical baselines:
-   - React: Architecture (R1)
-   - Rust: Ownership (Ru1)
-   - Svelte: Reactivity (Sv1)
-   - TypeScript: TypeSafety (TS1)
-   - C#: AsyncPatterns (CS1)
-   - Python: CodeOrganization (Py1)
-   - Tailwind: ClassOrganization (TW1)
-   - MUMPS: Standards (M1)
+2. **Baseline dimensions** — inspect the listed baseline for each detected family, including audits, and select it when at least one scoped file has an applicable responsibility. If no rule applies, record the baseline and the concrete reason in exclusions rather than creating an empty reviewer assignment. Never omit a consequential obligation solely because a diff is small. These names identify rule files; finding IDs come from their actual rules, not selection labels. Baselines:
+   - React: Architecture
+   - Rust: Ownership
+   - Svelte: Reactivity
+   - TypeScript: TypeSafety
+   - C#: AsyncPatterns
+   - Python: CodeOrganization
+   - Tailwind: ClassOrganization
+   - MUMPS: Standards
 
 3. **Context-driven selection** — for non-baseline dimensions, use judgment:
    - What does the code actually do? (data fetching code activates DataFetching dimensions)
@@ -72,13 +74,15 @@ Based on review size from context:
 | Medium | 50-300 | 10-50 | 8 |
 | Large | 300+ | 50+ | 12 |
 
-If selected dimensions exceed the agent cap, prioritize: baselines first, then by relevance to the specific changes.
+The cap controls concurrency, not coverage. Prioritize dispatch order (baselines, then consequence/relevance) and queue the rest within host capacity. Explicit user limits can leave named coverage incomplete; do not silently drop dimensions/languages. Resolve tier boundaries consistently: Small up to 50 diff lines or 10 audit files; Medium up to 300 lines or 50 files; Large above that.
 
 ## Step 5: Route Files
 
-For each selected dimension, assign the subset of changed/target files relevant to it:
+For each selected dimension, assign files by responsibility and framework/module role using the complete manifest. The extensions below are examples, not exclusion lists. Inspect imports, directives, routes and configuration before deciding relevance. Include React server actions/loaders in JS/TS modules (including `use server`), SvelteKit server loaders/actions/endpoints and hooks in JS/TS, and Tailwind CSS/theme/plugin/configuration owners. Server-only and CSS-only changes still need their applicable framework responsibilities. A plain unrelated TypeScript utility does not acquire framework dimensions merely from its extension. Record unsupported or omitted responsibilities explicitly.
+
+Common examples:
 - React dimensions: `.tsx`, `.jsx` files
-- TypeScript dimensions: `.ts` files (and `.tsx` for type-related dimensions)
+- TypeScript dimensions: `.ts`, `.tsx`, and TypeScript-bearing `.svelte`/`.svelte.ts` files for applicable type responsibilities
 - Rust dimensions: `.rs` files
 - Python dimensions: `.py` files
 - Svelte dimensions: `.svelte`, `.svelte.ts` files
@@ -102,15 +106,18 @@ Write `dimensions.json` to `$REVIEW_DIR/dimensions.json`:
       "name": "Type Safety",
       "language": "TypeScript",
       "path": "/absolute/path/to/Dimensions/TypeScript/TypeSafety.md",
-      "reason": "Baseline — always relevant for TypeScript code",
+      "reason": "Applicable boundary checks: auth and client modules handle unknown external input",
       "files": ["src/utils/auth.ts", "src/api/client.ts"]
     }
   ],
+  "exclusions": [],
   "audit_summary": "Selected: N dimensions for M-line diff across K languages"
 }
 ```
 
 ## Step 7: Print Selection Rationale
+
+Before returning, validate unique dimension IDs, existing paths inside the supplied skill, scoped files, and selected or explicitly excluded responsibilities for every detected language. Audit summaries use audit file counts, not changed-line thresholds. A rule in multiple inlined dimensions remains one rule identity; duplicate text is not extra independent coverage.
 
 Output to chat for user transparency:
 - How many dimensions selected and why

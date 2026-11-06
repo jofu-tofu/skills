@@ -9,7 +9,7 @@
  *
  * Examples:
  *   bun run ValidateTemplate.ts --template Primitives/Roster.hbs
- *   bun run ValidateTemplate.ts -t Evals/Judge.hbs -d Data/JudgeConfig.yaml --strict
+ *   bun run ValidateTemplate.ts -t Primitives/Gate.hbs -d Data/ValidationGates.yaml
  */
 
 import Handlebars from 'handlebars';
@@ -41,10 +41,15 @@ interface ValidateOptions {
 // Validator
 // ============================================================================
 
-function resolveTemplatePath(path: string): string {
+/** Absolute paths as given; relative paths under Templates/ first, then the current directory (same rule as RenderTemplate). */
+export function resolveTemplatePath(path: string): string {
   if (path.startsWith('/')) return path;
-  const templatesDir = dirname(dirname(import.meta.path));
-  return resolve(templatesDir, path);
+  const base = dirname(dirname(import.meta.path));
+  const templatesDir = basename(base) === 'Templates' ? base : resolve(base, 'Templates');
+  const underTemplates = resolve(templatesDir, path);
+  if (existsSync(underTemplates)) return underTemplates;
+  const underCwd = resolve(process.cwd(), path);
+  return existsSync(underCwd) ? underCwd : underTemplates;
 }
 
 function extractVariables(source: string): string[] {
@@ -53,7 +58,8 @@ function extractVariables(source: string): string[] {
   // Match {{variable}} and {{object.property}}
   const simpleVars = source.matchAll(/\{\{([a-zA-Z_][a-zA-Z0-9_.]*)\}\}/g);
   for (const match of simpleVars) {
-    variables.add(match[1]);
+    // Bare {{else}} is branch syntax, not a data lookup.
+    if (match[1] !== 'else') variables.add(match[1]);
   }
 
   // Match {{#each items}} and {{#if condition}}
@@ -93,79 +99,89 @@ function extractPartials(source: string): string[] {
   return Array.from(partials).sort();
 }
 
-function checkUnbalancedBlocks(source: string): string[] {
-  const errors: string[] = [];
-  const blockStack: { name: string; line: number }[] = [];
-  const lines = source.split('\n');
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const lineNum = i + 1;
-
-    // Opening blocks
-    const opens = line.matchAll(/\{\{#([a-z]+)/g);
-    for (const match of opens) {
-      blockStack.push({ name: match[1], line: lineNum });
+function withoutComments(source: string, ast: unknown): string {
+  const lineStarts = [0];
+  for (let i = 0; i < source.length; i++) if (source[i] === '\n') lineStarts.push(i + 1);
+  const ranges: [number, number][] = [];
+  function visit(value: unknown): void {
+    if (!value || typeof value !== 'object') return;
+    const node = value as { type?: string; loc?: { start: { line: number; column: number }; end: { line: number; column: number } } };
+    if (node.type === 'CommentStatement' && node.loc) {
+      ranges.push([lineStarts[node.loc.start.line - 1] + node.loc.start.column,
+        lineStarts[node.loc.end.line - 1] + node.loc.end.column]);
+      return;
     }
+    for (const child of Object.values(value)) visit(child);
+  }
+  visit(ast);
+  for (const [start, end] of ranges.sort((a, b) => b[0] - a[0])) {
+    source = source.slice(0, start) + source.slice(start, end).replace(/[^\r\n]/g, ' ') + source.slice(end);
+  }
+  return source;
+}
 
-    // Closing blocks
-    const closes = line.matchAll(/\{\{\/([a-z]+)\}\}/g);
-    for (const match of closes) {
-      const closer = match[1];
-      if (blockStack.length === 0) {
-        errors.push(`Line ${lineNum}: Unexpected closing block {{/${closer}}}`);
+/** Follow built-in scopes using the supplied data; do not execute custom helpers or partials. */
+function scopedDataChecks(ast: any, data: unknown): { missing: string[]; limited: boolean } {
+  const missing = new Set<string>();
+  let limited = false;
+  const truthy = (value: any) => !!value && !(Array.isArray(value) && value.length === 0);
+  function value(node: any, contexts: any[], aliases: Record<string, any>, meta: any): any {
+    if (!node) return undefined;
+    if (node.type.endsWith('Literal')) return node.value;
+    if (node.type !== 'PathExpression') { limited = true; return undefined; }
+    const parts = [...node.parts];
+    let current: any;
+    if (node.data) {
+      const first = parts.shift();
+      let frame = meta;
+      for (let depth = 0; depth < (node.depth ?? 0); depth++) frame = frame?._parent;
+      current = frame === undefined ? undefined : first === 'root' ? data : Object.hasOwn(frame, first) ? frame[first] : undefined;
+    } else if (!node.depth && !/^\.|this\b/.test(node.original) && parts.length && Object.hasOwn(aliases, parts[0])) {
+      current = aliases[parts.shift()];
+    } else current = contexts[node.depth ?? 0];
+    // Default Handlebars lookup blocks inherited properties; JSON/YAML own keys remain valid.
+    for (const part of parts) current = current == null || !Object.hasOwn(current, part) ? undefined : current[part];
+    return current;
+  }
+  function visit(program: any, contexts: any[], aliases: Record<string, any>, meta: any): void {
+    for (const node of program?.body ?? []) {
+      if (['ContentStatement', 'CommentStatement'].includes(node.type)) continue;
+      if (node.type === 'MustacheStatement' && !node.params?.length && !node.hash?.pairs?.length && node.path?.type === 'PathExpression') {
+        if (value(node.path, contexts, aliases, meta) === undefined) missing.add(node.path.original);
+        continue;
+      }
+      if (node.type !== 'BlockStatement' || !['if', 'unless', 'each', 'with'].includes(node.path.original) || node.params?.length !== 1 || node.params[0].type === 'SubExpression') {
+        limited = true;
+        continue;
+      }
+      const kind = node.path.original;
+      const selected = value(node.params[0], contexts, aliases, meta);
+      if (kind === 'if' || kind === 'unless') {
+        const includeZero = node.hash?.pairs?.some((x: any) => x.key === 'includeZero' && x.value.value === true);
+        const condition = truthy(selected) || (includeZero && selected === 0);
+        visit((kind === 'if' ? condition : !condition) ? node.program : node.inverse, contexts, aliases, meta);
+      } else if (kind === 'with') {
+        // Unlike #if, Handlebars #with treats numeric zero as a nonempty context.
+        if (truthy(selected) || selected === 0) {
+          const local = { ...aliases };
+          if (node.program.blockParams?.[0]) local[node.program.blockParams[0]] = selected;
+          visit(node.program, [selected, ...contexts], local, meta);
+        } else visit(node.inverse, contexts, aliases, meta);
       } else {
-        const opener = blockStack.pop()!;
-        if (opener.name !== closer) {
-          errors.push(
-            `Line ${lineNum}: Mismatched block - expected {{/${opener.name}}} (opened on line ${opener.line}), got {{/${closer}}}`
-          );
-        }
+        const entries = selected && typeof selected === 'object' ? Object.entries(selected) : [];
+        if (!entries.length) visit(node.inverse, contexts, aliases, meta);
+        entries.forEach(([key, item], index) => {
+          const local = { ...aliases };
+          if (node.program.blockParams?.[0]) local[node.program.blockParams[0]] = item;
+          if (node.program.blockParams?.[1]) local[node.program.blockParams[1]] = Array.isArray(selected) ? index : key;
+          visit(node.program, [item, ...contexts], local, { ...meta, _parent: meta, key: Array.isArray(selected) ? Number(key) : key, index, first: index === 0, last: index === entries.length - 1 });
+        });
       }
     }
   }
-
-  // Unclosed blocks
-  for (const opener of blockStack) {
-    errors.push(`Line ${opener.line}: Unclosed block {{#${opener.name}}}`);
-  }
-
-  return errors;
+  visit(ast, [data], {}, {});
+  return { missing: [...missing].map(name => `Variable "${name}" not found in data`), limited };
 }
-
-function checkMissingVariables(
-  variables: string[],
-  data: Record<string, unknown>
-): string[] {
-  const warnings: string[] = [];
-
-  function hasPath(obj: Record<string, unknown>, path: string): boolean {
-    const parts = path.split('.');
-    let current: unknown = obj;
-
-    for (const part of parts) {
-      if (current === null || current === undefined) return false;
-      if (typeof current !== 'object') return false;
-      current = (current as Record<string, unknown>)[part];
-    }
-
-    return current !== undefined;
-  }
-
-  for (const variable of variables) {
-    // Skip special variables
-    if (['this', '@index', '@key', '@first', '@last', '@root'].some(s => variable.startsWith(s))) {
-      continue;
-    }
-
-    if (!hasPath(data, variable)) {
-      warnings.push(`Variable "${variable}" not found in data`);
-    }
-  }
-
-  return warnings;
-}
-
 export function validateTemplate(options: ValidateOptions): ValidationResult {
   const result: ValidationResult = {
     valid: true,
@@ -186,39 +202,46 @@ export function validateTemplate(options: ValidateOptions): ValidationResult {
 
   const source = readFileSync(fullPath, 'utf-8');
 
-  // Extract metadata
-  result.variables = extractVariables(source);
-  result.helpers = extractHelpers(source);
-  result.partials = extractPartials(source);
-
-  // Check for syntax errors by attempting to compile
+  // compile() is lazy; parse now so the validator actually checks syntax.
+  // The parser also handles comments, inline blocks and nesting correctly.
+  let parsed: any;
   try {
-    Handlebars.compile(source);
+    const ast = Handlebars.parse(source);
+    parsed = ast;
+    // Comment examples are not live variables, helper calls or partials.
+    const activeSource = withoutComments(source, ast);
+    result.variables = extractVariables(activeSource);
+    result.helpers = extractHelpers(activeSource);
+    result.partials = extractPartials(activeSource);
   } catch (error) {
     result.valid = false;
     result.errors.push(`Syntax error: ${(error as Error).message}`);
     return result;
   }
 
-  // Check for unbalanced blocks
-  const blockErrors = checkUnbalancedBlocks(source);
-  if (blockErrors.length > 0) {
-    result.valid = false;
-    result.errors.push(...blockErrors);
-  }
-
   // If data provided, check for missing variables
   if (options.dataPath) {
     const dataFullPath = resolveTemplatePath(options.dataPath);
     if (!existsSync(dataFullPath)) {
-      result.warnings.push(`Data file not found: ${dataFullPath}`);
+      // A data file the caller named and that is not there means no variable was checked; that is a failure, not a hint.
+      result.valid = false;
+      result.errors.push(`Data file not found: ${dataFullPath} (no variables were checked)`);
     } else {
-      const dataSource = readFileSync(dataFullPath, 'utf-8');
-      const data = options.dataPath.endsWith('.json')
-        ? JSON.parse(dataSource)
-        : parseYaml(dataSource);
+      let data: unknown;
+      try {
+        const dataSource = readFileSync(dataFullPath, 'utf-8');
+        data = options.dataPath.endsWith('.json') ? JSON.parse(dataSource) : parseYaml(dataSource);
+      } catch (error) {
+        result.valid = false;
+        result.errors.push(`Data could not be read or parsed: ${(error as Error).message}`);
+        return result;
+      }
 
-      const missingVars = checkMissingVariables(result.variables, data as Record<string, unknown>);
+      const dataChecks = scopedDataChecks(parsed, data);
+      const missingVars = dataChecks.missing;
+      if (dataChecks.limited) {
+        result.warnings.push('Data checks follow built-in scopes for this data only; custom helpers, subexpressions and partials were not checked. Render representative data to verify them.');
+      }
       if (options.strict) {
         result.errors.push(...missingVars.map(w => w.replace('Variable', 'Missing variable')));
         if (missingVars.length > 0) result.valid = false;
@@ -250,7 +273,7 @@ function main(): void {
 
   if (values.help || !values.template) {
     console.log(`
-PAI Template Validator
+standalone skill Template Validator
 
 Usage:
   bun run ValidateTemplate.ts --template <path> [options]
@@ -258,12 +281,16 @@ Usage:
 Options:
   -t, --template <path>  Template file (.hbs)
   -d, --data <path>      Data file (.yaml or .json) for variable checking
-  -s, --strict           Treat missing variables as errors (not warnings)
+  -s, --strict           Treat missing values in checked scopes as errors
   -h, --help             Show this help
 
 Examples:
   bun run ValidateTemplate.ts -t Primitives/Roster.hbs
-  bun run ValidateTemplate.ts -t Evals/Judge.hbs -d Data/JudgeConfig.yaml --strict
+  bun run ValidateTemplate.ts -t Primitives/Gate.hbs -d Data/ValidationGates.yaml
+
+Data checks follow built-in if/unless/each/with scopes for the supplied data.
+Custom helpers, subexpressions and partials require rendering; warnings identify
+these unchecked paths. A valid result does not certify every data shape.
 `);
     process.exit(values.help ? 0 : 1);
   }

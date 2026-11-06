@@ -66,6 +66,14 @@ Write `$RESEARCH_DIR/question.md`:
 [or "None found"]
 ```
 
+Preserve the user's requested source scope and output location. Search only relevant authorized local context; do not include unrelated private material. Record material population/intervention/comparator/outcome/timeframe constraints and unknowns. Read `../Standards/EvidenceStandard.md` for shared source and artifact contracts.
+
+Maintain `pipeline-state.md` with stage/branch/round, actual output paths, completion state and limits. Use actual host delegation in batches if concurrency is limited; record unavailable capabilities rather than simulate successful agents. Check producer completion and fresh non-empty substantive output, not filenames alone. Retry a failed stage once while preserving completed prior work; a second failure leaves explicit incomplete coverage.
+
+**Known-empty closed scope.** Before dispatch, inspect the supplied inventory. If it is explicitly the complete authorized corpus, contains zero sources, and no further acquisition is permitted or available within this task, stop the search pipeline here. The orchestrator may write the requested bounded empty evidence map directly: retain the question and scope, record zero sources and no assessable effect, distinguish an empty supplied corpus from absence of research or evidence of no effect, and name the next useful acquisition request. Record actual artifact paths and that discovery, expansion, evaluation and synthesis agents were not dispatched because there was no evidence or acquisition route. Do not create pretend stage outputs or a saturation percentage for zero sources.
+
+This exception does not apply to zero hits from a search, an unreadable or incomplete inventory, or any nonempty corpus. Preserve their normal discovery, targeted expansion, assessment or truthful failure handling. Training recall cannot fill a corpus explicitly restricted to supplied records.
+
 ### Step 1: Landscape Scan (3 Parallel Agents)
 
 Spawn 3 agents. Each reads `question.md` and writes to its own output file.
@@ -114,9 +122,7 @@ step where the orchestrator reads agent output). Extract and deduplicate:
 - Total unique: [N]
 ```
 
-**Thin-evidence gate:** If total unique papers < 5, switch to thin-evidence
-path — run a single targeted expansion agent instead of full Wave 2. Note
-the evidence limitation prominently.
+**Thin-evidence gate:** If total unique papers < 5, run one targeted expansion agent instead of full Wave 2 and write `expansion-targeted.md`. Record this branch and path in `pipeline-state.md`. Zero real seeds is valid: search a justified alternate query when possible, or preserve an honest empty/limited map. Do not invent papers to meet the threshold.
 
 Write `$RESEARCH_DIR/seed-papers.md`:
 
@@ -143,7 +149,11 @@ Write `$RESEARCH_DIR/seed-papers.md`:
 - Apparent gaps: [list]
 ```
 
+The compact table is an index, not permission to discard source fields. Preserve identity, source/access status, version/correction history and study lineage in linked records or accompanying notes under the shared evidence contract.
+
 ### Step 2: Deep Expansion (4 Parallel Agents)
+
+This is the full branch. On the thin branch, run only the targeted agent into `expansion-targeted.md`, record its completion/limits, then use the same continuation decision and evaluation handoff below. Do not dispatch the four full-branch agents as well.
 
 Spawn 4 agents. Each reads `seed-papers.md` and writes to its own file.
 
@@ -182,6 +192,8 @@ with seed-papers.md.
 - Saturation ratio: [overlap / total]
 ```
 
+Before evaluation, inspect whether material unanswered questions justify another targeted search with available sources and within user scope. If so, run that search, record its actual new sources/overlap and update the manifest. A round/time limit or unavailable source produces an explicit remaining-coverage limit, not a claim that literature is exhausted. High overlap is useful evidence of diminishing returns, not proof of completeness. A closed supplied corpus can legitimately yield no new papers.
+
 ### Step 3: Evaluate (1 Agent)
 
 Spawn one agent to triage and assess the evidence.
@@ -191,15 +203,15 @@ Read Workflows/Evaluate.md.
 Read ALL files in $RESEARCH_DIR/:
   - question.md
   - seed-papers.md
-  - expansion-backward.md
-  - expansion-forward.md
-  - expansion-crossdomain.md
-  - expansion-adversarial.md
+  - pipeline-state.md
+  - actual completed expansion paths listed there (four full-branch files or expansion-targeted.md)
 
 Write evaluation to: $RESEARCH_DIR/evaluation.md
 ```
 
 **Wait for completion.** Verify file exists.
+
+
 
 ### Step 4: Synthesize (1 Agent)
 
@@ -210,6 +222,7 @@ Read Workflows/Synthesize.md.
 Read $RESEARCH_DIR/evaluation.md
 Read $RESEARCH_DIR/seed-papers.md
 Read $RESEARCH_DIR/question.md
+Read $RESEARCH_DIR/pipeline-state.md and the cited source records needed to trace expansion-only findings.
 
 Write final evidence map to: $RESEARCH_DIR/evidence-map.md
 ```

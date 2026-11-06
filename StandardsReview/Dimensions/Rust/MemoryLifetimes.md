@@ -4,42 +4,42 @@
 
 ## Mental Model
 
-Rust's memory model is built on a simple physical reality: every value lives either on the stack or the heap, and exactly one owner is responsible for deallocating it. The stack is fast, cache-friendly, and automatically cleaned up when a function returns. The heap is flexible, dynamically sized, and requires explicit allocation and deallocation (handled by `Box`, `Vec`, `String`, and friends through the `Drop` trait). The default choice should always be the stack. Reaching for `Box<T>` on a small struct is like renting a storage unit for your keys -- the overhead of managing the indirection exceeds the cost of just carrying the value.
+Rust values may occupy local, allocated, or static storage, and optimization can change their physical placement. Ownership controls access and cleanup rather than promising a particular machine location. The stack is fast, cache-friendly, and automatically cleaned up when a function returns. The heap is flexible, dynamically sized, and requires explicit allocation and deallocation (handled by `Box`, `Vec`, `String`, and friends through the `Drop` trait). Prefer direct local values when appropriate to the required storage and ownership. Reaching for `Box<T>` on a small struct is like renting a storage unit for your keys -- the overhead of managing the indirection exceeds the cost of just carrying the value.
 
 Lifetimes are the compiler's way of tracking how long borrows are valid. Every reference in Rust has a lifetime, but most are inferred through elision rules. When the compiler cannot infer, you annotate -- and those annotations become part of your API contract. A function signature like `fn merge<'left, 'right>(a: &'left Index, b: &'right Index) -> Merged<'left, 'right>` tells callers exactly which inputs the output borrows from. Good lifetime design minimizes explicit parameters (own data when borrowing adds complexity) and names them descriptively when they must appear.
 
-`Pin<T>` enters the picture when values contain self-referential pointers -- most commonly in async futures. After an async function yields at an `.await` point, the future's state machine may hold references into its own stack frame. Moving that future would invalidate those references. `Pin` is a wrapper that prevents moves, making it safe for the future to hold self-references. Stack pinning (`pin!()`) is for local futures; heap pinning (`Box::pin()`) is for futures that must be stored, returned, or sent across threads.
+`Pin<T>` enters the picture when values contain self-referential pointers -- most commonly in async futures. After an async function yields at an `.await` point, the future's state machine may hold references into its own stack frame. Moving that future would invalidate those references. Pin<Ptr> protects the pointee of a pointer when the pointee is not Unpin; the pointer itself can move. Returning or storing an unpolled future is safe without boxing. Use pin! for local polling or Box::pin when owning pinned storage is useful.
 
-RAII (Resource Acquisition Is Initialization) is Rust's mechanism for deterministic cleanup. The `Drop` trait runs when a value goes out of scope -- on every path: normal returns, early `?` returns, and panics. This makes guard types extremely powerful: a `LockFile` that deletes itself on drop, a `MutexGuard` that releases the lock, a database transaction that rolls back if not committed. The key insight is that manual cleanup code is fragile because every new `return` or `?` adds an exit path that might skip it, while `Drop` is structurally guaranteed by the compiler.
+RAII (Resource Acquisition Is Initialization) is Rust's mechanism for deterministic cleanup. Drop normally runs on scope exit, including early returns and panic unwinding. Abort, process exit, forgetting a value, and reference cycles can skip destruction. This makes guard types extremely powerful: a `LockFile` that deletes itself on drop, a `MutexGuard` that releases the lock, a database transaction that rolls back if not committed. The key insight is that manual cleanup code is fragile because every new `return` or `?` adds an exit path that might skip it, while a guard covers ordinary scope exits. Cleanup can still fail, so expose explicit fallible cleanup when the result matters.
 
-For complex data structures like graphs and trees with shared or cyclic references, Rust's ownership model creates friction. The naive `Rc<RefCell<Node>>` pattern works but introduces runtime reference counting, dynamic borrow checking, and panic risk. Arena allocation offers a cleaner alternative: allocate all nodes in a contiguous arena and reference them by index. The borrow checker works naturally because you borrow the arena, not individual nodes, and there is no reference counting overhead.
+For complex data structures like graphs and trees with shared or cyclic references, Rust's ownership model creates friction. The naive `Rc<RefCell<Node>>` pattern works but introduces runtime reference counting, dynamic borrow checking, and panic risk. An index arena is an alternative: store nodes together and refer to them by keys; arena implementations and performance vary. The borrow checker works naturally because you borrow the arena, not individual nodes, and there is no reference counting overhead.
 
-Finally, Rust guarantees memory safety but not that destructors run. `mem::forget`, `Box::leak`, and `Rc` cycles all prevent `Drop` from executing. Code that relies on `Drop` for correctness (not just cleanup) has a latent bug. Design types so that leaking them wastes resources but does not violate invariants, and document intentional leaks clearly.
+Finally, Rust guarantees memory safety but not that destructors run. `mem::forget`, `Box::leak`, and `Rc` cycles all prevent `Drop` from executing. Memory safety must not depend on destructors always running. Resource and application correctness may require cleanup; handle failure or leaks explicitly when those obligations matter.
 
 ## Consumer Guide
 
 ### When Reviewing Code
 
-Look for these signals: `Box::new()` wrapping small structs that could live on the stack; lifetime parameters named `'a`, `'b` with no indication of what they borrow; manual resource cleanup (explicit close/delete/unlock calls) instead of `Drop`-based guards; `Rc<RefCell<T>>` in graph structures where arena indices would eliminate runtime overhead; `Box::leak()` without a comment explaining why the leak is intentional and safe; and async functions returning unboxed futures that callers struggle to pin. Each of these indicates a memory or lifetime design decision that could be improved.
+Look for these signals: `Box::new()` wrapping small structs that could live on the stack; lifetime parameters named `'a`, `'b` with no indication of what they borrow; manual resource cleanup (explicit close/delete/unlock calls) instead of `Drop`-based guards; `Rc<RefCell<T>>` in graph structures where arena indices would eliminate runtime overhead; `Box::leak()` without a comment explaining why the leak is intentional and safe; and future polling code that fails to uphold the pinning contract. Each of these indicates a memory or lifetime design decision that could be improved.
 
 ### When Designing / Planning
 
-Decide ownership strategy early. For each data structure, ask: who owns this value, how long does it live, and who needs to borrow it? If a value is created and consumed within a single function, it belongs on the stack. If it must outlive the creating scope, it moves to the heap. If multiple consumers need shared access, choose between borrowing (lifetimes), shared ownership (`Arc` for concurrent, `Rc` for single-threaded), or arena allocation (for graph-like structures). Plan RAII guards for any resource with cleanup obligations: files, locks, network connections, temporary directories.
+Decide ownership strategy early. For each data structure, ask: who owns this value, how long does it live, and who needs to borrow it? Small local values often need no explicit heap allocation. A value can move to a caller or another owner without heap allocation; heap storage is a separate design choice. If multiple consumers need shared access, choose between borrowing (lifetimes), shared ownership (`Arc` for concurrent, `Rc` for single-threaded), or arena allocation (for graph-like structures). Plan RAII guards for any resource with cleanup obligations: files, locks, network connections, temporary directories.
 
 ### When Implementing
 
-Default to stack allocation. Use `Box` only for recursive types, trait objects, and genuinely large buffers. Name lifetime parameters after what they borrow (`'conn`, `'input`, `'query`), not with single letters. Wrap every resource that needs cleanup in a type with a `Drop` impl -- never rely on callers remembering to call a cleanup method. For graph structures, reach for `slotmap`, `typed-arena`, or `bumpalo` before `Rc<RefCell<T>>`. When pinning futures, use `pin!()` for stack-local futures and `Box::pin()` for returned or stored futures. When using `Box::leak()`, add a comment documenting why the leak is intentional and that `Drop` is not required for correctness.
+Default to stack allocation. Prefer direct values when they fit the ownership and storage needs; Box also supports stable allocated addresses and other API contracts. Name lifetime parameters after what they borrow (`'conn`, `'input`, `'query`), not with single letters. Wrap every resource that needs cleanup in a type with a `Drop` impl -- never rely on callers remembering to call a cleanup method. For graph structures, reach for `slotmap`, `typed-arena`, or `bumpalo` before `Rc<RefCell<T>>`. Use pin! for local polling and Box::pin when owned pinned storage or dynamic dispatch is useful; returning impl Future does not require boxing. When using `Box::leak()`, add a comment documenting why the leak is intentional and how cleanup obligations are handled.
 
 ## Rules in This Dimension
 
 | Rule | Impact | Summary |
 |------|--------|---------|
-| StackOverHeapDefault | HIGH | Stack allocation by default; Box only for recursive types, trait objects, and large buffers |
-| PinForAsyncAndSelfRef | HIGH | Pin futures for self-referential state; pin!() for stack, Box::pin() for heap |
+| StackOverHeapDefault | HIGH | Prefer direct values; use Box when indirection or owned stable storage is useful |
+| PinForAsyncAndSelfRef | HIGH | Pin address-sensitive pointees; pin!() uses local storage, Box::pin() allocated storage |
 | LifetimeParameterDesign | MEDIUM | Minimize lifetime params in public APIs; name descriptively when required |
 | RAIIResourceManagement | HIGH | Drop for deterministic cleanup; guard types over manual cleanup code |
 | ArenaForGraphStructures | MEDIUM | Arena allocation with index references for graphs and trees over Rc<RefCell<T>> |
-| AvoidLeakingMemory | MEDIUM | Don't rely on Drop for correctness; document intentional leaks |
+| AvoidLeakingMemory | MEDIUM | Don't rely on Drop for memory safety; document cleanup consequences of leaks |
 
 
 ---
@@ -113,30 +113,28 @@ fn compute_centroid(points: &[Point3D]) -> Point3D {
 
 **Impact: HIGH (Incorrect pinning causes undefined behavior or compiler errors with async futures)**
 
-Async futures in Rust are state machines that may contain self-referential pointers across `.await` points. Moving such a future after it has been polled invalidates those internal pointers. `Pin<T>` guarantees the value will not be moved, making it safe to hold self-references. Use `pin!()` for stack-pinned locals and `Box::pin()` when the future must be heap-allocated or returned from a function.
+Async futures in Rust are state machines that may contain self-referential pointers across `.await` points. Moving such a future after it has been polled invalidates those internal pointers. Pin<Ptr> restricts moving a non-Unpin pointee after pinning. A future may be returned or moved into storage before pinning; polling requires Pin<&mut Self>. Await and executors normally handle this.
 
-**Incorrect: Attempting to use a self-referential future without pinning**
+**Incorrect: Polling a boxed non-Unpin future as if it were pinned**
+
+```rust,compile_fail
+use std::{future::Future, pin::Pin, task::{Context, Poll}};
+
+fn poll_unpinned(
+    future: &mut Box<dyn Future<Output = ()>>,
+    cx: &mut Context<'_>,
+) -> Poll<()> {
+    // Rejected: dyn Future is not necessarily Unpin.
+    Future::poll(Pin::new(&mut **future), cx)
+}
+```
+
+Returning `impl Future` is valid. For example, the caller can directly await this unboxed future:
 
 ```rust
-use std::future::Future;
-
-// Returning an unboxed future that the caller cannot pin correctly
-fn make_retry_future(url: &str) -> impl Future<Output = Result<String, Error>> {
-    // This future holds references to its own state across awaits
-    async {
-        let client = reqwest::Client::new();
-        let response = client.get(url).send().await?;
-        // After this await, the future is self-referential --
-        // moving it would invalidate internal pointers
-        let body = response.text().await?;
-        Ok(body)
-    }
+fn make_future() -> impl std::future::Future<Output = u32> {
+    async { 42 }
 }
-
-// Caller tries to store futures in a Vec and poll them --
-// without pinning, this is unsound or won't compile
-let mut futures: Vec<Box<dyn Future<Output = Result<String, Error>>>> = vec![];
-futures.push(Box::new(make_retry_future("https://example.com")));
 ```
 
 **Correct: Pin futures appropriately for stack and heap contexts**
@@ -157,18 +155,18 @@ fn make_retry_future(
     })
 }
 
-// Stack-pinning with pin!() for local futures
+// Local pinning; inside async code storage belongs to the enclosing future
 async fn fetch_with_timeout(url: &str) -> Result<String, reqwest::Error> {
     let future = pin!(reqwest::get(url));
-    // `future` is now Pin<&mut impl Future> and cannot be moved
+    // The pinned reference may move; its non-Unpin pointee must stay put
     future.await?.text().await
 }
 ```
 
 **When acceptable:**
-- Simple futures that do not hold self-references across `.await` points (the compiler will tell you)
+- Futures implementing Unpin permit safe Pin::new and movement of the pointee
 - When using `tokio::spawn` or `tokio::select!`, which handle pinning internally
-- When a combinator like `.map()` or `.then()` already returns a pinned future
+- Returning or storing an unpolled future, then letting await or an executor pin it; combinators do not universally return pinned pointers
 
 ---
 
@@ -190,8 +188,8 @@ struct QueryResult<'a, 'b, 'c> {
 
 // Unnecessary lifetime parameter -- could return owned String
 fn format_name<'a>(first: &'a str, last: &'a str) -> &'a str {
-    // This can't actually work -- you'd need to allocate
-    // The lifetime param here signals a misunderstanding
+    // For a contract that joins both names with a separator,
+    // return an owned String. This signature could validly return one input.
     todo!()
 }
 
@@ -226,16 +224,16 @@ fn merge_results<'left, 'right>(
 
 **When acceptable:**
 - Single-letter lifetimes (`'a`) in short, private helper functions where the scope is obvious
-- Trait implementations where the trait definition dictates the lifetime parameter names
+- Trait implementations where keeping names consistent with the trait improves readability (names themselves are not prescribed)
 - Closure or iterator adaptor chains where descriptive names would add noise to already dense generic bounds
 
 ---
 
 ### RS9.4 RAIIResourceManagement
 
-**Impact: HIGH (Drop-based cleanup prevents resource leaks on every exit path including panics)**
+**Impact: HIGH (RAII covers ordinary early returns and panic unwinding)**
 
-Rust's `Drop` trait provides deterministic resource cleanup that runs on every exit path: normal returns, early returns with `?`, and panics (in unwind mode). Manual cleanup code is fragile because every new `return` or `?` introduces a path that can skip the cleanup. Wrap resources in RAII guard types so that cleanup is structurally guaranteed by the compiler.
+Use RAII guards for ordinary scope cleanup, including ? returns and panic unwinding. Destructors do not run after abort or process::exit and can be suppressed by forgetting or cycles. A destructor cannot guarantee that a fallible filesystem or database operation succeeds.
 
 **Incorrect: Manual cleanup that leaks on early return**
 
@@ -255,7 +253,7 @@ fn process_file(path: &Path) -> Result<Stats, Error> {
 }
 ```
 
-**Correct: RAII guard ensures cleanup on all paths**
+**Correct: RAII guard attempts cleanup on ordinary scope exits**
 
 ```rust
 struct LockFile {
@@ -264,7 +262,9 @@ struct LockFile {
 
 impl LockFile {
     fn acquire(path: PathBuf) -> std::io::Result<Self> {
-        std::fs::write(&path, "locked")?;
+        // Fail if the path already exists; do not overwrite another lock.
+        let _file = std::fs::OpenOptions::new()
+            .write(true).create_new(true).open(&path)?;
         Ok(Self { path })
     }
 }
@@ -277,7 +277,8 @@ impl Drop for LockFile {
 
 fn process_file(path: &Path) -> Result<Stats, Error> {
     let _lock = LockFile::acquire(path.with_extension("lock"))?;
-    // Lock is released on ANY exit: normal return, ?, or panic
+    // Drop attempts removal on normal return, ?, or panic unwinding.
+    // Assumes exclusive ownership of this path; removal can fail.
 
     let data = std::fs::read_to_string(path)?;
     let parsed = parse_data(&data)?;
@@ -296,7 +297,7 @@ fn process_file(path: &Path) -> Result<Stats, Error> {
 
 **Impact: MEDIUM (Arenas eliminate reference-counting overhead and borrow checker friction for graph/tree structures)**
 
-Graph and tree structures with shared or cyclic references are notoriously difficult to express with Rust's ownership model. The `Rc<RefCell<Node>>` pattern compiles but introduces runtime overhead (reference counting, borrow checking) and panics on borrow violations. Arena allocation with index-based references sidesteps these problems: all nodes live in a single allocation, references are plain indices, and the borrow checker works naturally because you borrow the arena, not individual nodes.
+Graph and tree structures with shared or cyclic references are notoriously difficult to express with Rust's ownership model. The `Rc<RefCell<Node>>` pattern compiles but introduces runtime overhead (reference counting, borrow checking) and panics on borrow violations. Arena allocation with index-based references sidesteps these problems: nodes are managed by an arena (which may allocate multiple buffers), relationships use keys or indices, and the borrow checker works naturally because you borrow the arena, not individual nodes.
 
 **Incorrect: Rc<RefCell<Node>> graph with runtime overhead and panic risk**
 
@@ -341,9 +342,8 @@ struct Tree {
 impl Tree {
     fn sum(&self, key: NodeKey) -> i32 {
         let node = &self.nodes[key];
-        let child_keys: Vec<NodeKey> = node.children.clone();
         let mut total = node.value;
-        for child_key in child_keys {
+        for &child_key in &node.children {
             total += self.sum(child_key);
         }
         total
@@ -369,7 +369,7 @@ impl Tree {
 
 **Impact: MEDIUM (Leaked memory is permanent for the process lifetime; leaked Drop obligations silently skip cleanup)**
 
-Rust guarantees memory safety but does not guarantee destructors will run. `std::mem::forget`, `Box::leak`, and reference cycles with `Rc` all prevent `Drop` from executing. If your program relies on `Drop` for correctness (not just cleanup), these leaks become logic bugs. Design types so that leaking them is wasteful but not incorrect, and document intentional leaks with clear comments explaining the lifetime rationale.
+Rust guarantees memory safety but does not guarantee destructors will run. `std::mem::forget`, `Box::leak`, and reference cycles with `Rc` all prevent `Drop` from executing. If your program relies on `Drop` for correctness (not just cleanup), these leaks become logic bugs. Keep memory safety independent of destruction, and document application-level consequences of intentional leaks.
 
 **Incorrect: Relying on Drop for correctness, then leaking**
 
@@ -397,7 +397,7 @@ fn setup_environment() -> &'static Path {
 }
 ```
 
-**Correct: Intentional leaks documented; Drop not required for correctness**
+**Correct: Document intentional leaks and expose fallible cleanup where needed**
 
 ```rust
 /// Application-wide configuration loaded once at startup.
@@ -412,7 +412,7 @@ fn init_config() -> &'static Config {
 
 /// Temporary directory with explicit cleanup method.
 /// Drop serves as a safety net, but callers should use cleanup()
-/// for guaranteed removal since Drop may not run.
+/// to observe removal errors; neither method guarantees filesystem success.
 struct TempDir {
     path: PathBuf,
     cleaned: bool,
@@ -446,9 +446,9 @@ impl Drop for TempDir {
 
 **StackOverHeapDefault + RAIIResourceManagement**: Stack allocation and RAII reinforce each other. Stack-allocated guard types get their `Drop` called automatically when the enclosing scope exits, with zero heap overhead. This is the ideal pattern for short-lived resources like lock guards, transaction scopes, and timing measurements.
 
-**RAIIResourceManagement + AvoidLeakingMemory**: These two rules are in tension. RAII says "put cleanup in Drop"; AvoidLeakingMemory says "don't rely on Drop for correctness." The resolution is layered defense: implement `Drop` as a safety net, but provide an explicit cleanup method (like `commit()` or `close()`) that callers should use for operations where cleanup failure matters. Drop handles the common case; the explicit method handles the critical case.
+**RAIIResourceManagement + AvoidLeakingMemory**: These two rules are in tension. RAII says "put cleanup in Drop"; AvoidLeakingMemory says "memory safety must tolerate skipped destructors." The resolution is layered defense: implement `Drop` as a safety net, but provide an explicit cleanup method (like `commit()` or `close()`) that callers should use for operations where cleanup failure matters. Drop handles the common case; the explicit method handles the critical case.
 
-**PinForAsyncAndSelfRef + StackOverHeapDefault**: Pin adds nuance to the stack-vs-heap decision. Stack-pinned futures (`pin!()`) are cheaper but cannot be returned from functions or stored in collections. When a future must be stored or sent, `Box::pin()` is the correct heap allocation -- this is one of the legitimate reasons to use `Box`.
+**PinForAsyncAndSelfRef + StackOverHeapDefault**: Pin adds nuance to the stack-vs-heap decision. A local pin! borrow cannot outlive its backing storage. Box::pin provides movable ownership of pinned storage; unpolled impl Future values can instead be returned, stored, or sent without boxing when their type and Send bounds permit.
 
 **ArenaForGraphStructures + LifetimeParameterDesign**: Arenas simplify lifetime management for graph structures. Instead of threading lifetime parameters through every node reference, the arena owns all nodes and hands out `Copy`-able index keys. This often eliminates lifetime parameters entirely from graph-traversal functions.
 
@@ -456,14 +456,14 @@ impl Drop for TempDir {
 
 ### HIGH
 
-- **Boxing small structs by default**: Wrapping types under 128 bytes in `Box` without a structural reason (recursion, trait object, `'static` requirement). Adds allocation overhead and pointer indirection for no benefit.
+- **Boxing small structs by default**: Boxing small values can add allocation and indirection; assess ownership, stable-address, and API needs. Neither a byte threshold nor a 'static bound universally requires boxing.
 - **Manual resource cleanup without RAII**: Explicit `file.close()`, `lock.release()`, or `fs::remove_file()` calls at the end of a function. Every early return or `?` added later will skip the cleanup, creating resource leaks.
-- **Unpinned future storage**: Storing `Box<dyn Future>` without `Pin` in collections or struct fields. The future may contain self-references and moving it causes undefined behavior or compilation errors.
+- **Polling without the required pin**: Storage in Box<dyn Future> is safe, and moving Box does not move its allocation. Polling a possibly non-Unpin future requires a pinned mutable reference; use Pin<Box<dyn Future>> for convenient owned polling.
 
 ### MEDIUM
 
 - **Opaque single-letter lifetimes in public APIs**: `fn process<'a, 'b, 'c>(...)` in a public function signature forces every reader and caller to trace which lifetime corresponds to which borrow. Descriptive names make the API self-documenting.
-- **`Rc<RefCell<T>>` for graph structures**: Compiles and works but introduces runtime reference counting, dynamic borrow checking with panic risk, and poor cache locality compared to arena-based alternatives.
+- **`Rc<RefCell<T>>` for graph structures**: Compiles and works but introduces runtime reference counting, dynamic borrow checking with panic risk, and workload-dependent allocation/locality costs. Benchmark any proposed arena replacement.
 - **`Box::leak()` without documentation**: Intentional leaks are sometimes correct (process-lifetime singletons), but without a comment explaining the rationale, reviewers cannot distinguish intentional leaks from bugs.
 
 ### LOW
@@ -479,11 +479,11 @@ impl Drop for TempDir {
 let point = Point { x: 1.0, y: 2.0 };
 let config = AppConfig { timeout: 30, retries: 3 };
 
-// HEAP (Box): recursive type -- compiler requires indirection
+// Vec and HashMap already provide indirection for this recursive type
 enum Json {
     Null,
     Array(Vec<Json>),
-    Object(Box<HashMap<String, Json>>),  // Box breaks infinite size
+    Object(HashMap<String, Json>),  // extra Box is unnecessary
 }
 
 // HEAP (Box): trait object for dynamic dispatch
@@ -555,3 +555,20 @@ fn transfer_funds(conn: &mut Connection, amount: u64) -> Result<(), DbError> {
 - `std::pin` module documentation
 - `typed-arena`, `bumpalo`, `slotmap` crate documentation
 - *The Rust Reference* -- Lifetime Elision rules
+
+## Verified primary references
+
+- https://doc.rust-lang.org/reference/type-layout.html
+- https://doc.rust-lang.org/std/collections/index.html
+- https://doc.rust-lang.org/std/convert/trait.AsRef.html
+- https://rust-lang.github.io/api-guidelines/flexibility.html#c-caller-control
+- https://doc.rust-lang.org/std/pin/index.html
+- https://doc.rust-lang.org/std/future/trait.Future.html
+- https://doc.rust-lang.org/reference/destructors.html
+- https://doc.rust-lang.org/std/mem/fn.forget.html
+- https://doc.rust-lang.org/std/fs/struct.OpenOptions.html
+- https://doc.rust-lang.org/std/vec/struct.Vec.html
+- https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html
+- https://doc.rust-lang.org/std/cell/index.html
+- https://doc.rust-lang.org/reference/lifetime-elision.html
+- https://doc.rust-lang.org/std/pin/macro.pin.html

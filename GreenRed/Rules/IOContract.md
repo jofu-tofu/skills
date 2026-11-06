@@ -30,7 +30,7 @@ These are implementation details — tests should never reference them:
 - Internal method call order
 - Private/unexported helper functions
 - Internal state that callers cannot observe
-- Logging, metrics, or internal diagnostics
+- Incidental logging, metrics, or internal diagnostics that are not part of the caller's contract. Explicitly required audit events, diagnostic CLI output or monitoring behavior are observable outputs and may be tested at that boundary.
 - How many times an internal method was called
 
 ---

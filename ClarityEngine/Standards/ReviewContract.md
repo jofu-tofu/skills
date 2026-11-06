@@ -37,7 +37,7 @@ A finding that asks to add content must also name the reader question the additi
 - **Major:** The finding materially impairs understanding or use, such as an ambiguous action, a missing causal step, a lost qualification, or a buried ask.
 - **Polish:** An improvement with no material effect on understanding or use.
 
-Choose the lower severity when the reader harm is speculative. Choose the higher one when the passage sits on the reader's main path: the opening, the decision, or the ask.
+Choose the lower severity when the reader harm is speculative. Main-path placement—the opening, decision or ask—informs the consequence; it does not by itself establish material impairment. A brief lookup resolved by a nearby explanation may warrant Polish. A consequential misunderstanding, action error or substantial obstruction can warrant Major even when the reader eventually answers correctly. Use the actual passage and reader evidence to explain that distinction.
 
 ## Finding Format
 

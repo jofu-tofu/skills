@@ -15,7 +15,7 @@ metadata:
 
 ## Skill Type: Reference + Workflow
 
-This skill provides **principles for test quality** plus **four actionable workflows** for common testing scenarios.
+This skill provides **principles for test quality** plus **eight actionable workflows** for common testing scenarios.
 
 **Core principle:** Code that is hard to test is poorly designed. Separate pure logic from side effects, and testing becomes trivial.
 

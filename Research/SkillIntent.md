@@ -4,11 +4,7 @@
 
 ## First Principles
 
-1. **Citation chaining beats query reframing.** Greenhalgh & Peacock (2005)
-   found citation chaining yields more unique papers than any keyword strategy.
-   Reframing is valuable but ranks ~4th in effectiveness. The pipeline centers
-   citation chaining (Step 2) while including reframing as one component.
-
+1. **Use complementary search routes.** [Greenhalgh & Peacock (2005)](https://pmc.ncbi.nlm.nih.gov/articles/PMC1283190/) audited one review of complex evidence: snowballing found51% of its495 sources, versus30% from protocol-driven searches, with overlapping routes. This supports citation/reference chasing alongside search, not universal superiority across review types. The pipeline includes both and evaluates their actual contribution.
 2. **Finding papers is necessary but not the bottleneck.** Most people fail at
    evaluating what they find. The Evaluate step exists because the replication
    crisis means ~36-50% of published findings may not replicate.
@@ -17,8 +13,7 @@
    use the same term for a concept <20% of the time. Cross-domain reframing in
    Step 2 addresses this, but citation chaining bypasses it entirely.
 
-4. **Search saturation, not timeouts.** Stopping criterion is conceptual
-   saturation — when new searches return >80% known papers — not a clock.
+4. **Search saturation, not timeouts.** Overlap informs diminishing returns, not proof of completeness. Continue a useful targeted search when material gaps, available sources and user scope justify it; preserve resource/access limits honestly.
 
 5. **Published literature is a biased sample.** Publication bias means positive
    results are 3x more likely to be published. The adversarial agent actively
@@ -60,10 +55,10 @@ and persistent artifacts that accumulate knowledge across sessions.
 
 ## Success Criteria
 
-1. Wave 1 returns at least 5 seed papers with titles, authors, and key terms
-2. Wave 2 produces papers that Wave 1 did not find (unique contribution > 0)
-3. The cross-domain agent finds at least one paper from a different field
-4. The adversarial agent finds at least one contradiction or qualification
+1. Wave 1 preserves all relevant identified sources and their provenance; zero or thin evidence is valid.
+2. Expansion investigates justified gaps and reports its actual contribution, including no new sources.
+3. Cross-domain search tests relevant alternate vocabulary while preserving applicability limits; no unrelated paper is required.
+4. Adversarial search investigates plausible null/replication/boundary evidence; no contradiction is fabricated.
 5. The evidence map contains explicit confidence levels per finding
 6. The evidence map contains a non-empty "What This Evidence Cannot Tell You"
 7. All artifacts are written to `$RESEARCH_DIR` and persist after the session
@@ -122,7 +117,7 @@ evidence-map.md                      ← Synthesize agent writes
 
 | Claim | Source |
 |-------|--------|
-| Citation chaining is #1 supplementary strategy | Greenhalgh & Peacock (2005, BMJ) |
+| Complementary methods in one complex-evidence review; not a universal ranking | Greenhalgh & Peacock (2005, BMJ), DOI10.1136/bmj.38636.593461.68 |
 | Vocabulary mismatch limits single-query recall | Furnas et al. (1987, CACM) |
 | Cross-domain combinations drive breakthroughs | Uzzi et al. (2013, Science) |
 | Replication rates are low in many fields | Open Science Collaboration (2015, Science) |
