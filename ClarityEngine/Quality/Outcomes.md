@@ -43,3 +43,17 @@ The [workflow outcomes](WorkflowOutcomes.md) decompose these reader results into
 | CE-O5 | CE-AUDIT, CE-REVIEW, CE-REPAIR; Cutter retains RC-32 ownership |
 | CE-O7 | CE-CONVERT, CE-FORMAT |
 | CE-O8 | CE-REVIEW, CE-VERIFY, CE-FORMAT |
+
+## Specific distinctions from the broader session census
+
+The [expanded census](../Improvements/SessionOutcomes/ExpandedCensus.md) adds the distinctions below without changing the eight parent outcomes or creating another mandatory authoring pass. These are evaluation criteria, not evidence that the writing workflows now perform better.
+
+| ID | Parent | Specific reader/author result | Misleading pass to reject | Valid alternative to preserve |
+|---|---|---|---|---|
+| CE-O1a | O1 | Each section answers the question the requested artifact asks at its current stage. | A polished kickoff supplies an implementation design or invented success metrics while leaving its template questions unanswered. | A kickoff can identify what needs to be learned and how evidence will be gathered without promising a design or release. |
+| CE-O1b | O1/O2 | The audience and requested action fit what those readers actually know, see, and control. | Familiar words assign a reader knowledge of a source or workflow they cannot observe. | State the evidence gap or address the person whose role is established; do not invent an audience or owner to complete the explanation. |
+| CE-O6a | O6/O4 | A pass preserves the approved requirements owned by another contributing skill or template. | A wording pass silently replaces a design requirement, template answer, or previously protected meaning to satisfy its own preference. | Surface a conflict for the author while improving wording within scope; preserve distinct ownership without weakening either standard. |
+| CE-O7a | O7 | A tester can identify the required environment, perform the steps with available tools, and recognize the result. | Setup names only an internal change ID or uses unavailable author-only tooling. | State observable required behavior or configuration when supported; keep an exact identifier when the tester genuinely needs it. |
+| CE-O8a | O8/O3/O4 | A review claim applies to the delivered wording and the audience assumptions actually used for it. | A longer draft passes, then is manually shortened or aimed at a different audience while its old Ready/Pass label is retained. | Report which version and audience were checked; later edits may require renewed checks or an explicitly unverified delivery. |
+
+These are not new RC owners. Navigator/Reader contribute to O1a, AudienceFit/brief/source checks to O1b, DocumentContract/Verify to O6a, procedural source and destination checks to O7a, and the author-to-review-to-delivery handoff to O8a. Existing rules may already cover parts of each distinction. Preserve that coverage and test the actual handoff before adding duplicate instructions.
