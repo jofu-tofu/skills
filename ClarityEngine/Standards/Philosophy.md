@@ -28,7 +28,7 @@ Readers follow logic they can see and words they already use. So the document st
 
 ### 4. Meaning Before Brevity
 
-Reading costs time, and extra words get far less attention than they need. So every passage earns its place, and cutting removes tangents and restatement, never the reasoning that connects the claims.
+Reading costs time, and extra words get far less attention than they need. So every passage earns its place, and cutting removes tangents and restatement, never the reasoning that connects the claims. How much detail earns its place depends on what this reader decides: detail below those decisions that another document carries, such as code comments, technical notes, or a test plan, is summarized and pointed to rather than repeated.
 
 **Test:** Delete a passage hypothetically. If nothing the reader needs is lost, delete it; if the reader can no longer say why the conclusion follows, restore the missing step.
 
@@ -71,6 +71,7 @@ Each check has a stable RC ID and exactly one owning lens. This table is the ind
 | RC-29 | Register is plain but not casual, and fits the genre | 3 | `Lenses/AudienceFit.md` |
 | RC-30 | Slide text fits how the deck is delivered | 1 | `Lenses/Visual.md` |
 | RC-31 | Setup comes before use | 1 | `Lenses/Navigator.md` |
+| RC-32 | Detail below the reader's decisions is summarized and pointed to its home | 4 | `Lenses/Cutter.md` |
 
 Comprehension (`Lenses/Reader.md`) has no RC ID. A fresh reader checks it by answering questions from the document.
 

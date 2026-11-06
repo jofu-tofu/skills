@@ -1,0 +1,351 @@
+{
+  "suite_version": "history-scope-1",
+  "workflow": "CodeReview/GatherContext -> INT -> VerifyAndReport",
+  "mode": "exploratory assessment",
+  "claim": "Bounded scope preservation comparison",
+  "snapshots": {
+    "baseline": "80d6099",
+    "candidate_int_sha256": "30f8447c9827295ca849fbda6f470453ca7ae6c0a63963e7d9217115b665e399",
+    "candidate_context_sha256": "76d61039bc1347504919fb8ee26a96be90d45ee7ffa061d5a6d1d71fa38c1a5e",
+    "cases": "Cases.json + SupplementalCases.json",
+    "measurement": "CR-HS-M1",
+    "checker": "Source-grounded unblinded adjudication"
+  },
+  "requested_trials": 16,
+  "completed_trials": 16,
+  "runs": [
+    {
+      "case_id": "scope-01",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Safe shared helper reuse with manual preservation and unchanged batch selection",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept bounded reuse, trace the existing preservation guard, and do not invent lifecycle work.",
+          "evidence": [
+            "external:review-evaluation/runs/baseline/cases/scope-01/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-01",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Safe shared helper reuse with manual preservation and unchanged batch selection",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept bounded reuse, trace the existing preservation guard, and do not invent lifecycle work.",
+          "evidence": [
+            "external:review-evaluation/runs/candidate/cases/scope-01/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-02",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Detect shared-contract bypass",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both report unconditional portal overwrite of manual classifications with correct changed line and causal sequence; recommend existing guarded mapper.",
+          "evidence": [
+            "external:review-evaluation/runs/baseline/cases/scope-02/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-02",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Detect shared-contract bypass",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both report unconditional portal overwrite of manual classifications with correct changed line and causal sequence; recommend existing guarded mapper.",
+          "evidence": [
+            "external:review-evaluation/runs/candidate/cases/scope-02/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-03",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Allow necessary route/download/filter plumbing",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept required export implementation and preserve access/filter contracts; neither equates unnamed implementation details with scope expansion. UI and test comments are explicitly not execution proof.",
+          "evidence": [
+            "external:review-evaluation/runs/baseline/cases/scope-03/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-03",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Allow necessary route/download/filter plumbing",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept required export implementation and preserve access/filter contracts; neither equates unnamed implementation details with scope expansion. UI and test comments are explicitly not execution proof.",
+          "evidence": [
+            "external:review-evaluation/runs/candidate/cases/scope-03/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-04",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Detect unrequested persistent export mutation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both report archived status writes for exported rows, with correct persistence contract and bounded remedy; neither exaggerates mutation to hidden rows.",
+          "evidence": [
+            "external:review-evaluation/runs/baseline/cases/scope-04/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-04",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Detect unrequested persistent export mutation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both report archived status writes for exported rows, with correct persistence contract and bounded remedy; neither exaggerates mutation to hidden rows.",
+          "evidence": [
+            "external:review-evaluation/runs/candidate/cases/scope-04/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-05",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Retain real boundary validation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both recognize complete selected-ID preflight before mutation and do not discard it because an internal importer validates IDs. This target does not establish correctness for null payload shape.",
+          "evidence": [
+            "external:review-evaluation/runs/baseline/cases/scope-05/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-05",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Retain real boundary validation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both recognize complete selected-ID preflight before mutation and do not discard it because an internal importer validates IDs. This target does not establish correctness for null payload shape.",
+          "evidence": [
+            "external:review-evaluation/runs/candidate/cases/scope-05/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-06",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Respect latest authorized scope expansion",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both treat all-line batch selection as explicitly authorized by follow-up, preserve manual values, and independently retain the absent requested-test deliverable in final limitations.",
+          "evidence": [
+            "external:review-evaluation/runs/baseline/cases/scope-06/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-06",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Respect latest authorized scope expansion",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both treat all-line batch selection as explicitly authorized by follow-up, preserve manual values, and independently retain the absent requested-test deliverable in final limitations.",
+          "evidence": [
+            "external:review-evaluation/runs/candidate/cases/scope-06/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-07",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Respect accepted omission and rejected fallback",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept temporary omission, trace matching-final recovery, and neither reopen settled policy nor propose forbidden fallback/retention work.",
+          "evidence": [
+            "external:review-evaluation/runs/baseline/cases/scope-07/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-07",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Respect accepted omission and rejected fallback",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept temporary omission, trace matching-final recovery, and neither reopen settled policy nor propose forbidden fallback/retention work.",
+          "evidence": [
+            "external:review-evaluation/runs/candidate/cases/scope-07/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-08",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Allow removal of enforced internal redundancy while preserving external validation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both rely on complete validated caller graph rather than type annotation alone, retain HTTP validation and avoid invented callers or numeric redesign.",
+          "evidence": [
+            "external:review-evaluation/runs/baseline/cases/scope-08/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-08",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "Allow removal of enforced internal redundancy while preserving external validation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both rely on complete validated caller graph rather than type annotation alone, retain HTTP validation and avoid invented callers or numeric redesign.",
+          "evidence": [
+            "external:review-evaluation/runs/candidate/cases/scope-08/review/report.md"
+          ],
+          "reason": "Source/contract adjudication under frozen targeted decision; not full-review certification."
+        }
+      ]
+    }
+  ],
+  "decision": "pass",
+  "decision_scope": "Preservation on eight targeted decisions per version; no comparative benefit",
+  "regression_coverage": "Measurement.md#first-comparison-checks-and-preservation-map",
+  "benefit": {
+    "observedComparativeImprovement": false,
+    "passDelta": 0,
+    "interpretation": "Parity on all eight targeted decisions; no evidence that candidate improves baseline accuracy in this bounded trial."
+  },
+  "preservation": {
+    "decision": "pass within sample",
+    "interpretation": "Candidate retains baseline's two true-positive decisions and six calibrated scope decisions; no targeted regression observed."
+  },
+  "novel_findings": [
+    {
+      "caseId": "scope-06",
+      "bothConditions": "INT raises absent executable tests despite new comment claiming tests; verifier filters its HIGH defect card as hypothetical future regression but explicitly carries unmet requested tests into final verdict and coverage.",
+      "adjudication": "Legitimate unmet deliverable, not a reference false positive. Comment-only inventory supports the concern. Classifying it as NITPICK is debatable and can obscure an explicit requested deliverable, but final reports do not hide or waive it. This shared behavior yields no comparative benefit and does not invalidate the separate authorized-expansion target.",
+      "frozenCriteria": "No retroactive change to target score or severity expectations. Record as separate evidence/possible follow-up."
+    }
+  ],
+  "limitations": [
+    "One trial per condition with eight cases batched through each stage; no estimate of repeatability or independent-case variance.",
+    "Synthetic snippets and supplied external contracts, not production repositories or historical reproductions.",
+    "Reports explicitly limit conclusions to INT source inspection; no full review, runtime, persistence, deployment or release proof claimed.",
+    "Independent executable qualification uses stubs and was not supplied to subjects; it grounds references, not subject runtime testing.",
+    "Scope-05 payload shape outside selected-ID target remains separately unverified; no novel null-shape finding was reported.",
+    "Severity calibration, report verbosity, timing, token usage, standards and other review dimensions were not scored.",
+    "Tests/UI described only in fixture comments cannot establish executable test coverage."
+  ]
+}

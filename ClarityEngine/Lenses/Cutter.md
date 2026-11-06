@@ -49,7 +49,7 @@ The summary exemption lets a summary section restate claims made elsewhere in th
 
 ### RC-19: The main path fits its reading-time budget
 
-**Rule:** Compare the main-path reading time in `measurements.md` with the budget in `brief.md`. Within budget passes. Over budget triggers a cut-or-collapse review: list the main-path passages a reader can skip, such as methods, history, and exhaustive alternatives, in order of least value, and propose cutting them or moving them to a collapsed section or appendix. Within any budget, very long paragraphs and lists flag where to look for cuts; their length alone is not a failure.
+**Rule:** Compare the main-path reading time in `measurements.md` with the budget in `brief.md`. Within budget passes. Over budget triggers a cut-or-collapse review: list the main-path passages a reader can skip, such as methods, history, exhaustive alternatives, and detail a companion document carries (RC-32), in order of least value, and propose cutting them or moving them to a collapsed section or appendix. Within any budget, very long paragraphs and lists flag where to look for cuts; their length alone is not a failure.
 
 **Fail when:** The main path is over budget and contains passages that could be cut or collapsed. Over budget with every passage necessary passes, with that reason recorded.
 
@@ -68,6 +68,18 @@ The summary exemption lets a summary section restate claims made elsewhere in th
 **Boundary:** All studies used students and instructional text. The cost is small and reliable; cite it as such, not as a large effect. Fencing evidence comes from one lab.
 
 **Sources:** Harp & Mayer 1998 (tangents placed first did the most harm); Wesenberg et al. 2026a (harm grows with amount), 2026b (fencing offset the penalty).
+
+### RC-32: Detail below the reader's decisions is summarized and pointed to its home
+
+**Rule:** Read the brief's `audience`, `outcome`, and `companion_docs`. For each passage of mechanism, ordering, identifiers, item numbers, edge-case handling, or test coverage, ask whether this reader needs it to understand, decide, or act, or whether it only shows how the work is carried out. Reduce detail of the second kind that a named companion document carries to one sentence that keeps the decision or consequence it supports, plus a pointer when the reader may want the rest. Each finding gives that summary sentence and names the companion the detail belongs in.
+
+**Test:** "Would this reader understand, decide, or act differently without this passage, and does a companion document hold it?" No and yes means it fails.
+
+**Fail when:** The main path walks through detail this reader doesn't act on and a named companion document carries.
+
+**Boundary:** The brief's `companion_docs` decides where detail lives; this check doesn't, and DocPhilosophy covers placement in general. Keep anything that states a decision, behavior the reader will see, a limit, a risk, an owner, or a tradeoff, even when a companion repeats it. With no `companion_docs` in the brief, report candidates as proposals for the author. A detail with no home yet is a proposal to give it one, not a reason to keep it in the main path.
+
+**Sources:** Weinreich et al. 2008 (extra words got about one sixth of the reading time they needed). Field case, 2026-10-27: two prose-pass rounds on an Epic design grew its SmartText from 3,337 to 3,450 words, because each fix added a missing consequence and nothing asked where detail belonged. An abstraction pass that moved implementation detail to the DLG Technical Notes cut it to about 2,140 words, and a fresh reader still answered every question.
 
 ## Output
 

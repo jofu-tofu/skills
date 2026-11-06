@@ -1,0 +1,392 @@
+{
+  "suite_version": "history-verifier-2",
+  "workflow": "CodeReview/VerifyAndReport",
+  "mode": "exploratory assessment",
+  "claim": "Bounded retention of supported maintenance findings without invented acceptance gates",
+  "snapshots": {
+    "baseline": "80d6099",
+    "candidate_verifier_sha256": "aea4c1337e69dc3e62d08f330bff46c887d0305f1f00d423e205c9e377424a4c",
+    "cases": "six unchanged replay inputs plus VerifierCases.json",
+    "measurement": "CR-HS-M1",
+    "checker": "Same-model unblinded source/contract adjudication"
+  },
+  "requested_trials": 18,
+  "completed_trials": 18,
+  "runs": [
+    {
+      "case_id": "maintenance-01",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain runtime shape validation; no static-type-only removal or invented defect.",
+          "evidence": [
+            "external:verifier-followup-2/replay/baseline/cases/maintenance-01/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-01",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain runtime shape validation; no static-type-only removal or invented defect.",
+          "evidence": [
+            "external:verifier-followup-2/replay/candidate/cases/maintenance-01/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-02",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept removal of private duplicate guard while preserving actual HTTP check.",
+          "evidence": [
+            "external:verifier-followup-2/replay/baseline/cases/maintenance-02/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-02",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept removal of private duplicate guard while preserving actual HTTP check.",
+          "evidence": [
+            "external:verifier-followup-2/replay/candidate/cases/maintenance-02/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-03",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "fail",
+          "observation": "Baseline again discards existing duplicate selector-policy synchronization burden because current outputs match. Candidate retains exact bounded MEDIUM maintenance finding and existing-selectors-to-shared-processing correction. It explicitly states duplication is not blocking or incomplete feature, current required source behavior passes, and refactoring permission is not acceptance requirement. It does not invent a current mismatch or runtime reproduction.",
+          "evidence": [
+            "external:verifier-followup-2/replay/baseline/cases/maintenance-03/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-03",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Baseline again discards existing duplicate selector-policy synchronization burden because current outputs match. Candidate retains exact bounded MEDIUM maintenance finding and existing-selectors-to-shared-processing correction. It explicitly states duplication is not blocking or incomplete feature, current required source behavior passes, and refactoring permission is not acceptance requirement. It does not invent a current mismatch or runtime reproduction.",
+          "evidence": [
+            "external:verifier-followup-2/replay/candidate/cases/maintenance-03/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-04",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept coherent operation boolean; no generic boolean ban or unnecessary framework.",
+          "evidence": [
+            "external:verifier-followup-2/replay/baseline/cases/maintenance-04/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-04",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both accept coherent operation boolean; no generic boolean ban or unnecessary framework.",
+          "evidence": [
+            "external:verifier-followup-2/replay/candidate/cases/maintenance-04/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-02",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Actual unconditional overwrite remains reported with changed-line cause and bounded preservation fix. Candidate distinguishes reuse preference from the actual preservation defect.",
+          "evidence": [
+            "external:verifier-followup-2/replay/baseline/cases/scope-02/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-02",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Actual unconditional overwrite remains reported with changed-line cause and bounded preservation fix. Candidate distinguishes reuse preference from the actual preservation defect.",
+          "evidence": [
+            "external:verifier-followup-2/replay/candidate/cases/scope-02/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-07",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both respect accepted omission and explicitly exclude fallback/retention redesign from unmet requirements.",
+          "evidence": [
+            "external:verifier-followup-2/replay/baseline/cases/scope-07/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-07",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both respect accepted omission and explicitly exclude fallback/retention redesign from unmet requirements.",
+          "evidence": [
+            "external:verifier-followup-2/replay/candidate/cases/scope-07/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-01",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "fail",
+          "observation": "Acknowledges two authoritative tariff sites and supported tariff changes, but discards the maintenance burden as theoretical future fragility because no current wrong charge exists. Audit scope itself is handled correctly.",
+          "evidence": [
+            "external:verifier-followup-2/replay/baseline/cases/transfer-01/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-01",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Retains MEDIUM finding for existing coordination burden across identical rates, explicitly says current prices agree and no incomplete feature or current pricing error is established.",
+          "evidence": [
+            "external:verifier-followup-2/replay/candidate/cases/transfer-01/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-02",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both discard line-count-only ternary preference. Inclusive20 policy and existing API remain source-aligned; neither requires a rewrite or promotes style into acceptance criteria.",
+          "evidence": [
+            "external:verifier-followup-2/replay/baseline/cases/transfer-02/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-02",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both discard line-count-only ternary preference. Inclusive20 policy and existing API remain source-aligned; neither requires a rewrite or promotes style into acceptance criteria.",
+          "evidence": [
+            "external:verifier-followup-2/replay/candidate/cases/transfer-02/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-03",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain HIGH source-verified current error at exactly20, correctly trace strict comparison to freight, and recommend <=20 while preserving freight above20 and API.",
+          "evidence": [
+            "external:verifier-followup-2/replay/baseline/cases/transfer-03/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-03",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "finding-and-scope-preservation",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain HIGH source-verified current error at exactly20, correctly trace strict comparison to freight, and recommend <=20 while preserving freight above20 and API.",
+          "evidence": [
+            "external:verifier-followup-2/replay/candidate/cases/transfer-03/review/report.md"
+          ],
+          "reason": "Frozen source/contract criteria; includes supported recommendation and acceptance-authority preservation."
+        }
+      ]
+    }
+  ],
+  "decision": "pass",
+  "decision_scope": "Nine reused final-stage cases; not general effectiveness or native orchestration",
+  "regression_coverage": "Measurement.md#fourth-comparison-maintenance-advice-must-not-invent-acceptance-gates",
+  "counts": {
+    "baseline": {
+      "pass": 7,
+      "fail": 2,
+      "unverified": 0
+    },
+    "candidate": {
+      "pass": 9,
+      "fail": 0,
+      "unverified": 0
+    }
+  },
+  "benefit": "Two source-supported maintenance findings retained in the matched run; baseline suppressed them.",
+  "preservation": "No observed targeted regression or invented acceptance gate in final candidate.",
+  "prior_results": "Scope8/8 tie; SIM3/4 tie; first verifier replay5/6 both for different failures plus fresh3/3 tie. All preserved.",
+  "limitations": [
+    "Known replay cases, not independent fresh holdout. One run per arm after adaptive revisions.",
+    "Final verification stage only; no new issue-discovery, GatherContext or complete-review qualification.",
+    "This file grades only replay6. The same fourth calls include three previously introduced transfer cases judged separately, including audit; this file makes no audit result claim.",
+    "Source/runtime fixture qualifications are independent of subject reports; subjects correctly preserve source-only uncertainty.",
+    "Same-model unblinded evaluation cannot establish human benefit or population reliability.",
+    "Third5/6 authority regression and original maintenance3/4 tie remain preserved in their original directories.",
+    "Seeded verifier stage, not finding discovery or full review.",
+    "Reused cases after iterative feedback and six preceding replay cases per process; no fresh/independent transfer claim.",
+    "One matched run, condition labels visible, same-model construction/adjudication; no statistical improvement estimate.",
+    "Runtime qualification belongs to reference grounding, not reviewer execution. Both reports correctly claim source-only proof.",
+    "General severity calibration, runtime/integration/deployment correctness, and broad report quality are outside these scores.",
+    "Do not replace original failed/tied trials or prior third-replay preservation failure with this result."
+  ],
+  "retention": "Retain1.1.0-rc.3 under ApproveSkill's separate benefit/preservation gates, limited to observed cases."
+}

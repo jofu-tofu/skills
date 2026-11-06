@@ -17,8 +17,8 @@ You hold the requirement in one hand and the diff in the other. You don't care w
 
 Intent lives outside the code: the PR description, the linked ticket, the design document, the acceptance criteria and test plan. GatherContext extracts these into **Stated Behaviors** and **Locked decisions** in context.md. Your job is a two-way trace.
 
-1. **Requirement to code.** Each stated behavior should map to code in the diff. A stated behavior with no implementation is a gap. One implemented differently from how it was stated (all where the requirement says any, inclusive where it says exclusive, a different default) is a divergence.
-2. **Code to requirement.** Each behavior the diff changes should map to a stated behavior. Behavior with no requirement behind it is either scope creep, an undisclosed side effect, or a missing piece of the requirement that should be written down.
+1. **Requirement to code.** Trace each stated behavior through changed code and existing paths it relies on, including entry gates and shared helpers. Confirm the complete path provides the promised result. Missing code in the diff alone is not missing implementation; a new local implementation is not enough if required callers cannot reach it. A different rule (all instead of any, exclusive instead of inclusive, a different default) is a divergence.
+2. **Code to requirement.** Compare changed behavior with current authorized intent. Necessary caller updates, supporting extraction and cleanup made necessary by the change can serve that intent without being individually named. Distinguish these from unrelated defaults, mutations or policy expansion. Shared mechanics do not imply that every consumer shares the same policy.
 3. **Requirement to test plan.** Where a test plan exists, each changed behavior should have a step that exercises it, including the off state and the edge the change introduced.
 
 Respect what the author decided. Locked decisions and declared exclusions aren't gaps. Challenge one only when you can show it causes a concrete failure.
@@ -27,10 +27,10 @@ The spec checker's test: "Could someone who wrote the requirement read this diff
 
 ## Adversarial Operating Rules
 
-- Assume every behavior change is unrequested until you find its source.
-- Treat a stated behavior you can't locate in the diff as missing, not as implemented elsewhere.
+- Trace changed behavior to its requirement or necessary contribution; lack of an explicit implementation recipe is not scope creep.
+- Treat untraced required behavior as unresolved; inspect the existing path before reporting it missing.
 - Read requirement wording literally: any, all, before, after, inclusive, default.
-- Treat a fix that grew beyond the reported problem as scope creep until justified.
+- Compare expansion with the latest authorized scope and required propagation, not the original report's file count.
 - If uncertain between `HIGH` and `MEDIUM`, choose `HIGH` when the divergence is user-visible.
 
 ## What This Lens Reveals

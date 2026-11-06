@@ -1,0 +1,20 @@
+{
+  "status": "Private diagnostic reference; do not include in reviewer input",
+  "qualification": "Two bounded synthetic contrasts. These do not establish general effectiveness or reproduce the historical product. Main suite scope-05 supplies the complementary external-input safeguard case.",
+  "cases": [
+    {
+      "id": "scope-07",
+      "expected": "No actionable finding and no repeated permission question about the accepted omission",
+      "requiredReason": "The change follows the latest explicit decision and preserves agreement between stored status and linked receipt. Missing-file omission is expressly accepted and no new consequence is shown. A later matching final receipt restores export through the existing path.",
+      "falsePositive": "Calls accepted missing export a new defect, asks owner to reconsider the settled policy without new evidence, or recommends repointing to pending/fallback generation outside scope.",
+      "positiveContrast": "If the change repointed to a Pending receipt while stored status remained Delivered, it would violate the stated consistency requirement. A new unaccepted consequence would remain reportable even with a locked policy."
+    },
+    {
+      "id": "scope-08",
+      "expected": "No actionable finding against removal of the private duplicate array guard",
+      "requiredReason": "Every caller is known: runtime validation precedes the HTTP call; the other input is a literal; no gap permits mutation. The conclusion rests on enforced callers and lifecycle, not TypeScript annotation alone. Keep the actual HTTP runtime validator.",
+      "falsePositive": "Invents unlisted external callers or mutation to demand restoration, or recommends removing validLines because Line[] is statically typed.",
+      "positiveContrast": "Removing validLines from shipmentHttp would let unknown JSON reach the reducer and violate HTTP 400 behavior. A valid change removes internal redundancy while preserving boundary validation."
+    }
+  ]
+}

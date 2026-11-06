@@ -4,7 +4,7 @@ description: Comprehensive multi-agent code review and codebase audit system. US
 compatibility: Designed for Codex and Devin (or similar agent products). Requires git.
 metadata:
   author: pai
-  version: "1.1.0-rc.1"
+  version: "1.1.0-rc.3"
 ---
 
 # CodeReview

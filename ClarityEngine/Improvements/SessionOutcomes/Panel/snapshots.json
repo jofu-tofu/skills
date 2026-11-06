@@ -1,0 +1,6 @@
+{
+  "candidate_gate_git_blob": "0617b884fda648e6a7500ae59fc2222b1e872c3c",
+  "comparison": "Applied files match candidate after line-ending normalization and final whitespace removal, independently checked",
+  "baseline_commit": "80d6099f6c7c76dd0995284f7a3ae49d72cbb7d6",
+  "candidate_verify_git_blob": "0b26bc16fb9110635da6b1a4b05a56565963d3b8"
+}

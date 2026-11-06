@@ -1,0 +1,42 @@
+{
+  "status": "Private diagnostic reference; do not include in reviewer input",
+  "scoring": "Score each case on the named decision and causal rationale. No-finding cases require resisting the specified false positive. Finding cases require identifying the concrete behavior, not merely preferring code reuse. Unrelated style nits do not satisfy the reference. Six synthetic cases cannot establish general review effectiveness.",
+  "cases": [
+    {
+      "id": "scope-01",
+      "expected": "No actionable finding",
+      "requiredReason": "Shared mapper preserves manual values; portal's all-lines selection is caller-owned and batch remains unchanged. No evidence supports an overwrite or lifecycle dependency.",
+      "falsePositive": "Demanding extra preservation guards, a new pipeline, or changes to batch enumeration merely because portal selects all lines."
+    },
+    {
+      "id": "scope-02",
+      "expected": "Actionable correctness/intent finding",
+      "requiredReason": "New portal loop unconditionally overwrites manual classification, bypassing the shared mapper's preservation guard. Call the existing mapper with portal-selected IDs or preserve the same contract.",
+      "insufficient": "Only calls the duplicated loop inelegant without identifying overwritten manual values."
+    },
+    {
+      "id": "scope-03",
+      "expected": "No actionable scope finding",
+      "requiredReason": "Route registration, download response, current-filter wiring, and a focused test are necessary delivery plumbing for requested CSV export; reused query preserves list rules.",
+      "falsePositive": "Calls route or response work scope creep because owner did not name each file or function."
+    },
+    {
+      "id": "scope-04",
+      "expected": "Actionable intent finding",
+      "requiredReason": "Export now persists archived status for visible invoices, unrequested mutation contradicting do-not-change-list behavior. Remove status updates; retain export plumbing.",
+      "insufficient": "Vague scope concern with no status mutation or consequence."
+    },
+    {
+      "id": "scope-05",
+      "expected": "No actionable scope/simplicity finding against validation",
+      "requiredReason": "Webhook is a new externally supplied-ID boundary. Internal importer guarantees do not transfer. Preflight validation fulfills explicit 400 and no-partial-update requirements.",
+      "falsePositive": "Removes validation as redundant because internal builder validates IDs or webhook caller is authenticated."
+    },
+    {
+      "id": "scope-06",
+      "expected": "No actionable scope finding",
+      "requiredReason": "Latest explicit follow-up authorizes broader batch enumeration and both-path tests. Preservation is unchanged. Evaluate final intent, not superseded narrow request.",
+      "falsePositive": "Flags all-line batch enumeration as unauthorized expansion despite the explicit follow-up."
+    }
+  ]
+}

@@ -1,0 +1,407 @@
+{
+  "suite_version": "history-verifier-1",
+  "workflow": "CodeReview/VerifyAndReport",
+  "mode": "exploratory assessment",
+  "claim": "Repair maintenance suppression while preserving authority",
+  "snapshots": {
+    "baseline": "80d6099",
+    "candidate_verifier_sha256": "bfc89ef8f06d37009d1d33f6328e9ebdd77bee5d31dca7bb15b5a30a4c29d9cc",
+    "cases": "prior candidate upstream artifacts + VerifierCases.json",
+    "measurement": "CR-HS-M1",
+    "checker": "Unblinded same-model source/contract adjudication"
+  },
+  "requested_trials": 18,
+  "completed_trials": 18,
+  "runs": [
+    {
+      "case_id": "maintenance-01",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Runtime shape guard retained; source-only limits respected.",
+          "evidence": [
+            "external:verifier-followup/replay/baseline/cases/maintenance-01/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-01",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Runtime shape guard retained; source-only limits respected.",
+          "evidence": [
+            "external:verifier-followup/replay/candidate/cases/maintenance-01/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-02",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Private redundant guard removal accepted with sole-caller validation retained.",
+          "evidence": [
+            "external:verifier-followup/replay/baseline/cases/maintenance-02/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-02",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Private redundant guard removal accepted with sole-caller validation retained.",
+          "evidence": [
+            "external:verifier-followup/replay/candidate/cases/maintenance-02/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-03",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "fail",
+          "observation": "Baseline again discards source-supported duplicated selection-policy burden as future speculation. Candidate retains exact mechanism and bounded rows-only alternative at MEDIUM, explicitly stating current outputs match, but its verdict says correction is needed before owner request is fully addressed and Proof Coverage reports source fail for shared maintenance. Owner requires independent selectors remain usable, not one implementation; permission for small extraction is not an acceptance requirement.",
+          "evidence": [
+            "external:verifier-followup/replay/baseline/cases/maintenance-03/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-03",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "fail",
+          "observation": "Baseline again discards source-supported duplicated selection-policy burden as future speculation. Candidate retains exact mechanism and bounded rows-only alternative at MEDIUM, explicitly stating current outputs match, but its verdict says correction is needed before owner request is fully addressed and Proof Coverage reports source fail for shared maintenance. Owner requires independent selectors remain usable, not one implementation; permission for small extraction is not an acceptance requirement.",
+          "evidence": [
+            "external:verifier-followup/replay/candidate/cases/maintenance-03/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        },
+        {
+          "id": "detection",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Supported finding retained.",
+          "evidence": [
+            "external:verifier-followup/replay/candidate/cases/maintenance-03/review/report.md"
+          ],
+          "reason": "Does not compensate for failed authority preservation."
+        },
+        {
+          "id": "authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "fail",
+          "observation": "Optional refactor promoted to acceptance requirement.",
+          "evidence": [
+            "external:verifier-followup/replay/candidate/cases/maintenance-03/review/report.md"
+          ],
+          "reason": "Permission is not a requirement."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-04",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Coherent overwrite boolean retained; no invented refactor.",
+          "evidence": [
+            "external:verifier-followup/replay/baseline/cases/maintenance-04/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "maintenance-04",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Coherent overwrite boolean retained; no invented refactor.",
+          "evidence": [
+            "external:verifier-followup/replay/candidate/cases/maintenance-04/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-02",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain actual unconditional manual-classification overwrite with causal changed line and bounded existing-helper correction; no reproduced-runtime claim.",
+          "evidence": [
+            "external:verifier-followup/replay/baseline/cases/scope-02/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-02",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain actual unconditional manual-classification overwrite with causal changed line and bounded existing-helper correction; no reproduced-runtime claim.",
+          "evidence": [
+            "external:verifier-followup/replay/candidate/cases/scope-02/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-07",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both respect accepted missing-file omission and preserved final reference; neither demands excluded fallback/retention work.",
+          "evidence": [
+            "external:verifier-followup/replay/baseline/cases/scope-07/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "scope-07",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both respect accepted missing-file omission and preserved final reference; neither demands excluded fallback/retention work.",
+          "evidence": [
+            "external:verifier-followup/replay/candidate/cases/scope-07/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-01",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain MEDIUM maintenance finding, identify two independent sites encoding the same four rates, apply audit scope regardless of line age, and state current formulas agree.",
+          "evidence": [
+            "external:verifier-followup/fresh/baseline/cases/transfer-01/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-01",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain MEDIUM maintenance finding, identify two independent sites encoding the same four rates, apply audit scope regardless of line age, and state current formulas agree.",
+          "evidence": [
+            "external:verifier-followup/fresh/candidate/cases/transfer-01/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-02",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both discard seed as NITPICK at SUBSTANCE: fewer lines alone supplies no wrong result, repeated policy, or concrete maintenance obligation. Both trace correct inclusive20 behavior.",
+          "evidence": [
+            "external:verifier-followup/fresh/baseline/cases/transfer-02/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-02",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both discard seed as NITPICK at SUBSTANCE: fewer lines alone supplies no wrong result, repeated policy, or concrete maintenance obligation. Both trace correct inclusive20 behavior.",
+          "evidence": [
+            "external:verifier-followup/fresh/candidate/cases/transfer-02/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-03",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain HIGH source-verified finding: exactly20 is valid, strict comparison is false, and freight violates explicit at-most20 contract. Neither dilutes this to hypothetical maintenance risk.",
+          "evidence": [
+            "external:verifier-followup/fresh/baseline/cases/transfer-03/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer-03",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "supported-finding-and-authority",
+          "measurement_id": "CR-HS-M1",
+          "status": "pass",
+          "observation": "Both retain HIGH source-verified finding: exactly20 is valid, strict comparison is false, and freight violates explicit at-most20 contract. Neither dilutes this to hypothetical maintenance risk.",
+          "evidence": [
+            "external:verifier-followup/fresh/candidate/cases/transfer-03/review/report.md"
+          ],
+          "reason": "Source/contract adjudication; all required aspects must hold."
+        }
+      ]
+    }
+  ],
+  "decision": "fail",
+  "regression_coverage": "Measurement.md#third-comparison-observed-verifier-suppression",
+  "decision_scope": "Candidate detection gain rejected because authority preservation fails",
+  "limits": [
+    "Final verifier only; same supplied lens outputs and contexts reused, not discovery or full pipeline.",
+    "The six known replay cases do not establish independent transfer or audit behavior; the separately recorded fresh batch includes audit. The subsequent fourth plan was expanded to cover all nine as reused material.",
+    "Unblinded same-model assessment; no population reliability or human-benefit claim.",
+    "Original maintenance comparison remains3/4 tie; this record does not overwrite it."
+  ],
+  "observations": {
+    "replay": {
+      "baseline": {
+        "pass": 5,
+        "fail": 1,
+        "unverified": 0
+      },
+      "candidate": {
+        "pass": 5,
+        "fail": 1,
+        "unverified": 0
+      },
+      "candidateDetectionGain": 1,
+      "candidateNewAuthorityFailures": 1,
+      "cleanComparativeGain": false
+    },
+    "fresh": "3/3 each; no comparative gain"
+  },
+  "next": "Fourth comparison uses explicitly separated maintenance advice and acceptance requirements."
+}

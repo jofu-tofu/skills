@@ -1,0 +1,763 @@
+{
+  "suite_version": "panel-v2-with-v1-preserved",
+  "workflow": "ClarityEngine/ReadabilityGate to Verify",
+  "mode": "exploratory assessment",
+  "claim": "Correct final review-completion reports from recorded reviewer results",
+  "snapshots": {
+    "baseline": "80d6099f6c7c76dd0995284f7a3ae49d72cbb7d6",
+    "candidate_v1": "candidate-v1/",
+    "candidate_v2": "enclosing commit Gate/Verify; blob identities in snapshots.json",
+    "cases": [
+      "cases-v1.md",
+      "cases-v2.md"
+    ],
+    "measurement": "M1 bounded evidence reconciliation",
+    "checker": "reference.md"
+  },
+  "requested_trials": 36,
+  "completed_trials": 36,
+  "runs": [
+    {
+      "case_id": "C1",
+      "role": "development",
+      "configuration": "baseline-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v1-reports.md"
+          ],
+          "reason": "Reference Ready/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C2",
+      "role": "development",
+      "configuration": "baseline-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "fail",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C3",
+      "role": "development",
+      "configuration": "baseline-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "fail",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C4",
+      "role": "development",
+      "configuration": "baseline-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "fail",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C5",
+      "role": "development",
+      "configuration": "baseline-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "NeedsRevision/NeedsRevision",
+          "evidence": [
+            "baseline-v1-reports.md"
+          ],
+          "reason": "Reference NeedsRevision/NeedsRevision; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C6",
+      "role": "development",
+      "configuration": "baseline-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/NotVerified",
+          "evidence": [
+            "baseline-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C7",
+      "role": "development",
+      "configuration": "baseline-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v1-reports.md"
+          ],
+          "reason": "Reference Ready/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C8",
+      "role": "development",
+      "configuration": "baseline-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/NotVerified",
+          "evidence": [
+            "baseline-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; baseline aggregate interpretation is ambiguous; raw reports preserve it"
+        }
+      ]
+    },
+    {
+      "case_id": "C1",
+      "role": "development",
+      "configuration": "candidate-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "candidate-v1-reports.md"
+          ],
+          "reason": "Reference Ready/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C2",
+      "role": "development",
+      "configuration": "candidate-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/Pass",
+          "evidence": [
+            "candidate-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C3",
+      "role": "development",
+      "configuration": "candidate-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/Pass",
+          "evidence": [
+            "candidate-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C4",
+      "role": "development",
+      "configuration": "candidate-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/Pass",
+          "evidence": [
+            "candidate-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C5",
+      "role": "development",
+      "configuration": "candidate-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "NeedsRevision/NeedsRevision",
+          "evidence": [
+            "candidate-v1-reports.md"
+          ],
+          "reason": "Reference NeedsRevision/NeedsRevision; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C6",
+      "role": "development",
+      "configuration": "candidate-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/NotVerified",
+          "evidence": [
+            "candidate-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C7",
+      "role": "development",
+      "configuration": "candidate-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "candidate-v1-reports.md"
+          ],
+          "reason": "Reference Ready/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C8",
+      "role": "development",
+      "configuration": "candidate-v1",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/NotVerified",
+          "evidence": [
+            "candidate-v1-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; baseline aggregate interpretation is ambiguous; raw reports preserve it"
+        }
+      ]
+    },
+    {
+      "case_id": "C1",
+      "role": "development",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference Ready/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C2",
+      "role": "development",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "fail",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C3",
+      "role": "development",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "fail",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C4",
+      "role": "development",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "fail",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C5",
+      "role": "development",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "NeedsRevision/NeedsRevision",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference NeedsRevision/NeedsRevision; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C6",
+      "role": "development",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/NotVerified",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C7",
+      "role": "development",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference Ready/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C8",
+      "role": "development",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "fail",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; baseline aggregate interpretation is ambiguous; raw reports preserve it"
+        }
+      ]
+    },
+    {
+      "case_id": "C9",
+      "role": "validation",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "fail",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C10",
+      "role": "validation",
+      "configuration": "baseline-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "fail",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "baseline-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; baseline aggregate interpretation is ambiguous; raw reports preserve it"
+        }
+      ]
+    },
+    {
+      "case_id": "C1",
+      "role": "development",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference Ready/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C2",
+      "role": "development",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/Pass",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C3",
+      "role": "development",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/Pass",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C4",
+      "role": "development",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/Pass",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C5",
+      "role": "development",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "NeedsRevision/NeedsRevision",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference NeedsRevision/NeedsRevision; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C6",
+      "role": "development",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/NotVerified",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C7",
+      "role": "development",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Ready/Pass",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference Ready/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C8",
+      "role": "development",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/NotVerified",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; baseline aggregate interpretation is ambiguous; raw reports preserve it"
+        }
+      ]
+    },
+    {
+      "case_id": "C9",
+      "role": "validation",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/Pass",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/Pass; required current evidence and defect precedence govern"
+        }
+      ]
+    },
+    {
+      "case_id": "C10",
+      "role": "validation",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "readiness-comprehension",
+          "measurement_id": "M1-evidence-reconciliation",
+          "status": "pass",
+          "observation": "Unverified/NotVerified",
+          "evidence": [
+            "candidate-v2-reports.md"
+          ],
+          "reason": "Reference Unverified/NotVerified; baseline aggregate interpretation is ambiguous; raw reports preserve it"
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "pass",
+    "scope": "Retain candidate v2 for bounded reporting behavior; live orchestration unverified"
+  },
+  "counts": {
+    "pass": 27,
+    "fail": 9,
+    "unverified": 0,
+    "attempted_runs": 36,
+    "completed_runs": 36,
+    "tokens": null
+  },
+  "regression_coverage": "../Record.md#protected-behavior-and-coverage",
+  "limitations": [
+    "Supplied synthetic reviewer evidence; no live reviewer launches or fault injection",
+    "One execution per case/version/suite",
+    "C8 baseline judgment varied between trials",
+    "Not human comprehension or complete skill readiness"
+  ],
+  "improvement_id": "session-outcomes-panel",
+  "targeted_failure": {
+    "baseline_status": "fail",
+    "candidate_status": "pass",
+    "evidence": [
+      "baseline-v2-reports.md",
+      "candidate-v2-reports.md"
+    ]
+  },
+  "loop_observations": [
+    {
+      "stage": "diagnosis",
+      "status": "supported",
+      "observation": "Missing planned reviewers can disappear from required coverage",
+      "evidence": [
+        "report.md"
+      ],
+      "attribution": "observed"
+    },
+    {
+      "stage": "execution",
+      "status": "supported",
+      "observation": "Final reports produced under each supplied workflow from identical recorded evidence",
+      "evidence": [
+        "baseline-v2-reports.md",
+        "candidate-v2-reports.md"
+      ],
+      "attribution": "observed"
+    },
+    {
+      "stage": "transfer",
+      "status": "not_tested",
+      "observation": "Live agent host orchestration not executed",
+      "evidence": [
+        "report.md"
+      ],
+      "attribution": "unknown"
+    }
+  ]
+}

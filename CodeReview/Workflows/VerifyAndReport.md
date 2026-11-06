@@ -47,11 +47,11 @@ Apply these filters **in order**. A finding that fails any filter is discarded w
 
 **SUBSTANCE — Does this finding describe a real risk or just a preference?**
 
-The test: *"If this finding were ignored, what specific bad thing would happen?"* If you can't name a concrete failure mode (wrong output, crash, data loss, security breach, production incident), the finding lacks substance. Findings that amount to "this could be written differently" or "this isn't how I'd do it" are preferences, not problems.
+The test: *"What concrete failure or maintenance burden does this finding establish?"* Runtime failures include wrong output, crashes, data loss and security breaches. A maintenance finding can instead show an existing duplicated policy, misleading contract or caller obligation, with a supported change/use scenario and a bounded correction that preserves behavior. Verify the actual decision sites and obligations; do not require an already-broken runtime path for these findings. Fewer lines or a different preferred design alone establish neither kind of problem. Label maintenance risks as such rather than inventing a current runtime defect. Keep a maintenance recommendation separate from unmet acceptance requirements in the verdict and Proof Coverage: permission to refactor is not a requirement to do so. A blocking or incomplete-feature verdict needs an explicit requirement or supported failure beyond the maintenance burden itself.
 
 Discard findings that are:
 - **Style preferences** — naming conventions, formatting, import ordering, brace style, comment style — unless the project has an explicit linter rule that the code violates
-- **Theoretical fragility** — "this might break if someone later changes X" where X is speculative and the code is correct today. The review covers what the code *does*, not what hypothetical future developers *might* do to it.
+- **Theoretical fragility** — a warning needs invented requirements or hypothetical misuse to become a problem. Distinguish this from a present, source-demonstrated maintenance burden: duplicated authoritative policy or required caller coordination can be substantive even while current outputs match. Name the supported scenario and concrete burden, not merely the possibility of a future edit.
 - **Redundant with tooling** — type errors a compiler catches, lint violations a linter catches, format issues a formatter catches. Assume CI runs these tools. Don't duplicate their work.
 - **Cosmetic complexity complaints** — "this function is long" or "this has many parameters" without identifying a specific bug, ambiguity, or maintenance trap that results from the length/complexity
 - Tag: `NITPICK`
