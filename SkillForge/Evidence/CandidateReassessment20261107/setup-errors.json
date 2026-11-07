@@ -18,5 +18,10 @@
     "operation": "Completion invocation",
     "error": "MODULE_NOT_FOUND: relative checker path invoked from skills root instead of attempt directory",
     "resolution": "Unchanged command from attempt directory returned complete/retain_baseline"
+  },
+  {
+    "operation": "Post-commit completion verification",
+    "error": "Root-relative input paths were mistakenly repeated beneath --root, producing ENOENT",
+    "resolution": "Canonical attempt-directory invocation passed unchanged after commit; use Reproduce.md paths and attempt cwd"
   }
 ]
