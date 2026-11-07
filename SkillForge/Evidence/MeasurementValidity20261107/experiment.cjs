@@ -47,7 +47,7 @@ function prepare(){
  const observations=read(p.join(here,'fixed-observations.json'));
  for(const arm of ['baseline','candidate']){
   const dir=p.join(raw,'trials',arm);if(fs.existsSync(dir))throw Error('Preserve trial');
-  fs.mkdirSync(dir,{recursive:true});fs.cpSync(arm==='baseline'?p.join(raw,'baseline'):skill,p.join(dir,'method'),{recursive:true});
+  fs.mkdirSync(dir,{recursive:true});fs.cpSync(arm==='baseline'?p.join(raw,'baseline'):skill,p.join(dir,'method'),{recursive:true,filter:src=>p.basename(src)!=='MeasurementValidity20261107'});
   write(p.join(dir,'observations.json'),observations);write(p.join(dir,'summary.json'),read(p.join(here,'fixed-summary.json')));
   for(const [name,src]of Object.entries(targets))for(const route of ['AnalyzeClaims','AnalyzeComments','AnalyzeProse','RhetoricalLens']){
    const f=p.join(src,'Tools',route+'Check.ts');write(p.join(dir,'targets',name,'Tools',route+'Check.ts'),fs.readFileSync(f,'utf8'));

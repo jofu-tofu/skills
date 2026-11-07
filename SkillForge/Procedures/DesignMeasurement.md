@@ -30,6 +30,20 @@ Run when a measure is new, materially changed, unsupported, or used beyond its q
 
 Qualification itself uses justified reference evidence and declared criteria; it is not a majority vote. These states describe the instrument, not whether a target skill passed. Case construction and exploratory/qualification runs can proceed within scope without a qualified measure, but are labeled accordingly and cannot yield a confirmed skill benefit from unsupported scores. Design-only work stops with designed/unqualified status, not a demand for unrequested experiments.
 
+## Qualification by intended use
+
+Attach the state to the use being claimed; do not promote evidence between these uses automatically. One compact record may cover several uses with different states. Mark unrequested uses outside scope rather than adding mandatory experiments.
+
+| Use | Evidence needed for that use |
+|---|---|
+| Known-fault discrimination | Independently grounded fixed artifacts, including valid alternatives and misleading passes. Report which faults and acceptable results the measure separates. |
+| Fresh-case prediction or selection | Freeze the measure and decision threshold before observing independent outcomes on new cases from the intended task family. Record exposure, reference uncertainty, selection errors and transfer limits. Known-fault success alone is insufficient. |
+| Optimization robustness | Test revisions actually selected or produced using the measure against separate outcome evidence; include plausible shortcuts and protected regressions. Retrospective rankings or repeated reuse of a holdout do not establish prospective robustness. Bound the tested optimization process and distribution. |
+
+For a direct deterministic contract, independently justified expected behavior and executable checks can establish that bounded result; no population correlation or model calibration is required. Do not extend source membership into factual truth, or a finite contract into all future inputs. Use an independent reference appropriate to the outcome, not the measure's own unsupported judgment.
+
+Choose thresholds from the intended decision and error costs, not a universal coefficient. Report false acceptance of unacceptable results and false rejection of valid results separately, with denominators; keep unresolved references and unavailable execution outside confirmed pass/fail counts and visible in coverage. If reasonable resolutions of a disputed reference would change the selection, defer that selection or narrow its scope. Requalify affected uses when the outcome, task family, reference, checker or optimization process changes.
+
 ## Ownership and references
 
 EstablishQuality owns intended outcomes; this procedure owns measurement reasoning. ConstructCases materializes the benchmark and may execute authorized qualification checks; EvaluateCandidate verifies qualification before relying on evidence. Assess-only work stores proposed specs externally and preserves canonical target records. [Grader](../Standards/Grader.md) and [Schemas](../Standards/Schemas.md#canonical-resultsjson) govern result semantics.
