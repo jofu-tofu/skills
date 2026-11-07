@@ -27,3 +27,10 @@ baseline; do not keep tuning prose. If it shows a material coherent gain, run th
 same real Prompting family for transfer/preservation before retaining V2. Typo
 control applies to whichever version is considered for retention. No population
 or causal speed claim from these small unmatched-order observations.
+
+For the V2 proceed decision, require preserved external outcomes and complete,
+truthful evaluation plus fewer commands, lower reported input/output tokens and
+lower author elapsed than the existing Ledger baseline. This conservative
+all-dimensions rule avoids choosing a favorable cost unit after seeing V2; it is
+a local experiment allocation rule, not a universal cost utility or effect-size
+claim. If any required counter is unavailable, do not claim the rule passed.

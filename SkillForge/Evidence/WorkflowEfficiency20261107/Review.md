@@ -32,3 +32,17 @@ directory. Normal scoped escalation retained the required setting and produced
 14/14 structural passes. These are harness setup failures, not target outcomes.
 The 34 existing completion-checker tests pass. No new behavioral conclusion follows
 from either mechanical suite.
+
+## V2 review before its trial
+
+V2 removes V1's generic reuse/batching instruction and explicitly makes prose
+layout templates conditional on missing fields or consumer format needs. Its
+scope is focused Update work. The adjacent reference list still requires the
+actual Quality/UpdateSkill profile; the paragraph explicitly preserves it along
+with procedure/standard rules and machine-readable schemas. Optional template
+layout does not make any outcome criterion optional. The completion-contract
+format is explicitly excluded from the shortcut. No new artifact or extra review
+stage is required. Risk: an executor may omit fields that existed only in a
+template, or misclassify a required format as prose. Inspect resulting records,
+gate evidence and qualification in the actual follow-up; the unchanged gate
+cannot itself certify semantic adequacy. Broad work retains its original path.

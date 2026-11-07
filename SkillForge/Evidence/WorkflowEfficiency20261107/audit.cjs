@@ -6,8 +6,9 @@ for(const name of fs.readdirSync(p.join(root,'trials'))){const dir=p.join(root,'
  const source=commands.map(e=>e.item.command).join('\n');
  const changed=Object.keys({...x.before.target,...x.after.target}).filter(k=>x.before.target[k]!==x.after.target[k]);
  assert.deepEqual(x.before.method,x.after.method,'method must stay unchanged');
- let external;
- if(fs.existsSync(p.join(out,'checks.json')))external=JSON.parse(fs.readFileSync(p.join(out,'checks.json')));
+ let external;const externalStart=performance.now();const cached=fs.existsSync(p.join(out,'checks.json'));
+ if(fs.existsSync(p.join(out,'checks-corrected.json')))external=JSON.parse(fs.readFileSync(p.join(out,'checks-corrected.json')));
+ else if(fs.existsSync(p.join(out,'checks.json')))external=JSON.parse(fs.readFileSync(p.join(out,'checks.json')));
  else if(name.startsWith('ledger')){
   const vm=check(fs.readFileSync(p.join(dir,'target/total.cjs'),'utf8')),cli=[];
   for(let i=0;i<cases.length;i++){const [input,expected,exit]=cases[i],f=p.join(out,'case-'+i+'.json');if(input!==null)fs.writeFileSync(f,input);const r=cp.spawnSync(process.execPath,[p.join(dir,'target/total.cjs'),f],{encoding:'utf8',windowsHide:true});let pass=false;try{assert.deepEqual(JSON.parse(r.stdout),expected);assert.equal(r.status,exit);pass=true}catch{}cli.push({input,expected,exit,stdout:r.stdout,stderr:r.stderr,actual_exit:r.status,status:pass?'pass':'fail'});}
@@ -17,7 +18,8 @@ for(const name of fs.readdirSync(p.join(root,'trials'))){const dir=p.join(root,'
   const consumer=cp.spawnSync('bun',[p.join(project,'20-working-T1-T3/RealSkillComparison20261106/consumer.ts'),p.join(dir,'target'),p.join(out,'consumer')],{encoding:'utf8',windowsHide:true});fs.writeFileSync(p.join(out,'consumer-stdout.txt'),consumer.stdout);fs.writeFileSync(p.join(out,'consumer-stderr.txt'),consumer.stderr);
   external={tests_exit:test.status,consumer_exit:consumer.status,consumer:fs.existsSync(p.join(out,'consumer/results.json'))?JSON.parse(fs.readFileSync(p.join(out,'consumer/results.json'))):null,all_pass:test.status===0&&consumer.status===0};
  }else{const expected='---\nname: TinySkill\ndescription: Report JSON.\n---\n# TinySkill\nReport the output exactly; preserve null as unknown.\n';external={all_pass:fs.readFileSync(p.join(dir,'target/SKILL.md'),'utf8')===expected&&changed.length===1,evidence_files:fs.readdirSync(p.join(dir,'evidence'))};}
- fs.writeFileSync(p.join(out,'checks.json'),JSON.stringify(external,null,2));
+ if(!cached)external.elapsed_seconds=(performance.now()-externalStart)/1000;
+ if(!cached)fs.writeFileSync(p.join(out,'checks.json'),JSON.stringify(external,null,2));
  const procedureMentions=Object.fromEntries(['ReviewDesign','ApproveSkill','PlanChange','GenerateAlternatives','EvaluateCandidate','DesignMeasurement'].map(n=>[n,commands.filter(e=>e.item.command.includes(n+'.md')).map(e=>e.item.id)]));
  rows.push({name,status:x.status,seconds:x.seconds,usage:x.usage,commands:x.commands,command_output_bytes:x.command_output_bytes,command_errors:x.command_errors,method_unchanged:true,target_changes:changed,procedure_command_mentions:procedureMentions,external,trace_sha256:hash(p.join(dir,'events.jsonl')),receipt_sha256:hash(receipt)});
 }

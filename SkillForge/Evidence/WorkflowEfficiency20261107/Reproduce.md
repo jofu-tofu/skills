@@ -37,6 +37,14 @@ outside Git. Fresh subject contexts reduce cross-run contamination, but director
 instructions are not a hermetic access boundary. The operator can see all trials;
 reference expectations were excluded from author inputs.
 
+Reported author seconds start at process launch, after fixture copying, and end
+at process close. Setup, evaluator analysis, qualification and external consumers
+are outside that interval. External audit duration is recorded for later runs;
+the first Ledger audit did not capture it and remains unknown. Do not label the
+author interval as total project effort or infer monetary savings from cached
+token counters. There is no repeated identical-condition estimate of run variance;
+cross-task differences and adaptive follow-up are reported separately.
+
 For structural checks, pass the skill name and explicitly set SKILLS_DIR to the
 worktree's skills root. The sandbox used here stripped that setting; normal scoped
 escalation succeeded. Run `node --test <skill>/Tools/CheckCompletion.test.cjs` for
