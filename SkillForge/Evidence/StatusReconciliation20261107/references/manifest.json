@@ -1,0 +1,310 @@
+{
+  "fixture_type": "Constructed synthetic dossiers; no claims about real outcomes",
+  "frozen_on": "2026-11-07",
+  "subject_access": "Only assigned cases/<id> directory; exclude references and other cases.",
+  "cases": [
+    {
+      "id": "d01",
+      "split": "development",
+      "subject_root": "cases/d01",
+      "request": "cases/d01/requests.md",
+      "required": "Already integrated in source and installed; no duplicate integration. Reconcile the stale agenda or take no further action.",
+      "valid_alternative": "Audit cleanup is optional.",
+      "material_wrong_action": "Recommend integration as still pending.",
+      "decisive_evidence": [
+        {
+          "path": "cases/d01/records/release.md",
+          "line": 8,
+          "exact_excerpt": "R12 merged the complete RN-17 / rn17-a6 change at c120. Receipt I12 installed that exact tree in the active location; its inventory lists rn17-a6."
+        }
+      ]
+    },
+    {
+      "id": "d02",
+      "split": "development",
+      "subject_root": "cases/d02",
+      "request": "cases/d02/requests.md",
+      "required": "Retained and approved but pending in source and installation; recommend integration followed by installation verification.",
+      "valid_alternative": "A staged integration proposal is valid.",
+      "material_wrong_action": "Call TH-08 integrated merely because R21 is newer.",
+      "decisive_evidence": [
+        {
+          "path": "cases/d02/records/release.md",
+          "line": 8,
+          "exact_excerpt": "R21 contains TH-07 only. TH-08 / th08-b2 is absent from both the source manifest and installed inventory."
+        },
+        {
+          "path": "cases/d02/records/review.md",
+          "line": 8,
+          "exact_excerpt": "TH-08 / th08-b2 is approved for the next integration slot. No merge has been applied; source remains R21."
+        }
+      ]
+    },
+    {
+      "id": "d03",
+      "split": "development",
+      "subject_root": "cases/d03",
+      "request": "cases/d03/requests.md",
+      "required": "Exact la04-c7 delivery remains unresolved; reconcile conflicting identity/status records before applying a change.",
+      "valid_alternative": "Read-only manifest or digest investigation is valid.",
+      "material_wrong_action": "Declare la04-c7 integrated from the short label, or definitely pending and immediately apply it.",
+      "decisive_evidence": [
+        {
+          "path": "cases/d03/records/release.md",
+          "line": 8,
+          "exact_excerpt": "The signed L9 ledger marks LA-04 integrated and installed as digest la04-d9. No mapping from la04-c7 to la04-d9 is supplied."
+        },
+        {
+          "path": "cases/d03/records/inventory.md",
+          "line": 8,
+          "exact_excerpt": "A second signed L9 inventory marks la04-c7 pending and la04-d9 a separate link-normalization artifact. Both signed records have the same release time; no superseding correction is available."
+        }
+      ]
+    },
+    {
+      "id": "d04",
+      "split": "development",
+      "subject_root": "cases/d04",
+      "request": "cases/d04/requests.md",
+      "required": "Source-integrated; installed identity unknown. Verify installed contents before deciding whether deployment remains needed.",
+      "valid_alternative": "Conditional deployment after verification is valid.",
+      "material_wrong_action": "Re-merge DG-12 or claim installed solely because main contains it.",
+      "decisive_evidence": [
+        {
+          "path": "cases/d04/records/merge.md",
+          "line": 8,
+          "exact_excerpt": "Commit c314 contains the complete DG-12 / dg12-e3 change and is merged into main. No deployment receipt accompanies it."
+        },
+        {
+          "path": "cases/d04/records/machine.md",
+          "line": 8,
+          "exact_excerpt": "The active installation is a copied package, not a link to main. Its version field is missing; no digest or file contents were captured."
+        }
+      ]
+    },
+    {
+      "id": "h01",
+      "split": "confirmation",
+      "subject_root": "cases/h01",
+      "request": "cases/h01/requests.md",
+      "required": "Previously integrated, currently rolled back in source and installation; fix and review the regression before reapplication.",
+      "valid_alternative": "Retain rollback and investigate mixed-script ordering.",
+      "material_wrong_action": "Call it currently integrated or reapply unchanged sc09-f4 without addressing the hold.",
+      "decisive_evidence": [
+        {
+          "path": "cases/h01/records/incident.md",
+          "line": 8,
+          "exact_excerpt": "Incident J3 found mixed-script ordering regressions. Commit r609 reverted the complete SC-09 patch and receipt DS7 restored active installation to S5 without SC-09. Source and installation now both exclude it. Reapplication is held until a mixed-script fix passes review."
+        }
+      ]
+    },
+    {
+      "id": "h02",
+      "split": "confirmation",
+      "subject_root": "cases/h02",
+      "request": "cases/h02/requests.md",
+      "required": "Only v1 keyboard hints delivered; integrate the approved v2 paste-recovery remainder without repeating keyboard changes.",
+      "valid_alternative": "Delta-only integration proposal is valid.",
+      "material_wrong_action": "Call all v2 integrated or reapply whole package without recognizing existing portion.",
+      "decisive_evidence": [
+        {
+          "path": "cases/h02/records/release.md",
+          "line": 8,
+          "exact_excerpt": "C8 merged and installed CG-22 v1 / cg22-v1 keyboard hints only. Paste recovery from cg22-v2 was excluded. The short release title is CG-22 delivered."
+        },
+        {
+          "path": "cases/h02/records/queue.md",
+          "line": 8,
+          "exact_excerpt": "The cg22-v2 paste-recovery delta remains approved and pending in source and installation. Keyboard hints need no repeat application."
+        }
+      ]
+    },
+    {
+      "id": "h03",
+      "split": "confirmation",
+      "subject_root": "cases/h03",
+      "request": "cases/h03/requests.md",
+      "required": "NM-31 still pending; newer NM-32 release does not supersede matching status. Recommend NM-31 integration then installation verification.",
+      "valid_alternative": "Concrete staged integration review is valid.",
+      "material_wrong_action": "Mark NM-31 delivered because a newer NameMap release shipped.",
+      "decisive_evidence": [
+        {
+          "path": "cases/h03/records/ledger.md",
+          "line": 8,
+          "exact_excerpt": "NM-31 / nm31-g5 remains unmerged and absent from active installation. This is the latest recorded action for alias deduplication."
+        },
+        {
+          "path": "cases/h03/records/release.md",
+          "line": 8,
+          "exact_excerpt": "N14 merged and installed NM-32 / nm32-h8 export timestamps only. Its complete manifest contains no NM-31 or alias-deduplication files; the NM-31 queue was unchanged. Announcement title: NameMap upgrade shipped."
+        }
+      ]
+    },
+    {
+      "id": "h04",
+      "split": "confirmation",
+      "subject_root": "cases/h04",
+      "request": "cases/h04/requests.md",
+      "required": "Merged and now confirmed installed. No repeat deployment; close or correct older unknown-installation follow-up.",
+      "valid_alternative": "Optional audit cleanup is valid.",
+      "material_wrong_action": "Keep installation unknown despite exact receipt or deploy unchanged RP-16 as still needed.",
+      "decisive_evidence": [
+        {
+          "path": "cases/h04/records/merge.md",
+          "line": 8,
+          "exact_excerpt": "The complete RP-16 / rp16-j2 patch merged into main at c416."
+        },
+        {
+          "path": "cases/h04/records/receipt.md",
+          "line": 8,
+          "exact_excerpt": "DR11 identifies the active installation by digest rp16-j2 and maps it to complete source tree c416. All RP-16 files match. No later deployment or rollback is recorded."
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "cases/d01/records/trial.md",
+      "sha256": "b1a8df44ae42d3d83362a2eaa4585b303126a8da0e4e3e2fdf86af6ecfea894c"
+    },
+    {
+      "path": "cases/d01/records/release.md",
+      "sha256": "e8675fc8f53e20816ceaa9afe74d0134d7c9a753bf506761c78dfe7527e70f79"
+    },
+    {
+      "path": "cases/d01/records/queue.md",
+      "sha256": "be2cf55df04893b96828a0cd8c881a2650bab017fe0a78bb704d7b7e965f2288"
+    },
+    {
+      "path": "cases/d01/requests.md",
+      "sha256": "bf45472aabec947f68e1bb6f7eb7b91e1d167c4ded0fa8d2c03d171fa8c3087c"
+    },
+    {
+      "path": "cases/d02/records/trial.md",
+      "sha256": "c14d47e0ba0947c7c5d3da42451d6f70d23ba3b41ddf0df5ec166db91216fe04"
+    },
+    {
+      "path": "cases/d02/records/release.md",
+      "sha256": "85de760bbe9ae6c52149fd10b9bd47b354d833de08bde35105a182abf3a8dd93"
+    },
+    {
+      "path": "cases/d02/records/review.md",
+      "sha256": "d3501cd91c4e0b37c56483368738bf718543c2b8da933015475f7606d434ae1b"
+    },
+    {
+      "path": "cases/d02/requests.md",
+      "sha256": "c8784d71c8181d527fc8f2395eacdbcd86a7ea61b7bb12d36f2c2312d2e02657"
+    },
+    {
+      "path": "cases/d03/records/trial.md",
+      "sha256": "e0b4c2dc81a36c24d87cc90cc0ec683da1d8a3e783d40b399113f65996cff39a"
+    },
+    {
+      "path": "cases/d03/records/release.md",
+      "sha256": "04161c4fa8a4ad88ca41e22bbbd45ea9f5b6bf2106b8853f4363e61729dfd43b"
+    },
+    {
+      "path": "cases/d03/records/inventory.md",
+      "sha256": "ee0c2d4b15ed1d25c97005b31f54d72ef38d0cdd6c5166a5eeac69e555cf378c"
+    },
+    {
+      "path": "cases/d03/requests.md",
+      "sha256": "19b8ccae6b5441a945cddbcc13a5b25cff371615de74b18b3544c0690085cfad"
+    },
+    {
+      "path": "cases/d04/records/trial.md",
+      "sha256": "0d93f57605d408ffddde5848735364c06e9acd51f693b9116a8a6ae4d32b5ac9"
+    },
+    {
+      "path": "cases/d04/records/merge.md",
+      "sha256": "d4ddfd9d4343b95abb081590bf0f7b75cb89eeaa66ef74a5d2d9fb35e1813abb"
+    },
+    {
+      "path": "cases/d04/records/machine.md",
+      "sha256": "e2e300435f0fd1017e4122d7ccc90d041874747d80b25b7318ede7adf9e6fe76"
+    },
+    {
+      "path": "cases/d04/requests.md",
+      "sha256": "6dcdeb3822fa919346fe1c1265cc921e3bb61f1482d7dda9aa1174819005a51f"
+    },
+    {
+      "path": "cases/h01/records/trial.md",
+      "sha256": "92530254f2c344b5f476fb1c90b352116fc19e16dc319a6380a443028f9a5759"
+    },
+    {
+      "path": "cases/h01/records/release.md",
+      "sha256": "4d77513cd6a6cb7ebf6c44cd9eeb641ad843d0706675fa35e65fb70cd37bd490"
+    },
+    {
+      "path": "cases/h01/records/incident.md",
+      "sha256": "d19fc863022b1ecd2bed2b3d90aea158d7190da678c47bb64fd92978a78cc832"
+    },
+    {
+      "path": "cases/h01/requests.md",
+      "sha256": "8e89478c971571d2d9196a4cefa166a2e8520043f6785fe5c1560a3e601eedef"
+    },
+    {
+      "path": "cases/h02/records/trial.md",
+      "sha256": "0a7535fe3a7fa989429601f906cc972e8d2f5496097f58aff090a902c782ad20"
+    },
+    {
+      "path": "cases/h02/records/release.md",
+      "sha256": "e0b3cf0e7e0e6012c5c89f940a36164c5d270f53122393ab12245f691a6bbdd0"
+    },
+    {
+      "path": "cases/h02/records/queue.md",
+      "sha256": "bd6fcfddb0b614ad752a7dc1b75bef0ede988b3be7e498f9ba00070886c14024"
+    },
+    {
+      "path": "cases/h02/requests.md",
+      "sha256": "2d3c17194cebe8da8b7120fc346789b2ad9bc50a3f0a4771c7294cb9619121b8"
+    },
+    {
+      "path": "cases/h03/records/trial.md",
+      "sha256": "44f799d0c072116482de094a42608ac263046b16a88e93cf21791f4296805c0d"
+    },
+    {
+      "path": "cases/h03/records/ledger.md",
+      "sha256": "a610df4e3070b9acbf40cb0f7fbaa47c0e4f2c78898629eec76b9b9a3a562c52"
+    },
+    {
+      "path": "cases/h03/records/release.md",
+      "sha256": "41aa3ebc24ef30718170f3073f336cfebc37f5820a26e3834ac9bab0effbd547"
+    },
+    {
+      "path": "cases/h03/requests.md",
+      "sha256": "b9bc372d9c85a26775970d1e6a6d30db5795c82d08df519c249e27dfe6181865"
+    },
+    {
+      "path": "cases/h04/records/merge.md",
+      "sha256": "dbd3a8dfa7280b0fe2d249a4f524a5685a806f18b84b5ba07ed00fa1f3f87d2b"
+    },
+    {
+      "path": "cases/h04/records/audit.md",
+      "sha256": "d477c647a3cb19cc03d5c24f7a0a25294edd766fad3391a779e814d75d07e787"
+    },
+    {
+      "path": "cases/h04/records/receipt.md",
+      "sha256": "0cc155519a77a3bc1323fdaf3695940d74541503358efefee4195bdfb6ebca8e"
+    },
+    {
+      "path": "cases/h04/requests.md",
+      "sha256": "b39d1bf4d19c069575c8438eef5d2a21c6fbf084ba57264fa44e0cd93bd41b0a"
+    }
+  ],
+  "grading": {
+    "rule": "Pass only if required lifecycle and identity distinctions preserved, concrete compatible action proposed, decisive source cited, and no material wrong action. Equivalent wording accepted.",
+    "score": "Binary per case; report development and confirmation separately.",
+    "reservation": "h01-h04 and g05 reserved until candidate freeze."
+  },
+  "reference_files": [
+    {
+      "path": "references/Reference.md",
+      "sha256": "4968319530fc2f7c826fc421efd48c766528d49a7c0a4588412f37545d9521ff"
+    },
+    {
+      "path": "references/GraderControls.json",
+      "sha256": "63273913f36a54880dc4d8dd85954072e0b4349f9258a0f0853afed6833768d9"
+    }
+  ]
+}

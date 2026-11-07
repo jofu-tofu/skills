@@ -1,0 +1,350 @@
+[
+  {
+    "path": "cases/d01/records/queue.md",
+    "sha256": "be2cf55df04893b96828a0cd8c881a2650bab017fe0a78bb704d7b7e965f2288"
+  },
+  {
+    "path": "cases/d01/records/release.md",
+    "sha256": "e8675fc8f53e20816ceaa9afe74d0134d7c9a753bf506761c78dfe7527e70f79"
+  },
+  {
+    "path": "cases/d01/records/trial.md",
+    "sha256": "b1a8df44ae42d3d83362a2eaa4585b303126a8da0e4e3e2fdf86af6ecfea894c"
+  },
+  {
+    "path": "cases/d01/requests.md",
+    "sha256": "bf45472aabec947f68e1bb6f7eb7b91e1d167c4ded0fa8d2c03d171fa8c3087c"
+  },
+  {
+    "path": "cases/d02/records/release.md",
+    "sha256": "85de760bbe9ae6c52149fd10b9bd47b354d833de08bde35105a182abf3a8dd93"
+  },
+  {
+    "path": "cases/d02/records/review.md",
+    "sha256": "d3501cd91c4e0b37c56483368738bf718543c2b8da933015475f7606d434ae1b"
+  },
+  {
+    "path": "cases/d02/records/trial.md",
+    "sha256": "c14d47e0ba0947c7c5d3da42451d6f70d23ba3b41ddf0df5ec166db91216fe04"
+  },
+  {
+    "path": "cases/d02/requests.md",
+    "sha256": "c8784d71c8181d527fc8f2395eacdbcd86a7ea61b7bb12d36f2c2312d2e02657"
+  },
+  {
+    "path": "cases/d03/records/inventory.md",
+    "sha256": "ee0c2d4b15ed1d25c97005b31f54d72ef38d0cdd6c5166a5eeac69e555cf378c"
+  },
+  {
+    "path": "cases/d03/records/release.md",
+    "sha256": "04161c4fa8a4ad88ca41e22bbbd45ea9f5b6bf2106b8853f4363e61729dfd43b"
+  },
+  {
+    "path": "cases/d03/records/trial.md",
+    "sha256": "e0b4c2dc81a36c24d87cc90cc0ec683da1d8a3e783d40b399113f65996cff39a"
+  },
+  {
+    "path": "cases/d03/requests.md",
+    "sha256": "19b8ccae6b5441a945cddbcc13a5b25cff371615de74b18b3544c0690085cfad"
+  },
+  {
+    "path": "cases/d04/records/machine.md",
+    "sha256": "e2e300435f0fd1017e4122d7ccc90d041874747d80b25b7318ede7adf9e6fe76"
+  },
+  {
+    "path": "cases/d04/records/merge.md",
+    "sha256": "d4ddfd9d4343b95abb081590bf0f7b75cb89eeaa66ef74a5d2d9fb35e1813abb"
+  },
+  {
+    "path": "cases/d04/records/trial.md",
+    "sha256": "0d93f57605d408ffddde5848735364c06e9acd51f693b9116a8a6ae4d32b5ac9"
+  },
+  {
+    "path": "cases/d04/requests.md",
+    "sha256": "6dcdeb3822fa919346fe1c1265cc921e3bb61f1482d7dda9aa1174819005a51f"
+  },
+  {
+    "path": "method/Architecture.md",
+    "sha256": "fc16bcf8cd84ecf31d93c55553ba6bdec749d31081e82f69fd06c1538f6d38f0"
+  },
+  {
+    "path": "method/Checks/StructuralReview.md",
+    "sha256": "5c37f36e2ea96e915a2c014dcc39bd78f2c68c265e1e6cae77e23f5f0bf5dd0f"
+  },
+  {
+    "path": "method/Evidence/ValidationSummary.md",
+    "sha256": "74348b321a0365983f50a4cac57cc101a2f77a40b182deca0e932ac8963e6813"
+  },
+  {
+    "path": "method/Procedures/ApproveSkill.md",
+    "sha256": "368924e9a61e85071c6dc36defd982a77452b8d3450319876adf5f6c6c981f1f"
+  },
+  {
+    "path": "method/Procedures/ComprehensiveImprovement.md",
+    "sha256": "d2f1bf57c65455b3ad3bc2bdb0aa15f793e7b891917af14f4291f49639812f07"
+  },
+  {
+    "path": "method/Procedures/ConstructCases.md",
+    "sha256": "6a900e21abf3260873aaa2b329957982330b36da16357911f1164356802b74e6"
+  },
+  {
+    "path": "method/Procedures/DesignMeasurement.md",
+    "sha256": "a192c894e79a299758399575c4f91fbe8a83ff839595fcb502296a06f0cb4340"
+  },
+  {
+    "path": "method/Procedures/DiagnoseGap.md",
+    "sha256": "e6589eb22348fa6fdb0c216329af2c807698ddc319d93237333e22b6603cbd30"
+  },
+  {
+    "path": "method/Procedures/DraftCandidate.md",
+    "sha256": "4093a8b68aa24e973990eee6c4b871925abfdd7d27998dca1852b152588fb04c"
+  },
+  {
+    "path": "method/Procedures/EstablishQuality.md",
+    "sha256": "0e1f3e9f2a8fdb1ce9e12279085188fb73771a6cac43ca22471b786960c24643"
+  },
+  {
+    "path": "method/Procedures/EvaluateCandidate.md",
+    "sha256": "cc64c55ede9ba428a4d9603b88ac3d7a3349342e6fdb703d9cbc4e10c80af441"
+  },
+  {
+    "path": "method/Procedures/GenerateAlternatives.md",
+    "sha256": "7ab50bde2c89528862c79f63be8c65dbf953da3956ecf4578b92954043a5df1c"
+  },
+  {
+    "path": "method/Procedures/PlanChange.md",
+    "sha256": "22fe7667d0f68c2e66d2f1a60cf659da287e0d2bea13b9543b10c9a04ab2edb7"
+  },
+  {
+    "path": "method/Procedures/RecordLearning.md",
+    "sha256": "041435b415235c6602b62627dd9142280e8afdf8a41a2ccd2f6f7a6a69c0716d"
+  },
+  {
+    "path": "method/Procedures/ReviewDesign.md",
+    "sha256": "c7e6a2905a3490d8715417ab9a81fc8c379c9d85a07372e3d2987a22b7196d64"
+  },
+  {
+    "path": "method/Procedures/TestTriggering.md",
+    "sha256": "dea8ee412077fe18b59a2bba6e1a332cc04b4c2e9e17bcefb10357434477eab2"
+  },
+  {
+    "path": "method/Quality/CreateSkill/ChallengeCases.md",
+    "sha256": "be36f0b251262654cc17cf94aa38f3c4be482be45cfd25bc4f216c22ef9b4fb5"
+  },
+  {
+    "path": "method/Quality/CreateSkill/Context.md",
+    "sha256": "8bd97afdf882e1c97764ecfe61077ee12799b505103d6e8b8c7f39c07c4e92ea"
+  },
+  {
+    "path": "method/Quality/CreateSkill/Feedback.md",
+    "sha256": "08730684811d5afb2f335b19998c5f1cfe3d3110994e49cb8a356f025f603d0a"
+  },
+  {
+    "path": "method/Quality/CreateSkill/Outcomes.md",
+    "sha256": "c8beaccefd848b48b0ba3d0bc1b067f13aac3f00a5dd08f83272d84851916d4f"
+  },
+  {
+    "path": "method/Quality/CreateSkill/Tradeoffs.md",
+    "sha256": "794b1f0df7d8f25125f87a51312049cae0b82df46234b2efcd389cfc4a415c84"
+  },
+  {
+    "path": "method/Quality/EvaluateSkill/ChallengeCases.md",
+    "sha256": "b7ded48a9324eba255f90b38593813712a394e865507ad9cbcc8a59f6c5971ea"
+  },
+  {
+    "path": "method/Quality/EvaluateSkill/Context.md",
+    "sha256": "2c07989223a1066a43d0720c35387eb956f1f508daf3bb7dba9ab49d0735244f"
+  },
+  {
+    "path": "method/Quality/EvaluateSkill/Feedback.md",
+    "sha256": "8a11d131630620f8f85126da38f7cd26830c42ed41378fc56cfb651efd5fcfaf"
+  },
+  {
+    "path": "method/Quality/EvaluateSkill/Outcomes.md",
+    "sha256": "c2a6d3a415ad847b257855b4b3a6126b0c30a0ad7570e0e1eeca5d182c3a3c8c"
+  },
+  {
+    "path": "method/Quality/EvaluateSkill/Tradeoffs.md",
+    "sha256": "1b66c0fec52072a6e899501b2cb781beb7415fb18723018666edd14f301454ca"
+  },
+  {
+    "path": "method/Quality/ImproveSkill/ChallengeCases.md",
+    "sha256": "23219c147959fe68e902d5dbd531212d6eeede639b2b098f4500e9877e52fde2"
+  },
+  {
+    "path": "method/Quality/ImproveSkill/Context.md",
+    "sha256": "b8cb76b099e90b6cbeb23165901981ea0ce181b9b9852587fda3c74c5dbeaf99"
+  },
+  {
+    "path": "method/Quality/ImproveSkill/Feedback.md",
+    "sha256": "41c1a906296d95b1ee8b96eab1610c041da6f5f9b3e27a73ba50fb14b4808e49"
+  },
+  {
+    "path": "method/Quality/ImproveSkill/Outcomes.md",
+    "sha256": "3f730c4e025720ac32f1805e6e7084f70ec34a109f807346271aa834108a7460"
+  },
+  {
+    "path": "method/Quality/ImproveSkill/Tradeoffs.md",
+    "sha256": "aad9879e84cecc5713e20e442715b8704a0aa00606f737d7907abc80f9a35ec7"
+  },
+  {
+    "path": "method/Quality/Shared.md",
+    "sha256": "1ba0610a5cff1bd747becba7ceace437dc39cf4487f4743768361c5db82b61c7"
+  },
+  {
+    "path": "method/Quality/UpdateSkill/ChallengeCases.md",
+    "sha256": "eb10109bc9abcc296be08d36ca5eacca804c9168f902bf1c6c924f5c533016e1"
+  },
+  {
+    "path": "method/Quality/UpdateSkill/Context.md",
+    "sha256": "45440b18197516d122fa971177131939390481c909b0d1b300502fee8ffe3972"
+  },
+  {
+    "path": "method/Quality/UpdateSkill/Feedback.md",
+    "sha256": "8728a9b59c5ef7c046affce2d6e01818e824e7f55c38ad831ab44013757a41a8"
+  },
+  {
+    "path": "method/Quality/UpdateSkill/Outcomes.md",
+    "sha256": "683c2285ec747e6907bc827cb29809e054f0435daa7f96537c39ac79c0d92b67"
+  },
+  {
+    "path": "method/Quality/UpdateSkill/Tradeoffs.md",
+    "sha256": "e3a8e845e953b175d0b8fc1af8fa96009f6b836fca6efac1919a09150a21d4e0"
+  },
+  {
+    "path": "method/RELEASE.md",
+    "sha256": "9a19e818802b7bb7ed44b79e9bc2bce9cb2de9eb06fea2d4e9e56c167a0c43d0"
+  },
+  {
+    "path": "method/ResearchLibrary/Experiment and Authoring Source Catalog.md",
+    "sha256": "c1f18b7188d1ef032908e2ba860a218dd9cd315ff285a19b545b199b20a161db"
+  },
+  {
+    "path": "method/ResearchLibrary/Experiment Design - Evidence and Use.md",
+    "sha256": "f9971b59b48b59853afef3a735bcfb6bfad2da5f2e2771de3b0a1c82eae07759"
+  },
+  {
+    "path": "method/ResearchLibrary/Research Use and Maintenance.md",
+    "sha256": "e247ce34bf163e9a39d4b6f9a10f3caba8f799d0536ecd543bb86e3b535cb261"
+  },
+  {
+    "path": "method/ResearchLibrary/Skill Authoring - Evidence and Use.md",
+    "sha256": "fdb5bc01b7914e70c48acc0bd804a2294d5ce3414fbc0468fb7d39f6cde0108c"
+  },
+  {
+    "path": "method/ResearchLibrary/SkillForge Research Library.md",
+    "sha256": "82f28037977428d6113dfd2a72a69135dc189f546ac919d542cc4b887b8fb6e1"
+  },
+  {
+    "path": "method/SKILL.md",
+    "sha256": "f74065fb517b0075e082f41e0b671aea116349084c57c3f197c978a10530d94a"
+  },
+  {
+    "path": "method/SkillIntent.md",
+    "sha256": "0f2dc9f9b9a49686f082f41c97a35cb9f38df019be9be3785ad1cff7d5376c91"
+  },
+  {
+    "path": "method/Standards/Analyzer.md",
+    "sha256": "22ae49ff1aa46a4432cd25d4f50d2f986a02f7db53d0a646ce21de44b70e32b7"
+  },
+  {
+    "path": "method/Standards/Authoring.md",
+    "sha256": "17e35632c559a6365c10fe1f9b2320f9cda949e34f2d130d58473ddc46b2c888"
+  },
+  {
+    "path": "method/Standards/Comparator.md",
+    "sha256": "a260cf3e0107456db43fecbe7637a640e50a52d6b86fbed920d8c8bfa7f69a98"
+  },
+  {
+    "path": "method/Standards/Grader.md",
+    "sha256": "537c83730fe999a4afc3be73e0993d2e521c140b4bba9e392de683bc2fafbb40"
+  },
+  {
+    "path": "method/Standards/KnowledgeIntegration.md",
+    "sha256": "b28a4f670033ac1a43da2b2c165dbe9f867cc4a5ed766792b0f0658a8eecdc7c"
+  },
+  {
+    "path": "method/Standards/RegressionCoverage.md",
+    "sha256": "15693cc02236297bb7565ca873ad10de74bb3dd2347c3455d20e5f4ccdb4e9cf"
+  },
+  {
+    "path": "method/Standards/Schemas.md",
+    "sha256": "9d4ecd544c9545df1346de4653d9fc8edd5e2e8a4f72db2253628927a4379614"
+  },
+  {
+    "path": "method/Templates/Improvement/CompactAttempt.md",
+    "sha256": "fe9067f5daa76ac2ab75925c68f777c871ded49bfc70bc1659844395ec7bd5fa"
+  },
+  {
+    "path": "method/Templates/Improvement/Completion.md",
+    "sha256": "4c350b6cf56541bcb91493e12fcf9acd26173cd5fa3f3e7b5ef7a8995b968c11"
+  },
+  {
+    "path": "method/Templates/Improvement/Decision.md",
+    "sha256": "cea704d94b8fe94f261a9827b21cab7b3f2dca323340e1c8df3d880d53a8e170"
+  },
+  {
+    "path": "method/Templates/Improvement/GapRecord.md",
+    "sha256": "f470fb43773e14516ef5bf25fa60d8a1e4abb959dc457bf6f3a82ac55cc28fa0"
+  },
+  {
+    "path": "method/Templates/Improvement/Plan.md",
+    "sha256": "445ffd0393135e56d3769ffaa95373f04838b60efb8cba0fe4fffc5a0332637a"
+  },
+  {
+    "path": "method/Templates/Improvement/Results.md",
+    "sha256": "ac433fe0236c81b79fae4fbf8cb8a4214f3c6b0ce895de242721ad8e3355039b"
+  },
+  {
+    "path": "method/Templates/Quality/ChallengeCases.md",
+    "sha256": "303895b95aa4953d5ec6b6ff1389d8c290a39ac34ff5b3c4aab285fa46fd3143"
+  },
+  {
+    "path": "method/Templates/Quality/Context.md",
+    "sha256": "0139d54076c83b4b33a759f33b758b6c8a74eff8d84dc0fdbc2747e3c55f976f"
+  },
+  {
+    "path": "method/Templates/Quality/Feedback.md",
+    "sha256": "fb718c67d5d252d67a6f017095167ce983589e3b48172c9503e9d6644cc813b6"
+  },
+  {
+    "path": "method/Templates/Quality/Measurement.md",
+    "sha256": "84dee77708cf2099ed55c2932ac7bf1727ef4a66bc35abc1a19c8028cab8992f"
+  },
+  {
+    "path": "method/Templates/Quality/Outcomes.md",
+    "sha256": "0c3398b53503ab0cf7f798a9f186186efb84534ee24c8da6dddcd3fd13d05727"
+  },
+  {
+    "path": "method/Templates/Quality/Tradeoffs.md",
+    "sha256": "d7ab28f7f12fb6dfb5326995621bef9470a91da89d082a7975d621030cb1d358"
+  },
+  {
+    "path": "method/Tools/CheckCompletion.cjs",
+    "sha256": "805fa7dbe6beb2087886a5602d7bb8c66e83d501acddc850c67f3fd1b0d8753e"
+  },
+  {
+    "path": "method/Tools/lib/paths.ts",
+    "sha256": "1a4d91c6a4134a939b392f83a2a8c58d02fb192a2b426017a923ddf7d81e15e1"
+  },
+  {
+    "path": "method/Tools/lib/platform.ts",
+    "sha256": "fbc4784c8887d35a73685f3374ded27e3ea8d307dfa9783e5581605265c2786b"
+  },
+  {
+    "path": "method/Tools/README.md",
+    "sha256": "1b0d91290e1d265b65f5b2418fc2a999b072870a0a100b0f8144addf48fe98e7"
+  },
+  {
+    "path": "method/Workflows/CreateSkill.md",
+    "sha256": "4629ad2ae6889af55fb29ee74ca4fef9c9af73f304febef76d5d4766768651ba"
+  },
+  {
+    "path": "method/Workflows/EvaluateSkill.md",
+    "sha256": "311a7d3c0ada95c6555d71847044541e433cabb13cec54a024bc79a6e6c7fcde"
+  },
+  {
+    "path": "method/Workflows/UpdateSkill.md",
+    "sha256": "77da5d31959b22b68cfc9a6653295d546661ba728cd2fdc55f299348f71f1a90"
+  }
+]

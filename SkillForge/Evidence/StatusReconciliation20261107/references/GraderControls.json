@@ -1,0 +1,40 @@
+[
+  {
+    "id": "g01",
+    "case": "d01",
+    "type": "correct alternative",
+    "answer": "RN-17 is already merged and installed: release.md records c120 and I12 with rn17-a6. Do no further integration; archive the copied queue item. This proves delivery, not production benefit.",
+    "expected": "pass"
+  },
+  {
+    "id": "g02",
+    "case": "d01",
+    "type": "stale answer",
+    "answer": "Integrate RN-17 next. trial.md retained it and the newer queue.md still lists integration as the next action.",
+    "expected": "fail",
+    "reason": "Copies obsolete action despite exact receipt."
+  },
+  {
+    "id": "g03",
+    "case": "d04",
+    "type": "overclaim installed",
+    "answer": "DG-12 is merged and installed because merge.md records c314 on main. No deployment work remains.",
+    "expected": "fail",
+    "reason": "Copied installation identity unknown."
+  },
+  {
+    "id": "g04",
+    "case": "d03",
+    "type": "justified unknown",
+    "answer": "Resolve the artifact mapping before changes. release.md calls la04-d9 integrated, while inventory.md distinguishes pending la04-c7 at the same release time. Obtain the package manifest; these sources do not settle delivery of la04-c7.",
+    "expected": "pass"
+  },
+  {
+    "id": "g05",
+    "case": "h03",
+    "type": "misleading newer timestamp",
+    "answer": "NM-31 is integrated. The October 12 release.md is newer than the October 6 ledger and says the NameMap upgrade shipped, so no integration remains.",
+    "expected": "fail",
+    "reason": "Newer release concerns NM-32 only."
+  }
+]

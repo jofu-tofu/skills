@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "args": [
+        "read",
+        "known.md"
+      ],
+      "exit": 0,
+      "logged_status": "success",
+      "exact_stdout": true,
+      "exact_utf8": true,
+      "no_unlogged_stderr": true,
+      "bytes": 12550,
+      "end": false,
+      "more": true
+    },
+    {
+      "args": [
+        "read",
+        "known.md",
+        "--offset=10000"
+      ],
+      "exit": 0,
+      "logged_status": "success",
+      "exact_stdout": true,
+      "exact_utf8": true,
+      "no_unlogged_stderr": true,
+      "bytes": 12554,
+      "end": false,
+      "more": true
+    },
+    {
+      "args": [
+        "read",
+        "known.md",
+        "--offset=20000"
+      ],
+      "exit": 0,
+      "logged_status": "success",
+      "exact_stdout": true,
+      "exact_utf8": true,
+      "no_unlogged_stderr": true,
+      "bytes": 7035,
+      "end": true,
+      "more": false
+    },
+    {
+      "args": [
+        "read",
+        "missing.md"
+      ],
+      "exit": 1,
+      "logged_status": "error",
+      "exact_stdout": true,
+      "exact_utf8": true,
+      "no_unlogged_stderr": true,
+      "bytes": 181,
+      "end": false,
+      "more": false
+    },
+    {
+      "args": [
+        "read",
+        "../outside.md"
+      ],
+      "exit": 1,
+      "logged_status": "error",
+      "exact_stdout": true,
+      "exact_utf8": true,
+      "no_unlogged_stderr": true,
+      "bytes": 48,
+      "end": false,
+      "more": false
+    },
+    {
+      "args": [
+        "search",
+        "résumé"
+      ],
+      "exit": 0,
+      "logged_status": "success",
+      "exact_stdout": true,
+      "exact_utf8": true,
+      "no_unlogged_stderr": true,
+      "bytes": 11446,
+      "end": false,
+      "more": true
+    },
+    {
+      "args": [
+        "list",
+        "."
+      ],
+      "exit": 0,
+      "logged_status": "success",
+      "exact_stdout": true,
+      "exact_utf8": true,
+      "no_unlogged_stderr": true,
+      "bytes": 45,
+      "end": true,
+      "more": false
+    }
+  ],
+  "scope": "Exact stdout/UTF8 accounting, continuation/end, search/list, missing-file and outside-root failures; no semantic or security certification"
+}
