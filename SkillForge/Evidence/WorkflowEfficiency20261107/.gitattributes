@@ -1,2 +1,4 @@
 # Evidence hashes and copied checker/fixture bytes must survive checkout unchanged.
-* -text
+* -text whitespace=cr-at-eol
+# Captured outputs retain original whitespace as part of their tested identity.
+solutions/** -whitespace
