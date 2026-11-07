@@ -1,0 +1,33 @@
+{
+  "scope": "behavioral",
+  "required_checks": [
+    {
+      "kind": "outcome",
+      "description": "Trace prior decisions/current applicability and triage candidate families",
+      "id": "inventory"
+    },
+    {
+      "kind": "behavioral_execution",
+      "description": "Run informative matched reassessment with measured benefit and grounded decisions",
+      "id": "comparison"
+    },
+    {
+      "kind": "outcome",
+      "description": "Apply frozen rule and retain only supported improvement",
+      "id": "disposition"
+    },
+    {
+      "kind": "preservation",
+      "description": "Protect current runtime, historical records and scoped claims",
+      "id": "preservation"
+    }
+  ],
+  "scope_basis": {
+    "sha256": "adcd48773f8783f5cefd6f2ec6fc1b3cf2a6de763ceca0b597da0c338f7d4ca3",
+    "quote": "rerun informative comparisons and integrate ideas into the skill if better than baseline",
+    "path": "request.txt"
+  },
+  "depth": "focused",
+  "requested_result": "Review SkillForge historical candidates, execute informative reassessment and integrate only supported benefit on same branch",
+  "schema_version": 1
+}
