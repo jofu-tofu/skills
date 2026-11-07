@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "valid": true,
+  "contract_sha256": "f33573f68164eca82725e489878c2b9649c31f3648d28df0ae791ca8eccbfe95",
+  "candidate_decision": "retain_baseline",
+  "task_status": "complete",
+  "unresolved": [],
+  "next_actions": []
+}

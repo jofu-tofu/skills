@@ -1,0 +1,26 @@
+{
+  "improvement_id": "WorkflowEfficiency20261107",
+  "parent_attempt": null,
+  "workflow": "UpdateSkill",
+  "baseline": "244434c6476f6678fb1cca7fa1193129f54ae1de",
+  "candidates": {
+    "v1": "b2a8420",
+    "v2": "8c84929"
+  },
+  "hypothesis": {
+    "observed_failure": null,
+    "reproduction": "not_applicable",
+    "desired_gain": "Less actual effort with sound outcomes",
+    "smallest_change": "V1 reuse guidance, then V2 optional prose templates"
+  },
+  "targeted_failure": null,
+  "decision": "rejected",
+  "retained": "baseline",
+  "reason": "Protocol and Amendment rules fail; complete bounded comparison supports no-change",
+  "evidence": [
+    "Report.md",
+    "summary.json",
+    "final-verification.json"
+  ],
+  "next_experiment": "Compare applicable qualified checker reuse versus regeneration, including changed-contract stale-evidence control"
+}

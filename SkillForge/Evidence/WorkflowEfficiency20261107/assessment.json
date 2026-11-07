@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "f33573f68164eca82725e489878c2b9649c31f3648d28df0ae791ca8eccbfe95",
+  "candidate_decision": "retain_baseline",
+  "checks": [
+    {
+      "id": "result",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Report.md",
+          "sha256": "45b3375b548c06ea002347470de0b694677a9df3b000339cc0daa438a2c3bb3e"
+        },
+        {
+          "path": "summary.json",
+          "sha256": "3d3c73603be9b8d37e7587789af222ba3eed9da25842bc93da0b8b45d17eb1a0"
+        },
+        {
+          "path": "qualification.json",
+          "sha256": "1b53a310c5528b4a229f3c0d85500ca402df51ab025fb9e2e9746cb96bf72150"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "results.json",
+          "sha256": "9062d1511f595b1a442f06f18de7a6f6e9516e462b02bd5290b6e68ef88c7744"
+        },
+        {
+          "path": "final-verification.json",
+          "sha256": "3a61eb1fcdf0941e46781793cdb59be62a045644e6791241d98b93cd494e936a"
+        },
+        {
+          "path": "raw-manifest.json",
+          "sha256": "5fbc9478ef8ca21125f8e5618d4d0d341e9e9dcc23d3ef32471ad662ebea7552"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Report.md",
+          "sha256": "45b3375b548c06ea002347470de0b694677a9df3b000339cc0daa438a2c3bb3e"
+        },
+        {
+          "path": "summary.json",
+          "sha256": "3d3c73603be9b8d37e7587789af222ba3eed9da25842bc93da0b8b45d17eb1a0"
+        },
+        {
+          "path": "final-verification.json",
+          "sha256": "3a61eb1fcdf0941e46781793cdb59be62a045644e6791241d98b93cd494e936a"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}

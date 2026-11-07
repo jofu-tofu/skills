@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Execute bounded workflow-effort comparison and retain a supported simplification or baseline with truthful limits",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "9d8af7312ef84346b8c0af598a1159333c12099b25f54de244ce00d2c7437004",
+    "quote": "Improve actual time/context/tool effort needed to deliver equally sound outcomes. Audit current routes and real traces, including operational-efficiency and Prompting comparisons. Challenge unnecessary reads, repeated checks, records, handoffs and mandatory procedure overhead. Compare a focused simplification against the current method on matched representative tasks, preserving outcome quality, uncertainty handling and completion. Returned text bytes alone are not total tokens or elapsed savings; record real available costs and variability. Keep changes focused on workflow orchestration and operational behavior."
+  },
+  "required_checks": [
+    {
+      "id": "result",
+      "kind": "outcome",
+      "description": "Evidence-grounded bounded retain/reject decision with costs and limits"
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Matched actual workflow and downstream executions with qualified checks"
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Protected outcomes, scope, uncertainty and completion preserved"
+    }
+  ]
+}

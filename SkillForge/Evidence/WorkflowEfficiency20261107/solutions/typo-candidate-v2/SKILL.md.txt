@@ -1,0 +1,6 @@
+---
+name: TinySkill
+description: Report JSON.
+---
+# TinySkill
+Report the output exactly; preserve null as unknown.
