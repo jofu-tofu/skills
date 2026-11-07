@@ -1,0 +1,67 @@
+diff --git a/SkillForge/Evidence/DecisionMap.md b/SkillForge/Evidence/DecisionMap.md
+new file mode 100644
+index 0000000..7175dd3
+--- /dev/null
++++ b/SkillForge/Evidence/DecisionMap.md
+@@ -0,0 +1,14 @@
++# Decision evidence map
++
++Selective leads for SkillForge, checked 2026-11-07. Read the source before reusing a conclusion. This is neither a complete archive nor qualification of the current combined package. [Attempt index](../Improvements/Index.md) retains older history; [validation scope](ValidationSummary.md) separates release evidence and unsupported claims.
++
++| Present question | Evidence and observation | Applicability / decision implication |
++|---|---|---|
++| Does explicit alternative generation improve actual solutions? | [Real Prompting comparison](ExperimentMemory20261107/Sources/RealSkillComparison.md): rc.9/rc.10 both yield useful caches and splits; downstream checks pass; cache tradeoffs differ. | Selected real Prompting tasks, one author per arm/scope. No general superiority. Focused context arm did not load GenerateAlternatives; do not attribute its layout to that procedure. |
++| Did the focused trigger repair establish benefit? | [Activation follow-up](ExperimentMemory20261107/Sources/Activation.md): actual read → comparison → implementation; 5/5 executor checks each; candidate classifier bytes higher. | rc.9 versus repaired candidate, not the separately updated efficiency installation. Supports activation/preservation on this task; loading and solution superiority remain unsupported. |
++| Should identical lesson packets receive more selector trials? | [Discriminating experiment](ExperimentMemory20261107/Sources/Discriminating.md): all three methods inspect identical packets and stop/reframe; repair outcomes also tie. | Historical checkpoint, not autonomous orchestration reliability. Compare delivered treatments before repeating. Ordinary-history versus common-packet question remains distinct; missing arm/transcript provenance stays unknown. |
++| Does an earlier failure mean the final target failed? | [Discriminating report audit history](ExperimentMemory20261107/Sources/Discriminating.md): first audit wrongly demanded PlanChange; corrected exposure audit preserves outcome scores. [Operational efficiency](ExperimentMemory20261107/Sources/OperationalEfficiency.md) preserves initial runtime limits. | Distinguish runner/checker execution from established target observations. Inspect original and corrected evidence; do not delete failures or infer outcomes from a process exit alone. |
++| Is a historical “uninstalled” recommendation current? | [Validation integration note](ValidationSummary.md): 2026-11-07 user-authorized draft integration supersedes deployment status only. | Old reports' trial-time decisions remain intact. Integration does not establish comparative benefit or validate untested combinations. Verify current source version separately when needed. |
++| Can compact workflow guidance claim general cost savings? | [Operational-efficiency results](ExperimentMemory20261107/Sources/OperationalEfficiency.md): matched useful outcomes tie; full-task token usage increased. | Distinguish shorter instructions from observed task cost. Use workload-specific outcomes and costs; unknown billing remains unknown. |
++
++Source copies are portable report-level evidence, not full raw trial provenance. [Source manifest](ExperimentMemory20261107/sources.json) gives original project-relative paths and SHA-256. Raw traces remain in the project; unavailable underlying evidence limits any stronger claim. These sources were chosen for the present reuse experiment, not a complete historical review.
+diff --git a/SkillForge/Procedures/PlanChange.md b/SkillForge/Procedures/PlanChange.md
+index 19bc7c6..4510bf3 100644
+--- a/SkillForge/Procedures/PlanChange.md
++++ b/SkillForge/Procedures/PlanChange.md
+@@ -32,7 +32,7 @@ Skip for assessment-only work, typo/formatting maintenance, a fixed mechanical m
+ 
+ Keep this decision brief and within the task budget; it is not a mandatory literature review.
+ 
+-1. Name the unresolved question that could change which improvement to try. Inspect relevant existing evidence first: prior attempts, target references and research summaries. Check relevance and limits; do not load the whole archive.
++1. Name the unresolved question that could change which improvement to try. Inspect relevant existing evidence first: prior attempts, target references and research summaries. When prior experiments may change trial selection, use [ReuseEvidence](ReuseEvidence.md) to check provenance, applicability and superseded conclusions; record the decision effect in this plan. Do not load the whole archive.
+ 2. If a consequential question remains and academic evidence could inform it, search academic literature before selecting the change. Bound the search to the question and available budget; prefer primary papers and inspect methods, task conditions and limitations before transferring a finding. Stop when evidence is sufficient to choose the next bounded step, or the search budget is reached.
+ 3. Record the question, evidence consulted, implications for candidate changes and uncertainty. If no new search is useful, record why existing evidence is sufficient or literature would not inform this decision. If access or budget prevents a useful search, record that limitation separately; do not call the evidence sufficient.
+ 4. Feed findings into change ranking, including a no-change option. Treat transfer to the target skill as a hypothesis to evaluate, not proven benefit. When incorporating findings, follow [KnowledgeIntegration](../Standards/KnowledgeIntegration.md). Reuse evidence for [DesignMeasurement](DesignMeasurement.md) when applicable; its measurement research requirement remains independent.
+diff --git a/SkillForge/Procedures/RecordLearning.md b/SkillForge/Procedures/RecordLearning.md
+index 068f2fe..574c4e5 100644
+--- a/SkillForge/Procedures/RecordLearning.md
++++ b/SkillForge/Procedures/RecordLearning.md
+@@ -13,6 +13,7 @@ Internal procedure; called by workflows, not automatically loaded at entry.
+ 1. Preserve raw evidence and links to exact versions.
+ 2. Record observations separately from interpretations and decisions. Preserve the owning workflow's task status, unresolved required outcomes and next action separately from candidate retention; recording a `continue` decision does not close the task.
+ 3. Index every recorded attempt, including failed, inconclusive and unexecuted attempts. Use the evaluation workspace's index for assessment-only work; otherwise use the target's attempt index. Update the retained-version pointer only when a retention decision exists.
++   Make the entry searchable by decision/outcome and tested conditions: source/version, observation, interpretation, applicability limits and next action. Link dated corrections to the exact conclusion they supersede; do not replace old observations or let deployment status imply benefit. Reuse an adequate existing index format. [ReuseEvidence](ReuseEvidence.md) consumes these leads before later trials; a compact entry and source link are enough.
+    For broad improvement, preserve the parent coverage inventory and structural findings separately from round decisions. Record each round's resolved and remaining outcomes, next useful action and any scope amendment. A passing sample/no-change record must not become a whole-skill complete pointer while required coverage is unresolved. Keep reusable criteria and structural rationale retrievable in the improved skill, with raw evidence referenced externally when appropriate.
+ 4. Update reusable criteria only with supported reasons; preserve prior versions.
+    Retain measurement specifications, qualification evidence and scope, rejected alternatives, and the next discriminating experiment. Changed measurement versions require an explicit comparison or rerun; do not silently compare unlike scores.
+diff --git a/SkillForge/Procedures/ReuseEvidence.md b/SkillForge/Procedures/ReuseEvidence.md
+new file mode 100644
+index 0000000..b41ee1b
+--- /dev/null
++++ b/SkillForge/Procedures/ReuseEvidence.md
+@@ -0,0 +1,16 @@
++# ReuseEvidence
++
++**Input:** Present decision/question, target and measure versions, accessible attempt index and source records.
++**Output:** A brief reuse note in the existing plan: consulted evidence, applicability, effect on the decision and remaining uncertainty. No separate database or mandatory artifact.
++
++Called by PlanChange when prior evidence may change trial selection. Keep maintenance short paths unchanged. Use the target's existing index; SkillForge's [evidence map](../Evidence/DecisionMap.md) is a bounded example, not a required archive for other skills.
++
++1. State the decision before searching. Search the index for outcome, failure mechanism and task conditions, including failed/tied attempts and rival explanations. Open only plausible source records; broaden once if a consequential question remains. Record the searched scope when nothing is found; absence from an index is not evidence that no experiment exists.
++2. Check each consequential finding against its source: observation, tested version/task, measure/reference, and limits. Separate observed behavior from the author's interpretation and retention/deployment decision. Missing or unverifiable provenance makes the finding a lead, not established support. A source hash verifies identity, not truth.
++3. Check applicability to this decision. Changed versions, inputs, tools, measures or outcome levels require a reasoned bridge or a new check. An activation result cannot establish solution benefit; a repaired checker cannot retroactively turn missing observations into passes. A tie can rule out repeating an unchanged contrast without proving equivalence.
++4. Follow dated corrections and supersession links. Name exactly which claim changed; preserve unaffected observations. New deployment status does not rewrite comparative benefit, and a newer record does not automatically supersede every older finding. If records conflict without resolution, retain the conflict.
++5. Record what this changes: reuse an applicable check, reject/revise a candidate, stop a saturated trial, narrow a claim, or run the smallest missing check. If it changes nothing, say so. Return to PlanChange; do not repeat an experiment just to regenerate known evidence. Keep source IDs/paths and unresolved gaps sufficient for the next operator.
++
++RecordLearning owns indexing the new observation and decision, including failures. Assessment-only work writes its reuse note in the evaluation workspace. Do not modify historical sources to make them agree with current conclusions.
++
++Completion: a reader can locate support and explain why it applies, what decision changed (or did not), and what still requires evidence. Merely finding relevant words or producing a longer summary is not success. This procedure's comparative benefit remains subject to the linked attempt's results.

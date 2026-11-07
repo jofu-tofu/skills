@@ -1,0 +1,194 @@
+{
+  "workflow": "UpdateSkill",
+  "suite_version": "experiment-memory-v1",
+  "improvement_id": "ExperimentMemory20261107",
+  "cost": null,
+  "counts": {
+    "fail": 0,
+    "unit": "question judgments across two portfolios, not ten independent trials",
+    "pass": 10,
+    "unverified": 0
+  },
+  "regression_coverage": "Review.md and preservation.json",
+  "limitations": [
+    "One portfolio per arm; same vendor; retrospective sources, no historical reruns",
+    "Procedural isolation and cued candidate exposure; no causal adoption conclusion",
+    "Actual latency, usage and cost unavailable; no efficiency claim"
+  ],
+  "loop_observations": [
+    {
+      "evidence": [
+        "candidate-output.md",
+        "ExposureCaveat.md"
+      ],
+      "stage": "activation",
+      "attribution": "unknown",
+      "observation": "Reader reports exposure; coordinator cue confounds spontaneous activation and raw traces unavailable",
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        "Protocol.md",
+        "grades.json"
+      ],
+      "stage": "selection",
+      "attribution": "observed",
+      "observation": "Tied decisions meet frozen no-change rule",
+      "status": "supported"
+    }
+  ],
+  "mode": "exploratory assessment",
+  "completed_trials": 2,
+  "targeted_failure": null,
+  "snapshots": {
+    "cases": "questions.json",
+    "baseline": "244434c6476f6678fb1cca7fa1193129f54ae1de",
+    "candidate": "12ecc7c",
+    "checker": "qualification-grades.json",
+    "measurement": "Protocol.md M1"
+  },
+  "requested_trials": 2,
+  "candidate_decision": "retain_baseline",
+  "decision": "inconclusive",
+  "runs": [
+    {
+      "execution_status": "completed",
+      "checks": [
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H1",
+          "observation": "Both report 58/58, 6/6 and justified stop/reframe for all methods; retain baseline; deny superiority/equivalence and causal timing rank; specify an unrehearsed shortfall, activated distinct intervention and outcome/cost comparison.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "baseline-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        },
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H2",
+          "observation": "Both distinguish original no-install recommendations from November 7 authorized integration; preserve U10/U11, compact Update and preflight, tied benefit limits, and expressly qualify status as documented rather than live verification.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "baseline-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        },
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H3",
+          "observation": "Both separate original focused non-exposure from repaired event 10/23/25 exposure; report both 5/5 and the unfavorable/mixed loading results using supported raw values or percentages; treat bytes as proxy and single-pair times as descriptive.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "baseline-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        },
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H4",
+          "observation": "Both identify the wrong universal PlanChange requirement, valid EvaluateSkill exposure, preserved initial audit and unchanged behavioral scores; separate setup/invocation errors from completed target outcomes and report tied 13/13 external checks and review judgments.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "baseline-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        },
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H5",
+          "observation": "Both withhold selector-arm attribution and lesson causality from subjects' limited evidence, identify missing transcripts/mappings/source links, reject unchanged selector repeats, and preserve the separate ordinary-history/common-packet question.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "baseline-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        }
+      ],
+      "role": "acceptance",
+      "configuration": "baseline",
+      "trial": 1,
+      "case_id": "historical-portfolio"
+    },
+    {
+      "execution_status": "completed",
+      "checks": [
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H1",
+          "observation": "Both report 58/58, 6/6 and justified stop/reframe for all methods; retain baseline; deny superiority/equivalence and causal timing rank; specify an unrehearsed shortfall, activated distinct intervention and outcome/cost comparison.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "candidate-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        },
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H2",
+          "observation": "Both distinguish original no-install recommendations from November 7 authorized integration; preserve U10/U11, compact Update and preflight, tied benefit limits, and expressly qualify status as documented rather than live verification.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "candidate-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        },
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H3",
+          "observation": "Both separate original focused non-exposure from repaired event 10/23/25 exposure; report both 5/5 and the unfavorable/mixed loading results using supported raw values or percentages; treat bytes as proxy and single-pair times as descriptive.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "candidate-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        },
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H4",
+          "observation": "Both identify the wrong universal PlanChange requirement, valid EvaluateSkill exposure, preserved initial audit and unchanged behavioral scores; separate setup/invocation errors from completed target outcomes and report tied 13/13 external checks and review judgments.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "candidate-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        },
+        {
+          "status": "pass",
+          "reason": "Applicable historical-source constraints; valid alternatives accepted.",
+          "id": "H5",
+          "observation": "Both withhold selector-arm attribution and lesson causality from subjects' limited evidence, identify missing transcripts/mappings/source links, reject unchanged selector repeats, and preserve the separate ordinary-history/common-packet question.",
+          "measurement_id": "M1-source-grounded-v1",
+          "evidence": [
+            "candidate-output.md",
+            "reference.json",
+            "grades.json"
+          ]
+        }
+      ],
+      "role": "acceptance",
+      "configuration": "candidate",
+      "trial": 1,
+      "case_id": "historical-portfolio"
+    }
+  ],
+  "claim": "Bounded historical evidence retrieval and decision use; no comparative benefit established"
+}

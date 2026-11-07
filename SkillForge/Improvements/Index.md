@@ -5,6 +5,8 @@ updated: 2026-11-03
 ---
 # Proposed SkillForge improvement records
 
+Historical evidence reuse, 2026-11-07: [comparison and no-change decision](../Evidence/ExperimentMemory20261107/Results.md). Baseline and candidate each pass five held-out historical decision questions; no consequential baseline error corrected. Extra reuse procedure/map withdrawn, candidate patch and source-backed references preserved. Exposure was cued and costs unavailable; no spontaneous-adoption or efficiency claim. Revisit only after an ordinary-search miss or meaningful retrieval-cost gap, not more unchanged repeats.
+
 Focused structural activation rc.11: [repair and real-skill comparison](FocusedActivation/Record.md). Actual activation succeeds, outcomes tie, loading benefit is absent; keep experimental and uninstalled.
 
 Idea-generation candidate: [mechanism alternatives and overhead comparison](IdeaGeneration/Record.md). Six matched component pairs tie on executable solution quality; the candidate explicitly explores additional structural options. Measured planning overhead and full-caller evidence remain scoped to synthetic tasks; no general superiority claim.
