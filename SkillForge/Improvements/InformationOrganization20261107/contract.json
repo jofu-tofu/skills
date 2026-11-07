@@ -1,0 +1,28 @@
+{
+  "scope": "behavioral",
+  "scope_basis": {
+    "quote": "Compare a bounded structural change with current navigation using real tasks and verify behavior, discoverability, link integrity, required context and maintenance paths.",
+    "sha256": "3b3e6ecbc7506d37f47b843e9b501856b09f29aee90656489f6a9501fbd9a15c",
+    "path": "request.txt"
+  },
+  "required_checks": [
+    {
+      "kind": "outcome",
+      "id": "result",
+      "description": "Evidence-based retain/reject decision under frozen navigation benefit rule"
+    },
+    {
+      "kind": "behavioral_execution",
+      "id": "execution",
+      "description": "Matched navigation and actual maintenance execution"
+    },
+    {
+      "kind": "preservation",
+      "id": "preservation",
+      "description": "Required decisions, owners, links and minimal edit preserved in retained version"
+    }
+  ],
+  "schema_version": 1,
+  "depth": "focused",
+  "requested_result": "Compare a bounded runtime navigation change and retain only supported improvement, preserving required decisions and maintenance behavior."
+}
