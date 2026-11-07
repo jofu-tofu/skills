@@ -8,6 +8,8 @@
 - [Tradeoffs](../Quality/UpdateSkill/Tradeoffs.md): before planning/deciding; [Feedback](../Quality/UpdateSkill/Feedback.md): before evaluation; [ChallengeCases](../Quality/UpdateSkill/ChallengeCases.md): when designing cases.
 - Read each linked procedure when called. Procedures are reusable operations, not separate required agent calls; reference adequate existing records.
 
+Treat a required read as acquiring usable guidance, not repeating a tool call. Reuse complete, unchanged instructions already available in the current context. Reread affected sections after edits, truncation, context loss or a scope change; do not rely on memory when their content is unavailable. Load dependencies for the next decision, not every possible later stage. Batch independent needed reads within the tool's output limit so truncation does not cause recovery work. Reuse the current plan and evidence links for handoffs; do not copy them into new prose records unless a consumer needs a separate artifact. Required machine-readable contracts, qualification, evaluation and completion checks still apply.
+
 ## Purpose and scope
 
 Deliver a scoped revision and a justified retain/reject/defer decision while preserving required existing behavior.
