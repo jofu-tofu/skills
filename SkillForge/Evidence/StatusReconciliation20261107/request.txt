@@ -1,0 +1,1 @@
+Continue the proposed narrower experiment: can we prevent stale recommendations without adding unnecessary work? Test current integration status on fresh cases, measure correct actions and reading effort, confirm gains before integrating.

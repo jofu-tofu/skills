@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Execute the approved narrow stale-status experiment and retain only supported improvement",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "fd63254db503663581dc12cac476d0ea14a1dab3f985852c06e2cdb38c4c8334",
+    "quote": "can we prevent stale recommendations without adding unnecessary work?"
+  },
+  "required_checks": [
+    {
+      "id": "design",
+      "kind": "outcome",
+      "description": "Freeze relevant cases, measures and adoption rule with qualified controls"
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Execute matched development and rule-required confirmation or historical diagnostic"
+    },
+    {
+      "id": "decision",
+      "kind": "outcome",
+      "description": "Apply unchanged acceptance rule and preserve rejected or supported candidate evidence"
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Preserve baseline/source identities and scoped runtime behavior"
+    }
+  ]
+}
