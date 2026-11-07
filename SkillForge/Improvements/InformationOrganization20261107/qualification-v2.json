@@ -1,0 +1,13 @@
+{
+  "status": "qualified",
+  "scope": "exact bounded emitted page bytes; received-text inference additionally requires no host truncation in execution",
+  "pages": 3,
+  "characters": 28585,
+  "checks": [
+    "stdout equals logged text",
+    "bytes independently counted",
+    "page cap",
+    "lossless concatenation",
+    "end marker"
+  ]
+}
