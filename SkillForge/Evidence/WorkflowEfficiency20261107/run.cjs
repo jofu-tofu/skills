@@ -8,10 +8,11 @@ function write(f,x){fs.writeFileSync(f,typeof x==='string'?x:JSON.stringify(x,nu
 async function main(){
  if(action==='prepare'){
   if(fs.existsSync(root))throw Error('Preserve prior preparation');fs.mkdirSync(root,{recursive:true});
-  copy('C:/Users/fujos/Github/skills/SkillForge',p.join(root,'frozen/baseline'));
-  copy(p.join(project,'WorkflowEfficiency20261107/skills/SkillForge'),p.join(root,'frozen/candidate'));
-  copy(p.join(project,'20-working-T1-T3/OperationalEfficiency20261106/authorized-v2/baseline/evidence/baseline'),p.join(root,'frozen/ledger'));
-  copy(p.join(project,'20-working-T1-T3/RealSkillComparison20261106/frozen/target'),p.join(root,'frozen/prompting'));
+  copy(process.argv[4]||'C:/Users/fujos/Github/skills/SkillForge',p.join(root,'frozen/baseline'));
+  copy(process.argv[5]||p.join(project,'WorkflowEfficiency20261107/skills/SkillForge'),p.join(root,'frozen/candidate'));
+  copy(p.join(__dirname,'fixtures/LedgerSkill'),p.join(root,'frozen/ledger'));
+  fs.renameSync(p.join(root,'frozen/ledger/SKILL.txt'),p.join(root,'frozen/ledger/SKILL.md'));
+  copy(process.argv[6]||p.join(project,'20-working-T1-T3/RealSkillComparison20261106/frozen/target'),p.join(root,'frozen/prompting'));
   write(p.join(root,'frozen/identities.json'),Object.fromEntries(['baseline','candidate','ledger','prompting'].map(n=>[n,manifest(p.join(root,'frozen',n))])));return;
  }
  if(!/^(ledger|prompting|typo)-(baseline|candidate)(-repeat|-v2)?$/.test(action))throw Error('Invalid action');

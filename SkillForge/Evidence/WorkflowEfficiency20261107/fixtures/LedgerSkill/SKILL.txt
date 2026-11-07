@@ -1,0 +1,6 @@
+---
+name: LedgerSkill
+description: Total signed integer ledger entries from JSON.
+---
+# LedgerSkill
+Read Intent.md, then run node total.cjs INPUT.json. Report the resulting JSON exactly.

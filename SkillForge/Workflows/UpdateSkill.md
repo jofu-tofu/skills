@@ -8,8 +8,6 @@
 - [Tradeoffs](../Quality/UpdateSkill/Tradeoffs.md): before planning/deciding; [Feedback](../Quality/UpdateSkill/Feedback.md): before evaluation; [ChallengeCases](../Quality/UpdateSkill/ChallengeCases.md): when designing cases.
 - Read each linked procedure when called. Procedures are reusable operations, not separate required agent calls; reference adequate existing records.
 
-For focused attempts, prose templates are optional layouts, not an additional required reading chain. Record the fields required by the procedures in an adequate existing plan/report; load a prose template only when a needed field is unclear or a consumer requires that format. This applies to linked quality-profile and plan/results/decision templates, including redirect pages. It does not waive intent, shared/profile requirements, called procedures, relevant standards, machine-readable schemas, the completion-contract format, qualification evidence, evaluation or the completion check. Preserve raw evidence and link it once rather than duplicating it across handoff records.
-
 ## Purpose and scope
 
 Deliver a scoped revision and a justified retain/reject/defer decision while preserving required existing behavior.

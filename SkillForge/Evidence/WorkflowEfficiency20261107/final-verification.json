@@ -1,0 +1,37 @@
+{
+  "gates": [
+    {
+      "name": "ledger-baseline",
+      "exit_code": 0,
+      "valid": true,
+      "task_status": "complete"
+    },
+    {
+      "name": "ledger-candidate",
+      "exit_code": 0,
+      "valid": true,
+      "task_status": "complete"
+    },
+    {
+      "name": "ledger-candidate-v2",
+      "exit_code": 0,
+      "valid": true,
+      "task_status": "complete"
+    },
+    {
+      "name": "prompting-baseline",
+      "exit_code": 0,
+      "valid": true,
+      "task_status": "complete"
+    },
+    {
+      "name": "prompting-candidate",
+      "exit_code": 0,
+      "valid": true,
+      "task_status": "complete"
+    }
+  ],
+  "portable_ledger_fixture_identical": true,
+  "portable_prompting_checker_identical": true,
+  "all_external_pass": true
+}

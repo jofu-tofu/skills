@@ -15,7 +15,7 @@ for(const name of fs.readdirSync(p.join(root,'trials'))){const dir=p.join(root,'
   external={vm,cli,all_pass:vm.every(c=>c.status==='pass')&&cli.every(c=>c.status==='pass'),success_read_counts:vm.filter(c=>c.exit===0).map(c=>c.reads)};
  }else if(name.startsWith('prompting')){
   const test=cp.spawnSync('bun',['test'],{cwd:p.join(dir,'target'),encoding:'utf8',windowsHide:true});fs.writeFileSync(p.join(out,'tests.txt'),test.stdout+test.stderr);
-  const consumer=cp.spawnSync('bun',[p.join(project,'20-working-T1-T3/RealSkillComparison20261106/consumer.ts'),p.join(dir,'target'),p.join(out,'consumer')],{encoding:'utf8',windowsHide:true});fs.writeFileSync(p.join(out,'consumer-stdout.txt'),consumer.stdout);fs.writeFileSync(p.join(out,'consumer-stderr.txt'),consumer.stderr);
+  const consumer=cp.spawnSync('bun',[p.join(__dirname,'check-prompting.ts'),p.join(dir,'target'),p.join(out,'consumer')],{encoding:'utf8',windowsHide:true});fs.writeFileSync(p.join(out,'consumer-stdout.txt'),consumer.stdout);fs.writeFileSync(p.join(out,'consumer-stderr.txt'),consumer.stderr);
   external={tests_exit:test.status,consumer_exit:consumer.status,consumer:fs.existsSync(p.join(out,'consumer/results.json'))?JSON.parse(fs.readFileSync(p.join(out,'consumer/results.json'))):null,all_pass:test.status===0&&consumer.status===0};
  }else{const expected='---\nname: TinySkill\ndescription: Report JSON.\n---\n# TinySkill\nReport the output exactly; preserve null as unknown.\n';external={all_pass:fs.readFileSync(p.join(dir,'target/SKILL.md'),'utf8')===expected&&changed.length===1,evidence_files:fs.readdirSync(p.join(dir,'evidence'))};}
  if(!cached)external.elapsed_seconds=(performance.now()-externalStart)/1000;

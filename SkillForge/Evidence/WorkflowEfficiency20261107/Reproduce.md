@@ -13,6 +13,19 @@ Use a new project root for a new replication. A timeout is preserved as unavaila
 execution, never silently retried. The original user authorized evaluation calls;
 future operators must use their own applicable authority.
 
+Portable preparation accepts explicit sources:
+`node run.cjs NEW_PROJECT prepare BASELINE_SKILLFORGE CANDIDATE_SKILLFORGE PROMPTING`.
+Check out the named commits and provision Prompting's locked dependencies first.
+The bundled Ledger fixture matches the original frozen input. The bundled
+check-prompting.ts is byte-identical to the tested historical consumer (verified
+before copying); audit uses it directly. This packaging change does not alter
+any existing trial, input, checker logic or score.
+For a fresh V2 replication, supply commit 8c84929's SkillForge as the candidate
+source and use ordinary candidate labels in the new project; the original -v2
+labels preserve its adaptive place in this experiment. Without the historical
+research folder, qualify.cjs verifies the packaged checker hash against the
+committed qualification reference instead of inventing a new qualification run.
+
 Baseline SkillForge comes from skills commit
 244434c6476f6678fb1cca7fa1193129f54ae1de; candidate from b2a8420's UpdateSkill
 paragraph. The rest of the method is identical. The historical frozen Prompting
