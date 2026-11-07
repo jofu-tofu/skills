@@ -1,0 +1,12 @@
+{
+  "status": "completed",
+  "exit": 0,
+  "seconds": 357.615,
+  "usage": {
+    "input_tokens": 861691,
+    "cached_input_tokens": 800896,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 10931,
+    "reasoning_output_tokens": 1662
+  }
+}

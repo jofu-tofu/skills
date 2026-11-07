@@ -1,0 +1,40 @@
+const fs=require('node:fs'),p=require('node:path');
+const {manifest,hash}=require('./run.cjs'),here=__dirname,project=p.resolve(process.argv[2]),raw=p.join(project,'MeasurementOptimization20261107/raw');
+const read=f=>JSON.parse(fs.readFileSync(f,'utf8')),frozen=read(p.join(here,'freeze.json')),checks=[];
+function check(id,pass,detail=null){checks.push({id,pass:!!pass,detail});}
+for(const [f,h]of Object.entries(frozen.files))check('frozen-'+f,hash(fs.readFileSync(p.join(here,f)))===h);
+check('source-unchanged',JSON.stringify(manifest(p.join(raw,'source-target')))===JSON.stringify(frozen.source));
+const differences=Object.keys(frozen.methods.baseline).filter(f=>frozen.methods.baseline[f]!==frozen.methods.candidate[f]);
+check('only-declared-treatment',differences.length===2&&differences.includes('Procedures/DesignMeasurement.md')&&differences.includes('Templates/Quality/Measurement.md'),differences);
+const outcomes=read(p.join(here,'outcomes.json')),timings=read(p.join(here,'timings.json')),arms={};
+const median=a=>a.toSorted((a,b)=>a-b)[Math.floor(a.length/2)];
+const original=timings.filter(r=>r.arm==='original').map(r=>r.value?.milliseconds);
+check('three-original-timings',original.length===3&&original.every(x=>typeof x==='number'&&x>0));
+for(const arm of ['baseline','candidate']){
+ const dir=p.join(raw,'authors',arm),inputs=read(p.join(dir,'runner-inputs.json')),now=manifest(dir);
+ const changed=Object.keys(inputs).filter(f=>inputs[f]!==now[f]);
+ const protectedChanges=changed.filter(f=>!f.startsWith('target/Tools/'));
+ const existingTestChanges=changed.filter(f=>f.startsWith('target/')&&f.endsWith('.test.ts'));
+ check(arm+'-protected-inputs',protectedChanges.length===0&&existingTestChanges.length===0,{protectedChanges,existingTestChanges});
+ check(arm+'-task-identity',hash(fs.readFileSync(p.join(dir,'task.md')))===frozen.task_sha256);
+ check(arm+'-method-identity',JSON.stringify(manifest(p.join(dir,'method')))===JSON.stringify(frozen.methods[arm]));
+ const events=fs.readFileSync(p.join(dir,'runner-events.jsonl'),'utf8').split(/\r?\n/).flatMap(s=>{try{return[JSON.parse(s)];}catch{return[];}});
+ const commands=events.filter(e=>e.type==='item.completed'&&e.item?.type==='command_execution');
+ const text=commands.map(e=>e.item.aggregated_output||'').join('\n');
+ const exposure={entry:text.includes('# SkillForge'),workflow:text.includes('# UpdateSkill Workflow'),measurement:text.includes('# DesignMeasurement'),candidate_section:text.includes('## Qualification by intended use')};
+ check(arm+'-exposure',exposure.entry&&exposure.workflow&&exposure.measurement&&exposure.candidate_section===(arm==='candidate'));
+ const receipt=read(p.join(dir,'runner-receipt.json'));check(arm+'-completed',receipt.status==='completed');
+ const result=outcomes.find(r=>r.label===arm),tests=read(p.join(raw,'tests-'+arm+'.json'));
+ const runs=timings.filter(r=>r.arm===arm);check(arm+'-timing-available',runs.length===3&&runs.every(r=>r.exit===0&&r.value?.output_equal===true));
+ const ms=median(runs.map(r=>r.value?.milliseconds??Infinity)),gain=1-ms/median(original),decision=read(p.join(dir,'evidence/decision.json'));
+ const preserves=result?.result?.fail===0&&result?.result?.pass===23&&tests.exit===0;
+ const evidenceDir=p.join(here,'subjects',arm);fs.mkdirSync(evidenceDir,{recursive:true});
+ for(const f of ['final-report.md','decision.json'])fs.copyFileSync(p.join(dir,'evidence',f),p.join(evidenceDir,f));
+ const targetManifest=manifest(p.join(dir,'target'));fs.writeFileSync(p.join(evidenceDir,'target-manifest.json'),JSON.stringify(targetManifest,null,2)+'\n');
+ fs.writeFileSync(p.join(evidenceDir,'tests.json'),JSON.stringify(tests,null,2)+'\n');
+ fs.writeFileSync(p.join(evidenceDir,'execution.json'),JSON.stringify(receipt,null,2)+'\n');
+ const targetSource=fs.readFileSync(p.join(dir,'target/Tools/RenderTemplate.ts'));fs.writeFileSync(p.join(evidenceDir,'RenderTemplate.ts.txt'),targetSource);
+ arms[arm]={receipt,exposure,changed_inputs:changed,new_target_files:Object.keys(targetManifest).filter(f=>!frozen.source[f]),consumer_pass:result?.result?.pass??null,consumer_fail:result?.result?.fail??null,existing_tests_exit:tests.exit,median_ms:ms,improvement_fraction:gain,preserves,useful_optimization:preserves&&gain>=.20,author_decision:decision,event_sha256:hash(fs.readFileSync(p.join(dir,'runner-events.jsonl'))),target_renderer_sha256:hash(targetSource),commands:commands.length};
+}
+const result={audit_pass:checks.every(c=>c.pass),checks,original_median_ms:median(original),arms,interpretation:'Record correctness and useful-target outcomes separately from method benefit. A tie retains baseline; one author per method cannot establish a causal performance ranking.'};
+fs.writeFileSync(p.join(here,'audit.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));if(!result.audit_pass)process.exitCode=1;

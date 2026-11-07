@@ -1,0 +1,236 @@
+[
+  {
+    "label": "baseline",
+    "process": {
+      "command": [
+        "bun",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\consumer.ts",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\outcomes\\baseline\\target",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\outcomes\\baseline\\evidence",
+        "primary"
+      ],
+      "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\outcomes\\baseline",
+      "exit": 0,
+      "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\outcomes\\baseline\\evidence\\fixtures\\rendered.txt\n{\"variant\":\"primary\",\"checks\":[{\"id\":\"object-overload-zero-false\",\"status\":\"pass\"},{\"id\":\"fresh-data-same-template\",\"status\":\"pass\"},{\"id\":\"mutated-data-object\",\"status\":\"pass\"},{\"id\":\"json-overload\",\"status\":\"pass\"},{\"id\":\"yaml-overload\",\"status\":\"pass\"},{\"id\":\"edited-data-file\",\"status\":\"pass\"},{\"id\":\"same-size-restored-mtime-template-edit\",\"status\":\"pass\"},{\"id\":\"deleted-template\",\"status\":\"pass\"},{\"id\":\"recreated-template\",\"status\":\"pass\"},{\"id\":\"invalid-edited-template\",\"status\":\"pass\"},{\"id\":\"partial-initial\",\"status\":\"pass\"},{\"id\":\"same-size-restored-mtime-partial-edit\",\"status\":\"pass\"},{\"id\":\"removed-partial\",\"status\":\"pass\"},{\"id\":\"recreated-partial\",\"status\":\"pass\"},{\"id\":\"partial-context-varies\",\"status\":\"pass\"},{\"id\":\"helper-reregistration\",\"status\":\"pass\"},{\"id\":\"external-partial-preserved\",\"status\":\"pass\"},{\"id\":\"named-output-content\",\"status\":\"pass\"},{\"id\":\"missing-data-error\",\"status\":\"pass\"},{\"id\":\"malformed-json-error\",\"status\":\"pass\"},{\"id\":\"real-briefing-constraints-and-format\",\"status\":\"pass\"},{\"id\":\"empty-real-gate\",\"status\":\"pass\"},{\"id\":\"actual-cli-stdout\",\"status\":\"pass\"}],\"pass\":23,\"fail\":0}\n",
+      "stderr": "",
+      "error": null,
+      "seconds": 1.152
+    },
+    "result": {
+      "variant": "primary",
+      "checks": [
+        {
+          "id": "object-overload-zero-false",
+          "status": "pass"
+        },
+        {
+          "id": "fresh-data-same-template",
+          "status": "pass"
+        },
+        {
+          "id": "mutated-data-object",
+          "status": "pass"
+        },
+        {
+          "id": "json-overload",
+          "status": "pass"
+        },
+        {
+          "id": "yaml-overload",
+          "status": "pass"
+        },
+        {
+          "id": "edited-data-file",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-template-edit",
+          "status": "pass"
+        },
+        {
+          "id": "deleted-template",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-template",
+          "status": "pass"
+        },
+        {
+          "id": "invalid-edited-template",
+          "status": "pass"
+        },
+        {
+          "id": "partial-initial",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-partial-edit",
+          "status": "pass"
+        },
+        {
+          "id": "removed-partial",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-partial",
+          "status": "pass"
+        },
+        {
+          "id": "partial-context-varies",
+          "status": "pass"
+        },
+        {
+          "id": "helper-reregistration",
+          "status": "pass"
+        },
+        {
+          "id": "external-partial-preserved",
+          "status": "pass"
+        },
+        {
+          "id": "named-output-content",
+          "status": "pass"
+        },
+        {
+          "id": "missing-data-error",
+          "status": "pass"
+        },
+        {
+          "id": "malformed-json-error",
+          "status": "pass"
+        },
+        {
+          "id": "real-briefing-constraints-and-format",
+          "status": "pass"
+        },
+        {
+          "id": "empty-real-gate",
+          "status": "pass"
+        },
+        {
+          "id": "actual-cli-stdout",
+          "status": "pass"
+        }
+      ],
+      "pass": 23,
+      "fail": 0
+    }
+  },
+  {
+    "label": "candidate",
+    "process": {
+      "command": [
+        "bun",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\consumer.ts",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\outcomes\\candidate\\target",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\outcomes\\candidate\\evidence",
+        "primary"
+      ],
+      "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\outcomes\\candidate",
+      "exit": 0,
+      "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\outcomes\\candidate\\evidence\\fixtures\\rendered.txt\n{\"variant\":\"primary\",\"checks\":[{\"id\":\"object-overload-zero-false\",\"status\":\"pass\"},{\"id\":\"fresh-data-same-template\",\"status\":\"pass\"},{\"id\":\"mutated-data-object\",\"status\":\"pass\"},{\"id\":\"json-overload\",\"status\":\"pass\"},{\"id\":\"yaml-overload\",\"status\":\"pass\"},{\"id\":\"edited-data-file\",\"status\":\"pass\"},{\"id\":\"same-size-restored-mtime-template-edit\",\"status\":\"pass\"},{\"id\":\"deleted-template\",\"status\":\"pass\"},{\"id\":\"recreated-template\",\"status\":\"pass\"},{\"id\":\"invalid-edited-template\",\"status\":\"pass\"},{\"id\":\"partial-initial\",\"status\":\"pass\"},{\"id\":\"same-size-restored-mtime-partial-edit\",\"status\":\"pass\"},{\"id\":\"removed-partial\",\"status\":\"pass\"},{\"id\":\"recreated-partial\",\"status\":\"pass\"},{\"id\":\"partial-context-varies\",\"status\":\"pass\"},{\"id\":\"helper-reregistration\",\"status\":\"pass\"},{\"id\":\"external-partial-preserved\",\"status\":\"pass\"},{\"id\":\"named-output-content\",\"status\":\"pass\"},{\"id\":\"missing-data-error\",\"status\":\"pass\"},{\"id\":\"malformed-json-error\",\"status\":\"pass\"},{\"id\":\"real-briefing-constraints-and-format\",\"status\":\"pass\"},{\"id\":\"empty-real-gate\",\"status\":\"pass\"},{\"id\":\"actual-cli-stdout\",\"status\":\"pass\"}],\"pass\":23,\"fail\":0}\n",
+      "stderr": "",
+      "error": null,
+      "seconds": 0.936
+    },
+    "result": {
+      "variant": "primary",
+      "checks": [
+        {
+          "id": "object-overload-zero-false",
+          "status": "pass"
+        },
+        {
+          "id": "fresh-data-same-template",
+          "status": "pass"
+        },
+        {
+          "id": "mutated-data-object",
+          "status": "pass"
+        },
+        {
+          "id": "json-overload",
+          "status": "pass"
+        },
+        {
+          "id": "yaml-overload",
+          "status": "pass"
+        },
+        {
+          "id": "edited-data-file",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-template-edit",
+          "status": "pass"
+        },
+        {
+          "id": "deleted-template",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-template",
+          "status": "pass"
+        },
+        {
+          "id": "invalid-edited-template",
+          "status": "pass"
+        },
+        {
+          "id": "partial-initial",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-partial-edit",
+          "status": "pass"
+        },
+        {
+          "id": "removed-partial",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-partial",
+          "status": "pass"
+        },
+        {
+          "id": "partial-context-varies",
+          "status": "pass"
+        },
+        {
+          "id": "helper-reregistration",
+          "status": "pass"
+        },
+        {
+          "id": "external-partial-preserved",
+          "status": "pass"
+        },
+        {
+          "id": "named-output-content",
+          "status": "pass"
+        },
+        {
+          "id": "missing-data-error",
+          "status": "pass"
+        },
+        {
+          "id": "malformed-json-error",
+          "status": "pass"
+        },
+        {
+          "id": "real-briefing-constraints-and-format",
+          "status": "pass"
+        },
+        {
+          "id": "empty-real-gate",
+          "status": "pass"
+        },
+        {
+          "id": "actual-cli-stdout",
+          "status": "pass"
+        }
+      ],
+      "pass": 23,
+      "fail": 0
+    }
+  }
+]

@@ -1,0 +1,237 @@
+{
+  "audit_pass": true,
+  "checks": [
+    {
+      "id": "frozen-Protocol.md",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "frozen-consumer.ts",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "frozen-benchmark.ts",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "frozen-run.cjs",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "frozen-contract.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "frozen-qualification.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "frozen-source.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "source-unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "only-declared-treatment",
+      "pass": true,
+      "detail": [
+        "Procedures/DesignMeasurement.md",
+        "Templates/Quality/Measurement.md"
+      ]
+    },
+    {
+      "id": "three-original-timings",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "baseline-protected-inputs",
+      "pass": true,
+      "detail": {
+        "protectedChanges": [],
+        "existingTestChanges": []
+      }
+    },
+    {
+      "id": "baseline-task-identity",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "baseline-method-identity",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "baseline-exposure",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "baseline-completed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "baseline-timing-available",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "candidate-protected-inputs",
+      "pass": true,
+      "detail": {
+        "protectedChanges": [],
+        "existingTestChanges": []
+      }
+    },
+    {
+      "id": "candidate-task-identity",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "candidate-method-identity",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "candidate-exposure",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "candidate-completed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "id": "candidate-timing-available",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "original_median_ms": 1637.8667,
+  "arms": {
+    "baseline": {
+      "receipt": {
+        "status": "completed",
+        "exit": 0,
+        "seconds": 357.615,
+        "usage": {
+          "input_tokens": 861691,
+          "cached_input_tokens": 800896,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 10931,
+          "reasoning_output_tokens": 1662
+        }
+      },
+      "exposure": {
+        "entry": true,
+        "workflow": true,
+        "measurement": true,
+        "candidate_section": false
+      },
+      "changed_inputs": [
+        "target/Tools/RenderTemplate.ts"
+      ],
+      "new_target_files": [],
+      "consumer_pass": 23,
+      "consumer_fail": 0,
+      "existing_tests_exit": 0,
+      "median_ms": 1307.4975,
+      "improvement_fraction": 0.2017070131531461,
+      "preserves": true,
+      "useful_optimization": true,
+      "author_decision": {
+        "retain_target": true,
+        "claimed_benefit": "10.09% lower median elapsed time on the supplied 240-render benchmark (2075.55 ms to 1866.17 ms); exact outputs matched and measured compilation calls fell from 480 to 0.",
+        "evidence": [
+          "timings.json",
+          "baseline-tests.txt",
+          "candidate-tests.txt",
+          "baseline-probe.json",
+          "candidate-probe.json",
+          "baseline-open-handle.json",
+          "candidate-open-handle.json",
+          "identities-final.json",
+          "review.md"
+        ],
+        "limits": [
+          "Three paired runs on this Windows/Bun 1.3.5 environment; local benchmark evidence, not a statistical population estimate or universal speedup.",
+          "Metadata-guarded partial reuse assumes the filesystem exposes writes through identity, size, mode or nanosecond modification/change/birth timestamps. Byte changes invisible to all these fields can evade invalidation; concurrent edits are not a transactional snapshot.",
+          "Parent cache is bounded to 64 entries; partial cache scales with the current local partial library. Memory and cold-start performance were not measured.",
+          "Added probes are author-visible diagnostic checks, not supplied hidden evaluation or independent downstream model judgments. No claim about general prompt quality."
+        ]
+      },
+      "event_sha256": "4c75efaed23c12d6b84f4f7cc4fd3e686b52b15d606a857a99ec1758bf8f738d",
+      "target_renderer_sha256": "15460dd9dd7964e2d04e063d408b752b7ca936219557dcedfbd6117aa771c382",
+      "commands": 19
+    },
+    "candidate": {
+      "receipt": {
+        "status": "completed",
+        "exit": 0,
+        "seconds": 374.791,
+        "usage": {
+          "input_tokens": 1310758,
+          "cached_input_tokens": 1248640,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 10465,
+          "reasoning_output_tokens": 1558
+        }
+      },
+      "exposure": {
+        "entry": true,
+        "workflow": true,
+        "measurement": true,
+        "candidate_section": true
+      },
+      "changed_inputs": [
+        "target/Tools/RenderTemplate.ts"
+      ],
+      "new_target_files": [],
+      "consumer_pass": 23,
+      "consumer_fail": 0,
+      "existing_tests_exit": 0,
+      "median_ms": 229.99170000000004,
+      "improvement_fraction": 0.8595784992759179,
+      "preserves": true,
+      "useful_optimization": true,
+      "author_decision": {
+        "retain_target": true,
+        "claimed_benefit": "87.6% lower median elapsed time in the supplied warm batch workload (2156.4 to 267.8 ms); exact output preserved.",
+        "evidence": [
+          "timings.json",
+          "baseline-tests.txt",
+          "candidate-tests-final.txt",
+          "baseline-consumers-final.txt",
+          "candidate-consumers-final.txt",
+          "baseline-edges-v2.txt",
+          "candidate-edges-v2.txt"
+        ],
+        "limits": [
+          "Three local warm-batch trials on Bun 1.3.5 / Windows; no population or cold-start speed claim.",
+          "Unused partial sources are now loaded only when invoked; unreadable unused files no longer fail unrelated renders. Used-source errors still propagate.",
+          "Cache bounded to 256 entries and 4 million source characters; compilation memory itself is not directly measured.",
+          "No agents, model downstream evaluation, network, installs, Git or publication; no claim about prompt quality or SkillForge comparative effectiveness.",
+          "Concurrent file mutation during a synchronous render is not an atomic snapshot, as in the baseline."
+        ]
+      },
+      "event_sha256": "9e5b316f278d0cb10c6374c143c3393c5d73033ef6a63b58c723c70166e343be",
+      "target_renderer_sha256": "18807944cf11ff4468109d4774e19a920533014fce18b444779d71cd0cc33541",
+      "commands": 19
+    }
+  },
+  "interpretation": "Record correctness and useful-target outcomes separately from method benefit. A tie retains baseline; one author per method cannot establish a causal performance ranking."
+}

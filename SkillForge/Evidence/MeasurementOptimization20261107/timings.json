@@ -1,0 +1,200 @@
+[
+  {
+    "arm": "original",
+    "rep": 0,
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\0-original\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\0-original",
+    "exit": 0,
+    "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":1685.6579000000002,\"compile_calls\":480,\"output_equal\":true}\n",
+    "stderr": "",
+    "error": null,
+    "seconds": 2.484,
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 1685.6579000000002,
+      "compile_calls": 480,
+      "output_equal": true
+    }
+  },
+  {
+    "arm": "baseline",
+    "rep": 0,
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\0-baseline\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\0-baseline",
+    "exit": 0,
+    "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":1299.0968000000003,\"compile_calls\":0,\"output_equal\":true}\n",
+    "stderr": "",
+    "error": null,
+    "seconds": 2.193,
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 1299.0968000000003,
+      "compile_calls": 0,
+      "output_equal": true
+    }
+  },
+  {
+    "arm": "candidate",
+    "rep": 0,
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\0-candidate\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\0-candidate",
+    "exit": 0,
+    "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":238.9792,\"compile_calls\":0,\"output_equal\":true}\n",
+    "stderr": "",
+    "error": null,
+    "seconds": 0.982,
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 238.9792,
+      "compile_calls": 0,
+      "output_equal": true
+    }
+  },
+  {
+    "arm": "candidate",
+    "rep": 1,
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\1-candidate\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\1-candidate",
+    "exit": 0,
+    "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":226.76440000000002,\"compile_calls\":0,\"output_equal\":true}\n",
+    "stderr": "",
+    "error": null,
+    "seconds": 0.983,
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 226.76440000000002,
+      "compile_calls": 0,
+      "output_equal": true
+    }
+  },
+  {
+    "arm": "original",
+    "rep": 1,
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\1-original\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\1-original",
+    "exit": 0,
+    "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":1637.8667,\"compile_calls\":480,\"output_equal\":true}\n",
+    "stderr": "",
+    "error": null,
+    "seconds": 2.413,
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 1637.8667,
+      "compile_calls": 480,
+      "output_equal": true
+    }
+  },
+  {
+    "arm": "baseline",
+    "rep": 1,
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\1-baseline\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\1-baseline",
+    "exit": 0,
+    "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":1418.8006,\"compile_calls\":0,\"output_equal\":true}\n",
+    "stderr": "",
+    "error": null,
+    "seconds": 2.189,
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 1418.8006,
+      "compile_calls": 0,
+      "output_equal": true
+    }
+  },
+  {
+    "arm": "baseline",
+    "rep": 2,
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\2-baseline\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\2-baseline",
+    "exit": 0,
+    "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":1307.4975,\"compile_calls\":0,\"output_equal\":true}\n",
+    "stderr": "",
+    "error": null,
+    "seconds": 2.107,
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 1307.4975,
+      "compile_calls": 0,
+      "output_equal": true
+    }
+  },
+  {
+    "arm": "candidate",
+    "rep": 2,
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\2-candidate\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\2-candidate",
+    "exit": 0,
+    "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":229.99170000000004,\"compile_calls\":0,\"output_equal\":true}\n",
+    "stderr": "",
+    "error": null,
+    "seconds": 1.015,
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 229.99170000000004,
+      "compile_calls": 0,
+      "output_equal": true
+    }
+  },
+  {
+    "arm": "original",
+    "rep": 2,
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\2-original\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\timings\\2-original",
+    "exit": 0,
+    "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":1563.7478,\"compile_calls\":480,\"output_equal\":true}\n",
+    "stderr": "",
+    "error": null,
+    "seconds": 2.366,
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 1563.7478,
+      "compile_calls": 480,
+      "output_equal": true
+    }
+  }
+]

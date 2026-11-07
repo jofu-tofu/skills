@@ -1,0 +1,21 @@
+{
+  "retain_target": true,
+  "claimed_benefit": "10.09% lower median elapsed time on the supplied 240-render benchmark (2075.55 ms to 1866.17 ms); exact outputs matched and measured compilation calls fell from 480 to 0.",
+  "evidence": [
+    "timings.json",
+    "baseline-tests.txt",
+    "candidate-tests.txt",
+    "baseline-probe.json",
+    "candidate-probe.json",
+    "baseline-open-handle.json",
+    "candidate-open-handle.json",
+    "identities-final.json",
+    "review.md"
+  ],
+  "limits": [
+    "Three paired runs on this Windows/Bun 1.3.5 environment; local benchmark evidence, not a statistical population estimate or universal speedup.",
+    "Metadata-guarded partial reuse assumes the filesystem exposes writes through identity, size, mode or nanosecond modification/change/birth timestamps. Byte changes invisible to all these fields can evade invalidation; concurrent edits are not a transactional snapshot.",
+    "Parent cache is bounded to 64 entries; partial cache scales with the current local partial library. Memory and cold-start performance were not measured.",
+    "Added probes are author-visible diagnostic checks, not supplied hidden evaluation or independent downstream model judgments. No claim about general prompt quality."
+  ]
+}
