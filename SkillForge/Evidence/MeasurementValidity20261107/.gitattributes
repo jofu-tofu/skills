@@ -1,1 +1,4 @@
 * -text
+# Exact exported receipts and unified-diff context retain their original whitespace.
+subjects/** -whitespace
+candidate.patch -whitespace
