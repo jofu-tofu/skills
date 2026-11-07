@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "scope": "Bounded retrospective retrieval and decision test over selected historical records; not independent semantic truth, general efficacy or a population estimate.",
+  "grading_rule": "Grade semantic constraints, not wording. Pass requires applicable constraints and no material contradictory unsupported inference. Accept listed or equivalently supported alternatives. Excerpts are historical report statements, not independently rerun outcomes.",
+  "sources": [
+    {
+      "id": "real",
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/RealSkillComparison20261106/Results.md",
+      "sha256": "a1a503f9ed3faa99df2fe397bde4ab6264688c37db06ee836cd4a8ca4044199b"
+    },
+    {
+      "id": "activation",
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/Activation20261106/Results.md",
+      "sha256": "c0c2d7e273a1c4ed9a965f08b30875943d7abe419909048dde0dc7a91e8c597a"
+    },
+    {
+      "id": "discriminating",
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/Discriminating20261106/report.md",
+      "sha256": "ec01d9f5688d65db3b481a415cd61c70fc2d8b94c7d189fe3a9e76207f6e0288"
+    },
+    {
+      "id": "efficiency",
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+      "sha256": "578a34045ee335a78b86d8a293539602faea3e9e109f4f8174b18ae0a9c85ff8"
+    },
+    {
+      "id": "validation",
+      "path": "C:/Users/fujos/Github/skills/SkillForge/Evidence/ValidationSummary.md",
+      "sha256": "8c1f8727e601e74a1cb2a8ee02d7ab2083bf96180082af90a168bc0b0b2f0184"
+    }
+  ],
+  "cases": [
+    {
+      "id": "H1",
+      "support": [
+        {
+          "source_id": "discriminating",
+          "line": 29,
+          "exact_excerpt": "| A: current SkillForge | 58/58 | 6/6 | Justified stop/reframe |"
+        },
+        {
+          "source_id": "discriminating",
+          "line": 30,
+          "exact_excerpt": "| B: revised SkillForge | 58/58 | 6/6 | Justified stop/reframe |"
+        },
+        {
+          "source_id": "discriminating",
+          "line": 31,
+          "exact_excerpt": "| C: short practical control | 58/58 | 6/6 | Justified stop/reframe |"
+        },
+        {
+          "source_id": "discriminating",
+          "line": 63,
+          "exact_excerpt": "The next informative method test would need an unrehearsed orchestration task with an observed current-method shortfall, a distinct activated intervention and a decision-relevant cost/outcome comparison. Repeating this saturated checkpoint or adding more source-matcher assertions would not supply that evidence. No further identical repeats were launched."
+        },
+        {
+          "source_id": "discriminating",
+          "line": 47,
+          "exact_excerpt": "The short control was fastest in both task observations. These single runs, concurrent service use and different cache histories do not establish a causal speed ranking. Full gross/cached input and output usage, command counts, returned bytes and elapsed times are retained in [summary.json](summary.json). No dollar costs or universal efficiency gain are inferred."
+        }
+      ],
+      "required_constraints": [
+        "All three tie at 58/58 repair checks, 6/6 consumer decisions and justified stop/reframe.",
+        "No demonstrated added benefit; a tie does not prove equivalence or population reliability.",
+        "No evidence-based replacement by either alternative; single concurrent timings do not prove speed ranking.",
+        "Next test needs unrehearsed orchestration, observed current-method shortfall, distinct activated intervention and decision-relevant outcome/cost."
+      ],
+      "valid_alternatives": [
+        "Retain baseline and preserve alternatives.",
+        "Stop further testing until a genuine method-level shortfall appears."
+      ]
+    },
+    {
+      "id": "H2",
+      "support": [
+        {
+          "source_id": "activation",
+          "line": 3,
+          "exact_excerpt": "The trigger is repaired in the isolated candidate. Keep it uninstalled: this run demonstrates activation and preserved behavior, not better solutions."
+        },
+        {
+          "source_id": "efficiency",
+          "line": 51,
+          "exact_excerpt": "All required focused checks are resolved; no further saturated reruns are justified. The final completion contract/assessment/output are `contract.json`, `assessment-final.json`, and `completion-final.json`. No installation, merge, commit or publication was performed. Next integration must reconcile the separate idea-generation changes rather than overwrite them."
+        },
+        {
+          "source_id": "validation",
+          "line": 54,
+          "exact_excerpt": "Integration, 2026-11-07: the user authorized merging and pushing both experimental drafts. The combined package preserves operational efficiency as U10, alternative generation as U11, the compact Update workflow, and the experiment-comparison preflight. Earlier uninstalled decisions describe the original trials; this integration supersedes deployment status only. Existing tied results and limits remain unchanged; no new comparative benefit is claimed."
+        }
+      ],
+      "required_constraints": [
+        "Uninstalled/no-integration recommendations describe original trials.",
+        "November 7 entry reports authorized merging and pushing both drafts, combined U10/U11, compact Update and comparison preflight.",
+        "Integration supersedes deployment status only; ties and limits remain and no new benefit is claimed.",
+        "Do not claim independently verified current live installation bytes from this documentation."
+      ],
+      "valid_alternatives": [
+        "Report integration and qualify unverified live installed identity.",
+        "Use latest dated entry while retaining historical recommendations as provenance."
+      ]
+    },
+    {
+      "id": "H3",
+      "support": [
+        {
+          "source_id": "real",
+          "line": 51,
+          "exact_excerpt": "The new GenerateAlternatives procedure was actually loaded in the candidate's broad operational run. It was **not loaded in the focused context run**, which used ordinary PlanChange and still considered three structural alternatives. That round therefore tests the whole method's routing behavior, not the efficacy of the new procedure itself. Do not attribute its layout differences to a step that did not execute."
+        },
+        {
+          "source_id": "activation",
+          "line": 7,
+          "exact_excerpt": "The real Prompting author read the procedure at event 10, wrote its comparison at event 23 and implemented at event 25. It considered no change, section-range reads, core plus conditional references, and a summary alongside the monolith. It chose conditional references. The baseline also produced a useful structural split. Both retained all 265 checked substantive standards lines, protected files and working local links."
+        },
+        {
+          "source_id": "activation",
+          "line": 20,
+          "exact_excerpt": "Candidate improvement authoring was 13.0% faster with 6.1% fewer output tokens in this single pair. Downstream returned bytes were 15.4% higher for classification, 0.8% higher for operations and 0.2% lower for specialized skill authoring. Thus lower planning time did not produce a better loading result. Command-output bytes are a context proxy, not unique instruction tokens or billed cost."
+        },
+        {
+          "source_id": "activation",
+          "line": 15,
+          "exact_excerpt": "| Downstream executor checks | 5/5 | 5/5 |"
+        }
+      ],
+      "required_constraints": [
+        "Original focused-context run did not load GenerateAlternatives; ordinary PlanChange considered alternatives.",
+        "Repaired run loaded the procedure before comparison and implementation; this supports activation.",
+        "Both pass 5/5; no demonstrated loading advantage: classification bytes +15.4%, operations +0.8%, specialized -0.2%.",
+        "Returned bytes are a context proxy, not billing/unique instruction tokens; one pair does not establish general speed or creativity."
+      ],
+      "valid_alternatives": [
+        "Describe bounded routing repair and preservation without loading benefit.",
+        "Use equivalent raw table values instead of percentages."
+      ]
+    },
+    {
+      "id": "H4",
+      "support": [
+        {
+          "source_id": "discriminating",
+          "line": 67,
+          "exact_excerpt": "The candidate passed 14/14 structural checks. The initial validator invocation used the wrong environment path and is preserved in [structural-check.md](structural-check.md), not counted as a candidate failure or pass. The first audit incorrectly required every SkillForge subject to load PlanChange to prove method exposure; actual A traces showed entry/workflow loading through EvaluateSkill. [audit-initial.json](audit-initial.json) and [summary-initial.json](summary-initial.json) preserve that failed audit. The corrected audit checks entry/workflow exposure and separately reports preflight loading for every arm. No behavioral scores changed."
+        },
+        {
+          "source_id": "efficiency",
+          "line": 41,
+          "exact_excerpt": "The original npm CLI failed on an inherited service-tier setting, then sandbox network access. The first authorized retry reached the provider but the CLI could not use the configured model. The compatible existing app runtime resolved this without changing global configuration or model. Both full subjects initially used an incorrect completion-checker path/root invocation, preserved the error, corrected it and consumed a valid complete result. No failed target output was silently replaced."
+        },
+        {
+          "source_id": "efficiency",
+          "line": 43,
+          "exact_excerpt": "The initial OpenAI-docs skill path was unavailable; local runtime help provided the compatible invocation. Early Python preparation was unavailable; Node was used. A local status-helper quoting error was corrected without changing a subject or evidence. These are setup issues, not target performance failures."
+        },
+        {
+          "source_id": "efficiency",
+          "line": 20,
+          "exact_excerpt": "| External downstream checker | 13/13 | 13/13 | Independently executed signed/zero/empty/invalid/missing-input checks; valid executions use one read versus original two. |"
+        },
+        {
+          "source_id": "efficiency",
+          "line": 21,
+          "exact_excerpt": "| Review of fresh StatusBrief/SafeSort | 7/7 source-grounded judgments; targets unchanged | Same | Both find archive/glossary/record overhead, protect required semantics and retain the adequate skill. Tie. |"
+        }
+      ],
+      "required_constraints": [
+        "Initial audit wrongly required PlanChange for every subject; baseline used EvaluateSkill entry/workflow.",
+        "Corrected audit separates method exposure/preflight loading; no behavioral scores changed and initial audit remains.",
+        "Runner/model/path errors are setup or invocation failures, not failed target outputs; preserve errors and completed corrections.",
+        "Completed efficiency comparisons tie on useful outcomes, 13/13 external checks each and same review judgments; no general efficiency superiority."
+      ],
+      "valid_alternatives": [
+        "Separate invalid validation/infrastructure attempts from completed target outcomes.",
+        "Request raw receipts for independent audit while reporting supported classification."
+      ]
+    },
+    {
+      "id": "H5",
+      "support": [
+        {
+          "source_id": "discriminating",
+          "line": 35,
+          "exact_excerpt": "All three continuation subjects compared actual packet hashes and executed 92 CLI checks on the two historical targets. Each reproduced the ordinary target's two adjacent failures, recognized identical selected content, distinguished artifact differences from method effects, and recommended zero more repeats of the unchanged selector contrast. They retained the separate ordinary-history-versus-common-packet question and missing exposure/provenance evidence where applicable. No new selector experiment was run: the old packets cannot identify that content-selection contrast."
+        },
+        {
+          "source_id": "discriminating",
+          "line": 60,
+          "exact_excerpt": "- Decision subjects receive two authored targets, not complete author transcripts, historical arm mappings or linked lesson-source reports. All three explicitly preserved those limits. Parent records retain provenance, but the subjects were not credited with access they lacked."
+        }
+      ],
+      "required_constraints": [
+        "Two targets and checks do not establish historical arm attribution or lesson causality.",
+        "Subjects lacked complete author transcripts, historical arm mappings and linked lesson-source reports; do not invent provenance/exposure.",
+        "Identical selected content cannot identify content-selection contrast; zero unchanged selector repeats is supported.",
+        "Keep ordinary-history-versus-common-packet question distinct; obtain missing exposure/provenance before causal attribution."
+      ],
+      "valid_alternatives": [
+        "Abstain on attribution and request full author/exposure records, arm mappings and lesson-source links.",
+        "Reframe to an explicitly separate preparation-cost question."
+      ]
+    }
+  ],
+  "grader_qualification_examples": [
+    {
+      "kind": "positive",
+      "case_id": "H1",
+      "response": "Retain baseline. All three achieved 58/58 repair checks, 6/6 consumer decisions and justified stop/reframe. No added benefit is demonstrated; this is not population equivalence. Preserve alternatives and test only an unrehearsed orchestration shortfall with distinct activated intervention and outcome/cost comparison. Single concurrent timings do not establish speed ranking.",
+      "expected_grade": "pass",
+      "reason": "Preserves tied outcomes, limitations and discriminating next test."
+    },
+    {
+      "kind": "negative",
+      "case_id": "H5",
+      "response": "The better historical target proves the candidate selector chose better lessons. Repeat the unchanged selector contrast to confirm the gain.",
+      "expected_grade": "fail",
+      "reason": "Invents arm and exposure provenance; ignores identical content."
+    },
+    {
+      "kind": "valid_alternative",
+      "case_id": "H2",
+      "response": "The November 7 record reports authorized integration of both drafts, preserving U10/U11, compact Update and the comparison preflight; earlier uninstalled decisions are historical. Verify live package identity before asserting current installed bytes. Integration changes deployment status only, leaving ties, limitations and no demonstrated benefit intact.",
+      "expected_grade": "pass",
+      "reason": "Live identity caution is valid and does not deny recorded integration."
+    },
+    {
+      "kind": "misleading_pass",
+      "case_id": "H3",
+      "response": "The repair passed 5/5 and activated GenerateAlternatives, so the original focused-context trial validates the procedure and we can advertise better loading.",
+      "expected_grade": "fail",
+      "reason": "Uses true pass counts to invent benefit and retroactively attribute an unexecuted step."
+    }
+  ]
+}

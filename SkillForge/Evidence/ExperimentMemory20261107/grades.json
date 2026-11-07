@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "scope": "One bounded retrospective portfolio per arm, five questions each. Semantic grading against frozen historical report constraints, not independent outcome reruns or a population estimate.",
+  "expected_labels_read": false,
+  "arms": {
+    "baseline": {
+      "artifact": "runs/baseline.md",
+      "questions": [
+        {
+          "case_id": "H1",
+          "verdict": "pass",
+          "evidence": "Both report 58/58, 6/6 and justified stop/reframe for all methods; retain baseline; deny superiority/equivalence and causal timing rank; specify an unrehearsed shortfall, activated distinct intervention and outcome/cost comparison.",
+          "source": "Discriminating20261106/report.md:3,29-31,47,51-63",
+          "material_unsupported_claims": []
+        },
+        {
+          "case_id": "H2",
+          "verdict": "pass",
+          "evidence": "Both distinguish original no-install recommendations from November 7 authorized integration; preserve U10/U11, compact Update and preflight, tied benefit limits, and expressly qualify status as documented rather than live verification.",
+          "source": "Activation20261106/Results.md:3; OperationalEfficiency20261106/FinalResults.md:51; ValidationSummary.md:54",
+          "material_unsupported_claims": []
+        },
+        {
+          "case_id": "H3",
+          "verdict": "pass",
+          "evidence": "Both separate original focused non-exposure from repaired event 10/23/25 exposure; report both 5/5 and the unfavorable/mixed loading results using supported raw values or percentages; treat bytes as proxy and single-pair times as descriptive.",
+          "source": "RealSkillComparison20261106/Results.md:51; Activation20261106/Results.md:7,15,20",
+          "material_unsupported_claims": []
+        },
+        {
+          "case_id": "H4",
+          "verdict": "pass",
+          "evidence": "Both identify the wrong universal PlanChange requirement, valid EvaluateSkill exposure, preserved initial audit and unchanged behavioral scores; separate setup/invocation errors from completed target outcomes and report tied 13/13 external checks and review judgments.",
+          "source": "Discriminating20261106/report.md:67; OperationalEfficiency20261106/FinalResults.md:20-21,41-43",
+          "material_unsupported_claims": []
+        },
+        {
+          "case_id": "H5",
+          "verdict": "pass",
+          "evidence": "Both withhold selector-arm attribution and lesson causality from subjects' limited evidence, identify missing transcripts/mappings/source links, reject unchanged selector repeats, and preserve the separate ordinary-history/common-packet question.",
+          "source": "Discriminating20261106/report.md:35,60",
+          "material_unsupported_claims": []
+        }
+      ],
+      "passes": 5,
+      "failures": 0,
+      "unverified_answers": 0
+    },
+    "candidate": {
+      "artifact": "runs/candidate.md",
+      "questions": [
+        {
+          "case_id": "H1",
+          "verdict": "pass",
+          "evidence": "Both report 58/58, 6/6 and justified stop/reframe for all methods; retain baseline; deny superiority/equivalence and causal timing rank; specify an unrehearsed shortfall, activated distinct intervention and outcome/cost comparison.",
+          "source": "Discriminating20261106/report.md:3,29-31,47,51-63",
+          "material_unsupported_claims": []
+        },
+        {
+          "case_id": "H2",
+          "verdict": "pass",
+          "evidence": "Both distinguish original no-install recommendations from November 7 authorized integration; preserve U10/U11, compact Update and preflight, tied benefit limits, and expressly qualify status as documented rather than live verification.",
+          "source": "Activation20261106/Results.md:3; OperationalEfficiency20261106/FinalResults.md:51; ValidationSummary.md:54",
+          "material_unsupported_claims": []
+        },
+        {
+          "case_id": "H3",
+          "verdict": "pass",
+          "evidence": "Both separate original focused non-exposure from repaired event 10/23/25 exposure; report both 5/5 and the unfavorable/mixed loading results using supported raw values or percentages; treat bytes as proxy and single-pair times as descriptive.",
+          "source": "RealSkillComparison20261106/Results.md:51; Activation20261106/Results.md:7,15,20",
+          "material_unsupported_claims": []
+        },
+        {
+          "case_id": "H4",
+          "verdict": "pass",
+          "evidence": "Both identify the wrong universal PlanChange requirement, valid EvaluateSkill exposure, preserved initial audit and unchanged behavioral scores; separate setup/invocation errors from completed target outcomes and report tied 13/13 external checks and review judgments.",
+          "source": "Discriminating20261106/report.md:67; OperationalEfficiency20261106/FinalResults.md:20-21,41-43",
+          "material_unsupported_claims": []
+        },
+        {
+          "case_id": "H5",
+          "verdict": "pass",
+          "evidence": "Both withhold selector-arm attribution and lesson causality from subjects' limited evidence, identify missing transcripts/mappings/source links, reject unchanged selector repeats, and preserve the separate ordinary-history/common-packet question.",
+          "source": "Discriminating20261106/report.md:35,60",
+          "material_unsupported_claims": []
+        }
+      ],
+      "passes": 5,
+      "failures": 0,
+      "unverified_answers": 0
+    }
+  },
+  "spotchecks": {
+    "source_hash_verification": "Five frozen source SHA-256 hashes matched during qualification; all 19 frozen exact line excerpts matched.",
+    "answer_quote_checks": [
+      {
+        "claim": "No added method benefit was demonstrated; replacing the full framework is unjustified",
+        "result": "Matches Discriminating report after ignoring Markdown emphasis."
+      },
+      {
+        "claim": "Original focused procedure was not loaded; repaired read/comparison/implementation events 10/23/25",
+        "result": "Matches cited original reports; ordinary Markdown emphasis is omitted harmlessly in quoted fragments."
+      },
+      {
+        "claim": "No behavioral scores changed; no failed target output was silently replaced",
+        "result": "Exact phrases occur in Discriminating and OperationalEfficiency final reports."
+      },
+      {
+        "claim": "Subjects lacked complete author transcripts, arm mappings and lesson-source reports",
+        "result": "Matches Discriminating report; neither arm credits subjects with parent-only evidence."
+      },
+      {
+        "claim": "Candidate cites November 6/7 commits and junction status from personal notes",
+        "result": "The specified commit IDs and documented integration/junction statements appear in worktrees.md:269,277. These remain documented status, not independently verified current Git/install state."
+      },
+      {
+        "claim": "Baseline adds parent retrieval provenance and exploratory adjacent scores",
+        "result": "LessonRetrieval20261106/report.md confirms identical L1/L2 198-word packets, primary ties and A/B/C adjacent sequences. Baseline explicitly separates this from subject-accessible evidence and causality."
+      }
+    ],
+    "material_quote_distortions": [],
+    "coverage_limit": "Spotchecks plus frozen constraint checks, not an exhaustive independent audit of every supplementary numeric claim or linked historical receipt."
+  },
+  "exposure": {
+    "candidate": "unverified independently; candidate output and command ledger report ReuseEvidence and DecisionMap reads before answers.",
+    "baseline": "unverified independently; baseline output and command ledger report EvaluateSkill and ordinary supporting procedures.",
+    "raw_traces": "No exported raw agent traces available, confirmed by coordinator. Read ledgers are subject self-reports, not raw tool traces.",
+    "coaching": "Coordinator reports asymmetric intervention naming ReuseEvidence/DecisionMap and telling candidate not to add reads; baseline received generic procedure-use guidance. Therefore no uncoached activation, spontaneous adoption or isolated method effect is established.",
+    "costs": "No independently measured per-arm tokens, time, unique read bytes or billed cost; ledger command counts cannot establish efficiency."
+  },
+  "disposition": {
+    "decision": "retain baseline; reject adoption on claimed comparative benefit from this portfolio",
+    "rule": "Benefit requires at least one consequential baseline error corrected with no regression; ties retain baseline.",
+    "consequential_baseline_errors": 0,
+    "corrected_baseline_errors": 0,
+    "observed_regressions": 0,
+    "benefit_demonstrated": false,
+    "corrective_followup_required": false,
+    "rationale": "Both outputs satisfy all five frozen constraints. Asymmetric coaching and missing raw exposure traces weaken method/activation inference, but neither creates a baseline error or reverses the conservative retain decision. Raw-trace export could strengthen provenance if available; rerunning saturated questions is unnecessary to settle this bounded disposition.",
+    "future_test_condition": "Only a new consequential ordinary-method retrieval/decision shortfall with distinct intervention and symmetric guidance would justify a new benefit comparison. Do not use repeated solved questions to seek a winner."
+  },
+  "limits": [
+    "Selected historical portfolio; five answers are not five independent trials.",
+    "Historical claims are source-grounded report statements, not independent re-executions.",
+    "No general superiority, equivalence, autonomous activation or cost-saving claim.",
+    "No candidate/source files edited; reference.json expected labels not read."
+  ]
+}
