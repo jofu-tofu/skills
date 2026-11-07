@@ -1,0 +1,74 @@
+[
+  {
+    "sha256": "5918498ca1febbb59cfb362b4273b1aff6fda18b653c466f328f45082ee4a93d",
+    "path": "20-working-T1-T3/LessonRetrieval20261106/report.md"
+  },
+  {
+    "sha256": "ec01d9f5688d65db3b481a415cd61c70fc2d8b94c7d189fe3a9e76207f6e0288",
+    "path": "20-working-T1-T3/Discriminating20261106/report.md"
+  },
+  {
+    "sha256": "a1a503f9ed3faa99df2fe397bde4ab6264688c37db06ee836cd4a8ca4044199b",
+    "path": "20-working-T1-T3/RealSkillComparison20261106/Results.md"
+  },
+  {
+    "sha256": "c0c2d7e273a1c4ed9a965f08b30875943d7abe419909048dde0dc7a91e8c597a",
+    "path": "20-working-T1-T3/Activation20261106/Results.md"
+  },
+  {
+    "sha256": "75f14facf1d98ffe535d71266fcb6e08aa51f82f9d888c4edb3f9cf6ff98170d",
+    "path": "20-working-T1-T3/IdeaGeneration20261106/Results.md"
+  },
+  {
+    "sha256": "578a34045ee335a78b86d8a293539602faea3e9e109f4f8174b18ae0a9c85ff8",
+    "path": "20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md"
+  },
+  {
+    "sha256": "1625e241aa2813d20142e63e294e9c07ab66a9e625f9a8f829a9fa339a42f047",
+    "path": "20-working-T1-T3/OperationalEfficiency20261106/Report.md"
+  },
+  {
+    "sha256": "6504bebb5f74ad035d3f9c4c7ac61fc3281e80e0ff9b16aaced9d6ce15ed7182",
+    "path": "20-working-T1-T3/ResearchDriven20261106/evaluation.md"
+  },
+  {
+    "sha256": "c41f2fc7f9924aeff8492c6eb4f2d7e17bf5a4bf417fa037363786e673d04f2e",
+    "path": "20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+  },
+  {
+    "sha256": "df0c093396648c1bbd90367062f0247b58bfe3466daf6ecbf18a3dbbe2e4a4a2",
+    "path": "20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md"
+  },
+  {
+    "sha256": "5bd83168913f00552dde2916c297970efe4e7b37fe7d60ccf65d638b8d1e5e0c",
+    "path": "20-working-T1-T3/Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Report.md"
+  },
+  {
+    "sha256": "e1d6459889a3e9acf4c8fb0795eda73e8675bb83b38d0c915e92c73de37aab94",
+    "path": "20-working-T1-T3/Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Decision.md"
+  },
+  {
+    "sha256": "ab1a56950347410af185e5739099dd71a1d845ad4524a7d340e98fdd71956edf",
+    "path": "20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Report.md"
+  },
+  {
+    "sha256": "e6db597de00d9fa27b8f27c886b924e53e69a9472ec3e5381d39ac947352ac31",
+    "path": "20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Decision.md"
+  },
+  {
+    "sha256": "338293f0602145df7bfb6036ad5f694238d23c16e86b239a874c5ecceb06b07e",
+    "path": "20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Report.md"
+  },
+  {
+    "sha256": "4b6b205871e9d99c286e6cb1abc5f1d97906f2aa1481eef33c8e8d80e6a8d1c1",
+    "path": "20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Decision.md"
+  },
+  {
+    "sha256": "c769a2cc1a899c6800c436ae82dc89d61afeb9a923a9f8d5a90c982c8c7a5436",
+    "path": "20-working-T1-T3/SkillForgeComprehensive20261104/FinalResults.md"
+  },
+  {
+    "sha256": "5acb43c552814227ba54874c9b170ab7be4af8faad2753132fd5c917e4eb8c2e",
+    "path": "20-working-T1-T3/SkillForgeCompletionGate20261104/final-report.md"
+  }
+]

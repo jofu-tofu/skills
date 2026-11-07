@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": [
+    "Exact stdout/log bytes",
+    "UTF-8 multibyte accounting",
+    "Bounded-page continuation",
+    "End marker"
+  ],
+  "changes": [
+    "method/Improvements/DecisionHistory.md",
+    "method/Improvements/Index.md"
+  ]
+}
