@@ -1,0 +1,160 @@
+{
+  "baseline": "6c71d99",
+  "shared_gate_exactly_restored": true,
+  "runtime_differences": [],
+  "frozen_cases_and_refs": [
+    {
+      "path": "cases/d01/records/trial.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d01/records/release.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d01/records/queue.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d01/requests.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d02/records/trial.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d02/records/release.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d02/records/review.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d02/requests.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d03/records/trial.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d03/records/release.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d03/records/inventory.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d03/requests.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d04/records/trial.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d04/records/merge.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d04/records/machine.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/d04/requests.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h01/records/trial.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h01/records/release.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h01/records/incident.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h01/requests.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h02/records/trial.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h02/records/release.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h02/records/queue.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h02/requests.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h03/records/trial.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h03/records/ledger.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h03/records/release.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h03/requests.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h04/records/merge.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h04/records/audit.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h04/records/receipt.md",
+      "unchanged": true
+    },
+    {
+      "path": "cases/h04/requests.md",
+      "unchanged": true
+    },
+    {
+      "path": "references/Reference.md",
+      "unchanged": true
+    },
+    {
+      "path": "references/GraderControls.json",
+      "unchanged": true
+    }
+  ],
+  "executed_input_manifests_unchanged": true,
+  "completion_tests": {
+    "pass": 34,
+    "fail": 0,
+    "evidence": "completion-tests.txt"
+  },
+  "structure": {
+    "pass": 14,
+    "fail": 0,
+    "evidence": "structure.txt"
+  },
+  "links": {
+    "checked": 39,
+    "missing": []
+  },
+  "reserved_confirmation": "Not executed; development benefit gate not met",
+  "outside_evidence_change": "Historical result entry appended to Improvements/Index.md only"
+}

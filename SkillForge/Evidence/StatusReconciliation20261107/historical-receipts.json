@@ -1,0 +1,362 @@
+{
+  "stage": "historical",
+  "runs": [
+    {
+      "arm": "A",
+      "stage": "historical",
+      "total_calls": 12,
+      "failed_calls": 1,
+      "returned_utf8_bytes": 71887,
+      "successful_bytes": 71672,
+      "candidate_rule_exposed": false,
+      "changed_input_files": [],
+      "files": [
+        {
+          "path": "runs/historical-A/prompt.txt",
+          "sha256": "9588dc0567d653eb4daeb8443b09f03920da59db2933f8560273b12aa0ccb8b2"
+        },
+        {
+          "path": "runs/historical-A/reads.jsonl",
+          "sha256": "ffa1e781c7ca79e7995bb06e76fd5029f71e73cc135269fa63575197af214374"
+        },
+        {
+          "path": "runs/historical-A/answer.md",
+          "sha256": "110129ea1bc116eecf229055ba7aa6ed85da2ab88bae125c32248d2f3a1f3200"
+        }
+      ],
+      "reads": [
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/SKILL.md"
+          ],
+          "offset": 0,
+          "fullLength": 4970,
+          "bytes": 5025
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/SkillIntent.md",
+            "method/Quality/Shared.md",
+            "method/Workflows/EvaluateSkill.md"
+          ],
+          "offset": 0,
+          "fullLength": 9322,
+          "bytes": 9343
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md",
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md"
+          ],
+          "offset": 0,
+          "fullLength": 31840,
+          "bytes": 10062
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md",
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md"
+          ],
+          "offset": 10000,
+          "fullLength": 31840,
+          "bytes": 10054
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md",
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md"
+          ],
+          "offset": 20000,
+          "fullLength": 31840,
+          "bytes": 10056
+        },
+        {
+          "status": "success",
+          "op": "list",
+          "args": [
+            "history"
+          ],
+          "offset": 0,
+          "fullLength": 1506,
+          "bytes": 1523
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 0,
+          "fullLength": 20053,
+          "bytes": 10058
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 10000,
+          "fullLength": 20053,
+          "bytes": 10058
+        },
+        {
+          "status": "error",
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/Activation20261106/Results.md",
+            "method/Improvements/FocusedActivation/Record.md",
+            "method/Improvements/OperationalEfficiency/Record.md"
+          ],
+          "offset": 0,
+          "fullLength": 0,
+          "bytes": 215
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/Activation20261106/Results.md"
+          ],
+          "offset": 0,
+          "fullLength": 3330,
+          "bytes": 3347
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/Evidence/ValidationSummary.md"
+          ],
+          "offset": 6500,
+          "fullLength": 8559,
+          "bytes": 2076
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 20000,
+          "fullLength": 20053,
+          "bytes": 70
+        }
+      ]
+    },
+    {
+      "arm": "B",
+      "stage": "historical",
+      "total_calls": 12,
+      "failed_calls": 2,
+      "returned_utf8_bytes": 79610,
+      "successful_bytes": 79224,
+      "candidate_rule_exposed": true,
+      "changed_input_files": [],
+      "files": [
+        {
+          "path": "runs/historical-B/prompt.txt",
+          "sha256": "b7cd52d10350069d83a8031e309b596b929418fc6a9c79c070e5ff23273ecd92"
+        },
+        {
+          "path": "runs/historical-B/reads.jsonl",
+          "sha256": "c2bb4eb67373d54d5b2a5dfa83d05ec275cfa8ddb2cc7d0fcfdb102968e2ff04"
+        },
+        {
+          "path": "runs/historical-B/answer.md",
+          "sha256": "835e7b06bde4003364248750fe43a9455454cee45d964e44b19b5f934343e5fe"
+        }
+      ],
+      "reads": [
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/SKILL.md"
+          ],
+          "offset": 0,
+          "fullLength": 4970,
+          "bytes": 5025
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/SkillIntent.md",
+            "method/Quality/Shared.md",
+            "method/Workflows/EvaluateSkill.md"
+          ],
+          "offset": 0,
+          "fullLength": 9322,
+          "bytes": 9343
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/ReviewDesign.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 0,
+          "fullLength": 17796,
+          "bytes": 10074
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/ReviewDesign.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 10000,
+          "fullLength": 17796,
+          "bytes": 7813
+        },
+        {
+          "status": "success",
+          "op": "list",
+          "args": [
+            "history"
+          ],
+          "offset": 0,
+          "fullLength": 1506,
+          "bytes": 1523
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md"
+          ],
+          "offset": 0,
+          "fullLength": 26133,
+          "bytes": 10058
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md"
+          ],
+          "offset": 10000,
+          "fullLength": 26133,
+          "bytes": 10056
+        },
+        {
+          "status": "error",
+          "op": "read",
+          "args": [
+            "method/Improvements/Index.md",
+            "method/Improvements/OperationalEfficiency/Record.md",
+            "method/Improvements/IdeaGeneration/Record.md",
+            "method/Improvements/FocusedActivation/Record.md",
+            "method/Standards/Authoring.md"
+          ],
+          "offset": 0,
+          "fullLength": 0,
+          "bytes": 196
+        },
+        {
+          "status": "error",
+          "op": "list",
+          "args": [
+            "method/Improvements"
+          ],
+          "offset": 0,
+          "fullLength": 0,
+          "bytes": 190
+        },
+        {
+          "status": "success",
+          "op": "search",
+          "args": [
+            "install|integrat|2026-11-07"
+          ],
+          "offset": 0,
+          "fullLength": 24284,
+          "bytes": 10054
+        },
+        {
+          "status": "success",
+          "op": "search",
+          "args": [
+            "install|integrat|2026-11-07"
+          ],
+          "offset": 10000,
+          "fullLength": 24284,
+          "bytes": 10058
+        },
+        {
+          "status": "success",
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/Activation20261106/Results.md",
+            "method/Standards/Authoring.md"
+          ],
+          "offset": 0,
+          "fullLength": 5203,
+          "bytes": 5220
+        }
+      ]
+    }
+  ],
+  "cost_gate": {
+    "bytes_limit": 89858.75,
+    "calls_limit": 14,
+    "pass": true
+  },
+  "limits": "Total returned bytes includes failed-reader messages. Not model tokens/time/billing. Correctness and host-truncation disclosures require independent review."
+}

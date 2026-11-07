@@ -1,0 +1,16 @@
+
+✅ SkillForge (14/14 checks passed)
+  [x] SKILL.md exists
+  [x] Directory TitleCase
+  [x] Valid frontmatter
+  [x] Name TitleCase
+  [x] Name matches directory
+  [x] USE WHEN clause
+  [x] Single-line description
+  [x] Description length
+  [x] Examples section
+  [x] Tools/ directory
+  [x] Workflows/ directory
+  [x] Workflow: CreateSkill.md
+  [x] Workflow: UpdateSkill.md
+  [x] Workflow: EvaluateSkill.md
