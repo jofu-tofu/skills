@@ -49,3 +49,6 @@ Independent evidence review covers the retained results; final distribution chec
 ## Unsupported claims
 
 Native automatic skill selection, real provider/model accuracy, real browser/DOCX rendering, full Markdown/GFM parsing, population reliability, other platforms/models and cost advantage are not established. Optional viewer/exploration tools are experimental support, not qualified readiness instruments.
+
+
+Integration, 2026-11-07: the user authorized merging and pushing both experimental drafts. The combined package preserves operational efficiency as U10, alternative generation as U11, the compact Update workflow, and the experiment-comparison preflight. Earlier uninstalled decisions describe the original trials; this integration supersedes deployment status only. Existing tied results and limits remain unchanged; no new comparative benefit is claimed.

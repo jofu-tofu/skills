@@ -33,3 +33,6 @@ Supported structural validation is limited to the bundled legacy format. The ben
 ## History
 
 2.0.0 was adopted 2026-11-03 from the older v0.4 method lineage with portable links, bundled research and personal-path removal. This candidate preserves those packaging decisions and the historical null results. A package release does not claim universal superiority.
+
+
+Integration, 2026-11-07: the user authorized merging and pushing both experimental drafts. The combined package preserves operational efficiency as U10, alternative generation as U11, the compact Update workflow, and the experiment-comparison preflight. Earlier uninstalled decisions describe the original trials; this integration supersedes deployment status only. Existing tied results and limits remain unchanged; no new comparative benefit is claimed.
