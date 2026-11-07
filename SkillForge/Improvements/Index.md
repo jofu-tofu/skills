@@ -5,6 +5,8 @@ updated: 2026-11-03
 ---
 # Proposed SkillForge improvement records
 
+Integration, 2026-11-07: user authorized merging the information-organization branch at `8f9b2fa` into main. This supersedes its earlier unmerged/uninstalled status; frozen comparison records retain their original execution scope. Fresh-checkout validation passes 34 completion tests, 14 structural checks and the hash-backed completion gate. No new behavioral benefit is claimed.
+
 Runtime information organization, 2026-11-07: [bounded navigation comparison](InformationOrganization20261107/Results.md). Retain the optional owner map in its isolated branch: corrected pair preserves seven source-grounded decisions/edit checks, with 68,450 versus 79,131 successful returned bytes and 9 versus 12 disclosed reader invocations. Original truncated-read comparison and checker corrections preserved. One diagnostic pair does not establish general efficiency or full-workflow benefit. Unmerged and uninstalled.
 
 Focused structural activation rc.11: [repair and real-skill comparison](FocusedActivation/Record.md). Actual activation succeeds, outcomes tie, loading benefit is absent; keep experimental and uninstalled.
