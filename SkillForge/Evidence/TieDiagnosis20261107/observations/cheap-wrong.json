@@ -1,0 +1,278 @@
+{
+  "target": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\20-working-T1-T3\\RealSkillComparison20261106\\authors\\candidate\\target",
+  "renderer_sha256": "e39e7559f94ec143b3020ac4ff19a515175496f454985384c38a387897a5a02f",
+  "spec": {
+    "paths": 12,
+    "rounds": 4,
+    "id": "shared-12",
+    "order": "rounds",
+    "shared": true
+  },
+  "instrument_known_calls": 3,
+  "compile_calls": 0,
+  "renders": 48,
+  "correct": false,
+  "checks": [
+    {
+      "id": "render-0",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|0'\n"
+    },
+    {
+      "id": "render-1",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|1'\n"
+    },
+    {
+      "id": "render-2",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|2'\n"
+    },
+    {
+      "id": "render-3",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|3'\n"
+    },
+    {
+      "id": "render-4",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|4'\n"
+    },
+    {
+      "id": "render-5",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|5'\n"
+    },
+    {
+      "id": "render-6",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|6'\n"
+    },
+    {
+      "id": "render-7",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|7'\n"
+    },
+    {
+      "id": "render-8",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|8'\n"
+    },
+    {
+      "id": "render-9",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|9'\n"
+    },
+    {
+      "id": "render-10",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|10'\n"
+    },
+    {
+      "id": "render-11",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|11'\n"
+    },
+    {
+      "id": "render-12",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|12'\n"
+    },
+    {
+      "id": "render-13",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|13'\n"
+    },
+    {
+      "id": "render-14",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|14'\n"
+    },
+    {
+      "id": "render-15",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|15'\n"
+    },
+    {
+      "id": "render-16",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|16'\n"
+    },
+    {
+      "id": "render-17",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|17'\n"
+    },
+    {
+      "id": "render-18",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|18'\n"
+    },
+    {
+      "id": "render-19",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|19'\n"
+    },
+    {
+      "id": "render-20",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|20'\n"
+    },
+    {
+      "id": "render-21",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|21'\n"
+    },
+    {
+      "id": "render-22",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|22'\n"
+    },
+    {
+      "id": "render-23",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|23'\n"
+    },
+    {
+      "id": "render-24",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|24'\n"
+    },
+    {
+      "id": "render-25",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|25'\n"
+    },
+    {
+      "id": "render-26",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|26'\n"
+    },
+    {
+      "id": "render-27",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|27'\n"
+    },
+    {
+      "id": "render-28",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|28'\n"
+    },
+    {
+      "id": "render-29",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|29'\n"
+    },
+    {
+      "id": "render-30",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|30'\n"
+    },
+    {
+      "id": "render-31",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|31'\n"
+    },
+    {
+      "id": "render-32",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|32'\n"
+    },
+    {
+      "id": "render-33",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|33'\n"
+    },
+    {
+      "id": "render-34",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|34'\n"
+    },
+    {
+      "id": "render-35",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|35'\n"
+    },
+    {
+      "id": "render-36",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|36'\n"
+    },
+    {
+      "id": "render-37",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|37'\n"
+    },
+    {
+      "id": "render-38",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|38'\n"
+    },
+    {
+      "id": "render-39",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|39'\n"
+    },
+    {
+      "id": "render-40",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|40'\n"
+    },
+    {
+      "id": "render-41",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|41'\n"
+    },
+    {
+      "id": "render-42",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|42'\n"
+    },
+    {
+      "id": "render-43",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|43'\n"
+    },
+    {
+      "id": "render-44",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|44'\n"
+    },
+    {
+      "id": "render-45",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|45'\n"
+    },
+    {
+      "id": "render-46",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|46'\n"
+    },
+    {
+      "id": "render-47",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'shared-12-shared|47'\n"
+    },
+    {
+      "id": "zero",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'wrong' !== 'value=0'\n"
+    },
+    {
+      "id": "false",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'wrong'\n- 'value=false'\n"
+    },
+    {
+      "id": "source-edit",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'wrong' !== 'edit=7'\n"
+    },
+    {
+      "id": "missing-source",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Missing expected exception."
+    }
+  ],
+  "scope": "Exact compile calls under stated workload; not latency, heap, billing or general quality"
+}

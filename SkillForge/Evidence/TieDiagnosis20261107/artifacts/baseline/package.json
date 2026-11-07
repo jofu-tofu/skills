@@ -1,0 +1,9 @@
+{
+  "name": "standalone-prompting",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "yaml": "^2.8.2",
+    "handlebars": "^4.7.8"
+  }
+}

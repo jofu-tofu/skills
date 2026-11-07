@@ -5,6 +5,8 @@ updated: 2026-11-03
 ---
 # Proposed SkillForge improvement records
 
+Comparative resolution, 2026-11-07: [tie diagnosis and executed comparison](../Evidence/TieDiagnosis20261107/Results.md). Distinguishes regression adequacy from benefit ranking; qualifies ordered acceptable results and diagnoses unresolved ties. Six actual renderer workload pairs expose opposing compilation advantages and two scoped equalities while all correctness gates pass. Thirteen controls, live invalid-counter/cheap-wrong controls and one candidate caller check pass. No general method-superiority, latency/memory or universal-quality claim. Candidate retained locally; no integration or installation.
+
 Focused structural activation rc.11: [repair and real-skill comparison](FocusedActivation/Record.md). Actual activation succeeds, outcomes tie, loading benefit is absent; keep experimental and uninstalled.
 
 Idea-generation candidate: [mechanism alternatives and overhead comparison](IdeaGeneration/Record.md). Six matched component pairs tie on executable solution quality; the candidate explicitly explores additional structural options. Measured planning overhead and full-caller evidence remain scoped to synthetic tasks; no general superiority claim.

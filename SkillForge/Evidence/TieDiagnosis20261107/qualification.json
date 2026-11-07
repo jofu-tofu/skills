@@ -36,8 +36,24 @@
     {
       "id": "false-counter-control-detected",
       "status": "pass"
+    },
+    {
+      "id": "different-workloads-not-ranked",
+      "status": "pass"
+    },
+    {
+      "id": "missing-workload-not-ranked",
+      "status": "pass"
+    },
+    {
+      "id": "different-render-count-not-ranked",
+      "status": "pass"
+    },
+    {
+      "id": "equivalent-spec-key-order-accepted",
+      "status": "pass"
     }
   ],
-  "passed": 9,
+  "passed": 13,
   "failed": 0
 }

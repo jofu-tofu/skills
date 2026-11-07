@@ -1,0 +1,43 @@
+{
+  "scope": "Arithmetic and gate semantics only; actual instrument qualification is in measure.ts",
+  "checks": [
+    {
+      "id": "acceptable-artifacts-ordered",
+      "status": "pass"
+    },
+    {
+      "id": "reversed-labels",
+      "status": "pass"
+    },
+    {
+      "id": "valid-equal-alternative",
+      "status": "pass"
+    },
+    {
+      "id": "cheap-wrong-is-ineligible",
+      "status": "pass"
+    },
+    {
+      "id": "missing-benefit-is-not-equality",
+      "status": "pass"
+    },
+    {
+      "id": "missing-output-is-not-failure",
+      "status": "pass"
+    },
+    {
+      "id": "opposing-advantages-not-forced-winner",
+      "status": "pass"
+    },
+    {
+      "id": "gate-only-false-ranking-detected",
+      "status": "pass"
+    },
+    {
+      "id": "false-counter-control-detected",
+      "status": "pass"
+    }
+  ],
+  "passed": 9,
+  "failed": 0
+}

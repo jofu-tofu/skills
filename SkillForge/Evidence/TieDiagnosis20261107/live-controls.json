@@ -1,0 +1,5 @@
+{
+  "cheap_wrong_exit": 1,
+  "broken_counter_exit": 1,
+  "expected": "Both nonzero: counter rejected before target grading; cheap wrong output fails semantic gate"
+}
