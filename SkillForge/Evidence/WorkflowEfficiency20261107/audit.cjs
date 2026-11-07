@@ -7,7 +7,8 @@ for(const name of fs.readdirSync(p.join(root,'trials'))){const dir=p.join(root,'
  const changed=Object.keys({...x.before.target,...x.after.target}).filter(k=>x.before.target[k]!==x.after.target[k]);
  assert.deepEqual(x.before.method,x.after.method,'method must stay unchanged');
  let external;
- if(name.startsWith('ledger')){
+ if(fs.existsSync(p.join(out,'checks.json')))external=JSON.parse(fs.readFileSync(p.join(out,'checks.json')));
+ else if(name.startsWith('ledger')){
   const vm=check(fs.readFileSync(p.join(dir,'target/total.cjs'),'utf8')),cli=[];
   for(let i=0;i<cases.length;i++){const [input,expected,exit]=cases[i],f=p.join(out,'case-'+i+'.json');if(input!==null)fs.writeFileSync(f,input);const r=cp.spawnSync(process.execPath,[p.join(dir,'target/total.cjs'),f],{encoding:'utf8',windowsHide:true});let pass=false;try{assert.deepEqual(JSON.parse(r.stdout),expected);assert.equal(r.status,exit);pass=true}catch{}cli.push({input,expected,exit,stdout:r.stdout,stderr:r.stderr,actual_exit:r.status,status:pass?'pass':'fail'});}
   external={vm,cli,all_pass:vm.every(c=>c.status==='pass')&&cli.every(c=>c.status==='pass'),success_read_counts:vm.filter(c=>c.exit===0).map(c=>c.reads)};

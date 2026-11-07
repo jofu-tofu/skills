@@ -14,9 +14,9 @@ async function main(){
   copy(p.join(project,'20-working-T1-T3/RealSkillComparison20261106/frozen/target'),p.join(root,'frozen/prompting'));
   write(p.join(root,'frozen/identities.json'),Object.fromEntries(['baseline','candidate','ledger','prompting'].map(n=>[n,manifest(p.join(root,'frozen',n))])));return;
  }
- if(!/^(ledger|prompting|typo)-(baseline|candidate)(-repeat)?$/.test(action))throw Error('Invalid action');
+ if(!/^(ledger|prompting|typo)-(baseline|candidate)(-repeat|-v2)?$/.test(action))throw Error('Invalid action');
  const [task,arm]=action.split('-'),dir=p.join(root,'trials',action);if(fs.existsSync(dir))throw Error('Preserve existing trial');fs.mkdirSync(dir,{recursive:true});
- copy(p.join(root,'frozen',arm),p.join(dir,'method'));fs.mkdirSync(p.join(dir,'evidence'));
+ copy(p.join(root,'frozen',action.endsWith('-v2')?'candidate-v2':arm),p.join(dir,'method'));fs.mkdirSync(p.join(dir,'evidence'));
  if(task==='typo'){fs.mkdirSync(p.join(dir,'target'));write(p.join(dir,'target/SKILL.md'),'---\nname: TinySkill\ndescription: Report JSON.\n---\n# TinySkill\nReport the outupt exactly; preserve null as unknown.\n');}
  else copy(p.join(root,'frozen',task),p.join(dir,'target'));
  const job=task==='ledger'?"Improve LedgerSkill execution efficiency while preserving its complete input/output contract. Implement and evaluate the focused improvement.":task==='prompting'?"Improve runtime efficiency of the real Prompting renderer on repeated renders, preserving existing public APIs, CLI flags, output and error semantics, changes to templates/data/partials, helpers and bundled primitives. Implement and evaluate the focused improvement. Prompt-authoring guidance is outside this runtime scope; preserve it.":"Fix only the misspelling outupt to output in target/SKILL.md, preserving all other bytes.";
