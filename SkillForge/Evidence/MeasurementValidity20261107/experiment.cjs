@@ -1,4 +1,4 @@
-// Reproduction: node experiment.cjs <freeze|fixed|prepare|trials|summarize> <project-root> [codex-executable]
+// Reproduction: node experiment.cjs <freeze|fixed|prepare|trials> <project-root> [codex-executable]
 const fs=require('node:fs'),p=require('node:path'),cp=require('node:child_process'),crypto=require('node:crypto');
 const here=__dirname, project=p.resolve(process.argv[3]||p.join(here,'../../../../../../../'));
 const raw=p.join(project,'MeasurementValidity20261107/raw'), historical=p.join(project,'20-working-T1-T3/Discriminating20261106');
@@ -68,7 +68,7 @@ async function invoke(dir){
  const timer=setTimeout(()=>{timedout=true;cp.spawnSync('taskkill',['/PID',String(child.pid),'/T','/F'],{windowsHide:true});},480000);
  const code=await new Promise((res,rej)=>{child.once('close',res);child.once('error',rej);});clearTimeout(timer);
  write(p.join(dir,'stderr.txt'),err);const events=fs.existsSync(p.join(dir,'events.jsonl'))?fs.readFileSync(p.join(dir,'events.jsonl'),'utf8').split(/\r?\n/).flatMap(l=>{try{return[JSON.parse(l)];}catch{return[];}}):[];
- const result={status:timedout?'timeout':code===0?'completed':'error',exit_code:code,seconds:(Date.now()-t)/1000,usage:events.findLast(e=>e.type==='turn.completed')?.usage??null};write(p.join(dir,'execution.json'),result);console.log(JSON.stringify({arm:p.basename(dir),...result}));
+ const result={status:timedout?'timeout':code===0?'completed':'error',exit_code:code,seconds:(Date.now()-t)/1000,usage:events.findLast(e=>e.type==='turn.completed')?.usage??null};write(p.join(dir,'runner-execution.json'),result);console.log(JSON.stringify({arm:p.basename(dir),...result}));
 }
 async function main(){const mode=process.argv[2];if(mode==='freeze')freeze();else if(mode==='fixed')fixed();else if(mode==='prepare')prepare();else if(mode==='trials')await Promise.all(['baseline','candidate'].map(arm=>invoke(p.join(raw,'trials',arm))));else throw Error('Mode');}
 if(require.main===module)main().catch(e=>{console.error(e);process.exitCode=1;});

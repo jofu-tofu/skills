@@ -12,7 +12,7 @@ Template owned by [DesignMeasurement](../../Procedures/DesignMeasurement.md). St
 | Collection | Who records what/when; task strata/sampling; controls; allowed input and protected-key boundaries. |
 | Scoring | Numerator/denominator or anchors; direction; duplicates, missing data, unresolved cases, zero-denominator and aggregation rules. |
 | Decision | Meaningful gain, protected regressions, uncertainty, error/cost tradeoffs and unresolved priorities. |
-| Qualification | State per intended use: known-fault discrimination, fresh-case prediction/selection, optimization robustness; outside-scope uses need no added trial. Record designed/qualified/unqualified, evidence links, reference uncertainty, false acceptance/rejection and denominators, threshold and transfer boundary. Direct deterministic contracts need no population correlation; see [use-specific qualification](../../Procedures/DesignMeasurement.md#qualification-by-intended-use). |
+| Qualification | designed/qualified/unqualified; checked positive/negative/alternative/shortcut cases, results and evidence links; declared criteria and qualified-use boundary. |
 | Next experiment | Competing predictions, decision impact, effort, stopping rule and fresh confirmation needs. |
 | Reuse/change | Prior version, revised assumptions, affected comparisons to repeat, drift triggers and unsupported claims. |
 
