@@ -1,0 +1,28 @@
+{
+  "scope_basis": {
+    "quote": "I think a lot of the times we just kind of run regression tests and say that two are the same. That's kind of how I feel. I'm trying to prevent something like that.",
+    "path": "request.txt",
+    "sha256": "b403485179d7c9446b21e79d3f5fb64876e1e89a899a906cc00e9cecea9388b8"
+  },
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Improve comparative evaluation beyond regression passes, test sensitivity and preserve honest tradeoffs and uncertainty.",
+  "schema_version": 1,
+  "required_checks": [
+    {
+      "description": "Comparison differentiates meaningful task-specific advantages among acceptable real outputs while admitting scoped equality or missing priorities.",
+      "id": "resolution",
+      "kind": "outcome"
+    },
+    {
+      "description": "Actual qualified baseline/revised measurements and affected decision handoff executed.",
+      "id": "execution",
+      "kind": "behavioral_execution"
+    },
+    {
+      "description": "Correctness gates, missingness, no-forced-winner and maintenance paths preserved.",
+      "id": "preservation",
+      "kind": "preservation"
+    }
+  ]
+}
