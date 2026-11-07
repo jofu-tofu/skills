@@ -1,0 +1,175 @@
+{
+  "target": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\20-working-T1-T3\\RealSkillComparison20261106\\authors\\baseline\\target",
+  "renderer_sha256": "97d23e8dc60a6514f6005b291af8afe203d387e6d94401e7d5c2983ce48847d2",
+  "spec": {
+    "shared": true,
+    "id": "followup-shared-7",
+    "order": "rounds",
+    "paths": 7,
+    "rounds": 5,
+    "reverse": true
+  },
+  "instrument_known_calls": 3,
+  "compile_calls": 7,
+  "renders": 35,
+  "correct": true,
+  "checks": [
+    {
+      "id": "render-0",
+      "status": "pass"
+    },
+    {
+      "id": "render-1",
+      "status": "pass"
+    },
+    {
+      "id": "render-2",
+      "status": "pass"
+    },
+    {
+      "id": "render-3",
+      "status": "pass"
+    },
+    {
+      "id": "render-4",
+      "status": "pass"
+    },
+    {
+      "id": "render-5",
+      "status": "pass"
+    },
+    {
+      "id": "render-6",
+      "status": "pass"
+    },
+    {
+      "id": "render-7",
+      "status": "pass"
+    },
+    {
+      "id": "render-8",
+      "status": "pass"
+    },
+    {
+      "id": "render-9",
+      "status": "pass"
+    },
+    {
+      "id": "render-10",
+      "status": "pass"
+    },
+    {
+      "id": "render-11",
+      "status": "pass"
+    },
+    {
+      "id": "render-12",
+      "status": "pass"
+    },
+    {
+      "id": "render-13",
+      "status": "pass"
+    },
+    {
+      "id": "render-14",
+      "status": "pass"
+    },
+    {
+      "id": "render-15",
+      "status": "pass"
+    },
+    {
+      "id": "render-16",
+      "status": "pass"
+    },
+    {
+      "id": "render-17",
+      "status": "pass"
+    },
+    {
+      "id": "render-18",
+      "status": "pass"
+    },
+    {
+      "id": "render-19",
+      "status": "pass"
+    },
+    {
+      "id": "render-20",
+      "status": "pass"
+    },
+    {
+      "id": "render-21",
+      "status": "pass"
+    },
+    {
+      "id": "render-22",
+      "status": "pass"
+    },
+    {
+      "id": "render-23",
+      "status": "pass"
+    },
+    {
+      "id": "render-24",
+      "status": "pass"
+    },
+    {
+      "id": "render-25",
+      "status": "pass"
+    },
+    {
+      "id": "render-26",
+      "status": "pass"
+    },
+    {
+      "id": "render-27",
+      "status": "pass"
+    },
+    {
+      "id": "render-28",
+      "status": "pass"
+    },
+    {
+      "id": "render-29",
+      "status": "pass"
+    },
+    {
+      "id": "render-30",
+      "status": "pass"
+    },
+    {
+      "id": "render-31",
+      "status": "pass"
+    },
+    {
+      "id": "render-32",
+      "status": "pass"
+    },
+    {
+      "id": "render-33",
+      "status": "pass"
+    },
+    {
+      "id": "render-34",
+      "status": "pass"
+    },
+    {
+      "id": "zero",
+      "status": "pass"
+    },
+    {
+      "id": "false",
+      "status": "pass"
+    },
+    {
+      "id": "source-edit",
+      "status": "pass"
+    },
+    {
+      "id": "missing-source",
+      "status": "pass"
+    }
+  ],
+  "scope": "Exact compile calls under stated workload; not latency, heap, billing or general quality"
+}

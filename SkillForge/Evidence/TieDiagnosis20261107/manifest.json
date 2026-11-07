@@ -1,0 +1,97 @@
+[
+  {
+    "path": "observations/baseline-burst-40.json",
+    "sha256": "d2f7678d928d6bd9bdf2f14459752c433b7949b3a49bc119bf8c12da84e35f1d",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/baseline-burst-40/observation.json"
+  },
+  {
+    "path": "observations/baseline-distinct-20.json",
+    "sha256": "bf624d99f1bbb5b0e0e1c66bc13e77ddd25209bfd68924ccf7d8ff130e37593e",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/baseline-distinct-20/observation.json"
+  },
+  {
+    "path": "observations/baseline-followup-distinct-18.json",
+    "sha256": "cef9a49d679ad559092df894d1f14925c1de9904966c0f9e3be1874d5d837dcc",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/baseline-followup-distinct-18/observation.json"
+  },
+  {
+    "path": "observations/baseline-followup-distinct-9.json",
+    "sha256": "35597d87d71a217c6dfa996e7b650b68836f3674152036ad2f158abb6bcb2647",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/baseline-followup-distinct-9/observation.json"
+  },
+  {
+    "path": "observations/baseline-followup-shared-7.json",
+    "sha256": "b92336121aded4d82af1d44ab3c15988dd8c8b9fd35e840f62d7327420b67a14",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/baseline-followup-shared-7/observation.json"
+  },
+  {
+    "path": "observations/baseline-shared-12.json",
+    "sha256": "e43b66e7986453df87521d2dbc3b2a854f4aa0645e71239b928207ef63086e71",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/baseline-shared-12/observation.json"
+  },
+  {
+    "path": "observations/candidate-burst-40.json",
+    "sha256": "fbd252f3d2d1127d9c967adbbad8234a406900e1e65f40f5568db1c5d5619bb9",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/candidate-burst-40/observation.json"
+  },
+  {
+    "path": "observations/candidate-distinct-20.json",
+    "sha256": "b97f7284b4bf9bac30f41fa16a9c1abe92d146931b3bee44de6ba5d549052935",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/candidate-distinct-20/observation.json"
+  },
+  {
+    "path": "observations/candidate-followup-distinct-18.json",
+    "sha256": "48213ca2dc20ed6af509f00c3339ee3371a5b2db6ab2af77e1c309d1638d025b",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/candidate-followup-distinct-18/observation.json"
+  },
+  {
+    "path": "observations/candidate-followup-distinct-9.json",
+    "sha256": "fd977136f30828bcd7fa06e418433e34a5bcae88dc66b3f5286d8419da16afea",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/candidate-followup-distinct-9/observation.json"
+  },
+  {
+    "path": "observations/candidate-followup-shared-7.json",
+    "sha256": "36177f9fad2bec908c4af5626612076dfb85248ed1775219657127a2be60499b",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/candidate-followup-shared-7/observation.json"
+  },
+  {
+    "path": "observations/candidate-shared-12.json",
+    "sha256": "704b03041892f3b2e2382d9646c9e1cd1c50ee4b631cdba1cebefcdcddcc869b",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/candidate-shared-12/observation.json"
+  },
+  {
+    "path": "observations/cheap-wrong.json",
+    "sha256": "e5c89ef0a54354e91fc3f26114414df73cbea0ccc08c83285a55829a80d79a04",
+    "original": "20-working-T1-T3/TieDiagnosis20261107/cheap-wrong/observation.json"
+  },
+  {
+    "path": "artifacts/baseline/Tools/RenderTemplate.ts",
+    "sha256": "97d23e8dc60a6514f6005b291af8afe203d387e6d94401e7d5c2983ce48847d2",
+    "original": "20-working-T1-T3/RealSkillComparison20261106/authors/baseline/target/Tools/RenderTemplate.ts"
+  },
+  {
+    "path": "artifacts/baseline/package.json",
+    "sha256": "92971db651e19551841d0b81e529890ba84fa146cfc762722742971e11645237",
+    "original": "20-working-T1-T3/RealSkillComparison20261106/authors/baseline/target/package.json"
+  },
+  {
+    "path": "artifacts/baseline/bun.lock",
+    "sha256": "2e68fc28708272506c7acfeea7b4f1ac4225e68ae0cc0842b790bb5a6be072d7",
+    "original": "20-working-T1-T3/RealSkillComparison20261106/authors/baseline/target/bun.lock"
+  },
+  {
+    "path": "artifacts/candidate/Tools/RenderTemplate.ts",
+    "sha256": "e39e7559f94ec143b3020ac4ff19a515175496f454985384c38a387897a5a02f",
+    "original": "20-working-T1-T3/RealSkillComparison20261106/authors/candidate/target/Tools/RenderTemplate.ts"
+  },
+  {
+    "path": "artifacts/candidate/package.json",
+    "sha256": "92971db651e19551841d0b81e529890ba84fa146cfc762722742971e11645237",
+    "original": "20-working-T1-T3/RealSkillComparison20261106/authors/candidate/target/package.json"
+  },
+  {
+    "path": "artifacts/candidate/bun.lock",
+    "sha256": "2e68fc28708272506c7acfeea7b4f1ac4225e68ae0cc0842b790bb5a6be072d7",
+    "original": "20-working-T1-T3/RealSkillComparison20261106/authors/candidate/target/bun.lock"
+  }
+]

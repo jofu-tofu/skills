@@ -20,6 +20,14 @@ Run when a measure is new, materially changed, unsupported, or used beyond its q
 6. **Choose the next experiment.** List rival explanations, predicted results, evidence needed, decision each result could change, cost and stopping rule. Prefer the cheapest useful discriminating test. Expected information gain and decision value differ; do not invent probabilities or utility weights. Diagnostic contrasts test weaknesses; fresh representative cases support performance estimates. Compare candidate measures on the same artifacts before using them to select skill revisions where practical.
 7. **Return status and handoff.** Use the states below. Freeze qualified versions and decision rules before confirmatory comparisons. A changed measure requires reassessing both baseline and candidate under that definition; preserve old results. Hand case construction to ConstructCases, execution to EvaluateCandidate, and readiness to ApproveSkill. These procedures consume this record rather than recursively requesting another design for the same unchanged version.
 
+## Comparative resolution
+
+For choosing between candidates, separate **adequacy gates** (does each satisfy required behavior?) from **benefit measures** (what useful difference would justify choosing one?). Passing regressions establishes the former. Name the user-relevant difference the comparison can detect, its task conditions and practical importance; leave unknown priorities explicit. Do not equate finer numerical scales with better measurement.
+
+Qualify ranking on acceptable outputs with an independently supported difference in that outcome, not only obviously broken versus correct outputs. Include a valid alternative, equal-on-measured-scope pair, reversed labels/order, and an attractive shortcut that fails a protected requirement. References can come from executable consequences or intended-user performance; for judgment-based quality use blinded comparisons and justified anchors, preserving disagreement. Preference, verbosity and model agreement alone are not independent references. If the method cannot resolve a meaningful contrast, it is not qualified for that ranking even if its correctness gate works.
+
+Keep benefit dimensions separate where tradeoffs depend on workload or priorities. Report which candidate is better for which conditions; combine only with a justified decision rule. Missing benefit observations mean unresolved comparison, not equal quality. An observed tie needs [PlanChange's tie diagnosis](PlanChange.md#diagnosing-an-unresolved-tie) before it justifies repeating or ending the comparison.
+
 ## Qualification states
 
 | State | Meaning and permitted use |

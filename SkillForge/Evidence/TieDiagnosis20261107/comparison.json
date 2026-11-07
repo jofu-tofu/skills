@@ -1,0 +1,189 @@
+{
+  "scope": "Regrade preserved real-renderer observations; M0 is regression-only scoring, NOT the complete historical method",
+  "integrity": [
+    {
+      "path": "observations/baseline-burst-40.json",
+      "pass": true
+    },
+    {
+      "path": "observations/baseline-distinct-20.json",
+      "pass": true
+    },
+    {
+      "path": "observations/baseline-followup-distinct-18.json",
+      "pass": true
+    },
+    {
+      "path": "observations/baseline-followup-distinct-9.json",
+      "pass": true
+    },
+    {
+      "path": "observations/baseline-followup-shared-7.json",
+      "pass": true
+    },
+    {
+      "path": "observations/baseline-shared-12.json",
+      "pass": true
+    },
+    {
+      "path": "observations/candidate-burst-40.json",
+      "pass": true
+    },
+    {
+      "path": "observations/candidate-distinct-20.json",
+      "pass": true
+    },
+    {
+      "path": "observations/candidate-followup-distinct-18.json",
+      "pass": true
+    },
+    {
+      "path": "observations/candidate-followup-distinct-9.json",
+      "pass": true
+    },
+    {
+      "path": "observations/candidate-followup-shared-7.json",
+      "pass": true
+    },
+    {
+      "path": "observations/candidate-shared-12.json",
+      "pass": true
+    },
+    {
+      "path": "observations/cheap-wrong.json",
+      "pass": true
+    },
+    {
+      "path": "artifacts/baseline/Tools/RenderTemplate.ts",
+      "pass": true
+    },
+    {
+      "path": "artifacts/baseline/package.json",
+      "pass": true
+    },
+    {
+      "path": "artifacts/baseline/bun.lock",
+      "pass": true
+    },
+    {
+      "path": "artifacts/candidate/Tools/RenderTemplate.ts",
+      "pass": true
+    },
+    {
+      "path": "artifacts/candidate/package.json",
+      "pass": true
+    },
+    {
+      "path": "artifacts/candidate/bun.lock",
+      "pass": true
+    }
+  ],
+  "rows": [
+    {
+      "id": "shared-12",
+      "phase": "initial",
+      "renders_each": 48,
+      "gate_only": "both_pass",
+      "A_compile_calls": 12,
+      "B_compile_calls": 1,
+      "result": {
+        "status": "conditional_advantage",
+        "winner": "B",
+        "scope": "Fewer compile calls for this workload, with checked output semantics"
+      },
+      "swapped": {
+        "status": "conditional_advantage",
+        "winner": "A",
+        "scope": "Fewer compile calls for this workload, with checked output semantics"
+      }
+    },
+    {
+      "id": "distinct-20",
+      "phase": "initial",
+      "renders_each": 80,
+      "gate_only": "both_pass",
+      "A_compile_calls": 20,
+      "B_compile_calls": 80,
+      "result": {
+        "status": "conditional_advantage",
+        "winner": "A",
+        "scope": "Fewer compile calls for this workload, with checked output semantics"
+      },
+      "swapped": {
+        "status": "conditional_advantage",
+        "winner": "B",
+        "scope": "Fewer compile calls for this workload, with checked output semantics"
+      }
+    },
+    {
+      "id": "burst-40",
+      "phase": "initial",
+      "renders_each": 120,
+      "gate_only": "both_pass",
+      "A_compile_calls": 40,
+      "B_compile_calls": 40,
+      "result": {
+        "status": "equal_on_measured_scope"
+      },
+      "swapped": {
+        "status": "equal_on_measured_scope"
+      }
+    },
+    {
+      "id": "followup-shared-7",
+      "phase": "followup",
+      "renders_each": 35,
+      "gate_only": "both_pass",
+      "A_compile_calls": 7,
+      "B_compile_calls": 1,
+      "result": {
+        "status": "conditional_advantage",
+        "winner": "B",
+        "scope": "Fewer compile calls for this workload, with checked output semantics"
+      },
+      "swapped": {
+        "status": "conditional_advantage",
+        "winner": "A",
+        "scope": "Fewer compile calls for this workload, with checked output semantics"
+      }
+    },
+    {
+      "id": "followup-distinct-18",
+      "phase": "followup",
+      "renders_each": 90,
+      "gate_only": "both_pass",
+      "A_compile_calls": 18,
+      "B_compile_calls": 90,
+      "result": {
+        "status": "conditional_advantage",
+        "winner": "A",
+        "scope": "Fewer compile calls for this workload, with checked output semantics"
+      },
+      "swapped": {
+        "status": "conditional_advantage",
+        "winner": "B",
+        "scope": "Fewer compile calls for this workload, with checked output semantics"
+      }
+    },
+    {
+      "id": "followup-distinct-9",
+      "phase": "followup",
+      "renders_each": 45,
+      "gate_only": "both_pass",
+      "A_compile_calls": 9,
+      "B_compile_calls": 9,
+      "result": {
+        "status": "equal_on_measured_scope"
+      },
+      "swapped": {
+        "status": "equal_on_measured_scope"
+      }
+    }
+  ],
+  "portfolio": "tradeoff_requires_workload_priorities",
+  "cheap_wrong": {
+    "status": "gate_failure",
+    "eligible": "B"
+  },
+  "cost": "Compile calls are exact work counts; latency, memory and billing not inferred"
+}

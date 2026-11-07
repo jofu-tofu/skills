@@ -1,0 +1,280 @@
+{
+  "limitations": [
+    "Six designed workload pairs, not independent agent tasks or population samples",
+    "Original historical report already showed cache tradeoffs; M0 is not the full baseline method",
+    "Exact compile calls only; latency, memory, production mix and broader semantic validity unverified",
+    "Single candidate caller, no A/B instruction-effectiveness claim"
+  ],
+  "targeted_failure": "Regression-only equality inference; not a demonstrated failure of every historical experiment",
+  "snapshots": {
+    "measurement": "Protocol.md M0/M1",
+    "baseline_instructions": "244434c",
+    "candidate_instructions": "5af798c",
+    "artifacts": "manifest.json",
+    "checker": "compare.cjs v2 plus qualification.json"
+  },
+  "workflow": "UpdateSkill",
+  "regression_coverage": "Review.md and preservation.json",
+  "improvement_id": "TieDiagnosis20261107",
+  "candidate_decision": "retain_candidate",
+  "completed_trials": 12,
+  "decision_scope": "Measurement distinction and scoped caller application only; general method superiority unverified",
+  "runs": [
+    {
+      "case_id": "shared-12",
+      "trial": 1,
+      "execution_status": "completed",
+      "configuration": "same real artifacts under M0 and M1",
+      "checks": [
+        {
+          "id": "adequacy",
+          "observation": "both_pass",
+          "measurement_id": "M0-correctness",
+          "status": "pass",
+          "reason": "Both produce expected outputs and pass four preservation checks.",
+          "evidence": [
+            "observations/baseline-shared-12.json",
+            "observations/candidate-shared-12.json"
+          ]
+        },
+        {
+          "id": "comparative-resolution",
+          "observation": {
+            "A": 12,
+            "B": 1,
+            "decision": {
+              "status": "conditional_advantage",
+              "winner": "B",
+              "scope": "Fewer compile calls for this workload, with checked output semantics"
+            }
+          },
+          "measurement_id": "M1-compile-work-v2",
+          "status": "pass",
+          "reason": "Exact observed work counts and frozen task objective support conditional advantage or scoped equality.",
+          "evidence": [
+            "comparison.json",
+            "Protocol.md"
+          ]
+        }
+      ],
+      "role": "development"
+    },
+    {
+      "case_id": "distinct-20",
+      "trial": 1,
+      "execution_status": "completed",
+      "configuration": "same real artifacts under M0 and M1",
+      "checks": [
+        {
+          "id": "adequacy",
+          "observation": "both_pass",
+          "measurement_id": "M0-correctness",
+          "status": "pass",
+          "reason": "Both produce expected outputs and pass four preservation checks.",
+          "evidence": [
+            "observations/baseline-distinct-20.json",
+            "observations/candidate-distinct-20.json"
+          ]
+        },
+        {
+          "id": "comparative-resolution",
+          "observation": {
+            "A": 20,
+            "B": 80,
+            "decision": {
+              "status": "conditional_advantage",
+              "winner": "A",
+              "scope": "Fewer compile calls for this workload, with checked output semantics"
+            }
+          },
+          "measurement_id": "M1-compile-work-v2",
+          "status": "pass",
+          "reason": "Exact observed work counts and frozen task objective support conditional advantage or scoped equality.",
+          "evidence": [
+            "comparison.json",
+            "Protocol.md"
+          ]
+        }
+      ],
+      "role": "development"
+    },
+    {
+      "case_id": "burst-40",
+      "trial": 1,
+      "execution_status": "completed",
+      "configuration": "same real artifacts under M0 and M1",
+      "checks": [
+        {
+          "id": "adequacy",
+          "observation": "both_pass",
+          "measurement_id": "M0-correctness",
+          "status": "pass",
+          "reason": "Both produce expected outputs and pass four preservation checks.",
+          "evidence": [
+            "observations/baseline-burst-40.json",
+            "observations/candidate-burst-40.json"
+          ]
+        },
+        {
+          "id": "comparative-resolution",
+          "observation": {
+            "A": 40,
+            "B": 40,
+            "decision": {
+              "status": "equal_on_measured_scope"
+            }
+          },
+          "measurement_id": "M1-compile-work-v2",
+          "status": "pass",
+          "reason": "Exact observed work counts and frozen task objective support conditional advantage or scoped equality.",
+          "evidence": [
+            "comparison.json",
+            "Protocol.md"
+          ]
+        }
+      ],
+      "role": "development"
+    },
+    {
+      "case_id": "followup-shared-7",
+      "trial": 1,
+      "execution_status": "completed",
+      "configuration": "same real artifacts under M0 and M1",
+      "checks": [
+        {
+          "id": "adequacy",
+          "observation": "both_pass",
+          "measurement_id": "M0-correctness",
+          "status": "pass",
+          "reason": "Both produce expected outputs and pass four preservation checks.",
+          "evidence": [
+            "observations/baseline-followup-shared-7.json",
+            "observations/candidate-followup-shared-7.json"
+          ]
+        },
+        {
+          "id": "comparative-resolution",
+          "observation": {
+            "A": 7,
+            "B": 1,
+            "decision": {
+              "status": "conditional_advantage",
+              "winner": "B",
+              "scope": "Fewer compile calls for this workload, with checked output semantics"
+            }
+          },
+          "measurement_id": "M1-compile-work-v2",
+          "status": "pass",
+          "reason": "Exact observed work counts and frozen task objective support conditional advantage or scoped equality.",
+          "evidence": [
+            "comparison.json",
+            "Protocol.md"
+          ]
+        }
+      ],
+      "role": "validation"
+    },
+    {
+      "case_id": "followup-distinct-18",
+      "trial": 1,
+      "execution_status": "completed",
+      "configuration": "same real artifacts under M0 and M1",
+      "checks": [
+        {
+          "id": "adequacy",
+          "observation": "both_pass",
+          "measurement_id": "M0-correctness",
+          "status": "pass",
+          "reason": "Both produce expected outputs and pass four preservation checks.",
+          "evidence": [
+            "observations/baseline-followup-distinct-18.json",
+            "observations/candidate-followup-distinct-18.json"
+          ]
+        },
+        {
+          "id": "comparative-resolution",
+          "observation": {
+            "A": 18,
+            "B": 90,
+            "decision": {
+              "status": "conditional_advantage",
+              "winner": "A",
+              "scope": "Fewer compile calls for this workload, with checked output semantics"
+            }
+          },
+          "measurement_id": "M1-compile-work-v2",
+          "status": "pass",
+          "reason": "Exact observed work counts and frozen task objective support conditional advantage or scoped equality.",
+          "evidence": [
+            "comparison.json",
+            "Protocol.md"
+          ]
+        }
+      ],
+      "role": "validation"
+    },
+    {
+      "case_id": "followup-distinct-9",
+      "trial": 1,
+      "execution_status": "completed",
+      "configuration": "same real artifacts under M0 and M1",
+      "checks": [
+        {
+          "id": "adequacy",
+          "observation": "both_pass",
+          "measurement_id": "M0-correctness",
+          "status": "pass",
+          "reason": "Both produce expected outputs and pass four preservation checks.",
+          "evidence": [
+            "observations/baseline-followup-distinct-9.json",
+            "observations/candidate-followup-distinct-9.json"
+          ]
+        },
+        {
+          "id": "comparative-resolution",
+          "observation": {
+            "A": 9,
+            "B": 9,
+            "decision": {
+              "status": "equal_on_measured_scope"
+            }
+          },
+          "measurement_id": "M1-compile-work-v2",
+          "status": "pass",
+          "reason": "Exact observed work counts and frozen task objective support conditional advantage or scoped equality.",
+          "evidence": [
+            "comparison.json",
+            "Protocol.md"
+          ]
+        }
+      ],
+      "role": "validation"
+    }
+  ],
+  "loop_observations": [
+    {
+      "attribution": "observed",
+      "observation": "M0 gives both-pass while meaningful task-specific work differences exist",
+      "status": "supported",
+      "stage": "diagnosis",
+      "evidence": [
+        "comparison.json"
+      ]
+    },
+    {
+      "attribution": "observed",
+      "observation": "One fresh candidate caller uses measurements to return conditional choices and preserve typo scope",
+      "status": "supported",
+      "stage": "transfer",
+      "evidence": [
+        "workflow-check.md",
+        "workflow-check-comparison.json"
+      ]
+    }
+  ],
+  "suite_version": "tie-resolution-v2",
+  "decision": "pass",
+  "mode": "exploratory assessment",
+  "claim": "Bounded comparative sensitivity and decision handoff beyond correctness gates",
+  "requested_trials": 12
+}

@@ -1,0 +1,49 @@
+{
+  "rows": [
+    {
+      "id": "shared-12",
+      "status": "conditional_advantage",
+      "winner": "B",
+      "scope": "Fewer compile calls for this workload, with checked output semantics"
+    },
+    {
+      "id": "distinct-20",
+      "status": "conditional_advantage",
+      "winner": "A",
+      "scope": "Fewer compile calls for this workload, with checked output semantics"
+    },
+    {
+      "id": "burst-40",
+      "status": "equal_on_measured_scope"
+    },
+    {
+      "id": "followup-shared-7",
+      "status": "conditional_advantage",
+      "winner": "B",
+      "scope": "Fewer compile calls for this workload, with checked output semantics"
+    },
+    {
+      "id": "followup-distinct-18",
+      "status": "conditional_advantage",
+      "winner": "A",
+      "scope": "Fewer compile calls for this workload, with checked output semantics"
+    },
+    {
+      "id": "followup-distinct-9",
+      "status": "equal_on_measured_scope"
+    }
+  ],
+  "portfolio": "tradeoff_requires_workload_priorities",
+  "reversedShared": {
+    "status": "conditional_advantage",
+    "winner": "A",
+    "scope": "Fewer compile calls for this workload, with checked output semantics"
+  },
+  "invalidShortcut": {
+    "status": "gate_failure",
+    "eligible": "A"
+  },
+  "missing": {
+    "status": "unverified"
+  }
+}

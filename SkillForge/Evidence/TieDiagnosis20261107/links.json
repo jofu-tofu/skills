@@ -1,0 +1,172 @@
+{
+  "initial_invocation_error": "EISDIR on same-file anchor; checker corrected to resolve empty path to current file, no target edits",
+  "checks": [
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "../Templates/Quality/Measurement.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "PlanChange.md#diagnosing-an-unresolved-tie",
+      "pass": true
+    },
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "../Standards/Grader.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "../Standards/Schemas.md#canonical-resultsjson",
+      "pass": true
+    },
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "../ResearchLibrary/Experiment%20Design%20-%20Evidence%20and%20Use.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "DiagnoseGap.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "#alternative-generation-activation",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "GenerateAlternatives.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "DesignMeasurement.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Standards/RegressionCoverage.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Standards/KnowledgeIntegration.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "DesignMeasurement.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "DesignMeasurement.md#comparative-resolution",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "ComprehensiveImprovement.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../ResearchLibrary/Experiment%20Design%20-%20Evidence%20and%20Use.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Templates/Improvement/Plan.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Templates/Improvement/CompactAttempt.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Quality/Shared.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Standards/RegressionCoverage.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "PlanChange.md#diagnosing-an-unresolved-tie",
+      "pass": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "ComprehensiveImprovement.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Templates/Improvement/Completion.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Tools/CheckCompletion.cjs",
+      "pass": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Templates/Improvement/Completion.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Templates/Improvement/Decision.md",
+      "pass": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Quality/Shared.md",
+      "pass": true
+    },
+    {
+      "file": "Evidence/TieDiagnosis20261107/Results.md",
+      "ref": "Protocol.md",
+      "pass": true
+    },
+    {
+      "file": "Evidence/TieDiagnosis20261107/Results.md",
+      "ref": "comparison.json",
+      "pass": true
+    },
+    {
+      "file": "Evidence/TieDiagnosis20261107/Results.md",
+      "ref": "live-controls.json",
+      "pass": true
+    },
+    {
+      "file": "Evidence/TieDiagnosis20261107/Results.md",
+      "ref": "qualification.json",
+      "pass": true
+    },
+    {
+      "file": "Evidence/TieDiagnosis20261107/Results.md",
+      "ref": "workflow-check.md",
+      "pass": true
+    },
+    {
+      "file": "Evidence/TieDiagnosis20261107/Results.md",
+      "ref": "Review.md",
+      "pass": true
+    },
+    {
+      "file": "Evidence/TieDiagnosis20261107/Results.md",
+      "ref": "Reproduce.md",
+      "pass": true
+    }
+  ],
+  "passed": 33,
+  "failed": 0
+}

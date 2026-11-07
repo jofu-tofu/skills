@@ -1,0 +1,78 @@
+{
+  "checks": [
+    {
+      "id": "resolution",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "fdc57503dfe1ca56c8444e8975da8488097863a41cc2f079e5d4a3dc286c9f86"
+        },
+        {
+          "path": "comparison.json",
+          "sha256": "4d5349de4119fc406d0fc9bc6904e9a1ef0af48e2cb5f7ee8aba00c4aea58b1c"
+        },
+        {
+          "path": "qualification.json",
+          "sha256": "58a81d610b6fe5ff7325c07cd1b948f4a24ea5c0d23ad99962bc01c012d3b1c7"
+        },
+        {
+          "path": "live-controls.json",
+          "sha256": "8c7263fa076a24d782223bc2fe0292db1d96dad2ea57048cfae9e78240b42506"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "id": "execution",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "comparison.json",
+          "sha256": "4d5349de4119fc406d0fc9bc6904e9a1ef0af48e2cb5f7ee8aba00c4aea58b1c"
+        },
+        {
+          "path": "workflow-check.md",
+          "sha256": "0544e56e0f9b17adb343cddf0a7a21743b6d27dad718a40f326ae6568fd6b23a"
+        },
+        {
+          "path": "workflow-check-comparison.json",
+          "sha256": "5e917c8ba116b8f7c8454d360c7b5946fab865f6e6ef8e162ed386db999f6397"
+        },
+        {
+          "path": "manifest.json",
+          "sha256": "94af17080449a68d0eb345fd192401aea4170ee709b36fd3ae73a3ce1499214e"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "id": "preservation",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "preservation.json",
+          "sha256": "e75829c197186c53a530d0e51f546d865423e157c662878677f2bd888ae81478"
+        },
+        {
+          "path": "qualification.json",
+          "sha256": "58a81d610b6fe5ff7325c07cd1b948f4a24ea5c0d23ad99962bc01c012d3b1c7"
+        },
+        {
+          "path": "links.json",
+          "sha256": "08b8df01a0335448459b7c7255114dfb3d7bccac8701e9e680f0210e707e2cc7"
+        },
+        {
+          "path": "Review.md",
+          "sha256": "08f7327719f05af2d6de26b77a02d2882810e2b859ebc3566e4aa5fee914c614"
+        }
+      ],
+      "status": "pass"
+    }
+  ],
+  "candidate_decision": "retain_candidate",
+  "schema_version": 1,
+  "actions": [],
+  "blockers": [],
+  "contract_sha256": "2f7b1c9f16b7b0580359abdac6f1c9ee842ca0454e6f8d29b2643f93a8b061d8"
+}

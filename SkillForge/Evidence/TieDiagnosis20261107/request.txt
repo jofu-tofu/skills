@@ -1,0 +1,1 @@
+I think a lot of the times we just kind of run regression tests and say that two are the same. That's kind of how I feel. I'm trying to prevent something like that.

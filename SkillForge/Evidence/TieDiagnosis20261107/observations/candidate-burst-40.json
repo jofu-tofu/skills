@@ -1,0 +1,514 @@
+{
+  "target": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\20-working-T1-T3\\RealSkillComparison20261106\\authors\\candidate\\target",
+  "renderer_sha256": "e39e7559f94ec143b3020ac4ff19a515175496f454985384c38a387897a5a02f",
+  "spec": {
+    "paths": 40,
+    "rounds": 3,
+    "id": "burst-40",
+    "order": "burst",
+    "shared": false
+  },
+  "instrument_known_calls": 3,
+  "compile_calls": 40,
+  "renders": 120,
+  "correct": true,
+  "checks": [
+    {
+      "id": "render-0",
+      "status": "pass"
+    },
+    {
+      "id": "render-1",
+      "status": "pass"
+    },
+    {
+      "id": "render-2",
+      "status": "pass"
+    },
+    {
+      "id": "render-3",
+      "status": "pass"
+    },
+    {
+      "id": "render-4",
+      "status": "pass"
+    },
+    {
+      "id": "render-5",
+      "status": "pass"
+    },
+    {
+      "id": "render-6",
+      "status": "pass"
+    },
+    {
+      "id": "render-7",
+      "status": "pass"
+    },
+    {
+      "id": "render-8",
+      "status": "pass"
+    },
+    {
+      "id": "render-9",
+      "status": "pass"
+    },
+    {
+      "id": "render-10",
+      "status": "pass"
+    },
+    {
+      "id": "render-11",
+      "status": "pass"
+    },
+    {
+      "id": "render-12",
+      "status": "pass"
+    },
+    {
+      "id": "render-13",
+      "status": "pass"
+    },
+    {
+      "id": "render-14",
+      "status": "pass"
+    },
+    {
+      "id": "render-15",
+      "status": "pass"
+    },
+    {
+      "id": "render-16",
+      "status": "pass"
+    },
+    {
+      "id": "render-17",
+      "status": "pass"
+    },
+    {
+      "id": "render-18",
+      "status": "pass"
+    },
+    {
+      "id": "render-19",
+      "status": "pass"
+    },
+    {
+      "id": "render-20",
+      "status": "pass"
+    },
+    {
+      "id": "render-21",
+      "status": "pass"
+    },
+    {
+      "id": "render-22",
+      "status": "pass"
+    },
+    {
+      "id": "render-23",
+      "status": "pass"
+    },
+    {
+      "id": "render-24",
+      "status": "pass"
+    },
+    {
+      "id": "render-25",
+      "status": "pass"
+    },
+    {
+      "id": "render-26",
+      "status": "pass"
+    },
+    {
+      "id": "render-27",
+      "status": "pass"
+    },
+    {
+      "id": "render-28",
+      "status": "pass"
+    },
+    {
+      "id": "render-29",
+      "status": "pass"
+    },
+    {
+      "id": "render-30",
+      "status": "pass"
+    },
+    {
+      "id": "render-31",
+      "status": "pass"
+    },
+    {
+      "id": "render-32",
+      "status": "pass"
+    },
+    {
+      "id": "render-33",
+      "status": "pass"
+    },
+    {
+      "id": "render-34",
+      "status": "pass"
+    },
+    {
+      "id": "render-35",
+      "status": "pass"
+    },
+    {
+      "id": "render-36",
+      "status": "pass"
+    },
+    {
+      "id": "render-37",
+      "status": "pass"
+    },
+    {
+      "id": "render-38",
+      "status": "pass"
+    },
+    {
+      "id": "render-39",
+      "status": "pass"
+    },
+    {
+      "id": "render-40",
+      "status": "pass"
+    },
+    {
+      "id": "render-41",
+      "status": "pass"
+    },
+    {
+      "id": "render-42",
+      "status": "pass"
+    },
+    {
+      "id": "render-43",
+      "status": "pass"
+    },
+    {
+      "id": "render-44",
+      "status": "pass"
+    },
+    {
+      "id": "render-45",
+      "status": "pass"
+    },
+    {
+      "id": "render-46",
+      "status": "pass"
+    },
+    {
+      "id": "render-47",
+      "status": "pass"
+    },
+    {
+      "id": "render-48",
+      "status": "pass"
+    },
+    {
+      "id": "render-49",
+      "status": "pass"
+    },
+    {
+      "id": "render-50",
+      "status": "pass"
+    },
+    {
+      "id": "render-51",
+      "status": "pass"
+    },
+    {
+      "id": "render-52",
+      "status": "pass"
+    },
+    {
+      "id": "render-53",
+      "status": "pass"
+    },
+    {
+      "id": "render-54",
+      "status": "pass"
+    },
+    {
+      "id": "render-55",
+      "status": "pass"
+    },
+    {
+      "id": "render-56",
+      "status": "pass"
+    },
+    {
+      "id": "render-57",
+      "status": "pass"
+    },
+    {
+      "id": "render-58",
+      "status": "pass"
+    },
+    {
+      "id": "render-59",
+      "status": "pass"
+    },
+    {
+      "id": "render-60",
+      "status": "pass"
+    },
+    {
+      "id": "render-61",
+      "status": "pass"
+    },
+    {
+      "id": "render-62",
+      "status": "pass"
+    },
+    {
+      "id": "render-63",
+      "status": "pass"
+    },
+    {
+      "id": "render-64",
+      "status": "pass"
+    },
+    {
+      "id": "render-65",
+      "status": "pass"
+    },
+    {
+      "id": "render-66",
+      "status": "pass"
+    },
+    {
+      "id": "render-67",
+      "status": "pass"
+    },
+    {
+      "id": "render-68",
+      "status": "pass"
+    },
+    {
+      "id": "render-69",
+      "status": "pass"
+    },
+    {
+      "id": "render-70",
+      "status": "pass"
+    },
+    {
+      "id": "render-71",
+      "status": "pass"
+    },
+    {
+      "id": "render-72",
+      "status": "pass"
+    },
+    {
+      "id": "render-73",
+      "status": "pass"
+    },
+    {
+      "id": "render-74",
+      "status": "pass"
+    },
+    {
+      "id": "render-75",
+      "status": "pass"
+    },
+    {
+      "id": "render-76",
+      "status": "pass"
+    },
+    {
+      "id": "render-77",
+      "status": "pass"
+    },
+    {
+      "id": "render-78",
+      "status": "pass"
+    },
+    {
+      "id": "render-79",
+      "status": "pass"
+    },
+    {
+      "id": "render-80",
+      "status": "pass"
+    },
+    {
+      "id": "render-81",
+      "status": "pass"
+    },
+    {
+      "id": "render-82",
+      "status": "pass"
+    },
+    {
+      "id": "render-83",
+      "status": "pass"
+    },
+    {
+      "id": "render-84",
+      "status": "pass"
+    },
+    {
+      "id": "render-85",
+      "status": "pass"
+    },
+    {
+      "id": "render-86",
+      "status": "pass"
+    },
+    {
+      "id": "render-87",
+      "status": "pass"
+    },
+    {
+      "id": "render-88",
+      "status": "pass"
+    },
+    {
+      "id": "render-89",
+      "status": "pass"
+    },
+    {
+      "id": "render-90",
+      "status": "pass"
+    },
+    {
+      "id": "render-91",
+      "status": "pass"
+    },
+    {
+      "id": "render-92",
+      "status": "pass"
+    },
+    {
+      "id": "render-93",
+      "status": "pass"
+    },
+    {
+      "id": "render-94",
+      "status": "pass"
+    },
+    {
+      "id": "render-95",
+      "status": "pass"
+    },
+    {
+      "id": "render-96",
+      "status": "pass"
+    },
+    {
+      "id": "render-97",
+      "status": "pass"
+    },
+    {
+      "id": "render-98",
+      "status": "pass"
+    },
+    {
+      "id": "render-99",
+      "status": "pass"
+    },
+    {
+      "id": "render-100",
+      "status": "pass"
+    },
+    {
+      "id": "render-101",
+      "status": "pass"
+    },
+    {
+      "id": "render-102",
+      "status": "pass"
+    },
+    {
+      "id": "render-103",
+      "status": "pass"
+    },
+    {
+      "id": "render-104",
+      "status": "pass"
+    },
+    {
+      "id": "render-105",
+      "status": "pass"
+    },
+    {
+      "id": "render-106",
+      "status": "pass"
+    },
+    {
+      "id": "render-107",
+      "status": "pass"
+    },
+    {
+      "id": "render-108",
+      "status": "pass"
+    },
+    {
+      "id": "render-109",
+      "status": "pass"
+    },
+    {
+      "id": "render-110",
+      "status": "pass"
+    },
+    {
+      "id": "render-111",
+      "status": "pass"
+    },
+    {
+      "id": "render-112",
+      "status": "pass"
+    },
+    {
+      "id": "render-113",
+      "status": "pass"
+    },
+    {
+      "id": "render-114",
+      "status": "pass"
+    },
+    {
+      "id": "render-115",
+      "status": "pass"
+    },
+    {
+      "id": "render-116",
+      "status": "pass"
+    },
+    {
+      "id": "render-117",
+      "status": "pass"
+    },
+    {
+      "id": "render-118",
+      "status": "pass"
+    },
+    {
+      "id": "render-119",
+      "status": "pass"
+    },
+    {
+      "id": "zero",
+      "status": "pass"
+    },
+    {
+      "id": "false",
+      "status": "pass"
+    },
+    {
+      "id": "source-edit",
+      "status": "pass"
+    },
+    {
+      "id": "missing-source",
+      "status": "pass"
+    }
+  ],
+  "scope": "Exact compile calls under stated workload; not latency, heap, billing or general quality"
+}
