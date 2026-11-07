@@ -17,4 +17,6 @@ These proposed requirements specialize [Shared](../Shared.md); do not score docu
 - **U08:** Broad improvement preserves a reviewed purpose/task-family outcome inventory and baseline whole-skill structural review independently of round budgets. Success on a sample does not erase uncovered outcomes or portfolio children.
 - **U09:** Each broad round updates parent coverage and leads to actual subsequent evaluation or repair while material required work remains. Completion reconciles the full inventory and structural findings against user intent; no fixed round count, forced rewrite or infinite improvement requirement replaces that decision.
 
+- **U10:** Where alternative generation applies, including focused structural improvements under PlanChange's activation rule, compare plausible distinct mechanisms before selecting a change. Judge executable outcomes and total cost rather than novelty, wording variation or extra files; preserve proportionate maintenance/local-repair/no-change paths.
+
 Origin: workflow outcome and shared commitments, operationalized here as draft checks. Validate these checks before using them as authoritative references. Revisit when they miss failures or reject valid alternatives.

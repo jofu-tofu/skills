@@ -1,6 +1,14 @@
 # SkillForge 2.1.0 release candidate
 
-Current draft: 2.1.0-rc.9. Broad improvement now owns comprehensive parent outcome coverage and baseline structural review independently of successive experiment rounds. Matched completion checks improve from 29/34 to 34/34. Two actual improvement comparisons tie on independent outcomes; proportionality and corrected adequate-skill controls pass. Retained for bounded completion protections, with no general behavioral superiority established. Deeper target application remains in progress; no installation or publication is implied. See [current record](Improvements/ComprehensiveImprovement/Record.md).
+Current draft: 2.1.0-rc.11. Repairs focused structural activation. Real-skill comparison confirms activation and preserved outcomes, but no solution-quality advantage. Experimental and uninstalled; see [record](Improvements/FocusedActivation/Record.md).
+
+## Prior rc.10 scope
+
+Current draft: 2.1.0-rc.10. Adds conditional mechanism-diverse idea generation before change selection, including structural alternatives and simplification. Six matched component pairs and one full-workflow pair tie on executable solution quality. Observed component overhead is +7.4% elapsed and +9.8% output tokens; the full-workflow observation is +7.5% elapsed with fewer output tokens. Adequate-target and typo controls preserve scope. Retained as an experimental search aid, not a demonstrated superiority or general efficiency improvement. See [current record](Improvements/IdeaGeneration/Record.md). No installation or publication is implied.
+
+## Prior rc.9 scope
+
+Broad improvement owns comprehensive parent outcome coverage and baseline structural review independently of successive rounds. Completion checks improve from 29/34 to 34/34; two actual improvement comparisons tie. See the [comprehensive-improvement record](Improvements/ComprehensiveImprovement/Record.md) for its original evidence and limits.
 
 ## Prior rc.8 scope
 

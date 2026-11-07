@@ -5,6 +5,10 @@ updated: 2026-11-03
 ---
 # Proposed SkillForge improvement records
 
+Focused structural activation rc.11: [repair and real-skill comparison](FocusedActivation/Record.md). Actual activation succeeds, outcomes tie, loading benefit is absent; keep experimental and uninstalled.
+
+Idea-generation candidate: [mechanism alternatives and overhead comparison](IdeaGeneration/Record.md). Six matched component pairs tie on executable solution quality; the candidate explicitly explores additional structural options. Measured planning overhead and full-caller evidence remain scoped to synthetic tasks; no general superiority claim.
+
 Comprehensive improvement draft rc.9: [scope-loss diagnosis and evaluation](ComprehensiveImprovement/Record.md). Parent coverage and baseline structural review remain distinct from rounds. Completion checks improve 29/34 to 34/34; two full-task comparisons tie and proportionality controls pass. Eleven preserved trials include corrected adequate/design-only controls. Bounded method retained; deeper target continuation remains in progress. No whole-task completion or installation claim.
 
 Completion gate repair, 2026-11-04: [failure, implementation and evidence](CompletionGate/Record.md). Separates candidate retention from complete/continue/blocked; 24 CLI tests and both historical closure replays pass. Approved full SkillForge baseline/candidate runs completed after preserved timeout interruptions; the candidate invoked and consumed the gate. Separate typo/design controls pass. Bounded repair retained in the worktree; no general superiority, installation or publication claim.
