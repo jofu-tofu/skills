@@ -1,0 +1,34 @@
+{
+  "protocol_sha256": "1991417f7dddff4fa4090920bcec9babc69b8fca97f7ce88eacd3b89f68e2f76",
+  "source_sha256": "de59d9caf93f8729787a6a09ad83e0a1135be0adb93da7b99e45a57fa9e73494",
+  "results": [
+    {
+      "id": "faithful",
+      "claim": "The release is not approved.",
+      "asserted_approval": false,
+      "reference_approval": false,
+      "proposition_consistent": true,
+      "source_checker_ok": true,
+      "exit": 0,
+      "error": null,
+      "stdout": "{\"ok\":true,\"noClaims\":false,\"claims\":[{\"n\":1,\"text\":\"The release is not approved.\",\"grade\":\"C\"}],\"overall\":{\"Lowest claim score\":\"C\",\"Highest claim score\":\"C\",\"Average claim score\":\"C\"},\"problems\":[]}\n",
+      "stderr": "",
+      "report_sha256": "273e96e1d0052796810db894178911fe947b5e56b460bf9312413591b44b75cf",
+      "tool_sha256": "9792c361f56fa567d8052cdbe1a755dc8129b18f64095225ac42bd351850a5e7"
+    },
+    {
+      "id": "reversed",
+      "claim": "The release is approved.",
+      "asserted_approval": true,
+      "reference_approval": false,
+      "proposition_consistent": false,
+      "source_checker_ok": true,
+      "exit": 0,
+      "error": null,
+      "stdout": "{\"ok\":true,\"noClaims\":false,\"claims\":[{\"n\":1,\"text\":\"The release is approved.\",\"grade\":\"C\"}],\"overall\":{\"Lowest claim score\":\"C\",\"Highest claim score\":\"C\",\"Average claim score\":\"C\"},\"problems\":[]}\n",
+      "stderr": "",
+      "report_sha256": "3cb2deeb7283efef73d263d7d4b00a16821668d7722f694a46b595cb901c5e92",
+      "tool_sha256": "9792c361f56fa567d8052cdbe1a755dc8129b18f64095225ac42bd351850a5e7"
+    }
+  ]
+}

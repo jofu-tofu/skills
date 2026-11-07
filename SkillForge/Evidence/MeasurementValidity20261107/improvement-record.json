@@ -1,0 +1,62 @@
+{
+  "improvement_id": "MeasurementValidity20261107",
+  "parent_attempt": null,
+  "workflow": "SkillForge/DesignMeasurement",
+  "baseline": "244434c6476f6678fb1cca7fa1193129f54ae1de",
+  "candidate": "5c9acc8",
+  "hypothesis": {
+    "observed_failure": null,
+    "reproduction": "not_applicable",
+    "desired_gain": "Better evidence-use decisions from explicit use-specific qualification.",
+    "falsifying_outcome": "Baseline already makes the same justified decisions with no preservation deficit."
+  },
+  "targeted_failure": null,
+  "evaluation": {
+    "suite_version": "MeasurementValidity20261107-v1",
+    "protocol": "Protocol.md",
+    "results": "results.json"
+  },
+  "loop_observations": [
+    {
+      "stage": "measurement",
+      "status": "pass",
+      "observation": "Primary score accepts narrow despite four wider failures; source matcher accepts negation-reversed report.",
+      "evidence": [
+        "fixed-observations.json",
+        "boundary/results.json"
+      ],
+      "attribution": "Instrument scope limits, not evidence of a SkillForge baseline decision failure."
+    },
+    {
+      "stage": "execution",
+      "status": "pass",
+      "observation": "Both methods select broad, resolve 6/6 conditional decisions and pass 18/18 downstream checks.",
+      "evidence": [
+        "decision-review.json",
+        "downstream-results.json",
+        "audit.json"
+      ],
+      "attribution": "Tie on this explicit retrospective task."
+    },
+    {
+      "stage": "decision",
+      "status": "pass",
+      "observation": "Baseline restored; tested patch and useful assessment retained as evidence.",
+      "evidence": [
+        "Report.md",
+        "candidate.patch",
+        "audit.json"
+      ],
+      "attribution": "Frozen benefit rule, not a generalized claim that candidate is ineffective."
+    }
+  ],
+  "decision": "retain_baseline",
+  "reason": "No observed incremental benefit; stop saturated repeats.",
+  "limitations": [
+    "Two startup failures plus two completed model sessions.",
+    "One model/vendor, one retrospective explicit decision portfolio per arm.",
+    "New lexical instances are not representative new task families.",
+    "Conditional CSV/reference/design-only cases do not establish full workflow execution.",
+    "No prospective optimization sequence or general factual-truth validation."
+  ]
+}

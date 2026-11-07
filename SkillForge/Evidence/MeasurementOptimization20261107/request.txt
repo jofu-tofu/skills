@@ -1,0 +1,1 @@
+Run the next discriminating experiment on a real optimization task with independently frozen outcomes. Keep making incremental commits, and retain the baseline if the candidate still adds no value.

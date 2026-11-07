@@ -1,0 +1,286 @@
+{
+  "suite_version": "MeasurementValidity20261107-v1",
+  "workflow": "UpdateSkill",
+  "mode": "exploratory assessment",
+  "claim": "Test use-specific measurement qualification on fixed artifacts and real selected-target behavior; no general superiority claim.",
+  "snapshots": {
+    "baseline": "244434c6476f6678fb1cca7fa1193129f54ae1de",
+    "candidate": "5c9acc8",
+    "cases": "consumer-inputs/cases.json",
+    "measurement": "FixedAssessment.md",
+    "checker": "experiment.cjs",
+    "identities": "freeze.json",
+    "treatments": "treatment.json"
+  },
+  "requested_trials": 4,
+  "completed_trials": 2,
+  "runs": [
+    {
+      "case_id": "startup-baseline",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "error",
+      "checks": [
+        {
+          "id": "runtime",
+          "measurement_id": "process-receipt",
+          "status": "unverified",
+          "observation": "Codex state access denied before evaluation",
+          "evidence": [
+            "external-evidence.json"
+          ],
+          "reason": "Unavailable execution, not target failure"
+        }
+      ]
+    },
+    {
+      "case_id": "paired-selection-baseline",
+      "role": "acceptance",
+      "configuration": "baseline",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "selection",
+          "measurement_id": "fixed-contract-and-downstream-v1",
+          "status": "pass",
+          "observation": "broad",
+          "evidence": [
+            "subjects/baseline/decision.json",
+            "fixed-observations.json",
+            "downstream-results.json"
+          ],
+          "reason": "Selected actual artifact passes all 18 separately frozen consumer checks"
+        },
+        {
+          "id": 1,
+          "status": "pass",
+          "observation": "No",
+          "reason": "Primary omits observed adjacent failures.",
+          "evidence": [
+            "subjects/baseline/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 2,
+          "status": "pass",
+          "observation": "No",
+          "reason": "Source-membership contract excludes factual truth; boundary pair executes the limit.",
+          "evidence": [
+            "subjects/baseline/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 3,
+          "status": "pass",
+          "observation": "No; robustness remains unverified",
+          "reason": "Historical artifacts are exposed, with no prospective optimization sequence.",
+          "evidence": [
+            "subjects/baseline/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 4,
+          "status": "pass",
+          "observation": "No",
+          "reason": "Finite equality contract stipulated, population calibration not prerequisite; no CSV execution claimed.",
+          "evidence": [
+            "subjects/baseline/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 5,
+          "status": "pass",
+          "observation": "Neither; unverified pending adjudication",
+          "reason": "Conflicting equal authorities and no resolution cannot ground a confirmed verdict.",
+          "evidence": [
+            "subjects/baseline/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 6,
+          "status": "pass",
+          "observation": "No",
+          "reason": "Explicit design-only scope does not authorize execution.",
+          "evidence": [
+            "subjects/baseline/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        }
+      ],
+      "cost": {
+        "status": "completed",
+        "exit_code": 0,
+        "seconds": 182.639,
+        "usage": {
+          "input_tokens": 836993,
+          "cached_input_tokens": 772480,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5153,
+          "reasoning_output_tokens": 124
+        }
+      }
+    },
+    {
+      "case_id": "startup-candidate",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "error",
+      "checks": [
+        {
+          "id": "runtime",
+          "measurement_id": "process-receipt",
+          "status": "unverified",
+          "observation": "Codex state access denied before evaluation",
+          "evidence": [
+            "external-evidence.json"
+          ],
+          "reason": "Unavailable execution, not target failure"
+        }
+      ]
+    },
+    {
+      "case_id": "paired-selection-candidate",
+      "role": "acceptance",
+      "configuration": "candidate",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "selection",
+          "measurement_id": "fixed-contract-and-downstream-v1",
+          "status": "pass",
+          "observation": "broad",
+          "evidence": [
+            "subjects/candidate/decision.json",
+            "fixed-observations.json",
+            "downstream-results.json"
+          ],
+          "reason": "Selected actual artifact passes all 18 separately frozen consumer checks"
+        },
+        {
+          "id": 1,
+          "status": "pass",
+          "observation": "No",
+          "reason": "Primary omits observed adjacent failures.",
+          "evidence": [
+            "subjects/candidate/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 2,
+          "status": "pass",
+          "observation": "No",
+          "reason": "Source-membership contract excludes factual truth; boundary pair executes the limit.",
+          "evidence": [
+            "subjects/candidate/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 3,
+          "status": "pass",
+          "observation": "No; optimization robustness is unverified",
+          "reason": "Historical artifacts are exposed, with no prospective optimization sequence.",
+          "evidence": [
+            "subjects/candidate/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 4,
+          "status": "pass",
+          "observation": "No",
+          "reason": "Finite equality contract stipulated, population calibration not prerequisite; no CSV execution claimed.",
+          "evidence": [
+            "subjects/candidate/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 5,
+          "status": "pass",
+          "observation": "Neither; unverified",
+          "reason": "Conflicting equal authorities and no resolution cannot ground a confirmed verdict.",
+          "evidence": [
+            "subjects/candidate/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        },
+        {
+          "id": 6,
+          "status": "pass",
+          "observation": "No",
+          "reason": "Explicit design-only scope does not authorize execution.",
+          "evidence": [
+            "subjects/candidate/decision.json",
+            "Protocol.md",
+            "treatment.json"
+          ],
+          "measurement_id": "explicit-scope-decision-v1"
+        }
+      ],
+      "cost": {
+        "status": "completed",
+        "exit_code": 0,
+        "seconds": 183.571,
+        "usage": {
+          "input_tokens": 588137,
+          "cached_input_tokens": 528256,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5618,
+          "reasoning_output_tokens": 112
+        }
+      }
+    }
+  ],
+  "decision": "inconclusive",
+  "candidate_decision": "retain_baseline",
+  "task_status": "complete",
+  "targeted_benefit": {
+    "status": "unverified",
+    "reason": "Observed tie; no additional benefit demonstrated, no equivalence inference."
+  },
+  "preservation": {
+    "status": "pass",
+    "scope": "Six conditional decisions, actual fixed-target selection and 18 lexical consumer cases per arm; runtime files restored to baseline."
+  },
+  "regression_coverage": "Protocol.md#completion-and-preservation",
+  "limitations": [
+    "Two startup failures plus two completed model sessions.",
+    "One model/vendor, one retrospective explicit decision portfolio per arm.",
+    "New lexical instances are not representative new task families.",
+    "Conditional CSV/reference/design-only cases do not establish full workflow execution.",
+    "No prospective optimization sequence or general factual-truth validation."
+  ]
+}

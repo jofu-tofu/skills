@@ -1,0 +1,17 @@
+# Measurement specification v1 — frozen before local execution
+
+Authority: task.md; SkillForge EvaluateSkill / DesignMeasurement. Assessment only, eight-minute cap. Historical scores have already been inspected; this is diagnostic qualification, not preregistered confirmation.
+
+O1: reject unsupported/empty source quotations under the route contract. O2: accept literal quotes and valid elisions/insertions. O3: preserve optional no-source, selected-section, short-suggestion and rewrite modes. O4: distinguish CLI errors from validation rejection. Evaluation unit: target × case. Audience: team choosing one of the supplied tools for bounded source/shape checking across four routes. Truth, semantic quality and future optimization robustness are excluded.
+
+M1: direct agreement of CLI exit and JSON ok with independently inspectable source strings and supplied CLI-contract labels. Expected rejection is a successful check when exit=1 and ok=false; expected acceptance requires exit=0 and ok=true. Missing/malformed output or launch error is unverified, not false. Expected usage errors require exit=2; they say nothing about input validity. Record each case separately; no regression can be offset by aggregate gains. No duplicate historical row is independent sampling evidence.
+
+References: inputs/cases.json, inputs/source.txt, inputs/*.md, observations.json, target help/comments. Literal source supports positives; fabricated passages and bracket-only spans support negatives/shortcut controls; elisions and editorial insertion are valid alternatives. Omitted --source and Prose's under-six-token/rewrite exemptions are protected contracts, not false positives. Inspect labels against source rather than use candidate self-reports as ground truth. Conflicting authorities remain unverified pending owner adjudication.
+
+Methods: retain deterministic contract comparison for this finite claim. Existing supplied historical suite is useful but not random. Human semantic review would be needed for truth/meaning; no such ratings are supplied. External research/network and external models are prohibited and unnecessary for finite string/CLI equality. Population correlations do not qualify a direct finite equality contract better than known controls. No invented probabilities or population confidence intervals.
+
+Plan: replay all 14 available adjacent cases once against all three unchanged versions (42 CLI executions); preserve stdout, exit, parse errors and runtime. Recompute all 174 supplied observation verdicts independently; inspect scorer controls. Verify manifest hashes. Primary and historical-transfer files are unavailable locally, so their runs remain historical evidence, not new executions.
+
+Selection gate: choose the version satisfying all supplied contract strata, with local adjacent reproduction supporting its claimed advantage and no observed protected-mode regression. If none qualifies return none. Scope is these documented source/shape behaviors, not universal readiness. Stop after the finite comparison; no new benchmark or target edits.
+
+Rivals: primary success may hide adjacent failures; broad guards may reject valid alternatives; historical labels may be inaccurate or files mismatched. The 42 paired checks distinguish the first two and source/hash inspection tests the third. Qualification state will be recorded in qualification.md after execution. Runtime/assessor uncertainty is separate from nonrandom case-selection uncertainty. Requalify on target, contract, runtime, source normalization or reference changes.

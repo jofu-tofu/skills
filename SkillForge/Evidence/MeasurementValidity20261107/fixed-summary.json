@@ -1,0 +1,53 @@
+{
+  "original": {
+    "primary": {
+      "pass": 28,
+      "fail": 4,
+      "unverified": 0
+    },
+    "adjacent": {
+      "pass": 12,
+      "fail": 2,
+      "unverified": 0
+    },
+    "historical-transfer": {
+      "pass": 9,
+      "fail": 3,
+      "unverified": 0
+    }
+  },
+  "narrow": {
+    "primary": {
+      "pass": 32,
+      "fail": 0,
+      "unverified": 0
+    },
+    "adjacent": {
+      "pass": 12,
+      "fail": 2,
+      "unverified": 0
+    },
+    "historical-transfer": {
+      "pass": 10,
+      "fail": 2,
+      "unverified": 0
+    }
+  },
+  "broad": {
+    "primary": {
+      "pass": 32,
+      "fail": 0,
+      "unverified": 0
+    },
+    "adjacent": {
+      "pass": 14,
+      "fail": 0,
+      "unverified": 0
+    },
+    "historical-transfer": {
+      "pass": 12,
+      "fail": 0,
+      "unverified": 0
+    }
+  }
+}

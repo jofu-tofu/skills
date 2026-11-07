@@ -1,0 +1,71 @@
+[
+  {
+    "label": "output-cache",
+    "run": {
+      "command": [
+        "bun",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\profile-controls\\output-cache\\target"
+      ],
+      "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\profile-controls\\output-cache",
+      "exit": 0,
+      "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":0.08129999999994197,\"compile_calls\":0,\"output_equal\":true}\n",
+      "stderr": "",
+      "error": null,
+      "seconds": 0.732
+    },
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 0.08129999999994197,
+      "compile_calls": 0,
+      "output_equal": true
+    }
+  },
+  {
+    "label": "partial-cache",
+    "run": {
+      "command": [
+        "bun",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\profile-controls\\partial-cache\\target"
+      ],
+      "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\profile-controls\\partial-cache",
+      "exit": 0,
+      "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":119.91840000000002,\"compile_calls\":240,\"output_equal\":true}\n",
+      "stderr": "",
+      "error": null,
+      "seconds": 0.866
+    },
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 119.91840000000002,
+      "compile_calls": 240,
+      "output_equal": true
+    }
+  },
+  {
+    "label": "valid-refactor",
+    "run": {
+      "command": [
+        "bun",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\profile-controls\\valid-refactor\\target"
+      ],
+      "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\profile-controls\\valid-refactor",
+      "exit": 0,
+      "stdout": "{\"iterations\":240,\"partial_files\":64,\"milliseconds\":1667.6509999999998,\"compile_calls\":480,\"output_equal\":true}\n",
+      "stderr": "",
+      "error": null,
+      "seconds": 2.432
+    },
+    "value": {
+      "iterations": 240,
+      "partial_files": 64,
+      "milliseconds": 1667.6509999999998,
+      "compile_calls": 480,
+      "output_equal": true
+    }
+  }
+]
