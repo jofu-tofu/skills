@@ -1,0 +1,541 @@
+{
+  "suite_version": "navigation-v2 (v1 preserved separately)",
+  "workflow": "UpdateSkill",
+  "mode": "confirmation",
+  "claim": "Bounded maintainer-navigation benefit and preservation on three requests plus one tiny target edit",
+  "snapshots": {
+    "base_commit": "244434c6476f6678fb1cca7fa1193129f54ae1de",
+    "candidate_runtime_commit": "0f9b7c2",
+    "baseline": "cbd1122d6772b2e9ba29a5fa7da9bee8f1326c529f8bbb7690066c6a0483d2ac",
+    "candidate": "e9ada4558e3d8b8b217e316145f292289d7b103dd33a4b05b562cf3424f60588",
+    "cases_sha256": "2c42c6dbd0ffaecb8acaff60cdab2ca3e54433aa280df7e4911a828f5e611ece",
+    "measurement_sha256": "ba73c7ae628d7334e17494c847041f72242a128ec32bd529968d356b4eeb30e9",
+    "amendment_sha256": "087e7ab34ce7861c63f05936b88da27b566b4433c651d516aafe12aff9f4786d",
+    "checker_sha256": "6cfb9afdfa0cdbbc4187e3f7dcfa5f1c2cf90aa105e8690e55d0374867615998"
+  },
+  "runtime": {
+    "host": "Codex desktop subagents",
+    "model": "Inherited host model/settings; exact model ID and effort not independently exposed",
+    "platform": "Windows PowerShell; Node v24.12.0",
+    "isolation": "Fresh agent contexts; shared filesystem, procedural access restrictions, same vendor"
+  },
+  "requested_trials": 4,
+  "completed_trials": 4,
+  "runs": [
+    {
+      "case_id": "maintainer-requests-and-typo",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "D1",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Correct activation owner/caller and redesign versus fixed move/typo decisions",
+          "evidence": [
+            "answer-A1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D2",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Current workflow/target requirements and contribution ownership distinguished",
+          "evidence": [
+            "answer-A1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D3",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Measurement qualification does not establish unverified target readiness",
+          "evidence": [
+            "answer-A1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D4",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Continue feasible repair; assessment-only exception; executable completion format",
+          "evidence": [
+            "answer-A1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D5",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Current integrated status preserves tied-result limits",
+          "evidence": [
+            "answer-A1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D6",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Historical profiles, external raw evidence and optional library are not blanket prerequisites",
+          "evidence": [
+            "answer-A1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D7",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Actual target bytes match only the requested typo replacement",
+          "evidence": [
+            "answer-A1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Exact original/repaired bytes independently compared"
+        },
+        {
+          "id": "navigation-volume",
+          "measurement_id": "bytes-v1",
+          "status": "unverified",
+          "observation": "Emitted text logged, host output truncated",
+          "evidence": [
+            "audit-round1-exact.json",
+            "answer-A1.md"
+          ],
+          "reason": "Cannot infer received volume"
+        }
+      ],
+      "cost": {
+        "successful_reader_calls": 7,
+        "failed_reader_calls": 0,
+        "logged_utf8_bytes": 100112,
+        "metric": "emitted_stdout_bytes",
+        "error_output_bytes": null,
+        "model_tokens": null,
+        "elapsed_seconds": null
+      }
+    },
+    {
+      "case_id": "maintainer-requests-and-typo",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "D1",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Correct activation owner/caller and redesign versus fixed move/typo decisions",
+          "evidence": [
+            "answer-B1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D2",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Current workflow/target requirements and contribution ownership distinguished",
+          "evidence": [
+            "answer-B1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D3",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Measurement qualification does not establish unverified target readiness",
+          "evidence": [
+            "answer-B1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D4",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Continue feasible repair; assessment-only exception; executable completion format",
+          "evidence": [
+            "answer-B1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D5",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Current integrated status preserves tied-result limits",
+          "evidence": [
+            "answer-B1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D6",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Historical profiles, external raw evidence and optional library are not blanket prerequisites",
+          "evidence": [
+            "answer-B1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D7",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Actual target bytes match only the requested typo replacement",
+          "evidence": [
+            "answer-B1.md",
+            "spotcheck-v2.md",
+            "audit-round1-exact.json"
+          ],
+          "reason": "Exact original/repaired bytes independently compared"
+        },
+        {
+          "id": "navigation-volume",
+          "measurement_id": "bytes-v1",
+          "status": "unverified",
+          "observation": "Emitted text logged, host output truncated",
+          "evidence": [
+            "audit-round1-exact.json",
+            "answer-B1.md"
+          ],
+          "reason": "Cannot infer received volume"
+        }
+      ],
+      "cost": {
+        "successful_reader_calls": 4,
+        "failed_reader_calls": 0,
+        "logged_utf8_bytes": 92671,
+        "metric": "emitted_stdout_bytes",
+        "error_output_bytes": null,
+        "model_tokens": null,
+        "elapsed_seconds": null
+      }
+    },
+    {
+      "case_id": "maintainer-requests-and-typo",
+      "role": "acceptance",
+      "configuration": "baseline",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "D1",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Correct activation owner/caller and redesign versus fixed move/typo decisions",
+          "evidence": [
+            "answer-A2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D2",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Current workflow/target requirements and contribution ownership distinguished",
+          "evidence": [
+            "answer-A2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D3",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Measurement qualification does not establish unverified target readiness",
+          "evidence": [
+            "answer-A2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D4",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Continue feasible repair; assessment-only exception; executable completion format",
+          "evidence": [
+            "answer-A2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D5",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Current integrated status preserves tied-result limits",
+          "evidence": [
+            "answer-A2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D6",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Historical profiles, external raw evidence and optional library are not blanket prerequisites",
+          "evidence": [
+            "answer-A2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D7",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Actual target bytes match only the requested typo replacement",
+          "evidence": [
+            "answer-A2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Exact original/repaired bytes independently compared"
+        },
+        {
+          "id": "navigation-volume",
+          "measurement_id": "bytes-v2",
+          "status": "pass",
+          "observation": "Bounded pages received without host truncation; failed request counted separately",
+          "evidence": [
+            "audit-v2.json",
+            "answer-A2.md"
+          ],
+          "reason": "Limited to successful package-text stdout, not total model cost"
+        }
+      ],
+      "cost": {
+        "successful_reader_calls": 11,
+        "failed_reader_calls": 1,
+        "logged_utf8_bytes": 79131,
+        "metric": "successful_returned_stdout_bytes",
+        "error_output_bytes": null,
+        "model_tokens": null,
+        "elapsed_seconds": null
+      }
+    },
+    {
+      "case_id": "maintainer-requests-and-typo",
+      "role": "acceptance",
+      "configuration": "candidate",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "D1",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Correct activation owner/caller and redesign versus fixed move/typo decisions",
+          "evidence": [
+            "answer-B2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D2",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Current workflow/target requirements and contribution ownership distinguished",
+          "evidence": [
+            "answer-B2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D3",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Measurement qualification does not establish unverified target readiness",
+          "evidence": [
+            "answer-B2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D4",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Continue feasible repair; assessment-only exception; executable completion format",
+          "evidence": [
+            "answer-B2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D5",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Current integrated status preserves tied-result limits",
+          "evidence": [
+            "answer-B2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D6",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Historical profiles, external raw evidence and optional library are not blanket prerequisites",
+          "evidence": [
+            "answer-B2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Source-checked against frozen baseline contracts; valid equivalent citations accepted"
+        },
+        {
+          "id": "D7",
+          "measurement_id": "source-decisions-v1",
+          "status": "pass",
+          "observation": "Actual target bytes match only the requested typo replacement",
+          "evidence": [
+            "answer-B2.md",
+            "spotcheck-v2.md",
+            "audit-v2.json"
+          ],
+          "reason": "Exact original/repaired bytes independently compared"
+        },
+        {
+          "id": "navigation-volume",
+          "measurement_id": "bytes-v2",
+          "status": "pass",
+          "observation": "Bounded pages received without host truncation; failed request counted separately",
+          "evidence": [
+            "audit-v2.json",
+            "answer-B2.md"
+          ],
+          "reason": "Limited to successful package-text stdout, not total model cost"
+        }
+      ],
+      "cost": {
+        "successful_reader_calls": 9,
+        "failed_reader_calls": 0,
+        "logged_utf8_bytes": 68450,
+        "metric": "successful_returned_stdout_bytes",
+        "error_output_bytes": null,
+        "model_tokens": null,
+        "elapsed_seconds": null
+      }
+    }
+  ],
+  "decision": "pass",
+  "candidate_decision": "retain_candidate",
+  "task_status_reference": "completion.json",
+  "benefit": {
+    "status": "pass",
+    "baseline_success_bytes": 79131,
+    "candidate_success_bytes": 68450,
+    "difference_bytes": -10681,
+    "successful_text_reduction_percent": 13.497870620458492,
+    "baseline_total_reader_invocations": 12,
+    "candidate_total_reader_invocations": 9,
+    "scope": "One corrected matched pair; error-output bytes excluded and unknown"
+  },
+  "preservation": {
+    "status": "pass",
+    "scope": "D1-D7; 52 links/anchors; 14 structural checks; 34 completion tests"
+  },
+  "summary": {
+    "pass": 30,
+    "fail": 0,
+    "unverified": 2,
+    "unverified_scope": "Original received-volume measurements only",
+    "independent_units": "Four executions of the same three requests; checks within runs are not independent task samples"
+  },
+  "regression_coverage": "Plan.md and Measurement.md D1-D7",
+  "improvement_id": "InformationOrganization20261107",
+  "targeted_failure": null,
+  "loop_observations": [
+    {
+      "stage": "activation",
+      "status": "supported",
+      "observation": "Both versions Architecture read; candidate map exposed",
+      "evidence": [
+        "audit-v2.json",
+        "spotcheck-v2.md"
+      ],
+      "attribution": "observed"
+    },
+    {
+      "stage": "evaluation",
+      "status": "supported",
+      "observation": "Truncation prompted instrument correction and fresh pair; exact-byte checker corrected against pre-edit hash",
+      "evidence": [
+        "Amendment-v2.md",
+        "spotcheck-v2.md"
+      ],
+      "attribution": "observed"
+    },
+    {
+      "stage": "transfer",
+      "status": "not_tested",
+      "observation": "Actual policy patch and fresh downstream consumer not tested",
+      "evidence": [],
+      "attribution": "unknown"
+    }
+  ],
+  "limitations": [
+    "Simulated maintainer requests on real package and synthetic typo fixture",
+    "Fresh contexts repeat diagnostic tasks; no population estimate",
+    "One corrected pair; independent agent choices remain rival explanation",
+    "Reader calls and stdout only; billing, latency, model work and error-output byte cost unknown",
+    "General semantic validity, whole-skill outcomes, installation and historical retrieval not established"
+  ]
+}

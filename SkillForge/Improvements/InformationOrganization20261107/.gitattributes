@@ -1,0 +1,2 @@
+# Keep hashed evidence byte-identical through checkout on every platform.
+* -text

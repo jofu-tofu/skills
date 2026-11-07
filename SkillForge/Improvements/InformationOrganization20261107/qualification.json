@@ -1,0 +1,11 @@
+{
+  "status": "qualified",
+  "scope": "exact returned UTF-8 bytes; source-grounded decisions qualified manually in Measurement.md",
+  "controls": 4,
+  "bytes": [
+    1666,
+    1666,
+    50,
+    166
+  ]
+}

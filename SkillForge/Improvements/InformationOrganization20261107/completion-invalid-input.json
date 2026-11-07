@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "valid": false,
+  "task_status": "continue",
+  "candidate_decision": null,
+  "errors": [
+    "ENOENT: no such file or directory, open 'C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\InformationOrganization20261107\\skills\\SkillForge\\Improvements\\InformationOrganization20261107\\InformationOrganization20261107\\skills\\SkillForge\\Improvements\\InformationOrganization20261107\\contract.json'"
+  ],
+  "next_actions": [
+    {
+      "id": "repair-completion-input",
+      "description": "Repair the unavailable or malformed input."
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "4f86dc02f6fd39cdbc29e4de4fa3fff10e0c526e23c7464e54588f7a55925ac2",
+  "candidate_decision": "retain_candidate",
+  "checks": [
+    {
+      "id": "result",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "2cdab8134868e94cc8381e0778b1ac2f0978f7a9d02c5b43fed0a372c500a8ef"
+        },
+        {
+          "path": "results.json",
+          "sha256": "a250d3b0052f8a67f2ceac197e624c358211d894ac98b4c672348e0da58d3353"
+        },
+        {
+          "path": "Measurement.md",
+          "sha256": "ba73c7ae628d7334e17494c847041f72242a128ec32bd529968d356b4eeb30e9"
+        },
+        {
+          "path": "spotcheck-v2.md",
+          "sha256": "22f1bd88fbf22352a65c8d091db77f63f7f1273b50ad1fffbb57f6fbb4cb7ea9"
+        },
+        {
+          "path": "audit-v2.json",
+          "sha256": "64310ab0dec35e57860ceee6bdda7271e764933fe4745ae069df65943806b8ef"
+        },
+        {
+          "path": "qualification-v2.json",
+          "sha256": "0b430cdbf1083e2bf7c97a5a69bc62f280a4efca8377ee7bd68647d29f475967"
+        },
+        {
+          "path": "completion-tests.txt",
+          "sha256": "1048f8b7ba6ae34ab9b29877376df94116a8c361f7e0883f1aaba331624ae2d6"
+        },
+        {
+          "path": "validator.txt",
+          "sha256": "9f7970f47a1f24180c49bf64fb1ae06add72f43f3b0f0def44bb968f2a8ecb6b"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "2cdab8134868e94cc8381e0778b1ac2f0978f7a9d02c5b43fed0a372c500a8ef"
+        },
+        {
+          "path": "results.json",
+          "sha256": "a250d3b0052f8a67f2ceac197e624c358211d894ac98b4c672348e0da58d3353"
+        },
+        {
+          "path": "Measurement.md",
+          "sha256": "ba73c7ae628d7334e17494c847041f72242a128ec32bd529968d356b4eeb30e9"
+        },
+        {
+          "path": "spotcheck-v2.md",
+          "sha256": "22f1bd88fbf22352a65c8d091db77f63f7f1273b50ad1fffbb57f6fbb4cb7ea9"
+        },
+        {
+          "path": "audit-v2.json",
+          "sha256": "64310ab0dec35e57860ceee6bdda7271e764933fe4745ae069df65943806b8ef"
+        },
+        {
+          "path": "qualification-v2.json",
+          "sha256": "0b430cdbf1083e2bf7c97a5a69bc62f280a4efca8377ee7bd68647d29f475967"
+        },
+        {
+          "path": "completion-tests.txt",
+          "sha256": "1048f8b7ba6ae34ab9b29877376df94116a8c361f7e0883f1aaba331624ae2d6"
+        },
+        {
+          "path": "validator.txt",
+          "sha256": "9f7970f47a1f24180c49bf64fb1ae06add72f43f3b0f0def44bb968f2a8ecb6b"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "2cdab8134868e94cc8381e0778b1ac2f0978f7a9d02c5b43fed0a372c500a8ef"
+        },
+        {
+          "path": "results.json",
+          "sha256": "a250d3b0052f8a67f2ceac197e624c358211d894ac98b4c672348e0da58d3353"
+        },
+        {
+          "path": "Measurement.md",
+          "sha256": "ba73c7ae628d7334e17494c847041f72242a128ec32bd529968d356b4eeb30e9"
+        },
+        {
+          "path": "spotcheck-v2.md",
+          "sha256": "22f1bd88fbf22352a65c8d091db77f63f7f1273b50ad1fffbb57f6fbb4cb7ea9"
+        },
+        {
+          "path": "audit-v2.json",
+          "sha256": "64310ab0dec35e57860ceee6bdda7271e764933fe4745ae069df65943806b8ef"
+        },
+        {
+          "path": "qualification-v2.json",
+          "sha256": "0b430cdbf1083e2bf7c97a5a69bc62f280a4efca8377ee7bd68647d29f475967"
+        },
+        {
+          "path": "completion-tests.txt",
+          "sha256": "1048f8b7ba6ae34ab9b29877376df94116a8c361f7e0883f1aaba331624ae2d6"
+        },
+        {
+          "path": "validator.txt",
+          "sha256": "9f7970f47a1f24180c49bf64fb1ae06add72f43f3b0f0def44bb968f2a8ecb6b"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}

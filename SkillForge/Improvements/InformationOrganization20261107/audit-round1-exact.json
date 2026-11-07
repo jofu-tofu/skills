@@ -1,0 +1,335 @@
+{
+  "snapshot_hashes": {
+    "baseline": "cbd1122d6772b2e9ba29a5fa7da9bee8f1326c529f8bbb7690066c6a0483d2ac",
+    "candidate": "e9ada4558e3d8b8b217e316145f292289d7b103dd33a4b05b562cf3424f60588"
+  },
+  "differences": [
+    "Architecture.md",
+    "SKILL.md"
+  ],
+  "links": [
+    {
+      "file": "SKILL.md",
+      "href": "RELEASE.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Evidence/ValidationSummary.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "SkillIntent.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Quality/Shared.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Architecture.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Procedures/DesignMeasurement.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Procedures/DiagnoseGap.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Procedures/ComprehensiveImprovement.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Tools/README.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Architecture.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Checks/StructuralReview.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Evidence/ValidationSummary.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "SKILL.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "SKILL.md#workflow-routing",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Workflows/CreateSkill.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Workflows/UpdateSkill.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Workflows/EvaluateSkill.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Workflows/UpdateSkill.md#purpose-and-scope",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/PlanChange.md#alternative-generation-activation",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/DiagnoseGap.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Improvement/GapRecord.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/EstablishQuality.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/EstablishQuality.md#outcome-contribution-mapping",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Quality/Context.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/DesignMeasurement.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Quality/Measurement.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/PlanChange.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/GenerateAlternatives.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Improvement/Plan.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ComprehensiveImprovement.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Standards/RegressionCoverage.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/DraftCandidate.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ReviewDesign.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Standards/Authoring.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ConstructCases.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/TestTriggering.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/EvaluateCandidate.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Standards/Grader.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Standards/Schemas.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ApproveSkill.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Improvement/Completion.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Tools/README.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/RecordLearning.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Improvements/Index.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Evidence/ValidationSummary.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "RELEASE.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "SkillIntent.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Quality/Shared.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Evidence/ValidationSummary.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "ResearchLibrary/SkillForge Research Library.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ReviewDesign.md#responsibility-checks",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Checks/RoutingCases.md",
+      "pass": true
+    }
+  ],
+  "runs": {
+    "A": {
+      "calls": 7,
+      "returned_bytes": 100112,
+      "ledger_bytes_match": true,
+      "read_paths": [
+        "SKILL.md",
+        "SkillIntent.md",
+        "Quality/Shared.md",
+        "Workflows/UpdateSkill.md",
+        "Procedures/PlanChange.md",
+        "Procedures/EstablishQuality.md",
+        "Procedures/ApproveSkill.md",
+        "Quality/UpdateSkill/Context.md",
+        "Quality/UpdateSkill/Outcomes.md",
+        "RELEASE.md",
+        "Evidence/ValidationSummary.md",
+        "Procedures/ApproveSkill.md",
+        "Templates/Improvement/Completion.md",
+        "Architecture.md",
+        "Procedures/EstablishQuality.md",
+        "ResearchLibrary/SkillForge Research Library.md"
+      ],
+      "architecture_exposed": true,
+      "target_exact": true,
+      "answer_present": true,
+      "evidence_sha256": {
+        "reads": "b81425135973495b40de7b91a5b769d2d7a8b6f579e4bfd4406dea83a9cf2c83",
+        "target": "353fce1a20ee5ed54a546ece6d17b1dc6f3ee00a0e8067f4992941adb9727193",
+        "answer": "a185c4d70da7646905ac1bc6fc7cabdab25700b7c0f6e231a4bf7b490c24dbde"
+      }
+    },
+    "B": {
+      "calls": 4,
+      "returned_bytes": 92671,
+      "ledger_bytes_match": true,
+      "read_paths": [
+        "SKILL.md",
+        "SkillIntent.md",
+        "Quality/Shared.md",
+        "Workflows/UpdateSkill.md",
+        "Architecture.md",
+        "Procedures/PlanChange.md",
+        "Procedures/ApproveSkill.md",
+        "Templates/Improvement/Completion.md",
+        "Evidence/ValidationSummary.md",
+        "RELEASE.md",
+        "Quality/UpdateSkill/Context.md",
+        "Quality/UpdateSkill/Outcomes.md",
+        "Procedures/ApproveSkill.md",
+        "Templates/Improvement/Completion.md",
+        "Procedures/EstablishQuality.md"
+      ],
+      "architecture_exposed": true,
+      "target_exact": true,
+      "answer_present": true,
+      "evidence_sha256": {
+        "reads": "2d406184479b69d7a70d2041cb540a54a190dd9daa356baa76d7608c81a86ef6",
+        "target": "353fce1a20ee5ed54a546ece6d17b1dc6f3ee00a0e8067f4992941adb9727193",
+        "answer": "82ad99015013da7f7baba0daee8e5423be222058cb5a20b83e75954a70b68cf2"
+      }
+    }
+  }
+}

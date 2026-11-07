@@ -1,0 +1,352 @@
+{
+  "snapshot_hashes": {
+    "baseline": "cbd1122d6772b2e9ba29a5fa7da9bee8f1326c529f8bbb7690066c6a0483d2ac",
+    "candidate": "e9ada4558e3d8b8b217e316145f292289d7b103dd33a4b05b562cf3424f60588"
+  },
+  "differences": [
+    "Architecture.md",
+    "SKILL.md"
+  ],
+  "links": [
+    {
+      "file": "SKILL.md",
+      "href": "RELEASE.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Evidence/ValidationSummary.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "SkillIntent.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Quality/Shared.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Architecture.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Procedures/DesignMeasurement.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Procedures/DiagnoseGap.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Procedures/ComprehensiveImprovement.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Tools/README.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Architecture.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Checks/StructuralReview.md",
+      "pass": true
+    },
+    {
+      "file": "SKILL.md",
+      "href": "Evidence/ValidationSummary.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "SKILL.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "SKILL.md#workflow-routing",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Workflows/CreateSkill.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Workflows/UpdateSkill.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Workflows/EvaluateSkill.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Workflows/UpdateSkill.md#purpose-and-scope",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/PlanChange.md#alternative-generation-activation",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/DiagnoseGap.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Improvement/GapRecord.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/EstablishQuality.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/EstablishQuality.md#outcome-contribution-mapping",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Quality/Context.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/DesignMeasurement.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Quality/Measurement.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/PlanChange.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/GenerateAlternatives.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Improvement/Plan.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ComprehensiveImprovement.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Standards/RegressionCoverage.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/DraftCandidate.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ReviewDesign.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Standards/Authoring.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ConstructCases.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/TestTriggering.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/EvaluateCandidate.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Standards/Grader.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Standards/Schemas.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ApproveSkill.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Templates/Improvement/Completion.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Tools/README.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/RecordLearning.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Improvements/Index.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Evidence/ValidationSummary.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "RELEASE.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "SkillIntent.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Quality/Shared.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Evidence/ValidationSummary.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "ResearchLibrary/SkillForge Research Library.md",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Procedures/ReviewDesign.md#responsibility-checks",
+      "pass": true
+    },
+    {
+      "file": "Architecture.md",
+      "href": "Checks/RoutingCases.md",
+      "pass": true
+    }
+  ],
+  "runs": {
+    "A": {
+      "calls": 11,
+      "returned_bytes": 79131,
+      "ledger_bytes_match": true,
+      "read_paths": [
+        "SKILL.md",
+        "SkillIntent.md",
+        "Quality/Shared.md",
+        "Workflows/UpdateSkill.md",
+        "SkillIntent.md",
+        "Quality/Shared.md",
+        "Workflows/UpdateSkill.md",
+        "Procedures/PlanChange.md",
+        "Procedures/EstablishQuality.md",
+        "Procedures/PlanChange.md",
+        "Procedures/EstablishQuality.md",
+        "Procedures/PlanChange.md",
+        "Procedures/EstablishQuality.md",
+        "Quality/UpdateSkill/Context.md",
+        "Quality/UpdateSkill/Outcomes.md",
+        "Procedures/ApproveSkill.md",
+        "Quality/UpdateSkill/Context.md",
+        "Quality/UpdateSkill/Outcomes.md",
+        "Procedures/ApproveSkill.md",
+        "RELEASE.md",
+        "Evidence/ValidationSummary.md",
+        "Architecture.md",
+        "RELEASE.md",
+        "Evidence/ValidationSummary.md",
+        "Architecture.md",
+        "Templates/Improvement/Completion.md"
+      ],
+      "architecture_exposed": true,
+      "target_exact": true,
+      "answer_present": true,
+      "evidence_sha256": {
+        "reads": "87060cedbb9c67b02a6c47346cadb846b1ebf320337af03a27510142a38125f6",
+        "target": "353fce1a20ee5ed54a546ece6d17b1dc6f3ee00a0e8067f4992941adb9727193",
+        "answer": "6bb8d6c8967a2e8c5ada9439f937889984abc1138f44de38cb2b406d78b0214d"
+      }
+    },
+    "B": {
+      "calls": 9,
+      "returned_bytes": 68450,
+      "ledger_bytes_match": true,
+      "read_paths": [
+        "SKILL.md",
+        "SkillIntent.md",
+        "Quality/Shared.md",
+        "Architecture.md",
+        "SkillIntent.md",
+        "Quality/Shared.md",
+        "Architecture.md",
+        "Workflows/UpdateSkill.md",
+        "Procedures/PlanChange.md",
+        "Workflows/UpdateSkill.md",
+        "Procedures/PlanChange.md",
+        "Procedures/ApproveSkill.md",
+        "Templates/Improvement/Completion.md",
+        "Templates/Improvement/Completion.md",
+        "RELEASE.md",
+        "Evidence/ValidationSummary.md",
+        "Quality/UpdateSkill/Context.md",
+        "Quality/UpdateSkill/Outcomes.md",
+        "RELEASE.md",
+        "Evidence/ValidationSummary.md",
+        "Quality/UpdateSkill/Context.md",
+        "Quality/UpdateSkill/Outcomes.md"
+      ],
+      "architecture_exposed": true,
+      "target_exact": true,
+      "answer_present": true,
+      "evidence_sha256": {
+        "reads": "7134140c50b6b61df805dd8bcb6ed44ed1793710cc44e6f92be7b194a70a58cd",
+        "target": "353fce1a20ee5ed54a546ece6d17b1dc6f3ee00a0e8067f4992941adb9727193",
+        "answer": "4d59c6b08e04676de72c6e72c9a4c6db4af209f00a97e307687cad684a51a631"
+      }
+    }
+  }
+}
