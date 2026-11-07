@@ -1,0 +1,97 @@
+{
+  "measurement_controls": "qualification.json, live-controls.json and comparison.json",
+  "historical_sources_and_raw_observations": [
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/baseline-burst-40/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/baseline-distinct-20/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/baseline-followup-distinct-18/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/baseline-followup-distinct-9/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/baseline-followup-shared-7/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/baseline-shared-12/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/candidate-burst-40/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/candidate-distinct-20/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/candidate-followup-distinct-18/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/candidate-followup-distinct-9/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/candidate-followup-shared-7/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/candidate-shared-12/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/TieDiagnosis20261107/cheap-wrong/observation.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/RealSkillComparison20261106/authors/baseline/target/Tools/RenderTemplate.ts"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/RealSkillComparison20261106/authors/baseline/target/package.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/RealSkillComparison20261106/authors/baseline/target/bun.lock"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/RealSkillComparison20261106/authors/candidate/target/Tools/RenderTemplate.ts"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/RealSkillComparison20261106/authors/candidate/target/package.json"
+    },
+    {
+      "unchanged": true,
+      "path": "20-working-T1-T3/RealSkillComparison20261106/authors/candidate/target/bun.lock"
+    }
+  ],
+  "structure": {
+    "failed": 0,
+    "passed": 14,
+    "runtime": "Bun 1.3.5 with explicit SKILLS_DIR and argv"
+  },
+  "maintenance": "Candidate workflow assessment confirms exact typo route does not acquire comparison",
+  "completion_regressions": {
+    "failed": 0,
+    "passed": 34,
+    "command": "node --test SkillForge/Tools/CheckCompletion.test.cjs"
+  },
+  "runtime_edit_scope": [
+    "Procedures/DesignMeasurement.md",
+    "Procedures/PlanChange.md",
+    "Procedures/ApproveSkill.md"
+  ]
+}
