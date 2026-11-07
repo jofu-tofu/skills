@@ -1,0 +1,14 @@
+# Reproduction and limits
+
+Candidate instructions are frozen at commit 12ecc7c; baseline is 244434c6476f6678fb1cca7fa1193129f54ae1de. This attempt tests historical retrieval and decisions, not target repair. Protocol.md and contract.json predate candidate edits.
+
+Run `node verify.cjs` in this directory to check five portable report identities and 19 quoted excerpts. It does not grade semantics. Sources are exact report copies; original relative links refer to their original project directories, recorded in sources.json. These copies do not include full underlying trial traces. JSON references retain original paths for provenance; verify.cjs resolves them through source IDs to portable copies.
+
+For a new behavioral comparison, use separate fresh contexts with baseline/candidate package snapshots, the same questions.json, and the same accessible history. Ask each to answer all questions with decision, sources, applicability, next action and actual consulted-path ledger. Exclude reference.json, Protocol.md, other outputs and grading keys from reader access. Read starting at SKILL.md and let normal routing operate. Do not require the new procedure in the task prompt. No external model runner or credential is bundled; use authorized host evaluation facilities. This run used host collaboration agents with inherited settings and no model override. Exact model identifier, total runtime/tokens and costs were unavailable.
+
+Reference author inspected selected historical reports, not the candidate. Candidate author inspected questions/keys only after candidate freeze. Grader first classified four responses without expected labels (positive, negative, valid alternative, misleading pass), matching all four source-backed expectations. It then graded actual outputs. Qualification is bounded historical-source adjudication, not a universally valid semantic checker or independent rerun of history.
+
+Raw project path: 20-working-T1-T3/ExperimentMemory20261107/. It retains heldout manifest/questions/references, grader inputs, baseline.zip and reader outputs. Portable outputs are copied here. Command ledgers are reader reports, not independently exported tool traces. ExposureCaveat.md records the asymmetric coordinator cue; spontaneous activation and causal loading savings are unsupported. One portfolio per arm does not provide independent samples or population reliability. No additional identical trial is warranted solely to seek a win.
+
+Preservation checks: from SkillForge root run `node --test Tools/CheckCompletion.test.cjs`. Validator: set process.env.SKILLS_DIR and process.argv inside Bun before importing Tools/ValidateSkill.ts, as described in Tools/README.md. Completion: from this directory run `node ../../Tools/CheckCompletion.cjs contract.json assessment.json --root .`.
+

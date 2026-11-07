@@ -1,0 +1,10 @@
+{
+  "token_usage": null,
+  "isolation": "Procedural file restrictions, not sandbox-enforced hiding",
+  "model_version": "not separately reported by collaboration tool",
+  "execution": "Host collaboration agents with fork_turns none; inherited model and reasoning settings, no override",
+  "baseline_commit": "244434c6476f6678fb1cca7fa1193129f54ae1de",
+  "candidate_commit": "12ecc7c",
+  "unit": "One five-question portfolio per arm",
+  "read_cost": "Only reader-reported consulted sources/commands available; not a reliable total-token or latency comparison"
+}

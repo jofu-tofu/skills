@@ -1,0 +1,103 @@
+{
+  "scope": "Exact source identity and excerpt presence only; no semantic validity claim",
+  "checks": [
+    {
+      "id": "Sources/RealSkillComparison.md",
+      "pass": true
+    },
+    {
+      "id": "Sources/Discriminating.md",
+      "pass": true
+    },
+    {
+      "id": "Sources/Activation.md",
+      "pass": true
+    },
+    {
+      "id": "Sources/OperationalEfficiency.md",
+      "pass": true
+    },
+    {
+      "id": "Sources/ValidationSummary.md",
+      "pass": true
+    },
+    {
+      "id": "H1:discriminating:29",
+      "pass": true
+    },
+    {
+      "id": "H1:discriminating:30",
+      "pass": true
+    },
+    {
+      "id": "H1:discriminating:31",
+      "pass": true
+    },
+    {
+      "id": "H1:discriminating:63",
+      "pass": true
+    },
+    {
+      "id": "H1:discriminating:47",
+      "pass": true
+    },
+    {
+      "id": "H2:activation:3",
+      "pass": true
+    },
+    {
+      "id": "H2:efficiency:51",
+      "pass": true
+    },
+    {
+      "id": "H2:validation:54",
+      "pass": true
+    },
+    {
+      "id": "H3:real:51",
+      "pass": true
+    },
+    {
+      "id": "H3:activation:7",
+      "pass": true
+    },
+    {
+      "id": "H3:activation:20",
+      "pass": true
+    },
+    {
+      "id": "H3:activation:15",
+      "pass": true
+    },
+    {
+      "id": "H4:discriminating:67",
+      "pass": true
+    },
+    {
+      "id": "H4:efficiency:41",
+      "pass": true
+    },
+    {
+      "id": "H4:efficiency:43",
+      "pass": true
+    },
+    {
+      "id": "H4:efficiency:20",
+      "pass": true
+    },
+    {
+      "id": "H4:efficiency:21",
+      "pass": true
+    },
+    {
+      "id": "H5:discriminating:35",
+      "pass": true
+    },
+    {
+      "id": "H5:discriminating:60",
+      "pass": true
+    }
+  ],
+  "passed": 24,
+  "failed": 0
+}

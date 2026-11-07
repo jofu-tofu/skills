@@ -1,0 +1,18 @@
+[
+  {
+    "path": "Procedures/PlanChange.md",
+    "sha256": "2b2bd96037aaee029974ead7872265cd7a1c3d8a9a55bb66dcc1687e21bd4a69"
+  },
+  {
+    "path": "Procedures/RecordLearning.md",
+    "sha256": "f2fe0f04df15c4ebea34d0b91558a52e429d39deb3c87c88b929dcb86e361c1c"
+  },
+  {
+    "path": "Procedures/ReuseEvidence.md",
+    "sha256": "78cf0faf960a0e8eb447364dfcc7b31bdd51c2529dc804e7be4479d8edfda4d3"
+  },
+  {
+    "path": "Evidence/DecisionMap.md",
+    "sha256": "68b973cd786f04e7b2a46e255b16270d3b43a26b0b42bf5c14e2c4ad7466d435"
+  }
+]
