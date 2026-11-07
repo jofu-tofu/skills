@@ -33,6 +33,8 @@ Create a user workflow when the request has a distinct end result and completion
 
 Create and Update share much of the sequence, but differ in starting state, baseline, preservation duties, and acceptance claims. Keep their orchestration files short. Do not duplicate procedure instructions.
 
+PlanChange conditionally calls [GenerateAlternatives](Procedures/GenerateAlternatives.md) before ranking changes. That procedure supplies distinct mechanisms and their risks/tests; PlanChange retains research, selection and experiment policy. It is not a new entry point or a mandatory agent call.
+
 ## Records and ownership
 
 - SkillForge's Quality folders assess how well its own workflows perform.

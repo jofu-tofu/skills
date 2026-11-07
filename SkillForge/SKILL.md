@@ -2,7 +2,7 @@
 name: SkillForge
 description: Create, update, or evaluate reusable agent skills with explicit quality criteria and preserved evidence. USE WHEN create a skill OR improve a skill OR evaluate a skill OR a skill keeps missing expected behavior OR diagnose a skill gap.
 metadata:
-  version: "2.1.0-rc.9"
+  version: "2.1.0-rc.11"
 ---
 # SkillForge
 

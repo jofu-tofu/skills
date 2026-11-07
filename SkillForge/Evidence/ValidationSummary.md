@@ -1,6 +1,14 @@
 # Validation scope
 
-Current draft rc.9: [comprehensive-improvement record](../Improvements/ComprehensiveImprovement/Record.md). Completion checks improve from 29/34 to 34/34. Both full-method comparisons tie: 9/9 independent outputs per version on each task, including actual further repair rounds. Focused, assessment, maintenance, corrected design-only and corrected adequate-target controls preserve scope. Eleven model trials retain fixture/runner qualification corrections and all original evidence. Retained for bounded completion protections; general behavioral superiority remains unverified. Comprehensive downstream application is in progress. The earlier sampled remaining-skills pass does not establish comprehensive closure.
+Current draft rc.11: [focused activation record](../Improvements/FocusedActivation/Record.md). One fresh real-skill pair, 16 downstream sessions and two maintenance controls confirm activation and preservation. Both methods pass 5/5 executor checks; no superiority established. Five operative files match tested snapshots.
+
+## Prior rc.10 evidence
+
+Current draft rc.10: [idea-generation record](../Improvements/IdeaGeneration/Record.md). Twelve completed component trials (six pairs) and one paired full workflow yield equal executable solution quality. The candidate explores additional structural options with modest observed aggregate overhead; this does not establish better solutions or population efficiency. One separate full-workflow typo control skips the new procedure. Twelve consumer qualification controls, 34 existing completion tests and 14 structural checks pass. Initial CLI failures are retained. Operative instructions were frozen for these trials; version and evidence-summary edits followed testing.
+
+## Prior rc.9 evidence
+
+Draft rc.9: [comprehensive-improvement record](../Improvements/ComprehensiveImprovement/Record.md). Completion checks improve from 29/34 to 34/34. Both full-method comparisons tie: 9/9 independent outputs per version on each task, including actual further repair rounds. Focused, assessment, maintenance, corrected design-only and corrected adequate-target controls preserve scope. Eleven model trials retain fixture/runner qualification corrections and all original evidence. Retained for bounded completion protections; general behavioral superiority remains unverified. Its original summary recorded comprehensive downstream application in progress; the earlier sampled remaining-skills pass did not establish comprehensive closure.
 
 ## Prior rc.8 evidence
 

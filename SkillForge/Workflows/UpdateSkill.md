@@ -17,7 +17,7 @@ Classify by the requested effect. Short approvals inherit the preceding goal and
 | Requested result | Path |
 |---|---|
 | Typo, formatting or wording without intended behavior change | Read target intent and affected text, edit, inspect diff/relevant links; validate if structure/routing changed. Skip quality regeneration, experiments and gate. |
-| Add/rename workflow or refactor structure | Read [Authoring](../Standards/Authoring.md), preserve intent/routing, make affected changes and validate structure/links. Evaluate affected handoffs before claiming behavioral equivalence. |
+| Add/rename workflow or refactor structure | A fixed mechanical move/rename with no remaining structural choice uses [Authoring](../Standards/Authoring.md), relevant validation/link checks and affected-handoff checks. If the work chooses or revises structure, use the numbered loop and [PlanChange's activation rule](../Procedures/PlanChange.md#alternative-generation-activation), even when focused. Keep the requested scope; this does not make it comprehensive. |
 | Integrate research or add intent | Read Authoring and its KnowledgeIntegration reference. Preserve rationale/limits and use existing explicit user goals. Citation/rationale-only maintenance stays narrow; changed decisions/behavior use the loop below. |
 | Repair description/triggering | Use [TestTriggering](../Procedures/TestTriggering.md), authoring review below, ApproveSkill and RecordLearning. Missing/failed confirmation cannot establish improvement. |
 | Improve behavior or repair failure | Use the loop below, including proportionate outcome evaluation. |
