@@ -1,0 +1,350 @@
+{
+  "scope": "Local target existence in six affected runtime documents; not anchor or behavior certification",
+  "checks": [
+    {
+      "file": "SKILL.md",
+      "ref": "RELEASE.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Evidence/ValidationSummary.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "SkillIntent.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Quality/Shared.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Architecture.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Procedures/DesignMeasurement.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Procedures/DiagnoseGap.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Procedures/ComprehensiveImprovement.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Tools/README.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Architecture.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Improvements/DecisionHistory.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Checks/StructuralReview.md",
+      "exists": true
+    },
+    {
+      "file": "SKILL.md",
+      "ref": "Evidence/ValidationSummary.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "DecisionHistory.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "../Evidence/TieDiagnosis20261107/Results.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "InformationOrganization20261107/Results.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "FocusedActivation/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "IdeaGeneration/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "ComprehensiveImprovement/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "CompletionGate/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "ResearchDecision/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "ExperimentAdequacy/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "OutcomeMapping/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "PurposeFirst/Proposal.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "ReconcileLegacy/Decision.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "ReconcileLegacy/Results.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "../SKILL.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "../Architecture.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "Templates/Plan.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "Templates/Results.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "Templates/Decision.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "../Templates/Improvement/GapRecord.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "../ResearchLibrary/SkillForge%20Research%20Library.md",
+      "exists": false
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "../Evidence/ValidationSummary.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "../RELEASE.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "OperationalEfficiency/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/Index.md",
+      "ref": "OperationalEfficiency/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/DecisionHistory.md",
+      "ref": "Index.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/DecisionHistory.md",
+      "ref": "IdeaGeneration/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/DecisionHistory.md",
+      "ref": "FocusedActivation/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/DecisionHistory.md",
+      "ref": "OperationalEfficiency/Record.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/DecisionHistory.md",
+      "ref": "../Evidence/ValidationSummary.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/DecisionHistory.md",
+      "ref": "Index.md",
+      "exists": true
+    },
+    {
+      "file": "Improvements/DecisionHistory.md",
+      "ref": "Index.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "../Templates/Quality/Measurement.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "PlanChange.md#diagnosing-an-unresolved-tie",
+      "exists": true
+    },
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "../Standards/Grader.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "../Standards/Schemas.md#canonical-resultsjson",
+      "exists": true
+    },
+    {
+      "file": "Procedures/DesignMeasurement.md",
+      "ref": "../ResearchLibrary/Experiment%20Design%20-%20Evidence%20and%20Use.md",
+      "exists": false
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "DiagnoseGap.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "GenerateAlternatives.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "DesignMeasurement.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Standards/RegressionCoverage.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Standards/KnowledgeIntegration.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "DesignMeasurement.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "DesignMeasurement.md#comparative-resolution",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "ComprehensiveImprovement.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../ResearchLibrary/Experiment%20Design%20-%20Evidence%20and%20Use.md",
+      "exists": false
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Templates/Improvement/Plan.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Templates/Improvement/CompactAttempt.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/PlanChange.md",
+      "ref": "../Quality/Shared.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Standards/RegressionCoverage.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "PlanChange.md#diagnosing-an-unresolved-tie",
+      "exists": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "ComprehensiveImprovement.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Templates/Improvement/Completion.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Tools/CheckCompletion.cjs",
+      "exists": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Templates/Improvement/Completion.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Templates/Improvement/Decision.md",
+      "exists": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "ref": "../Quality/Shared.md",
+      "exists": true
+    }
+  ]
+}

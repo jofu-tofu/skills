@@ -1,0 +1,2391 @@
+{
+  "input_identities": {
+    "A": [
+      {
+        "path": "history/20-working-T1-T3/Activation20261106/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Discriminating20261106/report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/RealSkillComparison20261106/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/ResearchDriven20261106/evaluation.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/SkillForgeCompletionGate20261104/final-report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/SkillForgeComprehensive20261104/FinalResults.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Report.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Architecture.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Checks/ReplacementPlan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Checks/RoutingCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Checks/StructuralReview.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/ReleaseQualification.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/SourceIdentities.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/.gitattributes",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/baseline/bun.lock",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/baseline/package.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/baseline/Tools/RenderTemplate.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/candidate/bun.lock",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/candidate/package.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/candidate/Tools/RenderTemplate.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/assessment.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/broken-counter.log",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/cheap-wrong.log",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/compare.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/comparison-v1.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/comparison.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/completion.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/contract.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/links.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/live-controls.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/manifest.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/measure.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-burst-40.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-distinct-20.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-followup-distinct-18.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-followup-distinct-9.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-followup-shared-7.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-shared-12.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-burst-40.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-distinct-20.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-followup-distinct-18.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-followup-distinct-9.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-followup-shared-7.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-shared-12.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/cheap-wrong.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/preservation.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/Protocol.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/qualification-v1.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/qualification.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/qualify.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/replay.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/Reproduce.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/request.txt",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/results.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/Review.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/burst-40.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/distinct-20.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/followup-distinct-18.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/followup-distinct-9.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/followup-shared-7.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/shared-12.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/workflow-check-comparison.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/workflow-check.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/ValidationSummary.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/CompletionGate/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ComprehensiveImprovement/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ExperimentAdequacy/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/FocusedActivation/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/IdeaGeneration/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/Index.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/.gitattributes",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Amendment-v2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/answer-A1.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/answer-A2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/answer-B1.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/answer-B2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/assessment.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/audit-round1-exact.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/audit-round1-original.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/audit-v2.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/audit.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/completion-invalid-input.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/completion-tests.txt",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/completion.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/contract.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/error-receipt-A2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Measurement.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Plan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/qualification-v2.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/qualification.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/qualify.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/raw-manifest.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/read-v1.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/read.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Reproduce.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/request.txt",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/results.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Review.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/spotcheck-round1.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/spotcheck-v2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Tasks.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/validator.txt",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/OperationalEfficiency/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/OutcomeMapping/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/PurposeFirst/Proposal.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/BaselineHashes.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/ImportedFiles.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/Plan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ResearchDecision/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/Templates/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/Templates/Plan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/Templates/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/ApproveSkill.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/ComprehensiveImprovement.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/ConstructCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/DesignMeasurement.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/DiagnoseGap.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/DraftCandidate.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/EstablishQuality.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/EvaluateCandidate.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/GenerateAlternatives.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/PlanChange.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/RecordLearning.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/ReviewDesign.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/TestTriggering.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/Shared.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/RELEASE.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/Experiment and Authoring Source Catalog.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/Experiment Design - Evidence and Use.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/Research Use and Maintenance.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/Skill Authoring - Evidence and Use.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/SkillForge Research Library.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/SKILL.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/SkillIntent.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Analyzer.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Authoring.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Comparator.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Grader.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/KnowledgeIntegration.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/RegressionCoverage.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Schemas.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/CompactAttempt.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/Completion.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/GapRecord.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/Plan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Measurement.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/assets/eval_review.html",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/BenchmarkFormat.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/CheckCompletion.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/CheckCompletion.test.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/eval-viewer/generate_review.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/eval-viewer/viewer.html",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/ExploreSkill.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/lib/paths.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/lib/platform.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/README.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/aggregate_benchmark.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/generate_report.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/improve_description.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/run_eval.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/run_loop.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/utils.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/__init__.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/ValidateSkill.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Workflows/CreateSkill.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Workflows/EvaluateSkill.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Workflows/UpdateSkill.md",
+        "unchanged": true
+      }
+    ],
+    "B": [
+      {
+        "path": "history/20-working-T1-T3/Activation20261106/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Discriminating20261106/report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/RealSkillComparison20261106/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/ResearchDriven20261106/evaluation.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/SkillForgeCompletionGate20261104/final-report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/SkillForgeComprehensive20261104/FinalResults.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Report.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "history/20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Report.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Architecture.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Checks/ReplacementPlan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Checks/RoutingCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Checks/StructuralReview.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/ReleaseQualification.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/SourceIdentities.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/.gitattributes",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/baseline/bun.lock",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/baseline/package.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/baseline/Tools/RenderTemplate.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/candidate/bun.lock",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/candidate/package.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/artifacts/candidate/Tools/RenderTemplate.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/assessment.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/broken-counter.log",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/cheap-wrong.log",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/compare.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/comparison-v1.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/comparison.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/completion.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/contract.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/links.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/live-controls.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/manifest.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/measure.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-burst-40.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-distinct-20.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-followup-distinct-18.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-followup-distinct-9.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-followup-shared-7.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/baseline-shared-12.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-burst-40.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-distinct-20.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-followup-distinct-18.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-followup-distinct-9.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-followup-shared-7.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/candidate-shared-12.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/observations/cheap-wrong.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/preservation.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/Protocol.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/qualification-v1.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/qualification.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/qualify.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/replay.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/Reproduce.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/request.txt",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/results.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/Review.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/burst-40.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/distinct-20.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/followup-distinct-18.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/followup-distinct-9.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/followup-shared-7.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/specs/shared-12.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/workflow-check-comparison.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/TieDiagnosis20261107/workflow-check.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Evidence/ValidationSummary.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/CompletionGate/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ComprehensiveImprovement/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/DecisionHistory.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ExperimentAdequacy/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/FocusedActivation/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/IdeaGeneration/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/Index.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/.gitattributes",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Amendment-v2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/answer-A1.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/answer-A2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/answer-B1.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/answer-B2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/assessment.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/audit-round1-exact.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/audit-round1-original.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/audit-v2.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/audit.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/completion-invalid-input.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/completion-tests.txt",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/completion.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/contract.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/error-receipt-A2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Measurement.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Plan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/qualification-v2.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/qualification.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/qualify.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/raw-manifest.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/read-v1.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/read.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Reproduce.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/request.txt",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/results.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Review.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/spotcheck-round1.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/spotcheck-v2.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/Tasks.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/InformationOrganization20261107/validator.txt",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/OperationalEfficiency/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/OutcomeMapping/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/PurposeFirst/Proposal.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/BaselineHashes.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/ImportedFiles.json",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/Plan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ReconcileLegacy/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/ResearchDecision/Record.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/Templates/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/Templates/Plan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Improvements/Templates/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/ApproveSkill.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/ComprehensiveImprovement.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/ConstructCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/DesignMeasurement.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/DiagnoseGap.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/DraftCandidate.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/EstablishQuality.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/EvaluateCandidate.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/GenerateAlternatives.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/PlanChange.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/RecordLearning.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/ReviewDesign.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Procedures/TestTriggering.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/CreateSkill/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/ImproveSkill/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/Shared.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Quality/UpdateSkill/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/RELEASE.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/Experiment and Authoring Source Catalog.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/Experiment Design - Evidence and Use.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/Research Use and Maintenance.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/Skill Authoring - Evidence and Use.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/ResearchLibrary/SkillForge Research Library.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/SKILL.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/SkillIntent.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Analyzer.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Authoring.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Comparator.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Grader.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/KnowledgeIntegration.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/RegressionCoverage.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Standards/Schemas.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/CompactAttempt.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/Completion.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/Decision.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/GapRecord.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/Plan.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Improvement/Results.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/ChallengeCases.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Context.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Feedback.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Measurement.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Outcomes.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Templates/Quality/Tradeoffs.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/assets/eval_review.html",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/BenchmarkFormat.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/CheckCompletion.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/CheckCompletion.test.cjs",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/eval-viewer/generate_review.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/eval-viewer/viewer.html",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/ExploreSkill.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/lib/paths.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/lib/platform.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/README.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/aggregate_benchmark.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/generate_report.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/improve_description.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/run_eval.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/run_loop.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/utils.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/scripts/__init__.py",
+        "unchanged": true
+      },
+      {
+        "path": "method/Tools/ValidateSkill.ts",
+        "unchanged": true
+      },
+      {
+        "path": "method/Workflows/CreateSkill.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Workflows/EvaluateSkill.md",
+        "unchanged": true
+      },
+      {
+        "path": "method/Workflows/UpdateSkill.md",
+        "unchanged": true
+      }
+    ]
+  },
+  "original_history": [
+    {
+      "path": "20-working-T1-T3/LessonRetrieval20261106/report.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/Discriminating20261106/report.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/RealSkillComparison20261106/Results.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/Activation20261106/Results.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/IdeaGeneration20261106/Results.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/ResearchDriven20261106/evaluation.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Report.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/Tasks/05-discovery-diagnosis-proposals/Experiments/20261103-DiscoveryProposalPilot/Decision.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Report.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-MethodComparisonV2/Decision.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Report.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/Tasks/06-experiment-design-and-skill-authoring/Experiments/20261103-PlanningComparisonV3/Decision.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/SkillForgeComprehensive20261104/FinalResults.md",
+      "unchanged": true
+    },
+    {
+      "path": "20-working-T1-T3/SkillForgeCompletionGate20261104/final-report.md",
+      "unchanged": true
+    }
+  ],
+  "runs": [
+    {
+      "id": "T1-A",
+      "successful_reader_invocations": 12,
+      "returned_utf8_bytes": 90155,
+      "map_exposed": false,
+      "files": [
+        {
+          "path": "runs/T1-A/prompt.txt",
+          "sha256": "6dd4164f79455b0b28f3df5f04c6203e76f7c86e840506f2bc3744f8ece4631f"
+        },
+        {
+          "path": "runs/T1-A/reads.jsonl",
+          "sha256": "ad73b09ceeed789624d53213e895d76cf6ffa77af697b9a173c4199527304022"
+        },
+        {
+          "path": "runs/T1-A/answer.md",
+          "sha256": "8debe4213df98915ccfe740f55abe5854b88387196a910e183056d1de2b2f8ed"
+        }
+      ],
+      "reads": [
+        {
+          "op": "read",
+          "args": [
+            "method/SKILL.md"
+          ],
+          "offset": 0,
+          "fullLength": 5011,
+          "bytes": 5066
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/SkillIntent.md",
+            "method/Quality/Shared.md",
+            "method/Workflows/EvaluateSkill.md"
+          ],
+          "offset": 0,
+          "fullLength": 9428,
+          "bytes": 9449
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 0,
+          "fullLength": 18670,
+          "bytes": 10062
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 10000,
+          "fullLength": 18670,
+          "bytes": 8687
+        },
+        {
+          "op": "search",
+          "args": [
+            "similarity|outcome-based|history.selection"
+          ],
+          "offset": 0,
+          "fullLength": 2960,
+          "bytes": 2981
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 0,
+          "fullLength": 15297,
+          "bytes": 10064
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 10000,
+          "fullLength": 15297,
+          "bytes": 5330
+        },
+        {
+          "op": "list",
+          "args": [
+            "history/20-working-T1-T3/LessonRetrieval20261106"
+          ],
+          "offset": 0,
+          "fullLength": 58,
+          "bytes": 75
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/PlanChange.md",
+            "method/Standards/Grader.md",
+            "method/Standards/Schemas.md"
+          ],
+          "offset": 0,
+          "fullLength": 47429,
+          "bytes": 10058
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/PlanChange.md",
+            "method/Standards/Grader.md",
+            "method/Standards/Schemas.md"
+          ],
+          "offset": 10000,
+          "fullLength": 47429,
+          "bytes": 10054
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/PlanChange.md",
+            "method/Standards/Grader.md",
+            "method/Standards/Schemas.md"
+          ],
+          "offset": 20000,
+          "fullLength": 47429,
+          "bytes": 10056
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/ResearchDriven20261106/evaluation.md"
+          ],
+          "offset": 0,
+          "fullLength": 8252,
+          "bytes": 8273
+        }
+      ]
+    },
+    {
+      "id": "T1-B",
+      "successful_reader_invocations": 10,
+      "returned_utf8_bytes": 77880,
+      "map_exposed": false,
+      "files": [
+        {
+          "path": "runs/T1-B/prompt.txt",
+          "sha256": "113705ccc86317b0f45e851983a2db62697431983b71ab6ad27136096a242c0d"
+        },
+        {
+          "path": "runs/T1-B/reads.jsonl",
+          "sha256": "b5931b294c401f3951af445ec475a2e9d2e8c5fdd9dd3ac89ca1f1c2b40d3678"
+        },
+        {
+          "path": "runs/T1-B/answer.md",
+          "sha256": "76ac1cbd9add51304099cb06ce114eafd5eac26c2740a1e44facc2eabf7ca8f3"
+        }
+      ],
+      "reads": [
+        {
+          "op": "read",
+          "args": [
+            "method/SKILL.md"
+          ],
+          "offset": 0,
+          "fullLength": 5011,
+          "bytes": 5066
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/SkillIntent.md",
+            "method/Quality/Shared.md",
+            "method/Workflows/EvaluateSkill.md"
+          ],
+          "offset": 0,
+          "fullLength": 9428,
+          "bytes": 9449
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 0,
+          "fullLength": 18670,
+          "bytes": 10062
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 10000,
+          "fullLength": 18670,
+          "bytes": 8687
+        },
+        {
+          "op": "search",
+          "args": [
+            "similarity|outcome-based|history.selection"
+          ],
+          "offset": 0,
+          "fullLength": 2960,
+          "bytes": 2981
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 0,
+          "fullLength": 15297,
+          "bytes": 10064
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 10000,
+          "fullLength": 15297,
+          "bytes": 5330
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/ResearchDriven20261106/evaluation.md",
+            "method/Procedures/PlanChange.md"
+          ],
+          "offset": 0,
+          "fullLength": 26108,
+          "bytes": 10058
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/ResearchDriven20261106/evaluation.md",
+            "method/Procedures/PlanChange.md"
+          ],
+          "offset": 10000,
+          "fullLength": 26108,
+          "bytes": 10058
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/ResearchDriven20261106/evaluation.md",
+            "method/Procedures/PlanChange.md"
+          ],
+          "offset": 20000,
+          "fullLength": 26108,
+          "bytes": 6125
+        }
+      ]
+    },
+    {
+      "id": "T2-A",
+      "successful_reader_invocations": 14,
+      "returned_utf8_bytes": 104871,
+      "map_exposed": false,
+      "files": [
+        {
+          "path": "runs/T2-A/prompt.txt",
+          "sha256": "69f1988a43024bfe5b23d6c1a1b161b681b71ea488d435fd2d80d7aa707c49a6"
+        },
+        {
+          "path": "runs/T2-A/reads.jsonl",
+          "sha256": "417f3e8503c5f6d50e17313beed519e95742f1fdaa9f5b532f70abaa869637df"
+        },
+        {
+          "path": "runs/T2-A/answer.md",
+          "sha256": "31b1f2132623e03959feb5bd17ebe613d78089cf171cb877cad61772fd951cb7"
+        }
+      ],
+      "reads": [
+        {
+          "op": "read",
+          "args": [
+            "method/SKILL.md"
+          ],
+          "offset": 0,
+          "fullLength": 5011,
+          "bytes": 5066
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/SkillIntent.md",
+            "method/Quality/Shared.md",
+            "method/Workflows/EvaluateSkill.md"
+          ],
+          "offset": 0,
+          "fullLength": 9428,
+          "bytes": 9449
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/ReviewDesign.md",
+            "method/Procedures/ApproveSkill.md"
+          ],
+          "offset": 0,
+          "fullLength": 14825,
+          "bytes": 10074
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/ReviewDesign.md",
+            "method/Procedures/ApproveSkill.md"
+          ],
+          "offset": 10000,
+          "fullLength": 14825,
+          "bytes": 4842
+        },
+        {
+          "op": "list",
+          "args": [
+            "history"
+          ],
+          "offset": 0,
+          "fullLength": 1506,
+          "bytes": 1523
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 0,
+          "fullLength": 18652,
+          "bytes": 10058
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 10000,
+          "fullLength": 18652,
+          "bytes": 8671
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/RecordLearning.md",
+            "method/Standards/RegressionCoverage.md",
+            "method/Standards/Authoring.md"
+          ],
+          "offset": 0,
+          "fullLength": 12037,
+          "bytes": 10054
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/RecordLearning.md",
+            "method/Standards/RegressionCoverage.md",
+            "method/Standards/Authoring.md"
+          ],
+          "offset": 10000,
+          "fullLength": 12037,
+          "bytes": 2054
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/DesignMeasurement.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 0,
+          "fullLength": 25007,
+          "bytes": 10054
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/DesignMeasurement.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 10000,
+          "fullLength": 25007,
+          "bytes": 10056
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/DesignMeasurement.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 20000,
+          "fullLength": 25007,
+          "bytes": 5040
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/PlanChange.md"
+          ],
+          "offset": 0,
+          "fullLength": 17855,
+          "bytes": 10058
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Procedures/PlanChange.md"
+          ],
+          "offset": 10000,
+          "fullLength": 17855,
+          "bytes": 7872
+        }
+      ]
+    },
+    {
+      "id": "T2-B",
+      "successful_reader_invocations": 13,
+      "returned_utf8_bytes": 101599,
+      "map_exposed": false,
+      "files": [
+        {
+          "path": "runs/T2-B/prompt.txt",
+          "sha256": "da16d6b982adef59bfc87ab9e3900d172f93e1c4a4815a7414c5ccd4190ce501"
+        },
+        {
+          "path": "runs/T2-B/reads.jsonl",
+          "sha256": "c51b74bfc71bd654d6e8b204a50d0a87b100f23872490a3db70959ca915bfc1d"
+        },
+        {
+          "path": "runs/T2-B/answer.md",
+          "sha256": "21329f3c71bd9d1c1f6d847dff1ae95a403e8f1112eb9e73449ca1c973fdf5af"
+        }
+      ],
+      "reads": [
+        {
+          "op": "read",
+          "args": [
+            "method/SKILL.md"
+          ],
+          "offset": 0,
+          "fullLength": 5011,
+          "bytes": 5066
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/SkillIntent.md",
+            "method/Quality/Shared.md",
+            "method/Workflows/EvaluateSkill.md"
+          ],
+          "offset": 0,
+          "fullLength": 9428,
+          "bytes": 9449
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 0,
+          "fullLength": 18670,
+          "bytes": 10062
+        },
+        {
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/EvaluateCandidate.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 10000,
+          "fullLength": 18670,
+          "bytes": 8687
+        },
+        {
+          "op": "list",
+          "args": [
+            "history"
+          ],
+          "offset": 0,
+          "fullLength": 1506,
+          "bytes": 1523
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 0,
+          "fullLength": 18652,
+          "bytes": 10058
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 10000,
+          "fullLength": 18652,
+          "bytes": 8671
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "method/Procedures/PlanChange.md"
+          ],
+          "offset": 0,
+          "fullLength": 37207,
+          "bytes": 10078
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "method/Procedures/PlanChange.md"
+          ],
+          "offset": 10000,
+          "fullLength": 37207,
+          "bytes": 10056
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "method/Procedures/PlanChange.md"
+          ],
+          "offset": 20000,
+          "fullLength": 37207,
+          "bytes": 10058
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "method/Procedures/PlanChange.md"
+          ],
+          "offset": 30000,
+          "fullLength": 37207,
+          "bytes": 7224
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md",
+            "history/20-working-T1-T3/Activation20261106/Results.md"
+          ],
+          "offset": 0,
+          "fullLength": 10592,
+          "bytes": 10058
+        },
+        {
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md",
+            "history/20-working-T1-T3/Activation20261106/Results.md"
+          ],
+          "offset": 10000,
+          "fullLength": 10592,
+          "bytes": 609
+        }
+      ]
+    }
+  ],
+  "limits": "Successful returned bytes only. Failed invocations, host truncation, decision quality and disclosures need separate review. Not model tokens, latency, cost or general causality."
+}

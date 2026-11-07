@@ -1,0 +1,22 @@
+[
+  {
+    "operation": "Git candidate freeze",
+    "error": "Shared worktree index.lock permission denied",
+    "resolution": "Authorized escalation succeeded; commit 7b96fad"
+  },
+  {
+    "operation": "V2 snapshot preparation",
+    "error": "WindowsApps python.exe inaccessible",
+    "resolution": "Node copied frozen snapshots successfully; no subject replacements"
+  },
+  {
+    "operation": "Local link check",
+    "error": "Checker omitted percent decoding",
+    "resolution": "Decoded local URLs; 69 candidate targets resolve; initial receipt retained"
+  },
+  {
+    "operation": "Completion invocation",
+    "error": "MODULE_NOT_FOUND: relative checker path invoked from skills root instead of attempt directory",
+    "resolution": "Unchanged command from attempt directory returned complete/retain_baseline"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "baseline": "d98ff45173ae50e228cf76af403e99829b6e2f25",
+  "runtime_changes_excluding_historical_index": [],
+  "skill_entry_restored_exactly": true,
+  "map_removed": true,
+  "completion_tests": {
+    "passed": 34,
+    "failed": 0,
+    "command": "node --test SkillForge/Tools/CheckCompletion.test.cjs"
+  },
+  "structure": {
+    "passed": 14,
+    "failed": 0
+  },
+  "history_and_snapshots": "Every entry unchanged in receipts-v1.json and receipts-v2.json",
+  "links_checked": 68,
+  "links_missing": [],
+  "scope": "Prior tie-resolution guidance and integrated owner navigation preserved; only historical index record retained outside evidence."
+}

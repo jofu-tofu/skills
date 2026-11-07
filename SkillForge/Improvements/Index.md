@@ -5,8 +5,6 @@ updated: 2026-11-03
 ---
 # Proposed SkillForge improvement records
 
-For earlier tied or superseded decisions, optionally use the [selective evidence leads](DecisionHistory.md); verify the linked record and current applicability before reuse.
-
 Comparative resolution, 2026-11-07: [tie diagnosis and executed comparison](../Evidence/TieDiagnosis20261107/Results.md). Distinguishes regression adequacy from benefit ranking; qualifies ordered acceptable results and diagnoses unresolved ties. Six actual renderer workload pairs expose opposing compilation advantages and two scoped equalities while all correctness gates pass. Thirteen controls, live invalid-counter/cheap-wrong controls and one candidate caller check pass. No general method-superiority, latency/memory or universal-quality claim. Candidate retained locally; no integration or installation.
 
 Integration, 2026-11-07: user authorized merging the information-organization branch at `8f9b2fa` into main. This supersedes its earlier unmerged/uninstalled status; frozen comparison records retain their original execution scope. Fresh-checkout validation passes 34 completion tests, 14 structural checks and the hash-backed completion gate. No new behavioral benefit is claimed.
@@ -58,3 +56,5 @@ Release candidate 2.1.0 integrates retained v0.7–v0.9 method/tool changes and 
 Operational efficiency, 2026-11-06: [pending candidate](OperationalEfficiency/Record.md). Explicit efficiency outcome, shorter Update orchestration and optional compact attempt record. Local checks pass; behavioral comparison blocked by external-transfer approval. Not installed or retained.
 
 Operational efficiency evaluation completed, 2026-11-06: [retained bounded candidate](OperationalEfficiency/Record.md). Six completed Codex evaluations; both method comparisons tie on useful outcomes, external ledger checks pass 13/13 each, actual typo remains lightweight, compact recovery passes 12/12. Full-task token usage increased; no general efficiency advantage claimed. Completion gate is complete. No install/merge/publication; reconcile the separate idea-generation candidate before integration. Supersedes the earlier approval-blocked entry.
+
+Historical candidate reassessment, 2026-11-07: [inventory and measured reruns](../Evidence/CandidateReassessment20261107/Results.md). Thirteen selected families reviewed; eight fresh decision-reader sessions tested an optional history map and one discovery correction. Activated map preserved decisions but increased reading on one task and reduced it on another; frozen adoption rule failed. Runtime baseline retained; patches and conditional observations preserved. No installation or general efficiency claim.
