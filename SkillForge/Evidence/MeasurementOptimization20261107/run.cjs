@@ -1,5 +1,5 @@
 const fs=require('node:fs'),p=require('node:path'),cp=require('node:child_process'),crypto=require('node:crypto');
-const here=__dirname,project=p.resolve(process.argv[3]),raw=p.join(project,'MeasurementOptimization20261107/raw'),repo=p.resolve(here,'../../..');
+const here=__dirname,project=p.resolve(process.argv[3]||process.cwd()),raw=p.join(project,'MeasurementOptimization20261107/raw'),repo=p.resolve(here,'../../..');
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex'),read=f=>JSON.parse(fs.readFileSync(f,'utf8'));
 function write(f,v){fs.mkdirSync(p.dirname(f),{recursive:true});fs.writeFileSync(f,typeof v==='string'?v:JSON.stringify(v,null,2)+'\n');}
 function manifest(dir){const out={};function walk(d){for(const e of fs.readdirSync(d,{withFileTypes:true})){if(['node_modules','.git'].includes(e.name))continue;const f=p.join(d,e.name);if(e.isDirectory())walk(f);else if(e.isFile())out[p.relative(dir,f).replaceAll('\\','/')]=hash(fs.readFileSync(f));}}walk(dir);return out;}

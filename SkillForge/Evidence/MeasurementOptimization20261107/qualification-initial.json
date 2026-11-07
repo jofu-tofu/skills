@@ -1,0 +1,461 @@
+{
+  "rows": [
+    {
+      "label": "original",
+      "exit": 0,
+      "seconds": 1.005,
+      "result": {
+        "variant": "primary",
+        "checks": [
+          {
+            "id": "object-overload-zero-false",
+            "status": "pass"
+          },
+          {
+            "id": "fresh-data-same-template",
+            "status": "pass"
+          },
+          {
+            "id": "mutated-data-object",
+            "status": "pass"
+          },
+          {
+            "id": "json-overload",
+            "status": "pass"
+          },
+          {
+            "id": "yaml-overload",
+            "status": "pass"
+          },
+          {
+            "id": "edited-data-file",
+            "status": "pass"
+          },
+          {
+            "id": "same-size-restored-mtime-template-edit",
+            "status": "pass"
+          },
+          {
+            "id": "deleted-template",
+            "status": "pass"
+          },
+          {
+            "id": "recreated-template",
+            "status": "pass"
+          },
+          {
+            "id": "invalid-edited-template",
+            "status": "pass"
+          },
+          {
+            "id": "partial-initial",
+            "status": "pass"
+          },
+          {
+            "id": "same-size-restored-mtime-partial-edit",
+            "status": "pass"
+          },
+          {
+            "id": "removed-partial",
+            "status": "pass"
+          },
+          {
+            "id": "recreated-partial",
+            "status": "pass"
+          },
+          {
+            "id": "partial-context-varies",
+            "status": "pass"
+          },
+          {
+            "id": "helper-reregistration",
+            "status": "pass"
+          },
+          {
+            "id": "external-partial-preserved",
+            "status": "pass"
+          },
+          {
+            "id": "named-output-content",
+            "status": "pass"
+          },
+          {
+            "id": "missing-data-error",
+            "status": "pass"
+          },
+          {
+            "id": "malformed-json-error",
+            "status": "pass"
+          },
+          {
+            "id": "real-briefing-constraints-and-format",
+            "status": "pass"
+          },
+          {
+            "id": "empty-real-gate",
+            "status": "pass"
+          },
+          {
+            "id": "actual-cli-stdout",
+            "status": "pass"
+          }
+        ],
+        "pass": 23,
+        "fail": 0
+      }
+    },
+    {
+      "label": "output-cache",
+      "exit": 1,
+      "seconds": 0.851,
+      "result": {
+        "variant": "primary",
+        "checks": [
+          {
+            "id": "object-overload-zero-false",
+            "status": "pass"
+          },
+          {
+            "id": "fresh-data-same-template",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'Other|4|GO'\n"
+          },
+          {
+            "id": "mutated-data-object",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'After|1|HOLD'\n"
+          },
+          {
+            "id": "json-overload",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'JSON|0|HOLD'\n"
+          },
+          {
+            "id": "yaml-overload",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'YAML|0|HOLD'\n"
+          },
+          {
+            "id": "edited-data-file",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'EDIT|2|GO'\n"
+          },
+          {
+            "id": "same-size-restored-mtime-template-edit",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'BLOCK Neri'\n"
+          },
+          {
+            "id": "deleted-template",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Missing expected exception."
+          },
+          {
+            "id": "recreated-template",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'AGAIN Neri'\n"
+          },
+          {
+            "id": "invalid-edited-template",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Missing expected exception."
+          },
+          {
+            "id": "partial-initial",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'ALLOW Neri'\n"
+          },
+          {
+            "id": "same-size-restored-mtime-partial-edit",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'BLOCK Neri'\n"
+          },
+          {
+            "id": "removed-partial",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Missing expected exception."
+          },
+          {
+            "id": "recreated-partial",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'NEW Neri'\n"
+          },
+          {
+            "id": "partial-context-varies",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'YESNO'\n"
+          },
+          {
+            "id": "helper-reregistration",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'two:Neri'\n"
+          },
+          {
+            "id": "external-partial-preserved",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'External Neri'\n"
+          },
+          {
+            "id": "named-output-content",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Neri|0|HOLD'\n- 'NERI'\n"
+          },
+          {
+            "id": "missing-data-error",
+            "status": "pass"
+          },
+          {
+            "id": "malformed-json-error",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Missing expected exception."
+          },
+          {
+            "id": "real-briefing-constraints-and-format",
+            "status": "pass"
+          },
+          {
+            "id": "empty-real-gate",
+            "status": "pass"
+          },
+          {
+            "id": "actual-cli-stdout",
+            "status": "pass"
+          }
+        ],
+        "pass": 5,
+        "fail": 18
+      }
+    },
+    {
+      "label": "partial-cache",
+      "exit": 1,
+      "seconds": 0.885,
+      "result": {
+        "variant": "primary",
+        "checks": [
+          {
+            "id": "object-overload-zero-false",
+            "status": "pass"
+          },
+          {
+            "id": "fresh-data-same-template",
+            "status": "pass"
+          },
+          {
+            "id": "mutated-data-object",
+            "status": "pass"
+          },
+          {
+            "id": "json-overload",
+            "status": "pass"
+          },
+          {
+            "id": "yaml-overload",
+            "status": "pass"
+          },
+          {
+            "id": "edited-data-file",
+            "status": "pass"
+          },
+          {
+            "id": "same-size-restored-mtime-template-edit",
+            "status": "pass"
+          },
+          {
+            "id": "deleted-template",
+            "status": "pass"
+          },
+          {
+            "id": "recreated-template",
+            "status": "pass"
+          },
+          {
+            "id": "invalid-edited-template",
+            "status": "pass"
+          },
+          {
+            "id": "partial-initial",
+            "status": "fail",
+            "error": "Error: The partial independent-leaf could not be found"
+          },
+          {
+            "id": "same-size-restored-mtime-partial-edit",
+            "status": "fail",
+            "error": "Error: The partial independent-leaf could not be found"
+          },
+          {
+            "id": "removed-partial",
+            "status": "pass"
+          },
+          {
+            "id": "recreated-partial",
+            "status": "fail",
+            "error": "Error: The partial independent-leaf could not be found"
+          },
+          {
+            "id": "partial-context-varies",
+            "status": "fail",
+            "error": "Error: The partial independent-leaf could not be found"
+          },
+          {
+            "id": "helper-reregistration",
+            "status": "pass"
+          },
+          {
+            "id": "external-partial-preserved",
+            "status": "pass"
+          },
+          {
+            "id": "named-output-content",
+            "status": "pass"
+          },
+          {
+            "id": "missing-data-error",
+            "status": "pass"
+          },
+          {
+            "id": "malformed-json-error",
+            "status": "pass"
+          },
+          {
+            "id": "real-briefing-constraints-and-format",
+            "status": "pass"
+          },
+          {
+            "id": "empty-real-gate",
+            "status": "pass"
+          },
+          {
+            "id": "actual-cli-stdout",
+            "status": "pass"
+          }
+        ],
+        "pass": 19,
+        "fail": 4
+      }
+    },
+    {
+      "label": "valid-refactor",
+      "exit": 0,
+      "seconds": 0.893,
+      "result": {
+        "variant": "primary",
+        "checks": [
+          {
+            "id": "object-overload-zero-false",
+            "status": "pass"
+          },
+          {
+            "id": "fresh-data-same-template",
+            "status": "pass"
+          },
+          {
+            "id": "mutated-data-object",
+            "status": "pass"
+          },
+          {
+            "id": "json-overload",
+            "status": "pass"
+          },
+          {
+            "id": "yaml-overload",
+            "status": "pass"
+          },
+          {
+            "id": "edited-data-file",
+            "status": "pass"
+          },
+          {
+            "id": "same-size-restored-mtime-template-edit",
+            "status": "pass"
+          },
+          {
+            "id": "deleted-template",
+            "status": "pass"
+          },
+          {
+            "id": "recreated-template",
+            "status": "pass"
+          },
+          {
+            "id": "invalid-edited-template",
+            "status": "pass"
+          },
+          {
+            "id": "partial-initial",
+            "status": "pass"
+          },
+          {
+            "id": "same-size-restored-mtime-partial-edit",
+            "status": "pass"
+          },
+          {
+            "id": "removed-partial",
+            "status": "pass"
+          },
+          {
+            "id": "recreated-partial",
+            "status": "pass"
+          },
+          {
+            "id": "partial-context-varies",
+            "status": "pass"
+          },
+          {
+            "id": "helper-reregistration",
+            "status": "pass"
+          },
+          {
+            "id": "external-partial-preserved",
+            "status": "pass"
+          },
+          {
+            "id": "named-output-content",
+            "status": "pass"
+          },
+          {
+            "id": "missing-data-error",
+            "status": "pass"
+          },
+          {
+            "id": "malformed-json-error",
+            "status": "pass"
+          },
+          {
+            "id": "real-briefing-constraints-and-format",
+            "status": "pass"
+          },
+          {
+            "id": "empty-real-gate",
+            "status": "pass"
+          },
+          {
+            "id": "actual-cli-stdout",
+            "status": "pass"
+          }
+        ],
+        "pass": 23,
+        "fail": 0
+      }
+    }
+  ],
+  "existing_tests": {
+    "exit": 1,
+    "stdout": "bun test v1.3.5 (1e86cebd)\n",
+    "stderr": "\nTools\\RenderTemplate.test.ts:\n(pass) bundled primitive consumer contracts > an empty gate collection does not fabricate a checklist [15.00ms]\n(pass) bundled primitive consumer contracts > Briefing emits the selected markdown instructions [16.00ms]\n(pass) bundled primitive consumer contracts > Briefing emits the selected json instructions\n(pass) bundled primitive consumer contracts > Briefing emits the selected structured instructions\n(pass) bundled primitive consumer contracts > explicit output structure overrides the default format instructions\n(pass) bundled primitive consumer contracts > Briefing preserves literal output-format instructions\n(pass) bundled primitive consumer contracts > Voice JSON preserves keys and string values without HTML escaping [16.00ms]\n(pass) bundled primitive consumer contracts > Voice empty collections and omitted optional text remain valid JSON\n55 |   const partials = resolve(import.meta.dir, '../Templates/Partials');\n56 |   const created = !existsSync(partials);\n57 |   mkdirSync(partials, { recursive: true });\n58 |   const name = `regression-${process.pid}-${Date.now()}`;\n59 |   const partial = join(partials, name + '.hbs');\n60 |   const temp = mkdtempSync(join(tmpdir(), 'prompting-partial-'));\n                    ^\nerror: ENOENT: no such file or directory, mkdtemp 'undefined\\temp\\prompting-partial-XXXXXX'\n      at <anonymous> (C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\source-target\\Tools\\RenderTemplate.test.ts:60:16)\n(fail) loads local partials without a shell and does not reuse a removed file\nerror: Cannot read directory \"C:\\Users\\fujos\\\": EPERM\n\nTools\\ValidateTemplate.test.ts:\n\n# Unhandled error between tests\n-------------------------------\n4 | import { join, resolve } from 'node:path';\n5 | import Handlebars from 'handlebars';\n6 | import { validateTemplate } from './ValidateTemplate';\n7 | \n8 | const prefix = join(tmpdir(), 'prompting-validator-');\n9 | const dir = mkdtempSync(prefix);\n                ^\nENOENT: no such file or directory, mkdtemp 'undefined\\temp\\prompting-validator-XXXXXX'\n    path: \"undefined\\\\temp\\\\prompting-validator-XXXXXX\",\n syscall: \"mkdtemp\",\n   errno: -2,\n    code: \"ENOENT\"\n\n      at C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\source-target\\Tools\\ValidateTemplate.test.ts:9:13\n      at loadAndEvaluateModule (2:1)\n-------------------------------\n\n\n 8 pass\n 2 fail\n 1 error\n 19 expect() calls\nRan 10 tests across 2 files. [701.00ms]\n"
+  },
+  "profile": {
+    "command": [
+      "bun",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts",
+      "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\profile-original\\target"
+    ],
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\profile-original",
+    "exit": 1,
+    "stdout": "",
+    "stderr": " 9 | const partials=join(target,'Templates/Partials');mkdirSync(partials,{recursive:true});\n10 | for(let i=0;i<64;i++)writeFileSync(join(partials,`profile-${i}.hbs`),i===0?'Agent {{name}}':`Unused partial ${i} ${'background '.repeat(400)}`);\n11 | const file=join(target,'Templates/profile-workload.hbs');writeFileSync(file,'{{> profile-0}}\\nConstraint: {{constraint}}\\nFormat: {{format}}');\n12 | const {renderTemplate}=await import(pathToFileURL(join(target,'Tools/RenderTemplate.ts')).href);\n13 | const data={name:'Reader',constraint:'Do not apply changes',format:'exact JSON'},expected='Agent Reader\\nConstraint: Do not apply changes\\nFormat: exact JSON';\n14 | for(let i=0;i<5;i++)if(renderTemplate(file,data)!==expected)throw Error('Incorrect warm-up output');\n                                                                       ^\nerror: Incorrect warm-up output\n      at C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\benchmark.ts:14:67\n\nBun v1.3.5 (Windows x64)\n",
+    "error": null,
+    "seconds": 0.733
+  },
+  "qualified": false
+}
