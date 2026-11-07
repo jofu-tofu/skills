@@ -1,0 +1,143 @@
+{
+  "root": "C:/Users/fujos/Obsidian/Projects/SkillForge/InformationOrganization20261107",
+  "scope": "External optional raw evidence; original files preserved",
+  "files": [
+    {
+      "path": "snapshot-manifest.json",
+      "sha256": "b1963ac061c9f2a338ed28d2c71e47799026313a6f23636dc0169c81d90993db",
+      "bytes": 22936
+    },
+    {
+      "path": "preflight-audit.json",
+      "sha256": "a084137d50745364e3e10e2d9bdfad3f0e8e897ccbb5b9072834e3c5ef43c59f",
+      "bytes": 7909
+    },
+    {
+      "path": "round1-audit.json",
+      "sha256": "20b4e6b6afdd0b915572478f99d750efe434d6f362a7cfe55dfef51c3fedf613",
+      "bytes": 8088
+    },
+    {
+      "path": "round1-exact-audit.json",
+      "sha256": "20b4e6b6afdd0b915572478f99d750efe434d6f362a7cfe55dfef51c3fedf613",
+      "bytes": 8088
+    },
+    {
+      "path": "round2-audit.json",
+      "sha256": "64310ab0dec35e57860ceee6bdda7271e764933fe4745ae069df65943806b8ef",
+      "bytes": 8632
+    },
+    {
+      "path": "qualification-read.jsonl",
+      "sha256": "86df5e7308a15d50956b000a8b4ac7fcc79f6958bcb7845a399950f070e396a9",
+      "bytes": 3918
+    },
+    {
+      "path": "qualification-v2.jsonl",
+      "sha256": "6730e452ae27e9696c5d5ee95d71bcfe0090d457059577ec4bf029ac07b0c561",
+      "bytes": 29560
+    },
+    {
+      "path": "target-original.md",
+      "sha256": "c7b04cb97f203d9eebc107f9a45fd5e66ff94ea6da13774e59dea91fa8967dac",
+      "bytes": 108
+    },
+    {
+      "path": "spotcheck-round1.md",
+      "sha256": "0fb0e9a119ad2acce9ab548b78bc56593a132d58d688bc0a5b7d8bd63b3fd38a",
+      "bytes": 6490
+    },
+    {
+      "path": "spotcheck-v2.md",
+      "sha256": "22f1bd88fbf22352a65c8d091db77f63f7f1273b50ad1fffbb57f6fbb4cb7ea9",
+      "bytes": 6482
+    },
+    {
+      "path": "completion-tests.txt",
+      "sha256": "1048f8b7ba6ae34ab9b29877376df94116a8c361f7e0883f1aaba331624ae2d6",
+      "bytes": 2765
+    },
+    {
+      "path": "validator.txt",
+      "sha256": "9f7970f47a1f24180c49bf64fb1ae06add72f43f3b0f0def44bb968f2a8ecb6b",
+      "bytes": 405
+    },
+    {
+      "path": "runs/A/reads.jsonl",
+      "sha256": "b81425135973495b40de7b91a5b769d2d7a8b6f579e4bfd4406dea83a9cf2c83",
+      "bytes": 102649
+    },
+    {
+      "path": "runs/A/answer.md",
+      "sha256": "a185c4d70da7646905ac1bc6fc7cabdab25700b7c0f6e231a4bf7b490c24dbde",
+      "bytes": 4443
+    },
+    {
+      "path": "runs/A/target/SKILL.md",
+      "sha256": "353fce1a20ee5ed54a546ece6d17b1dc6f3ee00a0e8067f4992941adb9727193",
+      "bytes": 108
+    },
+    {
+      "path": "runs/B/reads.jsonl",
+      "sha256": "2d406184479b69d7a70d2041cb540a54a190dd9daa356baa76d7608c81a86ef6",
+      "bytes": 95107
+    },
+    {
+      "path": "runs/B/answer.md",
+      "sha256": "82ad99015013da7f7baba0daee8e5423be222058cb5a20b83e75954a70b68cf2",
+      "bytes": 4029
+    },
+    {
+      "path": "runs/B/target/SKILL.md",
+      "sha256": "353fce1a20ee5ed54a546ece6d17b1dc6f3ee00a0e8067f4992941adb9727193",
+      "bytes": 108
+    },
+    {
+      "path": "runs-v2/A/reads.jsonl",
+      "sha256": "87060cedbb9c67b02a6c47346cadb846b1ebf320337af03a27510142a38125f6",
+      "bytes": 82149
+    },
+    {
+      "path": "runs-v2/A/answer.md",
+      "sha256": "6bb8d6c8967a2e8c5ada9439f937889984abc1138f44de38cb2b406d78b0214d",
+      "bytes": 4742
+    },
+    {
+      "path": "runs-v2/A/target/SKILL.md",
+      "sha256": "353fce1a20ee5ed54a546ece6d17b1dc6f3ee00a0e8067f4992941adb9727193",
+      "bytes": 108
+    },
+    {
+      "path": "runs-v2/B/reads.jsonl",
+      "sha256": "7134140c50b6b61df805dd8bcb6ed44ed1793710cc44e6f92be7b194a70a58cd",
+      "bytes": 70909
+    },
+    {
+      "path": "runs-v2/B/answer.md",
+      "sha256": "4d59c6b08e04676de72c6e72c9a4c6db4af209f00a97e307687cad684a51a631",
+      "bytes": 4416
+    },
+    {
+      "path": "runs-v2/B/target/SKILL.md",
+      "sha256": "353fce1a20ee5ed54a546ece6d17b1dc6f3ee00a0e8067f4992941adb9727193",
+      "bytes": 108
+    },
+    {
+      "path": "runs-v2/A/error-receipt.md",
+      "sha256": "e93094d233eeb5a3040574f49d01276384477239e4005227bea6e8905635544b",
+      "bytes": 2520
+    }
+  ],
+  "historical_sources": [
+    {
+      "path": "../20-working-T1-T3/RealSkillComparison20261106/Results.md",
+      "sha256": "a1a503f9ed3faa99df2fe397bde4ab6264688c37db06ee836cd4a8ca4044199b",
+      "coverage": "real Prompting context/cache comparison"
+    },
+    {
+      "path": "../20-working-T1-T3/Discriminating20261106/report.md",
+      "sha256": "ec01d9f5688d65db3b481a415cd61c70fc2d8b94c7d189fe3a9e76207f6e0288",
+      "coverage": "tied repair/preflight comparison"
+    }
+  ]
+}

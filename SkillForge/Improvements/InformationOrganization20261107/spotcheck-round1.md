@@ -1,0 +1,33 @@
+# Round-1 independent source spotcheck
+
+Reviewed 2026-11-07. Fresh-context review by the same vendor/model family; this reduces shared conversational context, not correlated judgment error or the need for source evidence. Reviewed frozen Plan, Measurement, Amendment-v2, Review and Tasks; both answers; baseline/candidate Architecture and SKILL; relevant baseline owners. No runs-v2 contents inspected. No package or Git changes.
+
+## Decisions
+
+| ID | A | B | Source-grounded evidence |
+|---|---|---|---|
+| D1 | pass | pass | Both identify PlanChange / Alternative-generation activation and UpdateSkill / Purpose and scope plus loop step 3. They distinguish context-loading structural choices from a fully specified mechanical move and typo. Baseline activation explicitly includes context loading and excludes fixed moves when no structural choice remains. |
+| D2 | pass | pass | Both identify EstablishQuality / Outcome contribution mapping and Shared plus current UpdateSkill profiles, distinct from target records. EstablishQuality calls mapping a hypothesis, and baseline Architecture / Records and ownership establishes the two quality owners. Both retain conditional profile loading. |
+| D3 | pass | pass | Both give insufficient evidence, separate instrument qualification from target results, and cite Shared S08–S09 plus ApproveSkill step 1. These are valid equivalent citations to DesignMeasurement / Qualification states, which expressly says states describe the instrument. A also states the confirmed-mandatory-failure exception; B's answer is correct for the supplied facts without inventing a failure. |
+| D4 | pass | pass | Both return continue for the behavioral repair, independent of experimental retention; route the feasible check back to evaluation; identify Completion.md and checker invocation/exit semantics; allow assessment-only completion within declared scope. ApproveSkill / Task completion supports these decisions. Neither claims checker execution. Assessment-only completion is conditional, not permission to skip a required in-scope assessment check (EvaluateSkill step 5). |
+| D5 | pass | pass | Both use ValidationSummary and RELEASE integration paragraphs, retain original trial limits and reject general efficiency/superiority. Integration explicitly supersedes deployment status only and adds no comparative benefit. A's distinction between integration and independent proof of local installation is sound. |
+| D6 | pass | pass | Both distinguish historical ImproveSkill, optional raw provenance and research library from current requirements. Baseline Architecture / Quality coverage, Shared final paragraph, ValidationSummary / Prior retained evidence and Release qualification, and Authoring optional research paragraphs support this. A explicitly preserves conditional research duties; B says these are not blanket prerequisites, a valid formulation. |
+| D7 | unverified (exact bytes); pass (normalized text) | unverified (exact bytes); pass (normalized text) | Both actual targets contain exactly the intended corrected fixture text after CRLF normalization. Both are 108 bytes; audit.cjs's literal expected LF fixture is 107 bytes. Its target_exact calculation normalizes CRLF, so it is not an exact-byte check. Without the original pre-edit byte artifact, preservation of all other bytes is unverified. Both answers accurately name the intended replacement; the discrepancy may originate in initial fixture creation. |
+
+## Architecture preservation
+
+No blocking lost rule or new mandatory optional reference found. Candidate keeps workflow/procedure separation, distinct Create/Update responsibilities, target-owned attempt records, reserved assessment separation, current-versus-historical profiles, and component-versus-composed evaluation. SKILL entry reads and routing remain intact; its only changed paragraph labels Architecture optional. The map explicitly says it adds no required reads and linked owners' conditions govern.
+
+Removed architecture summaries remain in execution owners: design-only and assessment-only branches in SKILL and workflows; measurement qualification and unverified semantics in DesignMeasurement and ApproveSkill; broad parent coverage in ComprehensiveImprovement and callers; substantive ReviewDesign versus typo exceptions in UpdateSkill; conditional GenerateAlternatives in PlanChange. The candidate links these owners. Existing quality-template requirements still follow EstablishQuality through all five templates. The candidate's quality-template link to Context is a gateway consistent with that owner, not a claim that only Context suffices.
+
+The existing link receipt reports all changed-file links passing; inspected decision anchors match actual baseline headings. This review did not independently reproduce every link or every historical assertion. No rule was inferred solely from the candidate map.
+
+## Qualification and limits
+
+All six listed qualification contrasts agree with baseline contracts: structural activation; valid direct-source alternative; reject qualified-implies-ready/complete; reject historical profile as current; accept scoped insufficient-evidence assessment while continuing feasible repairs; leave absent evidence unverified. Citation count, map use and matching reference wording are not correctness gates. These are source-grounded policy contrasts, not empirical general-judge calibration.
+
+Round-1 cost remains unqualified for received text: both answers report truncation. Ledger bytes can describe emitted helper text only. The old audit's exact-target label also overstates its normalized comparison; do not use that label as independent byte-preservation evidence. This is a concrete measurement limitation, not evidence the subjects made the wrong edit.
+
+Scope is adequate for the declared bounded maintainer-decision/navigation question, conditional on a qualified cost pair and resolution of D7. It does not establish general navigation advantage, full Create/Update authoring quality, real future rule-maintenance patch correctness, provider behavior, or population reliability. Three task prompts share one context per arm; repeated v2 tasks remain diagnostic rather than unseen families. A fresh pagination-corrected pair can address the named instrument defect; no conclusion about v2 is made here.
+
+Disposition: no semantic contradiction in D1–D6; D7 byte preservation awaits original fixture evidence. Do not certify runtime efficiency from round 1.

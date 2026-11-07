@@ -30,10 +30,11 @@ for(const arm of ['A','B']) {
   if(!fs.existsSync(log)) {result.runs[arm]={status:'not_started'};continue;}
   const reads=fs.readFileSync(log,'utf8').trim().split(/\r?\n/).map(JSON.parse);
   const target=fs.readFileSync(path.join(run,'target/SKILL.md'),'utf8');
-  // Both LF and CRLF are valid text-preserving editors; compare normalized bytes.
-  const expected='---\nname: Tiny\ndescription: A tiny maintenance fixture.\n---\n# Tiny\nRead the input and preserve all values.\n';
+  // PowerShell preparation used embedded LF and a final CRLF. Reconstructed
+  // original matches the pre-edit target SHA-256 in preflight-audit.json.
+  const expected='---\nname: Tiny\ndescription: A tiny maintenance fixture.\n---\n# Tiny\nRead the input and preserve all values.\r\n';
   const answer=path.join(run,'answer.md');
-  result.runs[arm]={calls:reads.length,returned_bytes:reads.reduce((n,x)=>n+x.bytes,0),ledger_bytes_match:reads.every(x=>Buffer.byteLength(x.output)===x.bytes),read_paths:reads.filter(x=>x.op==='read').flatMap(x=>x.args),architecture_exposed:reads.some(x=>x.op==='read'&&x.args.includes('Architecture.md')),target_exact:target.replaceAll('\r\n','\n')===expected,answer_present:fs.existsSync(answer),evidence_sha256:{reads:digest(fs.readFileSync(log)),target:digest(fs.readFileSync(path.join(run,'target/SKILL.md'))),answer:fs.existsSync(answer)?digest(fs.readFileSync(answer)):null}};
+  result.runs[arm]={calls:reads.length,returned_bytes:reads.reduce((n,x)=>n+x.bytes,0),ledger_bytes_match:reads.every(x=>Buffer.byteLength(x.output)===x.bytes),read_paths:reads.filter(x=>x.op==='read').flatMap(x=>x.args),architecture_exposed:reads.some(x=>x.op==='read'&&x.args.includes('Architecture.md')),target_exact:target===expected,answer_present:fs.existsSync(answer),evidence_sha256:{reads:digest(fs.readFileSync(log)),target:digest(fs.readFileSync(path.join(run,'target/SKILL.md'))),answer:fs.existsSync(answer)?digest(fs.readFileSync(answer)):null}};
 }
 const out=JSON.stringify(result,null,2)+'\n';
 if(process.argv[3]) fs.writeFileSync(process.argv[3],out);
