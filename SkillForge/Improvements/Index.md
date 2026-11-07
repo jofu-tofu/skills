@@ -5,6 +5,8 @@ updated: 2026-11-03
 ---
 # Proposed SkillForge improvement records
 
+For earlier tied or superseded decisions, optionally use the [selective evidence leads](DecisionHistory.md); verify the linked record and current applicability before reuse.
+
 Comparative resolution, 2026-11-07: [tie diagnosis and executed comparison](../Evidence/TieDiagnosis20261107/Results.md). Distinguishes regression adequacy from benefit ranking; qualifies ordered acceptable results and diagnoses unresolved ties. Six actual renderer workload pairs expose opposing compilation advantages and two scoped equalities while all correctness gates pass. Thirteen controls, live invalid-counter/cheap-wrong controls and one candidate caller check pass. No general method-superiority, latency/memory or universal-quality claim. Candidate retained locally; no integration or installation.
 
 Integration, 2026-11-07: user authorized merging the information-organization branch at `8f9b2fa` into main. This supersedes its earlier unmerged/uninstalled status; frozen comparison records retain their original execution scope. Fresh-checkout validation passes 34 completion tests, 14 structural checks and the hash-backed completion gate. No new behavioral benefit is claimed.
