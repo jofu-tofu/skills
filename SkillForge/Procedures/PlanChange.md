@@ -49,11 +49,27 @@ Before spending on trials, record these answers briefly in the plan. Reuse exist
 - **Realistic information:** Give subjects the context and authority they would actually have. Do not put the intervention's missing steps into both user prompts unless explicit coaching is the intended use. Keep reference answers separate from executor inputs. Record partial context, scaffolding, unavailable tools and isolation limits.
 - **Useful breadth:** Select distinct consequential situations, including affected handoffs, nonapplication and no-change cases, before repeating one easy case. Record the units separately: target/task family, author run, downstream consumer and assertions within it. Repeats measure run variation; more assertions in one repair do not add independent tasks. Explain what the selected cases leave unanswered and match breadth to the claim without imposing a fixed suite size.
 - **Interpretation before execution:** Establish reference provenance and qualify checks before confirmation. Freeze what favorable, unfavorable, tied and unavailable results mean. Exploratory runs may resolve a named uncertainty; they cannot substitute for missing confirmation.
+- **Comparative resolution:** When choosing among acceptable candidates, apply [DesignMeasurement's resolution check](DesignMeasurement.md#comparative-resolution): name the useful difference beyond adequacy gates and show that the measure can detect it. Existing regressions may be sufficient for a specific correctness repair; they do not automatically compare broader quality. A supplied answer or explicitly cued distinction cannot test discovery of that distinction.
 - **Cost and next action:** Explain why this is the smallest sufficient experiment, not merely the cheapest runnable one. Name the next action after each plausible result. Redesign a test whose possible results all leave the original decision unanswered. Preserve null results and avoid repeated proposal-only pilots when the unresolved question requires execution.
 
 For a focused repair, a small complete decision loop may resolve the request: reproduce the failure, contrast a valid alternative, exercise the affected handoff and decide. For broad improvement, that same loop is **one round** inside [ComprehensiveImprovement](ComprehensiveImprovement.md), not a stopping rule. Select it from the reviewed parent coverage inventory and structural findings, state which outcomes it can resolve, and preserve the rest as subsequent work. Passing samples and a per-round budget do not establish whole-skill adequacy. Test distinct consequential situations rather than repeatedly sampling an easy case; no arbitrary suite size or round count establishes completeness.
 
 Commit resources only to the next decision. Later stages are conditional options, not a fully budgeted research programme. Do not invent large run counts, effect-size thresholds or noninferiority margins without task evidence and a decision that needs them. If deployment reliability or a population claim requires broader sampling, explain why and derive the budget from that claim and available variance. Do not silently shrink such a claim to fit a cheap test.
+
+### Diagnosing an unresolved tie
+
+Record the explanation supported by the observations, not just identical pass totals. This can be a few lines in the existing assessment, not another required artifact.
+
+| What the evidence establishes | Next useful action |
+|---|---|
+| Same delivered treatment or no activation | Use the observable preflight below; do not attribute a mechanism effect. |
+| Only adequacy gates measured, missing benefit dimension, or insensitive checker | Return to DesignMeasurement; qualify a relevant contrast before more author trials. |
+| Prompt supplies the discovery or decision being tested | Restore realistic information and freeze a fresh task; keep coached results as limited evidence. |
+| Meaningful difference measured too imprecisely | Estimate relevant task/run uncertainty and justify additional observations by the decision; no automatic repeat quota. |
+| Opposing advantages across outcomes/workloads | Report conditional choices or unresolved priorities; do not force a universal winner with arbitrary weights. |
+| No worthwhile difference within an adequately tested scope | State that scope and resolution; retain the simpler/cheaper option only where that preference is supported. |
+
+Do not require every comparison to produce a winner. Conversely, stopping an uninformative experiment does not resolve an outstanding improvement request: perform the feasible measurement/task repair it identifies. A practical retain-baseline decision under uncertainty is not evidence of equal quality. Preserve exploratory diagnosis; freeze revised measures/cases before reassessing both candidates.
 
 ### Observable preflight for method comparisons
 

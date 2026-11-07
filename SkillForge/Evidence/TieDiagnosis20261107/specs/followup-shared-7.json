@@ -1,0 +1,8 @@
+{
+  "shared": true,
+  "id": "followup-shared-7",
+  "order": "rounds",
+  "paths": 7,
+  "rounds": 5,
+  "reverse": true
+}

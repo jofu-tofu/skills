@@ -1,0 +1,7 @@
+{
+  "paths": 12,
+  "rounds": 4,
+  "id": "shared-12",
+  "order": "rounds",
+  "shared": true
+}
