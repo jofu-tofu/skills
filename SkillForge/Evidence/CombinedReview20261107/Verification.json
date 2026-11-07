@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-07",
+  "scope": "Final composed checkout: references and original experiment completion records, not new behavioral evaluation",
+  "links": {
+    "checked": 112,
+    "issues": []
+  },
+  "gates": [
+    {
+      "path": "Improvements/InformationOrganization20261107",
+      "valid": true,
+      "task_status": "complete",
+      "candidate_decision": "retain_candidate"
+    },
+    {
+      "path": "Evidence/TieDiagnosis20261107",
+      "valid": true,
+      "task_status": "complete",
+      "candidate_decision": "retain_candidate"
+    },
+    {
+      "path": "Evidence/ExperimentMemory20261107",
+      "valid": true,
+      "task_status": "complete",
+      "candidate_decision": "retain_baseline"
+    },
+    {
+      "path": "Evidence/WorkflowEfficiency20261107",
+      "valid": true,
+      "task_status": "complete",
+      "candidate_decision": "retain_baseline"
+    },
+    {
+      "path": "Evidence/MeasurementValidity20261107",
+      "valid": true,
+      "task_status": "complete",
+      "candidate_decision": "retain_baseline"
+    },
+    {
+      "path": "Evidence/MeasurementOptimization20261107",
+      "valid": true,
+      "task_status": "complete",
+      "candidate_decision": "retain_baseline"
+    }
+  ]
+}
