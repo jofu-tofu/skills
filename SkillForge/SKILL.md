@@ -38,4 +38,4 @@ Review/audit requests use EvaluateSkill's design-review mode. Description or tri
 
 ## Status
 
-See [Architecture.md](Architecture.md) for boundaries and [Checks/StructuralReview.md](Checks/StructuralReview.md) for structural verification scope. Current bounded evidence and unsupported capabilities are indexed in [ValidationSummary](Evidence/ValidationSummary.md). Historical records retain their original scope; passing a finite suite does not establish universal effectiveness.
+For an optional lookup of rule owners, current versus historical records, and loading boundaries, see [Architecture.md](Architecture.md). See [Checks/StructuralReview.md](Checks/StructuralReview.md) for structural verification scope. Current bounded evidence and unsupported capabilities are indexed in [ValidationSummary](Evidence/ValidationSummary.md). Historical records retain their original scope; passing a finite suite does not establish universal effectiveness.
