@@ -1,0 +1,28 @@
+{
+  "source_commit": "4f132529a8d01585f6a0b0de145bd019de3c7dbe",
+  "identity": [
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "tested": "9b13c2fc4d4a477340cf6349136e1cc4ef8c697e34c0a886150e743216ee1371",
+      "source": "9b13c2fc4d4a477340cf6349136e1cc4ef8c697e34c0a886150e743216ee1371",
+      "installed": "9b13c2fc4d4a477340cf6349136e1cc4ef8c697e34c0a886150e743216ee1371"
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "tested": "8d5f45643940eb06f98b56e9212b8216a62db2e1d2b5f0c7f3863efec26630c2",
+      "source": "8d5f45643940eb06f98b56e9212b8216a62db2e1d2b5f0c7f3863efec26630c2",
+      "installed": "8d5f45643940eb06f98b56e9212b8216a62db2e1d2b5f0c7f3863efec26630c2"
+    }
+  ],
+  "completion_exit": 0,
+  "completion": {
+    "schema_version": 1,
+    "valid": true,
+    "contract_sha256": "99879140bb4db187c1ca3d5bc059554296318b9ee191387df32e1e7f652ddb99",
+    "candidate_decision": "retain_candidate",
+    "task_status": "complete",
+    "unresolved": [],
+    "next_actions": []
+  },
+  "match": true
+}
