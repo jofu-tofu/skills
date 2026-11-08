@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Make sure SkillForge follows up promising gains and tests unknown tradeoffs autonomously so I don’t have to keep pushing it to continue.",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "19b12d1ca51b80097ea2c98658e8d06e3a159cf05d8c5cf10db68cdb15bf5df7",
+    "quote": "Make sure SkillForge follows up promising gains and tests unknown tradeoffs autonomously so I don’t have to keep pushing it to continue."
+  },
+  "required_checks": [
+    {
+      "id": "policy",
+      "kind": "outcome",
+      "description": "Explicit continuation rule recognizes promising gains and feasible decision-relevant uncertainty under existing authorization."
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Actual operational follow-up occurs without a second user push."
+    },
+    {
+      "id": "fresh",
+      "kind": "behavioral_execution",
+      "description": "Fresh changed-input tradeoff is executed and correctly handled."
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Settled gains, design-only scope, mandatory regressions and genuine access limits remain respected."
+    },
+    {
+      "id": "structure",
+      "kind": "preservation",
+      "description": "Caller and owner agree; runtime structural and completion checks pass."
+    }
+  ]
+}
