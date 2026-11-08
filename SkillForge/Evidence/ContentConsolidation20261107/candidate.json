@@ -1,0 +1,83 @@
+{
+  "cases": [
+    {
+      "id": "mixed-a",
+      "input": {"identity": false, "validation": false, "installation": true, "rollback_clear": true},
+      "expected": {"identity": false, "validation": false, "installation": true, "rollback_clear": true, "ready": false}
+    },
+    {
+      "id": "mixed-b",
+      "input": {"identity": false, "validation": true, "installation": false, "rollback_clear": true},
+      "expected": {"identity": false, "validation": true, "installation": false, "rollback_clear": true, "ready": false}
+    },
+    {
+      "id": "mixed-c",
+      "input": {"identity": true, "validation": false, "installation": true, "rollback_clear": false},
+      "expected": {"identity": true, "validation": false, "installation": true, "rollback_clear": false, "ready": false}
+    },
+    {
+      "id": "all-true",
+      "input": {"identity": true, "validation": true, "installation": true, "rollback_clear": true},
+      "expected": {"identity": true, "validation": true, "installation": true, "rollback_clear": true, "ready": true}
+    }
+  ],
+  "coverage_map": [
+    {
+      "old_id": "old-0-1",
+      "new_ids": ["mixed-b", "mixed-c"],
+      "reason": "Preserves identity=true, validation=false and rollback_clear=false in mixed-c; installation=false in mixed-b; ready=false in both."
+    },
+    {
+      "old_id": "old-0-3",
+      "new_ids": ["mixed-a", "mixed-b"],
+      "reason": "Preserves identity=false, installation=true and rollback_clear=true in mixed-a; validation=true in mixed-b. Both require observing true fields after an initial false and reporting ready=false."
+    },
+    {
+      "old_id": "old-1-1",
+      "new_ids": ["mixed-b", "mixed-c"],
+      "reason": "Preserves identity=false, validation=true and installation=false in mixed-b; rollback_clear=false in mixed-c; ready=false in both."
+    },
+    {
+      "old_id": "old-1-3",
+      "new_ids": ["mixed-a", "mixed-c"],
+      "reason": "Preserves identity=true, validation=false and installation=true in mixed-c; rollback_clear=true in mixed-a; ready=false and true observations after false in both."
+    },
+    {
+      "old_id": "old-2-1",
+      "new_ids": ["mixed-a", "mixed-c"],
+      "reason": "Preserves identity=false, validation=false and installation=true in mixed-a; rollback_clear=false in mixed-c; ready=false in both."
+    },
+    {
+      "old_id": "old-2-3",
+      "new_ids": ["mixed-b", "mixed-c"],
+      "reason": "Preserves validation=true, installation=false and rollback_clear=true in mixed-b; identity=true in mixed-c; ready=false in both."
+    },
+    {
+      "old_id": "old-3-1",
+      "new_ids": ["mixed-a", "mixed-b"],
+      "reason": "Preserves identity=false, validation=false and rollback_clear=true in mixed-a; installation=false in mixed-b; ready=false in both."
+    },
+    {
+      "old_id": "old-3-3",
+      "new_ids": ["mixed-b", "mixed-c"],
+      "reason": "Preserves identity=true, installation=true and rollback_clear=false in mixed-c; validation=true in mixed-b; ready=false in both."
+    }
+  ],
+  "retained_diagnostics": [
+    "Assert presence, boolean type and exact value separately for all five fields in every case. False means observed failure, not missing evidence.",
+    "Across mixed-a, mixed-b and mixed-c, field signatures are identity=001, validation=010, installation=101 and rollback_clear=110. Each has both polarities, detecting all four inversions and eight stuck-value faults.",
+    "All four signatures differ pairwise, detecting all 12 directed copying faults.",
+    "Every observed field is true in at least one mixed case where ready=false, detecting all four replacements with the ready conjunction and collapse of all observed outputs to ready.",
+    "Every mixed case distinguishes AND readiness from OR and always-true readiness. all-true exercises the actual ready-positive interaction and detects always-false readiness.",
+    "Each mixed case requires a true observation after the first false, detecting the masking fault. These checks cover the 32 specified faulty implementations by direct logical inspection.",
+    "Four cases are minimal for this fault model plus the required ready-positive interaction: with all-true and only two mixed cases, each field needs a nonzero mixed signature to distinguish it from ready. Only three such two-bit signatures exist, insufficient to distinguish four fields.",
+    "Keep per-case, per-field mismatch diagnostics. One aggregate verdict loses field attribution and conceals true observations when ready=false. Independent cases remain separate; no reliability draws or comparison arms are merged."
+  ],
+  "limits": "Synthetic development replacement data; not executed. Coverage follows logical inspection of the explicitly bounded 32-fault model, not trial results or equivalence against arbitrary input-specific faults. Original combinations are not retained as requirements. Absent/unknown inputs are outside scope. No skill files were modified. No token savings or measured efficiency benefit is claimed; execution-based promotion remains unverified.",
+  "files_read": [
+    "C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SKILL.md",
+    "C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SkillIntent.md",
+    "C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Quality/Shared.md",
+    "C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Procedures/ConstructCases.md"
+  ]
+}

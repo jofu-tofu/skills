@@ -1,0 +1,5 @@
+# Public-task clarification before executor trials
+
+Author v1 correctly refused reduction under the public prompt wording preserve every faulty implementation: any removed unique input permits an input-specific defect. It returned the8original cases plus a ready-positive case. Preserve author-v1.json and raw run. This is a useful nonapplication observation, not failed skill behavior or an outcome to discard.
+
+The protocol and prewritten checker intended a finite32fault model and per-field polarity coverage. Public v1 wording was broader than that specification. V2 explicitly lists the same32families/instances, states that original rows are development examples rather than exhaustive contractual inputs, and forbids arbitrary-fault equivalence claims. Checker, coverage gates and cost comparison remain unchanged. Authorv2 is a new scoped task, not a retry of the unrestricted guarantee. Candidate guidance now names coverage/fault scope explicitly. Both author runs count as study cost. No execution comparison has run or been inspected yet.

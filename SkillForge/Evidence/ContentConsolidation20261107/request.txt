@@ -1,0 +1,1 @@
+Improve SkillForge to simplify test content itself: replace redundant cases with scenarios testing multiple behaviors, preserve required behavior and failure attribution, and measure actual token savings.
