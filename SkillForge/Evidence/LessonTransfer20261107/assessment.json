@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "48bbb44966ef9806fa01b5fee7eb315573ad0ca8c4e543ab48a505d8d3c1c739",
+  "candidate_decision": "retain_baseline",
+  "checks": [
+    {
+      "id": "diagnosis",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "70d07217e91e65a7bc4506f1314fcec90fb5ac8ef123b32daf71b98c7163cb93"
+        },
+        {
+          "path": "audit.json",
+          "sha256": "e4b070cb82eedbc00f6e9a26d5b82c7adeaea05c68ae7fdd1299ce280eb52a08"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "70d07217e91e65a7bc4506f1314fcec90fb5ac8ef123b32daf71b98c7163cb93"
+        },
+        {
+          "path": "audit.json",
+          "sha256": "e4b070cb82eedbc00f6e9a26d5b82c7adeaea05c68ae7fdd1299ce280eb52a08"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "70d07217e91e65a7bc4506f1314fcec90fb5ac8ef123b32daf71b98c7163cb93"
+        },
+        {
+          "path": "audit.json",
+          "sha256": "e4b070cb82eedbc00f6e9a26d5b82c7adeaea05c68ae7fdd1299ce280eb52a08"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}
