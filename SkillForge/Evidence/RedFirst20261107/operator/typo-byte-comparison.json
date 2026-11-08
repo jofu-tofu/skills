@@ -1,0 +1,12 @@
+{
+  "beforeBase64": "UHJlc2VydmUgYSByZXByb2R1Y2JsZSBleGFtcGxlIGFuZCBpdHMgc291cmNlLgo=",
+  "afterBase64": "UHJlc2VydmUgYSByZXByb2R1Y2libGUgZXhhbXBsZSBhbmQgaXRzIHNvdXJjZS4K",
+  "beforeSha256": "43f31eb821b9624db0ed47edcaab7ec8a15ba889ad67da16dac5af90a5b27b73",
+  "afterSha256": "318e0e30915f1ad3b79d1a151eb6f74437e6ed90919dca046283fd93198c1f6a",
+  "beforeLength": 47,
+  "afterLength": 48,
+  "offset": 11,
+  "exactReplacementOnly": true,
+  "prefixEqual": true,
+  "suffixEqual": true
+}

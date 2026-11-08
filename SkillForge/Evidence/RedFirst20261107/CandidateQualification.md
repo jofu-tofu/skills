@@ -1,0 +1,17 @@
+# Candidate qualification before outcome review
+
+Reviewed frozen RepairPlan.md, ConfirmationLayout.md and rule commit `04228a3` before reading candidate answers or ledgers. No reserved reference answers inspected or disclosed.
+
+The targeted instruction is a coherent development hypothesis: it applies the already-owned candidate decision gate to present-status assumptions, including a decision to leave work pending. It requires matching identity/scope rather than treating recency alone as authority, separates retention/integration/installation, and permits reuse of sufficient evidence. It adds no broad archive scan or new permission gate. Discovery remains a hypothesis: exposure to the instruction must be checked in actual traces, and a correct answer alone cannot prove causality.
+
+Independent file comparisons found exactly 209 files in each isolated candidate input and exactly one changed path relative to baseline-1: `method/Procedures/ApproveSkill.md`. Direct diff shows only its step 4 status paragraph changed. Its step 1 does not contain the parent red-first addition. Thus isolated readers test the status instruction without silently receiving the other red-first changes. The candidate brief retains the original release question and logged-reader access; only assigned paths differ.
+
+The source-backed measure fits the bounded repair: material current-state/action correctness, unsupported-efficiency rejection, and honest live-identity uncertainty can distinguish the observed baseline error from valid answers. Optional installed-identity follow-up is not a mandatory criterion. No benefit follows from phrase matching, more citations, or reading more files. Actual current-record exposure is an explicit mechanism check, separate from decision correctness.
+
+Frozen local resource gate is arithmetically clear: two baseline draws returned 200,988 bytes in 26 calls; candidate total limit is 251,235 bytes and 30 calls. Both individual candidate answers must meet material decision requirements. Summed reading cost cannot conceal a false recommendation. This is an overhead allowance, not an efficiency claim; bytes exclude preparation, reasoning, latency and billing.
+
+Two candidate observations after a mixed baseline can establish the declared bounded development gate, not a stable error-rate improvement. Keep the favorable baseline and all candidate outcomes, with no replacements. Both observations revisit one historical task, so they are not independent task coverage. Preserve old answer-like archive material and disclose exposure rather than selectively pruning baseline history.
+
+The conditional composed check is appropriate: separate contexts preserve original-task information while keeping reserved transfer cases unprimed by a preceding solved release task. Original-release composition uses the four live changed policy files; transfer retains its narrower runtime context. Those changes must stay explicit in interpretation. Four dossiers in one reader remain one reader context, not four independent model draws. Passing them permits only the stated scoped retention claim and does not establish broad reliability or downstream skill benefit.
+
+**Qualification result:** proceed to grade completed isolated runs under the frozen gate. If they pass, execute the frozen composed-release and composed-transfer checks without changing instructions or consulting reserved answers to tune them. Candidate outcomes and final retention remain unreviewed at this note's creation.

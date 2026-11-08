@@ -1,0 +1,13 @@
+# Preservation controls
+
+These are routing and next-step assessments only. No capability implementation, optimization comparison or general method benefit is claimed.
+
+| Control | Appropriate next executable work item | Claim limit |
+|---|---|---|
+| Add CSV capability where only Markdown exists, no incident | UpdateSkill enhancement: specify representative CSV input/output acceptance examples, quoting/newline/empty-field boundaries and existing Markdown preservation; EstablishQuality then DesignMeasurement qualifies those examples before drafting/evaluating the capability. | No historical red failure is required or invented. New acceptance behavior remains unverified until executed. |
+| Reduce measured reading effort while decisions are correct | Preserve correct baseline answers and comparable reading logs; define relevant benefit/headroom and a matched cost/outcome measure, then compare plausible loading mechanisms through GenerateAlternatives if choosing loading structure. Freeze savings and preservation decision rules before trials. | Correct baseline is an adequate control, not a repair failure. Static shortening alone is not lower runtime effort; returned bytes do not measure all effort. |
+| Captured failure plus two later successes on identical inputs | Preserve all three outputs and exact input/context identities; inspect read traces and decisive-source exposure to distinguish run variation, hidden context differences and checker mismatch. Select a discriminating diagnostic only if it can change the repair decision; avoid automatic repeat quotas. | Captured failure remains established; two passes do not erase it or establish reliability. If failure is source-supported and faithfully captured, it can anchor a regression even without another failure. Cause and rate remain unknown. |
+| Captured wrong answer, exact original snapshot unrecoverable | Recover available prompt/output, source-backed expectation, version and actual read trace; reconstruct the nearest available context with every deviation recorded. Execute a diagnostic on that reconstruction only after its reference and access are checked. | Do not call it exact reproduction or confirmed repair. The captured incident remains valid when its evidence supports it; original-context repair stays unverified, and provisional design must be labeled. |
+
+## Exact maintenance control
+Changed only `reproducble` to `reproducible` in typo.txt. Byte comparison in typo-byte-comparison.json records original/final bytes in base64, hashes, offset 11, lengths 47 -> 48 and equal prefix/suffix. Exact expected replacement matches final bytes. Newline is preserved. No experiment or completion gate was created for this typo.

@@ -1,0 +1,342 @@
+{
+  "runs": {
+    "baseline-1": {
+      "calls": 15,
+      "errors": 0,
+      "returnedBytes": 112094,
+      "answerSha256": "3679be634efcfd328ce1ec3c0cf32d66846840f7b742a6b9936e0a249305c764",
+      "ledgerSha256": "06361b5d82c440aa36d9d099c53a2fa57ad6334cefb51e23f4c49a8c7accf346",
+      "decisiveIntegrationExposures": [
+        {
+          "call": 12,
+          "op": "read",
+          "args": [
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md",
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+          ],
+          "offset": 0
+        },
+        {
+          "call": 13,
+          "op": "read",
+          "args": [
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md",
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+          ],
+          "offset": 10000
+        }
+      ],
+      "trace": [
+        {
+          "call": 1,
+          "op": "read",
+          "args": [
+            "method/SKILL.md"
+          ],
+          "offset": 0,
+          "bytes": 5066
+        },
+        {
+          "call": 2,
+          "op": "read",
+          "args": [
+            "method/SkillIntent.md",
+            "method/Quality/Shared.md",
+            "method/Workflows/EvaluateSkill.md"
+          ],
+          "offset": 0,
+          "bytes": 9449
+        },
+        {
+          "call": 3,
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/ReviewDesign.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 0,
+          "bytes": 10074
+        },
+        {
+          "call": 4,
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/ReviewDesign.md",
+            "method/Procedures/ApproveSkill.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 10000,
+          "bytes": 7455
+        },
+        {
+          "call": 5,
+          "op": "list",
+          "args": [
+            "history"
+          ],
+          "offset": 0,
+          "bytes": 1523
+        },
+        {
+          "call": 6,
+          "op": "read",
+          "args": [
+            "method/Standards/Authoring.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 0,
+          "bytes": 10058
+        },
+        {
+          "call": 7,
+          "op": "read",
+          "args": [
+            "method/Standards/Authoring.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 10000,
+          "bytes": 10056
+        },
+        {
+          "call": 8,
+          "op": "read",
+          "args": [
+            "method/Standards/Authoring.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 20000,
+          "bytes": 559
+        },
+        {
+          "call": 9,
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/Activation20261106/Results.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 0,
+          "bytes": 10056
+        },
+        {
+          "call": 10,
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/Activation20261106/Results.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 10000,
+          "bytes": 10064
+        },
+        {
+          "call": 11,
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/Activation20261106/Results.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md",
+            "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+          ],
+          "offset": 20000,
+          "bytes": 7841
+        },
+        {
+          "call": 12,
+          "op": "read",
+          "args": [
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md",
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+          ],
+          "offset": 0,
+          "bytes": 10056
+        },
+        {
+          "call": 13,
+          "op": "read",
+          "args": [
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md",
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+          ],
+          "offset": 10000,
+          "bytes": 10058
+        },
+        {
+          "call": 14,
+          "op": "read",
+          "args": [
+            "method/RELEASE.md",
+            "method/Evidence/ValidationSummary.md",
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+          ],
+          "offset": 20000,
+          "bytes": 712
+        },
+        {
+          "call": 15,
+          "op": "read",
+          "args": [
+            "method/Procedures/DesignMeasurement.md"
+          ],
+          "offset": 0,
+          "bytes": 9067
+        }
+      ]
+    },
+    "baseline-2": {
+      "calls": 11,
+      "errors": 0,
+      "returnedBytes": 88894,
+      "answerSha256": "8ce6bd2eb6cc220b964afb55141a6dc6d339652a3bf04a330ff51285b2b32dd8",
+      "ledgerSha256": "9d852ed5966b402454e9432a0ac36ad7d058e45fbb0215189a78f1f96bc75608",
+      "decisiveIntegrationExposures": [],
+      "trace": [
+        {
+          "call": 1,
+          "op": "read",
+          "args": [
+            "method/SKILL.md"
+          ],
+          "offset": 0,
+          "bytes": 5066
+        },
+        {
+          "call": 2,
+          "op": "read",
+          "args": [
+            "method/SkillIntent.md",
+            "method/Quality/Shared.md",
+            "method/Workflows/EvaluateSkill.md"
+          ],
+          "offset": 0,
+          "bytes": 9449
+        },
+        {
+          "call": 3,
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/ReviewDesign.md",
+            "method/Procedures/ApproveSkill.md"
+          ],
+          "offset": 0,
+          "bytes": 10074
+        },
+        {
+          "call": 4,
+          "op": "read",
+          "args": [
+            "method/Quality/EvaluateSkill/Context.md",
+            "method/Quality/EvaluateSkill/Outcomes.md",
+            "method/Quality/EvaluateSkill/Tradeoffs.md",
+            "method/Quality/EvaluateSkill/Feedback.md",
+            "method/Procedures/ReviewDesign.md",
+            "method/Procedures/ApproveSkill.md"
+          ],
+          "offset": 10000,
+          "bytes": 4842
+        },
+        {
+          "call": 5,
+          "op": "list",
+          "args": [
+            "history"
+          ],
+          "offset": 0,
+          "bytes": 1523
+        },
+        {
+          "call": 6,
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+            "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+          ],
+          "offset": 0,
+          "bytes": 10058
+        },
+        {
+          "call": 7,
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+            "method/Standards/Authoring.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 0,
+          "bytes": 10056
+        },
+        {
+          "call": 8,
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md",
+            "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md",
+            "history/20-working-T1-T3/Discriminating20261106/report.md"
+          ],
+          "offset": 0,
+          "bytes": 10078
+        },
+        {
+          "call": 9,
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/Activation20261106/Results.md",
+            "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+          ],
+          "offset": 0,
+          "bytes": 10058
+        },
+        {
+          "call": 10,
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/Discriminating20261106/report.md"
+          ],
+          "offset": 0,
+          "bytes": 9198
+        },
+        {
+          "call": 11,
+          "op": "read",
+          "args": [
+            "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+            "method/Procedures/RecordLearning.md"
+          ],
+          "offset": 0,
+          "bytes": 8492
+        }
+      ]
+    }
+  },
+  "targetUnchanged": true,
+  "inputUnchanged": {
+    "baseline-1": true,
+    "baseline-2": true
+  }
+}

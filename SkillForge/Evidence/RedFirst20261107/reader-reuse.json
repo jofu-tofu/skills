@@ -1,0 +1,9 @@
+{
+  "reader_sha256": "047b42abb9bd8d7d0764fba08ee45e8e07f4a6d58b31c1cf5c3a9e4d25fb36df",
+  "prior_reader_sha256": "047b42abb9bd8d7d0764fba08ee45e8e07f4a6d58b31c1cf5c3a9e4d25fb36df",
+  "identical": true,
+  "qualification": "../StatusReconciliation20261107/reader-qualification.json",
+  "qualification_sha256": "12fda29e85f043c4190140d6bb870f35d1b276852276da0a4b9232a3261f4ad3",
+  "checks_passed": 7,
+  "scope": "Same read/search/list pagination and failure-aware UTF8 accounting; source judgments separately reviewed."
+}

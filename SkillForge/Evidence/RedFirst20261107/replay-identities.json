@@ -1,0 +1,12 @@
+{
+  "original": "CandidateReassessment20261107/A",
+  "original_question_sha256": "7f9b1e03f3eb4967b6faae1530c53a4b2cc66852720c3f84830ae4558f80f74c",
+  "files_per_copy": 209,
+  "copies": [
+    "baseline-1",
+    "baseline-2"
+  ],
+  "all_files_match": true,
+  "method": "Original archived method/context, not a new full snapshot of current branch",
+  "differences": "Fresh model contexts/current host; failure-aware telemetry reader retains operations and 10000-character page cap; no source pruning or added target facts"
+}

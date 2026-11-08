@@ -1,0 +1,191 @@
+{
+  "id": "candidate-1",
+  "calls": 14,
+  "failed_calls": 0,
+  "returned_utf8_bytes": 109160,
+  "changed_input_files": [],
+  "status_rule_exposed": true,
+  "files": [
+    {
+      "path": "runs/candidate-1/prompt.txt",
+      "sha256": "73aed1749455cc99057580dab622e515abc13a3a69ffe1b40ca69114a94ffd2b"
+    },
+    {
+      "path": "runs/candidate-1/answer.md",
+      "sha256": "ccca1e90fd4437ac3bfbca1a76919153d7224671d87a93621b7697ede709bdff"
+    },
+    {
+      "path": "runs/candidate-1/reads.jsonl",
+      "sha256": "c08c5fc8b15ba6d7c625734b26de32c0078fa758d300177a8f1c4d533b690bc7"
+    }
+  ],
+  "reads": [
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SKILL.md"
+      ],
+      "offset": 0,
+      "fullLength": 5011,
+      "bytes": 5066
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SkillIntent.md",
+        "method/Quality/Shared.md",
+        "method/Workflows/EvaluateSkill.md"
+      ],
+      "offset": 0,
+      "fullLength": 9428,
+      "bytes": 9449
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Quality/EvaluateSkill/Context.md",
+        "method/Quality/EvaluateSkill/Outcomes.md",
+        "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "method/Quality/EvaluateSkill/Feedback.md",
+        "method/Procedures/EvaluateCandidate.md",
+        "method/Procedures/ApproveSkill.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 0,
+      "fullLength": 19243,
+      "bytes": 10062
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Quality/EvaluateSkill/Context.md",
+        "method/Quality/EvaluateSkill/Outcomes.md",
+        "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "method/Quality/EvaluateSkill/Feedback.md",
+        "method/Procedures/EvaluateCandidate.md",
+        "method/Procedures/ApproveSkill.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 10000,
+      "fullLength": 19243,
+      "bytes": 9260
+    },
+    {
+      "status": "success",
+      "op": "list",
+      "args": [
+        "history"
+      ],
+      "offset": 0,
+      "fullLength": 1506,
+      "bytes": 1523
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+        "method/RELEASE.md"
+      ],
+      "offset": 0,
+      "fullLength": 17611,
+      "bytes": 10058
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+        "method/RELEASE.md"
+      ],
+      "offset": 10000,
+      "fullLength": 17611,
+      "bytes": 7630
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Improvements/IdeaGeneration/Record.md",
+        "method/Improvements/OperationalEfficiency/Record.md",
+        "method/Improvements/FocusedActivation/Record.md",
+        "method/Procedures/DesignMeasurement.md"
+      ],
+      "offset": 0,
+      "fullLength": 18619,
+      "bytes": 10068
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Improvements/IdeaGeneration/Record.md",
+        "method/Improvements/OperationalEfficiency/Record.md",
+        "method/Improvements/FocusedActivation/Record.md",
+        "method/Procedures/DesignMeasurement.md"
+      ],
+      "offset": 10000,
+      "fullLength": 18619,
+      "bytes": 8636
+    },
+    {
+      "status": "success",
+      "op": "search",
+      "args": [
+        "2026-11-07|combined package|integration-result|installed junction"
+      ],
+      "offset": 0,
+      "fullLength": 10729,
+      "bytes": 10064
+    },
+    {
+      "status": "success",
+      "op": "search",
+      "args": [
+        "2026-11-07|combined package|integration-result|installed junction"
+      ],
+      "offset": 10000,
+      "fullLength": 10729,
+      "bytes": 746
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Evidence/ValidationSummary.md",
+        "method/Procedures/PlanChange.md"
+      ],
+      "offset": 0,
+      "fullLength": 26469,
+      "bytes": 10054
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Evidence/ValidationSummary.md",
+        "method/Procedures/PlanChange.md"
+      ],
+      "offset": 10000,
+      "fullLength": 26469,
+      "bytes": 10058
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Evidence/ValidationSummary.md",
+        "method/Procedures/PlanChange.md"
+      ],
+      "offset": 20000,
+      "fullLength": 26469,
+      "bytes": 6486
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "direct-gate",
+  "calls": 4,
+  "failed_calls": 0,
+  "returned_utf8_bytes": 15592,
+  "changed_input_files": [],
+  "status_rule_exposed": true,
+  "files": [
+    {
+      "path": "runs/direct-gate/prompt.txt",
+      "sha256": "885cd0b9925f381b7cfb8c1f9ef02d9dbaf76975002ef314462615ff132b0a1d"
+    },
+    {
+      "path": "runs/direct-gate/answer.md",
+      "sha256": "c630819db07fa0cbd0cd568b116a3a1c171f856e94b70a992d68ac5917e2848a"
+    },
+    {
+      "path": "runs/direct-gate/reads.jsonl",
+      "sha256": "25f7da56a87b4efb9b53e097b5f3cc2ed51c99a07677abd6b5e9cfc8ed28c97c"
+    }
+  ],
+  "reads": [
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Procedures/ApproveSkill.md"
+      ],
+      "offset": 0,
+      "fullLength": 9157,
+      "bytes": 9174
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "cases/h01/requests.md",
+        "cases/h02/requests.md",
+        "cases/h03/requests.md",
+        "cases/h04/requests.md"
+      ],
+      "offset": 0,
+      "fullLength": 1284,
+      "bytes": 1301
+    },
+    {
+      "status": "success",
+      "op": "list",
+      "args": [
+        "cases"
+      ],
+      "offset": 0,
+      "fullLength": 423,
+      "bytes": 440
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "cases/h01/records/incident.md",
+        "cases/h01/records/release.md",
+        "cases/h01/records/trial.md",
+        "cases/h02/records/queue.md",
+        "cases/h02/records/release.md",
+        "cases/h02/records/trial.md",
+        "cases/h03/records/ledger.md",
+        "cases/h03/records/release.md",
+        "cases/h03/records/trial.md",
+        "cases/h04/records/audit.md",
+        "cases/h04/records/merge.md",
+        "cases/h04/records/receipt.md"
+      ],
+      "offset": 0,
+      "fullLength": 4660,
+      "bytes": 4677
+    }
+  ]
+}

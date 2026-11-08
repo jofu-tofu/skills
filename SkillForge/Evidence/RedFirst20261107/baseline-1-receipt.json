@@ -1,0 +1,212 @@
+{
+  "id": "baseline-1",
+  "calls": 15,
+  "failed_calls": 0,
+  "returned_utf8_bytes": 112094,
+  "changed_input_files": [],
+  "status_rule_exposed": false,
+  "files": [
+    {
+      "path": "runs/baseline-1/prompt.txt",
+      "sha256": "1ad0b45fda0795992e599324da16246e261f081e501d3a63554830382fb492b2"
+    },
+    {
+      "path": "runs/baseline-1/answer.md",
+      "sha256": "3679be634efcfd328ce1ec3c0cf32d66846840f7b742a6b9936e0a249305c764"
+    },
+    {
+      "path": "runs/baseline-1/reads.jsonl",
+      "sha256": "06361b5d82c440aa36d9d099c53a2fa57ad6334cefb51e23f4c49a8c7accf346"
+    }
+  ],
+  "reads": [
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SKILL.md"
+      ],
+      "offset": 0,
+      "fullLength": 5011,
+      "bytes": 5066
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SkillIntent.md",
+        "method/Quality/Shared.md",
+        "method/Workflows/EvaluateSkill.md"
+      ],
+      "offset": 0,
+      "fullLength": 9428,
+      "bytes": 9449
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Quality/EvaluateSkill/Context.md",
+        "method/Quality/EvaluateSkill/Outcomes.md",
+        "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "method/Quality/EvaluateSkill/Feedback.md",
+        "method/Procedures/ReviewDesign.md",
+        "method/Procedures/ApproveSkill.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 0,
+      "fullLength": 17438,
+      "bytes": 10074
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Quality/EvaluateSkill/Context.md",
+        "method/Quality/EvaluateSkill/Outcomes.md",
+        "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "method/Quality/EvaluateSkill/Feedback.md",
+        "method/Procedures/ReviewDesign.md",
+        "method/Procedures/ApproveSkill.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 10000,
+      "fullLength": 17438,
+      "bytes": 7455
+    },
+    {
+      "status": "success",
+      "op": "list",
+      "args": [
+        "history"
+      ],
+      "offset": 0,
+      "fullLength": 1506,
+      "bytes": 1523
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Standards/Authoring.md",
+        "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+      ],
+      "offset": 0,
+      "fullLength": 20542,
+      "bytes": 10058
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Standards/Authoring.md",
+        "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+      ],
+      "offset": 10000,
+      "fullLength": 20542,
+      "bytes": 10056
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Standards/Authoring.md",
+        "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+      ],
+      "offset": 20000,
+      "fullLength": 20542,
+      "bytes": 559
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/Activation20261106/Results.md",
+        "history/20-working-T1-T3/Discriminating20261106/report.md",
+        "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+        "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+      ],
+      "offset": 0,
+      "fullLength": 27808,
+      "bytes": 10056
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/Activation20261106/Results.md",
+        "history/20-working-T1-T3/Discriminating20261106/report.md",
+        "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+        "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+      ],
+      "offset": 10000,
+      "fullLength": 27808,
+      "bytes": 10064
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/Activation20261106/Results.md",
+        "history/20-working-T1-T3/Discriminating20261106/report.md",
+        "history/20-working-T1-T3/LessonRetrieval20261106/report.md",
+        "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md"
+      ],
+      "offset": 20000,
+      "fullLength": 27808,
+      "bytes": 7841
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/RELEASE.md",
+        "method/Evidence/ValidationSummary.md",
+        "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+      ],
+      "offset": 0,
+      "fullLength": 20695,
+      "bytes": 10056
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/RELEASE.md",
+        "method/Evidence/ValidationSummary.md",
+        "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+      ],
+      "offset": 10000,
+      "fullLength": 20695,
+      "bytes": 10058
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/RELEASE.md",
+        "method/Evidence/ValidationSummary.md",
+        "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+      ],
+      "offset": 20000,
+      "fullLength": 20695,
+      "bytes": 712
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Procedures/DesignMeasurement.md"
+      ],
+      "offset": 0,
+      "fullLength": 9050,
+      "bytes": 9067
+    }
+  ]
+}

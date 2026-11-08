@@ -1,0 +1,29 @@
+{
+  "baseline_outcomes": [
+    "pass",
+    "fail_stale_status"
+  ],
+  "candidate_outcomes": [
+    "pass",
+    "pass"
+  ],
+  "composed_release": "pass",
+  "natural_transfer": {
+    "pass": 4,
+    "rule_exposed": false
+  },
+  "direct_reused_case_check": {
+    "pass": 4,
+    "rule_exposed": true
+  },
+  "costs": {
+    "baseline_bytes": 200988,
+    "candidate_bytes": 201923,
+    "baseline_calls": 26,
+    "candidate_calls": 26,
+    "bytes_delta": 935,
+    "pass": true
+  },
+  "qualification": "See independent source reviews; grades are not generated from counters.",
+  "limits": "Selected historical context; no population-rate or cost-saving claim; historical-answer exposure documented."
+}

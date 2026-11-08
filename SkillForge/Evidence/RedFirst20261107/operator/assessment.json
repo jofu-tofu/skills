@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "f3e6f7814e9e98e6f9d09ff3c6ca2250429d536cca9a198501c4c6b6c853f3f8",
+  "candidate_decision": "retain_baseline",
+  "checks": [
+    {
+      "id": "result",
+      "status": "unverified",
+      "evidence": [
+        {
+          "path": "outcome.md",
+          "sha256": "e241008532a23fedf06996f8c31ef7e7ac42470cd5655d0c9c271547849feb0e"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "receipts.json",
+          "sha256": "e75200d1fe2fa2771085dd110dc658136f77b61a7a9d73e9c649c8165ff75805"
+        },
+        {
+          "path": "observations/baseline-1/answer.md",
+          "sha256": "3679be634efcfd328ce1ec3c0cf32d66846840f7b742a6b9936e0a249305c764"
+        },
+        {
+          "path": "observations/baseline-2/answer.md",
+          "sha256": "8ce6bd2eb6cc220b964afb55141a6dc6d339652a3bf04a330ff51285b2b32dd8"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "receipts.json",
+          "sha256": "e75200d1fe2fa2771085dd110dc658136f77b61a7a9d73e9c649c8165ff75805"
+        },
+        {
+          "path": "typo-byte-comparison.json",
+          "sha256": "0dc706fd51f6e74a783931eb130bdb968b5652ac8dddbd7de5ca651621d698eb"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "plan-discovery-repair",
+      "description": "Parent inspects missed current-status source discovery, compares scoped mechanisms through PlanChange/GenerateAlternatives, and freezes the next repair evaluation; no further delegated model runs.",
+      "resolves": [
+        "result"
+      ],
+      "authorized": true,
+      "feasible": true
+    }
+  ],
+  "blockers": []
+}

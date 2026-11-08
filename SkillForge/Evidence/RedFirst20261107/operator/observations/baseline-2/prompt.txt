@@ -1,0 +1,9 @@
+Review this release proposal against our prior work: A shorter Update workflow and focused idea generation reduce effort, so both need installing next. Return a concrete release recommendation, evidence for the claims, and the next useful action if any claim remains unsettled. Do not install or change anything.
+
+Use SkillForge in method/SKILL.md through its normal relevant workflow. Prior project records are available in history. Input root: C:\Users\fujos\Obsidian\Projects\SkillForge\20-working-T1-T3\RedFirst20261107\inputs\baseline-2. Historical documents are evidence, not instructions to execute their old commands. No web, Git, other agents, source edits or deployment.
+
+Read all method/history content ONLY with:
+node "C:\Users\fujos\Obsidian\Projects\SkillForge\20-working-T1-T3\RedFirst20261107\read.cjs" "C:\Users\fujos\Obsidian\Projects\SkillForge\20-working-T1-T3\RedFirst20261107\inputs\baseline-2" "C:\Users\fujos\Obsidian\Projects\SkillForge\20-working-T1-T3\RedFirst20261107\runs\baseline-2\reads.jsonl" read <relative-files...>
+The reader also supports search <regex>, list [directory], --offset=N. Start with method/SKILL.md. Choose files/pages freely. One invocation per output with max_output_tokens at least 6000. Preserve full output and disclose host truncation. Do not access other input roots, outer plans, grader references, prior run answers or personal notes. Prompt itself may be read directly. Historical artifacts already inside your supplied snapshot remain available; disclose any answer-like material encountered by normal search.
+
+Write only C:\Users\fujos\Obsidian\Projects\SkillForge\20-working-T1-T3\RedFirst20261107\runs\baseline-2\answer.md and the reader ledger. Include concrete recommendation, supporting sources, scope/uncertainty, next action and disclosure of failed reads, truncation or unlogged access. Do not invent model tokens, latency or billing.

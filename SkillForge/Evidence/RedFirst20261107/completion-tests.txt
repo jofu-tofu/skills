@@ -1,0 +1,42 @@
+✔ a completed sampled round does not close untested parent families (66.7754ms)
+✔ parent inventory cannot silently omit outcomes from the contract checks (51.565ms)
+✔ one aggregate skill pass cannot replace distinct parent outcomes (50.3583ms)
+✔ broad work needs an evidenced scope challenge and structural review (60.5003ms)
+✔ complete reviewed broad coverage permits an unchanged skill without forced rounds (63.4568ms)
+✔ an unresolved portfolio child prevents broad closure (63.1855ms)
+✔ new in-scope outcomes remain work after an explicit inventory amendment (64.662ms)
+✔ missing or tampered broad inventory cannot establish completion (49.1724ms)
+✔ coverage judgments cannot be disguised as deliverables (54.9015ms)
+✔ assessment cannot downgrade comprehensive depth or replace parent inventory (50.8521ms)
+✔ supported requested outcomes complete the task independently of candidate choice (52.2568ms)
+✔ historical edit-only closure must continue to behavioral evaluation (49.5989ms)
+✔ historical unrelated tie cannot close an unresolved required repair (51.5402ms)
+✔ a missing next action is planning work, not permission to close (50.6073ms)
+✔ an actual evidenced blocker can stop an unresolved task (51.7921ms)
+✔ a feasible authorized next action takes precedence over a blocker (49.3456ms)
+✔ an unsupported blocker cannot end the task (49.7584ms)
+✔ partly blocked requirements leave other unresolved work active (50.1568ms)
+✔ explicit design-only delivery does not require behavioral execution (49.4972ms)
+✔ narrow maintenance can finish with its own supported requirement (50.5379ms)
+✔ assessment-only scope can finish with an inconclusive target verdict (50.125ms)
+✔ a supported assessment can reject a candidate and still be complete (47.3132ms)
+✔ omitted mandatory evidence remains unresolved (48.1662ms)
+✔ unqualified favorable judgments cannot establish complete (48.4126ms)
+✔ a stale evidence digest cannot establish complete (50.0422ms)
+✔ missing and empty evidence cannot establish complete (50.0812ms)
+✔ behavioral contracts cannot omit execution from their requirements (45.449ms)
+✔ changed contracts cannot reuse an old assessment identity (47.0246ms)
+✔ equivalent uppercase digests retain the same contract identity (52.5615ms)
+✔ assessment cannot redefine the frozen scope (45.3012ms)
+✔ duplicate requirements and duplicate judgments are rejected (45.4128ms)
+✔ truthy strings cannot pretend to authorize an action (45.9016ms)
+✔ scope source must contain its quoted user instruction (44.8895ms)
+✔ evidence outside the declared root is not accepted (48.6469ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1810.8547

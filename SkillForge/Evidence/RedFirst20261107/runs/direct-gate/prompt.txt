@@ -1,0 +1,7 @@
+Apply the supplied SkillForge ApproveSkill procedure directly to the four independent requests in cases/h01/requests.md, cases/h02/requests.md, cases/h03/requests.md and cases/h04/requests.md. This is an owner-procedure check, not a test of automatic workflow selection. Begin by reading method/Procedures/ApproveSkill.md, then obtain the relevant dossier records and any needed method references. For each request return the supported current state, concrete recommendation and limits, citing source records. Use each constructed dossier for its own target facts; method release history is unrelated. No source changes, integration, installation, web, Git or other agents.
+
+All method/dossier reads ONLY through:
+node "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/RedFirst20261107/read.cjs" "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/RedFirst20261107/inputs/direct-gate" "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/RedFirst20261107/runs/direct-gate/reads.jsonl" read <relative-files...>
+Supports search <regex>, list [directory], --offset=N. One invocation per output; max_output_tokens at least6000. Preserve pagination and disclose host truncation, failures or unlogged access. No other roots, prior answers or grader references. Prompt itself may be read directly.
+
+Write only C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/RedFirst20261107/runs/direct-gate/answer.md and ledger. Do not infer model tokens, billing or latency.

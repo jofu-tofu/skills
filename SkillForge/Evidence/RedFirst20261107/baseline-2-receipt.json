@@ -1,0 +1,154 @@
+{
+  "id": "baseline-2",
+  "calls": 11,
+  "failed_calls": 0,
+  "returned_utf8_bytes": 88894,
+  "changed_input_files": [],
+  "status_rule_exposed": false,
+  "files": [
+    {
+      "path": "runs/baseline-2/prompt.txt",
+      "sha256": "2a166305b354c9974c77dcf003181d208d8757436182cfc4d84027da8e1dbb09"
+    },
+    {
+      "path": "runs/baseline-2/answer.md",
+      "sha256": "8ce6bd2eb6cc220b964afb55141a6dc6d339652a3bf04a330ff51285b2b32dd8"
+    },
+    {
+      "path": "runs/baseline-2/reads.jsonl",
+      "sha256": "9d852ed5966b402454e9432a0ac36ad7d058e45fbb0215189a78f1f96bc75608"
+    }
+  ],
+  "reads": [
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SKILL.md"
+      ],
+      "offset": 0,
+      "fullLength": 5011,
+      "bytes": 5066
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SkillIntent.md",
+        "method/Quality/Shared.md",
+        "method/Workflows/EvaluateSkill.md"
+      ],
+      "offset": 0,
+      "fullLength": 9428,
+      "bytes": 9449
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Quality/EvaluateSkill/Context.md",
+        "method/Quality/EvaluateSkill/Outcomes.md",
+        "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "method/Quality/EvaluateSkill/Feedback.md",
+        "method/Procedures/ReviewDesign.md",
+        "method/Procedures/ApproveSkill.md"
+      ],
+      "offset": 0,
+      "fullLength": 14825,
+      "bytes": 10074
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Quality/EvaluateSkill/Context.md",
+        "method/Quality/EvaluateSkill/Outcomes.md",
+        "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "method/Quality/EvaluateSkill/Feedback.md",
+        "method/Procedures/ReviewDesign.md",
+        "method/Procedures/ApproveSkill.md"
+      ],
+      "offset": 10000,
+      "fullLength": 14825,
+      "bytes": 4842
+    },
+    {
+      "status": "success",
+      "op": "list",
+      "args": [
+        "history"
+      ],
+      "offset": 0,
+      "fullLength": 1506,
+      "bytes": 1523
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md"
+      ],
+      "offset": 0,
+      "fullLength": 18652,
+      "bytes": 10058
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+        "method/Standards/Authoring.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 0,
+      "fullLength": 10141,
+      "bytes": 10056
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/ResearchDriven20261106/lesson-seeds.md",
+        "history/20-working-T1-T3/ResearchDriven20261106/experiment-agenda.md",
+        "history/20-working-T1-T3/Discriminating20261106/report.md"
+      ],
+      "offset": 0,
+      "fullLength": 19351,
+      "bytes": 10078
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/Activation20261106/Results.md",
+        "history/20-working-T1-T3/RealSkillComparison20261106/Results.md"
+      ],
+      "offset": 0,
+      "fullLength": 10592,
+      "bytes": 10058
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/Discriminating20261106/report.md"
+      ],
+      "offset": 0,
+      "fullLength": 9179,
+      "bytes": 9198
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/OperationalEfficiency20261106/Report.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 0,
+      "fullLength": 8473,
+      "bytes": 8492
+    }
+  ]
+}

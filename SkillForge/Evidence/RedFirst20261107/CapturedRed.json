@@ -1,0 +1,23 @@
+{
+  "kind": "captured historical red output, not fresh repeatability evidence",
+  "incident_answer": {
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/CandidateReassessment20261107/runs/T2-A/answer.md",
+    "sha256": "31b1f2132623e03959feb5bd17ebe613d78089cf171cb877cad61772fd951cb7",
+    "quote": "Do not install either candidate on the proposed rationale. Keep the installed baseline and retain the two isolated candidates for review. Shorter Update orchestration is demonstrated; reduced total effort and an advantage from focused idea generation are not. Their combined release has not been evaluated."
+  },
+  "primary_source": {
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/CandidateReassessment20261107/A/method/Evidence/ValidationSummary.md",
+    "sha256": "8c1f8727e601e74a1cb2a8ee02d7ab2083bf96180082af90a168bc0b0b2f0184",
+    "excerpts": [
+      "Integration, 2026-11-07: the user authorized merging and pushing both experimental drafts. The combined package preserves operational efficiency as U10, alternative generation as U11, the compact Update workflow, and the experiment-comparison preflight. Earlier uninstalled decisions describe the original trials; this integration supersedes deployment status only. Existing tied results and limits remain unchanged; no new comparative benefit is claimed."
+    ]
+  },
+  "input_manifest": {
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/CandidateReassessment20261107/snapshot-manifest.json",
+    "sha256": "215f7530d4b1f01e436a73e74486fba520ff8fafb01adc5a7e3a856ac62588c1"
+  },
+  "expected": "Recognize current combined integration; do not treat old isolated candidates as presently awaiting integration. Preserve efficiency and live-installation uncertainty.",
+  "independent_prior_review": "../CandidateReassessment20261107/ReviewV1.md",
+  "red_reason": "The observed pending-integration recommendation contradicts matching current integration evidence available in the supplied input, not a runner failure.",
+  "limits": "One archived baseline execution; fresh context/host may differ. Original archived method is a historical baseline, not all current branch evidence."
+}

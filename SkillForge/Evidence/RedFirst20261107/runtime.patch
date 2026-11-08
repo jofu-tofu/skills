@@ -1,0 +1,83 @@
+diff --git a/SkillForge/Procedures/ApproveSkill.md b/SkillForge/Procedures/ApproveSkill.md
+index bed9357..5e37f08 100644
+--- a/SkillForge/Procedures/ApproveSkill.md
++++ b/SkillForge/Procedures/ApproveSkill.md
+@@ -16,10 +16,10 @@ Check composition at the affected producer/consumer boundary: do guarantees for
+ 
+ If missing evidence has an authorized, feasible resolution within the remaining budget, record insufficient evidence and a `continue` task status with the specific next check for EvaluateCandidate through the owning workflow. Do not close the improvement as deferred merely because the current assessment is fixed. A partial gain may be retained as partial, but it does not complete the unresolved requested outcome. Keep real resource, authority and scope limits explicit.
+ 
+-1. Check that evidence matches the exact candidate, current criteria and qualified measurement versions/scope. Required unverified checks or unsupported measurement prevent readiness/improvement confirmation; set candidate readiness to insufficient evidence unless a confirmed mandatory failure already determines not ready. Still determine task status below. Design delivery may still be complete.
++1. Check that evidence matches the exact candidate, current criteria and qualified measurement versions/scope. For a repair claim, inspect the [baseline red case](DiagnoseGap.md#baseline-red-case-for-a-repair), its unchanged candidate rerun, preservation and fresh-case evidence; keep captured incidents, current reproduction and broader reliability claims distinct. Required unverified checks or unsupported measurement prevent readiness/improvement confirmation; set candidate readiness to insufficient evidence unless a confirmed mandatory failure already determines not ready. Still determine task status below. Design delivery may still be complete.
+ 2. Apply mandatory gates before aggregate benefits or preferences. For an improvement, decide targeted benefit and required preservation separately using the plan's coverage map; both must meet their declared rules. Missing required branch/dependency evidence blocks the broader claim even when executed checks pass. Use [RegressionCoverage](../Standards/RegressionCoverage.md); preserve narrower supported results and design-only delivery without implying workflow readiness.
+ 3. Compare benefit and cost under the declared rule; expose unresolved value conflicts. Equal regression passes establish shared adequacy, not equal quality. For an unresolved comparison, consume [PlanChange's tie diagnosis](PlanChange.md#diagnosing-an-unresolved-tie) and the measurement's comparative-resolution evidence. Distinguish scoped equality, unresolved measurement/precision and task-dependent tradeoffs; do not force a winner or silently close an outstanding improvement whose missing comparison has a feasible repair.
+-4. Record a justified candidate decision with scope and revisit trigger. Cite the governing rule ID or section anchor, file/version, applicable evidence and decision authority.
++4. Record a justified candidate decision with scope and revisit trigger. Cite the governing rule ID or section anchor, file/version, applicable evidence and decision authority. When a recommendation depends on present adoption status, reconcile the exact candidate and change scope with the target's current release/integration records before deciding, including a recommendation to leave it pending. Historical trial notes establish trial-time status; retained, merged and installed are different states. Newer unrelated records do not supersede matching evidence. Reuse already-read evidence; do not scan the archive by default. If status is missing or conflicting, name the smallest read-only identity/record check and keep the status unverified.
+ 5. Apply the task-completion check below and return both decisions to the owning workflow. RecordLearning preserves the result but does not convert `continue` into closure. Make no deployment or installation action.
+ 
+ ## Task completion
+diff --git a/SkillForge/Procedures/DiagnoseGap.md b/SkillForge/Procedures/DiagnoseGap.md
+index 8b2a1f4..e924097 100644
+--- a/SkillForge/Procedures/DiagnoseGap.md
++++ b/SkillForge/Procedures/DiagnoseGap.md
+@@ -6,7 +6,7 @@ Shared procedure for reported or observed gaps; called by UpdateSkill and Evalua
+ 
+ **Input:** User request and authorized scope, target intent/version, observed incident or concern, relevant quality records and available evidence.
+ 
+-**Output:** A linked gap record distinguishing observation from suspected cause, affected outcome/measure IDs, diagnosis with uncertainty, next check, and handoff. Several causes may coexist. A report without a reproducible example remains a concern, not a demonstrated failure.
++**Output:** A linked gap record distinguishing observation from suspected cause, affected outcome/measure IDs, baseline reproduction state, diagnosis with uncertainty, next check, and handoff. Several causes may coexist. An unsupported report remains a concern; a captured input/output with a source-backed expectation demonstrates that incident even when it has not been reproduced. Neither alone establishes its cause or current failure frequency.
+ 
+ ## References
+ 
+@@ -16,7 +16,7 @@ Read [GapRecord](../Templates/Improvement/GapRecord.md) when recording a gap and
+ 
+ 1. Preserve the incident: input, actual output, expected behavior and its source, version/context, consequence, and available evidence. Ask only for missing information needed for the next check; continue with an explicitly bounded hypothesis when possible.
+ 2. Compare the expectation with target intent and applicable outcome IDs. A new preference or changed purpose needs EstablishQuality; do not silently rewrite the outcome to match a proposed fix.
+-3. Inspect whether current cases and scoring would detect the incident. Use available evidence or a bounded reproduction within scope; record missing tools, references or uncertainty. Keep alternative explanations visible.
++3. Inspect whether current cases and scoring would detect the incident. For a repair, establish the [baseline red case](#baseline-red-case-for-a-repair) before selecting or drafting a repair candidate. Record missing tools, references or uncertainty. Keep alternative explanations visible.
+ 4. Select the smallest justified response using the table below. Do not add a metric merely because an incident occurred.
+ 5. Save the gap record and its next check. The incident is a development/regression case; later confirmation needs different cases. Hand off only the actions authorized by the current workflow.
+ 
+@@ -34,6 +34,18 @@ For measurement changes, record old/new definitions, reasons, provenance and qua
+ 
+ UpdateSkill sends the diagnosis to [PlanChange](PlanChange.md); the result may be a measurement-only plan or no target edit. EvaluateSkill stores diagnosis and proposed criteria in its evaluation workspace, then assesses or reports insufficient evidence; it does not change the target or its canonical quality records. [RecordLearning](RecordLearning.md) preserves links to the incident, diagnosis, measurement version and next action for a later session.
+ 
++## Baseline red case for a repair
++
++A red case is an executed baseline outcome that violates an independently supported requirement. Preserve the task/input, expected outcome and its source, actual output, baseline identity, available context/tools and checker version in the existing gap record. Check that the failure is the reported behavior, not a broken runner, missing dependency or unsupported grader. Accept valid alternative outputs; do not test for the proposed implementation's wording.
++
++Start with the actual incident and faithful information access. Record any changed conditions: pruning an archive, supplying decisive facts or simplifying a task can remove the failure opportunity. Such a case may help diagnosis but cannot replace the incident and prove repair. Never hide valid baseline evidence or weaken the baseline to manufacture red.
++
++For variable model behavior, predeclare the next observations and stopping decision, preserve every outcome, and distinguish a captured failure, reproduced failure and passing replay. Justify repeats by the uncertainty; neither an arbitrary quota nor running until a failure appears establishes reliability. One passing replay does not erase the incident, and one failure does not establish a population rate.
++
++If red is not established, continue the cheapest feasible reproduction, context or measurement check before another repair candidate. If the original context cannot be recovered, label reconstructed evidence and keep repair claims unverified; an explicitly provisional design is not a confirmed fix. Do not close the repair merely because easier tests pass or the chosen pilot ended.
++
++New capabilities and optimizations need acceptance examples or measurable benefit headroom, not an invented historical failure. Assessment-only requests may report uncertainty without a candidate. Mechanical maintenance keeps its short path. After a repair candidate, rerun the red case unchanged, protect existing behavior, and check fresh cases before broadening the claim.
++
+ ## Acceptance and failure checks
+ 
+ A later reader can identify what happened, why the expectation applies, what remains uncertain, and which artifact should change. Check clean cases, wrong-checker cases, omitted benchmark categories and unsupported expectations. Failure examples: adding a new score for every complaint; calling a suspected cause proven; changing the success rule only for the candidate; treating an assessment request as edit authorization.
+diff --git a/SkillForge/Procedures/PlanChange.md b/SkillForge/Procedures/PlanChange.md
+index 9b946de..79e9e1d 100644
+--- a/SkillForge/Procedures/PlanChange.md
++++ b/SkillForge/Procedures/PlanChange.md
+@@ -11,7 +11,7 @@ Internal procedure; called by workflows, not automatically loaded at entry.
+ ## Steps
+ 
+ 1. Identify the requested claim and available evidence. For creation or change, identify the desired difference and distinguish observed failure from design hypothesis. For assessment-only work, name the question and target version; mark change hypothesis not applicable. For a reported gap, load its [DiagnoseGap](DiagnoseGap.md) record or call that procedure if missing. Identify whether the target skill, outcome, case set or checker needs revision; a plan need not include a skill edit.
+-2. For comparison or benefit claims, name the baseline or alternative and preserve its version. A single-version assessment or readiness check needs no comparison baseline; record it as not applicable.
++2. For comparison or benefit claims, name the baseline or alternative and preserve its version. For a repair, consume DiagnoseGap's [baseline red case](DiagnoseGap.md#baseline-red-case-for-a-repair) before selecting or drafting the repair candidate. If reproduction or measurement is still unresolved, plan that diagnostic next rather than another candidate; preserve any explicit provisional-design limit. A single-version assessment or readiness check needs no comparison baseline; record it as not applicable.
+    For broad improvement, complete the research decision below after clarifying outcomes and diagnosing any gap, before ranking changes. For a focused repair, use it only when a consequential uncertainty warrants research.
+    Apply [alternative-generation activation](#alternative-generation-activation) before ranking changes. When it applies, read and call [GenerateAlternatives](GenerateAlternatives.md); reuse its comparison while applicable. It owns mechanism-diverse exploration, not selection or research policy. Order plausible changes by expected contribution to the agreed outcomes, evidence, total effort, regression risk and dependencies. Start with the smallest useful, reversible experiment, which may test a substantial structural alternative; give the reason for that order. New folders or conformity to SkillForge's layout are not benefits by themselves. Keep later stages provisional and revisit them after each result; a useful plan may defer structural changes or make no skill edit.
+    Use EstablishQuality's outcome contribution map when present: tie a proposed component change to the specific result it should improve, the gap or overlap motivating it, and the other contributions it must preserve. A shared goal alone does not justify merging dimensions, and an unmapped goal does not automatically require a new one. Keep responsibility changes as hypotheses until checked against the final outcome and affected handoffs. This map informs the regression-coverage map below; it does not replace execution evidence.
+diff --git a/SkillForge/Templates/Improvement/GapRecord.md b/SkillForge/Templates/Improvement/GapRecord.md
+index 8f0a99e..feef719 100644
+--- a/SkillForge/Templates/Improvement/GapRecord.md
++++ b/SkillForge/Templates/Improvement/GapRecord.md
+@@ -8,6 +8,7 @@ Status: template, not observed evidence. Store with the target's attempt or asse
+ | Incident | Input, actual behavior, context and evidence links; mark historical, synthetic or not reproduced. |
+ | Expectation | Expected behavior, source/authority, affected outcome IDs and consequence. |
+ | Current measurement | Measure/checker/case-set IDs and versions; would it detect this incident? Evidence or unknown. |
++| Baseline red case (repairs) | Frozen task/input and source-backed expectation; baseline/context/tool/checker identities; actual executions and failures for the right reason. Distinguish captured incident, reproduced failure and passing replay; record changed conditions and the predeclared observation policy for variable behavior. Use not applicable for a new capability, optimization or maintenance rather than inventing a failure. |
+ | Diagnosis | Skill, outcome, benchmark coverage, checker, environment/evidence, or mixed; alternatives and confidence basis. |
+ | Response | Keep measure, add cases/stratum, revise checker, clarify outcome, revise skill, or defer; rationale. |
+ | Measurement change | Old/new definition, reference provenance, qualification status; preserve old results and rescore both versions fairly. |

@@ -1,0 +1,175 @@
+{
+  "id": "composed-transfer",
+  "calls": 11,
+  "failed_calls": 0,
+  "returned_utf8_bytes": 69052,
+  "changed_input_files": [],
+  "status_rule_exposed": false,
+  "files": [
+    {
+      "path": "runs/composed-transfer/prompt.txt",
+      "sha256": "ecca7c84c9d5cfbf2b01acb3774822d756a2d8a51e584e71f4d1387f7471e99f"
+    },
+    {
+      "path": "runs/composed-transfer/answer.md",
+      "sha256": "ccf20fa62126f163472c8b0ed2ace9560b239d73cd5593e3af3503c44d28bbfc"
+    },
+    {
+      "path": "runs/composed-transfer/reads.jsonl",
+      "sha256": "d995affb8475df3d5b06e1b469925c0dbc3113a9a13738886b70d357a9b32320"
+    }
+  ],
+  "reads": [
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SKILL.md"
+      ],
+      "offset": 0,
+      "fullLength": 4970,
+      "bytes": 5025
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SkillIntent.md",
+        "method/Quality/Shared.md",
+        "cases/h01/requests.md",
+        "cases/h02/requests.md",
+        "cases/h03/requests.md",
+        "cases/h04/requests.md"
+      ],
+      "offset": 0,
+      "fullLength": 7186,
+      "bytes": 7207
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Workflows/EvaluateSkill.md"
+      ],
+      "offset": 0,
+      "fullLength": 3420,
+      "bytes": 3437
+    },
+    {
+      "status": "success",
+      "op": "list",
+      "args": [
+        "cases"
+      ],
+      "offset": 0,
+      "fullLength": 423,
+      "bytes": 440
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Quality/EvaluateSkill/Context.md",
+        "method/Quality/EvaluateSkill/Outcomes.md",
+        "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "method/Quality/EvaluateSkill/Feedback.md",
+        "method/Procedures/EvaluateCandidate.md",
+        "method/Procedures/RecordLearning.md",
+        "cases/h01/records/incident.md",
+        "cases/h01/records/release.md",
+        "cases/h01/records/trial.md",
+        "cases/h02/records/queue.md",
+        "cases/h02/records/release.md",
+        "cases/h02/records/trial.md",
+        "cases/h03/records/ledger.md",
+        "cases/h03/records/release.md",
+        "cases/h03/records/trial.md",
+        "cases/h04/records/audit.md",
+        "cases/h04/records/merge.md",
+        "cases/h04/records/receipt.md"
+      ],
+      "offset": 0,
+      "fullLength": 14830,
+      "bytes": 10062
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "cases/h01/records/incident.md",
+        "cases/h01/records/release.md",
+        "cases/h01/records/trial.md",
+        "cases/h02/records/queue.md",
+        "cases/h02/records/release.md",
+        "cases/h02/records/trial.md",
+        "cases/h03/records/ledger.md",
+        "cases/h03/records/release.md",
+        "cases/h03/records/trial.md",
+        "cases/h04/records/audit.md",
+        "cases/h04/records/merge.md",
+        "cases/h04/records/receipt.md"
+      ],
+      "offset": 0,
+      "fullLength": 4660,
+      "bytes": 4677
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Standards/Schemas.md",
+        "method/Standards/Grader.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 0,
+      "fullLength": 31568,
+      "bytes": 10057
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Standards/Schemas.md",
+        "method/Standards/Grader.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 10000,
+      "fullLength": 31568,
+      "bytes": 10054
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Standards/Schemas.md",
+        "method/Standards/Grader.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 20000,
+      "fullLength": 31568,
+      "bytes": 10054
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Standards/Schemas.md",
+        "method/Standards/Grader.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 30000,
+      "fullLength": 31568,
+      "bytes": 1585
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Procedures/DiagnoseGap.md"
+      ],
+      "offset": 0,
+      "fullLength": 6437,
+      "bytes": 6454
+    }
+  ]
+}

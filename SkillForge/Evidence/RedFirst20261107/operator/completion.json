@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "valid": true,
+  "contract_sha256": "f3e6f7814e9e98e6f9d09ff3c6ca2250429d536cca9a198501c4c6b6c853f3f8",
+  "candidate_decision": "retain_baseline",
+  "task_status": "continue",
+  "unresolved": [
+    {
+      "id": "result",
+      "reason": "Check is unverified."
+    }
+  ],
+  "next_actions": [
+    {
+      "id": "plan-discovery-repair",
+      "description": "Parent inspects missed current-status source discovery, compares scoped mechanisms through PlanChange/GenerateAlternatives, and freezes the next repair evaluation; no further delegated model runs.",
+      "resolves": [
+        "result"
+      ],
+      "authorized": true,
+      "feasible": true
+    }
+  ]
+}

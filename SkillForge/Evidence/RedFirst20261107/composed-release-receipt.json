@@ -1,0 +1,173 @@
+{
+  "id": "composed-release",
+  "calls": 12,
+  "failed_calls": 0,
+  "returned_utf8_bytes": 83748,
+  "changed_input_files": [],
+  "status_rule_exposed": true,
+  "files": [
+    {
+      "path": "runs/composed-release/prompt.txt",
+      "sha256": "88ff86f8d90ce77a13bc421c22df9e419e46f38ea17abebb6b3443b6931f17db"
+    },
+    {
+      "path": "runs/composed-release/answer.md",
+      "sha256": "3b208428f9305c95898e9db765b9631f12de866da95000fe26a4e5a1fb7c30b2"
+    },
+    {
+      "path": "runs/composed-release/reads.jsonl",
+      "sha256": "50f9a89a118b60008969a1e2600648ebbebe327f6c7a5a0f84222f65e5ff2c4c"
+    }
+  ],
+  "reads": [
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SKILL.md"
+      ],
+      "offset": 0,
+      "fullLength": 5011,
+      "bytes": 5066
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/SkillIntent.md",
+        "method/Quality/Shared.md",
+        "method/Workflows/EvaluateSkill.md"
+      ],
+      "offset": 0,
+      "fullLength": 9428,
+      "bytes": 9449
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Quality/EvaluateSkill/Context.md",
+        "method/Quality/EvaluateSkill/Outcomes.md",
+        "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "method/Quality/EvaluateSkill/Feedback.md",
+        "method/Procedures/ReviewDesign.md",
+        "method/Procedures/ApproveSkill.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 0,
+      "fullLength": 18215,
+      "bytes": 10074
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Quality/EvaluateSkill/Context.md",
+        "method/Quality/EvaluateSkill/Outcomes.md",
+        "method/Quality/EvaluateSkill/Tradeoffs.md",
+        "method/Quality/EvaluateSkill/Feedback.md",
+        "method/Procedures/ReviewDesign.md",
+        "method/Procedures/ApproveSkill.md",
+        "method/Procedures/RecordLearning.md"
+      ],
+      "offset": 10000,
+      "fullLength": 18215,
+      "bytes": 8232
+    },
+    {
+      "status": "success",
+      "op": "list",
+      "args": [
+        "history"
+      ],
+      "offset": 0,
+      "fullLength": 1506,
+      "bytes": 1523
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+        "method/RELEASE.md",
+        "method/Evidence/ValidationSummary.md"
+      ],
+      "offset": 0,
+      "fullLength": 26225,
+      "bytes": 10058
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+        "method/RELEASE.md",
+        "method/Evidence/ValidationSummary.md"
+      ],
+      "offset": 10000,
+      "fullLength": 26225,
+      "bytes": 10056
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "history/20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+        "history/20-working-T1-T3/IdeaGeneration20261106/Results.md",
+        "method/RELEASE.md",
+        "method/Evidence/ValidationSummary.md"
+      ],
+      "offset": 20000,
+      "fullLength": 26225,
+      "bytes": 6242
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Improvements/IdeaGeneration/Record.md",
+        "method/Improvements/FocusedActivation/Record.md",
+        "method/Standards/Authoring.md",
+        "method/Procedures/EvaluateCandidate.md"
+      ],
+      "offset": 0,
+      "fullLength": 11887,
+      "bytes": 10060
+    },
+    {
+      "status": "success",
+      "op": "search",
+      "args": [
+        "Integration, 2026-11-07|installed operational|installed copy|installed SkillForge|merged|pushed"
+      ],
+      "offset": 0,
+      "fullLength": 11007,
+      "bytes": 10060
+    },
+    {
+      "status": "success",
+      "op": "search",
+      "args": [
+        "Integration, 2026-11-07|installed operational|installed copy|installed SkillForge|merged|pushed"
+      ],
+      "offset": 10000,
+      "fullLength": 11007,
+      "bytes": 1024
+    },
+    {
+      "status": "success",
+      "op": "read",
+      "args": [
+        "method/Improvements/IdeaGeneration/Record.md",
+        "method/Improvements/FocusedActivation/Record.md",
+        "method/Standards/Authoring.md",
+        "method/Procedures/EvaluateCandidate.md"
+      ],
+      "offset": 10000,
+      "fullLength": 11887,
+      "bytes": 1904
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+Use the supplied SkillForge method to assess the independent requests in cases/h01/requests.md, cases/h02/requests.md, cases/h03/requests.md and cases/h04/requests.md. Give a concrete supported recommendation for each. These are constructed exercises; use only each dossier for its target facts. Do not change, install or deploy anything. Start with method/SKILL.md and use normal relevant workflow routing. The method's own release history is not the dossier target. Optional historical method records are not supplied. No web, Git, agents, external references or other experiment roots.
+
+Read all method/dossier content ONLY with:
+node "C:\Users\fujos\Obsidian\Projects\SkillForge\20-working-T1-T3\RedFirst20261107\read.cjs" "C:\Users\fujos\Obsidian\Projects\SkillForge\20-working-T1-T3\RedFirst20261107\inputs\composed-transfer" "C:\Users\fujos\Obsidian\Projects\SkillForge\20-working-T1-T3\RedFirst20261107\runs\composed-transfer\reads.jsonl" read <relative-files...>
+Supports search <regex>, list [directory], --offset=N. One invocation per output, max_output_tokens at least 6000. Logs success and failure; disclose host truncation and unlogged reads. The prompt may be read directly. Do not inspect prior answers or grading keys.
+
+Write only C:\Users\fujos\Obsidian\Projects\SkillForge\20-working-T1-T3\RedFirst20261107\runs\composed-transfer\answer.md and ledger. For each case include decision, evidence paths/observations, uncertainty and next useful action, plus access/failure/truncation disclosure. No invented model usage, time or billing figures.

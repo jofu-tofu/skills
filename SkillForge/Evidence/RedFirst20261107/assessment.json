@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "c4c999d8516fe76dc4e9349d4ec07ad9b29851ec21cea3f26dc7c99ded647215",
+  "candidate_decision": "retain_candidate",
+  "checks": [
+    {
+      "id": "policy",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "6fa1f86ddcb25844d63158ef8e51121d2399b8dbfb4dc510abb0e3d6a1ca80cb"
+        },
+        {
+          "path": "PolicyAndRedReview.md",
+          "sha256": "ad099ded50ba6e5ade80652042d8259ead8c9d59e7a47932bc02384afa8b1f60"
+        },
+        {
+          "path": "runtime.patch",
+          "sha256": "962c7a47a16c51da6b682e3dbe47d19967363218764838931008f6fda9c5c7ec"
+        }
+      ]
+    },
+    {
+      "id": "handoff",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "PolicyAndRedReview.md",
+          "sha256": "ad099ded50ba6e5ade80652042d8259ead8c9d59e7a47932bc02384afa8b1f60"
+        },
+        {
+          "path": "operator/work-item.md",
+          "sha256": "539858572495373a0ac74ae49827691ca634cca3bee9d8072a97d41e8d324a85"
+        },
+        {
+          "path": "operator/outcome.md",
+          "sha256": "e241008532a23fedf06996f8c31ef7e7ac42470cd5655d0c9c271547849feb0e"
+        },
+        {
+          "path": "operator/controls.md",
+          "sha256": "c6c8111369da9d0acc55e2a5c707e55a6e106b2b1efe6ed1ee972e90e839482e"
+        },
+        {
+          "path": "operator/typo-byte-comparison.json",
+          "sha256": "0dc706fd51f6e74a783931eb130bdb968b5652ac8dddbd7de5ca651621d698eb"
+        }
+      ]
+    },
+    {
+      "id": "red_case",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "CapturedRed.json",
+          "sha256": "603eccc9cc5939551f4373b209b9bafef4f296d3405925e3ea85efb7664faa37"
+        },
+        {
+          "path": "PolicyAndRedReview.md",
+          "sha256": "ad099ded50ba6e5ade80652042d8259ead8c9d59e7a47932bc02384afa8b1f60"
+        },
+        {
+          "path": "baseline-1-receipt.json",
+          "sha256": "0650ef05036152261c40356158fe808c66e939a7cb6837b8629ced8fc6745e1b"
+        },
+        {
+          "path": "baseline-2-receipt.json",
+          "sha256": "b44fb79cda77d97e66c956fa6ba82eff53fba7209b89559d63754e5aa80a8e08"
+        }
+      ]
+    },
+    {
+      "id": "repair",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "6fa1f86ddcb25844d63158ef8e51121d2399b8dbfb4dc510abb0e3d6a1ca80cb"
+        },
+        {
+          "path": "CandidateResultsReview.md",
+          "sha256": "354a71a6479ea2d4ebe990975d12f9f5989d91718665f295c7b483ec5b567944"
+        },
+        {
+          "path": "ConfirmationReview.md",
+          "sha256": "5eb5679ad7ac94a113c84d905bdcc33b8afe6424f98f7db5224dd31892fe958f"
+        },
+        {
+          "path": "FinalReview.md",
+          "sha256": "3889620fc4d31e2151fedb3fc7204a24232e7da137065a41c1ba1c10ff369207"
+        },
+        {
+          "path": "comparison.json",
+          "sha256": "a0bf0e38ef38b2c2abeac9d61952a30461ef2f74b673d1ebcfe93479d43b8b15"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "preservation.json",
+          "sha256": "557f2631ae9e47851d7ac5f395fffc4d747c5ac901d551d3d380338cb741d80c"
+        },
+        {
+          "path": "links.json",
+          "sha256": "6840ee9720146e206308fae8ad397c0ddf792fee53101a1ec26b3450330c7f46"
+        },
+        {
+          "path": "reader-reuse.json",
+          "sha256": "a8304023daa2bd07566333f16f2df0d5e2044ea164500bae5eaacea0c3f29dbd"
+        },
+        {
+          "path": "completion-tests.txt",
+          "sha256": "2e35627cc967d49731546a3e088f97246140dba3e3d0a1b6dac3afb5b2f49b6f"
+        },
+        {
+          "path": "structure-final.txt",
+          "sha256": "9f7970f47a1f24180c49bf64fb1ae06add72f43f3b0f0def44bb968f2a8ecb6b"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}
