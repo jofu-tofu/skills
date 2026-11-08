@@ -1,0 +1,88 @@
+{
+  "author": {
+    "usage": {
+      "input_tokens": 70821,
+      "output_tokens": 1521,
+      "cached_input_tokens": 58368,
+      "uncached_input_tokens": 12453,
+      "total_tokens": 72342
+    },
+    "commands": [
+      {
+        "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SKILL.md'\"",
+        "exit_code": 0
+      },
+      {
+        "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SkillIntent.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Quality/Shared.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Procedures/ConstructCases.md'\"",
+        "exit_code": 0
+      }
+    ],
+    "raw_hashes": {
+      "events.jsonl": "9e43f766c0fa3d4e9edd6c543ea50bbe3138bda3314349057e19d53b8814d51d",
+      "execution.json": "61c81eb6b08a7ea6a80282e4327860a59f3daa20827c6dd8d33450651338551e",
+      "prompt.txt": "303692a746a995f30f359ff9bb1976a6591db594df19ed3d9128949556a3a63f",
+      "response.txt": "e8376bbe9a4a16e9a679e77e203da73f86a437748201fba8156f87b7eaba3955",
+      "stderr.txt": "244f3c9e3e97318c53cfce59233e2ff60791c5500edcd8365ae0216805367a97"
+    }
+  },
+  "author-v2": {
+    "usage": {
+      "input_tokens": 71225,
+      "output_tokens": 1979,
+      "cached_input_tokens": 58624,
+      "uncached_input_tokens": 12601,
+      "total_tokens": 73204
+    },
+    "commands": [
+      {
+        "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SKILL.md'\"",
+        "exit_code": 0
+      },
+      {
+        "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SkillIntent.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Quality/Shared.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Procedures/ConstructCases.md'\"",
+        "exit_code": 0
+      }
+    ],
+    "raw_hashes": {
+      "events.jsonl": "2cfa74bb3755b5c583caf0283ab20e71489ee83523c3eea70f7c7619a32e2048",
+      "execution.json": "1dc480f0f50f0aaccd4f11a2090975009439670f869938d6b8553a565a5ffd02",
+      "prompt.txt": "5881c1d85d441c2ac9c5541032702cc414cdefe6f46c9def014a72ca9b87ddb7",
+      "response.txt": "856d15cce1049688643aff415d146d71d4c42568423f409574a2191e68d81bc4",
+      "stderr.txt": "42a09fc840152d68e836d07b2bb3221f0eef031276d5bbf87f9655544467a68b"
+    }
+  },
+  "baseline": {
+    "usage": {
+      "input_tokens": 21451,
+      "output_tokens": 241,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 7883,
+      "total_tokens": 21692
+    },
+    "commands": [],
+    "raw_hashes": {
+      "events.jsonl": "47d8a04562483046716e92c3954052050cc1145b4d80f7f5a6ed4de5f034900c",
+      "execution.json": "7c720bfd1c6bd030fbeedd3ecbfc0389e7da45884bbfc9f84e7baeb2a1abcf31",
+      "prompt.txt": "8064e86c39a933311f8f42178e2dd357e03e104dc11ffd26cb3eb5dc596ebcc4",
+      "response.txt": "90d547355384975fed8c2e3a9132b2231b5a8ab652af34f63e42b7e6296b6e47",
+      "stderr.txt": "d9f27b10eebecc50cbdca62d9916d81302ef607187ced8d351659958dd3feb14"
+    }
+  },
+  "candidate": {
+    "usage": {
+      "input_tokens": 21328,
+      "output_tokens": 114,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 7760,
+      "total_tokens": 21442
+    },
+    "commands": [],
+    "raw_hashes": {
+      "events.jsonl": "e1251eb6c58c41defa91b26ed7488b380662737fa743f69576c37845070e3017",
+      "execution.json": "bebb396938abadccbb55db99a2005797b6a1f254fbcaf7f2a9da95212d9bc7f2",
+      "prompt.txt": "13016e8af631c01d1947fb02a227c411200240a418282954105175465030ef14",
+      "response.txt": "b04ef3644a0bd206af60b2f16888da40321fee9e03f2ecaed4c0957251a65615",
+      "stderr.txt": "c4c643ecd545a7b0ba89209d7f5393ee6ceea3eda4fe000bed1743793abbd9b3"
+    }
+  }
+}
