@@ -1,0 +1,161 @@
+{
+  "baseline": "e91db4fedf75264cf0113be0f7adf7180b97b6de",
+  "sources": [
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/LessonRetrieval20261106/retrieval/B/packet.md",
+      "bytes": 1424,
+      "sha256": "ad3e342fb0a34065ec49ea6717319fcd05802a0bc75304e7fdb034073329ce05"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/LessonRetrieval20261106/retrieval/C/packet.md",
+      "bytes": 1424,
+      "sha256": "ad3e342fb0a34065ec49ea6717319fcd05802a0bc75304e7fdb034073329ce05"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/LessonRetrieval20261106/retrieval/B/selection.json",
+      "bytes": 343,
+      "sha256": "461bb79d7af781bc3450ab3fe54d6cb662956748bf0ed07084b3e4ad5a725d02"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/LessonRetrieval20261106/retrieval/C/selection.json",
+      "bytes": 788,
+      "sha256": "281c859f2e232848910fb91a2df87e7d231548ae80468eee9c26ba58522f3524"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/LessonRetrieval20261106/report.md",
+      "bytes": 8466,
+      "sha256": "5918498ca1febbb59cfb362b4273b1aff6fda18b653c466f328f45082ee4a93d"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/RetrievalRedFirst20261107/skills/SkillForge/Evidence/RetrievalRedFirst20261107/Results.md",
+      "bytes": 5203,
+      "sha256": "7cb8d77e7d006576adff19fcdca8403fdf7f8a85c66f58803b57490a8ab0ce7a"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/RetrievalRedFirst20261107/skills/SkillForge/Evidence/RetrievalRedFirst20261107/Adjudication.md",
+      "bytes": 4171,
+      "sha256": "92ec4f58acd1a8f2f8f35a8ca447fe83f51c1ee1194f93bd86409364ca8482a0"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/RetrievalRedFirst20261107/skills/SkillForge/Evidence/RetrievalRedFirst20261107/qualification.json",
+      "bytes": 33051,
+      "sha256": "91ae6d5740ce88eb149eba4878ca5a9b92045dbbf977a18adc4e6d2b28bc3555"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/RetrievalRedFirst20261107/skills/SkillForge/Evidence/RetrievalRedFirst20261107/receipts.json",
+      "bytes": 4435,
+      "sha256": "8112cb97a90319d2b04792f130cb3a460fb791633985dce909e0d978a7f1501f"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/RetrievalRedFirst20261107/skills/SkillForge/Evidence/RetrievalRedFirst20261107/answers/cache-1.md",
+      "bytes": 6119,
+      "sha256": "093e6534e3a08d82cf34be8b9cfe861c556d9d2d88e8bd53c3697c2263b06b3b"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/RetrievalRedFirst20261107/skills/SkillForge/Evidence/RetrievalRedFirst20261107/answers/cache-2.md",
+      "bytes": 6379,
+      "sha256": "9ad9a9cdba04fa21292d48adbf8439c812ff69e15411b8f81bd85daf3db1add1"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/RetrievalRedFirst20261107/skills/SkillForge/Evidence/RetrievalRedFirst20261107/answers/fabric-1.md",
+      "bytes": 6516,
+      "sha256": "a2a65239552cede724c80d8d562e701d82367979a5b0ba2e8c06b64490413699"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/RetrievalRedFirst20261107/skills/SkillForge/Evidence/RetrievalRedFirst20261107/answers/fabric-2.md",
+      "bytes": 7083,
+      "sha256": "c3d93c6f8be6c35731316752b3e272f68851d806e15e3d984b0477b24ae7e8a3"
+    },
+    {
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\LessonTransfer20261107\\skills\\SkillForge\\Evidence\\ExperimentMemory20261107\\Results.md",
+      "bytes": 4983,
+      "sha256": "3092f22beace4d2be20ff442be949b5751d595cc0337936fa5e5b09c31a787e8"
+    },
+    {
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\LessonTransfer20261107\\skills\\SkillForge\\Evidence\\ExperimentMemory20261107\\baseline-output.md",
+      "bytes": 10418,
+      "sha256": "aeee4a3cfebdfc3cbc56d2858c0ba7a799d6367c674a51ca415bd99bfbec17fe"
+    },
+    {
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\LessonTransfer20261107\\skills\\SkillForge\\Evidence\\CandidateReassessment20261107\\Results.md",
+      "bytes": 5633,
+      "sha256": "e567ea72a01014b38e1375822dee3f7f6cfdc2fa1d75b4c772e2a30e8b110f9b"
+    },
+    {
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\LessonTransfer20261107\\skills\\SkillForge\\Evidence\\RedFirst20261107\\CapturedRed.json",
+      "bytes": 2215,
+      "sha256": "603eccc9cc5939551f4373b209b9bafef4f296d3405925e3ea85efb7664faa37"
+    },
+    {
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\LessonTransfer20261107\\skills\\SkillForge\\Evidence\\RedFirst20261107\\Results.md",
+      "bytes": 6507,
+      "sha256": "6fa1f86ddcb25844d63158ef8e51121d2399b8dbfb4dc510abb0e3d6a1ca80cb"
+    },
+    {
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\LessonTransfer20261107\\skills\\SkillForge\\Evidence\\AutonomousFollowup20261107\\Report.md",
+      "bytes": 7694,
+      "sha256": "4860659f5bc8059f425d00d2c0b9f7fa9f4e5d4513c965551980368704a41416"
+    },
+    {
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\LessonTransfer20261107\\skills\\SkillForge\\Evidence\\AutonomousFollowup20261107\\Rollout.md",
+      "bytes": 1415,
+      "sha256": "2f235b7c222f4c2073ac794e5f13913776b46ba9f8956c69dde9b66360bd667f"
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/MeasurementConfirmation20261107/skills/SkillForge/Evidence/MeasurementConfirmation20261107/Report.md",
+      "bytes": 9497,
+      "sha256": "c809fa44ccc4ff21de8549a0e4259ab15fb2aa75e9284ee6b313afbeaf2485b6"
+    }
+  ],
+  "packets_equal": true,
+  "packet_bytes": 1424,
+  "selected_B": [
+    "L1",
+    "L2"
+  ],
+  "selected_C": [
+    "L1",
+    "L2"
+  ],
+  "runtime": [
+    {
+      "path": "SKILL.md",
+      "task_sha256": "21c1d5af1dd62ba210d13d2e7b23d70bac23a281d2538f38f575ec3f5670f8ab",
+      "installed_sha256": "21c1d5af1dd62ba210d13d2e7b23d70bac23a281d2538f38f575ec3f5670f8ab",
+      "equal": true
+    },
+    {
+      "path": "Procedures/RecordLearning.md",
+      "task_sha256": "5dca60a39e1edd608aaa27274080284f700cd08dc52f43a1176640d371fbd19f",
+      "installed_sha256": "5dca60a39e1edd608aaa27274080284f700cd08dc52f43a1176640d371fbd19f",
+      "equal": true
+    },
+    {
+      "path": "Procedures/PlanChange.md",
+      "task_sha256": "d14b28a72e84191bef86b611e42d84b2443ff5e7ae64a3cbba16b4f73b8db58b",
+      "installed_sha256": "d14b28a72e84191bef86b611e42d84b2443ff5e7ae64a3cbba16b4f73b8db58b",
+      "equal": true
+    },
+    {
+      "path": "Procedures/DiagnoseGap.md",
+      "task_sha256": "b3312b856be460b337cc97ac0f32202b0bdb5577dabf65826bb4cb898ce765f1",
+      "installed_sha256": "b3312b856be460b337cc97ac0f32202b0bdb5577dabf65826bb4cb898ce765f1",
+      "equal": true
+    },
+    {
+      "path": "Procedures/ApproveSkill.md",
+      "task_sha256": "9b13c2fc4d4a477340cf6349136e1cc4ef8c697e34c0a886150e743216ee1371",
+      "installed_sha256": "9b13c2fc4d4a477340cf6349136e1cc4ef8c697e34c0a886150e743216ee1371",
+      "equal": true
+    },
+    {
+      "path": "Workflows/UpdateSkill.md",
+      "task_sha256": "8d5f45643940eb06f98b56e9212b8216a62db2e1d2b5f0c7f3863efec26630c2",
+      "installed_sha256": "8d5f45643940eb06f98b56e9212b8216a62db2e1d2b5f0c7f3863efec26630c2",
+      "equal": true
+    }
+  ],
+  "source_bytes": 133764,
+  "new_model_sessions": 0,
+  "limits": "Hashes and equality qualify identity only, not behavioral correctness. Existing results are not fresh executions. Total coordinator cost unavailable."
+}

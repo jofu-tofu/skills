@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Diagnose distinct unresolved harmful lesson transfer; change and evaluate only where supported, otherwise retain baseline with bounded evidence.",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "647a738301f3cb2fa6cf5be17302353f1bdb6d9f076baa8574116da6214d2600",
+    "quote": "Investigate whether actual retained lessons cause harmful transfer under changed tools, goals or preconditions. If the opportunity is already adequately handled, demonstrate that with evidence and retain baseline; no forced edit or manufactured comparison."
+  },
+  "required_checks": [
+    {
+      "id": "diagnosis",
+      "kind": "outcome",
+      "description": "Classify retained-lesson leads and whether new applicability headroom exists."
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Inspect existing actual executions and delivered lessons/decisions without repeating settled trials."
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Retain runtime and historical evidence absent a justified candidate."
+    }
+  ]
+}
