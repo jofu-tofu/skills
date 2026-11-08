@@ -1,0 +1,31 @@
+{
+  "identity": [
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "sha256": "9b13c2fc4d4a477340cf6349136e1cc4ef8c697e34c0a886150e743216ee1371",
+      "tested_sha256": "9b13c2fc4d4a477340cf6349136e1cc4ef8c697e34c0a886150e743216ee1371",
+      "match": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "sha256": "8d5f45643940eb06f98b56e9212b8216a62db2e1d2b5f0c7f3863efec26630c2",
+      "tested_sha256": "8d5f45643940eb06f98b56e9212b8216a62db2e1d2b5f0c7f3863efec26630c2",
+      "match": true
+    }
+  ],
+  "runs": [
+    {
+      "name": "completion-tests",
+      "exit": 0,
+      "stdout": "✔ a completed sampled round does not close untested parent families (120.8332ms)\n✔ parent inventory cannot silently omit outcomes from the contract checks (76.1968ms)\n✔ one aggregate skill pass cannot replace distinct parent outcomes (70.0681ms)\n✔ broad work needs an evidenced scope challenge and structural review (76.9974ms)\n✔ complete reviewed broad coverage permits an unchanged skill without forced rounds (83.6428ms)\n✔ an unresolved portfolio child prevents broad closure (85.3978ms)\n✔ new in-scope outcomes remain work after an explicit inventory amendment (89.8635ms)\n✔ missing or tampered broad inventory cannot establish completion (71.4766ms)\n✔ coverage judgments cannot be disguised as deliverables (73.5208ms)\n✔ assessment cannot downgrade comprehensive depth or replace parent inventory (69.9529ms)\n✔ supported requested outcomes complete the task independently of candidate choice (69.3791ms)\n✔ historical edit-only closure must continue to behavioral evaluation (68.571ms)\n✔ historical unrelated tie cannot close an unresolved required repair (70.2103ms)\n✔ a missing next action is planning work, not permission to close (69.4746ms)\n✔ an actual evidenced blocker can stop an unresolved task (81.2802ms)\n✔ a feasible authorized next action takes precedence over a blocker (76.3771ms)\n✔ an unsupported blocker cannot end the task (83.4532ms)\n✔ partly blocked requirements leave other unresolved work active (81.4124ms)\n✔ explicit design-only delivery does not require behavioral execution (76.4868ms)\n✔ narrow maintenance can finish with its own supported requirement (75.4091ms)\n✔ assessment-only scope can finish with an inconclusive target verdict (80.4445ms)\n✔ a supported assessment can reject a candidate and still be complete (75.2109ms)\n✔ omitted mandatory evidence remains unresolved (82.426ms)\n✔ unqualified favorable judgments cannot establish complete (79.8709ms)\n✔ a stale evidence digest cannot establish complete (77.0395ms)\n✔ missing and empty evidence cannot establish complete (73.2177ms)\n✔ behavioral contracts cannot omit execution from their requirements (69.6412ms)\n✔ changed contracts cannot reuse an old assessment identity (71.0558ms)\n✔ equivalent uppercase digests retain the same contract identity (209.291ms)\n✔ assessment cannot redefine the frozen scope (65.498ms)\n✔ duplicate requirements and duplicate judgments are rejected (67.5697ms)\n✔ truthy strings cannot pretend to authorize an action (70.5469ms)\n✔ scope source must contain its quoted user instruction (73.8207ms)\n✔ evidence outside the declared root is not accepted (77.6317ms)\nℹ tests 34\nℹ suites 0\nℹ pass 34\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2840.7143\n",
+      "stderr": ""
+    },
+    {
+      "name": "structure",
+      "exit": 0,
+      "stdout": "\n✅ SkillForge (14/14 checks passed)\n  [x] SKILL.md exists\n  [x] Directory TitleCase\n  [x] Valid frontmatter\n  [x] Name TitleCase\n  [x] Name matches directory\n  [x] USE WHEN clause\n  [x] Single-line description\n  [x] Description length\n  [x] Examples section\n  [x] Tools/ directory\n  [x] Workflows/ directory\n  [x] Workflow: CreateSkill.md\n  [x] Workflow: UpdateSkill.md\n  [x] Workflow: EvaluateSkill.md\n",
+      "stderr": ""
+    }
+  ],
+  "pass": true
+}
