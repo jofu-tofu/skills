@@ -1,0 +1,33 @@
+{
+  "requested_result": "Simplify real reusable other-skill fixtures, measure provider tokens under matched execution, preserve original decision coverage",
+  "required_checks": [
+    {
+      "id": "inventory",
+      "description": "Inventory shared repository test surface and justify unchanged suites",
+      "kind": "outcome"
+    },
+    {
+      "id": "clarity",
+      "description": "Compare real ClarityEngine original and candidate fixtures, all ten checkpoints and actual cost",
+      "kind": "behavioral_execution"
+    },
+    {
+      "id": "review",
+      "description": "Compare real CodeReview verifier original and candidate fixtures, all three checkpoints and actual cost",
+      "kind": "behavioral_execution"
+    },
+    {
+      "id": "preservation",
+      "description": "Qualify source/negative controls, preserve unique tests and historical evidence, adopt only supported candidates",
+      "kind": "preservation"
+    }
+  ],
+  "scope": "behavioral",
+  "depth": "focused",
+  "schema_version": 1,
+  "scope_basis": {
+    "quote": "save tokens without losing coverage",
+    "path": "request.txt",
+    "sha256": "fcf95488e390b616b053f4b567c89ddbc0228b4abf7b46fa14daba830839b94a"
+  }
+}
