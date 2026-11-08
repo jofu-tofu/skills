@@ -1,0 +1,218 @@
+{
+  "suite_version": "AutonomousFollowup20261107-v2",
+  "workflow": "UpdateSkill",
+  "mode": "confirmation",
+  "claim": "Explicit autonomous follow-up with remaining-scope preservation; bounded operational evidence, not population reliability.",
+  "snapshots": {
+    "baseline": "fe141d4bddbab6bfbbbd20ced676fa77536c2c7f",
+    "candidate": "602ac7a",
+    "cases": "inputs-*.json",
+    "measurement": "Protocol.md plus Amendment-v2.md",
+    "checker": "check-settings.cjs and source-based manual closure review"
+  },
+  "requested_trials": 4,
+  "completed_trials": 4,
+  "runs": [
+    {
+      "case_id": "historical-optimization-handoff",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "autonomous-execution",
+          "measurement_id": "trace-and-observation",
+          "status": "pass",
+          "observation": {
+            "local_processes": 21
+          },
+          "evidence": [
+            "audit.json",
+            "subjects/baseline/final.md"
+          ],
+          "reason": "Actual local executions and preserved observations; not merely a recommendation."
+        },
+        {
+          "id": "preserve-remaining-scope",
+          "measurement_id": "amended-original-task-scope",
+          "status": "fail",
+          "observation": "complete",
+          "evidence": [
+            "Amendment-v2.md",
+            "subjects/baseline/decision.json"
+          ],
+          "reason": "Closed while method question remained unverified; same amended rubric applied to both."
+        }
+      ],
+      "cost": {
+        "name": "baseline",
+        "status": "completed",
+        "exit": 0,
+        "seconds": 208.52,
+        "usage": {
+          "input_tokens": 641049,
+          "cached_input_tokens": 578432,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5236,
+          "reasoning_output_tokens": 197
+        }
+      }
+    },
+    {
+      "case_id": "historical-optimization-handoff",
+      "role": "development",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "autonomous-execution",
+          "measurement_id": "trace-and-observation",
+          "status": "pass",
+          "observation": {
+            "local_processes": 9
+          },
+          "evidence": [
+            "audit.json",
+            "subjects/candidate/final.md"
+          ],
+          "reason": "Actual local executions and preserved observations; not merely a recommendation."
+        },
+        {
+          "id": "preserve-remaining-scope",
+          "measurement_id": "amended-original-task-scope",
+          "status": "fail",
+          "observation": "complete",
+          "evidence": [
+            "Amendment-v2.md",
+            "subjects/candidate/decision.json"
+          ],
+          "reason": "Closed while method question remained unverified; same amended rubric applied to both."
+        }
+      ],
+      "cost": {
+        "name": "candidate",
+        "status": "completed",
+        "exit": 0,
+        "seconds": 193.293,
+        "usage": {
+          "input_tokens": 514977,
+          "cached_input_tokens": 461952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4714,
+          "reasoning_output_tokens": 324
+        }
+      }
+    },
+    {
+      "case_id": "historical-optimization-handoff",
+      "role": "development",
+      "configuration": "candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "autonomous-execution",
+          "measurement_id": "trace-and-observation",
+          "status": "pass",
+          "observation": {
+            "local_processes": 18
+          },
+          "evidence": [
+            "audit.json",
+            "subjects/candidate-v2/final.md"
+          ],
+          "reason": "Actual local executions and preserved observations; not merely a recommendation."
+        },
+        {
+          "id": "preserve-remaining-scope",
+          "measurement_id": "amended-original-task-scope",
+          "status": "pass",
+          "observation": "blocked",
+          "evidence": [
+            "Amendment-v2.md",
+            "subjects/candidate-v2/decision.json"
+          ],
+          "reason": "Preserved independent-author confirmation as blocked by actual missing treatments and access limits."
+        }
+      ],
+      "cost": {
+        "name": "candidate-v2",
+        "status": "completed",
+        "exit": 0,
+        "seconds": 188.902,
+        "usage": {
+          "input_tokens": 530040,
+          "cached_input_tokens": 484480,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4464,
+          "reasoning_output_tokens": 278
+        }
+      }
+    },
+    {
+      "case_id": "fresh-current-file-cache",
+      "role": "acceptance",
+      "configuration": "fresh-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "autonomous-execution",
+          "measurement_id": "trace-and-observation",
+          "status": "pass",
+          "observation": "Reproduced stale output, tested repair, restored correct baseline.",
+          "evidence": [
+            "audit.json",
+            "subjects/fresh-v2/final.md"
+          ],
+          "reason": "Actual local executions and preserved observations; not merely a recommendation."
+        },
+        {
+          "id": "preserve-remaining-scope",
+          "measurement_id": "amended-original-task-scope",
+          "status": "pass",
+          "observation": "complete",
+          "evidence": [
+            "Amendment-v2.md",
+            "subjects/fresh-v2/decision.json"
+          ],
+          "reason": "Resolved executable local correctness and benefit question; rejected bad cache and retained tested baseline."
+        }
+      ],
+      "cost": {
+        "name": "fresh-v2",
+        "status": "completed",
+        "exit": 0,
+        "seconds": 276.466,
+        "usage": {
+          "input_tokens": 806308,
+          "cached_input_tokens": 727424,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6085,
+          "reasoning_output_tokens": 786
+        }
+      }
+    }
+  ],
+  "decision": {
+    "candidate": "retain_candidate",
+    "task": "complete",
+    "scope": "Concrete continuation rule and bounded tested handoffs; source-based policy requested directly by user."
+  },
+  "limitations": [
+    "Reconstructed handoff, not exact long-context historical replay.",
+    "One execution per retained case; same model/vendor and shared host.",
+    "Author-service dispatch not tested; constrained handoff tests truthful blocker preservation.",
+    "V2 runs concurrent; no cross-run timing or token-efficiency claim.",
+    "Fresh-v1 snapshot never dispatched."
+  ],
+  "improvement_id": "autonomous-followup-20261107",
+  "targeted_failure": "Stop or narrow scope after a promising gain and unresolved tradeoff instead of carrying authorized work forward.",
+  "loop_observations": [
+    "Baseline and v1 executed follow-ups but prematurely closed the method-level scope.",
+    "Amended closure check exposed the same gap in both; v2 preserves it correctly.",
+    "Fresh v2 executes changed-input checks and does not retain an incorrect fast cache."
+  ]
+}

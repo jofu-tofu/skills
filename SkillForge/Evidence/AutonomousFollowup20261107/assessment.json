@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "99879140bb4db187c1ca3d5bc059554296318b9ee191387df32e1e7f652ddb99",
+  "candidate_decision": "retain_candidate",
+  "checks": [
+    {
+      "id": "policy",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Report.md",
+          "sha256": "4860659f5bc8059f425d00d2c0b9f7fa9f4e5d4513c965551980368704a41416"
+        },
+        {
+          "path": "results.json",
+          "sha256": "360459458aa75137fac8e0f01e5a40fe1ac6f982e7179dc59f249316652fed7d"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "audit.json",
+          "sha256": "194704f4a0fe1e688462ce182ce9bfd45bee17de22a192b4c5c522b607433bf6"
+        },
+        {
+          "path": "subjects/candidate-v2/final.md",
+          "sha256": "046125673c436aed206524cb5e8eb713ce0125eaf60ec731f88a2503641dc8f4"
+        },
+        {
+          "path": "subjects/candidate-v2/decision.json",
+          "sha256": "c41c15bf2ba5fd3f4a04aac0c77f51cf0dab8ccbdf068199a7a679ebef8f806e"
+        }
+      ]
+    },
+    {
+      "id": "fresh",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "qualification.json",
+          "sha256": "7153325db669f2858e49c6914327b6af57b2c2d9a8ef599d7e38af8188604e92"
+        },
+        {
+          "path": "fresh-external.json",
+          "sha256": "aa0aec02a0a9ce8e6d14596a9180a12ea4d973a03e0a52ab0d6c3310953e0c1a"
+        },
+        {
+          "path": "subjects/fresh-v2/final.md",
+          "sha256": "58cf52062b2ab3a0bb3c7f8be1a993f031453e9151de464539a9a6d0571d6714"
+        },
+        {
+          "path": "subjects/fresh-v2/evidence/diagnosis.json",
+          "sha256": "9a0a5e6adcfd4937b542cd8abf95ac8a778accdc97f78fbdcfe6759e8992befb"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "subjects/candidate-v2/decision.json",
+          "sha256": "c41c15bf2ba5fd3f4a04aac0c77f51cf0dab8ccbdf068199a7a679ebef8f806e"
+        },
+        {
+          "path": "subjects/fresh-v2/controls-dispositions.md",
+          "sha256": "bd6f67b4f8ccc075a4a7e8442b975ffcccdfe42a3916af4e2651b9f5deed172e"
+        },
+        {
+          "path": "audit.json",
+          "sha256": "194704f4a0fe1e688462ce182ce9bfd45bee17de22a192b4c5c522b607433bf6"
+        }
+      ]
+    },
+    {
+      "id": "structure",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "verification.json",
+          "sha256": "b7738b5045db3a935eb51b589f937c1dbd6e667eef2e9d823dea4bfdc08d9bc2"
+        },
+        {
+          "path": "Report.md",
+          "sha256": "4860659f5bc8059f425d00d2c0b9f7fa9f4e5d4513c965551980368704a41416"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}
