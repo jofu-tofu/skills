@@ -1,0 +1,139 @@
+{
+  "links_checked": 20,
+  "links": [
+    {
+      "source": "SkillForge/Procedures/ConstructCases.md",
+      "target": "DesignMeasurement.md"
+    },
+    {
+      "source": "SkillForge/Procedures/ConstructCases.md",
+      "target": "../Standards/Schemas.md"
+    },
+    {
+      "source": "SkillForge/Procedures/ConstructCases.md",
+      "target": "PlanChange.md"
+    },
+    {
+      "source": "SkillForge/Procedures/ConstructCases.md",
+      "target": "../Standards/Grader.md"
+    },
+    {
+      "source": "SkillForge/Procedures/ConstructCases.md",
+      "target": "../Standards/Comparator.md"
+    },
+    {
+      "source": "SkillForge/Procedures/ConstructCases.md",
+      "target": "../Standards/Analyzer.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "DiagnoseGap.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "DiagnoseGap.md#baseline-red-case-for-a-repair"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "GenerateAlternatives.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "DesignMeasurement.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "../Standards/RegressionCoverage.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "ConstructCases.md#consolidating-model-checks"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "../Standards/KnowledgeIntegration.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "DesignMeasurement.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "DesignMeasurement.md#comparative-resolution"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "ComprehensiveImprovement.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "../ResearchLibrary/Experiment%20Design%20-%20Evidence%20and%20Use.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "../Templates/Improvement/Plan.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "../Templates/Improvement/CompactAttempt.md"
+    },
+    {
+      "source": "SkillForge/Procedures/PlanChange.md",
+      "target": "../Quality/Shared.md"
+    }
+  ],
+  "preserved": [
+    {
+      "path": "SkillForge/Tools/CheckCompletion.cjs",
+      "working_sha256": "954b5cbedf96d3e2d1a153bb083553ded088e7598da054d895bf5572ab3f9248",
+      "lf_normalized_sha256": "805fa7dbe6beb2087886a5602d7bb8c66e83d501acddc850c67f3fd1b0d8753e",
+      "unchanged_from": "03d6098",
+      "comparison": "Text after CRLF checkout normalization"
+    },
+    {
+      "path": "SkillForge/Tools/CheckCompletion.test.cjs",
+      "working_sha256": "9e33117f90a927133420ed042800f813b24e153b936f788266f24f86f372784b",
+      "lf_normalized_sha256": "56fe177b98d3b42c30b9d7afd59110d9074b39cb74fd22d4fc4ac5bf974ef671",
+      "unchanged_from": "03d6098",
+      "comparison": "Text after CRLF checkout normalization"
+    },
+    {
+      "path": "SkillForge/Procedures/DiagnoseGap.md",
+      "working_sha256": "b3312b856be460b337cc97ac0f32202b0bdb5577dabf65826bb4cb898ce765f1",
+      "lf_normalized_sha256": "36b5f876514d7b648fce62be0e23d3142d3ac7a1ac0ca809094bff1c88325102",
+      "unchanged_from": "03d6098",
+      "comparison": "Text after CRLF checkout normalization"
+    },
+    {
+      "path": "SkillForge/Procedures/ApproveSkill.md",
+      "working_sha256": "3415cefc1b6275fd0c3ea94a168d36920c01cd2e2b951439cb1125c3eb76e053",
+      "lf_normalized_sha256": "3415cefc1b6275fd0c3ea94a168d36920c01cd2e2b951439cb1125c3eb76e053",
+      "unchanged_from": "03d6098",
+      "comparison": "Text after CRLF checkout normalization"
+    },
+    {
+      "path": "SkillForge/Standards/RegressionCoverage.md",
+      "working_sha256": "f697a1528f496f1271b715cec47f6022f16d419fb9d97c228f27224f30b2d0c4",
+      "lf_normalized_sha256": "15693cc02236297bb7565ca873ad10de74bb3dd2347c3455d20e5f4ccdb4e9cf",
+      "unchanged_from": "03d6098",
+      "comparison": "Text after CRLF checkout normalization"
+    }
+  ],
+  "runtime_changed": [
+    "SkillForge/Procedures/ConstructCases.md",
+    "SkillForge/Procedures/PlanChange.md"
+  ],
+  "previous_checks": {
+    "completion_tests": {
+      "pass": 34,
+      "fail": 0,
+      "command": "node --test SkillForge/Tools/CheckCompletion.test.cjs"
+    },
+    "structure": {
+      "pass": 14,
+      "fail": 0,
+      "command": "Bun ValidateSkill.ts SkillForge with process-local SKILLS_DIR=worktree"
+    },
+    "scope": "Executed in this attempt; unchanged tool tests and structural paths. These checks do not establish behavioral benefit."
+  }
+}

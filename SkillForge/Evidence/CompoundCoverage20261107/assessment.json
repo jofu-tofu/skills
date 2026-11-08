@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "d0f9f49d882c6a4534ea969cbbd84ededb4ad5c5679bb24225d18f5589817a66",
+  "candidate_decision": "retain_candidate",
+  "checks": [
+    {
+      "id": "coverage",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Qualification.md",
+          "sha256": "0fce33601a68868c360fefcf4dfd55757e3fb53d5d1e00f07503df74403a76cb"
+        },
+        {
+          "path": "V3Qualification.md",
+          "sha256": "dfa814948416954079e0a678bb37aef3a3b18cb6fc04339f9451f1f3faf53984"
+        },
+        {
+          "path": "fixtures/references/freeze-manifest.json",
+          "sha256": "28874d886bba677071760a513bf637b4a8e9488533f920e67ed0aa55d4e64625"
+        },
+        {
+          "path": "fixtures/references/qualification-results.json",
+          "sha256": "56f10e5df7790446665d0272372f9de84c6d1e0907195a63bb22c4e3d729e71f"
+        }
+      ]
+    },
+    {
+      "id": "tokens",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "development-v2-summary.json",
+          "sha256": "0bc0df39252264d6f2196133531769ca354e9ed3f19907eb8bc356985a02b5ea"
+        },
+        {
+          "path": "development-summary.json",
+          "sha256": "a5528c30bcf94482ae3b456219f6ba88becec2b650f9221b4fa013d829da737d"
+        },
+        {
+          "path": "reserved-summary.json",
+          "sha256": "419f67d6d54fa84bca697eb02a8f6fad5fd71336ad79946ea1a4db497ba9cd32"
+        },
+        {
+          "path": "Amendment.md",
+          "sha256": "5c2be42078d5b6b534ae79904b3791299fd14d8d8b30b1348862d54b053e2109"
+        },
+        {
+          "path": "FinalStrategyAudit.md",
+          "sha256": "85c8b82495302f7447e090fe8ea5c7437761dfac5311317572075d5b365fb46e"
+        }
+      ]
+    },
+    {
+      "id": "adoption",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "1b5f928bd32138517e2b310423d1d16985107517c9dd4645814175f018d18378"
+        },
+        {
+          "path": "FinalReview.md",
+          "sha256": "59313471e80bfa2a84c3dc38066fdb0db57d305c2f21f47c7b3ef116907c2725"
+        },
+        {
+          "path": "OwnerReview.md",
+          "sha256": "6d2285453f5193ac8ce500a3ca324c21d2a7838af7bfcd67041f2f96a7f2bfbd"
+        },
+        {
+          "path": "planner/owner-output.md",
+          "sha256": "9c3129ad1ef59077472565a0616638513d1ba2b4d188bc10dc8516310a9b6123"
+        },
+        {
+          "path": "runtime.patch",
+          "sha256": "cbe04bec6f5f3f13894151542f526d556ef42fa0a395fb7e76012bd455e13e98"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "preservation.json",
+          "sha256": "d19c6c88593ec3247ef5a108c1d70143866ac2f0c0fab5ca92238a0bab9ca7b1"
+        },
+        {
+          "path": "FinalReview.md",
+          "sha256": "59313471e80bfa2a84c3dc38066fdb0db57d305c2f21f47c7b3ef116907c2725"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}

@@ -1,0 +1,476 @@
+{
+  "stage": "reserved",
+  "scorer_label": "v3-confirmation",
+  "reference_sha256": "fd52c830d101f7157ed230f185410649bf59a7dec89867a6e5b7322f49163960",
+  "grader_sha256": "6cec296f8a383295eb4816a31ed8336f2fa2437134a635a9c4b2ac8140e5f596",
+  "runs": {
+    "split-C1": {
+      "grade": {
+        "checks": {
+          "C1": {
+            "pass": true,
+            "errors": []
+          }
+        },
+        "unexpected": [],
+        "pass": true
+      },
+      "parse_error": null,
+      "measurement": {
+        "valid": true,
+        "issues": [],
+        "turns_started": 1,
+        "turns_completed": 1,
+        "raw_turn_usage": [
+          {
+            "input_tokens": 44515,
+            "cached_input_tokens": 34816,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 107,
+            "reasoning_output_tokens": 0
+          }
+        ],
+        "usage": {
+          "input_tokens": 44515,
+          "output_tokens": 107,
+          "cached_input_tokens": 34816,
+          "uncached_input_tokens": 9699,
+          "total_tokens": 44622
+        },
+        "known_completed_usage": {
+          "input_tokens": 44515,
+          "output_tokens": 107,
+          "total_tokens": 44622
+        }
+      },
+      "actions": [
+        {
+          "type": "command_execution",
+          "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw packet.json; Get-Content -Raw output.schema.json; Get-Content -Raw common-instructions.txt'",
+          "exit_code": 1
+        }
+      ],
+      "inputs_unchanged": true,
+      "raw_files": {
+        "events.jsonl": "a78e11dc101845de996fe91acf07b86ed1f144ab33bd848cef85205e6d9520ce",
+        "execution.json": "421d2d4d72aacaa68dafd739cc7d0e60fab86f27f486061e91d71b21b1a50a4d",
+        "inputs.json": "b034812fb855e880948ef8df86862d9c68e1c709319bbdafa8755a24b67d55f8",
+        "integrity.json": "46c5c8e8f306f35c357039c36f8ad495748b903d83f0e671284ae7378d620250",
+        "output.schema.json": "706c12661b02b52ebdd5c912334463492a2a29853dcfad0713b61e5e148f9bd5",
+        "packet.json": "6a0d2758e9cf2adcf33fa66231c1aa528f21ddeb13bdbb984ca6957f4ead78a4",
+        "prompt.txt": "6f66a2a596618587154405406a8247146e3c5c04e4e5479216a4f2013db50012",
+        "response.txt": "d818c7b34630bdd680f29ac37fc71727d526680b3c284c08234a34294085f21c",
+        "stderr.txt": "2eabc2fe2e110c6c56d6519c6931b6aa8e66bc6026f753e7ac9611c7a58103b0"
+      }
+    },
+    "split-C2": {
+      "grade": {
+        "checks": {
+          "C2": {
+            "pass": true,
+            "errors": []
+          }
+        },
+        "unexpected": [],
+        "pass": true
+      },
+      "parse_error": null,
+      "measurement": {
+        "valid": true,
+        "issues": [],
+        "turns_started": 1,
+        "turns_completed": 1,
+        "raw_turn_usage": [
+          {
+            "input_tokens": 44536,
+            "cached_input_tokens": 34816,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 145,
+            "reasoning_output_tokens": 0
+          }
+        ],
+        "usage": {
+          "input_tokens": 44536,
+          "output_tokens": 145,
+          "cached_input_tokens": 34816,
+          "uncached_input_tokens": 9720,
+          "total_tokens": 44681
+        },
+        "known_completed_usage": {
+          "input_tokens": 44536,
+          "output_tokens": 145,
+          "total_tokens": 44681
+        }
+      },
+      "actions": [
+        {
+          "type": "command_execution",
+          "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw packet.json; Get-Content -Raw output.schema.json; Get-Content -Raw common-instructions.txt'",
+          "exit_code": 1
+        }
+      ],
+      "inputs_unchanged": true,
+      "raw_files": {
+        "events.jsonl": "4d11d1444a83881ac40601454df7a9947698783f7cabf377140213f9da75f043",
+        "execution.json": "8757f1a3506f39e3c2db974b2d37a3b004cca47007f36f29e2d5fcceda2f0cb6",
+        "inputs.json": "bbe58b9f9cea4f77c23bb158a342795bb11a30288d25873996aa6916d94706c3",
+        "integrity.json": "46c5c8e8f306f35c357039c36f8ad495748b903d83f0e671284ae7378d620250",
+        "output.schema.json": "706c12661b02b52ebdd5c912334463492a2a29853dcfad0713b61e5e148f9bd5",
+        "packet.json": "6a0d2758e9cf2adcf33fa66231c1aa528f21ddeb13bdbb984ca6957f4ead78a4",
+        "prompt.txt": "9732168bd21ba6532a987a4b07a41c6eb1ebaba4e1abeeef069a7b8b6b26c32b",
+        "response.txt": "16d07137aa7936990653604dec6593e4ee20a780cf3ca203dd47067d4d1f7a39",
+        "stderr.txt": "b9a24537d9080f3f26a0e4377d2ee590962b674803584f28eb4bfa1dfd0b4d68"
+      }
+    },
+    "split-C3": {
+      "grade": {
+        "checks": {
+          "C3": {
+            "pass": true,
+            "errors": []
+          }
+        },
+        "unexpected": [],
+        "pass": true
+      },
+      "parse_error": null,
+      "measurement": {
+        "valid": true,
+        "issues": [],
+        "turns_started": 1,
+        "turns_completed": 1,
+        "raw_turn_usage": [
+          {
+            "input_tokens": 44509,
+            "cached_input_tokens": 34816,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 120,
+            "reasoning_output_tokens": 0
+          }
+        ],
+        "usage": {
+          "input_tokens": 44509,
+          "output_tokens": 120,
+          "cached_input_tokens": 34816,
+          "uncached_input_tokens": 9693,
+          "total_tokens": 44629
+        },
+        "known_completed_usage": {
+          "input_tokens": 44509,
+          "output_tokens": 120,
+          "total_tokens": 44629
+        }
+      },
+      "actions": [
+        {
+          "type": "command_execution",
+          "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw packet.json; Get-Content -Raw output.schema.json; Get-Content -Raw common-instructions.txt'",
+          "exit_code": 1
+        }
+      ],
+      "inputs_unchanged": true,
+      "raw_files": {
+        "events.jsonl": "0563b88897451198c36ee625fae75c99ef698ec2ca0ca7e0130fedc8c74fa7c3",
+        "execution.json": "162213bc08d5ec497208b3864057acf9c8b7108e5c268d01b8357a5ef32872d5",
+        "inputs.json": "c065a021ee465a66dc271069735ebdb2b57d7a94e1b7590761089f151daf0729",
+        "integrity.json": "46c5c8e8f306f35c357039c36f8ad495748b903d83f0e671284ae7378d620250",
+        "output.schema.json": "706c12661b02b52ebdd5c912334463492a2a29853dcfad0713b61e5e148f9bd5",
+        "packet.json": "6a0d2758e9cf2adcf33fa66231c1aa528f21ddeb13bdbb984ca6957f4ead78a4",
+        "prompt.txt": "d706c1b1c796b3ad6b7f54a0d0478e7bdc73fbeb307e7374599edaeebd1c8d6b",
+        "response.txt": "30b4201aaddd6845a2a4f7e2b09da60b3a5ddc8e232cef09703a6a0d1fb491eb",
+        "stderr.txt": "ba0573c47ae8ea2491df4f3e6e497407547a722cb88d94fc71d3b7630af42b7b"
+      }
+    },
+    "split-C4": {
+      "grade": {
+        "checks": {
+          "C4": {
+            "pass": true,
+            "errors": []
+          }
+        },
+        "unexpected": [],
+        "pass": true
+      },
+      "parse_error": null,
+      "measurement": {
+        "valid": true,
+        "issues": [],
+        "turns_started": 1,
+        "turns_completed": 1,
+        "raw_turn_usage": [
+          {
+            "input_tokens": 44519,
+            "cached_input_tokens": 34816,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 123,
+            "reasoning_output_tokens": 0
+          }
+        ],
+        "usage": {
+          "input_tokens": 44519,
+          "output_tokens": 123,
+          "cached_input_tokens": 34816,
+          "uncached_input_tokens": 9703,
+          "total_tokens": 44642
+        },
+        "known_completed_usage": {
+          "input_tokens": 44519,
+          "output_tokens": 123,
+          "total_tokens": 44642
+        }
+      },
+      "actions": [
+        {
+          "type": "command_execution",
+          "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw packet.json; Get-Content -Raw output.schema.json; Get-Content -Raw common-instructions.txt'",
+          "exit_code": 1
+        }
+      ],
+      "inputs_unchanged": true,
+      "raw_files": {
+        "events.jsonl": "58dfad683b10eba816fffeb77f64c8165a5b025c43192624de55138bc98770c1",
+        "execution.json": "98533d57c7d4a00d9a977a95b0909ca16443dd6e666e6226a09128f0f59be731",
+        "inputs.json": "5be5a590bbd6baffde32313db414227e95f5115c294b38f9c55cfacc4bd11fc4",
+        "integrity.json": "46c5c8e8f306f35c357039c36f8ad495748b903d83f0e671284ae7378d620250",
+        "output.schema.json": "706c12661b02b52ebdd5c912334463492a2a29853dcfad0713b61e5e148f9bd5",
+        "packet.json": "6a0d2758e9cf2adcf33fa66231c1aa528f21ddeb13bdbb984ca6957f4ead78a4",
+        "prompt.txt": "3b41e0f7f709bce07c85f4e01c5f558c66591351e04a84388429b3cc8964429e",
+        "response.txt": "9d82aeec3d89dea67300fd1f9b35c67540a84a4430ac04a7314eae17e97b41a0",
+        "stderr.txt": "b1532d60668cf5a9e4731b1670348f6616593413f0e17537a0035b17f47bc44e"
+      }
+    },
+    "batch": {
+      "grade": {
+        "checks": {
+          "C1": {
+            "pass": true,
+            "errors": []
+          },
+          "C2": {
+            "pass": true,
+            "errors": []
+          },
+          "C3": {
+            "pass": true,
+            "errors": []
+          },
+          "C4": {
+            "pass": true,
+            "errors": []
+          }
+        },
+        "unexpected": [],
+        "pass": true
+      },
+      "parse_error": null,
+      "measurement": {
+        "valid": true,
+        "issues": [],
+        "turns_started": 1,
+        "turns_completed": 1,
+        "raw_turn_usage": [
+          {
+            "input_tokens": 44501,
+            "cached_input_tokens": 34816,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 311,
+            "reasoning_output_tokens": 30
+          }
+        ],
+        "usage": {
+          "input_tokens": 44501,
+          "output_tokens": 311,
+          "cached_input_tokens": 34816,
+          "uncached_input_tokens": 9685,
+          "total_tokens": 44812
+        },
+        "known_completed_usage": {
+          "input_tokens": 44501,
+          "output_tokens": 311,
+          "total_tokens": 44812
+        }
+      },
+      "actions": [
+        {
+          "type": "command_execution",
+          "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw packet.json; Get-Content -Raw output.schema.json; Get-Content -Raw common-instructions.txt'",
+          "exit_code": 1
+        }
+      ],
+      "inputs_unchanged": true,
+      "raw_files": {
+        "events.jsonl": "c0e75020ce5805ca85616463f337d0b171dc2ca3c5e76d981f0156138f767f51",
+        "execution.json": "2a904bf5172edd379e75522dbf312ebd1eec508c8922b0908801e438069f2b54",
+        "inputs.json": "409325eced4293085c1337224764b30cf4413d0705bce0c8c31045d51bc59801",
+        "integrity.json": "46c5c8e8f306f35c357039c36f8ad495748b903d83f0e671284ae7378d620250",
+        "output.schema.json": "706c12661b02b52ebdd5c912334463492a2a29853dcfad0713b61e5e148f9bd5",
+        "packet.json": "6a0d2758e9cf2adcf33fa66231c1aa528f21ddeb13bdbb984ca6957f4ead78a4",
+        "prompt.txt": "e111e931baad9ca1fdfcbc0a17513d83c78a076a3567f3ebbeb8dd40229c02d1",
+        "response.txt": "6bed7d615272a4f5b0b30baacc8fa8d01b4037e56c4f2843703f3eca3ae24df1",
+        "stderr.txt": "5facb09ce7ce202b759612e0f2507b515987f1d0a1ffb163aedd5c000d0210a1"
+      }
+    },
+    "compound": {
+      "grade": {
+        "checks": {
+          "C1": {
+            "pass": true,
+            "errors": []
+          },
+          "C2": {
+            "pass": true,
+            "errors": []
+          },
+          "C3": {
+            "pass": true,
+            "errors": []
+          },
+          "C4": {
+            "pass": true,
+            "errors": []
+          }
+        },
+        "unexpected": [],
+        "pass": true
+      },
+      "parse_error": null,
+      "measurement": {
+        "valid": true,
+        "issues": [],
+        "turns_started": 1,
+        "turns_completed": 1,
+        "raw_turn_usage": [
+          {
+            "input_tokens": 44490,
+            "cached_input_tokens": 34816,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 343,
+            "reasoning_output_tokens": 39
+          }
+        ],
+        "usage": {
+          "input_tokens": 44490,
+          "output_tokens": 343,
+          "cached_input_tokens": 34816,
+          "uncached_input_tokens": 9674,
+          "total_tokens": 44833
+        },
+        "known_completed_usage": {
+          "input_tokens": 44490,
+          "output_tokens": 343,
+          "total_tokens": 44833
+        }
+      },
+      "actions": [
+        {
+          "type": "command_execution",
+          "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw packet.json; Get-Content -Raw output.schema.json; Get-Content -Raw common-instructions.txt'",
+          "exit_code": 1
+        }
+      ],
+      "inputs_unchanged": true,
+      "raw_files": {
+        "events.jsonl": "7bad514cd00be04b46a69437967d690a9d182e86da3d8b9c4998df2738600050",
+        "execution.json": "96a8d7ee37a71f85e8d303f05ea967c786132cf4c3a8eebb643ad29f1ce7565b",
+        "inputs.json": "1f9ad860fcad43c602f5e3303351bb4bf035b3f844650f72dfae0fd8087d49da",
+        "integrity.json": "46c5c8e8f306f35c357039c36f8ad495748b903d83f0e671284ae7378d620250",
+        "output.schema.json": "706c12661b02b52ebdd5c912334463492a2a29853dcfad0713b61e5e148f9bd5",
+        "packet.json": "6a0d2758e9cf2adcf33fa66231c1aa528f21ddeb13bdbb984ca6957f4ead78a4",
+        "prompt.txt": "6fc56ab2e5081d9cfaea670a5b1e179dd96a524e87ebfddc795c8fda460771bf",
+        "response.txt": "e81a018c3822efeb15c4a01b0a95dabf8d3238a131bae50561a09edcca5dc7e3",
+        "stderr.txt": "608e888b16778829f0332fdf7e5b90e269d5fd6bcf80cb90c51e46387e3136ea"
+      }
+    }
+  },
+  "strategies": {
+    "split": {
+      "pass": true,
+      "checks": {
+        "C1": {
+          "pass": true,
+          "errors": []
+        },
+        "C2": {
+          "pass": true,
+          "errors": []
+        },
+        "C3": {
+          "pass": true,
+          "errors": []
+        },
+        "C4": {
+          "pass": true,
+          "errors": []
+        }
+      },
+      "usage": {
+        "input_tokens": 178079,
+        "output_tokens": 495,
+        "cached_input_tokens": 139264,
+        "uncached_input_tokens": 38815,
+        "total_tokens": 178574
+      }
+    },
+    "batch": {
+      "pass": true,
+      "checks": {
+        "C1": {
+          "pass": true,
+          "errors": []
+        },
+        "C2": {
+          "pass": true,
+          "errors": []
+        },
+        "C3": {
+          "pass": true,
+          "errors": []
+        },
+        "C4": {
+          "pass": true,
+          "errors": []
+        }
+      },
+      "usage": {
+        "input_tokens": 44501,
+        "output_tokens": 311,
+        "cached_input_tokens": 34816,
+        "uncached_input_tokens": 9685,
+        "total_tokens": 44812
+      },
+      "savings_vs_split": 0.7490564135876443,
+      "meets_local_gate": true
+    },
+    "compound": {
+      "pass": true,
+      "checks": {
+        "C1": {
+          "pass": true,
+          "errors": []
+        },
+        "C2": {
+          "pass": true,
+          "errors": []
+        },
+        "C3": {
+          "pass": true,
+          "errors": []
+        },
+        "C4": {
+          "pass": true,
+          "errors": []
+        }
+      },
+      "usage": {
+        "input_tokens": 44490,
+        "output_tokens": 343,
+        "cached_input_tokens": 34816,
+        "uncached_input_tokens": 9674,
+        "total_tokens": 44833
+      },
+      "savings_vs_split": 0.7489388152810599,
+      "meets_local_gate": true
+    }
+  }
+}

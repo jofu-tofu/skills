@@ -1,0 +1,13 @@
+# V3 independent qualification and amended claim
+
+V3 is qualified before reserved execution. The reviewer inspected both source packets, accepted blocker sets, revised grader and negative controls, then independently reran 146/146 controls. All 44 freeze-manifest files match SHA-256; manifest `28874d886bba677071760a513bf637b4a8e9488533f920e67ed0aa55d4e64625`. Public inputs and treatments remain unchanged. Reserved contents remain withheld from the candidate author in this review.
+
+The public contract leaves component blocker ownership ambiguous. Both the original empty component convention and the actual unmet component dependencies are acceptable; unrelated, self, omitted joint and extra joint blockers remain rejected. These alternatives follow source prerequisites and observed component availability, not a desire to match particular outputs. The joint readiness requirement remains strict. This fixes qualification, without making the original v2 result a pass.
+
+`development-v2-summary.json` preserves the original 2/4 scores for every strategy. V3 development regrading is explicitly exploratory and uses the same six responses: all strategies now pass 4/4. Usage is unchanged. Source states, identities, actions, efficiency conclusions and citation support all passed before this blocker correction.
+
+`Amendment.md` appropriately freezes the correction and mechanism before fresh reserved execution. One fresh reserved packet is sufficient to support the narrow context-reuse observation if every strategy preserves the qualified finite outcomes and consolidated strategies satisfy the unchanged 10% threshold. It is one confirmatory packet after adaptation, not two independently confirmatory packets. No full restart is necessary. Broad domain reliability, test-difficulty causality, arbitrary prose semantics and overall SkillForge effectiveness remain untested.
+
+Reviewed the candidate `ConstructCases.md` consolidation section and `PlanChange.md` link. They match the amendment: compare context reuse, retain observable requirements and diagnostic attribution, protect independent arms/holdouts/draws, preserve cheap distinct-failure tests, include retries/diagnosis/model grading in token claims, and avoid mandatory comparisons where context already is shared. Guidance does not assert that the original SkillForge baseline always splits contexts. Retention still requires reserved results and the separately executed fresh planner probe.
+
+The existing missing-common-file packaging defect remains disclosed and identical across arms; complete common instructions are inline. Do not repair it midway or discard its costs. Actual reserved traces and usage remain to be audited.

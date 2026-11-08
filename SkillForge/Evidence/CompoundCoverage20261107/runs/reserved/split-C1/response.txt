@@ -1,0 +1,1 @@
+{"checks":[{"id":"C1","identity":"R-a17","state":"active","action":"retain","efficiency":"not_assessed","blockers":[],"evidence":["R02","R05","R06","R08"]}]}

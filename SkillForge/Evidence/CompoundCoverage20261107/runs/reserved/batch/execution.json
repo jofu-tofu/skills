@@ -1,0 +1,39 @@
+{
+  "status": "completed",
+  "exit_code": 0,
+  "seconds": 16.755658099999998,
+  "valid": true,
+  "issues": [],
+  "turns_started": 1,
+  "turns_completed": 1,
+  "raw_turn_usage": [
+    {
+      "input_tokens": 44501,
+      "cached_input_tokens": 34816,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 311,
+      "reasoning_output_tokens": 30
+    }
+  ],
+  "usage": {
+    "input_tokens": 44501,
+    "output_tokens": 311,
+    "cached_input_tokens": 34816,
+    "uncached_input_tokens": 9685,
+    "total_tokens": 44812
+  },
+  "known_completed_usage": {
+    "input_tokens": 44501,
+    "output_tokens": 311,
+    "total_tokens": 44812
+  },
+  "commands": 1,
+  "command_errors": [
+    {
+      "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw packet.json; Get-Content -Raw output.schema.json; Get-Content -Raw common-instructions.txt'",
+      "exit_code": 1
+    }
+  ],
+  "prompt_sha256": "e111e931baad9ca1fdfcbc0a17513d83c78a076a3567f3ebbeb8dd40229c02d1",
+  "limits": "Provider totals, including cached input where reported; not billing or total project preparation cost."
+}

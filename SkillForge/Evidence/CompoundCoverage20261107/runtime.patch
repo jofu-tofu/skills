@@ -1,0 +1,29 @@
+diff --git a/SkillForge/Procedures/ConstructCases.md b/SkillForge/Procedures/ConstructCases.md
+index d850c26..3a49caa 100644
+--- a/SkillForge/Procedures/ConstructCases.md
++++ b/SkillForge/Procedures/ConstructCases.md
+@@ -13,4 +13,12 @@
+ 
+ Acceptance: a separate executor can run the plan without inventing requirements. A small smoke suite does not justify general effectiveness. Version suite changes independently of target changes.
+ 
++## Consolidating model checks
++
++When a plan repeats the same context across compatible model checks, compare sharing that context before increasing scenario complexity. A compound workflow can exercise several requirements and their interactions; keep each requirement's observation and failure identifiable. Map the coverage before replacing separate runs. Keep cheap deterministic checks, red/negative cases and small diagnostics where they expose distinct failures or help locate them. Fewer tests or harder prompts alone are not improvements.
++
++Do not combine comparison arms, development with reserved confirmation, or draws that must remain independent. Several assertions in one context are one execution, not independent trials. If a combined result is ambiguous, split the affected check for diagnosis and preserve the original result and added cost.
++
++For a token-saving claim, compare actual total input plus output tokens for equivalent completed work, including retries, diagnosis and model grading; report cached input separately without subtracting it from total input. Keep unmeasured preparation costs and missing usage explicit. Prefer the simplest arrangement supported by preserved coverage and measured savings. Where checks already share context, do not assume further savings or require a new comparison by default. PlanChange owns the acceptance rule and trial budget.
++
+ Before freezing a behavioral suite, trace every required decision in PlanChange's experiment adequacy check to observable evidence. Include the affected caller and final consumer where a handoff can lose the result. Inspect prompts for answers or coaching that remove the behavior being tested. Preserve development diagnoses separately from fresh confirmation; a saturated case remains useful preservation evidence but is not a reason to repeat an uninformative comparison. Return missing decision coverage to PlanChange before executing a suite that cannot answer its question.
+diff --git a/SkillForge/Procedures/PlanChange.md b/SkillForge/Procedures/PlanChange.md
+index 79e9e1d..26ca164 100644
+--- a/SkillForge/Procedures/PlanChange.md
++++ b/SkillForge/Procedures/PlanChange.md
+@@ -18,6 +18,7 @@ Internal procedure; called by workflows, not automatically loaded at entry.
+ 3. Define protected behavior, affected dependencies, assessment or comparison cases and measurement specifications with qualification evidence/status. Call [DesignMeasurement](DesignMeasurement.md) if missing, changed or unsupported; design-only plans may retain pending qualification. Select evidence methods before defaulting to a judge, and name unsupported outcomes explicitly.
+    For behavioral changes or workflow-level readiness, apply [RegressionCoverage](../Standards/RegressionCoverage.md). Record the requirement-to-branch/dependency-to-evidence map, justified exclusions and untested scope. Declare targeted benefit and preservation gates separately; match coverage to claim breadth and preserve lightweight/design-only limits.
+ 4. Declare assessment, improvement or readiness rules, budget, and error handling before execution. For staged work, state the next step's benefit and preservation checks and what would justify continuing, revising or stopping; do not bundle later hypotheses into a single untestable overhaul. This plan owns attempt policy. ConstructCases derives execution details from its identified version; resolve policy conflicts here through an explicit amendment, preserving the prior plan and affected evidence.
++   For evaluation-efficiency changes, use [ConstructCases' consolidation guidance](ConstructCases.md#consolidating-model-checks) to compare compatible shared-context arrangements while preserving coverage and required independence; test context reuse separately from claims that harder cases are better.
+ 5. Record design-only limits where execution is outside scope.
+ 
+ ## Alternative-generation activation
