@@ -1,0 +1,16 @@
+const fs=require('fs'),cp=require('child_process'),crypto=require('crypto'),path=require('path');
+const root=__dirname, repo=path.resolve(root,'../../..');
+const hash=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+const git=(...a)=>cp.execFileSync('git',['-C',repo,...a],{encoding:'utf8'}).trim();
+const base='e91db4fedf75264cf0113be0f7adf7180b97b6de';
+const changed=git('diff',base,'--name-only').split('\n').filter(Boolean);
+const sources=JSON.parse(fs.readFileSync(path.join(root,'sources.json'),'utf8'));
+const preserved=sources.map(s=>({path:s.path,pass:hash(s.path)===s.sha256}));
+const runtimeUnchanged=changed.every(s=>s==='SkillForge/Improvements/Index.md');
+const result={baseline:base,head:git('rev-parse','HEAD'),tracked_changes:changed,runtime_unchanged:runtimeUnchanged,historical_sources:preserved,all_pass:runtimeUnchanged&&git('rev-parse','HEAD')===base&&preserved.every(s=>s.pass)};
+fs.writeFileSync(path.join(root,'preservation.json'),JSON.stringify(result,null,2)+'\n');
+if(!result.all_pass)throw Error('preservation failed');
+const evidence=name=>({path:name,sha256:hash(path.join(root,name))});
+const assessment={schema_version:1,contract_sha256:hash(path.join(root,'contract.json')),candidate_decision:'retain_baseline',checks:[{id:'result',status:'pass',qualification:'qualified',evidence:['Results.md','audit.json','sources.json'].map(evidence)},{id:'execution',status:'pass',qualification:'qualified',evidence:['Results.md','sources.json'].map(evidence)},{id:'preservation',status:'pass',qualification:'qualified',evidence:['preservation.json'].map(evidence)}],actions:[],blockers:[]};
+fs.writeFileSync(path.join(root,'assessment.json'),JSON.stringify(assessment,null,2)+'\n');
+console.log(JSON.stringify({all_pass:result.all_pass,source_count:preserved.length,changed}));

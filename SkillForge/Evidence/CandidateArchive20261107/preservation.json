@@ -1,0 +1,55 @@
+{
+  "baseline": "e91db4fedf75264cf0113be0f7adf7180b97b6de",
+  "head": "e91db4fedf75264cf0113be0f7adf7180b97b6de",
+  "tracked_changes": [
+    "SkillForge/Improvements/Index.md"
+  ],
+  "runtime_unchanged": true,
+  "historical_sources": [
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/ResearchDriven20261106/replay-results.json",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/ResearchDriven20261106/replay-protocol.md",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/RealSkillComparison20261106/key-results.json",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/ResearchDriven20261106/replay.cjs",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/TieDiagnosis20261107/Results.md",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/CandidateReassessment20261107/Inventory.md",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/CandidateReassessment20261107/Results.md",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/ExperimentMemory20261107/Results.md",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/WorkflowEfficiency20261107/Report.md",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/MeasurementConfirmation20261107/skills/SkillForge/Evidence/MeasurementConfirmation20261107/Report.md",
+      "pass": true
+    },
+    {
+      "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/UnresolvedSessions20261107/skills/SkillForge/Evidence/UnresolvedSessions20261107/Report.md",
+      "pass": true
+    }
+  ],
+  "all_pass": true
+}
