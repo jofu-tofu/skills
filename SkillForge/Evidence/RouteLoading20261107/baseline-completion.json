@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "valid": true,
+  "contract_sha256": "7d6328fd35a1bded7725181a7e28390cf9c6673d3527a5ece106ff006a4b3e84",
+  "candidate_decision": "retain_baseline",
+  "task_status": "blocked",
+  "unresolved": [
+    {
+      "id": "result",
+      "reason": "Check is unverified."
+    }
+  ],
+  "next_actions": [
+    {
+      "id": "resolve-deadline",
+      "description": "Six-minute user deadline limits further precision studies. Fresh candidate gains range -9.11% to +10.35%; identical-baseline control ranges -12.66% to +8.55%. These data do not establish a runtime gain or equal speed. Cache adds retained text/value memory; exact heap cost unmeasured.",
+      "resolves": [
+        "result"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "id": "deadline",
+      "affects": [
+        "result"
+      ],
+      "reason": "Six-minute user deadline limits further precision studies. Fresh candidate gains range -9.11% to +10.35%; identical-baseline control ranges -12.66% to +8.55%. These data do not establish a runtime gain or equal speed. Cache adds retained text/value memory; exact heap cost unmeasured.",
+      "evidence": [
+        {
+          "path": "limit.txt",
+          "sha256": "c5f257a6026e53b2ad8f2f314c5c6f92c1e044fe3057b8f3ddb6d262ae63491d"
+        }
+      ]
+    }
+  ]
+}

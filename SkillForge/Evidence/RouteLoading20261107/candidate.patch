@@ -1,0 +1,5 @@
+--- a/SkillForge/Procedures/ApproveSkill.md
++++ b/SkillForge/Procedures/ApproveSkill.md
+@@
+-Use [Decision](../Templates/Improvement/Decision.md).
++Use [Decision](../Improvements/Templates/Decision.md). For readiness-only requests record ready/not ready/insufficient evidence and authority without implying installation.

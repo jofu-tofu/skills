@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Investigate actual candidate-selection headroom, change and evaluate only if justified; otherwise preserve baseline with evidence.",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "14f129e5bfca61e1feee778ae0f8bca5817cd18f799f7df36f3bc1579e0b7b1f",
+    "quote": "If the opportunity is already adequately handled, demonstrate that with evidence and retain baseline; no forced edit or manufactured comparison."
+  },
+  "required_checks": [
+    {
+      "id": "result",
+      "kind": "outcome",
+      "description": "Resolve conditional selector decision against actual local evidence without forced failure."
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Inspect applicable existing execution evidence; new comparison only if supported headroom exists."
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Runtime and historical records unchanged; isolated evidence and preserved ownership."
+    }
+  ]
+}

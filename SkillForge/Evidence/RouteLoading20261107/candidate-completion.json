@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "valid": true,
+  "contract_sha256": "8332ef9821d3d009ae470fc1be4d6dcd3220a31dbe0dbe43815918a9df39c49a",
+  "candidate_decision": "retain_baseline",
+  "task_status": "blocked",
+  "unresolved": [
+    {
+      "id": "result",
+      "reason": "Check is unverified."
+    }
+  ],
+  "next_actions": [
+    {
+      "id": "resolve-time-budget",
+      "description": "The hard six-minute budget prevents resolving noisy runtime comparisons or evaluating another mechanism; resume with more time and lower-noise timing.",
+      "resolves": [
+        "result"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "id": "time-budget",
+      "affects": [
+        "result"
+      ],
+      "reason": "The hard six-minute budget prevents resolving noisy runtime comparisons or evaluating another mechanism; resume with more time and lower-noise timing.",
+      "evidence": [
+        {
+          "path": "budget.md",
+          "sha256": "00d442a6881fb02c31ecf0c77d5cfdd11533ed98fbc559204ffb6772e4fed3eb"
+        },
+        {
+          "path": "run-1-interrupted.json",
+          "sha256": "60b0d52a6b6bdd57f980f559052c457beb5b84fab389f3f2c064af025c3194cc"
+        },
+        {
+          "path": "run-2.json",
+          "sha256": "1d3cd2a35307e7f37dc62da8e2efd8ab8e298e94da2722bafe40e0a0c5f0161a"
+        },
+        {
+          "path": "run-3.json",
+          "sha256": "219b410675adcb31ff225dcf953677755802fe64c778010b898cef9ef167a9f3"
+        }
+      ]
+    }
+  ]
+}

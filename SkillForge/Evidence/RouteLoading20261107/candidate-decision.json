@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "candidate_decision": "retain_baseline",
+  "task_status": "blocked",
+  "retained_implementation": "candidate.cjs",
+  "sha256": "f6beeb46dc4e270bb369a3fb427330668667c52d4a5b44813ca025435a60dca3",
+  "original_candidate": "reject_candidate",
+  "revised_candidate": "defer",
+  "benefit": "unverified",
+  "preservation": "pass",
+  "reason": "Original path cache is incorrect. Content-aware cache passes bounded correctness checks but runtime ranges overlap in two fresh processes. Retain exact baseline; no speedup claimed.",
+  "evidence": [
+    "evidence/run-2.json",
+    "evidence/run-3.json",
+    "evidence/retained-check.json",
+    "evidence/completion.json"
+  ],
+  "governing_rule": "method/Procedures/ApproveSkill.md#task-completion and #autonomous-follow-up-of-gains-and-tradeoffs; SkillForge 2.1.0-rc.11",
+  "controls": [
+    {
+      "id": "settled",
+      "candidate_decision": "retain_candidate",
+      "task_status": "complete",
+      "result": "pass",
+      "reason": "Two fresh confirmations establish a separated 3% gain, required outputs and no measured cost regression. No arbitrary minimum gain or redundant experiments.",
+      "next_action": null,
+      "supplied_evidence": "Two fresh confirmations show a 3% runtime gain with separated timing ranges, identical required outputs and no measured cost regression. No unresolved decision-changing issue remains.",
+      "evidence_provenance": "User-supplied saved record; not independently rerun"
+    },
+    {
+      "id": "design-only",
+      "candidate_decision": "defer",
+      "task_status": "complete",
+      "result": "unverified",
+      "reason": "Plan-only scope; prototype is not correctness evidence. No experiments executed.",
+      "plan": "Before later authorized adoption: freeze output/error requirements, compare unchanged and modified inputs against baseline, test caller mutation and errors, then matched timings with fresh confirmation. Retain only after preservation and benefit evidence.",
+      "next_action": "Execute this plan only if separately authorized.",
+      "supplied_evidence": "A prototype suggests a gain; correctness is untested.",
+      "evidence_provenance": "User-supplied saved record; not independently rerun"
+    },
+    {
+      "id": "known-regression",
+      "candidate_decision": "reject_candidate",
+      "task_status": "blocked",
+      "result": "fail",
+      "reason": "Independent exact checks show required customer_id missing. Speed cannot compensate. Implementation unavailable, preventing repair and rerun.",
+      "next_action": "Supply implementation; restore customer_id and rerun exact preservation plus speed checks.",
+      "supplied_evidence": "Candidate is faster but drops required customer_id. Exact independent checks reproduce the omission. Implementation is unavailable.",
+      "evidence_provenance": "User-supplied saved record; not independently rerun"
+    },
+    {
+      "id": "missing-access",
+      "candidate_decision": "defer",
+      "task_status": "blocked",
+      "result": "unverified",
+      "reason": "Local correctness does not establish private production suitability. Neither production workload nor representative substitute is available; invented weights prohibited.",
+      "next_action": "Provide authorized representative workload and suitability criteria.",
+      "supplied_evidence": "Local correctness passes. Production workload and a representative substitute are unavailable; invented weights are not authorized.",
+      "evidence_provenance": "User-supplied saved record; not independently rerun"
+    }
+  ],
+  "typo": "Only outupt -> output corrected",
+  "next_action": "With a larger authorized budget, improve timing resolution before adopting an optimization."
+}

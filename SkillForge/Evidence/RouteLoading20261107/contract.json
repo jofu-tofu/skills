@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Trace an actual costly completed SkillForge run and identify avoidable instruction loading, navigation or repeated work. Test one route-specific loading/simplification change against current SkillForge under comparable conditions. If the opportunity is already adequately handled, demonstrate that with evidence and retain baseline; no forced edit or manufactured comparison.",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "d3644a4b4639d20e93dee727c2587fe4f34efde5b4b26aeddb130f200f268be5",
+    "quote": "Trace an actual costly completed SkillForge run and identify avoidable instruction loading, navigation or repeated work. Test one route-specific loading/simplification change against current SkillForge under comparable conditions. If the opportunity is already adequately handled, demonstrate that with evidence and retain baseline; no forced edit or manufactured comparison."
+  },
+  "required_checks": [
+    {
+      "id": "result",
+      "kind": "outcome",
+      "description": "Trace-grounded route comparison and evidence-backed retention decision"
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Comparable actual target improvement with qualified external evaluation"
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Protected decisions, maintenance and target behavior preserved"
+    },
+    {
+      "id": "cost",
+      "kind": "outcome",
+      "description": "Observed costs and unknown totals accurately accounted for"
+    }
+  ]
+}

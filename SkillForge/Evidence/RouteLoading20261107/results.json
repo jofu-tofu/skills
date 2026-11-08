@@ -1,0 +1,64 @@
+[
+  {
+    "arm": "baseline",
+    "exit": 0,
+    "seconds": 247.434,
+    "usage": {
+      "input_tokens": 847281,
+      "cached_input_tokens": 792192,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5549,
+      "reasoning_output_tokens": 387
+    },
+    "commands": 14,
+    "command_errors": 0,
+    "logged_output_bytes": 177695,
+    "external_check": {
+      "exit": 0,
+      "stdout": "{\n  \"rows\": [\n    {\n      \"id\": \"initial\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"same-length-current-value\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"returned-object-mutation\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"malformed-current-file\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"recover-after-error\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"deleted-current-file\",\n      \"status\": \"pass\"\n    }\n  ],\n  \"pass\": 6,\n  \"fail\": 0\n}\n",
+      "stderr": ""
+    },
+    "exact_typo": true,
+    "changed_inputs": [
+      "candidate.cjs",
+      "typo/SKILL.md"
+    ],
+    "method_unchanged": true,
+    "controls_unchanged": true,
+    "baseline_unchanged": true,
+    "scoring_ms": 189,
+    "trace_sha256": "3843063471d57983e5a0db49b72d7443a437c48d40c4b8cb30c31db661a3168b",
+    "retained_sha256": "f6beeb46dc4e270bb369a3fb427330668667c52d4a5b44813ca025435a60dca3"
+  },
+  {
+    "arm": "candidate",
+    "exit": 0,
+    "seconds": 359.78,
+    "usage": {
+      "input_tokens": 1201120,
+      "cached_input_tokens": 1146624,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7374,
+      "reasoning_output_tokens": 995
+    },
+    "commands": 17,
+    "command_errors": 1,
+    "logged_output_bytes": 198669,
+    "external_check": {
+      "exit": 0,
+      "stdout": "{\n  \"rows\": [\n    {\n      \"id\": \"initial\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"same-length-current-value\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"returned-object-mutation\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"malformed-current-file\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"recover-after-error\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"deleted-current-file\",\n      \"status\": \"pass\"\n    }\n  ],\n  \"pass\": 6,\n  \"fail\": 0\n}\n",
+      "stderr": ""
+    },
+    "exact_typo": true,
+    "changed_inputs": [
+      "candidate.cjs",
+      "typo/SKILL.md"
+    ],
+    "method_unchanged": true,
+    "controls_unchanged": true,
+    "baseline_unchanged": true,
+    "scoring_ms": 166,
+    "trace_sha256": "c3e76a05b879852d29979b005f824b95d01e0aa3dc406792d4fb67b1a3656092",
+    "retained_sha256": "f6beeb46dc4e270bb369a3fb427330668667c52d4a5b44813ca025435a60dca3"
+  }
+]
