@@ -205,3 +205,52 @@ test('evidence outside the declared root is not accepted', t => {
   const f = fixture(t); f.assessment.checks[0].evidence = [{ path: '../outside.txt', sha256: 'a'.repeat(64) }];
   assert.equal(f.run().result.task_status, 'continue');
 });
+
+test('CLI accepts cwd-relative input paths inside an explicit attempt root', t => {
+  const f = fixture(t); assert.equal(f.run().code, 0);
+  const prefix = path.basename(f.root);
+  for (const assessment of [path.join(prefix, 'assessment.json'), 'assessment.json']) {
+    const r = spawnSync(process.execPath, [cli, path.join(prefix, 'contract.json'), assessment, '--root', f.root],
+      { cwd: path.dirname(f.root), encoding: 'utf8' });
+    assert.equal(r.status, 0, r.stdout + r.stderr);
+    assert.equal(JSON.parse(r.stdout).task_status, 'complete');
+  }
+});
+
+test('CLI keeps an existing root-relative input authoritative', t => {
+  const f = fixture(t); assert.equal(f.run().code, 0);
+  const prefix = path.basename(f.root);
+  fs.mkdirSync(path.join(f.root, prefix));
+  fs.writeFileSync(path.join(f.root, prefix, 'contract.json'), 'invalid JSON');
+  const r = spawnSync(process.execPath, [cli, path.join(prefix, 'contract.json'), 'assessment.json', '--root', f.root],
+    { cwd: path.dirname(f.root), encoding: 'utf8' });
+  assert.equal(r.status, 2);
+  assert.equal(JSON.parse(r.stdout).valid, false);
+});
+
+test('CLI does not fall back to a cwd input outside the attempt root', t => {
+  const f = fixture(t); assert.equal(f.run().code, 0);
+  const other = fixture(t); assert.equal(other.run().code, 0);
+  const r = spawnSync(process.execPath, [cli, path.join(path.basename(other.root), 'contract.json'), 'assessment.json', '--root', f.root],
+    { cwd: path.dirname(f.root), encoding: 'utf8' });
+  assert.equal(r.status, 2);
+  assert.equal(JSON.parse(r.stdout).valid, false);
+});
+
+test('CLI fallback checks the real destination of a directory link', t => {
+  const f = fixture(t); assert.equal(f.run().code, 0);
+  const other = fixture(t); assert.equal(other.run().code, 0);
+  fs.symlinkSync(other.root, path.join(f.root, 'linked'), process.platform === 'win32' ? 'junction' : 'dir');
+  const r = spawnSync(process.execPath, [cli, path.join(path.basename(f.root), 'linked', 'contract.json'), 'assessment.json', '--root', f.root],
+    { cwd: path.dirname(f.root), encoding: 'utf8' });
+  assert.equal(r.status, 2);
+  assert.equal(JSON.parse(r.stdout).valid, false);
+});
+
+test('CLI preserves absolute input paths', t => {
+  const f = fixture(t); assert.equal(f.run().code, 0);
+  const r = spawnSync(process.execPath, [cli, path.join(f.root, 'contract.json'), path.join(f.root, 'assessment.json'), '--root', f.root],
+    { cwd: path.dirname(f.root), encoding: 'utf8' });
+  assert.equal(r.status, 0, r.stdout + r.stderr);
+  assert.equal(JSON.parse(r.stdout).task_status, 'complete');
+});

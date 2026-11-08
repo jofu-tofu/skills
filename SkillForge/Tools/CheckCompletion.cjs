@@ -172,16 +172,31 @@ function checkCompletion(contract, assessment, root, contractDigest) {
     resolves: unresolved.filter(x => !covered.has(x.id)).map(x => x.id) }] };
 }
 
+function readInput(input, root) {
+  try {
+    return fs.readFileSync(path.resolve(root, input));
+  } catch (error) {
+    // Preserve root-relative precedence. Accept cwd-relative CLI operands only
+    // when their real destination belongs to the same attempt.
+    if (error.code !== 'ENOENT' || path.isAbsolute(input)) throw error;
+    try {
+      const alternate = fs.realpathSync(path.resolve(input));
+      if (inside(fs.realpathSync(root), alternate)) return fs.readFileSync(alternate);
+    } catch { /* Retain the original input error. */ }
+    throw error;
+  }
+}
+
 function main(args) {
   if (args.length === 1 && ['--help', '-h'].includes(args[0])) {
-    console.log('Usage: node CheckCompletion.cjs contract.json assessment.json [--root attempt-directory]\nExit: 0 complete; 3 continue; 4 blocked; 2 invalid input. See Procedures/ApproveSkill.md.'); return;
+    console.log('Usage: node CheckCompletion.cjs contract.json assessment.json [--root attempt-directory]\nInputs resolve relative to --root first; missing relative inputs may resolve from cwd only inside that root. Evidence always resolves from --root.\nExit: 0 complete; 3 continue; 4 blocked; 2 invalid input. See Procedures/ApproveSkill.md.'); return;
   }
   let result;
   try {
     if (!(args.length === 2 || (args.length === 4 && args[2] === '--root'))) throw Error('Expected contract, assessment and optional --root.');
     const root = path.resolve(args[3] || process.cwd());
-    const body = fs.readFileSync(path.resolve(root, args[0]));
-    const assessment = JSON.parse(fs.readFileSync(path.resolve(root, args[1]), 'utf8'));
+    const body = readInput(args[0], root);
+    const assessment = JSON.parse(readInput(args[1], root).toString('utf8'));
     result = checkCompletion(JSON.parse(body.toString('utf8')), assessment, root, digest(body));
   } catch (error) {
     result = { schema_version: 1, valid: false, task_status: 'continue', candidate_decision: null,

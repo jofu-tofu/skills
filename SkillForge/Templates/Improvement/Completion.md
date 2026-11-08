@@ -60,6 +60,8 @@ Run with Node or Bun:
 node <skill>/Tools/CheckCompletion.cjs contract.json assessment.json --root <attempt-directory>
 ```
 
+The two input files are looked up relative to `--root` first. If a relative input is missing there, the checker also accepts a working-directory-relative path when its real destination is inside the same root. An existing root-relative input always takes precedence. Evidence paths still resolve relative to `--root`.
+
 Preserve the JSON result. Exit 0 means `complete`; 3 means `continue`; 4 means `blocked`; 2 means invalid input that must be repaired. These nonzero exits are deliberate decisions, not permission to abandon the workflow. Preserve earlier assessments/results when resuming. If neither runtime is available, apply the same decision table manually and label enforcement manual; do not pretend the checker ran.
 
 The tool checks status consistency, contract identity and evidence integrity. It cannot establish that the contract captures user intent, that evidence proves the claimed result, or that a grader is qualified. Review those before invoking it; a hash of irrelevant prose is not behavioral evidence. It is a workflow check, not an application hook that intercepts every final answer.
