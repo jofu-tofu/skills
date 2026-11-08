@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "valid": true,
+  "contract_sha256": "5a9f9283f9296ffaf958c30e5a24013968f3784c7a9092a09a9d259ea2e12cfc",
+  "candidate_decision": "defer",
+  "task_status": "blocked",
+  "unresolved": [
+    {
+      "id": "result",
+      "reason": "Check is unverified."
+    },
+    {
+      "id": "execution",
+      "reason": "Check is unverified."
+    },
+    {
+      "id": "preservation",
+      "reason": "Check is unverified."
+    },
+    {
+      "id": "cost",
+      "reason": "Check is unverified."
+    }
+  ],
+  "next_actions": [
+    {
+      "id": "resolve-external-authorization",
+      "description": "Automatic approval review rejected private SkillForge instructions transfer to OpenAI Codex; explicit payload/destination authorization is pending.",
+      "resolves": [
+        "result",
+        "execution",
+        "preservation",
+        "cost"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "id": "external-authorization",
+      "affects": [
+        "result",
+        "execution",
+        "preservation",
+        "cost"
+      ],
+      "reason": "Automatic approval review rejected private SkillForge instructions transfer to OpenAI Codex; explicit payload/destination authorization is pending.",
+      "evidence": [
+        {
+          "path": "ExecutionBlock.md",
+          "sha256": "e72fa4bec274fa154eec46ae1e3951a3d2276e1532a5a5675bf2fe63d6a4fd62"
+        }
+      ]
+    }
+  ]
+}

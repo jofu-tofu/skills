@@ -1,0 +1,154 @@
+{
+  "trace": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AutonomousFollowup20261107\\raw\\fresh-v2\\runner-events.jsonl",
+  "sha256": "88b7f4df936116d0d79d5d379fa7855dc63567da1bae7174dd78f53020ac15d0",
+  "receipt": {
+    "name": "fresh-v2",
+    "status": "completed",
+    "exit": 0,
+    "seconds": 276.466,
+    "usage": {
+      "input_tokens": 806308,
+      "cached_input_tokens": 727424,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6085,
+      "reasoning_output_tokens": 786
+    }
+  },
+  "commands": [
+    {
+      "id": "item_1",
+      "status": "completed",
+      "output_utf8_bytes": 5686,
+      "read_expressions": [
+        "method/SKILL.md",
+        "task.txt'"
+      ],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_2",
+      "status": "completed",
+      "output_utf8_bytes": 14009,
+      "read_expressions": [
+        "method/SkillIntent.md",
+        "method/Quality/Shared.md",
+        "method/Workflows/UpdateSkill.md",
+        "checkpoint.md",
+        "controls.json"
+      ],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_3",
+      "status": "failed",
+      "output_utf8_bytes": 23438,
+      "read_expressions": [
+        "baseline.cjs",
+        "candidate.cjs",
+        "benchmark.cjs",
+        "checkpoint-benchmark.json",
+        "settings.json",
+        "method/Quality/UpdateSkill/*.md",
+        "method/Procedures/ApproveSkill.md",
+        "method/Procedures/CheckCompletion.md'"
+      ],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_4",
+      "status": "completed",
+      "output_utf8_bytes": 60603,
+      "read_expressions": [
+        "method/Procedures/DiagnoseGap.md",
+        "method/Procedures/EstablishQuality.md",
+        "method/Procedures/DesignMeasurement.md",
+        "method/Procedures/PlanChange.md",
+        "method/Procedures/DraftCandidate.md",
+        "method/Procedures/EvaluateCandidate.md",
+        "method/Procedures/ReviewDesign.md",
+        "method/Procedures/RecordLearning.md",
+        "method/Templates/Improvement/Completion.md'"
+      ],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_6",
+      "status": "completed",
+      "output_utf8_bytes": 55608,
+      "read_expressions": [
+        "method/Procedures/PlanChange.md",
+        "method/Procedures/ConstructCases.md",
+        "method/Standards/Grader.md",
+        "method/Standards/Schemas.md",
+        "method/Standards/Authoring.md'"
+      ],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_7",
+      "status": "completed",
+      "output_utf8_bytes": 0,
+      "read_expressions": [],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_10",
+      "status": "completed",
+      "output_utf8_bytes": 4151,
+      "read_expressions": [
+        "method/Standards/RegressionCoverage.md",
+        "method/Templates/Improvement/Decision.md",
+        "evidence/correctness.json'"
+      ],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_11",
+      "status": "completed",
+      "output_utf8_bytes": 1125,
+      "read_expressions": [
+        "method/Improvements/Templates/Decision.md\""
+      ],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_12",
+      "status": "completed",
+      "output_utf8_bytes": 167,
+      "read_expressions": [],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_8",
+      "status": "completed",
+      "output_utf8_bytes": 2510,
+      "read_expressions": [],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_13",
+      "status": "completed",
+      "output_utf8_bytes": 0,
+      "read_expressions": [],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_15",
+      "status": "completed",
+      "output_utf8_bytes": 3476,
+      "read_expressions": [
+        "completion-check.json",
+        "evidence/summary.json'"
+      ],
+      "trace_contains_truncation_marker": false
+    },
+    {
+      "id": "item_16",
+      "status": "completed",
+      "output_utf8_bytes": 0,
+      "read_expressions": [],
+      "trace_contains_truncation_marker": false
+    }
+  ],
+  "limits": "Command output strings are logged output, not guaranteed exact received model context. No per-instruction causal token attribution. Commands may contain grouped phases."
+}

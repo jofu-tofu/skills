@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "candidate_decision": "retain_baseline",
+  "task_status": "blocked",
+  "retained_implementation": "candidate.cjs",
+  "retained_sha256": "f6beeb46dc4e270bb369a3fb427330668667c52d4a5b44813ca025435a60dca3",
+  "original_candidate": "reject_candidate",
+  "revised_candidate": "defer",
+  "benefit": "unverified",
+  "preservation": "pass",
+  "reason": "Six-minute user deadline limits further precision studies. Fresh candidate gains range -9.11% to +10.35%; identical-baseline control ranges -12.66% to +8.55%. These data do not establish a runtime gain or equal speed. Cache adds retained text/value memory; exact heap cost unmeasured.",
+  "governing_rule": "method/Procedures/ApproveSkill.md: mandatory gates, autonomous follow-up and task completion; SkillForge 2.1.0-rc.11",
+  "controls": [
+    {
+      "id": "settled",
+      "candidate_decision": "retain_candidate",
+      "task_status": "complete",
+      "benefit": "pass",
+      "preservation": "pass",
+      "reason": "Supplied two fresh confirmations establish a separated 3% gain with no measured cost regression. No arbitrary minimum gain or additional settled tests required."
+    },
+    {
+      "id": "design-only",
+      "candidate_decision": "defer",
+      "task_status": "complete",
+      "readiness": "unverified",
+      "plan": "Preserve baseline; specify exact required outputs and representative current-file change/error cases. If execution is later authorized, qualify correctness checks, compare matched full-call timings and memory, then apply mandatory preservation before retention.",
+      "experiments_run": false,
+      "reason": "Explicit plan-only scope; prototype is not correctness evidence."
+    },
+    {
+      "id": "known-regression",
+      "candidate_decision": "reject_candidate",
+      "task_status": "blocked",
+      "preservation": "fail",
+      "reason": "Independent checks establish missing required customer_id. Speed cannot offset this failure. Implementation unavailable, so no authorized local repair is feasible.",
+      "resume_action": "Supply implementation to restore customer_id and rerun exact checks plus performance comparison."
+    },
+    {
+      "id": "missing-access",
+      "candidate_decision": "defer",
+      "task_status": "blocked",
+      "suitability": "unverified",
+      "local_correctness": "pass",
+      "reason": "Neither private production workload nor representative substitute is available. Local correctness does not establish production suitability; invented weights are unauthorized.",
+      "resume_action": "Provide authorized representative production workload and acceptance priorities."
+    }
+  ],
+  "evidence": [
+    "evidence/diagnosis.json",
+    "evidence/preservation-1.json",
+    "evidence/timing-1.json",
+    "evidence/timing-2.json"
+  ],
+  "resume_action": "With additional authorized time, stabilize timing conditions, quantify cache memory and compare repeated fresh paired runs before retaining the optimization."
+}

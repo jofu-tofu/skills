@@ -1,0 +1,12 @@
+{
+  "arm": "candidate",
+  "exit": 0,
+  "seconds": 359.78,
+  "usage": {
+    "input_tokens": 1201120,
+    "cached_input_tokens": 1146624,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 7374,
+    "reasoning_output_tokens": 995
+  }
+}
