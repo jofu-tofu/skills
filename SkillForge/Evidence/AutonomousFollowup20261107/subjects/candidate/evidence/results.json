@@ -1,0 +1,666 @@
+{
+  "suite_version": "transfer-followup-1",
+  "workflow": "UpdateSkill",
+  "mode": "exploratory assessment",
+  "claim": "Local workload transfer and error behavior of exact saved renderer artifacts",
+  "snapshots": {
+    "plan": "6ce2f8355af98dcc6eef5a99c0eac55615fcc855b8c3264f0aaaac8538709d2c",
+    "checker": "a19426154339cd7837d6496c74df5a9112ba0ffaef1c66ea13d53d1aff4c466e",
+    "targets": {
+      "original": "e50d7a8fdac69bf8627b8749e0a5b8fefd23fb94f6d2073ddc78441496614764",
+      "baseline": "15460dd9dd7964e2d04e063d408b752b7ca936219557dcedfbd6117aa771c382",
+      "candidate": "18807944cf11ff4468109d4774e19a920533014fce18b444779d71cd0cc33541"
+    }
+  },
+  "requested_trials": 9,
+  "completed_trials": 9,
+  "runs": [
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "all-partials",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "all-partials",
+            "iterations": 20,
+            "milliseconds": 289.4904,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "repeated-partial",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "repeated-partial",
+            "iterations": 20,
+            "milliseconds": 207.45609999999988,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "unused-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "unverified",
+          "observation": {
+            "case": "unused-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Observed difference; owner compatibility policy unspecified"
+        },
+        {
+          "id": "used-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "case": "used-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Used unavailable source must reject"
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "all-partials",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "all-partials",
+            "iterations": 20,
+            "milliseconds": 209.19780000000003,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "repeated-partial",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "repeated-partial",
+            "iterations": 20,
+            "milliseconds": 174.37530000000015,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "unused-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "unverified",
+          "observation": {
+            "case": "unused-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Observed difference; owner compatibility policy unspecified"
+        },
+        {
+          "id": "used-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "case": "used-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Used unavailable source must reject"
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "all-partials",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "all-partials",
+            "iterations": 20,
+            "milliseconds": 220.41599999999994,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "repeated-partial",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "repeated-partial",
+            "iterations": 20,
+            "milliseconds": 268.26790000000005,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "unused-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "unverified",
+          "observation": {
+            "case": "unused-unavailable",
+            "output": "Hello Neri",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Observed difference; owner compatibility policy unspecified"
+        },
+        {
+          "id": "used-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "case": "used-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Used unavailable source must reject"
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "all-partials",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "all-partials",
+            "iterations": 20,
+            "milliseconds": 200.08950000000004,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "repeated-partial",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "repeated-partial",
+            "iterations": 20,
+            "milliseconds": 173.29020000000003,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "unused-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "unverified",
+          "observation": {
+            "case": "unused-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Observed difference; owner compatibility policy unspecified"
+        },
+        {
+          "id": "used-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "case": "used-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Used unavailable source must reject"
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "all-partials",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "all-partials",
+            "iterations": 20,
+            "milliseconds": 232.7030000000001,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "repeated-partial",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "repeated-partial",
+            "iterations": 20,
+            "milliseconds": 284.36840000000007,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "unused-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "unverified",
+          "observation": {
+            "case": "unused-unavailable",
+            "output": "Hello Neri",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Observed difference; owner compatibility policy unspecified"
+        },
+        {
+          "id": "used-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "case": "used-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Used unavailable source must reject"
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "all-partials",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "all-partials",
+            "iterations": 20,
+            "milliseconds": 284.0435000000001,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "repeated-partial",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "repeated-partial",
+            "iterations": 20,
+            "milliseconds": 195.2005999999999,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "unused-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "unverified",
+          "observation": {
+            "case": "unused-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Observed difference; owner compatibility policy unspecified"
+        },
+        {
+          "id": "used-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "case": "used-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Used unavailable source must reject"
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 3,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "all-partials",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "all-partials",
+            "iterations": 20,
+            "milliseconds": 240.69359999999995,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "repeated-partial",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "repeated-partial",
+            "iterations": 20,
+            "milliseconds": 274.0845999999999,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "unused-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "unverified",
+          "observation": {
+            "case": "unused-unavailable",
+            "output": "Hello Neri",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Observed difference; owner compatibility policy unspecified"
+        },
+        {
+          "id": "used-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "case": "used-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Used unavailable source must reject"
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 3,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "all-partials",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "all-partials",
+            "iterations": 20,
+            "milliseconds": 289.0556999999999,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "repeated-partial",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "repeated-partial",
+            "iterations": 20,
+            "milliseconds": 201.20050000000015,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "unused-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "unverified",
+          "observation": {
+            "case": "unused-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Observed difference; owner compatibility policy unspecified"
+        },
+        {
+          "id": "used-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "case": "used-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Used unavailable source must reject"
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 3,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "all-partials",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "all-partials",
+            "iterations": 20,
+            "milliseconds": 256.4511,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "repeated-partial",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "workload": "repeated-partial",
+            "iterations": 20,
+            "milliseconds": 221.1527000000001,
+            "status": "pass",
+            "error": null
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Exact expected content from supplied inputs"
+        },
+        {
+          "id": "unused-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "unverified",
+          "observation": {
+            "case": "unused-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Observed difference; owner compatibility policy unspecified"
+        },
+        {
+          "id": "used-unavailable",
+          "measurement_id": "packet-transfer-v1",
+          "status": "pass",
+          "observation": {
+            "case": "used-unavailable",
+            "output": null,
+            "error": "Error: EISDIR: illegal operation on a directory, read"
+          },
+          "evidence": [
+            "evidence/repeats.json"
+          ],
+          "reason": "Used unavailable source must reject"
+        }
+      ]
+    }
+  ],
+  "decision": "inconclusive",
+  "limitations": [
+    "No causal method inference from repeated timings of one artifact per method.",
+    "No production traffic weights or unused-source policy.",
+    "Timings resolve only this host and these exact cases.",
+    "Original 23/23 and 37/37 results reused, not freshly rerun."
+  ],
+  "cost": {
+    "processes": 9,
+    "renders": 360,
+    "model_tokens": null
+  },
+  "regression_coverage": "packet/Protocol.md; original contract preserved",
+  "improvement_id": "autonomous-followup-local",
+  "targeted_failure": null,
+  "loop_observations": [
+    {
+      "stage": "transfer",
+      "status": "supported",
+      "attribution": "observed",
+      "observation": "Exact outputs preserved; repeated-partial candidate slower in separated timing ranges.",
+      "evidence": [
+        "evidence/repeats.json"
+      ]
+    }
+  ]
+}

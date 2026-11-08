@@ -1,0 +1,3 @@
+Saved [final.md](final.md) and [decision.json](decision.json).
+
+Rejected the stale-data cache. Its safe replacement passed correctness checks but showed no reliable speed gain, so I restored the baseline. All four saved requests have recorded dispositions. Completion check passed.

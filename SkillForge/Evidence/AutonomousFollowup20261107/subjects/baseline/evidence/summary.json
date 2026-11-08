@@ -1,0 +1,359 @@
+{
+  "original": {
+    "consumer": {
+      "variant": "primary",
+      "checks": [
+        {
+          "id": "object-overload-zero-false",
+          "status": "pass"
+        },
+        {
+          "id": "fresh-data-same-template",
+          "status": "pass"
+        },
+        {
+          "id": "mutated-data-object",
+          "status": "pass"
+        },
+        {
+          "id": "json-overload",
+          "status": "pass"
+        },
+        {
+          "id": "yaml-overload",
+          "status": "pass"
+        },
+        {
+          "id": "edited-data-file",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-template-edit",
+          "status": "pass"
+        },
+        {
+          "id": "deleted-template",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-template",
+          "status": "pass"
+        },
+        {
+          "id": "invalid-edited-template",
+          "status": "pass"
+        },
+        {
+          "id": "partial-initial",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-partial-edit",
+          "status": "pass"
+        },
+        {
+          "id": "removed-partial",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-partial",
+          "status": "pass"
+        },
+        {
+          "id": "partial-context-varies",
+          "status": "pass"
+        },
+        {
+          "id": "helper-reregistration",
+          "status": "pass"
+        },
+        {
+          "id": "external-partial-preserved",
+          "status": "pass"
+        },
+        {
+          "id": "named-output-content",
+          "status": "pass"
+        },
+        {
+          "id": "missing-data-error",
+          "status": "pass"
+        },
+        {
+          "id": "malformed-json-error",
+          "status": "pass"
+        },
+        {
+          "id": "real-briefing-constraints-and-format",
+          "status": "pass"
+        },
+        {
+          "id": "empty-real-gate",
+          "status": "pass"
+        },
+        {
+          "id": "actual-cli-stdout",
+          "status": "pass"
+        }
+      ],
+      "pass": 23,
+      "fail": 0
+    },
+    "benchmark": {
+      "min": 3261.1719,
+      "median": 3543.1613000000007,
+      "max": 4162.0018,
+      "unit": "ms"
+    },
+    "all-partials": {
+      "min": 278.3889999999999,
+      "median": 285.94949999999994,
+      "max": 428.11749999999995,
+      "unit": "ms"
+    },
+    "repeated-partial": {
+      "min": 194.6960999999999,
+      "median": 201.24389999999994,
+      "max": 262.68229999999994,
+      "unit": "ms"
+    }
+  },
+  "baseline": {
+    "consumer": {
+      "variant": "primary",
+      "checks": [
+        {
+          "id": "object-overload-zero-false",
+          "status": "pass"
+        },
+        {
+          "id": "fresh-data-same-template",
+          "status": "pass"
+        },
+        {
+          "id": "mutated-data-object",
+          "status": "pass"
+        },
+        {
+          "id": "json-overload",
+          "status": "pass"
+        },
+        {
+          "id": "yaml-overload",
+          "status": "pass"
+        },
+        {
+          "id": "edited-data-file",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-template-edit",
+          "status": "pass"
+        },
+        {
+          "id": "deleted-template",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-template",
+          "status": "pass"
+        },
+        {
+          "id": "invalid-edited-template",
+          "status": "pass"
+        },
+        {
+          "id": "partial-initial",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-partial-edit",
+          "status": "pass"
+        },
+        {
+          "id": "removed-partial",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-partial",
+          "status": "pass"
+        },
+        {
+          "id": "partial-context-varies",
+          "status": "pass"
+        },
+        {
+          "id": "helper-reregistration",
+          "status": "pass"
+        },
+        {
+          "id": "external-partial-preserved",
+          "status": "pass"
+        },
+        {
+          "id": "named-output-content",
+          "status": "pass"
+        },
+        {
+          "id": "missing-data-error",
+          "status": "pass"
+        },
+        {
+          "id": "malformed-json-error",
+          "status": "pass"
+        },
+        {
+          "id": "real-briefing-constraints-and-format",
+          "status": "pass"
+        },
+        {
+          "id": "empty-real-gate",
+          "status": "pass"
+        },
+        {
+          "id": "actual-cli-stdout",
+          "status": "pass"
+        }
+      ],
+      "pass": 23,
+      "fail": 0
+    },
+    "benchmark": {
+      "min": 2079.7466999999997,
+      "median": 3144.7877,
+      "max": 3758.0164000000004,
+      "unit": "ms"
+    },
+    "all-partials": {
+      "min": 210.35939999999994,
+      "median": 252.7187,
+      "max": 263.3949,
+      "unit": "ms"
+    },
+    "repeated-partial": {
+      "min": 176.58670000000006,
+      "median": 206.77800000000002,
+      "max": 217.7672,
+      "unit": "ms"
+    }
+  },
+  "candidate": {
+    "consumer": {
+      "variant": "primary",
+      "checks": [
+        {
+          "id": "object-overload-zero-false",
+          "status": "pass"
+        },
+        {
+          "id": "fresh-data-same-template",
+          "status": "pass"
+        },
+        {
+          "id": "mutated-data-object",
+          "status": "pass"
+        },
+        {
+          "id": "json-overload",
+          "status": "pass"
+        },
+        {
+          "id": "yaml-overload",
+          "status": "pass"
+        },
+        {
+          "id": "edited-data-file",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-template-edit",
+          "status": "pass"
+        },
+        {
+          "id": "deleted-template",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-template",
+          "status": "pass"
+        },
+        {
+          "id": "invalid-edited-template",
+          "status": "pass"
+        },
+        {
+          "id": "partial-initial",
+          "status": "pass"
+        },
+        {
+          "id": "same-size-restored-mtime-partial-edit",
+          "status": "pass"
+        },
+        {
+          "id": "removed-partial",
+          "status": "pass"
+        },
+        {
+          "id": "recreated-partial",
+          "status": "pass"
+        },
+        {
+          "id": "partial-context-varies",
+          "status": "pass"
+        },
+        {
+          "id": "helper-reregistration",
+          "status": "pass"
+        },
+        {
+          "id": "external-partial-preserved",
+          "status": "pass"
+        },
+        {
+          "id": "named-output-content",
+          "status": "pass"
+        },
+        {
+          "id": "missing-data-error",
+          "status": "pass"
+        },
+        {
+          "id": "malformed-json-error",
+          "status": "pass"
+        },
+        {
+          "id": "real-briefing-constraints-and-format",
+          "status": "pass"
+        },
+        {
+          "id": "empty-real-gate",
+          "status": "pass"
+        },
+        {
+          "id": "actual-cli-stdout",
+          "status": "pass"
+        }
+      ],
+      "pass": 23,
+      "fail": 0
+    },
+    "benchmark": {
+      "min": 369.0387999999999,
+      "median": 369.28509999999994,
+      "max": 411.0976999999999,
+      "unit": "ms"
+    },
+    "all-partials": {
+      "min": 220.92779999999993,
+      "median": 223.2591,
+      "max": 330.552,
+      "unit": "ms"
+    },
+    "repeated-partial": {
+      "min": 271.8597,
+      "median": 283.4334000000001,
+      "max": 369.25469999999996,
+      "unit": "ms"
+    }
+  }
+}

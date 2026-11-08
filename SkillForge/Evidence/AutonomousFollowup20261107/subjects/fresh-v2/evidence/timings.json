@@ -1,0 +1,173 @@
+{
+  "node": "v24.12.0",
+  "timings": [
+    {
+      "workload": "small",
+      "round": 0,
+      "name": "baseline",
+      "ms": 2732.2066,
+      "reads": 4000
+    },
+    {
+      "workload": "small",
+      "round": 0,
+      "name": "candidate",
+      "ms": 3273.7673000000004,
+      "reads": 4000
+    },
+    {
+      "workload": "small",
+      "round": 1,
+      "name": "candidate",
+      "ms": 3203.944699999999,
+      "reads": 4000
+    },
+    {
+      "workload": "small",
+      "round": 1,
+      "name": "baseline",
+      "ms": 3249.431700000001,
+      "reads": 4000
+    },
+    {
+      "workload": "small",
+      "round": 2,
+      "name": "baseline",
+      "ms": 3505.6936000000023,
+      "reads": 4000
+    },
+    {
+      "workload": "small",
+      "round": 2,
+      "name": "candidate",
+      "ms": 3495.0553999999975,
+      "reads": 4000
+    },
+    {
+      "workload": "small",
+      "round": 3,
+      "name": "candidate",
+      "ms": 3738.798200000001,
+      "reads": 4000
+    },
+    {
+      "workload": "small",
+      "round": 3,
+      "name": "baseline",
+      "ms": 3479.2131999999983,
+      "reads": 4000
+    },
+    {
+      "workload": "flat",
+      "round": 0,
+      "name": "baseline",
+      "ms": 3176.3214000000007,
+      "reads": 4000
+    },
+    {
+      "workload": "flat",
+      "round": 0,
+      "name": "candidate",
+      "ms": 3466.558500000003,
+      "reads": 4000
+    },
+    {
+      "workload": "flat",
+      "round": 1,
+      "name": "candidate",
+      "ms": 3408.878199999999,
+      "reads": 4000
+    },
+    {
+      "workload": "flat",
+      "round": 1,
+      "name": "baseline",
+      "ms": 3381.273500000003,
+      "reads": 4000
+    },
+    {
+      "workload": "flat",
+      "round": 2,
+      "name": "baseline",
+      "ms": 3073.8222000000023,
+      "reads": 4000
+    },
+    {
+      "workload": "flat",
+      "round": 2,
+      "name": "candidate",
+      "ms": 3008.604099999997,
+      "reads": 4000
+    },
+    {
+      "workload": "flat",
+      "round": 3,
+      "name": "candidate",
+      "ms": 3194.0743999999977,
+      "reads": 4000
+    },
+    {
+      "workload": "flat",
+      "round": 3,
+      "name": "baseline",
+      "ms": 3290.8745999999956,
+      "reads": 4000
+    },
+    {
+      "workload": "nested",
+      "round": 0,
+      "name": "baseline",
+      "ms": 3316.4473,
+      "reads": 4000
+    },
+    {
+      "workload": "nested",
+      "round": 0,
+      "name": "candidate",
+      "ms": 3378.162399999994,
+      "reads": 4000
+    },
+    {
+      "workload": "nested",
+      "round": 1,
+      "name": "candidate",
+      "ms": 3182.7171000000017,
+      "reads": 4000
+    },
+    {
+      "workload": "nested",
+      "round": 1,
+      "name": "baseline",
+      "ms": 3364.8566999999966,
+      "reads": 4000
+    },
+    {
+      "workload": "nested",
+      "round": 2,
+      "name": "baseline",
+      "ms": 3176.2180999999982,
+      "reads": 4000
+    },
+    {
+      "workload": "nested",
+      "round": 2,
+      "name": "candidate",
+      "ms": 3296.1140999999916,
+      "reads": 4000
+    },
+    {
+      "workload": "nested",
+      "round": 3,
+      "name": "candidate",
+      "ms": 3259.5515000000014,
+      "reads": 4000
+    },
+    {
+      "workload": "nested",
+      "round": 3,
+      "name": "baseline",
+      "ms": 3372.5488999999943,
+      "reads": 4000
+    }
+  ]
+}

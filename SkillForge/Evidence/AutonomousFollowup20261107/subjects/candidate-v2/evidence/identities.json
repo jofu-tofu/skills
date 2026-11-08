@@ -1,0 +1,56 @@
+{
+  "targets": {
+    "original": {
+      "checked": 32,
+      "mismatches": []
+    },
+    "baseline": {
+      "checked": 32,
+      "mismatches": []
+    },
+    "candidate": {
+      "checked": 32,
+      "mismatches": []
+    }
+  },
+  "method": {
+    "baseline": {
+      "checked": 107,
+      "mismatches": [
+        "Architecture.md",
+        "Evidence/ValidationSummary.md",
+        "Improvements/Index.md",
+        "Procedures/ApproveSkill.md",
+        "Procedures/ConstructCases.md",
+        "Procedures/DesignMeasurement.md",
+        "Procedures/DiagnoseGap.md",
+        "Procedures/EvaluateCandidate.md",
+        "Procedures/PlanChange.md",
+        "SKILL.md",
+        "Templates/Improvement/GapRecord.md",
+        "Tools/README.md",
+        "Workflows/UpdateSkill.md"
+      ]
+    },
+    "candidate": {
+      "checked": 107,
+      "mismatches": [
+        "Architecture.md",
+        "Evidence/ValidationSummary.md",
+        "Improvements/Index.md",
+        "Procedures/ApproveSkill.md",
+        "Procedures/ConstructCases.md",
+        "Procedures/DesignMeasurement.md",
+        "Procedures/DiagnoseGap.md",
+        "Procedures/EvaluateCandidate.md",
+        "Procedures/PlanChange.md",
+        "SKILL.md",
+        "Templates/Improvement/GapRecord.md",
+        "Templates/Quality/Measurement.md",
+        "Tools/README.md",
+        "Workflows/UpdateSkill.md"
+      ]
+    }
+  },
+  "limit": "packet/source.json contains historical method hashes, not recoverable historical file bytes. Available method/ differs from both treatments. targets/ contains Prompting renderers. External treatment locations in packet/README.md are outside authorized root. Exact independent author confirmation cannot be recreated from hashes; using current method would change the treatment."
+}

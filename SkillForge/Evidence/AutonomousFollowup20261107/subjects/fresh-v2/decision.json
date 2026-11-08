@@ -1,0 +1,48 @@
+{
+  "candidate_decision": "retain_baseline",
+  "task_status": "complete",
+  "original_candidate_decision": "reject_candidate",
+  "reason": "Original cache violates freshness. Safe replacement passes correctness but does not establish a repeatable gain across examined workloads; retain known-correct baseline.",
+  "rule": "method/Procedures/ApproveSkill.md#autonomous-follow-up-of-gains-and-tradeoffs",
+  "evidence": [
+    "evidence/diagnosis.json",
+    "evidence/correctness.json",
+    "evidence/timings.json",
+    "evidence/summary.json"
+  ],
+  "controls": [
+    {
+      "id": "settled",
+      "candidate_decision": "retain_candidate",
+      "task_status": "complete",
+      "reason": "Supplied fresh confirmations: 3% separated gain, preserved outputs, transfer and no measured cost regression."
+    },
+    {
+      "id": "design-only",
+      "candidate_decision": "defer",
+      "task_status": "complete",
+      "readiness": "unverified",
+      "deliverable": "controls-dispositions.md",
+      "experiments_run": 0
+    },
+    {
+      "id": "known-regression",
+      "candidate_decision": "reject_candidate",
+      "task_status": "blocked",
+      "reason": "Confirmed mandatory customer_id omission; separate implementation unavailable for repair.",
+      "resume": "Provide affected implementation; restore field and evaluate."
+    },
+    {
+      "id": "missing-access",
+      "candidate_decision": "defer",
+      "task_status": "blocked",
+      "reason": "Private production workload unavailable and no representative substitute authorized.",
+      "resume": "Supply authorized production workload or representative substitute."
+    }
+  ],
+  "limitations": [
+    "Local fixed-artifact evidence, not method effectiveness or private production suitability.",
+    "No full process memory profile; bounded cache inspection only.",
+    "No claim of universal equivalence across concurrent filesystem changes."
+  ]
+}

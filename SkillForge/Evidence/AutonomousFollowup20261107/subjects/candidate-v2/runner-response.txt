@@ -1,0 +1,8 @@
+Saved [final.md](C:/Users/fujos/Obsidian/Projects/SkillForge/AutonomousFollowup20261107/raw/candidate-v2/final.md) and [decision.json](C:/Users/fujos/Obsidian/Projects/SkillForge/AutonomousFollowup20261107/raw/candidate-v2/decision.json).
+
+- Ran 18 fresh-process checks; all executed output checks passed.
+- Candidate wins sparse workloads; baseline wins dense/repeated workloads.
+- Recorded all four control dispositions.
+- Retained baseline; method confirmation remains **blocked** by missing historical method snapshots.
+
+SkillForge’s [ApproveSkill rule](C:/Users/fujos/Obsidian/Projects/SkillForge/AutonomousFollowup20261107/raw/candidate-v2/method/Procedures/ApproveSkill.md) requires “independent author confirmation when feasible.” Available artifact timings cannot establish that the method caused the gain.

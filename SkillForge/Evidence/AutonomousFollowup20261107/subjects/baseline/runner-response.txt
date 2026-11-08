@@ -1,0 +1,3 @@
+Completed 21 local executions. Retained baseline SkillForge: candidate performance depends on workload, and method superiority remains unverified. All correctness checks passed; all four controls received dispositions.
+
+Saved [final.md](C:/Users/fujos/Obsidian/Projects/SkillForge/AutonomousFollowup20261107/raw/baseline/final.md) and [decision.json](C:/Users/fujos/Obsidian/Projects/SkillForge/AutonomousFollowup20261107/raw/baseline/decision.json). Completion checker passed. Protected files were unchanged.

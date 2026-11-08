@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "9f84a9b38962d019a63749fbd2a8468961b179575d103e1d8c26e5746d5f312b",
+  "candidate_decision": "retain_baseline",
+  "checks": [
+    {
+      "id": "qualification",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "packet/qualification.json",
+          "sha256": "c1e2cb705a312fb4f450d3eb4039453cbe76bcdd49703b2002bece82990c001f"
+        },
+        {
+          "path": "packet/Qualification.md",
+          "sha256": "2693cec06d6bacee9800560113aa488b313bd7b8d1f2964b8acbb078ccbb8e1c"
+        },
+        {
+          "path": "packet/freeze.json",
+          "sha256": "3a19ec0d49cc4d14852946f847730b514771257f80f33b28a3dcff6a4a48daeb"
+        },
+        {
+          "path": "packet/profile-controls.json",
+          "sha256": "1b0ee6142827ed93557eb84d4f38d8cbdf9239a2e6ec5b3e1afabc06bd18f887"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "packet/audit.json",
+          "sha256": "5e7d556b253c0fd4830b1c8e2c9910bb6a66da602d1436edd989bd7b3ca5613a"
+        },
+        {
+          "path": "packet/outcomes.json",
+          "sha256": "cb68fe6d8880b7d05c320b32ac67c8720eac76a982c0de31afe881e327715e0b"
+        },
+        {
+          "path": "packet/timings.json",
+          "sha256": "729997dc0a1d8105e1df4baba5de9e24740115b8664a6d06ca55d9ef02b462df"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "packet/audit.json",
+          "sha256": "5e7d556b253c0fd4830b1c8e2c9910bb6a66da602d1436edd989bd7b3ca5613a"
+        },
+        {
+          "path": "packet/outcomes.json",
+          "sha256": "cb68fe6d8880b7d05c320b32ac67c8720eac76a982c0de31afe881e327715e0b"
+        },
+        {
+          "path": "packet/transfer.json",
+          "sha256": "fae19b48b8fb7340bbc14c4be6120441edc44a6c876c11692da5f1caefdffe24"
+        },
+        {
+          "path": "packet/Report.md",
+          "sha256": "445a268a650c1d5e402752683680f9fb44c5e8c0c15184277a09529cca005c5a"
+        }
+      ]
+    },
+    {
+      "id": "decision",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "packet/Protocol.md",
+          "sha256": "47a3bc6f1140227392af78ad8679835de2949971841a065882f37170ea8f56a9"
+        },
+        {
+          "path": "packet/Report.md",
+          "sha256": "445a268a650c1d5e402752683680f9fb44c5e8c0c15184277a09529cca005c5a"
+        },
+        {
+          "path": "packet/results.json",
+          "sha256": "329011a904b26b29b4023a62253db2b6d68ffd6a0c7f616bd0f94f9b9a2d2d00"
+        }
+      ]
+    },
+    {
+      "id": "followup",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "evidence/plan.md",
+          "sha256": "6ce2f8355af98dcc6eef5a99c0eac55615fcc855b8c3264f0aaaac8538709d2c"
+        },
+        {
+          "path": "evidence/repeats.json",
+          "sha256": "3a50484ace725bec0d785c0e7cdba5dd1e66c94527d6e8411041a7fb8b8235ce"
+        },
+        {
+          "path": "evidence/summary.json",
+          "sha256": "c3523f135a10c9bf19e2a2d7269194c9053f98a52e6353f68fcefde43a51b674"
+        },
+        {
+          "path": "evidence/identities.json",
+          "sha256": "12b71017f2adc992477df206947f8204a2deabe1cf4e2c5a7a1f37f237752d70"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "arm": "original",
+    "type": "consumer",
+    "trial": 1,
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"consumer\",\"exit\":0,\"stdout\":\"✓ Rendered to: C:\\\\Users\\\\fujos\\\\Obsidian\\\\Projects\\\\SkillForge\\\\AutonomousFollowup20261107\\\\raw\\\\baseline\\\\evidence\\\\1794105640698-original-consumer\\\\results\\\\fixtures\\\\rendered.txt\\n{\\\"variant\\\":\\\"primary\\\",\\\"checks\\\":[{\\\"id\\\":\\\"object-overload-zero-false\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"fresh-data-same-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"mutated-data-object\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"json-overload\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"yaml-overload\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"edited-data-file\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"same-size-restored-mtime-template-edit\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"deleted-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"recreated-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"invalid-edited-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"partial-initial\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"same-size-restored-mtime-partial-edit\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"removed-partial\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"recreated-partial\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"partial-context-varies\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"helper-reregistration\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"external-partial-preserved\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"named-output-content\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"missing-data-error\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"malformed-json-error\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"real-briefing-constraints-and-format\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"empty-real-gate\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"actual-cli-stdout\\\",\\\"status\\\":\\\"pass\\\"}],\\\"pass\\\":23,\\\"fail\\\":0}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "type": "consumer",
+    "trial": 1,
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"consumer\",\"exit\":0,\"stdout\":\"✓ Rendered to: C:\\\\Users\\\\fujos\\\\Obsidian\\\\Projects\\\\SkillForge\\\\AutonomousFollowup20261107\\\\raw\\\\baseline\\\\evidence\\\\1794105643102-baseline-consumer\\\\results\\\\fixtures\\\\rendered.txt\\n{\\\"variant\\\":\\\"primary\\\",\\\"checks\\\":[{\\\"id\\\":\\\"object-overload-zero-false\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"fresh-data-same-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"mutated-data-object\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"json-overload\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"yaml-overload\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"edited-data-file\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"same-size-restored-mtime-template-edit\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"deleted-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"recreated-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"invalid-edited-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"partial-initial\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"same-size-restored-mtime-partial-edit\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"removed-partial\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"recreated-partial\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"partial-context-varies\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"helper-reregistration\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"external-partial-preserved\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"named-output-content\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"missing-data-error\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"malformed-json-error\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"real-briefing-constraints-and-format\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"empty-real-gate\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"actual-cli-stdout\\\",\\\"status\\\":\\\"pass\\\"}],\\\"pass\\\":23,\\\"fail\\\":0}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "type": "consumer",
+    "trial": 1,
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"consumer\",\"exit\":0,\"stdout\":\"✓ Rendered to: C:\\\\Users\\\\fujos\\\\Obsidian\\\\Projects\\\\SkillForge\\\\AutonomousFollowup20261107\\\\raw\\\\baseline\\\\evidence\\\\1794105644881-candidate-consumer\\\\results\\\\fixtures\\\\rendered.txt\\n{\\\"variant\\\":\\\"primary\\\",\\\"checks\\\":[{\\\"id\\\":\\\"object-overload-zero-false\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"fresh-data-same-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"mutated-data-object\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"json-overload\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"yaml-overload\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"edited-data-file\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"same-size-restored-mtime-template-edit\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"deleted-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"recreated-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"invalid-edited-template\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"partial-initial\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"same-size-restored-mtime-partial-edit\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"removed-partial\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"recreated-partial\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"partial-context-varies\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"helper-reregistration\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"external-partial-preserved\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"named-output-content\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"missing-data-error\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"malformed-json-error\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"real-briefing-constraints-and-format\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"empty-real-gate\\\",\\\"status\\\":\\\"pass\\\"},{\\\"id\\\":\\\"actual-cli-stdout\\\",\\\"status\\\":\\\"pass\\\"}],\\\"pass\\\":23,\\\"fail\\\":0}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "original",
+    "type": "benchmark",
+    "trial": 1,
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"benchmark\",\"exit\":0,\"stdout\":\"{\\\"iterations\\\":240,\\\"partial_files\\\":64,\\\"milliseconds\\\":3543.1613000000007,\\\"compile_calls\\\":480,\\\"output_equal\\\":true}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "type": "benchmark",
+    "trial": 1,
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"benchmark\",\"exit\":0,\"stdout\":\"{\\\"iterations\\\":240,\\\"partial_files\\\":64,\\\"milliseconds\\\":3758.0164000000004,\\\"compile_calls\\\":0,\\\"output_equal\\\":true}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "type": "benchmark",
+    "trial": 1,
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"benchmark\",\"exit\":0,\"stdout\":\"{\\\"iterations\\\":240,\\\"partial_files\\\":64,\\\"milliseconds\\\":411.0976999999999,\\\"compile_calls\\\":0,\\\"output_equal\\\":true}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "original",
+    "type": "transfer",
+    "trial": 1,
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":428.11749999999995,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":262.68229999999994,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "type": "transfer",
+    "trial": 1,
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":263.3949,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":217.7672,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "type": "transfer",
+    "trial": 1,
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":330.552,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":369.25469999999996,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":\\\"Hello Neri\\\",\\\"error\\\":null},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "type": "benchmark",
+    "trial": 2,
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"benchmark\",\"exit\":0,\"stdout\":\"{\\\"iterations\\\":240,\\\"partial_files\\\":64,\\\"milliseconds\\\":3144.7877,\\\"compile_calls\\\":0,\\\"output_equal\\\":true}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "type": "benchmark",
+    "trial": 2,
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"benchmark\",\"exit\":0,\"stdout\":\"{\\\"iterations\\\":240,\\\"partial_files\\\":64,\\\"milliseconds\\\":369.28509999999994,\\\"compile_calls\\\":0,\\\"output_equal\\\":true}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "original",
+    "type": "benchmark",
+    "trial": 2,
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"benchmark\",\"exit\":0,\"stdout\":\"{\\\"iterations\\\":240,\\\"partial_files\\\":64,\\\"milliseconds\\\":4162.0018,\\\"compile_calls\\\":480,\\\"output_equal\\\":true}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "type": "transfer",
+    "trial": 2,
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":252.7187,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":206.77800000000002,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "type": "transfer",
+    "trial": 2,
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":223.2591,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":271.8597,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":\\\"Hello Neri\\\",\\\"error\\\":null},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "original",
+    "type": "transfer",
+    "trial": 2,
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":285.94949999999994,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":201.24389999999994,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "type": "benchmark",
+    "trial": 3,
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"benchmark\",\"exit\":0,\"stdout\":\"{\\\"iterations\\\":240,\\\"partial_files\\\":64,\\\"milliseconds\\\":369.0387999999999,\\\"compile_calls\\\":0,\\\"output_equal\\\":true}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "original",
+    "type": "benchmark",
+    "trial": 3,
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"benchmark\",\"exit\":0,\"stdout\":\"{\\\"iterations\\\":240,\\\"partial_files\\\":64,\\\"milliseconds\\\":3261.1719,\\\"compile_calls\\\":480,\\\"output_equal\\\":true}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "type": "benchmark",
+    "trial": 3,
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"benchmark\",\"exit\":0,\"stdout\":\"{\\\"iterations\\\":240,\\\"partial_files\\\":64,\\\"milliseconds\\\":2079.7466999999997,\\\"compile_calls\\\":0,\\\"output_equal\\\":true}\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "type": "transfer",
+    "trial": 3,
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":220.92779999999993,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":283.4334000000001,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":\\\"Hello Neri\\\",\\\"error\\\":null},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "original",
+    "type": "transfer",
+    "trial": 3,
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":278.3889999999999,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":194.6960999999999,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "type": "transfer",
+    "trial": 3,
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":210.35939999999994,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":176.58670000000006,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  }
+]

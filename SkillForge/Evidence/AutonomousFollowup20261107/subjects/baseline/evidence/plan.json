@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "created": "2026-11-08T02:40:40.628Z",
+  "scope": "Resume saved optimization; confirm transfer uncertainty without new authors or target edits.",
+  "decision": "Retain baseline method unless causal benefit established; report workload-specific artifact differences without invented production weights.",
+  "hypotheses": [
+    "Sparse advantage transfers uniformly",
+    "Repeated partial reads reverse advantage",
+    "Timing difference is noisy"
+  ],
+  "rules": {
+    "correctness": "All 23 consumer cases pass for each target; each transfer output exact; used unavailable partial must error.",
+    "timing": "Three sequential fresh processes per arm/type, rotating order; report median and full range. Separated ranges support bounded workload ranking only; overlap means unresolved ranking. Preserve historical 20% primary rule without retroactive changes.",
+    "errors": "Unused unavailable source policy remains unspecified, observe rather than invent requirement."
+  },
+  "budget": "Six minutes total; 21 local processes at most; stop on unavailable runtime and retain failures.",
+  "consolidation": "Existing consumer combines compatible assertions; separate arm/process isolation retained. No model trials.",
+  "qualification": "Reuse packet/Qualification.md and immutable consumer.ts; transfer expectations derived directly from input strings. Timings are observed local elapsed cost, not population estimates.",
+  "limits": [
+    "No production workload distribution",
+    "No causal method attribution from fixed artifacts",
+    "No new target adoption",
+    "No network or installations"
+  ],
+  "files": {
+    "packet/consumer.ts": "bbbf11884755435cc5c28483a7cd8b9e237a07d4dab24074d00e81cdb626d363",
+    "packet/benchmark.ts": "06839f2167a62012d63d8d0b46489c9ad8de46fadc0964d6352cfa4a14b0f901",
+    "packet/transfer.ts": "a19426154339cd7837d6496c74df5a9112ba0ffaef1c66ea13d53d1aff4c466e",
+    "targets/original/Tools/RenderTemplate.ts": "e50d7a8fdac69bf8627b8749e0a5b8fefd23fb94f6d2073ddc78441496614764",
+    "targets/baseline/Tools/RenderTemplate.ts": "15460dd9dd7964e2d04e063d408b752b7ca936219557dcedfbd6117aa771c382",
+    "targets/candidate/Tools/RenderTemplate.ts": "18807944cf11ff4468109d4774e19a920533014fce18b444779d71cd0cc33541"
+  }
+}

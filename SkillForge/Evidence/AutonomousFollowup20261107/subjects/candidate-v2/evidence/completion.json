@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "valid": true,
+  "contract_sha256": "a3a27fffa6d0445b41946ce6bcb9c9251d913ff0e8ef01953217b9b441bf7b77",
+  "candidate_decision": "retain_baseline",
+  "task_status": "blocked",
+  "unresolved": [
+    {
+      "id": "method-confirmation",
+      "reason": "Check is unverified."
+    }
+  ],
+  "next_actions": [
+    {
+      "id": "resolve-historical-treatments",
+      "description": "Supply exact historical baseline/candidate method bytes inside the allowed root to enable independent matched author confirmation; hashes alone cannot recover them. Outside-root reads and network recovery are forbidden.",
+      "resolves": [
+        "method-confirmation"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "id": "historical-treatments",
+      "affects": [
+        "method-confirmation"
+      ],
+      "reason": "Supply exact historical baseline/candidate method bytes inside the allowed root to enable independent matched author confirmation; hashes alone cannot recover them. Outside-root reads and network recovery are forbidden.",
+      "evidence": [
+        {
+          "path": "evidence/identities.json",
+          "sha256": "8feada4ff0e109157861a71a2946cd8bf881ffb8e5ae23616c26587d22eb052c"
+        },
+        {
+          "path": "packet/source.json",
+          "sha256": "bf8f6b9c3ed1b4821ff3bb8d462a4bbe59e6ec372a8c256ed55711e753c4a9df"
+        },
+        {
+          "path": "packet/README.md",
+          "sha256": "b0ff9e683ebe3048fa1f4d7392dbb8245236a219a1e78160226ec8ba9587f43d"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Execute a real optimization comparison with independently frozen outcomes and preserve baseline if no candidate value is demonstrated.",
+  "scope_basis": {
+    "path": "packet/request.txt",
+    "sha256": "8bfdaa3ed308397c8ad0e1e559d3ef5ddeaa926052ec4fc73275b5fac92c67de",
+    "quote": "Run the next discriminating experiment on a real optimization task with independently frozen outcomes."
+  },
+  "required_checks": [
+    {
+      "id": "qualification",
+      "kind": "outcome",
+      "description": "Independent frozen outcome checker qualified before authors."
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Actual matched target optimizations and external execution completed."
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Assess content/freshness/interfaces against frozen mandatory outcomes."
+    },
+    {
+      "id": "decision",
+      "kind": "outcome",
+      "description": "Apply declared benefit and baseline-retention rules with evidence and limits."
+    },
+    {
+      "id": "followup",
+      "kind": "outcome",
+      "description": "Resolve feasible workload-transfer uncertainty without claiming method causality or inventing owner priorities."
+    }
+  ]
+}

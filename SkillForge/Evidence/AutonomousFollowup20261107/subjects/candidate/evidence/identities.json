@@ -1,0 +1,578 @@
+[
+  {
+    "arm": "original",
+    "path": "bun.lock",
+    "expected": "2e68fc28708272506c7acfeea7b4f1ac4225e68ae0cc0842b790bb5a6be072d7",
+    "actual": "2e68fc28708272506c7acfeea7b4f1ac4225e68ae0cc0842b790bb5a6be072d7"
+  },
+  {
+    "arm": "original",
+    "path": "Improvements/BundledExamples.md",
+    "expected": "940ed3669d4c307149af95099d84a1106494e85739b9daa84016bab6d0c57a4c",
+    "actual": "940ed3669d4c307149af95099d84a1106494e85739b9daa84016bab6d0c57a4c"
+  },
+  {
+    "arm": "original",
+    "path": "Improvements/DownstreamConsumers.md",
+    "expected": "4f1d04d52eb2b7ee6e2060261413075bc89d10c88e81b0065f849c3981176fd9",
+    "actual": "4f1d04d52eb2b7ee6e2060261413075bc89d10c88e81b0065f849c3981176fd9"
+  },
+  {
+    "arm": "original",
+    "path": "Improvements/EmptyGate.md",
+    "expected": "3a66209c75c9278f7a779d4086621e971dc638cc0b5a86de69d58e53b96789c4",
+    "actual": "3a66209c75c9278f7a779d4086621e971dc638cc0b5a86de69d58e53b96789c4"
+  },
+  {
+    "arm": "original",
+    "path": "Improvements/OwnPropertyLookup.md",
+    "expected": "0e6a67ac9b3416696eb9107b500d3a02142153e10b1d3a1c21adce964aff77be",
+    "actual": "0e6a67ac9b3416696eb9107b500d3a02142153e10b1d3a1c21adce964aff77be"
+  },
+  {
+    "arm": "original",
+    "path": "Improvements/ParentDataScopes.md",
+    "expected": "aecfbfc6643d14ed41e5ad6a174f1ea2f1350012d5333a2c876c8c0ba58cf0e1",
+    "actual": "aecfbfc6643d14ed41e5ad6a174f1ea2f1350012d5333a2c876c8c0ba58cf0e1"
+  },
+  {
+    "arm": "original",
+    "path": "Improvements/PrimitiveRendering.md",
+    "expected": "6192cbd68837e819fdbf1647102fb4d3f0fff8805eda663ad33002e82d3f4e70",
+    "actual": "6192cbd68837e819fdbf1647102fb4d3f0fff8805eda663ad33002e82d3f4e70"
+  },
+  {
+    "arm": "original",
+    "path": "Improvements/ScopedDataAndPartials.md",
+    "expected": "d3a3dbb472ef694d8a0a832d1efa16414e0a3223aa8d365d700544ebf9c09d8a",
+    "actual": "d3a3dbb472ef694d8a0a832d1efa16414e0a3223aa8d365d700544ebf9c09d8a"
+  },
+  {
+    "arm": "original",
+    "path": "Improvements/StandardsAnchors.md",
+    "expected": "4b8d585096d0c9edcdc8e79ca9cd3191b41a6f8cd4ae47d11d4bf8d630df2f12",
+    "actual": "4b8d585096d0c9edcdc8e79ca9cd3191b41a6f8cd4ae47d11d4bf8d630df2f12"
+  },
+  {
+    "arm": "original",
+    "path": "Improvements/TemplateValidation.md",
+    "expected": "4920423f0472f80677a85a3457d48b8bbff6b9282fc98d632f3d70e273565481",
+    "actual": "4920423f0472f80677a85a3457d48b8bbff6b9282fc98d632f3d70e273565481"
+  },
+  {
+    "arm": "original",
+    "path": "LICENSE",
+    "expected": "5896c3d9f7bee4a9e5115dea6c333e1eb55ba8596f7a42431f72c8ef9fc7bc98",
+    "actual": "5896c3d9f7bee4a9e5115dea6c333e1eb55ba8596f7a42431f72c8ef9fc7bc98"
+  },
+  {
+    "arm": "original",
+    "path": "package.json",
+    "expected": "92971db651e19551841d0b81e529890ba84fa146cfc762722742971e11645237",
+    "actual": "92971db651e19551841d0b81e529890ba84fa146cfc762722742971e11645237"
+  },
+  {
+    "arm": "original",
+    "path": "PORTABILITY.md",
+    "expected": "997b6d0058180973487c6d0b6eee321af981e8281abf4f52228f606686b878e1",
+    "actual": "997b6d0058180973487c6d0b6eee321af981e8281abf4f52228f606686b878e1"
+  },
+  {
+    "arm": "original",
+    "path": "Quality/Outcomes.md",
+    "expected": "6b5e76b39666f0700daccfe52dfebcc9271c8a3011888d13888579b1c06f572e",
+    "actual": "6b5e76b39666f0700daccfe52dfebcc9271c8a3011888d13888579b1c06f572e"
+  },
+  {
+    "arm": "original",
+    "path": "References/WritingGreatSkills.md",
+    "expected": "ec9d784261c29f7314c51a1e6a3e26a7419f4e894b83b77859f1251da1b10542",
+    "actual": "ec9d784261c29f7314c51a1e6a3e26a7419f4e894b83b77859f1251da1b10542"
+  },
+  {
+    "arm": "original",
+    "path": "Setup.md",
+    "expected": "9eb1f463c5ccb93b6350a4accacdd8531c3afcf2784f09f4230ece33cf87aea0",
+    "actual": "9eb1f463c5ccb93b6350a4accacdd8531c3afcf2784f09f4230ece33cf87aea0"
+  },
+  {
+    "arm": "original",
+    "path": "SKILL.md",
+    "expected": "f577c7e4d270e11822dbf8fddd36e2675a8cdd301c4a1a72eca32ff0fceceaaf",
+    "actual": "f577c7e4d270e11822dbf8fddd36e2675a8cdd301c4a1a72eca32ff0fceceaaf"
+  },
+  {
+    "arm": "original",
+    "path": "SOURCE.md",
+    "expected": "45b4513d8a757749f37d844408330fbef8678781f1bf3f7f74265c2fc9b8a494",
+    "actual": "45b4513d8a757749f37d844408330fbef8678781f1bf3f7f74265c2fc9b8a494"
+  },
+  {
+    "arm": "original",
+    "path": "Standards.md",
+    "expected": "13e75ea62f1a551b85217347f98717edae3a794c32638a074b0a31cb8686c8cd",
+    "actual": "13e75ea62f1a551b85217347f98717edae3a794c32638a074b0a31cb8686c8cd"
+  },
+  {
+    "arm": "original",
+    "path": "Templates/Data/Agents.yaml",
+    "expected": "b0349c2bc5cf8c6d1cc19bf6f582194d2c4c2f750166525eaf36a48c301e7af3",
+    "actual": "b0349c2bc5cf8c6d1cc19bf6f582194d2c4c2f750166525eaf36a48c301e7af3"
+  },
+  {
+    "arm": "original",
+    "path": "Templates/Data/ValidationGates.yaml",
+    "expected": "d9f902a738144b10c203dff5c93a8447c75094ea39bf260161c87a912b911d1d",
+    "actual": "d9f902a738144b10c203dff5c93a8447c75094ea39bf260161c87a912b911d1d"
+  },
+  {
+    "arm": "original",
+    "path": "Templates/Data/VoicePresets.yaml",
+    "expected": "bd4bc8ddc8e555b989339a8f98e643d63a10ae55ae1b053cff2d22c3be26f0d3",
+    "actual": "bd4bc8ddc8e555b989339a8f98e643d63a10ae55ae1b053cff2d22c3be26f0d3"
+  },
+  {
+    "arm": "original",
+    "path": "Templates/Primitives/Briefing.hbs",
+    "expected": "7b738e67d4ac2d0f8999178221b0a70bafb0f7ea2a1ac1c79c04157bcd88b3d8",
+    "actual": "7b738e67d4ac2d0f8999178221b0a70bafb0f7ea2a1ac1c79c04157bcd88b3d8"
+  },
+  {
+    "arm": "original",
+    "path": "Templates/Primitives/Gate.hbs",
+    "expected": "a3937f6a44b520a2a758ebfb414b88659fe17934ea0f4e6f02391d433e71f579",
+    "actual": "a3937f6a44b520a2a758ebfb414b88659fe17934ea0f4e6f02391d433e71f579"
+  },
+  {
+    "arm": "original",
+    "path": "Templates/Primitives/Roster.hbs",
+    "expected": "316ce630031ed695de494af4160447341fb50c68a38f4b206b97e64d0f518305",
+    "actual": "316ce630031ed695de494af4160447341fb50c68a38f4b206b97e64d0f518305"
+  },
+  {
+    "arm": "original",
+    "path": "Templates/Primitives/Structure.hbs",
+    "expected": "9d8f779df95556d37dacf6c0eeff46bdab85fc4f3ba701417c7ea39cb8ad2d2e",
+    "actual": "9d8f779df95556d37dacf6c0eeff46bdab85fc4f3ba701417c7ea39cb8ad2d2e"
+  },
+  {
+    "arm": "original",
+    "path": "Templates/Primitives/Voice.hbs",
+    "expected": "f09cdc8f12fcc79a8071381d5945b07fb394e5a5f4f0d880ee706420a0313f74",
+    "actual": "f09cdc8f12fcc79a8071381d5945b07fb394e5a5f4f0d880ee706420a0313f74"
+  },
+  {
+    "arm": "original",
+    "path": "Templates/README.md",
+    "expected": "24275c1ed2b1cdef4abf6a7f77300608848abc3ca3823124d1ba6f51050bbceb",
+    "actual": "24275c1ed2b1cdef4abf6a7f77300608848abc3ca3823124d1ba6f51050bbceb"
+  },
+  {
+    "arm": "original",
+    "path": "Tools/RenderTemplate.test.ts",
+    "expected": "280fae23aab6361430bf56efed88ef64398f3ab4e682b7e155f3250c82d08869",
+    "actual": "280fae23aab6361430bf56efed88ef64398f3ab4e682b7e155f3250c82d08869"
+  },
+  {
+    "arm": "original",
+    "path": "Tools/RenderTemplate.ts",
+    "expected": "e50d7a8fdac69bf8627b8749e0a5b8fefd23fb94f6d2073ddc78441496614764",
+    "actual": "e50d7a8fdac69bf8627b8749e0a5b8fefd23fb94f6d2073ddc78441496614764"
+  },
+  {
+    "arm": "original",
+    "path": "Tools/ValidateTemplate.test.ts",
+    "expected": "3790ab2f91c32393427ac21beb466140b144eacf03efa32901808cd66092a1a7",
+    "actual": "3790ab2f91c32393427ac21beb466140b144eacf03efa32901808cd66092a1a7"
+  },
+  {
+    "arm": "original",
+    "path": "Tools/ValidateTemplate.ts",
+    "expected": "6fae8a33bff6d5acde88816e0cf920c878e357862493050b9498b9fab086e1c0",
+    "actual": "6fae8a33bff6d5acde88816e0cf920c878e357862493050b9498b9fab086e1c0"
+  },
+  {
+    "arm": "baseline",
+    "path": "bun.lock",
+    "expected": "2e68fc28708272506c7acfeea7b4f1ac4225e68ae0cc0842b790bb5a6be072d7",
+    "actual": "2e68fc28708272506c7acfeea7b4f1ac4225e68ae0cc0842b790bb5a6be072d7"
+  },
+  {
+    "arm": "baseline",
+    "path": "Improvements/BundledExamples.md",
+    "expected": "940ed3669d4c307149af95099d84a1106494e85739b9daa84016bab6d0c57a4c",
+    "actual": "940ed3669d4c307149af95099d84a1106494e85739b9daa84016bab6d0c57a4c"
+  },
+  {
+    "arm": "baseline",
+    "path": "Improvements/DownstreamConsumers.md",
+    "expected": "4f1d04d52eb2b7ee6e2060261413075bc89d10c88e81b0065f849c3981176fd9",
+    "actual": "4f1d04d52eb2b7ee6e2060261413075bc89d10c88e81b0065f849c3981176fd9"
+  },
+  {
+    "arm": "baseline",
+    "path": "Improvements/EmptyGate.md",
+    "expected": "3a66209c75c9278f7a779d4086621e971dc638cc0b5a86de69d58e53b96789c4",
+    "actual": "3a66209c75c9278f7a779d4086621e971dc638cc0b5a86de69d58e53b96789c4"
+  },
+  {
+    "arm": "baseline",
+    "path": "Improvements/OwnPropertyLookup.md",
+    "expected": "0e6a67ac9b3416696eb9107b500d3a02142153e10b1d3a1c21adce964aff77be",
+    "actual": "0e6a67ac9b3416696eb9107b500d3a02142153e10b1d3a1c21adce964aff77be"
+  },
+  {
+    "arm": "baseline",
+    "path": "Improvements/ParentDataScopes.md",
+    "expected": "aecfbfc6643d14ed41e5ad6a174f1ea2f1350012d5333a2c876c8c0ba58cf0e1",
+    "actual": "aecfbfc6643d14ed41e5ad6a174f1ea2f1350012d5333a2c876c8c0ba58cf0e1"
+  },
+  {
+    "arm": "baseline",
+    "path": "Improvements/PrimitiveRendering.md",
+    "expected": "6192cbd68837e819fdbf1647102fb4d3f0fff8805eda663ad33002e82d3f4e70",
+    "actual": "6192cbd68837e819fdbf1647102fb4d3f0fff8805eda663ad33002e82d3f4e70"
+  },
+  {
+    "arm": "baseline",
+    "path": "Improvements/ScopedDataAndPartials.md",
+    "expected": "d3a3dbb472ef694d8a0a832d1efa16414e0a3223aa8d365d700544ebf9c09d8a",
+    "actual": "d3a3dbb472ef694d8a0a832d1efa16414e0a3223aa8d365d700544ebf9c09d8a"
+  },
+  {
+    "arm": "baseline",
+    "path": "Improvements/StandardsAnchors.md",
+    "expected": "4b8d585096d0c9edcdc8e79ca9cd3191b41a6f8cd4ae47d11d4bf8d630df2f12",
+    "actual": "4b8d585096d0c9edcdc8e79ca9cd3191b41a6f8cd4ae47d11d4bf8d630df2f12"
+  },
+  {
+    "arm": "baseline",
+    "path": "Improvements/TemplateValidation.md",
+    "expected": "4920423f0472f80677a85a3457d48b8bbff6b9282fc98d632f3d70e273565481",
+    "actual": "4920423f0472f80677a85a3457d48b8bbff6b9282fc98d632f3d70e273565481"
+  },
+  {
+    "arm": "baseline",
+    "path": "LICENSE",
+    "expected": "5896c3d9f7bee4a9e5115dea6c333e1eb55ba8596f7a42431f72c8ef9fc7bc98",
+    "actual": "5896c3d9f7bee4a9e5115dea6c333e1eb55ba8596f7a42431f72c8ef9fc7bc98"
+  },
+  {
+    "arm": "baseline",
+    "path": "package.json",
+    "expected": "92971db651e19551841d0b81e529890ba84fa146cfc762722742971e11645237",
+    "actual": "92971db651e19551841d0b81e529890ba84fa146cfc762722742971e11645237"
+  },
+  {
+    "arm": "baseline",
+    "path": "PORTABILITY.md",
+    "expected": "997b6d0058180973487c6d0b6eee321af981e8281abf4f52228f606686b878e1",
+    "actual": "997b6d0058180973487c6d0b6eee321af981e8281abf4f52228f606686b878e1"
+  },
+  {
+    "arm": "baseline",
+    "path": "Quality/Outcomes.md",
+    "expected": "6b5e76b39666f0700daccfe52dfebcc9271c8a3011888d13888579b1c06f572e",
+    "actual": "6b5e76b39666f0700daccfe52dfebcc9271c8a3011888d13888579b1c06f572e"
+  },
+  {
+    "arm": "baseline",
+    "path": "References/WritingGreatSkills.md",
+    "expected": "ec9d784261c29f7314c51a1e6a3e26a7419f4e894b83b77859f1251da1b10542",
+    "actual": "ec9d784261c29f7314c51a1e6a3e26a7419f4e894b83b77859f1251da1b10542"
+  },
+  {
+    "arm": "baseline",
+    "path": "Setup.md",
+    "expected": "9eb1f463c5ccb93b6350a4accacdd8531c3afcf2784f09f4230ece33cf87aea0",
+    "actual": "9eb1f463c5ccb93b6350a4accacdd8531c3afcf2784f09f4230ece33cf87aea0"
+  },
+  {
+    "arm": "baseline",
+    "path": "SKILL.md",
+    "expected": "f577c7e4d270e11822dbf8fddd36e2675a8cdd301c4a1a72eca32ff0fceceaaf",
+    "actual": "f577c7e4d270e11822dbf8fddd36e2675a8cdd301c4a1a72eca32ff0fceceaaf"
+  },
+  {
+    "arm": "baseline",
+    "path": "SOURCE.md",
+    "expected": "45b4513d8a757749f37d844408330fbef8678781f1bf3f7f74265c2fc9b8a494",
+    "actual": "45b4513d8a757749f37d844408330fbef8678781f1bf3f7f74265c2fc9b8a494"
+  },
+  {
+    "arm": "baseline",
+    "path": "Standards.md",
+    "expected": "13e75ea62f1a551b85217347f98717edae3a794c32638a074b0a31cb8686c8cd",
+    "actual": "13e75ea62f1a551b85217347f98717edae3a794c32638a074b0a31cb8686c8cd"
+  },
+  {
+    "arm": "baseline",
+    "path": "Templates/Data/Agents.yaml",
+    "expected": "b0349c2bc5cf8c6d1cc19bf6f582194d2c4c2f750166525eaf36a48c301e7af3",
+    "actual": "b0349c2bc5cf8c6d1cc19bf6f582194d2c4c2f750166525eaf36a48c301e7af3"
+  },
+  {
+    "arm": "baseline",
+    "path": "Templates/Data/ValidationGates.yaml",
+    "expected": "d9f902a738144b10c203dff5c93a8447c75094ea39bf260161c87a912b911d1d",
+    "actual": "d9f902a738144b10c203dff5c93a8447c75094ea39bf260161c87a912b911d1d"
+  },
+  {
+    "arm": "baseline",
+    "path": "Templates/Data/VoicePresets.yaml",
+    "expected": "bd4bc8ddc8e555b989339a8f98e643d63a10ae55ae1b053cff2d22c3be26f0d3",
+    "actual": "bd4bc8ddc8e555b989339a8f98e643d63a10ae55ae1b053cff2d22c3be26f0d3"
+  },
+  {
+    "arm": "baseline",
+    "path": "Templates/Primitives/Briefing.hbs",
+    "expected": "7b738e67d4ac2d0f8999178221b0a70bafb0f7ea2a1ac1c79c04157bcd88b3d8",
+    "actual": "7b738e67d4ac2d0f8999178221b0a70bafb0f7ea2a1ac1c79c04157bcd88b3d8"
+  },
+  {
+    "arm": "baseline",
+    "path": "Templates/Primitives/Gate.hbs",
+    "expected": "a3937f6a44b520a2a758ebfb414b88659fe17934ea0f4e6f02391d433e71f579",
+    "actual": "a3937f6a44b520a2a758ebfb414b88659fe17934ea0f4e6f02391d433e71f579"
+  },
+  {
+    "arm": "baseline",
+    "path": "Templates/Primitives/Roster.hbs",
+    "expected": "316ce630031ed695de494af4160447341fb50c68a38f4b206b97e64d0f518305",
+    "actual": "316ce630031ed695de494af4160447341fb50c68a38f4b206b97e64d0f518305"
+  },
+  {
+    "arm": "baseline",
+    "path": "Templates/Primitives/Structure.hbs",
+    "expected": "9d8f779df95556d37dacf6c0eeff46bdab85fc4f3ba701417c7ea39cb8ad2d2e",
+    "actual": "9d8f779df95556d37dacf6c0eeff46bdab85fc4f3ba701417c7ea39cb8ad2d2e"
+  },
+  {
+    "arm": "baseline",
+    "path": "Templates/Primitives/Voice.hbs",
+    "expected": "f09cdc8f12fcc79a8071381d5945b07fb394e5a5f4f0d880ee706420a0313f74",
+    "actual": "f09cdc8f12fcc79a8071381d5945b07fb394e5a5f4f0d880ee706420a0313f74"
+  },
+  {
+    "arm": "baseline",
+    "path": "Templates/README.md",
+    "expected": "24275c1ed2b1cdef4abf6a7f77300608848abc3ca3823124d1ba6f51050bbceb",
+    "actual": "24275c1ed2b1cdef4abf6a7f77300608848abc3ca3823124d1ba6f51050bbceb"
+  },
+  {
+    "arm": "baseline",
+    "path": "Tools/RenderTemplate.test.ts",
+    "expected": "280fae23aab6361430bf56efed88ef64398f3ab4e682b7e155f3250c82d08869",
+    "actual": "280fae23aab6361430bf56efed88ef64398f3ab4e682b7e155f3250c82d08869"
+  },
+  {
+    "arm": "baseline",
+    "path": "Tools/RenderTemplate.ts",
+    "expected": "15460dd9dd7964e2d04e063d408b752b7ca936219557dcedfbd6117aa771c382",
+    "actual": "15460dd9dd7964e2d04e063d408b752b7ca936219557dcedfbd6117aa771c382"
+  },
+  {
+    "arm": "baseline",
+    "path": "Tools/ValidateTemplate.test.ts",
+    "expected": "3790ab2f91c32393427ac21beb466140b144eacf03efa32901808cd66092a1a7",
+    "actual": "3790ab2f91c32393427ac21beb466140b144eacf03efa32901808cd66092a1a7"
+  },
+  {
+    "arm": "baseline",
+    "path": "Tools/ValidateTemplate.ts",
+    "expected": "6fae8a33bff6d5acde88816e0cf920c878e357862493050b9498b9fab086e1c0",
+    "actual": "6fae8a33bff6d5acde88816e0cf920c878e357862493050b9498b9fab086e1c0"
+  },
+  {
+    "arm": "candidate",
+    "path": "bun.lock",
+    "expected": "2e68fc28708272506c7acfeea7b4f1ac4225e68ae0cc0842b790bb5a6be072d7",
+    "actual": "2e68fc28708272506c7acfeea7b4f1ac4225e68ae0cc0842b790bb5a6be072d7"
+  },
+  {
+    "arm": "candidate",
+    "path": "Improvements/BundledExamples.md",
+    "expected": "940ed3669d4c307149af95099d84a1106494e85739b9daa84016bab6d0c57a4c",
+    "actual": "940ed3669d4c307149af95099d84a1106494e85739b9daa84016bab6d0c57a4c"
+  },
+  {
+    "arm": "candidate",
+    "path": "Improvements/DownstreamConsumers.md",
+    "expected": "4f1d04d52eb2b7ee6e2060261413075bc89d10c88e81b0065f849c3981176fd9",
+    "actual": "4f1d04d52eb2b7ee6e2060261413075bc89d10c88e81b0065f849c3981176fd9"
+  },
+  {
+    "arm": "candidate",
+    "path": "Improvements/EmptyGate.md",
+    "expected": "3a66209c75c9278f7a779d4086621e971dc638cc0b5a86de69d58e53b96789c4",
+    "actual": "3a66209c75c9278f7a779d4086621e971dc638cc0b5a86de69d58e53b96789c4"
+  },
+  {
+    "arm": "candidate",
+    "path": "Improvements/OwnPropertyLookup.md",
+    "expected": "0e6a67ac9b3416696eb9107b500d3a02142153e10b1d3a1c21adce964aff77be",
+    "actual": "0e6a67ac9b3416696eb9107b500d3a02142153e10b1d3a1c21adce964aff77be"
+  },
+  {
+    "arm": "candidate",
+    "path": "Improvements/ParentDataScopes.md",
+    "expected": "aecfbfc6643d14ed41e5ad6a174f1ea2f1350012d5333a2c876c8c0ba58cf0e1",
+    "actual": "aecfbfc6643d14ed41e5ad6a174f1ea2f1350012d5333a2c876c8c0ba58cf0e1"
+  },
+  {
+    "arm": "candidate",
+    "path": "Improvements/PrimitiveRendering.md",
+    "expected": "6192cbd68837e819fdbf1647102fb4d3f0fff8805eda663ad33002e82d3f4e70",
+    "actual": "6192cbd68837e819fdbf1647102fb4d3f0fff8805eda663ad33002e82d3f4e70"
+  },
+  {
+    "arm": "candidate",
+    "path": "Improvements/ScopedDataAndPartials.md",
+    "expected": "d3a3dbb472ef694d8a0a832d1efa16414e0a3223aa8d365d700544ebf9c09d8a",
+    "actual": "d3a3dbb472ef694d8a0a832d1efa16414e0a3223aa8d365d700544ebf9c09d8a"
+  },
+  {
+    "arm": "candidate",
+    "path": "Improvements/StandardsAnchors.md",
+    "expected": "4b8d585096d0c9edcdc8e79ca9cd3191b41a6f8cd4ae47d11d4bf8d630df2f12",
+    "actual": "4b8d585096d0c9edcdc8e79ca9cd3191b41a6f8cd4ae47d11d4bf8d630df2f12"
+  },
+  {
+    "arm": "candidate",
+    "path": "Improvements/TemplateValidation.md",
+    "expected": "4920423f0472f80677a85a3457d48b8bbff6b9282fc98d632f3d70e273565481",
+    "actual": "4920423f0472f80677a85a3457d48b8bbff6b9282fc98d632f3d70e273565481"
+  },
+  {
+    "arm": "candidate",
+    "path": "LICENSE",
+    "expected": "5896c3d9f7bee4a9e5115dea6c333e1eb55ba8596f7a42431f72c8ef9fc7bc98",
+    "actual": "5896c3d9f7bee4a9e5115dea6c333e1eb55ba8596f7a42431f72c8ef9fc7bc98"
+  },
+  {
+    "arm": "candidate",
+    "path": "package.json",
+    "expected": "92971db651e19551841d0b81e529890ba84fa146cfc762722742971e11645237",
+    "actual": "92971db651e19551841d0b81e529890ba84fa146cfc762722742971e11645237"
+  },
+  {
+    "arm": "candidate",
+    "path": "PORTABILITY.md",
+    "expected": "997b6d0058180973487c6d0b6eee321af981e8281abf4f52228f606686b878e1",
+    "actual": "997b6d0058180973487c6d0b6eee321af981e8281abf4f52228f606686b878e1"
+  },
+  {
+    "arm": "candidate",
+    "path": "Quality/Outcomes.md",
+    "expected": "6b5e76b39666f0700daccfe52dfebcc9271c8a3011888d13888579b1c06f572e",
+    "actual": "6b5e76b39666f0700daccfe52dfebcc9271c8a3011888d13888579b1c06f572e"
+  },
+  {
+    "arm": "candidate",
+    "path": "References/WritingGreatSkills.md",
+    "expected": "ec9d784261c29f7314c51a1e6a3e26a7419f4e894b83b77859f1251da1b10542",
+    "actual": "ec9d784261c29f7314c51a1e6a3e26a7419f4e894b83b77859f1251da1b10542"
+  },
+  {
+    "arm": "candidate",
+    "path": "Setup.md",
+    "expected": "9eb1f463c5ccb93b6350a4accacdd8531c3afcf2784f09f4230ece33cf87aea0",
+    "actual": "9eb1f463c5ccb93b6350a4accacdd8531c3afcf2784f09f4230ece33cf87aea0"
+  },
+  {
+    "arm": "candidate",
+    "path": "SKILL.md",
+    "expected": "f577c7e4d270e11822dbf8fddd36e2675a8cdd301c4a1a72eca32ff0fceceaaf",
+    "actual": "f577c7e4d270e11822dbf8fddd36e2675a8cdd301c4a1a72eca32ff0fceceaaf"
+  },
+  {
+    "arm": "candidate",
+    "path": "SOURCE.md",
+    "expected": "45b4513d8a757749f37d844408330fbef8678781f1bf3f7f74265c2fc9b8a494",
+    "actual": "45b4513d8a757749f37d844408330fbef8678781f1bf3f7f74265c2fc9b8a494"
+  },
+  {
+    "arm": "candidate",
+    "path": "Standards.md",
+    "expected": "13e75ea62f1a551b85217347f98717edae3a794c32638a074b0a31cb8686c8cd",
+    "actual": "13e75ea62f1a551b85217347f98717edae3a794c32638a074b0a31cb8686c8cd"
+  },
+  {
+    "arm": "candidate",
+    "path": "Templates/Data/Agents.yaml",
+    "expected": "b0349c2bc5cf8c6d1cc19bf6f582194d2c4c2f750166525eaf36a48c301e7af3",
+    "actual": "b0349c2bc5cf8c6d1cc19bf6f582194d2c4c2f750166525eaf36a48c301e7af3"
+  },
+  {
+    "arm": "candidate",
+    "path": "Templates/Data/ValidationGates.yaml",
+    "expected": "d9f902a738144b10c203dff5c93a8447c75094ea39bf260161c87a912b911d1d",
+    "actual": "d9f902a738144b10c203dff5c93a8447c75094ea39bf260161c87a912b911d1d"
+  },
+  {
+    "arm": "candidate",
+    "path": "Templates/Data/VoicePresets.yaml",
+    "expected": "bd4bc8ddc8e555b989339a8f98e643d63a10ae55ae1b053cff2d22c3be26f0d3",
+    "actual": "bd4bc8ddc8e555b989339a8f98e643d63a10ae55ae1b053cff2d22c3be26f0d3"
+  },
+  {
+    "arm": "candidate",
+    "path": "Templates/Primitives/Briefing.hbs",
+    "expected": "7b738e67d4ac2d0f8999178221b0a70bafb0f7ea2a1ac1c79c04157bcd88b3d8",
+    "actual": "7b738e67d4ac2d0f8999178221b0a70bafb0f7ea2a1ac1c79c04157bcd88b3d8"
+  },
+  {
+    "arm": "candidate",
+    "path": "Templates/Primitives/Gate.hbs",
+    "expected": "a3937f6a44b520a2a758ebfb414b88659fe17934ea0f4e6f02391d433e71f579",
+    "actual": "a3937f6a44b520a2a758ebfb414b88659fe17934ea0f4e6f02391d433e71f579"
+  },
+  {
+    "arm": "candidate",
+    "path": "Templates/Primitives/Roster.hbs",
+    "expected": "316ce630031ed695de494af4160447341fb50c68a38f4b206b97e64d0f518305",
+    "actual": "316ce630031ed695de494af4160447341fb50c68a38f4b206b97e64d0f518305"
+  },
+  {
+    "arm": "candidate",
+    "path": "Templates/Primitives/Structure.hbs",
+    "expected": "9d8f779df95556d37dacf6c0eeff46bdab85fc4f3ba701417c7ea39cb8ad2d2e",
+    "actual": "9d8f779df95556d37dacf6c0eeff46bdab85fc4f3ba701417c7ea39cb8ad2d2e"
+  },
+  {
+    "arm": "candidate",
+    "path": "Templates/Primitives/Voice.hbs",
+    "expected": "f09cdc8f12fcc79a8071381d5945b07fb394e5a5f4f0d880ee706420a0313f74",
+    "actual": "f09cdc8f12fcc79a8071381d5945b07fb394e5a5f4f0d880ee706420a0313f74"
+  },
+  {
+    "arm": "candidate",
+    "path": "Templates/README.md",
+    "expected": "24275c1ed2b1cdef4abf6a7f77300608848abc3ca3823124d1ba6f51050bbceb",
+    "actual": "24275c1ed2b1cdef4abf6a7f77300608848abc3ca3823124d1ba6f51050bbceb"
+  },
+  {
+    "arm": "candidate",
+    "path": "Tools/RenderTemplate.test.ts",
+    "expected": "280fae23aab6361430bf56efed88ef64398f3ab4e682b7e155f3250c82d08869",
+    "actual": "280fae23aab6361430bf56efed88ef64398f3ab4e682b7e155f3250c82d08869"
+  },
+  {
+    "arm": "candidate",
+    "path": "Tools/RenderTemplate.ts",
+    "expected": "18807944cf11ff4468109d4774e19a920533014fce18b444779d71cd0cc33541",
+    "actual": "18807944cf11ff4468109d4774e19a920533014fce18b444779d71cd0cc33541"
+  },
+  {
+    "arm": "candidate",
+    "path": "Tools/ValidateTemplate.test.ts",
+    "expected": "3790ab2f91c32393427ac21beb466140b144eacf03efa32901808cd66092a1a7",
+    "actual": "3790ab2f91c32393427ac21beb466140b144eacf03efa32901808cd66092a1a7"
+  },
+  {
+    "arm": "candidate",
+    "path": "Tools/ValidateTemplate.ts",
+    "expected": "6fae8a33bff6d5acde88816e0cf920c878e357862493050b9498b9fab086e1c0",
+    "actual": "6fae8a33bff6d5acde88816e0cf920c878e357862493050b9498b9fab086e1c0"
+  }
+]

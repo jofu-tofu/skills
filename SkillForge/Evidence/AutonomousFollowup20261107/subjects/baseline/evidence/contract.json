@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Execute next discriminating local optimization follow-up with frozen outcomes; preserve baseline absent method benefit and resolve controls.",
+  "scope_basis": {
+    "path": "task.txt",
+    "sha256": "946cd11b23d8273aa413555e797ee113f067a1061f0355926dd80ca09a384f09",
+    "quote": "Finish the task using existing progress"
+  },
+  "required_checks": [
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Matched local executions resolve saved transfer uncertainty"
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Exact independent outputs and error boundaries evaluated"
+    },
+    {
+      "id": "decision",
+      "kind": "outcome",
+      "description": "Separate artifact benefit from method benefit with limits"
+    },
+    {
+      "id": "controls",
+      "kind": "outcome",
+      "description": "Resolve all four saved requests within their stated scope"
+    }
+  ]
+}

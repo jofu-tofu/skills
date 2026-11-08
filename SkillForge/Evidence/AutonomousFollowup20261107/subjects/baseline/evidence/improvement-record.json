@@ -1,0 +1,34 @@
+{
+  "improvement_id": "autonomous-followup-local-v1",
+  "parent_attempt": "packet/improvement-record.json",
+  "baseline": "targets/baseline",
+  "candidate": "targets/candidate",
+  "hypothesis": {
+    "observed_failure": null,
+    "reproduction": "not_applicable",
+    "desired_gain": "Resolve uncertainty about transfer of measured renderer speed",
+    "smallest_change": "Evidence-only follow-up; no source revision"
+  },
+  "targeted_failure": null,
+  "loop_observations": [
+    {
+      "stage": "downstream_execution",
+      "status": "supported",
+      "observation": "21 completed local executions, preserved exact-output checks and workload-dependent costs",
+      "evidence": [
+        "evidence/executions.json"
+      ],
+      "attribution": "observed"
+    }
+  ],
+  "decision": "unverified",
+  "candidate_decision": "retain_baseline",
+  "task_status": "complete",
+  "reason": "No causal method advantage established; bounded artifact tradeoff confirmed.",
+  "next_check": "For adoption, obtain actual partial-use distribution and unused-source error policy. These are not assumed or invented.",
+  "limitations": [
+    "Fixed implementations, no new author pair",
+    "Same cases with fresh processes; not unseen-case validation",
+    "No production population claim"
+  ]
+}

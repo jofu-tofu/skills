@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "candidate_decision": "retain_baseline",
+  "task_status": "complete",
+  "scope": "Completed bounded real optimization experiment and local transfer follow-up; no deployment or universal renderer selection.",
+  "method_benefit": "unverified",
+  "target_gain": "Preserve historical sparse-workload gain as a scoped artifact result.",
+  "reason": "Both methods met the original gate; repeated transfer reveals a workload tradeoff, not a causal method advantage.",
+  "rule": "packet/Protocol.md#Decision rules and budget; method/Procedures/ApproveSkill.md#Autonomous follow-up of gains and tradeoffs",
+  "evidence": [
+    "packet/Report.md",
+    "evidence/plan.md",
+    "evidence/results.json",
+    "evidence/summary.json",
+    "evidence/completion.json"
+  ],
+  "controls": [
+    {
+      "id": "settled",
+      "candidate_decision": "retain_candidate",
+      "task_status": "complete",
+      "status": "pass",
+      "reason": "Two fresh confirmations establish a 3% gain with separated ranges, required behavior and measured cost preserved. No arbitrary minimum gain or redundant experiments.",
+      "evidence": "controls.json#settled"
+    },
+    {
+      "id": "design-only",
+      "candidate_decision": "defer",
+      "task_status": "complete",
+      "status": "unverified",
+      "reason": "Plan delivered below; no experiments or implementation performed for this control.",
+      "plan": [
+        "Preserve original implementation and define required outputs, freshness, errors and interfaces.",
+        "Propose a reversible optimization with an explicit mechanism and expected cost.",
+        "If execution is later authorized, freeze independent exact-output checks and compare full runtime under matched workloads; reject mandatory regressions."
+      ],
+      "evidence": "controls.json#design-only"
+    },
+    {
+      "id": "known-regression",
+      "candidate_decision": "reject_candidate",
+      "task_status": "blocked",
+      "status": "fail",
+      "reason": "Independent checks reproduce missing required customer_id. Speed cannot offset a mandatory omission. Retain baseline. No corresponding implementation or executable reproducer is supplied among the renderer targets; only the saved control evidence is available, and target edits are prohibited.",
+      "resume_action": "Provide an editable implementation and reproducer within authorized scope; restore customer_id, rerun the exact failure and preservation checks, then reassess speed.",
+      "evidence": "controls.json#known-regression"
+    },
+    {
+      "id": "missing-access",
+      "candidate_decision": "defer",
+      "task_status": "complete",
+      "status": "unverified",
+      "reason": "Assessment complete: local correctness is insufficient for private production suitability. Production evidence is explicitly unavailable with no representative substitute; no traffic weights invented.",
+      "suitability_status": "blocked_by_access",
+      "resume_action": "Supply authorized representative production workload and acceptance criteria.",
+      "evidence": "controls.json#missing-access"
+    }
+  ],
+  "unresolved": [
+    "Production workload mix and unused-unavailable-source policy remain unknown for future adoption.",
+    "Known-regression control repair blocked by absent editable implementation."
+  ],
+  "changes": "Evidence and reports only; no source edits, Git, installation or publication."
+}

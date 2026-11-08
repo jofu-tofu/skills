@@ -1,0 +1,5 @@
+Saved [final.md](final.md) and [decision.json](decision.json).
+
+Retained baseline SkillForge. Nine fresh runs confirmed the candidate’s repeated-partial slowdown; exact outputs passed. Method superiority remains unverified.
+
+All four controls have recorded dispositions. The known-regression repair remains blocked by missing implementation artifacts. Protected files were unchanged.

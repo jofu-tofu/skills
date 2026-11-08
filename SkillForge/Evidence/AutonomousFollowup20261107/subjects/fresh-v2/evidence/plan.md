@@ -1,0 +1,7 @@
+# Frozen plan v1
+Use UpdateSkill for this focused implementation task. Preserve checkpoint and original candidate. No method edit or method-effect claim.
+P1: current-file results and errors must equal baseline, including rewrite with equal size/timestamp, invalid JSON, deletion, recreation, nested values and caller mutation. Exact deep comparison plus error class/code is the oracle; hand-written expected values qualify it. Original stale cache is a negative control; baseline is positive control.
+P2: compare warmed alternating baseline/candidate timings on unchanged settings and larger nested JSON, plus changing content. Retain only repeatable positive runtime benefit without mandatory regression; no invented minimum percentage. Timings are local and do not establish production performance. Record transfer tradeoffs instead of inventing traffic weights.
+P3: bounded cache, no persistent file handles. Cost measurement: cache size by design; runtime comparisons. No claim about full process memory.
+Next: reproduce stale read before editing. Try read-current-source plus bounded parsed cache with fresh copies, preserving IO errors; reject if no useful repeatable benefit. Fallback is original baseline, not stale candidate. No structural skill changes, so alternative-generation trigger does not apply. Research unnecessary for executable local semantics; network prohibited.
+Consolidate deterministic correctness checks in one harness; run timing separately to avoid assertion overhead. No model checks or independent author effect claimed. Six-minute user budget.

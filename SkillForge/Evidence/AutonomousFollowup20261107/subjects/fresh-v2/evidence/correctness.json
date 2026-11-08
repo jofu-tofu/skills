@@ -1,0 +1,36 @@
+{
+  "checks": [
+    {
+      "name": "unchanged original",
+      "status": "pass"
+    },
+    {
+      "name": "equal-size same-timestamp rewrite",
+      "status": "pass"
+    },
+    {
+      "name": "all JSON types and special keys",
+      "status": "pass"
+    },
+    {
+      "name": "mutation isolation",
+      "status": "pass"
+    },
+    {
+      "name": "invalid JSON after valid",
+      "status": "pass"
+    },
+    {
+      "name": "deletion and recreation",
+      "status": "pass"
+    },
+    {
+      "name": "fresh unicode nested case",
+      "status": "pass"
+    },
+    {
+      "name": "cross-file same content and path Buffer",
+      "status": "pass"
+    }
+  ]
+}

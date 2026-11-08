@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Resume the real optimization comparison, resolve feasible gain/tradeoff checks, preserve original primary result and distinguish artifact value from method value.",
+  "scope_basis": {
+    "path": "task.txt",
+    "sha256": "946cd11b23d8273aa413555e797ee113f067a1061f0355926dd80ca09a384f09",
+    "quote": "Run the next discriminating experiment on a real optimization task with independently frozen outcomes."
+  },
+  "required_checks": [
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Execute matched discriminating follow-up on exact targets"
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Reuse qualified mandatory checks with verified target identities and check transfer outputs"
+    },
+    {
+      "id": "method-confirmation",
+      "kind": "outcome",
+      "description": "Resolve independent author variation before claiming method benefit"
+    }
+  ]
+}

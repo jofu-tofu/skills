@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "small": {
+      "baseline_ms": [
+        2732.2066,
+        3249.431700000001,
+        3505.6936000000023,
+        3479.2131999999983
+      ],
+      "candidate_ms": [
+        3273.7673000000004,
+        3203.944699999999,
+        3495.0553999999975,
+        3738.798200000001
+      ],
+      "gain_percent": -5.745713250941442,
+      "separated": false
+    },
+    "flat": {
+      "baseline_ms": [
+        3176.3214000000007,
+        3381.273500000003,
+        3073.8222000000023,
+        3290.8745999999956
+      ],
+      "candidate_ms": [
+        3466.558500000003,
+        3408.878199999999,
+        3008.604099999997,
+        3194.0743999999977
+      ],
+      "gain_percent": -1.2058503523797892,
+      "separated": false
+    },
+    "nested": {
+      "baseline_ms": [
+        3316.4473,
+        3364.8566999999966,
+        3176.2180999999982,
+        3372.5488999999943
+      ],
+      "candidate_ms": [
+        3378.162399999994,
+        3182.7171000000017,
+        3296.1140999999916,
+        3259.5515000000014
+      ],
+      "gain_percent": 0.8580898772198586,
+      "separated": false
+    }
+  },
+  "retain": false,
+  "retained_sha256": "f6beeb46dc4e270bb369a3fb427330668667c52d4a5b44813ca025435a60dca3",
+  "review": "Current read occurs before any cache hit. Copies isolate callers; nested values parse afresh. One cached source/value bounds entry count but increases retained bytes. No persistent descriptor. No instruction routing change; skill structural validator is inapplicable to CommonJS."
+}

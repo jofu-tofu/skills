@@ -1,0 +1,32 @@
+[
+  {
+    "id": "settled",
+    "candidate_decision": "retain_candidate",
+    "task_status": "complete",
+    "basis": "Two fresh confirmations, separated timing ranges, 3% gain, required outputs identical and no measured cost regression. No extra threshold or retest warranted.",
+    "evidence": "controls.json#settled"
+  },
+  {
+    "id": "design-only",
+    "candidate_decision": "defer",
+    "task_status": "complete",
+    "readiness": "unverified",
+    "artifact": "evidence/design-only-plan.md",
+    "basis": "Plan delivered within explicit no-experiments scope; prototype gain does not establish correctness."
+  },
+  {
+    "id": "known-regression",
+    "candidate_decision": "reject_candidate",
+    "task_status": "blocked",
+    "basis": "Independent exact checks reproduce missing required customer_id. Speed cannot override this mandatory failure. No implementation for this separate request is supplied to repair.",
+    "resume": "Supply the affected implementation locally; restore customer_id and rerun exact output and speed checks."
+  },
+  {
+    "id": "missing-access",
+    "candidate_decision": "defer",
+    "task_status": "complete",
+    "suitability": "unverified",
+    "basis": "Assessment concludes insufficient evidence: private workload unavailable and no representative substitute exists. Local correctness does not establish production suitability.",
+    "resume": "Provide representative production workload or authorized weights; do not invent them."
+  }
+]

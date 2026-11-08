@@ -1,0 +1,13 @@
+{
+  "name": "candidate-v2",
+  "status": "completed",
+  "exit": 0,
+  "seconds": 188.902,
+  "usage": {
+    "input_tokens": 530040,
+    "cached_input_tokens": 484480,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4464,
+    "reasoning_output_tokens": 278
+  }
+}

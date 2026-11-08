@@ -1,0 +1,56 @@
+[
+  {
+    "arm": "original",
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":289.4904,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":207.45609999999988,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":209.19780000000003,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":174.37530000000015,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":220.41599999999994,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":268.26790000000005,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":\\\"Hello Neri\\\",\\\"error\\\":null},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":200.08950000000004,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":173.29020000000003,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":232.7030000000001,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":284.36840000000007,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":\\\"Hello Neri\\\",\\\"error\\\":null},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "original",
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":284.0435000000001,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":195.2005999999999,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "candidate",
+    "exit": 0,
+    "stdout": "{\"arm\":\"candidate\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":240.69359999999995,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":274.0845999999999,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":\\\"Hello Neri\\\",\\\"error\\\":null},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "original",
+    "exit": 0,
+    "stdout": "{\"arm\":\"original\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":289.0556999999999,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":201.20050000000015,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  },
+  {
+    "arm": "baseline",
+    "exit": 0,
+    "stdout": "{\"arm\":\"baseline\",\"type\":\"transfer\",\"exit\":0,\"stdout\":\"[{\\\"workload\\\":\\\"all-partials\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":256.4511,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"workload\\\":\\\"repeated-partial\\\",\\\"iterations\\\":20,\\\"milliseconds\\\":221.1527000000001,\\\"status\\\":\\\"pass\\\",\\\"error\\\":null},{\\\"case\\\":\\\"unused-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"},{\\\"case\\\":\\\"used-unavailable\\\",\\\"output\\\":null,\\\"error\\\":\\\"Error: EISDIR: illegal operation on a directory, read\\\"}]\\n\",\"stderr\":\"\"}\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "name": "fresh-v2",
+  "status": "completed",
+  "exit": 0,
+  "seconds": 276.466,
+  "usage": {
+    "input_tokens": 806308,
+    "cached_input_tokens": 727424,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 6085,
+    "reasoning_output_tokens": 786
+  }
+}

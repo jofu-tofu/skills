@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "a289687e3f56fde20925cb141cbb40d17172744457472b13fda2506fcb246fcd",
+  "candidate_decision": "retain_baseline",
+  "checks": [
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "evidence/results.json",
+          "sha256": "2ed0286fd8613220e48b2cf601fd0f296dce0275a2132b132578aea35f20e6ae"
+        },
+        {
+          "path": "evidence/executions.json",
+          "sha256": "8c27718dc0ca0b07ea748c8b94f749dc5e354010e662bff35007b5456f229e0a"
+        },
+        {
+          "path": "evidence/integrity.json",
+          "sha256": "9fd0b0077ea2279cd97284949c88475043761ed8f7abbf6994774495fb665ecf"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "evidence/results.json",
+          "sha256": "2ed0286fd8613220e48b2cf601fd0f296dce0275a2132b132578aea35f20e6ae"
+        },
+        {
+          "path": "evidence/executions.json",
+          "sha256": "8c27718dc0ca0b07ea748c8b94f749dc5e354010e662bff35007b5456f229e0a"
+        },
+        {
+          "path": "evidence/integrity.json",
+          "sha256": "9fd0b0077ea2279cd97284949c88475043761ed8f7abbf6994774495fb665ecf"
+        }
+      ]
+    },
+    {
+      "id": "decision",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "final.md",
+          "sha256": "517f436239702667b0523e8f647a9154aeb331f980f7862db722d3a76d8d5560"
+        },
+        {
+          "path": "evidence/summary.json",
+          "sha256": "b80a182b35c63f2f081dff782b35ed2e9f523c8d48bc03081d365218a1a51afe"
+        },
+        {
+          "path": "packet/Protocol.md",
+          "sha256": "47a3bc6f1140227392af78ad8679835de2949971841a065882f37170ea8f56a9"
+        }
+      ]
+    },
+    {
+      "id": "controls",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "evidence/controls-dispositions.json",
+          "sha256": "274633be7e916d1d96a2a278c4cfd737dda4a5fa915d55cbb360660653e18828"
+        },
+        {
+          "path": "controls.json",
+          "sha256": "3bbb74ac30932df2d62e9a09cc2bf760ce9632a6fc948e44c493a1fbaf2442c7"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "path": "qualification.json",
+    "match": true
+  },
+  {
+    "path": "Qualification.md",
+    "match": true
+  },
+  {
+    "path": "freeze.json",
+    "match": true
+  },
+  {
+    "path": "profile-controls.json",
+    "match": true
+  },
+  {
+    "path": "audit.json",
+    "match": true
+  },
+  {
+    "path": "outcomes.json",
+    "match": true
+  },
+  {
+    "path": "timings.json",
+    "match": true
+  },
+  {
+    "path": "audit.json",
+    "match": true
+  },
+  {
+    "path": "outcomes.json",
+    "match": true
+  },
+  {
+    "path": "transfer.json",
+    "match": true
+  },
+  {
+    "path": "Report.md",
+    "match": true
+  },
+  {
+    "path": "Protocol.md",
+    "match": true
+  },
+  {
+    "path": "Report.md",
+    "match": true
+  },
+  {
+    "path": "results.json",
+    "match": true
+  }
+]

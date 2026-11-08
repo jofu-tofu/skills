@@ -1,0 +1,13 @@
+{
+  "first": {
+    "limit": 12
+  },
+  "expected": {
+    "limit": 99
+  },
+  "actual": {
+    "limit": 12
+  },
+  "status": "fail",
+  "cause": "Path cache never rereads content; fixed-input checkpoint omits updates."
+}

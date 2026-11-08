@@ -1,0 +1,1362 @@
+{
+  "suite_version": "local-followup-v1",
+  "workflow": "UpdateSkill",
+  "mode": "confirmation of fixed-artifact transfer; not causal method confirmation",
+  "claim": "Bounded workload cost and preservation on exact saved targets",
+  "snapshots": {
+    "packet/consumer.ts": "bbbf11884755435cc5c28483a7cd8b9e237a07d4dab24074d00e81cdb626d363",
+    "packet/benchmark.ts": "06839f2167a62012d63d8d0b46489c9ad8de46fadc0964d6352cfa4a14b0f901",
+    "packet/transfer.ts": "a19426154339cd7837d6496c74df5a9112ba0ffaef1c66ea13d53d1aff4c466e",
+    "targets/original/Tools/RenderTemplate.ts": "e50d7a8fdac69bf8627b8749e0a5b8fefd23fb94f6d2073ddc78441496614764",
+    "targets/baseline/Tools/RenderTemplate.ts": "15460dd9dd7964e2d04e063d408b752b7ca936219557dcedfbd6117aa771c382",
+    "targets/candidate/Tools/RenderTemplate.ts": "18807944cf11ff4468109d4774e19a920533014fce18b444779d71cd0cc33541"
+  },
+  "requested_trials": 21,
+  "completed_trials": 21,
+  "runs": [
+    {
+      "case_id": "consumer",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "consumer-saved-v1",
+          "status": "pass",
+          "observation": {
+            "variant": "primary",
+            "checks": [
+              {
+                "id": "object-overload-zero-false",
+                "status": "pass"
+              },
+              {
+                "id": "fresh-data-same-template",
+                "status": "pass"
+              },
+              {
+                "id": "mutated-data-object",
+                "status": "pass"
+              },
+              {
+                "id": "json-overload",
+                "status": "pass"
+              },
+              {
+                "id": "yaml-overload",
+                "status": "pass"
+              },
+              {
+                "id": "edited-data-file",
+                "status": "pass"
+              },
+              {
+                "id": "same-size-restored-mtime-template-edit",
+                "status": "pass"
+              },
+              {
+                "id": "deleted-template",
+                "status": "pass"
+              },
+              {
+                "id": "recreated-template",
+                "status": "pass"
+              },
+              {
+                "id": "invalid-edited-template",
+                "status": "pass"
+              },
+              {
+                "id": "partial-initial",
+                "status": "pass"
+              },
+              {
+                "id": "same-size-restored-mtime-partial-edit",
+                "status": "pass"
+              },
+              {
+                "id": "removed-partial",
+                "status": "pass"
+              },
+              {
+                "id": "recreated-partial",
+                "status": "pass"
+              },
+              {
+                "id": "partial-context-varies",
+                "status": "pass"
+              },
+              {
+                "id": "helper-reregistration",
+                "status": "pass"
+              },
+              {
+                "id": "external-partial-preserved",
+                "status": "pass"
+              },
+              {
+                "id": "named-output-content",
+                "status": "pass"
+              },
+              {
+                "id": "missing-data-error",
+                "status": "pass"
+              },
+              {
+                "id": "malformed-json-error",
+                "status": "pass"
+              },
+              {
+                "id": "real-briefing-constraints-and-format",
+                "status": "pass"
+              },
+              {
+                "id": "empty-real-gate",
+                "status": "pass"
+              },
+              {
+                "id": "actual-cli-stdout",
+                "status": "pass"
+              }
+            ],
+            "pass": 23,
+            "fail": 0
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "consumer",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "consumer-saved-v1",
+          "status": "pass",
+          "observation": {
+            "variant": "primary",
+            "checks": [
+              {
+                "id": "object-overload-zero-false",
+                "status": "pass"
+              },
+              {
+                "id": "fresh-data-same-template",
+                "status": "pass"
+              },
+              {
+                "id": "mutated-data-object",
+                "status": "pass"
+              },
+              {
+                "id": "json-overload",
+                "status": "pass"
+              },
+              {
+                "id": "yaml-overload",
+                "status": "pass"
+              },
+              {
+                "id": "edited-data-file",
+                "status": "pass"
+              },
+              {
+                "id": "same-size-restored-mtime-template-edit",
+                "status": "pass"
+              },
+              {
+                "id": "deleted-template",
+                "status": "pass"
+              },
+              {
+                "id": "recreated-template",
+                "status": "pass"
+              },
+              {
+                "id": "invalid-edited-template",
+                "status": "pass"
+              },
+              {
+                "id": "partial-initial",
+                "status": "pass"
+              },
+              {
+                "id": "same-size-restored-mtime-partial-edit",
+                "status": "pass"
+              },
+              {
+                "id": "removed-partial",
+                "status": "pass"
+              },
+              {
+                "id": "recreated-partial",
+                "status": "pass"
+              },
+              {
+                "id": "partial-context-varies",
+                "status": "pass"
+              },
+              {
+                "id": "helper-reregistration",
+                "status": "pass"
+              },
+              {
+                "id": "external-partial-preserved",
+                "status": "pass"
+              },
+              {
+                "id": "named-output-content",
+                "status": "pass"
+              },
+              {
+                "id": "missing-data-error",
+                "status": "pass"
+              },
+              {
+                "id": "malformed-json-error",
+                "status": "pass"
+              },
+              {
+                "id": "real-briefing-constraints-and-format",
+                "status": "pass"
+              },
+              {
+                "id": "empty-real-gate",
+                "status": "pass"
+              },
+              {
+                "id": "actual-cli-stdout",
+                "status": "pass"
+              }
+            ],
+            "pass": 23,
+            "fail": 0
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "consumer",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "consumer-saved-v1",
+          "status": "pass",
+          "observation": {
+            "variant": "primary",
+            "checks": [
+              {
+                "id": "object-overload-zero-false",
+                "status": "pass"
+              },
+              {
+                "id": "fresh-data-same-template",
+                "status": "pass"
+              },
+              {
+                "id": "mutated-data-object",
+                "status": "pass"
+              },
+              {
+                "id": "json-overload",
+                "status": "pass"
+              },
+              {
+                "id": "yaml-overload",
+                "status": "pass"
+              },
+              {
+                "id": "edited-data-file",
+                "status": "pass"
+              },
+              {
+                "id": "same-size-restored-mtime-template-edit",
+                "status": "pass"
+              },
+              {
+                "id": "deleted-template",
+                "status": "pass"
+              },
+              {
+                "id": "recreated-template",
+                "status": "pass"
+              },
+              {
+                "id": "invalid-edited-template",
+                "status": "pass"
+              },
+              {
+                "id": "partial-initial",
+                "status": "pass"
+              },
+              {
+                "id": "same-size-restored-mtime-partial-edit",
+                "status": "pass"
+              },
+              {
+                "id": "removed-partial",
+                "status": "pass"
+              },
+              {
+                "id": "recreated-partial",
+                "status": "pass"
+              },
+              {
+                "id": "partial-context-varies",
+                "status": "pass"
+              },
+              {
+                "id": "helper-reregistration",
+                "status": "pass"
+              },
+              {
+                "id": "external-partial-preserved",
+                "status": "pass"
+              },
+              {
+                "id": "named-output-content",
+                "status": "pass"
+              },
+              {
+                "id": "missing-data-error",
+                "status": "pass"
+              },
+              {
+                "id": "malformed-json-error",
+                "status": "pass"
+              },
+              {
+                "id": "real-briefing-constraints-and-format",
+                "status": "pass"
+              },
+              {
+                "id": "empty-real-gate",
+                "status": "pass"
+              },
+              {
+                "id": "actual-cli-stdout",
+                "status": "pass"
+              }
+            ],
+            "pass": 23,
+            "fail": 0
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "benchmark",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "benchmark-saved-v1",
+          "status": "pass",
+          "observation": {
+            "iterations": 240,
+            "partial_files": 64,
+            "milliseconds": 3543.1613000000007,
+            "compile_calls": 480,
+            "output_equal": true
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "benchmark",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "benchmark-saved-v1",
+          "status": "pass",
+          "observation": {
+            "iterations": 240,
+            "partial_files": 64,
+            "milliseconds": 3758.0164000000004,
+            "compile_calls": 0,
+            "output_equal": true
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "benchmark",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "benchmark-saved-v1",
+          "status": "pass",
+          "observation": {
+            "iterations": 240,
+            "partial_files": 64,
+            "milliseconds": 411.0976999999999,
+            "compile_calls": 0,
+            "output_equal": true
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "transfer-saved-v1",
+          "status": "pass",
+          "observation": [
+            {
+              "workload": "all-partials",
+              "iterations": 20,
+              "milliseconds": 428.11749999999995,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "workload": "repeated-partial",
+              "iterations": 20,
+              "milliseconds": 262.68229999999994,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "case": "unused-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            },
+            {
+              "case": "used-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            }
+          ],
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "transfer-saved-v1",
+          "status": "pass",
+          "observation": [
+            {
+              "workload": "all-partials",
+              "iterations": 20,
+              "milliseconds": 263.3949,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "workload": "repeated-partial",
+              "iterations": 20,
+              "milliseconds": 217.7672,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "case": "unused-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            },
+            {
+              "case": "used-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            }
+          ],
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "transfer-saved-v1",
+          "status": "pass",
+          "observation": [
+            {
+              "workload": "all-partials",
+              "iterations": 20,
+              "milliseconds": 330.552,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "workload": "repeated-partial",
+              "iterations": 20,
+              "milliseconds": 369.25469999999996,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "case": "unused-unavailable",
+              "output": "Hello Neri",
+              "error": null
+            },
+            {
+              "case": "used-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            }
+          ],
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "benchmark",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "benchmark-saved-v1",
+          "status": "pass",
+          "observation": {
+            "iterations": 240,
+            "partial_files": 64,
+            "milliseconds": 3144.7877,
+            "compile_calls": 0,
+            "output_equal": true
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "benchmark",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "benchmark-saved-v1",
+          "status": "pass",
+          "observation": {
+            "iterations": 240,
+            "partial_files": 64,
+            "milliseconds": 369.28509999999994,
+            "compile_calls": 0,
+            "output_equal": true
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "benchmark",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "benchmark-saved-v1",
+          "status": "pass",
+          "observation": {
+            "iterations": 240,
+            "partial_files": 64,
+            "milliseconds": 4162.0018,
+            "compile_calls": 480,
+            "output_equal": true
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "transfer-saved-v1",
+          "status": "pass",
+          "observation": [
+            {
+              "workload": "all-partials",
+              "iterations": 20,
+              "milliseconds": 252.7187,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "workload": "repeated-partial",
+              "iterations": 20,
+              "milliseconds": 206.77800000000002,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "case": "unused-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            },
+            {
+              "case": "used-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            }
+          ],
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "transfer-saved-v1",
+          "status": "pass",
+          "observation": [
+            {
+              "workload": "all-partials",
+              "iterations": 20,
+              "milliseconds": 223.2591,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "workload": "repeated-partial",
+              "iterations": 20,
+              "milliseconds": 271.8597,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "case": "unused-unavailable",
+              "output": "Hello Neri",
+              "error": null
+            },
+            {
+              "case": "used-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            }
+          ],
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 2,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "transfer-saved-v1",
+          "status": "pass",
+          "observation": [
+            {
+              "workload": "all-partials",
+              "iterations": 20,
+              "milliseconds": 285.94949999999994,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "workload": "repeated-partial",
+              "iterations": 20,
+              "milliseconds": 201.24389999999994,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "case": "unused-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            },
+            {
+              "case": "used-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            }
+          ],
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "benchmark",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 3,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "benchmark-saved-v1",
+          "status": "pass",
+          "observation": {
+            "iterations": 240,
+            "partial_files": 64,
+            "milliseconds": 369.0387999999999,
+            "compile_calls": 0,
+            "output_equal": true
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "benchmark",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 3,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "benchmark-saved-v1",
+          "status": "pass",
+          "observation": {
+            "iterations": 240,
+            "partial_files": 64,
+            "milliseconds": 3261.1719,
+            "compile_calls": 480,
+            "output_equal": true
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "benchmark",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 3,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "benchmark-saved-v1",
+          "status": "pass",
+          "observation": {
+            "iterations": 240,
+            "partial_files": 64,
+            "milliseconds": 2079.7466999999997,
+            "compile_calls": 0,
+            "output_equal": true
+          },
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "candidate",
+      "trial": 3,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "transfer-saved-v1",
+          "status": "pass",
+          "observation": [
+            {
+              "workload": "all-partials",
+              "iterations": 20,
+              "milliseconds": 220.92779999999993,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "workload": "repeated-partial",
+              "iterations": 20,
+              "milliseconds": 283.4334000000001,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "case": "unused-unavailable",
+              "output": "Hello Neri",
+              "error": null
+            },
+            {
+              "case": "used-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            }
+          ],
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "original",
+      "trial": 3,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "transfer-saved-v1",
+          "status": "pass",
+          "observation": [
+            {
+              "workload": "all-partials",
+              "iterations": 20,
+              "milliseconds": 278.3889999999999,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "workload": "repeated-partial",
+              "iterations": 20,
+              "milliseconds": 194.6960999999999,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "case": "unused-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            },
+            {
+              "case": "used-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            }
+          ],
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    },
+    {
+      "case_id": "transfer",
+      "role": "validation",
+      "configuration": "baseline",
+      "trial": 3,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "exact-output-and-required-errors",
+          "measurement_id": "transfer-saved-v1",
+          "status": "pass",
+          "observation": [
+            {
+              "workload": "all-partials",
+              "iterations": 20,
+              "milliseconds": 210.35939999999994,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "workload": "repeated-partial",
+              "iterations": 20,
+              "milliseconds": 176.58670000000006,
+              "status": "pass",
+              "error": null
+            },
+            {
+              "case": "unused-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            },
+            {
+              "case": "used-unavailable",
+              "output": null,
+              "error": "Error: EISDIR: illegal operation on a directory, read"
+            }
+          ],
+          "evidence": [
+            "evidence/executions.json"
+          ],
+          "reason": "Independent supplied strings and required used-source rejection; unused-source policy observed separately."
+        }
+      ]
+    }
+  ],
+  "decision": "inconclusive",
+  "candidate_decision": "retain_baseline",
+  "targeted_benefit": {
+    "method": "unverified",
+    "artifact_costs": {
+      "original": {
+        "consumer": {
+          "variant": "primary",
+          "checks": [
+            {
+              "id": "object-overload-zero-false",
+              "status": "pass"
+            },
+            {
+              "id": "fresh-data-same-template",
+              "status": "pass"
+            },
+            {
+              "id": "mutated-data-object",
+              "status": "pass"
+            },
+            {
+              "id": "json-overload",
+              "status": "pass"
+            },
+            {
+              "id": "yaml-overload",
+              "status": "pass"
+            },
+            {
+              "id": "edited-data-file",
+              "status": "pass"
+            },
+            {
+              "id": "same-size-restored-mtime-template-edit",
+              "status": "pass"
+            },
+            {
+              "id": "deleted-template",
+              "status": "pass"
+            },
+            {
+              "id": "recreated-template",
+              "status": "pass"
+            },
+            {
+              "id": "invalid-edited-template",
+              "status": "pass"
+            },
+            {
+              "id": "partial-initial",
+              "status": "pass"
+            },
+            {
+              "id": "same-size-restored-mtime-partial-edit",
+              "status": "pass"
+            },
+            {
+              "id": "removed-partial",
+              "status": "pass"
+            },
+            {
+              "id": "recreated-partial",
+              "status": "pass"
+            },
+            {
+              "id": "partial-context-varies",
+              "status": "pass"
+            },
+            {
+              "id": "helper-reregistration",
+              "status": "pass"
+            },
+            {
+              "id": "external-partial-preserved",
+              "status": "pass"
+            },
+            {
+              "id": "named-output-content",
+              "status": "pass"
+            },
+            {
+              "id": "missing-data-error",
+              "status": "pass"
+            },
+            {
+              "id": "malformed-json-error",
+              "status": "pass"
+            },
+            {
+              "id": "real-briefing-constraints-and-format",
+              "status": "pass"
+            },
+            {
+              "id": "empty-real-gate",
+              "status": "pass"
+            },
+            {
+              "id": "actual-cli-stdout",
+              "status": "pass"
+            }
+          ],
+          "pass": 23,
+          "fail": 0
+        },
+        "benchmark": {
+          "min": 3261.1719,
+          "median": 3543.1613000000007,
+          "max": 4162.0018,
+          "unit": "ms"
+        },
+        "all-partials": {
+          "min": 278.3889999999999,
+          "median": 285.94949999999994,
+          "max": 428.11749999999995,
+          "unit": "ms"
+        },
+        "repeated-partial": {
+          "min": 194.6960999999999,
+          "median": 201.24389999999994,
+          "max": 262.68229999999994,
+          "unit": "ms"
+        }
+      },
+      "baseline": {
+        "consumer": {
+          "variant": "primary",
+          "checks": [
+            {
+              "id": "object-overload-zero-false",
+              "status": "pass"
+            },
+            {
+              "id": "fresh-data-same-template",
+              "status": "pass"
+            },
+            {
+              "id": "mutated-data-object",
+              "status": "pass"
+            },
+            {
+              "id": "json-overload",
+              "status": "pass"
+            },
+            {
+              "id": "yaml-overload",
+              "status": "pass"
+            },
+            {
+              "id": "edited-data-file",
+              "status": "pass"
+            },
+            {
+              "id": "same-size-restored-mtime-template-edit",
+              "status": "pass"
+            },
+            {
+              "id": "deleted-template",
+              "status": "pass"
+            },
+            {
+              "id": "recreated-template",
+              "status": "pass"
+            },
+            {
+              "id": "invalid-edited-template",
+              "status": "pass"
+            },
+            {
+              "id": "partial-initial",
+              "status": "pass"
+            },
+            {
+              "id": "same-size-restored-mtime-partial-edit",
+              "status": "pass"
+            },
+            {
+              "id": "removed-partial",
+              "status": "pass"
+            },
+            {
+              "id": "recreated-partial",
+              "status": "pass"
+            },
+            {
+              "id": "partial-context-varies",
+              "status": "pass"
+            },
+            {
+              "id": "helper-reregistration",
+              "status": "pass"
+            },
+            {
+              "id": "external-partial-preserved",
+              "status": "pass"
+            },
+            {
+              "id": "named-output-content",
+              "status": "pass"
+            },
+            {
+              "id": "missing-data-error",
+              "status": "pass"
+            },
+            {
+              "id": "malformed-json-error",
+              "status": "pass"
+            },
+            {
+              "id": "real-briefing-constraints-and-format",
+              "status": "pass"
+            },
+            {
+              "id": "empty-real-gate",
+              "status": "pass"
+            },
+            {
+              "id": "actual-cli-stdout",
+              "status": "pass"
+            }
+          ],
+          "pass": 23,
+          "fail": 0
+        },
+        "benchmark": {
+          "min": 2079.7466999999997,
+          "median": 3144.7877,
+          "max": 3758.0164000000004,
+          "unit": "ms"
+        },
+        "all-partials": {
+          "min": 210.35939999999994,
+          "median": 252.7187,
+          "max": 263.3949,
+          "unit": "ms"
+        },
+        "repeated-partial": {
+          "min": 176.58670000000006,
+          "median": 206.77800000000002,
+          "max": 217.7672,
+          "unit": "ms"
+        }
+      },
+      "candidate": {
+        "consumer": {
+          "variant": "primary",
+          "checks": [
+            {
+              "id": "object-overload-zero-false",
+              "status": "pass"
+            },
+            {
+              "id": "fresh-data-same-template",
+              "status": "pass"
+            },
+            {
+              "id": "mutated-data-object",
+              "status": "pass"
+            },
+            {
+              "id": "json-overload",
+              "status": "pass"
+            },
+            {
+              "id": "yaml-overload",
+              "status": "pass"
+            },
+            {
+              "id": "edited-data-file",
+              "status": "pass"
+            },
+            {
+              "id": "same-size-restored-mtime-template-edit",
+              "status": "pass"
+            },
+            {
+              "id": "deleted-template",
+              "status": "pass"
+            },
+            {
+              "id": "recreated-template",
+              "status": "pass"
+            },
+            {
+              "id": "invalid-edited-template",
+              "status": "pass"
+            },
+            {
+              "id": "partial-initial",
+              "status": "pass"
+            },
+            {
+              "id": "same-size-restored-mtime-partial-edit",
+              "status": "pass"
+            },
+            {
+              "id": "removed-partial",
+              "status": "pass"
+            },
+            {
+              "id": "recreated-partial",
+              "status": "pass"
+            },
+            {
+              "id": "partial-context-varies",
+              "status": "pass"
+            },
+            {
+              "id": "helper-reregistration",
+              "status": "pass"
+            },
+            {
+              "id": "external-partial-preserved",
+              "status": "pass"
+            },
+            {
+              "id": "named-output-content",
+              "status": "pass"
+            },
+            {
+              "id": "missing-data-error",
+              "status": "pass"
+            },
+            {
+              "id": "malformed-json-error",
+              "status": "pass"
+            },
+            {
+              "id": "real-briefing-constraints-and-format",
+              "status": "pass"
+            },
+            {
+              "id": "empty-real-gate",
+              "status": "pass"
+            },
+            {
+              "id": "actual-cli-stdout",
+              "status": "pass"
+            }
+          ],
+          "pass": 23,
+          "fail": 0
+        },
+        "benchmark": {
+          "min": 369.0387999999999,
+          "median": 369.28509999999994,
+          "max": 411.0976999999999,
+          "unit": "ms"
+        },
+        "all-partials": {
+          "min": 220.92779999999993,
+          "median": 223.2591,
+          "max": 330.552,
+          "unit": "ms"
+        },
+        "repeated-partial": {
+          "min": 271.8597,
+          "median": 283.4334000000001,
+          "max": 369.25469999999996,
+          "unit": "ms"
+        }
+      }
+    }
+  },
+  "preservation": "All saved consumer and transfer outputs checked; unused unavailable error compatibility remains unspecified.",
+  "limitations": [
+    "No production workload distribution",
+    "No causal method attribution from fixed artifacts",
+    "No new target adoption",
+    "No network or installations"
+  ],
+  "regression_coverage": "packet/Protocol.md#qualification-and-scope; consumer covers freshness/API/helpers/CLI; transfer covers dense and repeated composition. Existing 37 bundled tests reused from saved packet; no target edits."
+}

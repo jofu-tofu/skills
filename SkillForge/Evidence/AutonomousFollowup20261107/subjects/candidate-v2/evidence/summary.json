@@ -1,0 +1,135 @@
+{
+  "runs": 18,
+  "failures": [],
+  "workloads": {
+    "original/sparse": {
+      "n": 3,
+      "median": 3576.8752,
+      "min": 3402.6157000000003,
+      "max": 3764.1743
+    },
+    "original/all-partials": {
+      "n": 3,
+      "median": 317.98849999999993,
+      "min": 301.58719999999994,
+      "max": 419.6475999999999
+    },
+    "original/repeated-partial": {
+      "n": 3,
+      "median": 226.63490000000002,
+      "min": 226.5136,
+      "max": 306.1731
+    },
+    "baseline/sparse": {
+      "n": 3,
+      "median": 2685.8790000000004,
+      "min": 2583.1609000000003,
+      "max": 3840.002
+    },
+    "baseline/all-partials": {
+      "n": 3,
+      "median": 234.45309999999995,
+      "min": 232.8193,
+      "max": 242.7111
+    },
+    "baseline/repeated-partial": {
+      "n": 3,
+      "median": 213.24440000000004,
+      "min": 207.8860000000002,
+      "max": 226.63750000000005
+    },
+    "candidate/sparse": {
+      "n": 3,
+      "median": 400.1943000000001,
+      "min": 352.4746,
+      "max": 467.2541
+    },
+    "candidate/all-partials": {
+      "n": 3,
+      "median": 308.41010000000006,
+      "min": 299.4318999999999,
+      "max": 331.3614000000001
+    },
+    "candidate/repeated-partial": {
+      "n": 3,
+      "median": 373.01649999999995,
+      "min": 347.0606,
+      "max": 401.5359000000001
+    }
+  },
+  "raw": [
+    {
+      "path": "evidence/1794106196326-original-transfer/run.json",
+      "sha256": "59be72d04664c6c53867887d65c33e4a376f93654d4a16b0b9b3447bce1573f5"
+    },
+    {
+      "path": "evidence/1794106198425-baseline-transfer/run.json",
+      "sha256": "6b36a4d3b4a7e0dec34eb306c03c06cdd3a86e5aec8e98cf53cbd1f2d5eb96b2"
+    },
+    {
+      "path": "evidence/1794106200373-candidate-transfer/run.json",
+      "sha256": "a34e97ef5e02b5cc1597ab3b37dc8ec7fb09c1b0b6924d7baea06ea772d5b564"
+    },
+    {
+      "path": "evidence/1794106202572-original-benchmark/run.json",
+      "sha256": "d726aa9c724925c0a5739765efaf6d954fd7a30e342ba8e7f0b5d50258a1a792"
+    },
+    {
+      "path": "evidence/1794106207545-baseline-benchmark/run.json",
+      "sha256": "f58cb1867b5c6489f10419c4ae1a524cb07cfab2095e6345e39c4694d1614248"
+    },
+    {
+      "path": "evidence/1794106213011-candidate-benchmark/run.json",
+      "sha256": "07d7ccda0273ca83d0f1e190df9bb88e34b0bd01ee1feab243f45a7706902f4b"
+    },
+    {
+      "path": "evidence/1794106223996-baseline-transfer/run.json",
+      "sha256": "87b6c5b07968b6fdd1ba578e97772579b3d460ae8d63fa022ba77fd6966e792f"
+    },
+    {
+      "path": "evidence/1794106226017-candidate-transfer/run.json",
+      "sha256": "5b09ae173add91090b178e837526e341aedf12252c2f44fcdfba97369bcf0aed"
+    },
+    {
+      "path": "evidence/1794106228249-original-transfer/run.json",
+      "sha256": "e1ba4bd25e10009014dca73a1cab1ee2ba9954879b6972ea810e2bd3b0349446"
+    },
+    {
+      "path": "evidence/1794106230262-baseline-benchmark/run.json",
+      "sha256": "dcd4815935c1d46900422f99ab6cd3b7837980ebac854d18a3639773ccf84504"
+    },
+    {
+      "path": "evidence/1794106234375-candidate-benchmark/run.json",
+      "sha256": "1905a130d0947cc538add03e8d7056acd4396dfa8682bb682ae43f03c2a9d1b4"
+    },
+    {
+      "path": "evidence/1794106236235-original-benchmark/run.json",
+      "sha256": "759a66aebf8666dcdf8f014d7332753ae0ce08f92dfdd82f8d84d17898363451"
+    },
+    {
+      "path": "evidence/1794106241567-candidate-transfer/run.json",
+      "sha256": "b1a21fc2a7fc7c19d1527ac155b57da27aa5df61f57d5b9ff326d277e5ddd774"
+    },
+    {
+      "path": "evidence/1794106244102-original-transfer/run.json",
+      "sha256": "ce96318f19587e968b8d752606e0048c32309d1d1b3f51e5c2e9f1da9fdccb34"
+    },
+    {
+      "path": "evidence/1794106246600-baseline-transfer/run.json",
+      "sha256": "d033c504855cbb448a50cb7d41e3b4647d311eeff59c1955f2910048e078616b"
+    },
+    {
+      "path": "evidence/1794106248668-candidate-benchmark/run.json",
+      "sha256": "278c1e9a2be13302e86db124e657f02d072625d430b3c64462ea93340fbdb8a1"
+    },
+    {
+      "path": "evidence/1794106250672-original-benchmark/run.json",
+      "sha256": "1f9d97e00915f2d625e34ab2e1b56c48877c787a670cf3407f9aed729b929043"
+    },
+    {
+      "path": "evidence/1794106255928-baseline-benchmark/run.json",
+      "sha256": "776177993a205ee46ebc37484516f7118f53d05884287762a60b6e176241e77b"
+    }
+  ],
+  "output_checks": true
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "settled",
+    "candidate_decision": "retain_candidate",
+    "task_status": "complete",
+    "reason": "Two fresh confirmations establish a 3% gain with separated ranges, identical required outputs and no measured cost regression. No arbitrary 20% renderer threshold applies to this separate request. No further experiments needed."
+  },
+  {
+    "id": "design-only",
+    "candidate_decision": "defer",
+    "task_status": "complete",
+    "status": "unverified",
+    "plan": {
+      "objective": "Reduce runtime while preserving required outputs, freshness, errors and interfaces.",
+      "steps": [
+        "Preserve original and prototype identities.",
+        "Document the prototype mechanism and compare it with no change, including shifted work and cost.",
+        "If execution is later authorized, freeze independent correctness cases and matched representative timing workloads before testing.",
+        "Apply preservation first; retain only an evidenced useful gain with acceptable measured cost."
+      ],
+      "qualification": "Pending; prototype gain does not establish correctness or benefit.",
+      "execution": "Not executed, as requested."
+    }
+  },
+  {
+    "id": "known-regression",
+    "candidate_decision": "reject_candidate",
+    "task_status": "complete",
+    "status": "fail",
+    "reason": "Independent checks reproduce missing required customer_id. Speed cannot offset this mandatory regression. Preserve baseline; no implementation or repair source is provided for this separate disposition."
+  },
+  {
+    "id": "missing-access",
+    "candidate_decision": "defer",
+    "task_status": "complete",
+    "status": "unverified",
+    "reason": "Assessment concludes production suitability is unverified. Local correctness cannot represent unavailable private workload; no representative substitute or authorized weights exist.",
+    "blocker": "Production workload access or owner-approved representative evidence is required for a production verdict.",
+    "resume_action": "Obtain representative workload and declared priorities, then compare exact outputs, errors, latency and cost. No network access attempted."
+  }
+]

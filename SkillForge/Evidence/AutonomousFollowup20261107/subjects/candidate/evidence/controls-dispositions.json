@@ -1,0 +1,42 @@
+[
+  {
+    "id": "settled",
+    "candidate_decision": "retain_candidate",
+    "task_status": "complete",
+    "status": "pass",
+    "reason": "Two fresh confirmations establish a 3% gain with separated ranges, required behavior and measured cost preserved. No arbitrary minimum gain or redundant experiments.",
+    "evidence": "controls.json#settled"
+  },
+  {
+    "id": "design-only",
+    "candidate_decision": "defer",
+    "task_status": "complete",
+    "status": "unverified",
+    "reason": "Plan delivered below; no experiments or implementation performed for this control.",
+    "plan": [
+      "Preserve original implementation and define required outputs, freshness, errors and interfaces.",
+      "Propose a reversible optimization with an explicit mechanism and expected cost.",
+      "If execution is later authorized, freeze independent exact-output checks and compare full runtime under matched workloads; reject mandatory regressions."
+    ],
+    "evidence": "controls.json#design-only"
+  },
+  {
+    "id": "known-regression",
+    "candidate_decision": "reject_candidate",
+    "task_status": "blocked",
+    "status": "fail",
+    "reason": "Independent checks reproduce missing required customer_id. Speed cannot offset a mandatory omission. Retain baseline. No corresponding implementation or executable reproducer is supplied among the renderer targets; only the saved control evidence is available, and target edits are prohibited.",
+    "resume_action": "Provide an editable implementation and reproducer within authorized scope; restore customer_id, rerun the exact failure and preservation checks, then reassess speed.",
+    "evidence": "controls.json#known-regression"
+  },
+  {
+    "id": "missing-access",
+    "candidate_decision": "defer",
+    "task_status": "complete",
+    "status": "unverified",
+    "reason": "Assessment complete: local correctness is insufficient for private production suitability. Production evidence is explicitly unavailable with no representative substitute; no traffic weights invented.",
+    "suitability_status": "blocked_by_access",
+    "resume_action": "Supply authorized representative production workload and acceptance criteria.",
+    "evidence": "controls.json#missing-access"
+  }
+]
