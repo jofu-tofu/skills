@@ -1,0 +1,141 @@
+{
+  "method": "Manual source-grounded review of exact decisions; actual selection and downstream behavior independently replayed. Not a learned semantic judge.",
+  "arms": {
+    "baseline": [
+      {
+        "id": 1,
+        "status": "pass",
+        "observation": "No",
+        "reason": "Primary omits observed adjacent failures.",
+        "evidence": [
+          "subjects/baseline/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 2,
+        "status": "pass",
+        "observation": "No",
+        "reason": "Source-membership contract excludes factual truth; boundary pair executes the limit.",
+        "evidence": [
+          "subjects/baseline/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 3,
+        "status": "pass",
+        "observation": "No; robustness remains unverified",
+        "reason": "Historical artifacts are exposed, with no prospective optimization sequence.",
+        "evidence": [
+          "subjects/baseline/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 4,
+        "status": "pass",
+        "observation": "No",
+        "reason": "Finite equality contract stipulated, population calibration not prerequisite; no CSV execution claimed.",
+        "evidence": [
+          "subjects/baseline/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 5,
+        "status": "pass",
+        "observation": "Neither; unverified pending adjudication",
+        "reason": "Conflicting equal authorities and no resolution cannot ground a confirmed verdict.",
+        "evidence": [
+          "subjects/baseline/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 6,
+        "status": "pass",
+        "observation": "No",
+        "reason": "Explicit design-only scope does not authorize execution.",
+        "evidence": [
+          "subjects/baseline/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      }
+    ],
+    "candidate": [
+      {
+        "id": 1,
+        "status": "pass",
+        "observation": "No",
+        "reason": "Primary omits observed adjacent failures.",
+        "evidence": [
+          "subjects/candidate/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 2,
+        "status": "pass",
+        "observation": "No",
+        "reason": "Source-membership contract excludes factual truth; boundary pair executes the limit.",
+        "evidence": [
+          "subjects/candidate/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 3,
+        "status": "pass",
+        "observation": "No; optimization robustness is unverified",
+        "reason": "Historical artifacts are exposed, with no prospective optimization sequence.",
+        "evidence": [
+          "subjects/candidate/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 4,
+        "status": "pass",
+        "observation": "No",
+        "reason": "Finite equality contract stipulated, population calibration not prerequisite; no CSV execution claimed.",
+        "evidence": [
+          "subjects/candidate/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 5,
+        "status": "pass",
+        "observation": "Neither; unverified",
+        "reason": "Conflicting equal authorities and no resolution cannot ground a confirmed verdict.",
+        "evidence": [
+          "subjects/candidate/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      },
+      {
+        "id": 6,
+        "status": "pass",
+        "observation": "No",
+        "reason": "Explicit design-only scope does not authorize execution.",
+        "evidence": [
+          "subjects/candidate/decision.json",
+          "Protocol.md",
+          "treatment.json"
+        ]
+      }
+    ]
+  }
+}

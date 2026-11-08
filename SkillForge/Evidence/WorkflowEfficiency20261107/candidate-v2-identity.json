@@ -1,0 +1,5 @@
+{
+  "base": "candidate",
+  "only_change": "Workflows/UpdateSkill.md",
+  "sha256": "fa0b301e9254cd96bff677fc54921d555cf2572643b40de9306fea6e98b7c3e5"
+}

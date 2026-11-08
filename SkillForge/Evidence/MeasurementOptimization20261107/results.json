@@ -1,0 +1,161 @@
+{
+  "suite_version": "MeasurementOptimization20261107-v1",
+  "workflow": "UpdateSkill",
+  "mode": "exploratory assessment",
+  "claim": "Real renderer optimization under two methods with independent frozen outcomes; bounded local target gains, no established causal method superiority.",
+  "snapshots": {
+    "baseline": "244434c6476f6678fb1cca7fa1193129f54ae1de",
+    "method_candidate": "prior MeasurementValidity20261107 patch; exact files in source.json",
+    "source": "source.json",
+    "cases": "consumer.ts",
+    "measurement": "Protocol.md",
+    "checker": "freeze.json"
+  },
+  "requested_trials": 2,
+  "completed_trials": 2,
+  "runs": [
+    {
+      "case_id": "renderer-optimization",
+      "role": "acceptance",
+      "configuration": "baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "correctness",
+          "measurement_id": "independent-render-consumer-v1",
+          "status": "pass",
+          "observation": {
+            "pass": 23,
+            "fail": 0
+          },
+          "evidence": [
+            "outcomes.json"
+          ],
+          "reason": "23 frozen exact behavior checks; source contracts and supplied strings ground references."
+        },
+        {
+          "id": "regression",
+          "measurement_id": "existing-tests",
+          "status": "pass",
+          "observation": {
+            "passed": 37,
+            "exit": 0
+          },
+          "evidence": [
+            "subjects/baseline/tests.json"
+          ],
+          "reason": "Unchanged original tests in disposable target copy."
+        },
+        {
+          "id": "useful-local-speedup",
+          "measurement_id": "three-process-render-time",
+          "status": "pass",
+          "observation": {
+            "median_ms": 1307.4975,
+            "improvement_fraction": 0.2017070131531461
+          },
+          "evidence": [
+            "timings.json",
+            "Protocol.md"
+          ],
+          "reason": "Observed median clears frozen 20% threshold; timing uncertainty and workload scope remain explicit."
+        }
+      ],
+      "cost": {
+        "status": "completed",
+        "exit": 0,
+        "seconds": 357.615,
+        "usage": {
+          "input_tokens": 861691,
+          "cached_input_tokens": 800896,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 10931,
+          "reasoning_output_tokens": 1662
+        }
+      }
+    },
+    {
+      "case_id": "renderer-optimization",
+      "role": "acceptance",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "correctness",
+          "measurement_id": "independent-render-consumer-v1",
+          "status": "pass",
+          "observation": {
+            "pass": 23,
+            "fail": 0
+          },
+          "evidence": [
+            "outcomes.json"
+          ],
+          "reason": "23 frozen exact behavior checks; source contracts and supplied strings ground references."
+        },
+        {
+          "id": "regression",
+          "measurement_id": "existing-tests",
+          "status": "pass",
+          "observation": {
+            "passed": 37,
+            "exit": 0
+          },
+          "evidence": [
+            "subjects/candidate/tests.json"
+          ],
+          "reason": "Unchanged original tests in disposable target copy."
+        },
+        {
+          "id": "useful-local-speedup",
+          "measurement_id": "three-process-render-time",
+          "status": "pass",
+          "observation": {
+            "median_ms": 229.99170000000004,
+            "improvement_fraction": 0.8595784992759179
+          },
+          "evidence": [
+            "timings.json",
+            "Protocol.md"
+          ],
+          "reason": "Observed median clears frozen 20% threshold; timing uncertainty and workload scope remain explicit."
+        }
+      ],
+      "cost": {
+        "status": "completed",
+        "exit": 0,
+        "seconds": 374.791,
+        "usage": {
+          "input_tokens": 1310758,
+          "cached_input_tokens": 1248640,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 10465,
+          "reasoning_output_tokens": 1558
+        }
+      }
+    }
+  ],
+  "decision": "inconclusive",
+  "candidate_decision": "retain_baseline",
+  "task_status": "complete",
+  "targeted_benefit": {
+    "target_optimization": "Both targets pass local usefulness gate; different artifact speed observations.",
+    "method_superiority": "unverified"
+  },
+  "preservation": {
+    "status": "pass",
+    "scope": "Frozen 23 checks and 37 existing tests per target.",
+    "unresolved_compatibility": "Unused unavailable partial no longer blocks candidate-produced target. Policy not specified; no target adoption."
+  },
+  "regression_coverage": "Protocol.md#qualification-and-scope",
+  "limitations": [
+    "One author per method, shared model/vendor.",
+    "Constructed sparse workload, no production distribution.",
+    "Baseline gain close to the 20% threshold; three processes do not establish a stable rate.",
+    "Transfer profiles are single-process diagnostics and show a different ranking.",
+    "Rendering fidelity does not certify downstream model obedience.",
+    "No universal prediction, correlation or long optimization-sequence robustness claim."
+  ]
+}

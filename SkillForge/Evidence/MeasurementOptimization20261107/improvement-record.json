@@ -1,0 +1,71 @@
+{
+  "improvement_id": "MeasurementOptimization20261107",
+  "parent_attempt": "MeasurementValidity20261107",
+  "workflow": "SkillForge/DesignMeasurement",
+  "baseline": "244434c6476f6678fb1cca7fa1193129f54ae1de",
+  "candidate": "prior two-file use-specific qualification patch",
+  "hypothesis": {
+    "observed_failure": null,
+    "reproduction": "not_applicable",
+    "desired_gain": "Improve actual optimization decisions by distinguishing profiling gains from independent user outcomes."
+  },
+  "targeted_failure": null,
+  "evaluation": {
+    "protocol": "Protocol.md",
+    "qualification": "Qualification.md",
+    "results": "results.json"
+  },
+  "loop_observations": [
+    {
+      "stage": "qualification",
+      "status": "pass",
+      "observation": "Two faulty shortcuts improve public timing but fail independent outcomes; original and valid refactor pass.",
+      "evidence": [
+        "qualification.json",
+        "profile-controls.json"
+      ],
+      "attribution": "Direct measure scope qualification, not method benefit."
+    },
+    {
+      "stage": "execution",
+      "status": "pass",
+      "observation": "Both authors reject negligible compile-count-only gain, revise real targets and satisfy frozen outer gates.",
+      "evidence": [
+        "audit.json",
+        "outcomes.json",
+        "timings.json"
+      ],
+      "attribution": "Both methods worked in this task; different targets do not establish causal method effect."
+    },
+    {
+      "stage": "followup",
+      "status": "pass",
+      "observation": "Exact outputs transfer; relative latency changes with usage density and an error-handling difference is verified.",
+      "evidence": [
+        "FollowupProtocol.md",
+        "transfer.json"
+      ],
+      "attribution": "Bounded post-primary diagnostic, not a retroactive primary gate."
+    },
+    {
+      "stage": "decision",
+      "status": "pass",
+      "observation": "Retain baseline SkillForge; preserve target artifacts without adoption.",
+      "evidence": [
+        "Protocol.md",
+        "Report.md"
+      ],
+      "attribution": "Predeclared both-pass rule; no automatic second author pair."
+    }
+  ],
+  "decision": "retain_baseline",
+  "reason": "Both satisfy frozen gates; independent evidence does not establish extra method value.",
+  "limitations": [
+    "One author per method, shared model/vendor.",
+    "Constructed sparse workload, no production distribution.",
+    "Baseline gain close to the 20% threshold; three processes do not establish a stable rate.",
+    "Transfer profiles are single-process diagnostics and show a different ranking.",
+    "Rendering fidelity does not certify downstream model obedience.",
+    "No universal prediction, correlation or long optimization-sequence robustness claim."
+  ]
+}

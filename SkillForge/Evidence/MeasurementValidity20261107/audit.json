@@ -1,0 +1,211 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "id": "protocol-frozen",
+      "pass": true
+    },
+    {
+      "id": "contract-frozen",
+      "pass": true
+    },
+    {
+      "id": "raw-fixed-identity",
+      "pass": true
+    },
+    {
+      "id": "baseline-protected-inputs",
+      "pass": true
+    },
+    {
+      "id": "baseline-task-identical",
+      "pass": true
+    },
+    {
+      "id": "baseline-method-identity",
+      "pass": true
+    },
+    {
+      "id": "baseline-no-outer-experiment-material",
+      "pass": true
+    },
+    {
+      "id": "baseline-treatment-exposure",
+      "pass": true
+    },
+    {
+      "id": "baseline-completed",
+      "pass": true
+    },
+    {
+      "id": "baseline-actual-selected-target",
+      "pass": true
+    },
+    {
+      "id": "baseline-subject-record-preserved",
+      "pass": true
+    },
+    {
+      "id": "baseline-42-local-invocations",
+      "pass": true
+    },
+    {
+      "id": "candidate-protected-inputs",
+      "pass": true
+    },
+    {
+      "id": "candidate-task-identical",
+      "pass": true
+    },
+    {
+      "id": "candidate-method-identity",
+      "pass": true
+    },
+    {
+      "id": "candidate-no-outer-experiment-material",
+      "pass": true
+    },
+    {
+      "id": "candidate-treatment-exposure",
+      "pass": true
+    },
+    {
+      "id": "candidate-completed",
+      "pass": true
+    },
+    {
+      "id": "candidate-actual-selected-target",
+      "pass": true
+    },
+    {
+      "id": "candidate-subject-record-preserved",
+      "pass": true
+    },
+    {
+      "id": "candidate-42-local-invocations",
+      "pass": true
+    },
+    {
+      "id": "downstream-36-pass",
+      "pass": true
+    },
+    {
+      "id": "downstream-raw-identity",
+      "pass": true
+    },
+    {
+      "id": "boundary-protocol-identity",
+      "pass": true
+    },
+    {
+      "id": "boundary-misleading-pass-observed",
+      "pass": true
+    },
+    {
+      "id": "retained-baseline-Procedures/DesignMeasurement.md",
+      "pass": true
+    },
+    {
+      "id": "retained-baseline-Templates/Quality/Measurement.md",
+      "pass": true
+    }
+  ],
+  "arms": {
+    "baseline": {
+      "execution": {
+        "status": "completed",
+        "exit_code": 0,
+        "seconds": 182.639,
+        "usage": {
+          "input_tokens": 836993,
+          "cached_input_tokens": 772480,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5153,
+          "reasoning_output_tokens": 124
+        }
+      },
+      "selected_target": "broad",
+      "local_cases": 42,
+      "exposure": {
+        "entry": true,
+        "workflow": true,
+        "measurement": true,
+        "new_section": false
+      },
+      "protected_changes": [],
+      "events_sha256": "eaa581b126122c457ed5c6a6d4c67cf9a29f5f647287c0d0c30c448437b54f5d",
+      "decision_sha256": "896e10ad8925536df0456317a10133da0c40911ea6389d562a08dc2b4484eb19"
+    },
+    "candidate": {
+      "execution": {
+        "status": "completed",
+        "exit_code": 0,
+        "seconds": 183.571,
+        "usage": {
+          "input_tokens": 588137,
+          "cached_input_tokens": 528256,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5618,
+          "reasoning_output_tokens": 112
+        }
+      },
+      "selected_target": "broad",
+      "local_cases": 42,
+      "exposure": {
+        "entry": true,
+        "workflow": true,
+        "measurement": true,
+        "new_section": true
+      },
+      "protected_changes": [],
+      "events_sha256": "5d1011e12d31c8024ebeba3c4d7dac70de44d74255ac1dea7bf41dd64250f712",
+      "decision_sha256": "e05125ad266c0e7b719086f936b5999c9a8601a4ffae09dd2fbe9e558671d42a"
+    }
+  },
+  "fixed_error_counts": {
+    "original": {
+      "false_acceptance": {
+        "count": 9,
+        "denominator": 26
+      },
+      "false_rejection": {
+        "count": 0,
+        "denominator": 30
+      },
+      "usage_cases": 2,
+      "unavailable": 0
+    },
+    "narrow": {
+      "false_acceptance": {
+        "count": 4,
+        "denominator": 26
+      },
+      "false_rejection": {
+        "count": 0,
+        "denominator": 30
+      },
+      "usage_cases": 2,
+      "unavailable": 0
+    },
+    "broad": {
+      "false_acceptance": {
+        "count": 0,
+        "denominator": 26
+      },
+      "false_rejection": {
+        "count": 0,
+        "denominator": 30
+      },
+      "usage_cases": 2,
+      "unavailable": 0
+    }
+  },
+  "runtime": {
+    "node": "v24.12.0",
+    "bun": "1.3.5",
+    "configured_model": "gpt-6-astra",
+    "configured_effort": "low",
+    "configured_service_tier": "default"
+  },
+  "limits": "Configured model read from local config; same vendor and normal host context, not hermetic isolation. Manual six-decision review is separate; byte checks do not establish semantic validity."
+}

@@ -1,0 +1,1 @@
+Given a JSON array of signed integer amounts, emit {"total":N,"count":N}. Preserve negative values, zero and empty arrays. Missing input or any non-integer entry emits {"error":"invalid input"} and exits 2. Use Node only. No network or external packages.

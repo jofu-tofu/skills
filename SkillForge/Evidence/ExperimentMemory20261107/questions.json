@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "scope": "Bounded retrospective retrieval and decision test over selected historical records; not independent semantic truth, general efficacy or a population estimate.",
+  "instructions": "Cite source paths or record names. Separate observations from claims; identify missing evidence. Equivalent defensible decisions are accepted.",
+  "questions": [
+    {
+      "id": "H1",
+      "task": "Should we replace current SkillForge with the experiment-design revision, or the short practical control, based on the November 6 Fabric comparison? Give the decision, results and smallest informative next test."
+    },
+    {
+      "id": "H2",
+      "task": "A release note says the focused-activation and operational-efficiency drafts are still uninstalled and must not be integrated. Is that the latest recorded deployment decision? Reconcile it with the later integration entry without upgrading the benefit claim."
+    },
+    {
+      "id": "H3",
+      "task": "Can we cite the real Prompting focused-context comparison as proof GenerateAlternatives improved loading, now that focused activation was repaired? Separate original exposure, repaired exposure and measured benefit."
+    },
+    {
+      "id": "H4",
+      "task": "An audit failed the experiment-design baseline for not loading PlanChange; operational-efficiency logs also show runner and completion-checker errors. Should these count as failed target outcomes? Explain the validation corrections and completed outcomes."
+    },
+    {
+      "id": "H5",
+      "task": "Retrieval-continuation subjects saw two historical authored targets and ran local checks. Can we assign the better target to a historical selector arm and credit retrieved lessons for the gain? Identify missing evidence, what identical packets imply and whether unchanged repeats are justified."
+    }
+  ]
+}

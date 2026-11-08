@@ -1,0 +1,474 @@
+{
+  "raw_sha256": "b19123877d6c7489a0c86afb46e8b1c373a9f4b3aaac81a8dfe2201c03a30c75",
+  "cases_sha256": "c5a08816a162e251a251ae38ed579eb18e0dc6380b6fa5dc8d3b90d8a181102b",
+  "results": [
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-01",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"noClaims\":false,\"claims\":[{\"n\":1,\"text\":\"The rollout reached nineteen teams.\",\"grade\":\"C\"}],\"overall\":{\"Lowest claim score\":\"C\",\"Highest claim score\":\"C\",\"Average claim score\":\"C\"},\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-02",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"noClaims\":false,\"claims\":[{\"n\":1,\"text\":\"The rollout reached nineteen teams.\",\"grade\":\"C\"}],\"overall\":{\"Lowest claim score\":\"C\",\"Highest claim score\":\"C\",\"Average claim score\":\"C\"},\"problems\":[\"claim 1: fallacy quote not found in the source (\\\"The interface erased every record\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-03",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"noClaims\":false,\"claims\":[{\"n\":1,\"text\":\"The rollout reached nineteen teams.\",\"grade\":\"C\"}],\"overall\":{\"Lowest claim score\":\"C\",\"Highest claim score\":\"C\",\"Average claim score\":\"C\"},\"problems\":[\"claim 1: fallacy quote not found in the source (\\\"...\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-04",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"noComments\":false,\"verdict\":\"LIKED\",\"counts\":{\"positive\":2,\"negative\":0,\"neutral\":0,\"total\":2},\"positives\":[{\"text\":\"Helpful interface\",\"count\":2,\"total\":2,\"quote\":\"The console feels responsive\"}],\"negatives\":[],\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-05",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"noComments\":false,\"verdict\":\"LIKED\",\"counts\":{\"positive\":2,\"negative\":0,\"neutral\":0,\"total\":2},\"positives\":[{\"text\":\"Helpful interface\",\"count\":2,\"total\":2,\"quote\":\"The interface erased every record\"}],\"negatives\":[],\"problems\":[\"line 9: quote not found in the source (\\\"The interface erased every record\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-06",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"noComments\":false,\"verdict\":\"LIKED\",\"counts\":{\"positive\":2,\"negative\":0,\"neutral\":0,\"total\":2},\"positives\":[{\"text\":\"Helpful interface\",\"count\":2,\"total\":2,\"quote\":\"...\"}],\"negatives\":[],\"problems\":[\"line 9: empty quote\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-07",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":13,\"budget\":250,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-08",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":13,\"budget\":250,\"problems\":[\"Logos: quotation not found in the source (\\\"[Words nobody ever wrote in this source]\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-09",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":13,\"budget\":250,\"problems\":[\"Logos: quotation not found in the source (\\\"We destroyed the shelter beside every district\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-10",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":16,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-11",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":16,\"budget\":400,\"problems\":[\"line 6: Clarity quotation not found in the source (\\\"[Words nobody ever wrote in this source]\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-12",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":16,\"budget\":400,\"problems\":[\"line 6: Clarity quotation not found in the source (\\\"We destroyed the shelter beside every district\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-13",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":12,\"budget\":250,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-14",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":14,\"budget\":250,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-15",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":15,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-16",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":17,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-17",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":10,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "baseline",
+      "selected": "broad",
+      "id": "consumer-18",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":24,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-01",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"noClaims\":false,\"claims\":[{\"n\":1,\"text\":\"The rollout reached nineteen teams.\",\"grade\":\"C\"}],\"overall\":{\"Lowest claim score\":\"C\",\"Highest claim score\":\"C\",\"Average claim score\":\"C\"},\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-02",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"noClaims\":false,\"claims\":[{\"n\":1,\"text\":\"The rollout reached nineteen teams.\",\"grade\":\"C\"}],\"overall\":{\"Lowest claim score\":\"C\",\"Highest claim score\":\"C\",\"Average claim score\":\"C\"},\"problems\":[\"claim 1: fallacy quote not found in the source (\\\"The interface erased every record\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-03",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"noClaims\":false,\"claims\":[{\"n\":1,\"text\":\"The rollout reached nineteen teams.\",\"grade\":\"C\"}],\"overall\":{\"Lowest claim score\":\"C\",\"Highest claim score\":\"C\",\"Average claim score\":\"C\"},\"problems\":[\"claim 1: fallacy quote not found in the source (\\\"...\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-04",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"noComments\":false,\"verdict\":\"LIKED\",\"counts\":{\"positive\":2,\"negative\":0,\"neutral\":0,\"total\":2},\"positives\":[{\"text\":\"Helpful interface\",\"count\":2,\"total\":2,\"quote\":\"The console feels responsive\"}],\"negatives\":[],\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-05",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"noComments\":false,\"verdict\":\"LIKED\",\"counts\":{\"positive\":2,\"negative\":0,\"neutral\":0,\"total\":2},\"positives\":[{\"text\":\"Helpful interface\",\"count\":2,\"total\":2,\"quote\":\"The interface erased every record\"}],\"negatives\":[],\"problems\":[\"line 9: quote not found in the source (\\\"The interface erased every record\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-06",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"noComments\":false,\"verdict\":\"LIKED\",\"counts\":{\"positive\":2,\"negative\":0,\"neutral\":0,\"total\":2},\"positives\":[{\"text\":\"Helpful interface\",\"count\":2,\"total\":2,\"quote\":\"...\"}],\"negatives\":[],\"problems\":[\"line 9: empty quote\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-07",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":13,\"budget\":250,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-08",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":13,\"budget\":250,\"problems\":[\"Logos: quotation not found in the source (\\\"[Words nobody ever wrote in this source]\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-09",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":13,\"budget\":250,\"problems\":[\"Logos: quotation not found in the source (\\\"We destroyed the shelter beside every district\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-10",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":16,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-11",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":16,\"budget\":400,\"problems\":[\"line 6: Clarity quotation not found in the source (\\\"[Words nobody ever wrote in this source]\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-12",
+      "expected": false,
+      "exit": 1,
+      "status": "pass",
+      "run": {
+        "code": 1,
+        "stdout": "{\"ok\":false,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":16,\"budget\":400,\"problems\":[\"line 6: Clarity quotation not found in the source (\\\"We destroyed the shelter beside every district\\\")\"]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-13",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":12,\"budget\":250,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-14",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"sections\":[\"Logos\"],\"techniques\":0,\"quotes\":1,\"words\":14,\"budget\":250,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-15",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":15,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-16",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":17,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-17",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":10,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "selected": "broad",
+      "id": "consumer-18",
+      "expected": true,
+      "exit": 0,
+      "status": "pass",
+      "run": {
+        "code": 0,
+        "stdout": "{\"ok\":true,\"mode\":\"ratings\",\"sections\":[\"Clarity\"],\"words\":24,\"budget\":400,\"problems\":[]}\n",
+        "stderr": ""
+      }
+    }
+  ]
+}

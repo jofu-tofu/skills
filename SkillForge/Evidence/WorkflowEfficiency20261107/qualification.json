@@ -1,0 +1,760 @@
+{
+  "ledger": {
+    "status": "qualified",
+    "scope": "Fixed exact JSON/exit and read-count contracts under Node VM; actual CLI separately checked",
+    "outcomes": {
+      "positive": [
+        {
+          "input": "[]",
+          "expected": {
+            "total": 0,
+            "count": 0
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":0}"
+          ],
+          "actual_exit": 0,
+          "reads": 2,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[3,-7,0,9]",
+          "expected": {
+            "total": 5,
+            "count": 4
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":5,\"count\":4}"
+          ],
+          "actual_exit": 0,
+          "reads": 2,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[-12,-5]",
+          "expected": {
+            "total": -17,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":-17,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 2,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[0,0]",
+          "expected": {
+            "total": 0,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 2,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[1.5]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[\"3\"]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "null",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "{}",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "broken",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": null,
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        }
+      ],
+      "valid_alternative": [
+        {
+          "input": "[]",
+          "expected": {
+            "total": 0,
+            "count": 0
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":0}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[3,-7,0,9]",
+          "expected": {
+            "total": 5,
+            "count": 4
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":5,\"count\":4}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[-12,-5]",
+          "expected": {
+            "total": -17,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":-17,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[0,0]",
+          "expected": {
+            "total": 0,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[1.5]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[\"3\"]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "null",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "{}",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "broken",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": null,
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        }
+      ],
+      "wrong_sum": [
+        {
+          "input": "[]",
+          "expected": {
+            "total": 0,
+            "count": 0
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":0}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[3,-7,0,9]",
+          "expected": {
+            "total": 5,
+            "count": 4
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":19,\"count\":4}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "fail"
+        },
+        {
+          "input": "[-12,-5]",
+          "expected": {
+            "total": -17,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":17,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "fail"
+        },
+        {
+          "input": "[0,0]",
+          "expected": {
+            "total": 0,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[1.5]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[\"3\"]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "null",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "{}",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "broken",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": null,
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        }
+      ],
+      "swallowed_error": [
+        {
+          "input": "[]",
+          "expected": {
+            "total": 0,
+            "count": 0
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":0}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[3,-7,0,9]",
+          "expected": {
+            "total": 5,
+            "count": 4
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":5,\"count\":4}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[-12,-5]",
+          "expected": {
+            "total": -17,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":-17,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[0,0]",
+          "expected": {
+            "total": 0,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[1.5]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "fail"
+        },
+        {
+          "input": "[\"3\"]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "fail"
+        },
+        {
+          "input": "null",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "fail"
+        },
+        {
+          "input": "{}",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "fail"
+        },
+        {
+          "input": "broken",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "fail"
+        },
+        {
+          "input": null,
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "fail"
+        }
+      ],
+      "irrelevant_comment": [
+        {
+          "input": "[]",
+          "expected": {
+            "total": 0,
+            "count": 0
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":0}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[3,-7,0,9]",
+          "expected": {
+            "total": 5,
+            "count": 4
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":5,\"count\":4}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[-12,-5]",
+          "expected": {
+            "total": -17,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":-17,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[0,0]",
+          "expected": {
+            "total": 0,
+            "count": 2
+          },
+          "exit": 0,
+          "stdout": [
+            "{\"total\":0,\"count\":2}"
+          ],
+          "actual_exit": 0,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[1.5]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "[\"3\"]",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "null",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "{}",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": "broken",
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        },
+        {
+          "input": null,
+          "expected": {
+            "error": "invalid input"
+          },
+          "exit": 2,
+          "stdout": [
+            "{\"error\":\"invalid input\"}"
+          ],
+          "actual_exit": 2,
+          "reads": 1,
+          "error": null,
+          "status": "pass"
+        }
+      ]
+    }
+  },
+  "prompting": {
+    "status": "qualified",
+    "scope": "Reuse existing 18 consumer checks, original and two valid cache alternatives passed; stale-output cache rejected. Same frozen target/runtime family. Not general semantic validity.",
+    "references": [
+      {
+        "path": "20-working-T1-T3/RealSkillComparison20261106/consumer.ts",
+        "sha256": "5a1a090113f79ec8c311ff8c7abf983ed1c509c20a61169f9952a9187ac0ba07"
+      },
+      {
+        "path": "20-working-T1-T3/RealSkillComparison20261106/qualification.json",
+        "sha256": "f59271c6c7c2c7f46cae693d1fc5879f771a4a4b05311010772ea7c713ffdcce"
+      },
+      {
+        "path": "20-working-T1-T3/RealSkillComparison20261106/qualify.cjs",
+        "sha256": "4b497effad24d79bf770fd5f46c63d495124d951cc0f134a2cb9f6379ae43047"
+      }
+    ]
+  },
+  "cost": {
+    "status": "qualified",
+    "scope": "Direct process duration and recorded provider usage/command counts; UTF-8 bytes proxy only. No latency causal estimator; missing usage null."
+  }
+}

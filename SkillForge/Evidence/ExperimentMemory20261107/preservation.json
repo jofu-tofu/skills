@@ -1,0 +1,30 @@
+[
+  {
+    "path": "Procedures/PlanChange.md",
+    "baseline_equal": true
+  },
+  {
+    "path": "Procedures/RecordLearning.md",
+    "baseline_equal": true
+  },
+  {
+    "path": "Workflows/UpdateSkill.md",
+    "baseline_equal": true
+  },
+  {
+    "path": "Workflows/EvaluateSkill.md",
+    "baseline_equal": true
+  },
+  {
+    "path": "Tools/CheckCompletion.cjs",
+    "baseline_equal": true
+  },
+  {
+    "path": "Procedures/ReuseEvidence.md",
+    "removed": true
+  },
+  {
+    "path": "Evidence/DecisionMap.md",
+    "removed": true
+  }
+]

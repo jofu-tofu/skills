@@ -1,0 +1,11 @@
+# Bounded transfer follow-up, frozen before execution
+
+Primary result: both authored targets pass 23/23 independent cases and 37 existing tests. Their fresh-process median gains are 20.17% (baseline method) and 85.96% (candidate method). Both meet the frozen 20% gate, so the protocol retains baseline SkillForge and does not trigger another author pair. The baseline's margin is narrow; do not treat it as a stable production rate. The candidate produced a substantially faster artifact on the sampled workload, not a demonstrated causal method advantage.
+
+One identified uncertainty remains: the candidate shifts work to each partial invocation, and explicitly changes failure behavior for unused unavailable partials. Resolve that boundary with a cheap diagnostic, not another saturated model trial or a retroactive primary gate.
+
+On new disposable copies of all three targets, execute two exact-output workloads: all 64 partials used once per render, and one partial used 100 times per render with changing data. Twenty renders per workload, one process per artifact. Expected outputs are independently constructed from supplied row/name values, not a target oracle. Preserve all timings, but this single process is diagnostic only and cannot replace the primary three-process timing decision or estimate production benefit. It tests whether the original one-used-partial result transfers to denser or repeated usage.
+
+Then add a directory with a `.hbs` name: it is a deliberately unavailable partial source. Render a template that does not reference it, then one that does. Observe whether the reported eager-versus-lazy error distinction occurs. The used-unavailable source must not produce successful content. For the unused source, report behavioral difference without inventing an owner policy: the task did not specify whether an unrelated unavailable source should block a valid render. This is an unresolved compatibility choice for any later target adoption, not a post-hoc failure label for the primary trial.
+
+No target or SkillForge changes, threshold amendments or new author trials are authorized by this diagnostic. Stop after these cases, retain raw observations and preserve the primary disposition.

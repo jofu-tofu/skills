@@ -1,0 +1,27 @@
+{
+  "root_relative_to_project": "MeasurementValidity20261107/raw",
+  "files": {
+    "fixed.json": "df5bd006602d9b46019d17f8e0bda8aa0d8c20bf600a58423d70da382c688ee3",
+    "downstream.json": "b19123877d6c7489a0c86afb46e8b1c373a9f4b3aaac81a8dfe2201c03a30c75",
+    "trials/baseline/events.jsonl": "eaa581b126122c457ed5c6a6d4c67cf9a29f5f647287c0d0c30c448437b54f5d",
+    "trials/baseline/decision.json": "896e10ad8925536df0456317a10133da0c40911ea6389d562a08dc2b4484eb19",
+    "trials/baseline/execution.json": "ece0a925c81c04c0990aea98f6cca3dcc3bd19ea66deb3a01bb13b8bdb1ef2dc",
+    "trials/baseline/subject-execution.json": "ece0a925c81c04c0990aea98f6cca3dcc3bd19ea66deb3a01bb13b8bdb1ef2dc",
+    "trials/baseline/runner-execution.json": "d033e1fc50a46d43b8ab9b341d2679b8231f045927d7dcbd51df548b01d852da",
+    "trials/baseline/input-manifest.json": "31fe2319655082504820b4f1173661aacbb49c2e42e4e86b38dd842c3bef85e5",
+    "trials/baseline/stderr.txt": "62c362ee80ad5b41faf21ee9561375ddcd28bd40e41d9510a9d17e8dc6ec57f0",
+    "trials/candidate/events.jsonl": "5d1011e12d31c8024ebeba3c4d7dac70de44d74255ac1dea7bf41dd64250f712",
+    "trials/candidate/decision.json": "e05125ad266c0e7b719086f936b5999c9a8601a4ffae09dd2fbe9e558671d42a",
+    "trials/candidate/execution.json": "c200e4db014a5b32cdd4904b7d3ce06c8d582420abdefc735de3153f00b4f4bd",
+    "trials/candidate/subject-execution.json": "c200e4db014a5b32cdd4904b7d3ce06c8d582420abdefc735de3153f00b4f4bd",
+    "trials/candidate/runner-execution.json": "eb5ab17cd2cb86e7212bf347d831aae6c31da24fde2fce1a64be3a83e5a7714d",
+    "trials/candidate/input-manifest.json": "54be174e0afce712f13ff0b49a8a5739796134ff8740019c80e6c36ab641893d",
+    "trials/candidate/stderr.txt": "7340ebac203fb5912e9ea729b5108d36cf5b927d3496d35315bb6b785921389e",
+    "runtime-denial-v1/baseline/stderr.txt": "0a524731bea9ff30da27a084b7033d4f7b44dd75c903d61068dcf06df993bb24",
+    "runtime-denial-v1/baseline/execution.json": "196a4e9ae5c7541f98c654da392139dab112d1cbfc1fad3784683384efc48f04",
+    "runtime-denial-v1/baseline/process.json": "97a500049d359bb60f4652a4ceefd92dedd4876d173b5bbaf47e5fdaf69947be",
+    "runtime-denial-v1/candidate/stderr.txt": "6f2f324fab3873af0cc3fdb2cf226dda7f289199e0e2bbf6b4d5acad5465352c",
+    "runtime-denial-v1/candidate/execution.json": "e5fb71286a556c4023023bb424e3cbe4fe7be3ea69f63a9487ef008fa6eef66b",
+    "runtime-denial-v1/candidate/process.json": "6fca0cdf6fd372972c9eb8e4d2c732d0c6a16cd73f769ef12b05234dbe6fcb8b"
+  }
+}

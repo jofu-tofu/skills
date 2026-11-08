@@ -1,0 +1,303 @@
+{
+  "suite_version": "workflow-effort-v1-with-adaptive-v2",
+  "workflow": "UpdateSkill",
+  "mode": "exploratory assessment",
+  "claim": "Bounded orchestration-cost comparison with executable output preservation",
+  "snapshots": {
+    "inputs": "identities.json",
+    "v2": "candidate-v2-identity.json",
+    "measurement_sha256": "1b53a310c5528b4a229f3c0d85500ca402df51ab025fb9e2e9746cb96bf72150",
+    "ledger_checker_sha256": "1bdeda6ab646edbb3a444627060e084d4db186b61550e0399ad0952ea86ff11b",
+    "prompting_checker_sha256": "5a1a090113f79ec8c311ff8c7abf983ed1c509c20a61169f9952a9187ac0ba07"
+  },
+  "requested_trials": 6,
+  "completed_trials": 6,
+  "regression_coverage": "Protocol.md#coverage-and-limitations",
+  "runs": [
+    {
+      "case_id": "ledger-baseline",
+      "role": "validation",
+      "configuration": "ledger-baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "external-outcomes",
+          "measurement_id": "executable-contracts-v1",
+          "status": "pass",
+          "observation": "Parsed JSON, exit and read counts pass",
+          "evidence": [
+            "summary.json",
+            "raw-manifest.json"
+          ],
+          "reason": "Executed checks under qualified bounded contracts"
+        },
+        {
+          "id": "cost-observation",
+          "measurement_id": "runtime-counters-v1",
+          "status": "pass",
+          "observation": {
+            "seconds": 249.9225221,
+            "commands": 12,
+            "usage": {
+              "input_tokens": 655168,
+              "cached_input_tokens": 609920,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 7647,
+              "reasoning_output_tokens": 319
+            },
+            "returned_bytes": 170662
+          },
+          "evidence": [
+            "summary.json"
+          ],
+          "reason": "Recorded counters, not a causal or population efficiency judgment"
+        }
+      ]
+    },
+    {
+      "case_id": "ledger-candidate",
+      "role": "validation",
+      "configuration": "ledger-candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "external-outcomes",
+          "measurement_id": "executable-contracts-v1",
+          "status": "pass",
+          "observation": "Parsed JSON, exit and read counts pass",
+          "evidence": [
+            "summary.json",
+            "raw-manifest.json"
+          ],
+          "reason": "Executed checks under qualified bounded contracts"
+        },
+        {
+          "id": "cost-observation",
+          "measurement_id": "runtime-counters-v1",
+          "status": "pass",
+          "observation": {
+            "seconds": 258.7258887,
+            "commands": 15,
+            "usage": {
+              "input_tokens": 793786,
+              "cached_input_tokens": 747136,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 7102,
+              "reasoning_output_tokens": 207
+            },
+            "returned_bytes": 187943
+          },
+          "evidence": [
+            "summary.json"
+          ],
+          "reason": "Recorded counters, not a causal or population efficiency judgment"
+        }
+      ]
+    },
+    {
+      "case_id": "ledger-candidate-v2",
+      "role": "development",
+      "configuration": "ledger-candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "external-outcomes",
+          "measurement_id": "executable-contracts-v1",
+          "status": "pass",
+          "observation": "Parsed JSON, exit and read counts pass",
+          "evidence": [
+            "summary.json",
+            "raw-manifest.json"
+          ],
+          "reason": "Executed checks under qualified bounded contracts"
+        },
+        {
+          "id": "cost-observation",
+          "measurement_id": "runtime-counters-v1",
+          "status": "pass",
+          "observation": {
+            "seconds": 253.7628588,
+            "commands": 12,
+            "usage": {
+              "input_tokens": 596317,
+              "cached_input_tokens": 553600,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 7799,
+              "reasoning_output_tokens": 199
+            },
+            "returned_bytes": 173894
+          },
+          "evidence": [
+            "summary.json"
+          ],
+          "reason": "Recorded counters, not a causal or population efficiency judgment"
+        }
+      ]
+    },
+    {
+      "case_id": "prompting-baseline",
+      "role": "validation",
+      "configuration": "prompting-baseline",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "external-outcomes",
+          "measurement_id": "executable-contracts-v1",
+          "status": "pass",
+          "observation": "37 existing tests and 18 external consumers pass",
+          "evidence": [
+            "summary.json",
+            "raw-manifest.json"
+          ],
+          "reason": "Executed checks under qualified bounded contracts"
+        },
+        {
+          "id": "cost-observation",
+          "measurement_id": "runtime-counters-v1",
+          "status": "pass",
+          "observation": {
+            "seconds": 289.4173899,
+            "commands": 13,
+            "usage": {
+              "input_tokens": 698663,
+              "cached_input_tokens": 652032,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 9529,
+              "reasoning_output_tokens": 771
+            },
+            "returned_bytes": 191979
+          },
+          "evidence": [
+            "summary.json"
+          ],
+          "reason": "Recorded counters, not a causal or population efficiency judgment"
+        }
+      ]
+    },
+    {
+      "case_id": "prompting-candidate",
+      "role": "validation",
+      "configuration": "prompting-candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "external-outcomes",
+          "measurement_id": "executable-contracts-v1",
+          "status": "pass",
+          "observation": "37 existing tests and 18 external consumers pass",
+          "evidence": [
+            "summary.json",
+            "raw-manifest.json"
+          ],
+          "reason": "Executed checks under qualified bounded contracts"
+        },
+        {
+          "id": "cost-observation",
+          "measurement_id": "runtime-counters-v1",
+          "status": "pass",
+          "observation": {
+            "seconds": 362.0064102,
+            "commands": 18,
+            "usage": {
+              "input_tokens": 1066679,
+              "cached_input_tokens": 1012480,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 11179,
+              "reasoning_output_tokens": 1341
+            },
+            "returned_bytes": 226665
+          },
+          "evidence": [
+            "summary.json"
+          ],
+          "reason": "Recorded counters, not a causal or population efficiency judgment"
+        }
+      ]
+    },
+    {
+      "case_id": "typo-candidate-v2",
+      "role": "development",
+      "configuration": "typo-candidate-v2",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "external-outcomes",
+          "measurement_id": "executable-contracts-v1",
+          "status": "pass",
+          "observation": "Exact intended byte edit; no experiment packet",
+          "evidence": [
+            "summary.json",
+            "raw-manifest.json"
+          ],
+          "reason": "Executed checks under qualified bounded contracts"
+        },
+        {
+          "id": "cost-observation",
+          "measurement_id": "runtime-counters-v1",
+          "status": "pass",
+          "observation": {
+            "seconds": 44.6008025,
+            "commands": 4,
+            "usage": {
+              "input_tokens": 124267,
+              "cached_input_tokens": 109952,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 746,
+              "reasoning_output_tokens": 0
+            },
+            "returned_bytes": 26908
+          },
+          "evidence": [
+            "summary.json"
+          ],
+          "reason": "Recorded counters, not a causal or population efficiency judgment"
+        }
+      ]
+    }
+  ],
+  "decision": "fail",
+  "targeted_benefit": {
+    "v1": "fail",
+    "v2": "fail",
+    "rule": "Neither candidate meets its declared retention/proceed rule"
+  },
+  "preservation": "pass within tested scope",
+  "candidate_decision": "retain_baseline",
+  "improvement_id": "WorkflowEfficiency20261107",
+  "targeted_failure": null,
+  "loop_observations": [
+    {
+      "stage": "activation",
+      "status": "supported",
+      "observation": "Both candidate paragraphs delivered; V1 reuse unreliable, V2 optional templates skipped",
+      "attribution": "observed",
+      "evidence": [
+        "Preflight.md",
+        "Report.md"
+      ]
+    },
+    {
+      "stage": "selection",
+      "status": "supported",
+      "observation": "Reject both candidates under frozen rules; restore baseline",
+      "attribution": "observed",
+      "evidence": [
+        "Report.md",
+        "Amendment.md"
+      ]
+    }
+  ],
+  "limitations": [
+    "One run per condition; V2 adaptive and reuses baseline",
+    "Unknown repeated-run variance and exact inherited model identity",
+    "No causal speed, monetary saving, broad workflow or population reliability claim",
+    "Operator review is not independent human assessment",
+    "Author elapsed excludes fixture setup and outer evaluation"
+  ]
+}

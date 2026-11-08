@@ -1,0 +1,135 @@
+{
+  "protocol_sha256": "441ac00e6c8da9a9d14aca7619a1d502c86513b79b52cefe1844a44fa6ed32be",
+  "checker_sha256": "a19426154339cd7837d6496c74df5a9112ba0ffaef1c66ea13d53d1aff4c466e",
+  "rows": [
+    {
+      "arm": "original",
+      "run": {
+        "command": [
+          "bun",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\transfer.ts",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\transfer\\original\\target",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\transfer\\original\\evidence"
+        ],
+        "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\transfer\\original",
+        "exit": 0,
+        "stdout": "[{\"workload\":\"all-partials\",\"iterations\":20,\"milliseconds\":234.17859999999996,\"status\":\"pass\",\"error\":null},{\"workload\":\"repeated-partial\",\"iterations\":20,\"milliseconds\":171.57759999999996,\"status\":\"pass\",\"error\":null},{\"case\":\"unused-unavailable\",\"output\":null,\"error\":\"Error: EISDIR: illegal operation on a directory, read\"},{\"case\":\"used-unavailable\",\"output\":null,\"error\":\"Error: EISDIR: illegal operation on a directory, read\"}]\n",
+        "stderr": "",
+        "error": null,
+        "seconds": 1.219
+      },
+      "result": [
+        {
+          "workload": "all-partials",
+          "iterations": 20,
+          "milliseconds": 234.17859999999996,
+          "status": "pass",
+          "error": null
+        },
+        {
+          "workload": "repeated-partial",
+          "iterations": 20,
+          "milliseconds": 171.57759999999996,
+          "status": "pass",
+          "error": null
+        },
+        {
+          "case": "unused-unavailable",
+          "output": null,
+          "error": "Error: EISDIR: illegal operation on a directory, read"
+        },
+        {
+          "case": "used-unavailable",
+          "output": null,
+          "error": "Error: EISDIR: illegal operation on a directory, read"
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "run": {
+        "command": [
+          "bun",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\transfer.ts",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\transfer\\baseline\\target",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\transfer\\baseline\\evidence"
+        ],
+        "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\transfer\\baseline",
+        "exit": 0,
+        "stdout": "[{\"workload\":\"all-partials\",\"iterations\":20,\"milliseconds\":155.6159,\"status\":\"pass\",\"error\":null},{\"workload\":\"repeated-partial\",\"iterations\":20,\"milliseconds\":135.5303,\"status\":\"pass\",\"error\":null},{\"case\":\"unused-unavailable\",\"output\":null,\"error\":\"Error: EISDIR: illegal operation on a directory, read\"},{\"case\":\"used-unavailable\",\"output\":null,\"error\":\"Error: EISDIR: illegal operation on a directory, read\"}]\n",
+        "stderr": "",
+        "error": null,
+        "seconds": 1.086
+      },
+      "result": [
+        {
+          "workload": "all-partials",
+          "iterations": 20,
+          "milliseconds": 155.6159,
+          "status": "pass",
+          "error": null
+        },
+        {
+          "workload": "repeated-partial",
+          "iterations": 20,
+          "milliseconds": 135.5303,
+          "status": "pass",
+          "error": null
+        },
+        {
+          "case": "unused-unavailable",
+          "output": null,
+          "error": "Error: EISDIR: illegal operation on a directory, read"
+        },
+        {
+          "case": "used-unavailable",
+          "output": null,
+          "error": "Error: EISDIR: illegal operation on a directory, read"
+        }
+      ]
+    },
+    {
+      "arm": "candidate",
+      "run": {
+        "command": [
+          "bun",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\skills\\SkillForge\\Evidence\\MeasurementOptimization20261107\\transfer.ts",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\transfer\\candidate\\target",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\transfer\\candidate\\evidence"
+        ],
+        "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\MeasurementOptimization20261107\\raw\\transfer\\candidate",
+        "exit": 0,
+        "stdout": "[{\"workload\":\"all-partials\",\"iterations\":20,\"milliseconds\":177.43439999999998,\"status\":\"pass\",\"error\":null},{\"workload\":\"repeated-partial\",\"iterations\":20,\"milliseconds\":212.36980000000005,\"status\":\"pass\",\"error\":null},{\"case\":\"unused-unavailable\",\"output\":\"Hello Neri\",\"error\":null},{\"case\":\"used-unavailable\",\"output\":null,\"error\":\"Error: EISDIR: illegal operation on a directory, read\"}]\n",
+        "stderr": "",
+        "error": null,
+        "seconds": 1.166
+      },
+      "result": [
+        {
+          "workload": "all-partials",
+          "iterations": 20,
+          "milliseconds": 177.43439999999998,
+          "status": "pass",
+          "error": null
+        },
+        {
+          "workload": "repeated-partial",
+          "iterations": 20,
+          "milliseconds": 212.36980000000005,
+          "status": "pass",
+          "error": null
+        },
+        {
+          "case": "unused-unavailable",
+          "output": "Hello Neri",
+          "error": null
+        },
+        {
+          "case": "used-unavailable",
+          "output": null,
+          "error": "Error: EISDIR: illegal operation on a directory, read"
+        }
+      ]
+    }
+  ]
+}

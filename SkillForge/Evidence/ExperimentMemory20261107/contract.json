@@ -1,0 +1,28 @@
+{
+  "depth": "focused",
+  "scope": "behavioral",
+  "requested_result": "Execute a bounded evidence-reuse improvement and decide from historical decision-use outcomes, preserving history and scope.",
+  "required_checks": [
+    {
+      "kind": "outcome",
+      "id": "result",
+      "description": "Supported reuse disposition grounded in relevant historical decision outcomes, allowing justified no-change."
+    },
+    {
+      "kind": "behavioral_execution",
+      "id": "execution",
+      "description": "Frozen baseline/candidate retrieval and decision-use comparison."
+    },
+    {
+      "kind": "preservation",
+      "id": "preservation",
+      "description": "History, maintenance scope and affected handoffs preserved."
+    }
+  ],
+  "scope_basis": {
+    "sha256": "5d2e338193e138830a940ce14602d422890601175523b0860acbb006b10777ab",
+    "path": "request.txt",
+    "quote": "Improve how past experiments inform current decisions. Test retrieval and decision use on known historical cases with held-out questions, obsolete or misleading near matches, failures and missing provenance."
+  },
+  "schema_version": 1
+}

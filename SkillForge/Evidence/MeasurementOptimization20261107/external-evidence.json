@@ -1,0 +1,22 @@
+{
+  "root_relative_to_project": "MeasurementOptimization20261107/raw",
+  "files": {
+    "original-tests.json": "3c31b380e6a5a3d283a382deef387147dabb0b2b8433f7742a455044e2d13a5c",
+    "original-tests-normal.json": "9a9a29bde34cff68f0955aa72dd5d1772f3878712205dedad32352803a22bdac",
+    "profile-original.json": "e77e8b9ae488c66084c3edd32bc9556f2ae6cbe7e1fbc02e3d0e81fb60661e91",
+    "authors/baseline/runner-events.jsonl": "4c75efaed23c12d6b84f4f7cc4fd3e686b52b15d606a857a99ec1758bf8f738d",
+    "authors/baseline/runner-receipt.json": "b83e41c54ce03059d803be5e5410b257c68ae255f40dc3cac26cd1dc2e671d62",
+    "authors/baseline/runner-inputs.json": "b30a5ae21c48768b7e2b39d2d3e6aced5b437711492f1d960b8d8e9709991fbc",
+    "authors/baseline/runner-stderr.txt": "92997d738e53f1f6934c5e146d3397ddddd4e3f0f004b12108a3cd930d1e676e",
+    "authors/baseline/evidence/decision.json": "e20fd5a84e41da1706fd78c83b2925057e21ec4a0648dfed0641c862ccc94af5",
+    "authors/baseline/evidence/final-report.md": "e6587424fdf1faccf1ff047c90c4db00e49bea9679bed46c051d1280de08d5fe",
+    "authors/baseline/target/Tools/RenderTemplate.ts": "15460dd9dd7964e2d04e063d408b752b7ca936219557dcedfbd6117aa771c382",
+    "authors/candidate/runner-events.jsonl": "9e5b316f278d0cb10c6374c143c3393c5d73033ef6a63b58c723c70166e343be",
+    "authors/candidate/runner-receipt.json": "805496ba3cde7824c23aa67849ee2407c6ee99c9fe48a07bbe1e7ac9e5d3f530",
+    "authors/candidate/runner-inputs.json": "bf8d4b8fc265f67ba82f1c345454280450dc13db99f7f496b3bbb0cac31fac61",
+    "authors/candidate/runner-stderr.txt": "b4da646b9c90925f67335c4fa65f46bd46ef4f2fa0eb536d4bba2641b18488b9",
+    "authors/candidate/evidence/decision.json": "543d66862a8ca7d9bc8ee0abe620da538c165c5daecf2674461ea440f51870d4",
+    "authors/candidate/evidence/final-report.md": "ccaa4f300265e883564f12f413891c0815594b2d2406da202067abd02c436b9c",
+    "authors/candidate/target/Tools/RenderTemplate.ts": "18807944cf11ff4468109d4774e19a920533014fce18b444779d71cd0cc33541"
+  }
+}

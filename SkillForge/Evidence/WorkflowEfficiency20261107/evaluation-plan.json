@@ -1,0 +1,25 @@
+{
+  "suite_version": "workflow-effort-v1-with-adaptive-v2",
+  "workflow": "UpdateSkill",
+  "plan": "Protocol.md",
+  "amendments": [
+    "Amendment.md",
+    "Preflight.md"
+  ],
+  "measurement": "qualification.json",
+  "regression_coverage": "Protocol.md#coverage-and-limitations",
+  "execution_order": [
+    "ledger-baseline",
+    "ledger-candidate",
+    "prompting-candidate",
+    "prompting-baseline",
+    "ledger-candidate-v2",
+    "typo-candidate-v2"
+  ],
+  "baseline": "244434c6476f6678fb1cca7fa1193129f54ae1de",
+  "candidate_v1": "b2a8420",
+  "candidate_v2": "8c84929",
+  "decision_rule": "Protocol.md and Amendment.md",
+  "isolation": "Separate ephemeral contexts and disposable copies; reference expectations withheld; not hermetic",
+  "unavailable": "Same-condition repetition variance, exact inherited model identity, monetary and total-project costs"
+}

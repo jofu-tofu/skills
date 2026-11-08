@@ -1,0 +1,32 @@
+[
+  {
+    "copy": "Sources/RealSkillComparison.md",
+    "source": "20-working-T1-T3/RealSkillComparison20261106/Results.md",
+    "sha256": "a1a503f9ed3faa99df2fe397bde4ab6264688c37db06ee836cd4a8ca4044199b",
+    "id": "real"
+  },
+  {
+    "copy": "Sources/Discriminating.md",
+    "source": "20-working-T1-T3/Discriminating20261106/report.md",
+    "sha256": "ec01d9f5688d65db3b481a415cd61c70fc2d8b94c7d189fe3a9e76207f6e0288",
+    "id": "discriminating"
+  },
+  {
+    "copy": "Sources/Activation.md",
+    "source": "20-working-T1-T3/Activation20261106/Results.md",
+    "sha256": "c0c2d7e273a1c4ed9a965f08b30875943d7abe419909048dde0dc7a91e8c597a",
+    "id": "activation"
+  },
+  {
+    "copy": "Sources/OperationalEfficiency.md",
+    "source": "20-working-T1-T3/OperationalEfficiency20261106/FinalResults.md",
+    "sha256": "578a34045ee335a78b86d8a293539602faea3e9e109f4f8174b18ae0a9c85ff8",
+    "id": "efficiency"
+  },
+  {
+    "sha256": "8c1f8727e601e74a1cb2a8ee02d7ab2083bf96180082af90a168bc0b0b2f0184",
+    "id": "validation",
+    "copy": "Sources/ValidationSummary.md",
+    "source": "skills/SkillForge/Evidence/ValidationSummary.md at 244434c"
+  }
+]

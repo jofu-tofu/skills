@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "scope": "Independent semantic grading of four qualification responses against historical report constraints; no outcomes independently rerun.",
+  "expected_labels_read": false,
+  "evidence_verification": {
+    "source_hashes_matched": 5,
+    "exact_line_excerpts_matched": 19,
+    "exact_line_excerpts_checked": 19,
+    "source_hashes_checked": 5
+  },
+  "grades": [
+    {
+      "grade": "pass",
+      "reason": "Reports all tied outcomes, no demonstrated benefit or population equivalence, retains baseline and alternatives, rejects causal timing rank, and gives the required distinct orchestration test.",
+      "case_id": "H1"
+    },
+    {
+      "grade": "fail",
+      "reason": "Claims selector causality despite identical selected content and missing attribution/exposure records, and recommends unchanged repeats contrary to the supported zero-repeat decision.",
+      "case_id": "H5"
+    },
+    {
+      "grade": "pass",
+      "reason": "Authorized integration is a defensible concise paraphrase of the dated entry; preserves U10/U11, compact Update and preflight, distinguishes historical deployment recommendations, and expressly withholds live-byte verification and new benefit.",
+      "case_id": "H2"
+    },
+    {
+      "grade": "fail",
+      "reason": "Incorrectly credits the original focused-context run with procedure efficacy although it did not load GenerateAlternatives; advertising better loading contradicts the downstream byte results. Activation and 5/5 checks do not cure these contradictions.",
+      "case_id": "H3"
+    }
+  ],
+  "reference_ambiguities": [
+    "The November 7 excerpt explicitly records authorization to merge/push and says integration supersedes deployment status; it is not an independent Git or live-install receipt. Accept reported authorized integration, but do not infer independently verified merge/push or installed identity.",
+    "The reference does not define unverified separately from fail. Here clear source contradictions are fail; source hashes and cited excerpts were all verifiable."
+  ]
+}

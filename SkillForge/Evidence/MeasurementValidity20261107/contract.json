@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Execute a bounded measurement-validity improvement attempt and justify retention or no change, using independent source-contract evidence.",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "822692b2e122c926fc44f4689821cdf09e0cfd38b512e0d215570108f73c1410",
+    "quote": "First test measures on fixed artifacts with independently grounded outcome evidence, then test an appropriate bounded skill change."
+  },
+  "required_checks": [
+    {
+      "id": "measurement",
+      "kind": "outcome",
+      "description": "Assess indicator uses on fixed artifacts, error types, references and transfer limits."
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Run paired skill consumers and execute their actual selected target."
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Preserve bounded direct contracts, uncertainty and design-only behavior."
+    },
+    {
+      "id": "decision",
+      "kind": "outcome",
+      "description": "Apply frozen retention rule without manufacturing an improvement claim."
+    }
+  ]
+}
