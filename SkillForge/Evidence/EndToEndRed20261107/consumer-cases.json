@@ -1,0 +1,6 @@
+[
+ {"id":"team-prompt","source":"Write a briefing for {{title}}.\n{{#each people}}{{#with this}}- {{../title}} owner: {{name}}\n{{/with}}{{/each}}","data":{"title":"Launch","people":[{"name":"Ada"},{"name":"Lin"}]},"valid":true,"output":"Write a briefing for Launch.\n- Launch owner: Ada\n- Launch owner: Lin\n"},
+ {"id":"quota-prompt","source":"{{#each jobs}}{{#if remaining includeZero=../includeEmpty}}Summarize {{name}}: {{instruction}}.{{else}}Skip.{{/if}}{{/each}}","data":{"includeEmpty":true,"jobs":[{"remaining":0,"name":"Audit","instruction":"state the blockers"}]},"valid":true,"output":"Summarize Audit: state the blockers."},
+ {"id":"missing-instruction","source":"{{#each jobs}}{{#if remaining includeZero=../includeEmpty}}Summarize {{name}}: {{instruction}}.{{else}}Skip.{{/if}}{{/each}}","data":{"includeEmpty":true,"jobs":[{"remaining":0,"name":"Audit"}]},"valid":false},
+ {"id":"missing-parent","source":"{{#with this}}You are {{../role}}. Produce {{deliverable}}.{{/with}}","data":{"role":"reviewer","deliverable":"a risk report"},"valid":false}
+]
