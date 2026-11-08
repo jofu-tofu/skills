@@ -1,5 +1,7 @@
 # Outcome measurement
 
+For current seeded final-verifier regression checks, use the [shared-scenario fixtures](../Testing/README.md), which retain the original three checkpoint IDs and source contracts. Historical trials keep their original inputs; these fixtures do not replace full-pipeline, discovery or broader outcome checks.
+
 Version CR-M 1.1, 2026-11-04: CR-M 1 plus the clean-handoff check frozen before candidate execution. Governs [Outcomes](Outcomes.md). Qualified for the bounded technical/artifact contrasts in the [attempt record](../Improvements/GranularOutcomes/Record.md); operator adjudication is grounded in executable contracts, source and actual artifacts. This does not qualify general detection, readability or maintenance-efficiency claims.
 
 ## Unit and evidence

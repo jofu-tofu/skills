@@ -1,0 +1,47 @@
+{
+  "baseline": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 21451,
+      "output_tokens": 241,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 7883,
+      "total_tokens": 21692
+    },
+    "cases": 8,
+    "raw_hashes": {
+      "events.jsonl": "47d8a04562483046716e92c3954052050cc1145b4d80f7f5a6ed4de5f034900c",
+      "execution.json": "7c720bfd1c6bd030fbeedd3ecbfc0389e7da45884bbfc9f84e7baeb2a1abcf31",
+      "prompt.txt": "8064e86c39a933311f8f42178e2dd357e03e104dc11ffd26cb3eb5dc596ebcc4",
+      "response.txt": "90d547355384975fed8c2e3a9132b2231b5a8ab652af34f63e42b7e6296b6e47",
+      "stderr.txt": "d9f27b10eebecc50cbdca62d9916d81302ef607187ced8d351659958dd3feb14"
+    }
+  },
+  "candidate": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 21328,
+      "output_tokens": 114,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 7760,
+      "total_tokens": 21442
+    },
+    "cases": 4,
+    "raw_hashes": {
+      "events.jsonl": "e1251eb6c58c41defa91b26ed7488b380662737fa743f69576c37845070e3017",
+      "execution.json": "bebb396938abadccbb55db99a2005797b6a1f254fbcaf7f2a9da95212d9bc7f2",
+      "prompt.txt": "13016e8af631c01d1947fb02a227c411200240a418282954105175465030ef14",
+      "response.txt": "b04ef3644a0bd206af60b2f16888da40321fee9e03f2ecaed4c0957251a65615",
+      "stderr.txt": "c4c643ecd545a7b0ba89209d7f5393ee6ceea3eda4fe000bed1743793abbd9b3"
+    }
+  },
+  "savings": 0.011524986170016627,
+  "decision": "retain_bounded_replacement",
+  "limit": "One observed pair; synthetic finite scope, same one-context execution arrangement. Author and preparation costs excluded from this execution comparison; no net project or general efficiency claim."
+}

@@ -1,0 +1,40 @@
+{
+  "suite": "Verifier compound scenarios: audit and alternative delivery proposals",
+  "instruction": "Verify the supplied dimension finding against the review mode, owner request, source and context. Follow the verifier workflow; preserve uncertainty and distinguish maintenance risk from a current runtime defect.",
+  "interpretation": "Each checkpoint is independent. Inherit scenario fields; checkpoint fields override. tipSource defaults to source when omitted. Do not carry a finding or disposition between checkpoints. Return a separate verified result for every original checkpoint ID.",
+  "scenarios": [
+    {
+      "id": "tariff-audit",
+      "mode": "audit",
+      "ownerRequest": "Audit the shipping-charge module for concrete maintenance risks. Web checkout and phone checkout must use the same shipping tariff. Updating the domestic and international tariff rates is an ordinary supported maintenance task. Do not change current prices or introduce a configurable pricing framework.",
+      "context": "The complete audited module is supplied. Both exported functions are in the target. They intentionally implement the same tariff; their surrounding checkout callers differ but impose no different tariff policy. All weights are positive numbers. Each tariff comprises fixed and per-weight components. There is no separate tariff source or generator.",
+      "source": "export function webShipping(weight, international) {\n  const fixed = international ? 12 : 4;\n  const perWeight = international ? 3 : 1;\n  return fixed + weight * perWeight;\n}\nexport function phoneShipping(weight, international) {\n  const fixed = international ? 12 : 4;\n  const perWeight = international ? 3 : 1;\n  return fixed + weight * perWeight;\n}",
+      "checkpoints": [
+        {
+          "id": "transfer-01",
+          "findings": "### Two checkout APIs duplicate the shared tariff — subject.js:2-3,6-8\n**Severity:** MEDIUM\n**Evidence:** source-verified\n**Basis:** [lens: Accidental duplication]\n**Issue:** Updating the supported shipping tariff requires changing both independent rate expressions while keeping the web and phone APIs equal. The module has two decision sites for the same four rates; current prices agree.\n**Recommendation:** Keep both entry points and delegate tariff calculation to one private helper with weight and international arguments, preserving the existing formula and prices. No pricing registry is needed.\nReviewed: complete supplied shipping module. Limits: source inspection only; no deployment or runtime test performed."
+        }
+      ]
+    },
+    {
+      "id": "delivery-proposals",
+      "mode": "diff",
+      "ownerRequest": "Add a label for whether a package can use economy delivery. Economy is available at weight at most 20; heavier packages use freight. Keep the existing API and avoid changing delivery policy.",
+      "source": "export function deliveryLabel(weight) { return ''; }",
+      "checkpoints": [
+        {
+          "id": "transfer-02",
+          "context": "Complete module supplied. There is one weight cutoff and one caller-visible decision. Both inputs and outputs are ordinary synchronous values. No style rule requires ternary syntax or prohibits if/else. No repeated decision, additional state, hidden call, or separate policy source exists.",
+          "tipSource": "export function deliveryLabel(weight) {\n  if (weight <= 20) {\n    return 'economy';\n  } else {\n    return 'freight';\n  }\n}",
+          "findings": "### Prefer a compact delivery expression — subject.js:2-6\n**Severity:** MEDIUM\n**Evidence:** source-verified\n**Basis:** [lens: Verbose patterns]\n**Issue:** The if/else occupies five lines when a ternary can express the same result in one. Fewer lines make the function simpler.\n**Recommendation:** Return weight <= 20 ? 'economy' : 'freight'.\nReviewed: complete supplied module and diff. Limits: source inspection only."
+        },
+        {
+          "id": "transfer-03",
+          "context": "Complete module supplied. Positive weights including exactly20 are valid inputs; no earlier rounding or conversion changes the value. The function's return value is the customer-visible label. No other branch or guard corrects it.",
+          "tipSource": "export function deliveryLabel(weight) {\n  if (weight < 20) return 'economy';\n  return 'freight';\n}",
+          "findings": "### Include the supported cutoff weight — subject.js:2\n**Severity:** HIGH\n**Evidence:** source-verified\n**Basis:** [lens: Boundary correctness]\n**Issue:** A valid package weighing exactly20 reaches the freight return, although the stated at-most20 rule requires economy. The new strict comparison excludes the boundary value.\n**Recommendation:** Use weight <= 20; retain freight above20.\nReviewed: complete supplied module and diff. Limits: traced source only; no runtime check performed."
+        }
+      ]
+    }
+  ]
+}

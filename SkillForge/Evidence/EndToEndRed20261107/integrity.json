@@ -1,0 +1,49 @@
+{
+  "A1": {
+    "method_unchanged": true,
+    "target_changes": [
+      "SKILL.md",
+      "Tools/ValidateTemplate.ts",
+      "Improvements/BuiltInScopeDecisions.md",
+      "Tools/ScopeValidation.test.ts"
+    ],
+    "execution": {
+      "status": "completed",
+      "exit_code": 0,
+      "seconds": 626.595,
+      "usage": {
+        "input_tokens": 1778351,
+        "cached_input_tokens": 1707904,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 17375,
+        "reasoning_output_tokens": 2787
+      },
+      "commands": 26,
+      "output_bytes": 268575
+    }
+  },
+  "A2": {
+    "method_unchanged": true,
+    "target_changes": [
+      "Quality/Outcomes.md",
+      "SKILL.md",
+      "Tools/ValidateTemplate.ts",
+      "Improvements/ScopeDecisions.md",
+      "Tools/ScopeDecisions.test.ts"
+    ],
+    "execution": {
+      "status": "completed",
+      "exit_code": 0,
+      "seconds": 525.151,
+      "usage": {
+        "input_tokens": 1345901,
+        "cached_input_tokens": 1281536,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 15822,
+        "reasoning_output_tokens": 3722
+      },
+      "commands": 20,
+      "output_bytes": 264624
+    }
+  }
+}

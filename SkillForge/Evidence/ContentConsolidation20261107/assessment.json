@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "3b7e67a840576183be73d4c677bfaf8b9d571c0b0bb336c6a5313b944e6c4bcc",
+  "candidate_decision": "retain_candidate",
+  "checks": [
+    {
+      "id": "content",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "candidate.json",
+          "sha256": "856d15cce1049688643aff415d146d71d4c42568423f409574a2191e68d81bc4"
+        },
+        {
+          "path": "author-v1.json",
+          "sha256": "e8376bbe9a4a16e9a679e77e203da73f86a437748201fba8156f87b7eaba3955"
+        },
+        {
+          "path": "author-traces.json",
+          "sha256": "1e95765e8b127debcc2bf6487f6126977d597d83bfbcb027c43a0bcaec8023ce"
+        },
+        {
+          "path": "Results.md",
+          "sha256": "cd8e24c33a7648fcd1be837cc472820947b75909123894abd25c23156830db7d"
+        }
+      ]
+    },
+    {
+      "id": "coverage",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "coverage.json",
+          "sha256": "24ceb83368d1082476d269d63b249d00a2caf63456de57168e0c01b803cf3bd5"
+        },
+        {
+          "path": "check.cjs",
+          "sha256": "6e38472d9214f30aa22b7084b0fd0b9f4b3c998be07d6c98fe6d5021817b487e"
+        },
+        {
+          "path": "Amendment.md",
+          "sha256": "4578f0a926420d91055c2d1af8a297fae564c2b58273cdbf95651b714ed5a836"
+        }
+      ]
+    },
+    {
+      "id": "cost",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "comparison.json",
+          "sha256": "f36b2dd106fd7cfdda474632f50e1ce1a7c2bfa8aa29de6f54a8632e97aae7a2"
+        },
+        {
+          "path": "execution-freeze.json",
+          "sha256": "76d0dc7979e4b0b487600b90d691fc1660be78475ff05c0fc39b6057efd2a994"
+        },
+        {
+          "path": "Results.md",
+          "sha256": "cd8e24c33a7648fcd1be837cc472820947b75909123894abd25c23156830db7d"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "installation.json",
+          "sha256": "23ad0cbdf27d2aa5407d86847aa2dfbcdc2628a365220c3825c2ba0d694db69e"
+        },
+        {
+          "path": "completion-tests.txt",
+          "sha256": "a0d0d5f5bbc85b1893968148e9b722d7e97e53ebee519c60e1ae1f55f2672edb"
+        },
+        {
+          "path": "structure.txt",
+          "sha256": "c4782c44e91aecfb41b86d11e9929daa12d764e1584ecece96ad01eb7dc3c53f"
+        },
+        {
+          "path": "Results.md",
+          "sha256": "cd8e24c33a7648fcd1be837cc472820947b75909123894abd25c23156830db7d"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}

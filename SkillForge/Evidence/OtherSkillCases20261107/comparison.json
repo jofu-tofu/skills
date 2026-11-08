@@ -1,0 +1,192 @@
+{
+  "clarity-1-baseline": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 28500,
+      "output_tokens": 933,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 14932,
+      "total_tokens": 29433
+    },
+    "raw_hashes": {
+      "events.jsonl": "720b9271114d0e3fa92f5dbcba945879dee28b03d20febb35f7b639d2e98ea82",
+      "execution.json": "5836994e250a7529de492e4f61aa28e42931b86b15e9c82cfd1eef0d960102dd",
+      "prompt.txt": "63cda90c5bde0b48f4b36f1bbcbee973a9df894bb367bb9578c789de695c4666",
+      "response.txt": "7a173db5a93d257d77678b8ba49ea9a9476b264844fc3407d79893e4355f4f60",
+      "stderr.txt": "1865fb963faf105ac521a624f2728cf3aee69394d71162ae1415dfafdb30c67e"
+    }
+  },
+  "clarity-2-baseline": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 28500,
+      "output_tokens": 919,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 14932,
+      "total_tokens": 29419
+    },
+    "raw_hashes": {
+      "events.jsonl": "6a463540113d62cb1ff215db95484ff512435568c92773899c9657b3fddea629",
+      "execution.json": "4b119bf6d1cd7f612805904b4541f64f59fe3bfcd0b4cdafbe5712e419a6c892",
+      "prompt.txt": "63cda90c5bde0b48f4b36f1bbcbee973a9df894bb367bb9578c789de695c4666",
+      "response.txt": "97e57f07d349cdb34638897f9e176b14fb9154dc7f6a46066923894b723775db",
+      "stderr.txt": "0035362711ead5e3c4f788352552e08d0445c89c504ab7698f8c3b8d43d45183"
+    }
+  },
+  "clarity-1-candidate": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 28387,
+      "output_tokens": 852,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 14819,
+      "total_tokens": 29239
+    },
+    "raw_hashes": {
+      "events.jsonl": "0b2f337cbea42d123d178d8f98e79aae71f1830e10bbf5ded102423da1583307",
+      "execution.json": "b28d38fb87ce7531041d0c0ef193f8d751e06fb0fe0a6493fdfc13618ec67771",
+      "prompt.txt": "1af9c0a29753e7435a26808625858f06eb9129c4e7c49c3ebb8b65d9a0eea2f2",
+      "response.txt": "5979549214e5bde5aff55996c96657435d6b20e00088061d0af867e2a72996b6",
+      "stderr.txt": "5857d38e7748200ec5f5036cef9ad0a26e78ee4d920e36809706c6d9fe17ed3e"
+    }
+  },
+  "clarity-2-candidate": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 28387,
+      "output_tokens": 864,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 14819,
+      "total_tokens": 29251
+    },
+    "raw_hashes": {
+      "events.jsonl": "3847ff36ef455de67465b903660946ecfa40c6791fe31759a211e9821a56dee4",
+      "execution.json": "a492320a3c093b27f628643d67b70d9c671bc6ea430cf0c6561109e57bce6e3d",
+      "prompt.txt": "1af9c0a29753e7435a26808625858f06eb9129c4e7c49c3ebb8b65d9a0eea2f2",
+      "response.txt": "0cb5d88a53897abd4dc1c9eac8cfd0058c008383c853f7bcd41c35d40843c438",
+      "stderr.txt": "076687740b1db9410be1e272a6b17141ad9b9933c72eb363cf61be25b8afac33"
+    }
+  },
+  "review-1-baseline": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 26290,
+      "output_tokens": 231,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 12722,
+      "total_tokens": 26521
+    },
+    "raw_hashes": {
+      "events.jsonl": "c7dad1c4ca431216763ccf595d0c277c2ed93533bedb2ad21d023e7951308d44",
+      "execution.json": "b509340f29d1a7345bb85798a01af998bcb0efe67703b9de497f69d05eb9685a",
+      "prompt.txt": "5c73b14e444d0ff67b22d1d5cec9f603336fed21a8b76acf3128bf5895808a66",
+      "response.txt": "07ffcb95f5ee2a8f3356b4592425eb1ea5073827d7434d19a60aa3c3662b0f5f",
+      "stderr.txt": "4edaa8e540e0c24282445155f05315a7cf4665abb32408f5a4bcd957b07dd5a4"
+    }
+  },
+  "review-2-baseline": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 26290,
+      "output_tokens": 223,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 12722,
+      "total_tokens": 26513
+    },
+    "raw_hashes": {
+      "events.jsonl": "fc3b1c9d15c8fb4930c757d67c262820f7f34c33338cd672ba821088737f9c2e",
+      "execution.json": "4c7ed374e7668369b1072770374c5926ca1a05dbdb5043e43328dfeae56a3bb6",
+      "prompt.txt": "5c73b14e444d0ff67b22d1d5cec9f603336fed21a8b76acf3128bf5895808a66",
+      "response.txt": "d7e72b5920da6564b1867e5008bd3e8c2b3e9739586d61a9e9b970d83d6350ea",
+      "stderr.txt": "0b42f02265b09f4c213e40b5e307fae630d5e4ea9567cf400f0686408f31d191"
+    }
+  },
+  "review-1-candidate": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 26214,
+      "output_tokens": 223,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 12646,
+      "total_tokens": 26437
+    },
+    "raw_hashes": {
+      "events.jsonl": "f952b582cc4efeae4384c7cf6df90d352f4334164bf18a2cfe95951f66b0e07c",
+      "execution.json": "3221f497d515f122cec705a0c50e37d7e0ca96f813a21ce9c663ac6e4452cb85",
+      "prompt.txt": "bf396e8db37af2cfe584f523eb5e529597f4753f4b1bd99d1187a18c08047f82",
+      "response.txt": "8f74ba2546a033b59eb2a91b055384eec4335b7687b4fd0a4e38620f4a2a2d5b",
+      "stderr.txt": "bb8817f7510d84ac5d020685c656b96ed7c58b72768d6ae6ec40847daedc2b95"
+    }
+  },
+  "review-2-candidate": {
+    "score": {
+      "pass": true,
+      "errors": []
+    },
+    "usage": {
+      "input_tokens": 26214,
+      "output_tokens": 233,
+      "cached_input_tokens": 13568,
+      "uncached_input_tokens": 12646,
+      "total_tokens": 26447
+    },
+    "raw_hashes": {
+      "events.jsonl": "8b62958a9a9e8312cd1a2cc150d7254ed229b0f02c76d6e46a4195d09adc744b",
+      "execution.json": "6bb5fb9116538c61d52799d19ebbcd92431ab9a4ce4191f898287388ff5a608a",
+      "prompt.txt": "bf396e8db37af2cfe584f523eb5e529597f4753f4b1bd99d1187a18c08047f82",
+      "response.txt": "7ea836ee093056cd1fecf7f4bca2b1ab2c046ee1d243169aa7d0b08b1fd585c2",
+      "stderr.txt": "ac9e583c68f082b79181ba005d19347f9d0c61bfb7a2529333a4a5551d6429f8"
+    }
+  },
+  "clarity": {
+    "pairs": [
+      {
+        "pair": 1,
+        "saving": 0.00659124112390852,
+        "pass": true
+      },
+      {
+        "pair": 2,
+        "saving": 0.005710595193582413,
+        "pass": true
+      }
+    ],
+    "eligible": true
+  },
+  "review": {
+    "pairs": [
+      {
+        "pair": 1,
+        "saving": 0.0031673013838090514,
+        "pass": true
+      },
+      {
+        "pair": 2,
+        "saving": 0.0024893448496964288,
+        "pass": true
+      }
+    ],
+    "eligible": true
+  }
+}

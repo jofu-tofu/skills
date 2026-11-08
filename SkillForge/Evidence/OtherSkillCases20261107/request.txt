@@ -1,0 +1,1 @@
+Simplify the actual test cases in the other skills and check that we save tokens without losing coverage.

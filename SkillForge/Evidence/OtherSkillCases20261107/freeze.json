@@ -1,0 +1,68 @@
+{
+  "methods": {
+    "clarity": [
+      {
+        "path": "ClarityEngine/Workflows/ReadabilityGate.md",
+        "sha256": "70333e4a88eaac45a3f541560c3c42802922724d3511c6ff2cfa7f6dcd273024"
+      },
+      {
+        "path": "ClarityEngine/Workflows/Verify.md",
+        "sha256": "0f46558ab7c39188329ebd998e2f24954b02e1aa24a614a35f98ac89d83d04f8"
+      }
+    ],
+    "review": [
+      {
+        "path": "CodeReview/Workflows/VerifyAndReport.md",
+        "sha256": "03a39d42659c08d6a13b07a9494b884d11efbaadc680be84a1a0a066d96621f5"
+      }
+    ]
+  },
+  "inputs": {
+    "clarity": {
+      "baseline": {
+        "path": "ClarityEngine/Improvements/SessionOutcomes/Panel/cases-v2.md",
+        "sha256": "c0b2fd771d27473a79ad0f79bbf8f3d927bbb5ebc5b3652b21bb679c1022b230"
+      },
+      "candidate": {
+        "path": "ClarityEngine/Testing/PanelScenarios.md",
+        "sha256": "57850a6254eb247968c19ebaf6a5d9c100e3639182948aa759a39b3952f74221"
+      }
+    },
+    "review": {
+      "baseline": {
+        "path": "CodeReview/Improvements/HistoryScope/VerifierCases.json",
+        "sha256": "834e2edc2f86ba23f898443ce01206d6b28f494085294e6ec5e1d620a30d3e9d"
+      },
+      "candidate": {
+        "path": "CodeReview/Testing/VerifierScenarios.json",
+        "sha256": "32b05f1c7b467e02986a41dd52a83e9494c01196a6b3e5eb164c77f9d06d4b3f"
+      }
+    }
+  },
+  "runs": {
+    "clarity-1-baseline": {
+      "prompt_sha256": "63cda90c5bde0b48f4b36f1bbcbee973a9df894bb367bb9578c789de695c4666"
+    },
+    "clarity-2-baseline": {
+      "prompt_sha256": "63cda90c5bde0b48f4b36f1bbcbee973a9df894bb367bb9578c789de695c4666"
+    },
+    "clarity-1-candidate": {
+      "prompt_sha256": "1af9c0a29753e7435a26808625858f06eb9129c4e7c49c3ebb8b65d9a0eea2f2"
+    },
+    "clarity-2-candidate": {
+      "prompt_sha256": "1af9c0a29753e7435a26808625858f06eb9129c4e7c49c3ebb8b65d9a0eea2f2"
+    },
+    "review-1-baseline": {
+      "prompt_sha256": "5c73b14e444d0ff67b22d1d5cec9f603336fed21a8b76acf3128bf5895808a66"
+    },
+    "review-2-baseline": {
+      "prompt_sha256": "5c73b14e444d0ff67b22d1d5cec9f603336fed21a8b76acf3128bf5895808a66"
+    },
+    "review-1-candidate": {
+      "prompt_sha256": "bf396e8db37af2cfe584f523eb5e529597f4753f4b1bd99d1187a18c08047f82"
+    },
+    "review-2-candidate": {
+      "prompt_sha256": "bf396e8db37af2cfe584f523eb5e529597f4753f4b1bd99d1187a18c08047f82"
+    }
+  }
+}

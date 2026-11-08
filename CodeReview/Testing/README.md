@@ -1,0 +1,7 @@
+# Current verifier fixtures
+
+[VerifierScenarios.json](VerifierScenarios.json) groups the existing seeded verifier checks into a tariff audit and two alternative delivery proposals. Scenario fields are inherited by checkpoints; checkpoint fields override them; omitted tipSource means the same source. Each checkpoint remains independent. Preserve all three original IDs and report each disposition separately: do not let the real boundary defect turn the cosmetic finding into a valid warning.
+
+Expanding the scenario defaults reproduces every field of the [original fixtures](../Improvements/HistoryScope/VerifierCases.json) exactly, including owner requests, source, context and seed findings. Existing flat-case consumers can still use that original file. The [source-derived key](../Improvements/HistoryScope/VerifierReference.json) remains grader-only; seeded cases test verification, not discovery.
+
+Both matched pairs preserve all three judgments and source-grounded explanations. Total provider input-plus-output usage is53,034original versus52,884current:150fewer tokens,0.2828%. Both individual pairs save tokens. No instructions, coverage obligations or source branches were removed. These observations do not establish general review performance, live pipeline savings or net-project savings. Optional shared-repository [full evidence](../../SkillForge/Evidence/OtherSkillCases20261107/Results.md) preserves inputs, receipts, qualification and limits.

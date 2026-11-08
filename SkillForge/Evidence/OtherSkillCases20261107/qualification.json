@@ -1,0 +1,232 @@
+{
+  "controls": 94,
+  "sourceChecks": 19,
+  "code_review_exact_expansion": true,
+  "clarity_state_map": {
+    "C1": {
+      "status": "Ready",
+      "comprehension": "Pass",
+      "planned": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "missing": [],
+      "stale_fix_included": false,
+      "dispatch": []
+    },
+    "C2": {
+      "status": "Unverified",
+      "comprehension": "Pass",
+      "planned": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [
+        "Reader",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "missing": [
+        "Cutter"
+      ],
+      "stale_fix_included": false,
+      "dispatch": []
+    },
+    "C3": {
+      "status": "Unverified",
+      "comprehension": "Pass",
+      "planned": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [
+        "Reader",
+        "Cutter",
+        "AudienceFit"
+      ],
+      "missing": [
+        "Navigator"
+      ],
+      "stale_fix_included": false,
+      "dispatch": []
+    },
+    "C4": {
+      "status": "Unverified",
+      "comprehension": "Pass",
+      "planned": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [
+        "Reader",
+        "Cutter",
+        "Navigator"
+      ],
+      "missing": [
+        "AudienceFit"
+      ],
+      "stale_fix_included": false,
+      "dispatch": []
+    },
+    "C5": {
+      "status": "NeedsRevision",
+      "comprehension": "NeedsRevision",
+      "planned": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [
+        "Reader",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "missing": [
+        "Cutter"
+      ],
+      "stale_fix_included": false,
+      "dispatch": []
+    },
+    "C6": {
+      "status": "Unverified",
+      "comprehension": "NotVerified",
+      "planned": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [],
+      "missing": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "stale_fix_included": false,
+      "dispatch": []
+    },
+    "C7": {
+      "status": "Ready",
+      "comprehension": "Pass",
+      "planned": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "missing": [],
+      "stale_fix_included": false,
+      "dispatch": []
+    },
+    "C8": {
+      "status": "Unverified",
+      "comprehension": "NotVerified",
+      "planned": [
+        "Reader-approver",
+        "Reader-operator",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [
+        "Reader-approver",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "missing": [
+        "Reader-operator"
+      ],
+      "stale_fix_included": false,
+      "dispatch": []
+    },
+    "C9": {
+      "status": "Unverified",
+      "comprehension": "Pass",
+      "planned": [
+        "Reader",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [
+        "Reader",
+        "Cutter",
+        "AudienceFit"
+      ],
+      "missing": [
+        "Navigator"
+      ],
+      "stale_fix_included": false,
+      "dispatch": []
+    },
+    "C10": {
+      "status": "Unverified",
+      "comprehension": "NotVerified",
+      "planned": [
+        "Reader-approver",
+        "Reader-operator",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "completed": [
+        "Reader-approver",
+        "Cutter",
+        "Navigator",
+        "AudienceFit"
+      ],
+      "missing": [
+        "Reader-operator"
+      ],
+      "stale_fix_included": false,
+      "dispatch": [
+        "Reader-approver",
+        "Reader-operator"
+      ]
+    }
+  },
+  "review_key": {
+    "transfer-01": {
+      "keep": true,
+      "classification": "maintenance",
+      "current_runtime_defect": false,
+      "reproduced": false
+    },
+    "transfer-02": {
+      "keep": false,
+      "classification": "cosmetic",
+      "current_runtime_defect": false,
+      "reproduced": false
+    },
+    "transfer-03": {
+      "keep": true,
+      "classification": "runtime",
+      "current_runtime_defect": true,
+      "reproduced": false
+    }
+  },
+  "scope": "Finite historical decisions; arbitrary prose adjudicated separately. Source checks execute supplied fixture functions, not review skill performance."
+}

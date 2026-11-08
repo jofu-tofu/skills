@@ -1,0 +1,26 @@
+{
+  "runtime_commit": "9c3b5b1",
+  "installed_target": "C:\\Users\\fujos\\Github\\skills\\SkillForge",
+  "identities": [
+    {
+      "path": "SKILL.md",
+      "lf_normalized_sha256": "203580f47c7e7aa5291df21c63fe5a87defc00c1fd15285363e46b623b8b258f",
+      "main_installed_match": true
+    },
+    {
+      "path": "Procedures/ConstructCases.md",
+      "lf_normalized_sha256": "77f76a984ea4dde8f7c08ca21676628c12db3be54df4af09762d0b1456394e43",
+      "main_installed_match": true
+    },
+    {
+      "path": "Procedures/EvaluateCandidate.md",
+      "lf_normalized_sha256": "05be46c05934c6059906764df4675c084e56497094ae49737fc56084d00547c8",
+      "main_installed_match": true
+    },
+    {
+      "path": "Procedures/PlanChange.md",
+      "lf_normalized_sha256": "4b87745f8ad9751548ec051db328a36127d55f1e6d748fbb0e0675af16a43c06",
+      "main_installed_match": true
+    }
+  ]
+}

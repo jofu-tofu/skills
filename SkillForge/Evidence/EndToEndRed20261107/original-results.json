@@ -1,0 +1,860 @@
+{
+  "label": "original",
+  "results": [
+    {
+      "id": "plain-valid",
+      "source": "Hello {{name}}",
+      "data": {
+        "name": "Ada"
+      },
+      "valid": true,
+      "output": "Hello Ada",
+      "role": "preservation",
+      "oracle": {
+        "ok": true,
+        "text": "Hello Ada"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "name"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\plain-valid.hbs\nStatus: ✓ Valid\n\nVariables (1):\n  - name\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\plain-valid.out\n",
+        "stderr": "",
+        "text": "Hello Ada"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "plain-missing",
+      "source": "Hello {{name}}",
+      "data": {},
+      "valid": false,
+      "role": "preservation",
+      "oracle": {
+        "ok": false,
+        "error": "Error: \"name\" not defined in [object Object] - 1:8"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"name\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "name"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\plain-missing.hbs\nStatus: ✗ Invalid\n\nVariables (1):\n  - name\n\n✗ Errors (1):\n  - Missing variable \"name\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": null,
+      "status": "pass"
+    },
+    {
+      "id": "same-parent-missing",
+      "source": "{{#with this}}{{../name}}{{/with}}",
+      "data": {
+        "name": "Ada"
+      },
+      "valid": false,
+      "role": "scope",
+      "oracle": {
+        "ok": false,
+        "error": "Error: \"name\" not defined in undefined - 1:16"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "this"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\same-parent-missing.hbs\nStatus: ✓ Valid\n\nVariables (1):\n  - this\n\n",
+        "stderr": ""
+      },
+      "render": null,
+      "status": "fail"
+    },
+    {
+      "id": "same-dot-parent-missing",
+      "source": "{{#with .}}{{../name}}{{/with}}",
+      "data": {
+        "name": "Ada"
+      },
+      "valid": false,
+      "role": "scope",
+      "oracle": {
+        "ok": false,
+        "error": "Error: \"name\" not defined in undefined - 1:13"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\same-dot-parent-missing.hbs\nStatus: ✓ Valid\n\n",
+        "stderr": ""
+      },
+      "render": null,
+      "status": "fail"
+    },
+    {
+      "id": "nested-self-valid",
+      "source": "{{#each people}}{{#with this}}{{../title}}:{{name}}{{/with}}{{/each}}",
+      "data": {
+        "title": "Team",
+        "people": [
+          {
+            "name": "Ada"
+          }
+        ]
+      },
+      "valid": true,
+      "output": "Team:Ada",
+      "role": "scope",
+      "oracle": {
+        "ok": true,
+        "text": "Team:Ada"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"../title\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "name",
+          "people",
+          "this"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\nested-self-valid.hbs\nStatus: ✗ Invalid\n\nVariables (3):\n  - name\n  - people\n  - this\n\n✗ Errors (1):\n  - Missing variable \"../title\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\nested-self-valid.out\n",
+        "stderr": "",
+        "text": "Team:Ada"
+      },
+      "status": "fail"
+    },
+    {
+      "id": "nested-self-missing",
+      "source": "{{#each people}}{{#with this}}{{../title}}:{{name}}{{/with}}{{/each}}",
+      "data": {
+        "people": [
+          {
+            "name": "Ada"
+          }
+        ]
+      },
+      "valid": false,
+      "role": "scope",
+      "oracle": {
+        "ok": false,
+        "error": "Error: \"title\" not defined in [object Object] - 1:32"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"../title\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "name",
+          "people",
+          "this"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\nested-self-missing.hbs\nStatus: ✗ Invalid\n\nVariables (3):\n  - name\n  - people\n  - this\n\n✗ Errors (1):\n  - Missing variable \"../title\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": null,
+      "status": "pass"
+    },
+    {
+      "id": "self-alias-valid",
+      "source": "{{#each people as |person|}}{{#with person}}{{../title}}:{{name}}{{/with}}{{/each}}",
+      "data": {
+        "title": "Team",
+        "people": [
+          {
+            "name": "Ada"
+          }
+        ]
+      },
+      "valid": true,
+      "output": "Team:Ada",
+      "role": "scope",
+      "oracle": {
+        "ok": true,
+        "text": "Team:Ada"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"../title\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "name",
+          "people",
+          "person"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\self-alias-valid.hbs\nStatus: ✗ Invalid\n\nVariables (3):\n  - name\n  - people\n  - person\n\n✗ Errors (1):\n  - Missing variable \"../title\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\self-alias-valid.out\n",
+        "stderr": "",
+        "text": "Team:Ada"
+      },
+      "status": "fail"
+    },
+    {
+      "id": "primitive-self-valid",
+      "source": "{{#each values}}{{#with this}}{{../title}};{{/with}}{{/each}}",
+      "data": {
+        "title": "Values",
+        "values": [
+          0,
+          1,
+          2
+        ]
+      },
+      "valid": true,
+      "output": "Values;Values;Values;",
+      "role": "scope",
+      "oracle": {
+        "ok": true,
+        "text": "Values;Values;Values;"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"../title\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "this",
+          "values"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\primitive-self-valid.hbs\nStatus: ✗ Invalid\n\nVariables (2):\n  - this\n  - values\n\n✗ Errors (1):\n  - Missing variable \"../title\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\primitive-self-valid.out\n",
+        "stderr": "",
+        "text": "Values;Values;Values;"
+      },
+      "status": "fail"
+    },
+    {
+      "id": "normal-with-valid",
+      "source": "{{#with person}}{{../title}}:{{name}}{{/with}}",
+      "data": {
+        "title": "Team",
+        "person": {
+          "name": "Ada"
+        }
+      },
+      "valid": true,
+      "output": "Team:Ada",
+      "role": "preservation",
+      "oracle": {
+        "ok": true,
+        "text": "Team:Ada"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "name",
+          "person"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\normal-with-valid.hbs\nStatus: ✓ Valid\n\nVariables (2):\n  - name\n  - person\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\normal-with-valid.out\n",
+        "stderr": "",
+        "text": "Team:Ada"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "if-dynamic-zero-missing",
+      "source": "{{#if count includeZero=allowZero}}{{message}}{{else}}none{{/if}}",
+      "data": {
+        "count": 0,
+        "allowZero": true
+      },
+      "valid": false,
+      "role": "branch",
+      "oracle": {
+        "ok": false,
+        "error": "Error: \"message\" not defined in [object Object] - 1:37"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "count",
+          "message"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\if-dynamic-zero-missing.hbs\nStatus: ✓ Valid\n\nVariables (2):\n  - count\n  - message\n\n",
+        "stderr": ""
+      },
+      "render": null,
+      "status": "fail"
+    },
+    {
+      "id": "if-dynamic-zero-valid",
+      "source": "{{#if count includeZero=allowZero}}{{message}}{{else}}{{missing}}{{/if}}",
+      "data": {
+        "count": 0,
+        "allowZero": true,
+        "message": "Ready"
+      },
+      "valid": true,
+      "output": "Ready",
+      "role": "branch",
+      "oracle": {
+        "ok": true,
+        "text": "Ready"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"missing\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "count",
+          "message",
+          "missing"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\if-dynamic-zero-valid.hbs\nStatus: ✗ Invalid\n\nVariables (3):\n  - count\n  - message\n  - missing\n\n✗ Errors (1):\n  - Missing variable \"missing\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\if-dynamic-zero-valid.out\n",
+        "stderr": "",
+        "text": "Ready"
+      },
+      "status": "fail"
+    },
+    {
+      "id": "if-dynamic-false-valid",
+      "source": "{{#if count includeZero=allowZero}}{{missing}}{{else}}{{message}}{{/if}}",
+      "data": {
+        "count": 0,
+        "allowZero": false,
+        "message": "Waiting"
+      },
+      "valid": true,
+      "output": "Waiting",
+      "role": "branch",
+      "oracle": {
+        "ok": true,
+        "text": "Waiting"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "count",
+          "message",
+          "missing"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\if-dynamic-false-valid.hbs\nStatus: ✓ Valid\n\nVariables (3):\n  - count\n  - message\n  - missing\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\if-dynamic-false-valid.out\n",
+        "stderr": "",
+        "text": "Waiting"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "if-dynamic-false-missing",
+      "source": "{{#if count includeZero=allowZero}}ready{{else}}{{message}}{{/if}}",
+      "data": {
+        "count": 0,
+        "allowZero": false
+      },
+      "valid": false,
+      "role": "branch",
+      "oracle": {
+        "ok": false,
+        "error": "Error: \"message\" not defined in [object Object] - 1:50"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"message\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "count",
+          "message"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\if-dynamic-false-missing.hbs\nStatus: ✗ Invalid\n\nVariables (2):\n  - count\n  - message\n\n✗ Errors (1):\n  - Missing variable \"message\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": null,
+      "status": "pass"
+    },
+    {
+      "id": "unless-dynamic-zero-valid",
+      "source": "{{#unless count includeZero=allowZero}}{{missing}}{{else}}{{message}}{{/unless}}",
+      "data": {
+        "count": 0,
+        "allowZero": true,
+        "message": "Ready"
+      },
+      "valid": true,
+      "output": "Ready",
+      "role": "branch",
+      "oracle": {
+        "ok": true,
+        "text": "Ready"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"missing\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "count",
+          "message",
+          "missing"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\unless-dynamic-zero-valid.hbs\nStatus: ✗ Invalid\n\nVariables (3):\n  - count\n  - message\n  - missing\n\n✗ Errors (1):\n  - Missing variable \"missing\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\unless-dynamic-zero-valid.out\n",
+        "stderr": "",
+        "text": "Ready"
+      },
+      "status": "fail"
+    },
+    {
+      "id": "unless-dynamic-zero-missing",
+      "source": "{{#unless count includeZero=allowZero}}none{{else}}{{message}}{{/unless}}",
+      "data": {
+        "count": 0,
+        "allowZero": true
+      },
+      "valid": false,
+      "role": "branch",
+      "oracle": {
+        "ok": false,
+        "error": "Error: \"message\" not defined in [object Object] - 1:53"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "count",
+          "message"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\unless-dynamic-zero-missing.hbs\nStatus: ✓ Valid\n\nVariables (2):\n  - count\n  - message\n\n",
+        "stderr": ""
+      },
+      "render": null,
+      "status": "fail"
+    },
+    {
+      "id": "nested-hash-path-valid",
+      "source": "{{#each items}}{{#if count includeZero=../allowZero}}{{message}}{{else}}{{missing}}{{/if}}{{/each}}",
+      "data": {
+        "allowZero": true,
+        "items": [
+          {
+            "count": 0,
+            "message": "Ready"
+          }
+        ]
+      },
+      "valid": true,
+      "output": "Ready",
+      "role": "composition",
+      "oracle": {
+        "ok": true,
+        "text": "Ready"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"missing\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "count",
+          "items",
+          "message",
+          "missing"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\nested-hash-path-valid.hbs\nStatus: ✗ Invalid\n\nVariables (4):\n  - count\n  - items\n  - message\n  - missing\n\n✗ Errors (1):\n  - Missing variable \"missing\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\nested-hash-path-valid.out\n",
+        "stderr": "",
+        "text": "Ready"
+      },
+      "status": "fail"
+    },
+    {
+      "id": "literal-zero-true",
+      "source": "{{#if count includeZero=true}}{{message}}{{else}}{{missing}}{{/if}}",
+      "data": {
+        "count": 0,
+        "message": "Ready"
+      },
+      "valid": true,
+      "output": "Ready",
+      "role": "preservation",
+      "oracle": {
+        "ok": true,
+        "text": "Ready"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "count",
+          "message",
+          "missing"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\literal-zero-true.hbs\nStatus: ✓ Valid\n\nVariables (3):\n  - count\n  - message\n  - missing\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\literal-zero-true.out\n",
+        "stderr": "",
+        "text": "Ready"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "literal-zero-false",
+      "source": "{{#if count includeZero=false}}{{missing}}{{else}}{{message}}{{/if}}",
+      "data": {
+        "count": 0,
+        "message": "Waiting"
+      },
+      "valid": true,
+      "output": "Waiting",
+      "role": "preservation",
+      "oracle": {
+        "ok": true,
+        "text": "Waiting"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "count",
+          "message",
+          "missing"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\literal-zero-false.hbs\nStatus: ✓ Valid\n\nVariables (3):\n  - count\n  - message\n  - missing\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\literal-zero-false.out\n",
+        "stderr": "",
+        "text": "Waiting"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "nested-data-frame",
+      "source": "{{#each rows}}{{#each this}}{{@../index}}.{{@index}}={{this}};{{/each}}{{/each}}",
+      "data": {
+        "rows": [
+          [
+            1,
+            2
+          ],
+          [
+            3
+          ]
+        ]
+      },
+      "valid": true,
+      "output": "0.0=1;0.1=2;1.0=3;",
+      "role": "preservation",
+      "oracle": {
+        "ok": true,
+        "text": "0.0=1;0.1=2;1.0=3;"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "rows",
+          "this"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\nested-data-frame.hbs\nStatus: ✓ Valid\n\nVariables (2):\n  - rows\n  - this\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\nested-data-frame.out\n",
+        "stderr": "",
+        "text": "0.0=1;0.1=2;1.0=3;"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "each-inverse",
+      "source": "{{#each people}}{{missing}}{{else}}{{title}}{{/each}}",
+      "data": {
+        "people": [],
+        "title": "Empty"
+      },
+      "valid": true,
+      "output": "Empty",
+      "role": "preservation",
+      "oracle": {
+        "ok": true,
+        "text": "Empty"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "missing",
+          "people",
+          "title"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\each-inverse.hbs\nStatus: ✓ Valid\n\nVariables (3):\n  - missing\n  - people\n  - title\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\each-inverse.out\n",
+        "stderr": "",
+        "text": "Empty"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "if-inverse",
+      "source": "{{#if ready}}{{missing}}{{else}}{{title}}{{/if}}",
+      "data": {
+        "ready": false,
+        "title": "Waiting"
+      },
+      "valid": true,
+      "output": "Waiting",
+      "role": "preservation",
+      "oracle": {
+        "ok": true,
+        "text": "Waiting"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "missing",
+          "ready",
+          "title"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\if-inverse.hbs\nStatus: ✓ Valid\n\nVariables (3):\n  - missing\n  - ready\n  - title\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\if-inverse.out\n",
+        "stderr": "",
+        "text": "Waiting"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "with-inverse",
+      "source": "{{#with person}}{{missing}}{{else}}{{title}}{{/with}}",
+      "data": {
+        "person": null,
+        "title": "Nobody"
+      },
+      "valid": true,
+      "output": "Nobody",
+      "role": "preservation",
+      "oracle": {
+        "ok": true,
+        "text": "Nobody"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "missing",
+          "person",
+          "title"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\with-inverse.hbs\nStatus: ✓ Valid\n\nVariables (3):\n  - missing\n  - person\n  - title\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original\\with-inverse.out\n",
+        "stderr": "",
+        "text": "Nobody"
+      },
+      "status": "pass"
+    }
+  ],
+  "existing": {
+    "exit": 0,
+    "stdout": "bun test v1.3.5 (1e86cebd)\n",
+    "stderr": "\nTools\\RenderTemplate.test.ts:\n(pass) bundled primitive consumer contracts > an empty gate collection does not fabricate a checklist [32.00ms]\n(pass) bundled primitive consumer contracts > Briefing emits the selected markdown instructions\n(pass) bundled primitive consumer contracts > Briefing emits the selected json instructions\n(pass) bundled primitive consumer contracts > Briefing emits the selected structured instructions\n(pass) bundled primitive consumer contracts > explicit output structure overrides the default format instructions [15.00ms]\n(pass) bundled primitive consumer contracts > Briefing preserves literal output-format instructions\n(pass) bundled primitive consumer contracts > Voice JSON preserves keys and string values without HTML escaping\n(pass) bundled primitive consumer contracts > Voice empty collections and omitted optional text remain valid JSON [16.00ms]\n(pass) loads local partials without a shell and does not reuse a removed file\nerror: Cannot read directory \"C:\\Users\\fujos\\\": EPERM\n\nerror: Cannot read directory \"C:\\Users\\fujos\\Obsidian\\Projects\\\": EPERM\n\nTools\\ValidateTemplate.test.ts:\nHandlebars: Access has been denied to resolve the property \"toString\" because it is not an \"own property\" of its parent.\nYou can add a runtime option to disable the check or this warning:\nSee https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access for details\n(pass) matches actual scoped rendering: inherited toString is unavailable\n(pass) matches actual scoped rendering: inherited constructor is unavailable\n(pass) matches actual scoped rendering: own toString string remains available\n(pass) matches actual scoped rendering: own constructor string remains available [16.00ms]\n(pass) matches actual scoped rendering: explicit this bypasses same-named alias\n(pass) matches actual scoped rendering: explicit relative path bypasses same-named alias\n(pass) matches actual scoped rendering: ordinary alias still selects its active branch [16.00ms]\n(pass) matches actual scoped rendering: parent index keeps inactive nested branch inactive\n(pass) matches actual scoped rendering: parent index exposes missing value in active nested branch\n(pass) matches actual scoped rendering: array key zero is numeric and false for if\n(pass) matches actual scoped rendering: object key zero remains a truthy string\n(pass) matches actual scoped rendering: with accepts zero context\n(pass) matches actual scoped rendering: with zero still checks active required values [15.00ms]\n(pass) accepts adjacent and nested blocks that render the required text\n(pass) rejects malformed expressions and mismatched or missing closing blocks\n(pass) does not treat comment examples as variable, helper or partial dependencies\n(pass) keeps missing live data warnings and strict failures [16.00ms]\n(pass) accepts ready=%s without requiring an else data field\n(pass) accepts ready=%s without requiring an else data field [16.00ms]\n(pass) reports an unavailable explicitly supplied data file\n(pass) follows built-in data scope: {{#each people}}{{name}}/{{../title}}{{/each}}\n(pass) follows built-in data scope: {{#with person}}{{name}}{{/with}}\n(pass) follows built-in data scope: {{#each people as |person|}}{{person.name}}/{{@index}}{{/each}} [15.00ms]\n(pass) follows built-in data scope: {{#each people}}{{@root.title}}/{{this.name}}{{/each}}\n(pass) follows built-in data scope: {{#if optional}}{{optional.name}}{{else}}none{{/if}}\n(pass) keeps real missing values visible in active scopes and this-prefixed root names\n(pass) marks custom helper and partial data checks as incomplete\n(pass) returns an actionable invalid result for malformed data [16.00ms]\n\n 37 pass\n 0 fail\n 95 expect() calls\nRan 37 tests across 2 files. [318.00ms]\n"
+  },
+  "totals": {
+    "pass": 12,
+    "fail": 10,
+    "unverified": 0
+  }
+}

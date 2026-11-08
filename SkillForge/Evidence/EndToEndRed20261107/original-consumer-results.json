@@ -1,0 +1,177 @@
+{
+  "label": "original",
+  "results": [
+    {
+      "id": "team-prompt",
+      "source": "Write a briefing for {{title}}.\n{{#each people}}{{#with this}}- {{../title}} owner: {{name}}\n{{/with}}{{/each}}",
+      "data": {
+        "title": "Launch",
+        "people": [
+          {
+            "name": "Ada"
+          },
+          {
+            "name": "Lin"
+          }
+        ]
+      },
+      "valid": true,
+      "output": "Write a briefing for Launch.\n- Launch owner: Ada\n- Launch owner: Lin\n",
+      "oracle": {
+        "ok": true,
+        "text": "Write a briefing for Launch.\n- Launch owner: Ada\n- Launch owner: Lin\n"
+      },
+      "direct": {
+        "valid": false,
+        "errors": [
+          "Missing variable \"../title\" not found in data"
+        ],
+        "warnings": [],
+        "variables": [
+          "name",
+          "people",
+          "this",
+          "title"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 1,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original-consumer-cases\\team-prompt.hbs\nStatus: ✗ Invalid\n\nVariables (4):\n  - name\n  - people\n  - this\n  - title\n\n✗ Errors (1):\n  - Missing variable \"../title\" not found in data\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original-consumer-cases\\team-prompt.out\n",
+        "stderr": "",
+        "text": "Write a briefing for Launch.\n- Launch owner: Ada\n- Launch owner: Lin\n"
+      },
+      "status": "fail"
+    },
+    {
+      "id": "quota-prompt",
+      "source": "{{#each jobs}}{{#if remaining includeZero=../includeEmpty}}Summarize {{name}}: {{instruction}}.{{else}}Skip.{{/if}}{{/each}}",
+      "data": {
+        "includeEmpty": true,
+        "jobs": [
+          {
+            "remaining": 0,
+            "name": "Audit",
+            "instruction": "state the blockers"
+          }
+        ]
+      },
+      "valid": true,
+      "output": "Summarize Audit: state the blockers.",
+      "oracle": {
+        "ok": true,
+        "text": "Summarize Audit: state the blockers."
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "instruction",
+          "jobs",
+          "name",
+          "remaining"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original-consumer-cases\\quota-prompt.hbs\nStatus: ✓ Valid\n\nVariables (4):\n  - instruction\n  - jobs\n  - name\n  - remaining\n\n",
+        "stderr": ""
+      },
+      "render": {
+        "exit": 0,
+        "stdout": "✓ Rendered to: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original-consumer-cases\\quota-prompt.out\n",
+        "stderr": "",
+        "text": "Summarize Audit: state the blockers."
+      },
+      "status": "pass"
+    },
+    {
+      "id": "missing-instruction",
+      "source": "{{#each jobs}}{{#if remaining includeZero=../includeEmpty}}Summarize {{name}}: {{instruction}}.{{else}}Skip.{{/if}}{{/each}}",
+      "data": {
+        "includeEmpty": true,
+        "jobs": [
+          {
+            "remaining": 0,
+            "name": "Audit"
+          }
+        ]
+      },
+      "valid": false,
+      "oracle": {
+        "ok": false,
+        "error": "Error: \"instruction\" not defined in [object Object] - 1:81"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "instruction",
+          "jobs",
+          "name",
+          "remaining"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original-consumer-cases\\missing-instruction.hbs\nStatus: ✓ Valid\n\nVariables (4):\n  - instruction\n  - jobs\n  - name\n  - remaining\n\n",
+        "stderr": ""
+      },
+      "render": null,
+      "status": "fail"
+    },
+    {
+      "id": "missing-parent",
+      "source": "{{#with this}}You are {{../role}}. Produce {{deliverable}}.{{/with}}",
+      "data": {
+        "role": "reviewer",
+        "deliverable": "a risk report"
+      },
+      "valid": false,
+      "oracle": {
+        "ok": false,
+        "error": "Error: \"role\" not defined in undefined - 1:24"
+      },
+      "direct": {
+        "valid": true,
+        "errors": [],
+        "warnings": [],
+        "variables": [
+          "deliverable",
+          "this"
+        ],
+        "helpers": [],
+        "partials": []
+      },
+      "cli": {
+        "exit": 0,
+        "stdout": "\n=== Template Validation ===\n\nTemplate: C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\EndToEndRed20261107\\raw\\assessment\\original-consumer-cases\\missing-parent.hbs\nStatus: ✓ Valid\n\nVariables (2):\n  - deliverable\n  - this\n\n",
+        "stderr": ""
+      },
+      "render": null,
+      "status": "fail"
+    }
+  ],
+  "existing": {
+    "exit": 0,
+    "stdout": "bun test v1.3.5 (1e86cebd)\n",
+    "stderr": "\nTools\\RenderTemplate.test.ts:\n(pass) bundled primitive consumer contracts > an empty gate collection does not fabricate a checklist [16.00ms]\n(pass) bundled primitive consumer contracts > Briefing emits the selected markdown instructions\n(pass) bundled primitive consumer contracts > Briefing emits the selected json instructions [15.00ms]\n(pass) bundled primitive consumer contracts > Briefing emits the selected structured instructions\n(pass) bundled primitive consumer contracts > explicit output structure overrides the default format instructions\n(pass) bundled primitive consumer contracts > Briefing preserves literal output-format instructions\n(pass) bundled primitive consumer contracts > Voice JSON preserves keys and string values without HTML escaping [16.00ms]\n(pass) bundled primitive consumer contracts > Voice empty collections and omitted optional text remain valid JSON\n(pass) loads local partials without a shell and does not reuse a removed file [16.00ms]\nerror: Cannot read directory \"C:\\Users\\fujos\\\": EPERM\n\nerror: Cannot read directory \"C:\\Users\\fujos\\Obsidian\\Projects\\\": EPERM\n\nTools\\ValidateTemplate.test.ts:\nHandlebars: Access has been denied to resolve the property \"toString\" because it is not an \"own property\" of its parent.\nYou can add a runtime option to disable the check or this warning:\nSee https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access for details\n(pass) matches actual scoped rendering: inherited toString is unavailable [15.00ms]\n(pass) matches actual scoped rendering: inherited constructor is unavailable\n(pass) matches actual scoped rendering: own toString string remains available\n(pass) matches actual scoped rendering: own constructor string remains available\n(pass) matches actual scoped rendering: explicit this bypasses same-named alias\n(pass) matches actual scoped rendering: explicit relative path bypasses same-named alias [16.00ms]\n(pass) matches actual scoped rendering: ordinary alias still selects its active branch\n(pass) matches actual scoped rendering: parent index keeps inactive nested branch inactive [15.00ms]\n(pass) matches actual scoped rendering: parent index exposes missing value in active nested branch\n(pass) matches actual scoped rendering: array key zero is numeric and false for if\n(pass) matches actual scoped rendering: object key zero remains a truthy string\n(pass) matches actual scoped rendering: with accepts zero context\n(pass) matches actual scoped rendering: with zero still checks active required values [16.00ms]\n(pass) accepts adjacent and nested blocks that render the required text\n(pass) rejects malformed expressions and mismatched or missing closing blocks\n(pass) does not treat comment examples as variable, helper or partial dependencies\n(pass) keeps missing live data warnings and strict failures [16.00ms]\n(pass) accepts ready=%s without requiring an else data field\n(pass) accepts ready=%s without requiring an else data field\n(pass) reports an unavailable explicitly supplied data file\n(pass) follows built-in data scope: {{#each people}}{{name}}/{{../title}}{{/each}} [15.00ms]\n(pass) follows built-in data scope: {{#with person}}{{name}}{{/with}}\n(pass) follows built-in data scope: {{#each people as |person|}}{{person.name}}/{{@index}}{{/each}}\n(pass) follows built-in data scope: {{#each people}}{{@root.title}}/{{this.name}}{{/each}}\n(pass) follows built-in data scope: {{#if optional}}{{optional.name}}{{else}}none{{/if}}\n(pass) keeps real missing values visible in active scopes and this-prefixed root names [16.00ms]\n(pass) marks custom helper and partial data checks as incomplete\n(pass) returns an actionable invalid result for malformed data\n\n 37 pass\n 0 fail\n 95 expect() calls\nRan 37 tests across 2 files. [318.00ms]\n"
+  },
+  "totals": {
+    "pass": 1,
+    "fail": 3,
+    "unverified": 0
+  }
+}

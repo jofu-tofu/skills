@@ -25,3 +25,5 @@ Keep measurement and candidate scoring separate from semantic acceptance. The ac
 Expanded follow-up: [40-chat census](SessionOutcomes/ExpandedCensus.md), including 26 additional chats and five load/reference leads. Added outcome distinctions and challenge specifications; their later execution is recorded separately below.
 
 - 2026-11-06 — [Final wording, audience and unresolved findings](FinalDelivery/Record.md): executed all three expanded cases, sixteen targeted boundary/consumer checks and required repair continuations. Retain 1.5.2-rc.2 for frozen inputs, final-delivery/meaning checks and explicit current-evidence reconciliation of earlier findings. Preserve baseline/v1 failures and source-limited outputs; no general performance advantage claimed.
+
+- 2026-11-07 — [Panel fixture content consolidation](../Testing/Consolidation.md): ten original checkpoints grouped into three shared-setup scenarios; all decisions preserved in two matched pairs. Recorded evaluation tokens58,852to58,490(0.6151% lower). Historical inputs, unrelated cases and native tests retained; no general reliability or net-project saving claim.
