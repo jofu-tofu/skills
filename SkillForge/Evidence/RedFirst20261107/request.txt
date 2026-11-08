@@ -1,0 +1,2 @@
+can we establish this in the skillforge skill and then keep going? improve the skill please
+Context: establish a real failing baseline case before repair candidates, verify red for the right reason, distinguish intermittent model failures, preserve other behavior and test fresh cases. Continue the improvement rather than declaring the whole goal complete after a bounded inconclusive round.

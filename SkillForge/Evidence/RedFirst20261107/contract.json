@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Establish red-first repair discipline in SkillForge and continue the unresolved repair with faithful baseline evidence",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "d708246767fe90fa446ad8d74f88423502544641771f1deb5dbc22ed413ed614",
+    "quote": "improve the skill please"
+  },
+  "required_checks": [
+    {
+      "id": "policy",
+      "kind": "outcome",
+      "description": "Implement coherent red-first discipline and preserve proportional exceptions"
+    },
+    {
+      "id": "handoff",
+      "kind": "behavioral_execution",
+      "description": "Execute the affected workflow handoff and source-grounded preservation probes"
+    },
+    {
+      "id": "red_case",
+      "kind": "behavioral_execution",
+      "description": "Preserve and faithfully execute baseline failure case before next repair candidate"
+    },
+    {
+      "id": "repair",
+      "kind": "outcome",
+      "description": "Continue the reproduced failure through supported repair or honestly evidenced unresolved diagnostic, not pilot-based closure"
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Preserve source identities and required existing runtime behavior"
+    }
+  ]
+}
