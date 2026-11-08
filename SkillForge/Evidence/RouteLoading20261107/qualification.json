@@ -1,0 +1,134 @@
+{
+  "started": "2026-11-08T03:25:45.156Z",
+  "finished": "2026-11-08T03:25:45.600Z",
+  "method_files": 85,
+  "only_method_difference": [
+    "Procedures/ApproveSkill.md"
+  ],
+  "identical_destination": "9707056034d612dfbbcac5a2322437f55fc753e929a985994a27811dc07d5077",
+  "caveat_preserved": true,
+  "current_source_unchanged": true,
+  "route": {
+    "baseline": [
+      "Templates/Improvement/Decision.md",
+      "Improvements/Templates/Decision.md"
+    ],
+    "candidate": [
+      "Improvements/Templates/Decision.md"
+    ],
+    "claim": "One fewer intermediary lookup when the edge is used; not measured model cost savings"
+  },
+  "checks": [
+    {
+      "name": "valid",
+      "exit": 0,
+      "ms": 100,
+      "result": {
+        "rows": [
+          {
+            "id": "initial",
+            "status": "pass"
+          },
+          {
+            "id": "same-length-current-value",
+            "status": "pass"
+          },
+          {
+            "id": "returned-object-mutation",
+            "status": "pass"
+          },
+          {
+            "id": "malformed-current-file",
+            "status": "pass"
+          },
+          {
+            "id": "recover-after-error",
+            "status": "pass"
+          },
+          {
+            "id": "deleted-current-file",
+            "status": "pass"
+          }
+        ],
+        "pass": 6,
+        "fail": 0
+      }
+    },
+    {
+      "name": "alternative",
+      "exit": 0,
+      "ms": 89,
+      "result": {
+        "rows": [
+          {
+            "id": "initial",
+            "status": "pass"
+          },
+          {
+            "id": "same-length-current-value",
+            "status": "pass"
+          },
+          {
+            "id": "returned-object-mutation",
+            "status": "pass"
+          },
+          {
+            "id": "malformed-current-file",
+            "status": "pass"
+          },
+          {
+            "id": "recover-after-error",
+            "status": "pass"
+          },
+          {
+            "id": "deleted-current-file",
+            "status": "pass"
+          }
+        ],
+        "pass": 6,
+        "fail": 0
+      }
+    },
+    {
+      "name": "stale",
+      "exit": 1,
+      "ms": 94,
+      "result": {
+        "rows": [
+          {
+            "id": "initial",
+            "status": "pass"
+          },
+          {
+            "id": "same-length-current-value",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   limit: 12,\n-   limit: 27,\n    mode: 'normal'\n  }\n"
+          },
+          {
+            "id": "returned-object-mutation",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   limit: -1,\n-   limit: 27,\n    mode: 'normal'\n  }\n"
+          },
+          {
+            "id": "malformed-current-file",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Missing expected exception."
+          },
+          {
+            "id": "recover-after-error",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   limit: -1,\n+   mode: 'normal'\n-   limit: 9,\n-   mode: 'recovery'\n  }\n"
+          },
+          {
+            "id": "deleted-current-file",
+            "status": "fail",
+            "error": "AssertionError [ERR_ASSERTION]: Missing expected exception."
+          }
+        ],
+        "pass": 1,
+        "fail": 5
+      }
+    }
+  ],
+  "limits": "Six settings assertions are one consumer contract, not six independent tasks. Local checks do not establish natural route activation or full workflow preservation."
+}

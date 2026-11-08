@@ -1,0 +1,140 @@
+[
+  {
+    "arm": "baseline",
+    "controls": [
+      {
+        "id": "settled",
+        "actual": [
+          "retain_candidate",
+          "complete"
+        ],
+        "expected": [
+          "retain_candidate",
+          "complete"
+        ],
+        "pass": true
+      },
+      {
+        "id": "design-only",
+        "actual": [
+          "defer",
+          "complete"
+        ],
+        "expected": [
+          "defer",
+          "complete"
+        ],
+        "pass": true
+      },
+      {
+        "id": "known-regression",
+        "actual": [
+          "reject_candidate",
+          "blocked"
+        ],
+        "expected": [
+          "reject_candidate",
+          "blocked"
+        ],
+        "pass": true
+      },
+      {
+        "id": "missing-access",
+        "actual": [
+          "defer",
+          "blocked"
+        ],
+        "expected": [
+          "defer",
+          "blocked"
+        ],
+        "pass": true
+      }
+    ],
+    "template_commands": [
+      {
+        "id": "item_10",
+        "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content method/Templates/Improvement/GapRecord.md; Get-Content method/Templates/Improvement/Decision.md; Get-Content method/Templates/Improvement/Plan.md; Get-Content method/Tools/CheckCompletion.cjs -TotalCount 100'",
+        "logged_output_bytes": 9388
+      }
+    ],
+    "gate": {
+      "valid": true,
+      "task_status": "blocked",
+      "candidate_decision": "retain_baseline"
+    },
+    "readiness_review": "Design-only remains unverified; no installation implication. Actual readiness-only workflow not executed.",
+    "maintenance_review": "Exact typo bytes pass; only typo-before/check artifacts accompany maintenance inside the already behavioral shared task. This is not an isolated standalone maintenance trial.",
+    "source_review": "Each retained reader is byte-identical to supplied correct baseline. Original cache and attempted content cache preserved; timings remain uncertain.",
+    "limits": "Same operator graded in separate pass. Fixture-supplied expected control decisions; no independent human assessment or population claim."
+  },
+  {
+    "arm": "candidate",
+    "controls": [
+      {
+        "id": "settled",
+        "actual": [
+          "retain_candidate",
+          "complete"
+        ],
+        "expected": [
+          "retain_candidate",
+          "complete"
+        ],
+        "pass": true
+      },
+      {
+        "id": "design-only",
+        "actual": [
+          "defer",
+          "complete"
+        ],
+        "expected": [
+          "defer",
+          "complete"
+        ],
+        "pass": true
+      },
+      {
+        "id": "known-regression",
+        "actual": [
+          "reject_candidate",
+          "blocked"
+        ],
+        "expected": [
+          "reject_candidate",
+          "blocked"
+        ],
+        "pass": true
+      },
+      {
+        "id": "missing-access",
+        "actual": [
+          "defer",
+          "blocked"
+        ],
+        "expected": [
+          "defer",
+          "blocked"
+        ],
+        "pass": true
+      }
+    ],
+    "template_commands": [
+      {
+        "id": "item_7",
+        "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content method/Procedures/GenerateAlternatives.md; Get-Content method/Standards/Schemas.md | Select-String -Pattern 'Canonical results' -Context 0,65; Get-Content method/Templates/Improvement/GapRecord.md; Get-Content method/Improvements/Templates/Decision.md\"",
+        "logged_output_bytes": 16204
+      }
+    ],
+    "gate": {
+      "valid": true,
+      "task_status": "blocked",
+      "candidate_decision": "retain_baseline"
+    },
+    "readiness_review": "Design-only remains unverified; no installation implication. Actual readiness-only workflow not executed.",
+    "maintenance_review": "Exact typo bytes pass; only typo-before/check artifacts accompany maintenance inside the already behavioral shared task. This is not an isolated standalone maintenance trial.",
+    "source_review": "Each retained reader is byte-identical to supplied correct baseline. Original cache and attempted content cache preserved; timings remain uncertain.",
+    "limits": "Same operator graded in separate pass. Fixture-supplied expected control decisions; no independent human assessment or population claim."
+  }
+]
