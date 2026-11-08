@@ -1,0 +1,40 @@
+{
+  "cases": [
+    {"id":"identity-only","input":{"identity":true,"validation":false,"installation":false,"rollback_clear":false},"expected":{"identity":true,"validation":false,"installation":false,"rollback_clear":false,"ready":false}},
+    {"id":"identity-fails","input":{"identity":false,"validation":true,"installation":true,"rollback_clear":true},"expected":{"identity":false,"validation":true,"installation":true,"rollback_clear":true,"ready":false}},
+    {"id":"validation-only","input":{"identity":false,"validation":true,"installation":false,"rollback_clear":false},"expected":{"identity":false,"validation":true,"installation":false,"rollback_clear":false,"ready":false}},
+    {"id":"validation-fails","input":{"identity":true,"validation":false,"installation":true,"rollback_clear":true},"expected":{"identity":true,"validation":false,"installation":true,"rollback_clear":true,"ready":false}},
+    {"id":"installation-only","input":{"identity":false,"validation":false,"installation":true,"rollback_clear":false},"expected":{"identity":false,"validation":false,"installation":true,"rollback_clear":false,"ready":false}},
+    {"id":"installation-fails","input":{"identity":true,"validation":true,"installation":false,"rollback_clear":true},"expected":{"identity":true,"validation":true,"installation":false,"rollback_clear":true,"ready":false}},
+    {"id":"rollback-only","input":{"identity":false,"validation":false,"installation":false,"rollback_clear":true},"expected":{"identity":false,"validation":false,"installation":false,"rollback_clear":true,"ready":false}},
+    {"id":"rollback-fails","input":{"identity":true,"validation":true,"installation":true,"rollback_clear":false},"expected":{"identity":true,"validation":true,"installation":true,"rollback_clear":false,"ready":false}},
+    {"id":"all-pass","input":{"identity":true,"validation":true,"installation":true,"rollback_clear":true},"expected":{"identity":true,"validation":true,"installation":true,"rollback_clear":true,"ready":true}}
+  ],
+  "coverage_map": [
+    {"old_id":"old-0-1","new_ids":["identity-only"],"reason":"Preserves identity true with every other field false and ready false, including faults specific to this input."},
+    {"old_id":"old-0-3","new_ids":["identity-fails"],"reason":"Preserves identity as the sole failure, all later observations true, and ready false."},
+    {"old_id":"old-1-1","new_ids":["validation-only"],"reason":"Preserves validation true after identity false, the other fields false, and ready false."},
+    {"old_id":"old-1-3","new_ids":["validation-fails"],"reason":"Preserves validation as the sole failure, both later observations true, and ready false."},
+    {"old_id":"old-2-1","new_ids":["installation-only"],"reason":"Preserves installation true after two false observations, all other fields false, and ready false."},
+    {"old_id":"old-2-3","new_ids":["installation-fails"],"reason":"Preserves installation as the sole failure, rollback_clear true afterward, and ready false."},
+    {"old_id":"old-3-1","new_ids":["rollback-only"],"reason":"Preserves rollback_clear true after three false observations, all other fields false, and ready false."},
+    {"old_id":"old-3-3","new_ids":["rollback-fails"],"reason":"Preserves rollback_clear as the sole failure, all earlier fields true, and ready false."}
+  ],
+  "retained_diagnostics": [
+    "Compare all five named fields separately against expected; a correct ready verdict cannot excuse incorrect or omitted observations.",
+    "Each evidence field has true and false outcomes, detecting single-field inversions and stuck values.",
+    "Every pair of evidence fields differs in retained cases, detecting copying another field.",
+    "Mixed cases contain true observations while ready is false, detecting collapse of all outputs to ready.",
+    "Single-failure cases detect readiness that ignores any required field; mixed cases reject OR readiness; all-pass rejects always-false readiness and exercises the positive conjunction.",
+    "True observations after false observations detect stopping at the first false.",
+    "Retaining every original input preserves input-specific faults, beyond the explicitly listed fault families.",
+    "Cases remain independent; no reliability draws or comparison arms are merged."
+  ],
+  "limits": "Runnable synthetic case data; not executed. No safe scenario reduction satisfies the unrestricted requirement to preserve every faulty implementation distinguished by the originals: removing any original input permits an implementation that fails only on that input to escape detection. Thus all eight distinct inputs remain, plus the required ready-positive input. A smaller suite could cover the named fault families but would weaken that broader guarantee. One aggregate verdict cannot replace these cases because it loses input-specific fault detection and separately attributable field observations. Exact equality must include field presence and boolean types; false means observed failure. Absent/unknown inputs are outside scope. No skill files changed, no trials run, and no token savings measured or claimed.",
+  "files_read": [
+    "C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SKILL.md",
+    "C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SkillIntent.md",
+    "C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Quality/Shared.md",
+    "C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Procedures/ConstructCases.md"
+  ]
+}

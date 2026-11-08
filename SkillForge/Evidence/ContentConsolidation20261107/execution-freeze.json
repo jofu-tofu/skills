@@ -1,0 +1,12 @@
+{
+  "baseline": {
+    "cases": 8,
+    "prompt_sha256": "8064e86c39a933311f8f42178e2dd357e03e104dc11ffd26cb3eb5dc596ebcc4",
+    "suite_sha256": "68a9df0a025e2414dab759db1d01afc3d909132a4161dd91d86aa16cfcf0612f"
+  },
+  "candidate": {
+    "cases": 4,
+    "prompt_sha256": "13016e8af631c01d1947fb02a227c411200240a418282954105175465030ef14",
+    "suite_sha256": "856d15cce1049688643aff415d146d71d4c42568423f409574a2191e68d81bc4"
+  }
+}

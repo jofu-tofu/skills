@@ -1,0 +1,225 @@
+{
+  "faults": 32,
+  "baseline": {
+    "cases": 8,
+    "matrix": {
+      "invert-identity": [
+        "old-0-1:identity",
+        "old-0-3:identity",
+        "old-1-1:identity",
+        "old-1-3:identity",
+        "old-2-1:identity",
+        "old-2-3:identity",
+        "old-3-1:identity",
+        "old-3-3:identity"
+      ],
+      "stuck-identity-true": [
+        "old-0-3:identity",
+        "old-1-1:identity",
+        "old-2-1:identity",
+        "old-3-1:identity"
+      ],
+      "stuck-identity-false": [
+        "old-0-1:identity",
+        "old-1-3:identity",
+        "old-2-3:identity",
+        "old-3-3:identity"
+      ],
+      "copy-identity-validation": [
+        "old-0-1:identity",
+        "old-0-3:identity",
+        "old-1-1:identity",
+        "old-1-3:identity"
+      ],
+      "copy-identity-installation": [
+        "old-0-1:identity",
+        "old-0-3:identity",
+        "old-2-1:identity",
+        "old-2-3:identity"
+      ],
+      "copy-identity-rollback_clear": [
+        "old-0-1:identity",
+        "old-0-3:identity",
+        "old-3-1:identity",
+        "old-3-3:identity"
+      ],
+      "collapse-identity": [
+        "old-0-1:identity",
+        "old-1-3:identity",
+        "old-2-3:identity",
+        "old-3-3:identity"
+      ],
+      "invert-validation": [
+        "old-0-1:validation",
+        "old-0-3:validation",
+        "old-1-1:validation",
+        "old-1-3:validation",
+        "old-2-1:validation",
+        "old-2-3:validation",
+        "old-3-1:validation",
+        "old-3-3:validation"
+      ],
+      "stuck-validation-true": [
+        "old-0-1:validation",
+        "old-1-3:validation",
+        "old-2-1:validation",
+        "old-3-1:validation"
+      ],
+      "stuck-validation-false": [
+        "old-0-3:validation",
+        "old-1-1:validation",
+        "old-2-3:validation",
+        "old-3-3:validation"
+      ],
+      "copy-validation-identity": [
+        "old-0-1:validation",
+        "old-0-3:validation",
+        "old-1-1:validation",
+        "old-1-3:validation"
+      ],
+      "copy-validation-installation": [
+        "old-1-1:validation",
+        "old-1-3:validation",
+        "old-2-1:validation",
+        "old-2-3:validation"
+      ],
+      "copy-validation-rollback_clear": [
+        "old-1-1:validation",
+        "old-1-3:validation",
+        "old-3-1:validation",
+        "old-3-3:validation"
+      ],
+      "collapse-validation": [
+        "old-0-3:validation",
+        "old-1-1:validation",
+        "old-2-3:validation",
+        "old-3-3:validation"
+      ],
+      "invert-installation": [
+        "old-0-1:installation",
+        "old-0-3:installation",
+        "old-1-1:installation",
+        "old-1-3:installation",
+        "old-2-1:installation",
+        "old-2-3:installation",
+        "old-3-1:installation",
+        "old-3-3:installation"
+      ],
+      "stuck-installation-true": [
+        "old-0-1:installation",
+        "old-1-1:installation",
+        "old-2-3:installation",
+        "old-3-1:installation"
+      ],
+      "stuck-installation-false": [
+        "old-0-3:installation",
+        "old-1-3:installation",
+        "old-2-1:installation",
+        "old-3-3:installation"
+      ],
+      "copy-installation-identity": [
+        "old-0-1:installation",
+        "old-0-3:installation",
+        "old-2-1:installation",
+        "old-2-3:installation"
+      ],
+      "copy-installation-validation": [
+        "old-1-1:installation",
+        "old-1-3:installation",
+        "old-2-1:installation",
+        "old-2-3:installation"
+      ],
+      "copy-installation-rollback_clear": [
+        "old-2-1:installation",
+        "old-2-3:installation",
+        "old-3-1:installation",
+        "old-3-3:installation"
+      ],
+      "collapse-installation": [
+        "old-0-3:installation",
+        "old-1-3:installation",
+        "old-2-1:installation",
+        "old-3-3:installation"
+      ],
+      "invert-rollback_clear": [
+        "old-0-1:rollback_clear",
+        "old-0-3:rollback_clear",
+        "old-1-1:rollback_clear",
+        "old-1-3:rollback_clear",
+        "old-2-1:rollback_clear",
+        "old-2-3:rollback_clear",
+        "old-3-1:rollback_clear",
+        "old-3-3:rollback_clear"
+      ],
+      "stuck-rollback_clear-true": [
+        "old-0-1:rollback_clear",
+        "old-1-1:rollback_clear",
+        "old-2-1:rollback_clear",
+        "old-3-3:rollback_clear"
+      ],
+      "stuck-rollback_clear-false": [
+        "old-0-3:rollback_clear",
+        "old-1-3:rollback_clear",
+        "old-2-3:rollback_clear",
+        "old-3-1:rollback_clear"
+      ],
+      "copy-rollback_clear-identity": [
+        "old-0-1:rollback_clear",
+        "old-0-3:rollback_clear",
+        "old-3-1:rollback_clear",
+        "old-3-3:rollback_clear"
+      ],
+      "copy-rollback_clear-validation": [
+        "old-1-1:rollback_clear",
+        "old-1-3:rollback_clear",
+        "old-3-1:rollback_clear",
+        "old-3-3:rollback_clear"
+      ],
+      "copy-rollback_clear-installation": [
+        "old-2-1:rollback_clear",
+        "old-2-3:rollback_clear",
+        "old-3-1:rollback_clear",
+        "old-3-3:rollback_clear"
+      ],
+      "collapse-rollback_clear": [
+        "old-0-3:rollback_clear",
+        "old-1-3:rollback_clear",
+        "old-2-3:rollback_clear",
+        "old-3-1:rollback_clear"
+      ],
+      "ready-any": [
+        "old-0-1:ready",
+        "old-0-3:ready",
+        "old-1-1:ready",
+        "old-1-3:ready",
+        "old-2-1:ready",
+        "old-2-3:ready",
+        "old-3-1:ready",
+        "old-3-3:ready"
+      ],
+      "ready-always": [
+        "old-0-1:ready",
+        "old-0-3:ready",
+        "old-1-1:ready",
+        "old-1-3:ready",
+        "old-2-1:ready",
+        "old-2-3:ready",
+        "old-3-1:ready",
+        "old-3-3:ready"
+      ],
+      "ready-never": [],
+      "early-stop": [
+        "old-0-3:validation",
+        "old-0-3:installation",
+        "old-0-3:rollback_clear",
+        "old-1-1:validation",
+        "old-1-3:installation",
+        "old-1-3:rollback_clear",
+        "old-2-1:installation",
+        "old-2-3:rollback_clear",
+        "old-3-1:rollback_clear"
+      ]
+    }
+  },
+  "grader_controls": 85
+}

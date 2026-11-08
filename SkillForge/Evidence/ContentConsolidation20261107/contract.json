@@ -1,0 +1,33 @@
+{
+  "scope_basis": {
+    "quote": "simplify test content itself",
+    "path": "request.txt",
+    "sha256": "1f71258cacc9c5342caca7144fdaa39cc34b456f8461071aaed327ac6718d30b"
+  },
+  "requested_result": "Content-level suite consolidation with executed coverage checks and honest cost comparison",
+  "schema_version": 1,
+  "depth": "focused",
+  "scope": "behavioral",
+  "required_checks": [
+    {
+      "id": "content",
+      "description": "Agent using revised skill produces actual new case content, not a batching plan",
+      "kind": "behavioral_execution"
+    },
+    {
+      "id": "coverage",
+      "description": "Replacement preserves original obligations and detected faults, accepts correct outputs, detects interaction masking",
+      "kind": "outcome"
+    },
+    {
+      "id": "cost",
+      "description": "Same-context suite execution captures actual usage, with scoped retain decision and no batching attribution",
+      "kind": "outcome"
+    },
+    {
+      "id": "preservation",
+      "description": "Default callers and existing cheap tests preserved; main and installed revision verified",
+      "kind": "preservation"
+    }
+  ]
+}
