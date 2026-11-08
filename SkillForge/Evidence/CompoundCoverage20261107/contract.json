@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Measure coverage-preserving consolidation using real token receipts and implement only supported strategy guidance",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "dd7ea74c4a0827ad8b4d8424d7bed9c04e1ce98ad0e622da04c87ee5daf19458",
+    "quote": "If successful in reducing tokens, implement this as a way to improve a skill."
+  },
+  "required_checks": [
+    {
+      "id": "coverage",
+      "kind": "outcome",
+      "description": "Qualify common requirements, interaction coverage and fault-attribution controls"
+    },
+    {
+      "id": "tokens",
+      "kind": "behavioral_execution",
+      "description": "Execute split,batch,compound comparisons with actual provider usage and fresh confirmation"
+    },
+    {
+      "id": "adoption",
+      "kind": "outcome",
+      "description": "Apply frozen rule; retain only supported guidance and check its workflow use if retained"
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Preserve red/negative/isolation coverage, source identities and current runtime requirements"
+    }
+  ]
+}

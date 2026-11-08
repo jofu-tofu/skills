@@ -1,0 +1,1 @@
+Replace redundant easy tests with more complicated tests that test multiple behaviors at once for efficiency when possible. If successful in reducing tokens, implement this as a way to improve a skill.
