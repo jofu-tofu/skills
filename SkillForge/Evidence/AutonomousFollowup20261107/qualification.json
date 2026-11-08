@@ -1,0 +1,79 @@
+[
+  {
+    "name": "valid",
+    "exit": 0,
+    "stdout": "{\n  \"rows\": [\n    {\n      \"id\": \"initial\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"same-length-current-value\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"returned-object-mutation\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"malformed-current-file\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"recover-after-error\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"deleted-current-file\",\n      \"status\": \"pass\"\n    }\n  ],\n  \"pass\": 6,\n  \"fail\": 0\n}\n",
+    "stderr": "",
+    "result": {
+      "rows": [
+        {
+          "id": "initial",
+          "status": "pass"
+        },
+        {
+          "id": "same-length-current-value",
+          "status": "pass"
+        },
+        {
+          "id": "returned-object-mutation",
+          "status": "pass"
+        },
+        {
+          "id": "malformed-current-file",
+          "status": "pass"
+        },
+        {
+          "id": "recover-after-error",
+          "status": "pass"
+        },
+        {
+          "id": "deleted-current-file",
+          "status": "pass"
+        }
+      ],
+      "pass": 6,
+      "fail": 0
+    }
+  },
+  {
+    "name": "stale",
+    "exit": 1,
+    "stdout": "{\n  \"rows\": [\n    {\n      \"id\": \"initial\",\n      \"status\": \"pass\"\n    },\n    {\n      \"id\": \"same-length-current-value\",\n      \"status\": \"fail\",\n      \"error\": \"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\\n+ actual - expected\\n\\n  {\\n+   limit: 12,\\n-   limit: 27,\\n    mode: 'normal'\\n  }\\n\"\n    },\n    {\n      \"id\": \"returned-object-mutation\",\n      \"status\": \"fail\",\n      \"error\": \"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\\n+ actual - expected\\n\\n  {\\n+   limit: -1,\\n-   limit: 27,\\n    mode: 'normal'\\n  }\\n\"\n    },\n    {\n      \"id\": \"malformed-current-file\",\n      \"status\": \"fail\",\n      \"error\": \"AssertionError [ERR_ASSERTION]: Missing expected exception.\"\n    },\n    {\n      \"id\": \"recover-after-error\",\n      \"status\": \"fail\",\n      \"error\": \"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\\n+ actual - expected\\n\\n  {\\n+   limit: -1,\\n+   mode: 'normal'\\n-   limit: 9,\\n-   mode: 'recovery'\\n  }\\n\"\n    },\n    {\n      \"id\": \"deleted-current-file\",\n      \"status\": \"fail\",\n      \"error\": \"AssertionError [ERR_ASSERTION]: Missing expected exception.\"\n    }\n  ],\n  \"pass\": 1,\n  \"fail\": 5\n}\n",
+    "stderr": "",
+    "result": {
+      "rows": [
+        {
+          "id": "initial",
+          "status": "pass"
+        },
+        {
+          "id": "same-length-current-value",
+          "status": "fail",
+          "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   limit: 12,\n-   limit: 27,\n    mode: 'normal'\n  }\n"
+        },
+        {
+          "id": "returned-object-mutation",
+          "status": "fail",
+          "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   limit: -1,\n-   limit: 27,\n    mode: 'normal'\n  }\n"
+        },
+        {
+          "id": "malformed-current-file",
+          "status": "fail",
+          "error": "AssertionError [ERR_ASSERTION]: Missing expected exception."
+        },
+        {
+          "id": "recover-after-error",
+          "status": "fail",
+          "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   limit: -1,\n+   mode: 'normal'\n-   limit: 9,\n-   mode: 'recovery'\n  }\n"
+        },
+        {
+          "id": "deleted-current-file",
+          "status": "fail",
+          "error": "AssertionError [ERR_ASSERTION]: Missing expected exception."
+        }
+      ],
+      "pass": 1,
+      "fail": 5
+    }
+  }
+]

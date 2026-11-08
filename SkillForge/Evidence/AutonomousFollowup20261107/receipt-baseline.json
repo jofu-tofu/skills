@@ -1,0 +1,13 @@
+{
+  "name": "baseline",
+  "status": "completed",
+  "exit": 0,
+  "seconds": 208.52,
+  "usage": {
+    "input_tokens": 641049,
+    "cached_input_tokens": 578432,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5236,
+    "reasoning_output_tokens": 197
+  }
+}
