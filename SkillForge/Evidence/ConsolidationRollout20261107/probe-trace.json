@@ -1,0 +1,26 @@
+{
+  "raw_root": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/ConsolidationRollout20261107",
+  "events_sha256": "f43564ac3b6afd9c482daab20e013cc6bf0e11dce1c0e4b402eca6a8764a5df7",
+  "commands": [
+    {
+      "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SKILL.md'\"",
+      "exit_code": 0
+    },
+    {
+      "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/SkillIntent.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Quality/Shared.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Workflows/EvaluateSkill.md'\"",
+      "exit_code": 0
+    },
+    {
+      "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Quality/EvaluateSkill/Context.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Quality/EvaluateSkill/Outcomes.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Quality/EvaluateSkill/Tradeoffs.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Procedures/ConstructCases.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Procedures/EvaluateCandidate.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Procedures/RecordLearning.md'\"",
+      "exit_code": 0
+    },
+    {
+      "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Procedures/PlanChange.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Standards/Schemas.md','C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Standards/Grader.md'\"",
+      "exit_code": 0
+    },
+    {
+      "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/Procedures/DesignMeasurement.md'\"",
+      "exit_code": 0
+    }
+  ]
+}

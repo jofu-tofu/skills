@@ -1,0 +1,42 @@
+{
+  "runtime_commit": "adcc492",
+  "installed_target": "C:\\Users\\fujos\\Github\\skills\\SkillForge",
+  "identities": [
+    {
+      "path": "SKILL.md",
+      "lf_normalized_sha256": "dd5d19eb42582fee985526fb6e31fd10c2f95e55108ad3d35c1ad4f568ef637a",
+      "main_and_installed_match": true
+    },
+    {
+      "path": "Procedures/ConstructCases.md",
+      "lf_normalized_sha256": "3e5d2cc286e7dd882acee09b79494864eb01a48fc123da95228bbfbe83c0ba41",
+      "main_and_installed_match": true
+    },
+    {
+      "path": "Procedures/PlanChange.md",
+      "lf_normalized_sha256": "4b87745f8ad9751548ec051db328a36127d55f1e6d748fbb0e0675af16a43c06",
+      "main_and_installed_match": true
+    },
+    {
+      "path": "Procedures/EvaluateCandidate.md",
+      "lf_normalized_sha256": "05be46c05934c6059906764df4675c084e56497094ae49737fc56084d00547c8",
+      "main_and_installed_match": true
+    },
+    {
+      "path": "Procedures/DiagnoseGap.md",
+      "lf_normalized_sha256": "36b5f876514d7b648fce62be0e23d3142d3ac7a1ac0ca809094bff1c88325102",
+      "main_and_installed_match": true
+    },
+    {
+      "path": "Procedures/ApproveSkill.md",
+      "lf_normalized_sha256": "3415cefc1b6275fd0c3ea94a168d36920c01cd2e2b951439cb1125c3eb76e053",
+      "main_and_installed_match": true
+    },
+    {
+      "path": "Checks/SharedSkillTests.md",
+      "lf_normalized_sha256": "d70b2ca49d4976b138b0a3cd1606763684706f30aa060bfbb4f5bc74222157ae",
+      "main_and_installed_match": true
+    }
+  ],
+  "meaning": "Main and installed runtime match reviewed task checkout after CRLF normalization. Historical trial-time uninstalled statements are superseded by this receipt; results and scopes unchanged."
+}

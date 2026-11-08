@@ -1,0 +1,14 @@
+const fs=require('node:fs'),p=require('node:path'),cp=require('node:child_process'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const skill=p.resolve(__dirname,'../..'),main='C:/Users/fujos/Github/skills/SkillForge',installed='C:/Users/fujos/.codex/skills/SkillForge',raw='C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/ConsolidationRollout20261107';
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex'),read=n=>fs.readFileSync(p.join(__dirname,n));
+const files=['SKILL.md','Procedures/ConstructCases.md','Procedures/PlanChange.md','Procedures/EvaluateCandidate.md','Procedures/DiagnoseGap.md','Procedures/ApproveSkill.md','Checks/SharedSkillTests.md'];
+const normalize=b=>b.toString('utf8').replace(/\r\n/g,'\n');
+const identities=files.map(name=>{const expected=normalize(fs.readFileSync(p.join(skill,name))),a=normalize(fs.readFileSync(p.join(main,name))),b=normalize(fs.readFileSync(p.join(installed,name)));assert.equal(expected,a);assert.equal(a,b);return{path:name,lf_normalized_sha256:hash(b),main_and_installed_match:true};});
+const receipt={runtime_commit:'adcc492',installed_target:fs.realpathSync(installed),identities,meaning:'Main and installed runtime match reviewed task checkout after CRLF normalization. Historical trial-time uninstalled statements are superseded by this receipt; results and scopes unchanged.'};
+fs.writeFileSync(p.join(__dirname,'installation.json'),JSON.stringify(receipt,null,2)+'\n');
+const events=fs.readFileSync(p.join(raw,'events.jsonl'),'utf8').trim().split(/\r?\n/).map(JSON.parse),commands=events.filter(x=>x.type==='item.completed'&&x.item?.type==='command_execution').map(x=>({command:x.item.command,exit_code:x.item.exit_code}));
+fs.writeFileSync(p.join(__dirname,'probe-trace.json'),JSON.stringify({raw_root:raw,events_sha256:hash(fs.readFileSync(p.join(raw,'events.jsonl'))),commands},null,2)+'\n');
+const evidence={routing:['Review.md','response.txt','probe-trace.json'],other_skills:['Protocol.md','suite-inventory.txt','combined-tests.txt','verification.json'],integration:['installation.json','verification.json','completion-tests.txt','structure.txt']};
+const assessment={schema_version:1,contract_sha256:hash(read('contract.json')),candidate_decision:'retain_candidate',checks:Object.entries(evidence).map(([id,names])=>({id,status:'pass',qualification:'qualified',evidence:names.map(name=>({path:name,sha256:hash(read(name))}))})),actions:[],blockers:[]};
+fs.writeFileSync(p.join(__dirname,'assessment.json'),JSON.stringify(assessment,null,2)+'\n');
+const output=cp.execFileSync(process.execPath,[p.join(skill,'Tools/CheckCompletion.cjs'),'contract.json','assessment.json','--root','.'],{cwd:__dirname,encoding:'utf8'});fs.writeFileSync(p.join(__dirname,'completion.json'),output);console.log(output);

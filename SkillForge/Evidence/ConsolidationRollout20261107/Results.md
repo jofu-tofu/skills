@@ -1,0 +1,11 @@
+# Consolidation rollout complete
+
+Merged retained branch changes into local main; runtime commit adcc492. Installed SkillForge is the existing junction to C:/Users/fujos/Github/skills/SkillForge. Seven reviewed instruction/recipe files match main and installed copies after checkout line-ending normalization. No remote push.
+
+The shared rule now applies through SKILL.md and EvaluateCandidate to every target skill, including existing suites. It is part of ordinary authorized evaluation planning, not a background process. Reuse sufficient evidence; consolidate compatible checks with per-check scoring, preserve cheap negatives and independent arms/draws, and amend frozen plans before changing execution. A fresh entry-route planning run read the owner and produced the expected arrangement. This one observed route does not guarantee every future agent follows it.
+
+Other skills: Prompting,ClarityEngine,WebDesign now have one documented compatible command retaining all75tests/185assertions; successful execution verified. Tests themselves were not removed. First run exposed missing Prompting dependencies; frozen-lockfile install with lifecycle scripts disabled repaired setup, then all tests passed. Browser integration remains separate; CodeReview's historic model cases were already batched; ClarityEngine's blind-reader boundaries remain. The inventory covers the shared repository, not vendor plugins. This simplification establishes fewer invocations, not new measured model-token savings for these suites.
+
+Validation:34completion tests,14structural checks,48links,8prior completion gates pass. Original histories preserved when merging main; only duplicate index text removed. Prior experimental uninstalled statements remain historical and are superseded for deployment by installation.json. The rollout gate is complete/retain_candidate. Raw fresh-reader events and final output retained with a SHA256 trace reference; no background automation or destructive test deletion.
+
+Use Checks/SharedSkillTests.md from the installed SkillForge for the combined command. Earlier CompoundCoverage supplies the bounded actual-token evidence; this rollout verifies routing, compatible execution, and installation separately.

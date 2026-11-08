@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "b38c2526b9fb8c4caad438eae9e17b066c4ff37c2853566f1ba7a5496d8155c0",
+  "candidate_decision": "retain_candidate",
+  "checks": [
+    {
+      "id": "routing",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Review.md",
+          "sha256": "e971c118f0a54a32fb6ced8293ba495b381ddd7404a862dc7bd2b102eb7e6843"
+        },
+        {
+          "path": "response.txt",
+          "sha256": "e0fb09b3fa2b8189cfefdb09e70f875e8fb875b3505f84cddc68d27348c7ab62"
+        },
+        {
+          "path": "probe-trace.json",
+          "sha256": "7df3b36b1d05780f22cd36b4260eb768365593a982062b46b51dc9ef1d5f09d3"
+        }
+      ]
+    },
+    {
+      "id": "other_skills",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Protocol.md",
+          "sha256": "39be8b08a39d94729b291dc7e66795df35e26415ee8a37497a634f7eb4cdbf81"
+        },
+        {
+          "path": "suite-inventory.txt",
+          "sha256": "60fd74d112e2d562d359d8d4f5f47728e7c65888f56a2260eafeb90e2cd7477d"
+        },
+        {
+          "path": "combined-tests.txt",
+          "sha256": "b1ea0c3721d4462f89833fa3593b6ffb7a4db4dbb1955d52cbde0bc432eafa2d"
+        },
+        {
+          "path": "verification.json",
+          "sha256": "5d0fc64c77ee771b2d80af6361a4932506d9b8c74ad8ea312cd26580bcd0cdf9"
+        }
+      ]
+    },
+    {
+      "id": "integration",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "installation.json",
+          "sha256": "e59b8c969b867fa6b46c60868d5d0f980c63c282983ae5518cfa7718a486f790"
+        },
+        {
+          "path": "verification.json",
+          "sha256": "5d0fc64c77ee771b2d80af6361a4932506d9b8c74ad8ea312cd26580bcd0cdf9"
+        },
+        {
+          "path": "completion-tests.txt",
+          "sha256": "8c774f3300a3a2b874f5ad790131cb8c3dd9fb0e167ea4e4377c8b07869e625a"
+        },
+        {
+          "path": "structure.txt",
+          "sha256": "c4782c44e91aecfb41b86d11e9929daa12d764e1584ecece96ad01eb7dc3c53f"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}
