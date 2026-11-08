@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "exit_code": 0,
+  "seconds": 72.2319899,
+  "valid": true,
+  "issues": [],
+  "turns_started": 1,
+  "turns_completed": 1,
+  "raw_turn_usage": [
+    {
+      "input_tokens": 170865,
+      "cached_input_tokens": 146176,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1494,
+      "reasoning_output_tokens": 22
+    }
+  ],
+  "usage": {
+    "input_tokens": 170865,
+    "output_tokens": 1494,
+    "cached_input_tokens": 146176,
+    "uncached_input_tokens": 24689,
+    "total_tokens": 172359
+  },
+  "known_completed_usage": {
+    "input_tokens": 170865,
+    "output_tokens": 1494,
+    "total_tokens": 172359
+  },
+  "commands": 5,
+  "command_errors": [],
+  "prompt_sha256": "056593b0d9142be4376f2f0621e85c211bcc4253431b3862a133bd7c233cf930",
+  "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+  "args": [
+    "exec",
+    "--ephemeral",
+    "--skip-git-repo-check",
+    "-s",
+    "workspace-write",
+    "-C",
+    "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\20-working-T1-T3\\ConsolidationRollout20261107",
+    "--json",
+    "-o",
+    "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\20-working-T1-T3\\ConsolidationRollout20261107\\response.txt",
+    "-"
+  ],
+  "limits": "Provider totals, including cached input where reported; not billing or total project preparation cost."
+}

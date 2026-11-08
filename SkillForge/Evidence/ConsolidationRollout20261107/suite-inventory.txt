@@ -1,0 +1,16 @@
+WebDesign\Tools\VerifyDesign.test.ts
+Prompting\Tools\ValidateTemplate.test.ts
+Prompting\Tools\RenderTemplate.test.ts
+Browser\Tests\SessionIdentity.test.ts
+Browser\Tests\Interaction.test.ts
+Browser\Tests\Diagnostics.test.ts
+ClarityEngine\Tools\ScorePlainness.test.ts
+ClarityEngine\Tools\MeasureDraft.test.ts
+CodeReview\Improvements\HistoryScope\VerifierCases.json
+CodeReview\Improvements\HistoryScope\SupplementalCases.json
+CodeReview\Improvements\HistoryScope\MaintenanceCases.json
+CodeReview\Improvements\HistoryScope\Cases.json
+ClarityEngine\Testing\RegressionCases.md
+ClarityEngine\Improvements\SessionOutcomes\ExpandedCases.md
+ClarityEngine\Improvements\SessionOutcomes\Panel\evaluation-plan.json
+ClarityEngine\Improvements\SessionOutcomes\Explanation\cases.md

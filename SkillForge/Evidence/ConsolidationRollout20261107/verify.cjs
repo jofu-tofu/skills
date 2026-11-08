@@ -1,0 +1,10 @@
+const fs=require('node:fs'),p=require('node:path'),cp=require('node:child_process'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const root=p.resolve(__dirname,'../..'),repo=p.dirname(root),hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const old=JSON.parse(fs.readFileSync(p.join(root,'Evidence/CombinedReview20261107/Verification.json'))).gates.map(x=>x.path);
+const gates=[...old,'Evidence/RedFirst20261107','Evidence/CompoundCoverage20261107'].map(dir=>{const cwd=p.join(root,dir),raw=cp.execFileSync(process.execPath,[p.join(root,'Tools/CheckCompletion.cjs'),'contract.json','assessment.json','--root','.'],{cwd,encoding:'utf8'}),result=JSON.parse(raw);assert.equal(result.task_status,'complete',dir);return{path:dir,...result};});
+const files=['SKILL.md','Procedures/EvaluateCandidate.md','Procedures/ConstructCases.md','Procedures/PlanChange.md','Tools/README.md','Checks/SharedSkillTests.md'];
+let links=0;for(const name of files){const file=p.join(root,name),body=fs.readFileSync(file,'utf8');for(const m of body.matchAll(/\]\(([^)]+)\)/g)){const link=decodeURIComponent(m[1].split('#')[0]);if(!link||/^[a-z]+:/i.test(link))continue;assert(fs.existsSync(p.resolve(p.dirname(file),link)),name+' '+link);links++;}}
+const suites=['Prompting/Tools/RenderTemplate.test.ts','Prompting/Tools/ValidateTemplate.test.ts','ClarityEngine/Tools/MeasureDraft.test.ts','ClarityEngine/Tools/ScorePlainness.test.ts','WebDesign/Tools/VerifyDesign.test.ts'];
+const source=suites.map(name=>{const b=fs.readFileSync(p.join(repo,name)),main=fs.readFileSync(p.join('C:/Users/fujos/Github/skills',name));assert.equal(hash(b),hash(main));return{path:name,sha256:hash(b)};});
+const report={gates,links_checked:links,suite_identities:source,scope:'Preserved original completion gates and exact tested companion test files; no new semantic qualification from hashing.'};
+fs.writeFileSync(p.join(__dirname,'verification.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({gates:gates.length,links,suites:source.length}));

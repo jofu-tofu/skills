@@ -1,0 +1,54 @@
+Use **EvaluateSkill’s comparison route, stopping at planning**. Status: `not_executed`. No target edits or model tests were performed.
+
+1. **Amend the frozen execution plan before future execution.** Use one session returning four separately scored decisions: facts, quantities, conditions, and final recommendation. Preserve existing assertion IDs, scoring rules, single-fault controls, and cheap deterministic negative controls. Keep the recommendation’s dependence on the other findings observable.
+
+2. **Schedule four independent development sessions:**
+
+   | Instructions | Independent draws | Decisions per draw |
+   |---|---:|---:|
+   | Baseline | 2 | 4 |
+   | Candidate | 2 | 4 |
+
+   This produces **4 executions and 16 scored decisions**, not 16 independent trials. Match document, runtime, tools, and scoring conditions. Never share context between arms or independent draws.
+
+3. **Reuse the supplied qualified pilot for the arrangement choice.** Its synthetic planning figures imply **7,000 fewer tokens, a 70% reduction**, per equivalent four-check execution. Across four development draws, the corresponding planning estimate is **40,000 → 12,000 tokens**. These are supplied inputs and arithmetic projections, not measurements from this execution. Do not repeat the old arrangement merely to reconfirm an adequately supported consolidation.
+
+4. **Freeze interpretation before running.** Report each required check separately as pass, fail, or unverified; aggregate gains cannot hide required regressions. Preserve errors, missing data, retries, and disagreements. Future cost accounting must include total input plus output, retries, diagnosis, and model grading; report cached input separately.
+
+   The four correctness checks establish adequacy within this document. They do not necessarily distinguish two acceptable instruction versions. Record the useful difference that would justify choosing the candidate. If none is specified or measurable, leave superiority unresolved. Equal pass totals alone do not establish equal quality; diagnose whether the comparison lacks sensitivity before adding trials.
+
+5. **Keep reserved confirmation sealed.** Freeze the development choice, instruction snapshots, measures, and decision rules before opening it. Confirmation remains a separate stage, outside this four-session development budget. Do not tune against its contents.
+
+Record these changes in the existing plan and linked execution metadata, preserving prior versions:
+
+- Consolidated session arrangement and unchanged four-check coverage/control mapping.
+- Four-session development budget, independence boundaries, and separate confirmation stage.
+- Supplied pilot provenance, qualification scope, projected savings, and cost-accounting rules.
+- Baseline/candidate snapshot identities, matched conditions, selection rules, and stopping rules.
+- Any unresolved benefit measure or qualification requirement.
+- Diagnostic splits only when a combined result is ambiguous, preserving the original result and added cost.
+- `not_executed` status and limits: one document cannot establish broad DocumentCheck effectiveness.
+
+No Evidence directories, grader keys, trial outputs, chat history, or external sources were read.
+
+Exact instruction files read, all relative to  
+`C:/Users/fujos/Obsidian/Projects/SkillForge/TieDiagnosis20261107/skills/SkillForge/`:
+
+```text
+SKILL.md
+SkillIntent.md
+Quality/Shared.md
+Workflows/EvaluateSkill.md
+Quality/EvaluateSkill/Context.md
+Quality/EvaluateSkill/Outcomes.md
+Quality/EvaluateSkill/Tradeoffs.md
+Procedures/ConstructCases.md
+Procedures/EvaluateCandidate.md
+Procedures/RecordLearning.md
+Procedures/PlanChange.md
+Procedures/DesignMeasurement.md
+Standards/Schemas.md
+Standards/Grader.md
+```
+
+The combined tool output partially truncated `Standards/Schemas.md`; its evaluation-plan and canonical-results sections were visible.

@@ -1,0 +1,94 @@
+bun test v1.3.5 (1e86cebd)
+
+Prompting\Tools\RenderTemplate.test.ts:
+(pass) bundled primitive consumer contracts > an empty gate collection does not fabricate a checklist [15.00ms]
+(pass) bundled primitive consumer contracts > Briefing emits the selected markdown instructions [16.00ms]
+(pass) bundled primitive consumer contracts > Briefing emits the selected json instructions
+(pass) bundled primitive consumer contracts > Briefing emits the selected structured instructions
+(pass) bundled primitive consumer contracts > explicit output structure overrides the default format instructions
+(pass) bundled primitive consumer contracts > Briefing preserves literal output-format instructions [15.00ms]
+(pass) bundled primitive consumer contracts > Voice JSON preserves keys and string values without HTML escaping
+(pass) bundled primitive consumer contracts > Voice empty collections and omitted optional text remain valid JSON [16.00ms]
+(pass) loads local partials without a shell and does not reuse a removed file
+
+Prompting\Tools\ValidateTemplate.test.ts:
+Handlebars: Access has been denied to resolve the property "toString" because it is not an "own property" of its parent.
+You can add a runtime option to disable the check or this warning:
+See https://handlebarsjs.com/api-reference/runtime-options.html#options-to-control-prototype-access for details
+(pass) matches actual scoped rendering: inherited toString is unavailable [15.00ms]
+(pass) matches actual scoped rendering: inherited constructor is unavailable
+(pass) matches actual scoped rendering: own toString string remains available
+(pass) matches actual scoped rendering: own constructor string remains available
+(pass) matches actual scoped rendering: explicit this bypasses same-named alias [16.00ms]
+(pass) matches actual scoped rendering: explicit relative path bypasses same-named alias
+(pass) matches actual scoped rendering: ordinary alias still selects its active branch [16.00ms]
+(pass) matches actual scoped rendering: parent index keeps inactive nested branch inactive
+(pass) matches actual scoped rendering: parent index exposes missing value in active nested branch
+(pass) matches actual scoped rendering: array key zero is numeric and false for if
+(pass) matches actual scoped rendering: object key zero remains a truthy string
+(pass) matches actual scoped rendering: with accepts zero context [15.00ms]
+(pass) matches actual scoped rendering: with zero still checks active required values
+(pass) accepts adjacent and nested blocks that render the required text [16.00ms]
+(pass) rejects malformed expressions and mismatched or missing closing blocks
+(pass) does not treat comment examples as variable, helper or partial dependencies [15.00ms]
+(pass) keeps missing live data warnings and strict failures
+(pass) accepts ready=%s without requiring an else data field [16.00ms]
+(pass) accepts ready=%s without requiring an else data field
+(pass) reports an unavailable explicitly supplied data file
+(pass) follows built-in data scope: {{#each people}}{{name}}/{{../title}}{{/each}}
+(pass) follows built-in data scope: {{#with person}}{{name}}{{/with}}
+(pass) follows built-in data scope: {{#each people as |person|}}{{person.name}}/{{@index}}{{/each}} [16.00ms]
+(pass) follows built-in data scope: {{#each people}}{{@root.title}}/{{this.name}}{{/each}}
+(pass) follows built-in data scope: {{#if optional}}{{optional.name}}{{else}}none{{/if}} [15.00ms]
+(pass) keeps real missing values visible in active scopes and this-prefixed root names
+(pass) marks custom helper and partial data checks as incomplete
+(pass) returns an actionable invalid result for malformed data [16.00ms]
+
+ClarityEngine\Tools\MeasureDraft.test.ts:
+(pass) sentence extraction preserves prose before internal punctuation > keeps the actual signed leading-decimal instruction intact [16.00ms]
+(pass) sentence extraction preserves prose before internal punctuation > retains decimal and scientific values before a real sentence boundary
+(pass) sentence extraction preserves prose before internal punctuation > retains version and URL prefixes, including an unfinished final sentence
+(pass) sentence extraction preserves prose before internal punctuation > preserves ordinary boundaries and closing quote or bracket punctuation
+(pass) sentence extraction preserves prose before internal punctuation > actual Markdown prose extraction does not omit the negative quantity or instruction
+
+ClarityEngine\Tools\ScorePlainness.test.ts:
+(pass) checkGates > passes a faithful plain rewrite
+(pass) checkGates > lets a negative verb become an explicit negation, but not lose one
+(pass) checkGates > rejects a dropped number
+(pass) checkGates > preserves signed quantities while accepting equivalent number and range notation
+(pass) checkGates > keeps scientific exponent signs in the numeric marker
+(pass) checkGates > preserves leading-dot decimal signs and magnitude
+(pass) checkGates > rejects flipped negation
+(pass) checkGates > accepts if-not in place of unless
+(pass) checkGates > rejects dropped or added scope words
+(pass) checkGates > accepts synonyms within a meaning class
+(pass) checkGates > rejects a dropped cause or condition
+(pass) checkGates > protects required terms and identifiers, and rejects invented terms
+(pass) checkGates > rejects a rewrite that drops most of the content
+(pass) computeSignals > counts rare words and skips required terms [32.00ms]
+(pass) computeSignals > matches abbreviations as whole words
+(pass) computeSignals > treats a parenthetical as an explanation
+(pass) computeSignals > measures words before the main verb past relative clauses and modifiers [15.00ms]
+(pass) computeSignals > finds agentless passives, hidden verbs, and vague verbs
+(pass) decide > does not select a plainer candidate that loses a quantity's negative sign
+(pass) decide > does not select a plainer candidate that loses a leading-dot decimal sign [16.00ms]
+(pass) decide > keeps the original when no candidate passes and improves
+(pass) decide > picks the candidate that wins every major signal
+(pass) decide > asks for a merge when strengths are split, then keeps the merge only if it wins [15.00ms]
+(pass) triage > flags jargon-heavy sentences and leaves plain ones alone [16.00ms]
+(pass) triage > exempts inline code and required terms
+(pass) triage > flags a staccato kicker and tells the rewriters to join it
+(pass) findStaccatoKicker > flags short, unlinked, absolute sentences and bare labels
+(pass) findStaccatoKicker > leaves linked, limited, longer, and heading-style sentences alone
+
+WebDesign\Tools\VerifyDesign.test.ts:
+(pass) accepts a complete PNG without claiming pixel or screenshot validation
+(pass) rejects plausible dimensions in an incomplete PNG
+(pass) rejects a complete image body without its end chunk
+(pass) rejects corrupted chunk content
+(pass) rejects non-image data
+
+ 75 pass
+ 0 fail
+ 185 expect() calls
+Ran 75 tests across 5 files. [1499.00ms]

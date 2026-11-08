@@ -1,0 +1,28 @@
+{
+  "requested_result": "Integrate retained work; apply shared consolidation rule to existing and new suites across skills; simplify compatible other-skill execution without deleting coverage",
+  "scope": "behavioral",
+  "required_checks": [
+    {
+      "id": "routing",
+      "kind": "behavioral_execution",
+      "description": "Existing-suite caller reaches consolidation guidance"
+    },
+    {
+      "id": "other_skills",
+      "kind": "outcome",
+      "description": "Inventory current suites and execute a compatible combined arrangement preserving distinct tests"
+    },
+    {
+      "id": "integration",
+      "kind": "preservation",
+      "description": "Main and installed skill match retained runtime; prior histories and gates preserved"
+    }
+  ],
+  "schema_version": 1,
+  "depth": "focused",
+  "scope_basis": {
+    "sha256": "45b084010d68bb73509063388a83240ef074fd53842063164596dbc6570480f1",
+    "quote": "make consolidation apply automatically to other skills",
+    "path": "request.txt"
+  }
+}

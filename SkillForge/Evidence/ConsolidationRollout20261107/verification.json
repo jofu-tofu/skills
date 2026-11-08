@@ -1,0 +1,108 @@
+{
+  "gates": [
+    {
+      "path": "Improvements/InformationOrganization20261107",
+      "schema_version": 1,
+      "valid": true,
+      "contract_sha256": "4f86dc02f6fd39cdbc29e4de4fa3fff10e0c526e23c7464e54588f7a55925ac2",
+      "candidate_decision": "retain_candidate",
+      "task_status": "complete",
+      "unresolved": [],
+      "next_actions": []
+    },
+    {
+      "path": "Evidence/TieDiagnosis20261107",
+      "schema_version": 1,
+      "valid": true,
+      "contract_sha256": "2f7b1c9f16b7b0580359abdac6f1c9ee842ca0454e6f8d29b2643f93a8b061d8",
+      "candidate_decision": "retain_candidate",
+      "task_status": "complete",
+      "unresolved": [],
+      "next_actions": []
+    },
+    {
+      "path": "Evidence/ExperimentMemory20261107",
+      "schema_version": 1,
+      "valid": true,
+      "contract_sha256": "ef63517f7f69c8ac20032f44a630cb07a09a9d0c1663bf1c5dedf5fc7f929701",
+      "candidate_decision": "retain_baseline",
+      "task_status": "complete",
+      "unresolved": [],
+      "next_actions": []
+    },
+    {
+      "path": "Evidence/WorkflowEfficiency20261107",
+      "schema_version": 1,
+      "valid": true,
+      "contract_sha256": "f33573f68164eca82725e489878c2b9649c31f3648d28df0ae791ca8eccbfe95",
+      "candidate_decision": "retain_baseline",
+      "task_status": "complete",
+      "unresolved": [],
+      "next_actions": []
+    },
+    {
+      "path": "Evidence/MeasurementValidity20261107",
+      "schema_version": 1,
+      "valid": true,
+      "contract_sha256": "43b27e7abade72ad6dbcd4ee76845515e1f12a0910bfd299d1fea2a917a89afb",
+      "candidate_decision": "retain_baseline",
+      "task_status": "complete",
+      "unresolved": [],
+      "next_actions": []
+    },
+    {
+      "path": "Evidence/MeasurementOptimization20261107",
+      "schema_version": 1,
+      "valid": true,
+      "contract_sha256": "0f10316436eca823dc06046bd750e20f7c72051b766c793289bee14fb75b6224",
+      "candidate_decision": "retain_baseline",
+      "task_status": "complete",
+      "unresolved": [],
+      "next_actions": []
+    },
+    {
+      "path": "Evidence/RedFirst20261107",
+      "schema_version": 1,
+      "valid": true,
+      "contract_sha256": "c4c999d8516fe76dc4e9349d4ec07ad9b29851ec21cea3f26dc7c99ded647215",
+      "candidate_decision": "retain_candidate",
+      "task_status": "complete",
+      "unresolved": [],
+      "next_actions": []
+    },
+    {
+      "path": "Evidence/CompoundCoverage20261107",
+      "schema_version": 1,
+      "valid": true,
+      "contract_sha256": "d0f9f49d882c6a4534ea969cbbd84ededb4ad5c5679bb24225d18f5589817a66",
+      "candidate_decision": "retain_candidate",
+      "task_status": "complete",
+      "unresolved": [],
+      "next_actions": []
+    }
+  ],
+  "links_checked": 48,
+  "suite_identities": [
+    {
+      "path": "Prompting/Tools/RenderTemplate.test.ts",
+      "sha256": "280fae23aab6361430bf56efed88ef64398f3ab4e682b7e155f3250c82d08869"
+    },
+    {
+      "path": "Prompting/Tools/ValidateTemplate.test.ts",
+      "sha256": "3790ab2f91c32393427ac21beb466140b144eacf03efa32901808cd66092a1a7"
+    },
+    {
+      "path": "ClarityEngine/Tools/MeasureDraft.test.ts",
+      "sha256": "ed86524d49aa30ca56fa11d53e2b90ed413d466b97d33079680e7a03a550c26a"
+    },
+    {
+      "path": "ClarityEngine/Tools/ScorePlainness.test.ts",
+      "sha256": "177a26ff7b5653b97ee40c69f66a25fdb54ac2ee4565accd1d3f0f9dccd4aed6"
+    },
+    {
+      "path": "WebDesign/Tools/VerifyDesign.test.ts",
+      "sha256": "1db3d9d4ef7bfef1e338d872457b07a73e3e5620042acedbfee2c767d443e04c"
+    }
+  ],
+  "scope": "Preserved original completion gates and exact tested companion test files; no new semantic qualification from hashing."
+}

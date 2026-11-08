@@ -22,6 +22,8 @@ Workflows orchestrate user tasks. [Procedures](Architecture.md) perform reusable
 
 All workflows use [DesignMeasurement](Procedures/DesignMeasurement.md) for new, changed, unsupported, or out-of-scope measures, including new skills without a reported gap. Record the intended outcome, evidence method, scoring rule, and qualification scope before using a measure to establish improvement or readiness. Results distinguish pass, fail, and unverified; missing evidence cannot establish success or failure.
 
+For every target skill, apply [test consolidation](Procedures/ConstructCases.md#consolidating-model-checks) when planning authorized evaluations, including existing suites. Reuse compatible context while preserving required coverage and independence; this is normal evaluation planning, not a separate opt-in experiment or background task.
+
 For a reported skill gap, route by requested result: “fix/improve it” selects UpdateSkill; “is this happening/why/check it” selects EvaluateSkill. A bare complaint starts with assessment, not an assumed edit. Both workflows call [DiagnoseGap](Procedures/DiagnoseGap.md). Preserve unresolved intent if it affects the next action. Ordinary requests to review code or write a document belong to the target skill, not SkillForge.
 
 ## Examples
