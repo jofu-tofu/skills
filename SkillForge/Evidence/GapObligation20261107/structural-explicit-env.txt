@@ -1,0 +1,10 @@
+
+Available skills:
+❌ Skill not found: SkillForge
+EPERM: operation not permitted, scandir 'C:\Users\fujos\.claude\skills'
+    path: "C:\\Users\\fujos\\.claude\\skills",
+ syscall: "scandir",
+   errno: -1,
+    code: "EPERM"
+
+

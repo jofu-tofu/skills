@@ -1,0 +1,179 @@
+✖ finished experiment without gap resolution continues despite all generic passes (68.3238ms)
+✖ rejected mechanism carries the unresolved outcome to the available next action (74.289ms)
+✖ unresolved outcome with evidenced access limit is blocked, not complete (75.5824ms)
+✖ repair needs its own outcome check rather than experiment-only coverage (76.3617ms)
+✖ assessment cannot downgrade a repair into a suggestion (72.7507ms)
+✖ required enhancement cannot finish by rejecting a mechanism or disproving a failure (71.5005ms)
+✔ resolved repair can retain baseline when another cause was corrected (76.6843ms)
+✔ evidence disproving a suspected gap permits a no-change repair conclusion (73.6602ms)
+✔ resolution label without qualified evidence cannot close a repair (216.3261ms)
+✔ bounded suggestion may stop unchanged without claiming a gap resolved (74.1171ms)
+✔ explicitly required enhancement completes with established outcome (73.866ms)
+✖ unknown objective cannot silently fall back to optional suggestion (73.3818ms)
+✔ legacy contracts retain historical behavior without claiming objective enforcement (71.0537ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 6
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1172.3624
+
+✖ failing tests:
+
+test at Tools\CheckObjective.test.cjs:22:1
+✖ finished experiment without gap resolution continues despite all generic passes (68.3238ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'complete'
+  - 'continue'
+       ^
+  
+      at TestContext.<anonymous> (C:\Users\fujos\Obsidian\Projects\SkillForge\GapObligation20261107\skills\SkillForge\Tools\CheckObjective.test.cjs:22:135)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.start (node:internal/test_runner/test:1003:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'complete',
+    expected: 'continue',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at Tools\CheckObjective.test.cjs:23:1
+✖ rejected mechanism carries the unresolved outcome to the available next action (74.289ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'complete'
+  - 'continue'
+       ^
+  
+      at TestContext.<anonymous> (C:\Users\fujos\Obsidian\Projects\SkillForge\GapObligation20261107\skills\SkillForge\Tools\CheckObjective.test.cjs:23:352)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'complete',
+    expected: 'continue',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at Tools\CheckObjective.test.cjs:24:1
+✖ unresolved outcome with evidenced access limit is blocked, not complete (75.5824ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'complete'
+  - 'blocked'
+  
+      at TestContext.<anonymous> (C:\Users\fujos\Obsidian\Projects\SkillForge\GapObligation20261107\skills\SkillForge\Tools\CheckObjective.test.cjs:24:268)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'complete',
+    expected: 'blocked',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at Tools\CheckObjective.test.cjs:25:1
+✖ repair needs its own outcome check rather than experiment-only coverage (76.3617ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (C:\Users\fujos\Obsidian\Projects\SkillForge\GapObligation20261107\skills\SkillForge\Tools\CheckObjective.test.cjs:25:196)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at Tools\CheckObjective.test.cjs:26:1
+✖ assessment cannot downgrade a repair into a suggestion (72.7507ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (C:\Users\fujos\Obsidian\Projects\SkillForge\GapObligation20261107\skills\SkillForge\Tools\CheckObjective.test.cjs:26:168)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at Tools\CheckObjective.test.cjs:27:1
+✖ required enhancement cannot finish by rejecting a mechanism or disproving a failure (71.5005ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'complete'
+  - 'continue'
+       ^
+  
+      at TestContext.<anonymous> (C:\Users\fujos\Obsidian\Projects\SkillForge\GapObligation20261107\skills\SkillForge\Tools\CheckObjective.test.cjs:27:168)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'complete',
+    expected: 'continue',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at Tools\CheckObjective.test.cjs:33:1
+✖ unknown objective cannot silently fall back to optional suggestion (73.3818ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (C:\Users\fujos\Obsidian\Projects\SkillForge\GapObligation20261107\skills\SkillForge\Tools\CheckObjective.test.cjs:33:149)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

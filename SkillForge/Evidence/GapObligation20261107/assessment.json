@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "14f7edd73c034fd0fb0a2340968b2167a9deb6f9d45fba9562c9e2a0dd98d085",
+  "candidate_decision": "retain_candidate",
+  "checks": [
+    {
+      "id": "result",
+      "status": "pass",
+      "resolution": "resolved",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "baseline-tests.txt",
+          "sha256": "8cff4f1ce86b49e6891fd18e5682447788fede479675718875d2795279696943"
+        },
+        {
+          "path": "candidate-tests.txt",
+          "sha256": "94f33aa66076867f894702353af7b7ffb00c504d3834f0d8aa4e273b7a96f3ad"
+        },
+        {
+          "path": "Review.md",
+          "sha256": "bf7eb93db9712ea7b93b33c1547e725bb602f036b262cf670944e11bf51cd73e"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "execution-results.json",
+          "sha256": "2fd3d86d8ffb9e7d2a3dd46d8dd1cabec008c918f928c0da7ce4a5e9d68c5ea4"
+        },
+        {
+          "path": "verification.json",
+          "sha256": "7917e741daf35623d51bcf79c50bbd762eba6e85b0ec56363a5fb1713f396573"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "candidate-tests.txt",
+          "sha256": "94f33aa66076867f894702353af7b7ffb00c504d3834f0d8aa4e273b7a96f3ad"
+        },
+        {
+          "path": "verification.json",
+          "sha256": "7917e741daf35623d51bcf79c50bbd762eba6e85b0ec56363a5fb1713f396573"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Report.md",
+          "sha256": "76b424ad4c1a5deccc4b7eaa38251927f3c7b3afdbeb6dbf86fef3b05d07df35"
+        },
+        {
+          "path": "Review.md",
+          "sha256": "bf7eb93db9712ea7b93b33c1547e725bb602f036b262cf670944e11bf51cd73e"
+        },
+        {
+          "path": "verification.json",
+          "sha256": "7917e741daf35623d51bcf79c50bbd762eba6e85b0ec56363a5fb1713f396573"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}

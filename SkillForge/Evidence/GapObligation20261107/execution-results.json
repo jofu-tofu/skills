@@ -1,0 +1,647 @@
+{
+  "qualification": {
+    "correct": {
+      "total": 27,
+      "passed": 27,
+      "failures": []
+    },
+    "original": {
+      "total": 27,
+      "passed": 5,
+      "failures": [
+        {
+          "input": "123,456,789",
+          "expected": 123456789,
+          "error": "Expected values to be strictly equal:\n\n123 !== 123456789\n"
+        },
+        {
+          "input": "-9,876,543",
+          "expected": -9876543,
+          "error": "Expected values to be strictly equal:\n\n-9 !== -9876543\n"
+        },
+        {
+          "input": "9,007,199,254,740,991",
+          "expected": 9007199254740991,
+          "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 9\n- 9007199254740991\n"
+        },
+        {
+          "input": "0,001",
+          "expected": 1,
+          "error": "Expected values to be strictly equal:\n\n0 !== 1\n"
+        },
+        {
+          "input": "\t1,000\n",
+          "expected": 1000,
+          "error": "Expected values to be strictly equal:\n\n1 !== 1000\n"
+        },
+        {
+          "input": "",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "   ",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "+12",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "12,34",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "1,2345",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "1,,234",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": ",123",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "123,",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "12.0",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "1e3",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "0x10",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "12 units",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "--3",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "NaN",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "Infinity",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "9007199254740992",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "-9,007,199,254,740,992",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        }
+      ]
+    },
+    "rejected": {
+      "total": 27,
+      "passed": 7,
+      "failures": [
+        {
+          "input": " -18 ",
+          "expected": -18,
+          "error": "Expected values to be strictly equal:\n\n18 !== -18\n"
+        },
+        {
+          "input": "-9,876,543",
+          "expected": -9876543,
+          "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 9876543\n- -9876543\n"
+        },
+        {
+          "input": "-9007199254740991",
+          "expected": -9007199254740991,
+          "error": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 9007199254740991\n- -9007199254740991\n"
+        },
+        {
+          "input": "",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "   ",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "+12",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "12,34",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "1,2345",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "1,,234",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": ",123",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "123,",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "12.0",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "1e3",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "0x10",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "12 units",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "--3",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "NaN",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "Infinity",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "9007199254740992",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        },
+        {
+          "input": "-9,007,199,254,740,992",
+          "expected": "throw",
+          "error": "Missing expected exception."
+        }
+      ]
+    }
+  },
+  "runs": [
+    {
+      "arm": "baseline-retry",
+      "receipt": {
+        "arm": "baseline-retry",
+        "exit": 0,
+        "seconds": 237.666,
+        "usage": {
+          "input_tokens": 700725,
+          "cached_input_tokens": 657536,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6762,
+          "reasoning_output_tokens": 134
+        }
+      },
+      "checks": {
+        "total": 27,
+        "passed": 27,
+        "failures": []
+      },
+      "changedReadonly": [],
+      "records": [
+        {
+          "path": "decision.json",
+          "value": {
+            "candidate_decision": "retain_candidate",
+            "task_status": "complete",
+            "target": "target/count.cjs",
+            "sha256": "4c36a7c4030e44072aa6829c6617cedb10a5a54f6b67b1188d7a6b97552abf8f",
+            "baseline_sha256": "aca6c18bd60437f23afb26a5d7a2634ce46fc345b3a42d77e400dbd4f830ed09",
+            "targeted_benefit": "1,234 now returns 1234; invalid/unsafe strings throw Error",
+            "preservation": "All 94 matched candidate cases pass, including negative zero, signed counts and safe boundaries; supplied check passes.",
+            "governing_rule": "method/Procedures/ApproveSkill.md#task-completion",
+            "authority": "task.txt requested repair",
+            "evidence": [
+              "evidence/results.json",
+              "evidence/candidate-check.json",
+              "evidence/completion-output.json"
+            ],
+            "unresolved_required_outcomes": [],
+            "limitations": [
+              "Finite deterministic cases do not prove universal correctness or SkillForge effectiveness.",
+              "Timing and token savings not measured."
+            ]
+          }
+        },
+        {
+          "path": "evidence\\assessment.json",
+          "value": {
+            "schema_version": 1,
+            "contract_sha256": "aee5cc93be0cb9eca65b78f3608f982211976208cabe16de2956cbb00856cd3d",
+            "candidate_decision": "retain_candidate",
+            "checks": [
+              {
+                "id": "result",
+                "status": "pass",
+                "qualification": "qualified",
+                "evidence": [
+                  {
+                    "path": "results.json",
+                    "sha256": "c87ace6f9b7ef5a51232d8a42707e34ace05b917bc35a7f3434ad419ef0e4cca"
+                  },
+                  {
+                    "path": "qualification.json",
+                    "sha256": "7822f779f15b99d955b83b6609425d352e013d1f6c6b4121674dc441c349747d"
+                  },
+                  {
+                    "path": "fresh-qualification.json",
+                    "sha256": "a449372a8d08f150b0f002c3fddb5f2c86d1eb54b2525d77fd9bd7bb4ce3952e"
+                  },
+                  {
+                    "path": "candidate-check.json",
+                    "sha256": "70f81a946feb2c7038e4a9e3baa75eab1fac638e4f1839a680cd7f60a5cc7f59"
+                  }
+                ]
+              },
+              {
+                "id": "execution",
+                "status": "pass",
+                "qualification": "qualified",
+                "evidence": [
+                  {
+                    "path": "results.json",
+                    "sha256": "c87ace6f9b7ef5a51232d8a42707e34ace05b917bc35a7f3434ad419ef0e4cca"
+                  },
+                  {
+                    "path": "qualification.json",
+                    "sha256": "7822f779f15b99d955b83b6609425d352e013d1f6c6b4121674dc441c349747d"
+                  },
+                  {
+                    "path": "fresh-qualification.json",
+                    "sha256": "a449372a8d08f150b0f002c3fddb5f2c86d1eb54b2525d77fd9bd7bb4ce3952e"
+                  },
+                  {
+                    "path": "candidate-check.json",
+                    "sha256": "70f81a946feb2c7038e4a9e3baa75eab1fac638e4f1839a680cd7f60a5cc7f59"
+                  }
+                ]
+              },
+              {
+                "id": "preservation",
+                "status": "pass",
+                "qualification": "qualified",
+                "evidence": [
+                  {
+                    "path": "results.json",
+                    "sha256": "c87ace6f9b7ef5a51232d8a42707e34ace05b917bc35a7f3434ad419ef0e4cca"
+                  },
+                  {
+                    "path": "qualification.json",
+                    "sha256": "7822f779f15b99d955b83b6609425d352e013d1f6c6b4121674dc441c349747d"
+                  },
+                  {
+                    "path": "fresh-qualification.json",
+                    "sha256": "a449372a8d08f150b0f002c3fddb5f2c86d1eb54b2525d77fd9bd7bb4ce3952e"
+                  },
+                  {
+                    "path": "candidate-check.json",
+                    "sha256": "70f81a946feb2c7038e4a9e3baa75eab1fac638e4f1839a680cd7f60a5cc7f59"
+                  }
+                ]
+              }
+            ],
+            "actions": [],
+            "blockers": []
+          }
+        },
+        {
+          "path": "evidence\\completion-output-invalid.json",
+          "value": {
+            "schema_version": 1,
+            "valid": false,
+            "task_status": "continue",
+            "candidate_decision": null,
+            "errors": [
+              "ENOENT: no such file or directory, open 'C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\GapObligation20261107\\raw\\baseline-retry\\evidence\\evidence\\contract.json'"
+            ],
+            "next_actions": [
+              {
+                "id": "repair-completion-input",
+                "description": "Repair the unavailable or malformed input."
+              }
+            ]
+          }
+        },
+        {
+          "path": "evidence\\completion-output.json",
+          "value": {
+            "schema_version": 1,
+            "valid": true,
+            "contract_sha256": "aee5cc93be0cb9eca65b78f3608f982211976208cabe16de2956cbb00856cd3d",
+            "candidate_decision": "retain_candidate",
+            "task_status": "complete",
+            "unresolved": [],
+            "next_actions": []
+          }
+        },
+        {
+          "path": "evidence\\improvement-record.json",
+          "value": {
+            "improvement_id": "count-repair-2",
+            "parent_attempt": "checkpoint.md rejected digit-stripping attempt",
+            "baseline": "aca6c18bd60437f23afb26a5d7a2634ce46fc345b3a42d77e400dbd4f830ed09",
+            "candidate": "4c36a7c4030e44072aa6829c6617cedb10a5a54f6b67b1188d7a6b97552abf8f",
+            "targeted_failure": {
+              "baseline_status": "fail",
+              "candidate_status": "pass",
+              "evidence": [
+                "baseline-check.json",
+                "candidate-check.json"
+              ]
+            },
+            "decision": "accepted",
+            "task_status": "complete",
+            "loop_observations": [
+              {
+                "stage": "evaluation",
+                "status": "failed",
+                "observation": "v1 false rejection from wrong expected safe bound; baseline restored.",
+                "evidence": [
+                  "results-v1.json"
+                ],
+                "attribution": "observed"
+              },
+              {
+                "stage": "evaluation",
+                "status": "supported",
+                "observation": "Corrected and independently qualified fixtures; matched rerun candidate 94/94, baseline 32/94.",
+                "evidence": [
+                  "results.json",
+                  "fresh-qualification.json"
+                ],
+                "attribution": "observed"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "candidate",
+      "receipt": {
+        "arm": "candidate",
+        "exit": 0,
+        "seconds": 224.855,
+        "usage": {
+          "input_tokens": 518757,
+          "cached_input_tokens": 477952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5228,
+          "reasoning_output_tokens": 33
+        }
+      },
+      "checks": {
+        "total": 27,
+        "passed": 27,
+        "failures": []
+      },
+      "changedReadonly": [],
+      "records": [
+        {
+          "path": "decision.json",
+          "value": {
+            "candidate_decision": "retain_candidate",
+            "task_status": "complete",
+            "objective": "repair",
+            "resolution": "resolved",
+            "baseline_sha256": "aca6c18bd60437f23afb26a5d7a2634ce46fc345b3a42d77e400dbd4f830ed09",
+            "candidate_sha256": "f4c97b581244b17cb80abf33ff87c3235a5d5768b4c083e23a1124d161d3f19b",
+            "benefit": "Reported 1,234 now returns 1234; full declared suite passes.",
+            "preservation": "Signs, negative zero, whitespace, valid forms, rejection and safe-range boundaries pass.",
+            "evidence": [
+              "evidence/results.json",
+              "evidence/supplied-check.json",
+              "evidence/completion-result.json"
+            ],
+            "authority": "task.txt",
+            "rule": "method/Procedures/ApproveSkill.md#task-completion",
+            "unresolved": [],
+            "next_action": null
+          }
+        },
+        {
+          "path": "evidence\\assessment.json",
+          "value": {
+            "schema_version": 1,
+            "contract_sha256": "64b5b3a8de315ef55c29ebd82606c53b06cd12eb16d71a68cbcd0df8d4a4a672",
+            "candidate_decision": "retain_candidate",
+            "checks": [
+              {
+                "id": "result",
+                "status": "pass",
+                "qualification": "qualified",
+                "resolution": "resolved",
+                "evidence": [
+                  {
+                    "path": "baseline-red.json",
+                    "sha256": "bf1c05dcfe3d510263ca18082512889f6b81fdf94bc3652b3d868e2df5b5d081"
+                  },
+                  {
+                    "path": "baseline-results.json",
+                    "sha256": "a6b945819ca7ea0316c4a0befcd3c0ec13c6e03050b6fd4b4a1dab63b3202d00"
+                  },
+                  {
+                    "path": "rejected-results.json",
+                    "sha256": "8682363ed5ea61b1e059d1f4df6af332f2d1c96f229ca0898e2fae0c5bc21495"
+                  },
+                  {
+                    "path": "candidate-results.json",
+                    "sha256": "00178c08b51e5b69333f671694efad32cc233dca6d55d2c41586ba9e0afbf8f7"
+                  },
+                  {
+                    "path": "supplied-check.json",
+                    "sha256": "a84c4d3cbfcbfa2e35ff000a334943a2972a1f9d9250fede6d89b8995ffa7288"
+                  },
+                  {
+                    "path": "identities.json",
+                    "sha256": "ec7b0f57c213c610b7b07eff173d9b6f89cb2eb66cae7ba3b6278c4f6decfe40"
+                  }
+                ]
+              },
+              {
+                "id": "execution",
+                "status": "pass",
+                "qualification": "qualified",
+                "evidence": [
+                  {
+                    "path": "baseline-red.json",
+                    "sha256": "bf1c05dcfe3d510263ca18082512889f6b81fdf94bc3652b3d868e2df5b5d081"
+                  },
+                  {
+                    "path": "baseline-results.json",
+                    "sha256": "a6b945819ca7ea0316c4a0befcd3c0ec13c6e03050b6fd4b4a1dab63b3202d00"
+                  },
+                  {
+                    "path": "rejected-results.json",
+                    "sha256": "8682363ed5ea61b1e059d1f4df6af332f2d1c96f229ca0898e2fae0c5bc21495"
+                  },
+                  {
+                    "path": "candidate-results.json",
+                    "sha256": "00178c08b51e5b69333f671694efad32cc233dca6d55d2c41586ba9e0afbf8f7"
+                  },
+                  {
+                    "path": "supplied-check.json",
+                    "sha256": "a84c4d3cbfcbfa2e35ff000a334943a2972a1f9d9250fede6d89b8995ffa7288"
+                  },
+                  {
+                    "path": "identities.json",
+                    "sha256": "ec7b0f57c213c610b7b07eff173d9b6f89cb2eb66cae7ba3b6278c4f6decfe40"
+                  }
+                ]
+              },
+              {
+                "id": "preservation",
+                "status": "pass",
+                "qualification": "qualified",
+                "evidence": [
+                  {
+                    "path": "baseline-red.json",
+                    "sha256": "bf1c05dcfe3d510263ca18082512889f6b81fdf94bc3652b3d868e2df5b5d081"
+                  },
+                  {
+                    "path": "baseline-results.json",
+                    "sha256": "a6b945819ca7ea0316c4a0befcd3c0ec13c6e03050b6fd4b4a1dab63b3202d00"
+                  },
+                  {
+                    "path": "rejected-results.json",
+                    "sha256": "8682363ed5ea61b1e059d1f4df6af332f2d1c96f229ca0898e2fae0c5bc21495"
+                  },
+                  {
+                    "path": "candidate-results.json",
+                    "sha256": "00178c08b51e5b69333f671694efad32cc233dca6d55d2c41586ba9e0afbf8f7"
+                  },
+                  {
+                    "path": "supplied-check.json",
+                    "sha256": "a84c4d3cbfcbfa2e35ff000a334943a2972a1f9d9250fede6d89b8995ffa7288"
+                  },
+                  {
+                    "path": "identities.json",
+                    "sha256": "ec7b0f57c213c610b7b07eff173d9b6f89cb2eb66cae7ba3b6278c4f6decfe40"
+                  }
+                ]
+              }
+            ],
+            "actions": [],
+            "blockers": []
+          }
+        },
+        {
+          "path": "evidence\\completion-invalid-path.json",
+          "value": {
+            "schema_version": 1,
+            "valid": false,
+            "task_status": "continue",
+            "candidate_decision": null,
+            "errors": [
+              "ENOENT: no such file or directory, open 'C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\GapObligation20261107\\raw\\candidate\\evidence\\evidence\\contract.json'"
+            ],
+            "next_actions": [
+              {
+                "id": "repair-completion-input",
+                "description": "Repair the unavailable or malformed input."
+              }
+            ]
+          }
+        },
+        {
+          "path": "evidence\\completion-result.json",
+          "value": {
+            "schema_version": 1,
+            "valid": true,
+            "contract_sha256": "64b5b3a8de315ef55c29ebd82606c53b06cd12eb16d71a68cbcd0df8d4a4a672",
+            "candidate_decision": "retain_candidate",
+            "task_status": "complete",
+            "unresolved": [],
+            "next_actions": []
+          }
+        },
+        {
+          "path": "evidence\\contract.json",
+          "value": {
+            "schema_version": 1,
+            "scope": "behavioral",
+            "depth": "focused",
+            "requested_result": "Repair CountReader to meet its existing SkillIntent.md, preserving required behavior.",
+            "objective": {
+              "kind": "repair",
+              "outcome_check": "result"
+            },
+            "scope_basis": {
+              "path": "request.txt",
+              "sha256": "84206a41b448f9d6fb642cefd4e4f7214e36c19465902da7fbb62e422ee0744d",
+              "quote": "Fix CountReader so it meets its existing SkillIntent.md."
+            },
+            "required_checks": [
+              {
+                "id": "result",
+                "kind": "outcome",
+                "description": "R1-R4 and reported grouped-count gap resolved"
+              },
+              {
+                "id": "execution",
+                "kind": "behavioral_execution",
+                "description": "Matched actual baseline/candidate execution"
+              },
+              {
+                "id": "preservation",
+                "kind": "preservation",
+                "description": "Required signs, zero, grammar and range preserved"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

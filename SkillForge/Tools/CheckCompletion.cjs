@@ -53,7 +53,7 @@ function checkCompletion(contract, assessment, root, contractDigest) {
   else if (!fs.readFileSync(path.resolve(root, basis.path), 'utf8').includes(basis.quote)) errors.push('Scope quote is absent from its source.');
   if (typeof assessment.contract_sha256 !== 'string' || assessment.contract_sha256.toLowerCase() !== contractDigest)
     errors.push('Assessment does not match the frozen contract digest.');
-  for (const field of ['scope', 'requested_result', 'task_status', 'depth', 'coverage_inventory', 'scope_review_check'])
+  for (const field of ['scope', 'requested_result', 'task_status', 'depth', 'coverage_inventory', 'scope_review_check', 'objective'])
     if (Object.hasOwn(assessment, field)) errors.push('Assessment cannot redefine ' + field + '.');
   if (!['retain_candidate', 'retain_baseline', 'reject_candidate', 'revise', 'defer'].includes(assessment.candidate_decision)) errors.push('Invalid candidate_decision.');
   const requirements = contract.required_checks;
@@ -67,6 +67,19 @@ function checkCompletion(contract, assessment, root, contractDigest) {
   }
   if (contract.scope === 'behavioral' && !(list(requirements) ? requirements : []).some(r => r?.kind === 'behavioral_execution'))
     errors.push('Behavioral scope requires a behavioral_execution check.');
+  // Additive for historical contracts. New behavioral updates bind their objective
+  // before editing; candidate rejection cannot substitute for outcome resolution.
+  const objective = contract.objective;
+  if (objective !== undefined) {
+    if (!objective || !['repair', 'enhancement', 'suggestion'].includes(objective.kind))
+      errors.push('objective.kind must be repair, enhancement or suggestion.');
+    if (contract.scope !== 'behavioral') errors.push('objective is only supported for behavioral scope.');
+    if (objective && ['repair', 'enhancement'].includes(objective.kind)) {
+      const outcome = (list(requirements) ? requirements : []).find(r => r?.id === objective.outcome_check);
+      if (!text(objective.outcome_check) || outcome?.kind !== 'outcome')
+        errors.push('A repair or enhancement objective requires a declared outcome check.');
+    }
+  }
   if (contract.depth !== undefined && !['focused', 'comprehensive'].includes(contract.depth)) errors.push('Invalid improvement depth.');
   // Broad work binds the parent inventory independently of a round's selected checks.
   // Hashes cannot prove semantic completeness; the scope-review outcome supplies that review.
@@ -134,6 +147,9 @@ function checkCompletion(contract, assessment, root, contractDigest) {
     const check = judgments.get(requirement.id);
     let reason;
     if (!check || check.status !== 'pass') reason = check ? 'Check is ' + check.status + '.' : 'Required check was omitted.';
+    else if (objective && ['repair', 'enhancement'].includes(objective.kind) && requirement.id === objective.outcome_check &&
+      !(check.resolution === 'resolved' || (objective.kind === 'repair' && check.resolution === 'disproven')))
+      reason = 'Required outcome lacks an explicit resolved' + (objective.kind === 'repair' ? '/disproven' : '') + ' disposition; finishing an experiment is not resolution.';
     else if (requirement.kind !== 'deliverable' && check.qualification !== 'qualified') reason = 'A favorable judgment lacks qualified measurement.';
     else {
       const evidence = evidenceStatus(check.evidence, root);
