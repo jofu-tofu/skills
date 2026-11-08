@@ -1,0 +1,7 @@
+# Panel fixture content consolidation
+
+Use [PanelScenarios.md](PanelScenarios.md) for current recorded-panel evaluations. It rewrites ten separately described cases into three shared-setup scenarios while retaining ten independent checkpoints. C1/C2/C3/C4/C9 cover current, absent, stale, empty and stale-negative evidence; C5/C6/C7 cover confirmed-defect precedence, absent evidence and later execution failure; C8/C10 preserve both audience aggregation and repair dispatch. Reset each checkpoint to its stated defaults: missing-reviewer faults must remain individually observable.
+
+All ten judgments pass in each of two matched original/candidate pairs under unchanged Gate/Verify instructions. Actual input-plus-output totals are58,852original versus58,490current:362fewer tokens,0.6151%. Both individual pairs save tokens. These are repeated recorded-evidence trials, not new holdouts, live panel orchestration or general cost estimates. All original checkpoints, separate field scores, negative contrasts and historical fixtures remain; no cheap tool tests were deleted.
+
+The original [reference](../Improvements/SessionOutcomes/Panel/reference.md) remains grader-only. Never supply it to executors. Historical results still describe their original fixtures. Full matched inputs, finite scorer controls, responses, provider receipts and limitations are in the optional shared-repository [evidence record](../../SkillForge/Evidence/OtherSkillCases20261107/Results.md). Preparation cost is not included in the execution saving; no net-project saving is established.

@@ -1,0 +1,67 @@
+{
+  "baseline": "6a898e4",
+  "preserved": [
+    {
+      "path": "ClarityEngine/Improvements/SessionOutcomes/Panel/cases-v2.md",
+      "lf_normalized_sha256": "635c4b564b02a8bdf687f871edf8dba7e8ecea347b9b4d001a20ac6d2032b5db"
+    },
+    {
+      "path": "ClarityEngine/Improvements/SessionOutcomes/Panel/reference.md",
+      "lf_normalized_sha256": "343ffec49abb8fade6fe05e6e1895ccf84aded69637b1cd46895d89cf82836a3"
+    },
+    {
+      "path": "CodeReview/Improvements/HistoryScope/VerifierCases.json",
+      "lf_normalized_sha256": "aec7a89648f902f167eff8dfc755a36e06e92075fca851d9f6fdd039fd4d6a46"
+    },
+    {
+      "path": "CodeReview/Improvements/HistoryScope/VerifierReference.json",
+      "lf_normalized_sha256": "a5b39156ae7988e939b67a7342b02a529747e2627c32c53b8c6931a1991f60b7"
+    },
+    {
+      "path": "ClarityEngine/Workflows/ReadabilityGate.md",
+      "lf_normalized_sha256": "16229cc0ebd58c467856e321e8852d35f7cbab8dc800910236081b5a0a393779"
+    },
+    {
+      "path": "ClarityEngine/Workflows/Verify.md",
+      "lf_normalized_sha256": "60bdf34e641332918740271482a2719165cf714c00047cd7d00d1e7be0dd4e40"
+    },
+    {
+      "path": "CodeReview/Workflows/VerifyAndReport.md",
+      "lf_normalized_sha256": "13e4de82e6dc340d017491bb8766d68273744989f7e1581474b744f28e6c59f8"
+    },
+    {
+      "path": "ClarityEngine/Tools/MeasureDraft.test.ts",
+      "lf_normalized_sha256": "27520dfed67d6ff278d99e5e0362348f38804d82ac480b6ebdeebee5e11f41e9"
+    },
+    {
+      "path": "ClarityEngine/Tools/ScorePlainness.test.ts",
+      "lf_normalized_sha256": "bb8c07cb1294d8ce2b56a7a4195b1fc923cffba4ed6c929a2aab63a108d85e65"
+    },
+    {
+      "path": "Prompting/Tools/RenderTemplate.test.ts",
+      "lf_normalized_sha256": "b0d60a3d751a21fb5b81293f99883645e7e4ef330c0b8dcb2fbdee8e9b63f6ad"
+    },
+    {
+      "path": "Prompting/Tools/ValidateTemplate.test.ts",
+      "lf_normalized_sha256": "e35c560f5946b64ed70358c4b4b8f817a9a002e00e20e2c91ee8078fea420d3e"
+    },
+    {
+      "path": "WebDesign/Tools/VerifyDesign.test.ts",
+      "lf_normalized_sha256": "909695bcdf06f8625b04c8c697694a07de5cdb353270449151a41a45d33b9395"
+    },
+    {
+      "path": "Browser/Tests/Interaction.test.ts",
+      "lf_normalized_sha256": "ef0c77e848867f660093eb1878cb8f93ef26e4cc55001ba88cd5593ba9fa5a12"
+    },
+    {
+      "path": "Browser/Tests/Diagnostics.test.ts",
+      "lf_normalized_sha256": "027a46cfa6206eae1d9dc323324d2d6cb33d2eb73652c8538759beba75df5e07"
+    },
+    {
+      "path": "Browser/Tests/SessionIdentity.test.ts",
+      "lf_normalized_sha256": "98e9be037a318c499d1ac551b31258dcca69015b2ca67c8f33373d3242668166"
+    }
+  ],
+  "links": 28,
+  "scope": "Unchanged native tests reused; no need to rerun unrelated deterministic tool tests for fixture/document-only changes."
+}
