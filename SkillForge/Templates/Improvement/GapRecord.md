@@ -8,6 +8,7 @@ Status: template, not observed evidence. Store with the target's attempt or asse
 | Incident | Input, actual behavior, context and evidence links; mark historical, synthetic or not reproduced. |
 | Expectation | Expected behavior, source/authority, affected outcome IDs and consequence. |
 | Current measurement | Measure/checker/case-set IDs and versions; would it detect this incident? Evidence or unknown. |
+| Baseline red case (repairs) | Frozen task/input and source-backed expectation; baseline/context/tool/checker identities; actual executions and failures for the right reason. Distinguish captured incident, reproduced failure and passing replay; record changed conditions and the predeclared observation policy for variable behavior. Use not applicable for a new capability, optimization or maintenance rather than inventing a failure. |
 | Diagnosis | Skill, outcome, benchmark coverage, checker, environment/evidence, or mixed; alternatives and confidence basis. |
 | Response | Keep measure, add cases/stratum, revise checker, clarify outcome, revise skill, or defer; rationale. |
 | Measurement change | Old/new definition, reference provenance, qualification status; preserve old results and rescore both versions fairly. |
