@@ -1,0 +1,23 @@
+# Repair after observed red
+
+The faithful archive-content baseline stage is complete: baseline-1 correctly reads current release records; baseline-2 repeats the stale separate/uninstalled recommendation and never accesses the decisive integration statements. Both copies match all 209 original input files. Independent source review confirms the false present-state claim; this is intermittent recurrence (one of two current-host observations), not a population failure-rate estimate. The operator correctly returned `continue`, without another candidate or a false repair claim.
+
+## Mechanism choice
+
+1. **Decision evidence check at ApproveSkill (selected):** the failing reader used this gate but accepted old trial status without consulting matching current records. Make present-status recommendations—including leaving a candidate pending—depend on relevant current source evidence. Keep retention/merge/installation separate and reuse sufficient reads. This targets the missed handoff and requires no new index or stage.
+2. Earlier EvaluateSkill status checklist: could trigger discovery sooner but duplicates the shared gate and adds a check to unrelated assessments. Reserve only if the gate intervention is not used or is too late.
+3. Historical map/navigation: prior work found non-exposure and opposing reading costs, with upkeep risk. The necessary records are already linked in SKILL. Do not revive broad indexing for this local omission.
+
+The previous short status rule was tested on compact/pruned inputs without baseline decision headroom. That rejection remains intact. This stage has a newly executed red case in the full archive and a narrower outcome claim. Wording also covers recommendations to leave work pending, so rejecting installation does not bypass current-state reconciliation.
+
+## Next matched test, frozen before editing
+
+Create two candidate input copies from the same original 209-file archive. Change only ApproveSkill's decision paragraph; preserve all history, original method context, question and read tools. Two fresh subjects receive the same task as baseline-1/2, without the red answer or references. Record every result and exposure; no replacements or mid-run coaching. Candidate snapshots test the isolated status change; the red-first policy is the parent operator's workflow, not a hidden additional treatment in these two subject copies.
+
+Primary success for each: recognize combined integration from matching primary records, avoid stale separate/pending/uninstalled claims, reject unsupported efficiency inference, and retain uncertainty about the actual live installation. Valid alternative next actions are accepted; absence of a particular optional follow-up does not manufacture failure. An unrelated newer record must not establish status. Grade source-supported decisions, not the candidate's phrase usage.
+
+Scoped repair gate: both candidate observations meet those outcomes, with actual current-record exposure and no unsupported action. Across the two candidate observations, total returned bytes must be <=125% of the two baseline observations combined and total reader calls <=baseline total+4. This is an explicit local allowance for preventing a false operational recommendation, not evidence of savings or a universal tradeoff. Report each run and failures separately; aggregate costs do not hide a wrong decision. Baseline observations are both retained, including the correct one.
+
+If this succeeds, execute a fresh composed-method check with the red-first policy plus status rule: the original release task and four previously reserved dossiers from StatusReconciliation20261107. All five decisions must be correct and source-grounded, with no overclaim about unrelated, partial, rolled-back or installed state. This is transfer/preservation confirmation, not four independent model draws or a representative accuracy estimate. Do not inspect reserved answer keys or change the candidate before confirmation. Confirm actual typo/assessment/optimization routing through the existing operator controls; no large generic benchmark.
+
+Only then retain the scoped status repair alongside the user-requested red-first discipline. State limited evidence: captured historical failure, mixed baseline replay, two corrected candidate observations and one fresh composed check. Do not claim guaranteed prevention, causal population superiority or downstream skill improvements. If a candidate or confirmation fails, preserve it and diagnose the specific failure before the next justified revision; a failed pilot is not closure of the user's repair request.
