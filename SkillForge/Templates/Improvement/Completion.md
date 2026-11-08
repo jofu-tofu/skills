@@ -11,6 +11,7 @@ Save the relevant user request and preceding proposal as `request.txt`. Derive s
   "schema_version": 1,
   "scope": "behavioral",
   "requested_result": "The user's required outcome, including the reported failure when applicable",
+  "objective": {"kind": "repair", "outcome_check": "result"},
   "scope_basis": {"path": "request.txt", "sha256": "SHA256_OF_REQUEST", "quote": "EXACT_RELEVANT_USER_TEXT"},
   "required_checks": [
     {"id": "result", "kind": "outcome", "description": "Requested behavior established at its required outcome level"},
@@ -21,6 +22,14 @@ Save the relevant user request and preceding proposal as `request.txt`. Derive s
 ```
 
 For a reported failure, the result check must cover the missed decision under relevant conditions. Ties on unrelated or over-coached cases do not establish it. Do not manufacture an observed failure for a requested enhancement. If criteria change, preserve the old contract, explain the amendment from user intent or evidence, and reassess both versions fairly.
+
+## Objective and resolution
+
+New behavioral UpdateSkill contracts record `objective` using [ApproveSkill's distinction](../../Procedures/ApproveSkill.md#owned-outcome-or-bounded-suggestion): `{"kind":"repair","outcome_check":"result"}`, `{"kind":"enhancement","outcome_check":"result"}`, or `{"kind":"suggestion"}`. Choose from the request, not the candidate's performance. Repair/enhancement must bind a declared `kind: "outcome"` check; an experiment-run or deliverable check cannot substitute. Comprehensive work retains all parent checks as well.
+
+For that owned-outcome judgment, a qualified evidence-backed pass also needs `"resolution":"resolved"`. A repair may instead use `"resolution":"disproven"` with evidence that the reported gap or its governing expectation is invalid/already inapplicable; this is not “we tried once and did not see it.” Rejecting a proposed cause does not disprove the gap. Other/missing resolution values remain unresolved even if the experiment check passed. Carry a real next action or evidenced blocker for the owned check. A required enhancement cannot use disproof of a historical failure to claim delivery.
+
+Suggestions need their own bounded decision evidence but no invented repair-resolution label. Assessment/design/maintenance contracts keep their existing scope. Historical contracts without `objective` remain readable under the old checks; this does not retrospectively certify their intent classification. For a resumed owned-outcome task, explicitly amend/freeze the contract before the next attempt rather than silently rewriting history. The assessment cannot redefine `objective`; changing scope requires a justified contract amendment.
 
 `assessment.json` after collecting evidence (start unresolved; never copy a pass):
 

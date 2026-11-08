@@ -1,0 +1,128 @@
+{
+  "suite_version": "gap-obligation-v1",
+  "workflow": "UpdateSkill",
+  "mode": "confirmation",
+  "claim": "Explicit declared-objective contract enforcement with bounded caller activation; not general agent superiority",
+  "snapshots": {
+    "baseline": "e91db4fedf75264cf0113be0f7adf7180b97b6de",
+    "candidate": [
+      {
+        "file": "Workflows/UpdateSkill.md",
+        "sha256": "a77611bc8cc131cf33e82eba588794dd4ead2a8e91ded47f71fc94dc85900ee9",
+        "tested": "a77611bc8cc131cf33e82eba588794dd4ead2a8e91ded47f71fc94dc85900ee9"
+      },
+      {
+        "file": "Procedures/ApproveSkill.md",
+        "sha256": "742230ddcc8354a5f2c47527b4bf193be172406009838176b4f92983e2ccba5f",
+        "tested": "742230ddcc8354a5f2c47527b4bf193be172406009838176b4f92983e2ccba5f"
+      },
+      {
+        "file": "Templates/Improvement/Completion.md",
+        "sha256": "2c582abd140206106af601adc415b3ad15aa71e7a402c14f143022eda5081fdb",
+        "tested": "2c582abd140206106af601adc415b3ad15aa71e7a402c14f143022eda5081fdb"
+      },
+      {
+        "file": "Tools/CheckCompletion.cjs",
+        "sha256": "a046dd82f36761328d5517c0725506299f5794b285d5b34eb13c6ea10a6b65a6",
+        "tested": "a046dd82f36761328d5517c0725506299f5794b285d5b34eb13c6ea10a6b65a6"
+      }
+    ],
+    "cases": "CheckObjective.test.cjs and run.cjs; parser reference collect.cjs",
+    "measurement": "Protocol.md and Review.md"
+  },
+  "requested_trials": 2,
+  "completed_trials": 2,
+  "runs": [
+    {
+      "case_id": "startup",
+      "role": "development",
+      "configuration": "baseline",
+      "trial": 0,
+      "execution_status": "error",
+      "checks": [
+        {
+          "id": "runtime",
+          "measurement_id": "runtime-receipt",
+          "status": "unverified",
+          "observation": "Local state/app-server initialization denied; zero model usage",
+          "evidence": [
+            "../../../../raw/baseline/runner-stderr.txt"
+          ],
+          "reason": "Infrastructure failure, not subject behavior"
+        }
+      ]
+    },
+    {
+      "case_id": "repair-after-rejection",
+      "role": "acceptance",
+      "configuration": "baseline-retry",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "downstream",
+          "measurement_id": "count-contract-v1",
+          "status": "pass",
+          "observation": "27/27 external parser cases; actual repair after failed first mechanism",
+          "evidence": [
+            "execution-results.json"
+          ],
+          "reason": "Executable assertions with valid and invalid reference controls"
+        },
+        {
+          "id": "nonapplication",
+          "measurement_id": "supplied-control-disposition",
+          "status": "pass",
+          "observation": "Both bounded suggestion and disproven-gap controls complete with baseline retained",
+          "evidence": [
+            "verification.json"
+          ],
+          "reason": "Supplied completed evidence tests interpretation only"
+        }
+      ]
+    },
+    {
+      "case_id": "repair-after-rejection",
+      "role": "acceptance",
+      "configuration": "candidate",
+      "trial": 1,
+      "execution_status": "completed",
+      "checks": [
+        {
+          "id": "downstream",
+          "measurement_id": "count-contract-v1",
+          "status": "pass",
+          "observation": "27/27 external parser cases; actual repair after failed first mechanism",
+          "evidence": [
+            "execution-results.json"
+          ],
+          "reason": "Executable assertions with valid and invalid reference controls"
+        },
+        {
+          "id": "nonapplication",
+          "measurement_id": "supplied-control-disposition",
+          "status": "pass",
+          "observation": "Both bounded suggestion and disproven-gap controls complete with baseline retained",
+          "evidence": [
+            "verification.json"
+          ],
+          "reason": "Supplied completed evidence tests interpretation only"
+        }
+      ]
+    }
+  ],
+  "decision": "improved",
+  "improvement_id": "GapObligation20261107",
+  "targeted_failure": {
+    "baseline_status": "fail",
+    "candidate_status": "pass",
+    "scope": "Seven mechanical invalid/unresolved objective contracts; not failed historical chats"
+  },
+  "loop_observations": "New contract tests 6/13 to 13/13; existing 34 pass. Synthetic method pair ties 27/27 with candidate objective activation.",
+  "regression_coverage": "Protocol.md O1-O5; CheckObjective and CheckCompletion tests; one caller task plus two supplied controls",
+  "limitations": [
+    "One synthetic author pair; nested assertions not independent tasks",
+    "Objective omission in legacy contracts remains compatible",
+    "Semantic intent and truth of resolution remain grader responsibilities"
+  ]
+}

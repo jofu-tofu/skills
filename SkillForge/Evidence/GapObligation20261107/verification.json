@@ -1,0 +1,330 @@
+{
+  "operative_identities": [
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "sha256": "a77611bc8cc131cf33e82eba588794dd4ead2a8e91ded47f71fc94dc85900ee9",
+      "tested": "a77611bc8cc131cf33e82eba588794dd4ead2a8e91ded47f71fc94dc85900ee9"
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "sha256": "742230ddcc8354a5f2c47527b4bf193be172406009838176b4f92983e2ccba5f",
+      "tested": "742230ddcc8354a5f2c47527b4bf193be172406009838176b4f92983e2ccba5f"
+    },
+    {
+      "file": "Templates/Improvement/Completion.md",
+      "sha256": "2c582abd140206106af601adc415b3ad15aa71e7a402c14f143022eda5081fdb",
+      "tested": "2c582abd140206106af601adc415b3ad15aa71e7a402c14f143022eda5081fdb"
+    },
+    {
+      "file": "Tools/CheckCompletion.cjs",
+      "sha256": "a046dd82f36761328d5517c0725506299f5794b285d5b34eb13c6ea10a6b65a6",
+      "tested": "a046dd82f36761328d5517c0725506299f5794b285d5b34eb13c6ea10a6b65a6"
+    }
+  ],
+  "all_match_tested": true,
+  "local_links": [
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../SkillIntent.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Quality/Shared.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Quality/UpdateSkill/Context.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Quality/UpdateSkill/Outcomes.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Quality/UpdateSkill/Tradeoffs.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Quality/UpdateSkill/Feedback.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Quality/UpdateSkill/ChallengeCases.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/ComprehensiveImprovement.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Standards/Authoring.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/PlanChange.md#alternative-generation-activation",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/TestTriggering.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/ReviewDesign.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/ApproveSkill.md#owned-outcome-or-bounded-suggestion",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Templates/Improvement/Completion.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/DiagnoseGap.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/EstablishQuality.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/DesignMeasurement.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/PlanChange.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/DraftCandidate.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/EvaluateCandidate.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/ApproveSkill.md",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/ApproveSkill.md#autonomous-follow-up-of-gains-and-tradeoffs",
+      "valid": true
+    },
+    {
+      "file": "Workflows/UpdateSkill.md",
+      "link": "../Procedures/RecordLearning.md",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "DiagnoseGap.md#baseline-red-case-for-a-repair",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "../Standards/RegressionCoverage.md",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "PlanChange.md#diagnosing-an-unresolved-tie",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "../Templates/Improvement/Completion.md#objective-and-resolution",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "ComprehensiveImprovement.md",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "../Templates/Improvement/Completion.md",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "../Tools/CheckCompletion.cjs",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "../Templates/Improvement/Completion.md",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "../Templates/Improvement/Decision.md",
+      "valid": true
+    },
+    {
+      "file": "Procedures/ApproveSkill.md",
+      "link": "../Quality/Shared.md",
+      "valid": true
+    },
+    {
+      "file": "Templates/Improvement/Completion.md",
+      "link": "../../Procedures/ApproveSkill.md#task-completion",
+      "valid": true
+    },
+    {
+      "file": "Templates/Improvement/Completion.md",
+      "link": "../../Procedures/ApproveSkill.md#owned-outcome-or-bounded-suggestion",
+      "valid": true
+    },
+    {
+      "file": "Evidence/GapObligation20261107/Report.md",
+      "link": "../../../../../EvidenceStatus20261107/skills/SkillForge/Evidence/EvidenceStatus20261107/Results.md",
+      "valid": true
+    },
+    {
+      "file": "Evidence/GapObligation20261107/Report.md",
+      "link": "../../../../../LessonTransfer20261107/skills/SkillForge/Evidence/LessonTransfer20261107/Results.md",
+      "valid": true
+    },
+    {
+      "file": "Evidence/GapObligation20261107/Report.md",
+      "link": "../../../../../CandidateArchive20261107/skills/SkillForge/Evidence/CandidateArchive20261107/Results.md",
+      "valid": true
+    },
+    {
+      "file": "Evidence/GapObligation20261107/Report.md",
+      "link": "Protocol.md",
+      "valid": true
+    },
+    {
+      "file": "Evidence/GapObligation20261107/Report.md",
+      "link": "Review.md",
+      "valid": true
+    },
+    {
+      "file": "Evidence/GapObligation20261107/Report.md",
+      "link": "execution-results.json",
+      "valid": true
+    }
+  ],
+  "streams": [
+    {
+      "arm": "baseline-retry",
+      "events_sha256": "f99a03530e681259d4ebc959471c50cb9c32b576cbf6a79926359e2a37abd596",
+      "receipt": {
+        "arm": "baseline-retry",
+        "exit": 0,
+        "seconds": 237.666,
+        "usage": {
+          "input_tokens": 700725,
+          "cached_input_tokens": 657536,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6762,
+          "reasoning_output_tokens": 134
+        }
+      },
+      "controls": {
+        "source": "task.txt",
+        "source_sha256": "84206a41b448f9d6fb642cefd4e4f7214e36c19465902da7fbb62e422ee0744d",
+        "evidence_type": "Supplied completed findings; not independently rerun",
+        "controls": [
+          {
+            "id": "A",
+            "candidate_decision": "retain_baseline",
+            "task_status": "complete",
+            "disposition": "Do not adopt optional memoization; stop further trials.",
+            "rationale": "Completed matched comparison establishes identical useful outputs, no cost saving and no decision-changing uncertainty. No demonstrated benefit justifies optional complexity; no mandatory repair remains.",
+            "target_edited": false
+          },
+          {
+            "id": "B",
+            "candidate_decision": "retain_baseline",
+            "task_status": "complete",
+            "disposition": "No target repair; classify reported defect as incorrect expected result.",
+            "rationale": "Supplied contract and independent exact arithmetic agree with current output; no other discrepancy remains. Correct the expectation in assessment, not target behavior. Do not manufacture red or repeat settled checks.",
+            "target_edited": false
+          }
+        ]
+      }
+    },
+    {
+      "arm": "candidate",
+      "events_sha256": "7d35d3dcc5844a0b6877a9e6ba4431bd0dd8425d0e969d2ae0a93947ef460582",
+      "receipt": {
+        "arm": "candidate",
+        "exit": 0,
+        "seconds": 224.855,
+        "usage": {
+          "input_tokens": 518757,
+          "cached_input_tokens": 477952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5228,
+          "reasoning_output_tokens": 33
+        }
+      },
+      "controls": {
+        "source": "task.txt supplied completed evidence; not independently rerun",
+        "controls": [
+          {
+            "id": "A",
+            "objective": "suggestion",
+            "candidate_decision": "retain_baseline",
+            "task_status": "complete",
+            "disposition": "reject_optional_memoization",
+            "rationale": "Completed matched comparison established identical useful outputs, no cost saving and no open decision-changing uncertainty. A bounded suggestion can end without an edit or further trials.",
+            "target_modified": false
+          },
+          {
+            "id": "B",
+            "objective": "repair",
+            "candidate_decision": "retain_baseline",
+            "task_status": "complete",
+            "resolution": "disproven",
+            "disposition": "no_target_change",
+            "rationale": "Reported rounding defect came from an incorrect expectation. The actual contract and independent exact arithmetic agree with the existing output; no discrepancy remains. This disproves the reported defect rather than merely rejecting a candidate.",
+            "target_modified": false
+          }
+        ],
+        "rule": "method/Procedures/ApproveSkill.md#owned-outcome-or-bounded-suggestion"
+      }
+    }
+  ],
+  "author_review": "Review.md",
+  "qualification": {
+    "contract_controls": "13 new public CLI cases: 6 pass/7 fail on old checker; all pass on candidate; 34 legacy cases preserved",
+    "parser_reference": {
+      "total": 27,
+      "passed": 27,
+      "failures": []
+    },
+    "known_wrong_original": 5,
+    "known_wrong_rejected": 7
+  },
+  "limits": [
+    "One synthetic author pair; nested assertions not independent tasks",
+    "Objective omission in legacy contracts remains compatible",
+    "Semantic intent and truth of resolution remain grader responsibilities"
+  ]
+}

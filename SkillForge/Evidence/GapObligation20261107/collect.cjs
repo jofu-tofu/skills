@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('node:fs'),p=require('node:path'),assert=require('node:assert/strict');
+const {raw,here,sha,write}=require('./run.cjs');
+const valid=[['0007',7],[' -18 ',-18],['123456',123456],['123,456,789',123456789],['-9,876,543',-9876543],['9,007,199,254,740,991',Number.MAX_SAFE_INTEGER],['-9007199254740991',-Number.MAX_SAFE_INTEGER],['0,001',1],['\t1,000\n',1000],['0',0]];
+const invalid=['','   ','+12','12,34','1,2345','1,,234',',123','123,','12.0','1e3','0x10','12 units','--3','NaN','Infinity','9007199254740992','-9,007,199,254,740,992'];
+function score(fn){const failures=[];for(const [s,n] of valid)try{assert.equal(fn(s),n)}catch(e){failures.push({input:s,expected:n,error:e.message})}for(const s of invalid)try{assert.throws(()=>fn(s))}catch(e){failures.push({input:s,expected:'throw',error:e.message})}return {total:valid.length+invalid.length,passed:valid.length+invalid.length-failures.length,failures};}
+const correct=s=>{const t=s.trim();if(!/^-?(?:[0-9]+|[0-9]{1,3}(?:,[0-9]{3})+)$/.test(t))throw Error('syntax');const n=Number(t.replaceAll(',',''));if(!Number.isSafeInteger(n))throw Error('range');return n;};
+const qualification={correct:score(correct),original:score(s=>Number.parseInt(s,10)),rejected:score(s=>Number(String(s).replace(/[^0-9]/g,'')))};
+assert.equal(qualification.correct.failures.length,0);assert.ok(qualification.original.failures.length);assert.ok(qualification.rejected.failures.length);
+const runs=[];
+for(const arm of ['baseline-retry','candidate']){const d=p.join(raw,arm);if(!fs.existsSync(p.join(d,'runner-receipt.json')))throw Error('Run still active: '+arm);const receipt=JSON.parse(fs.readFileSync(p.join(d,'runner-receipt.json')));const inputs=JSON.parse(fs.readFileSync(p.join(d,'runner-inputs.json')));const changedReadonly=[];for(const [file,hash] of Object.entries(inputs)){if(['target/count.cjs','target/SKILL.md'].includes(file))continue;if(!fs.existsSync(p.join(d,file))||sha(fs.readFileSync(p.join(d,file)))!==hash)changedReadonly.push(file);}
+const findings=[];function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(['method','.git','node_modules'].includes(e.name))continue;const f=p.join(dir,e.name);if(e.isDirectory())walk(f);else if(e.name.endsWith('.json')&&!e.name.startsWith('runner-')){try{const v=JSON.parse(fs.readFileSync(f));if(v.objective||v.task_status||v.candidate_decision)findings.push({path:p.relative(d,f),value:v});}catch{}}}}walk(d);
+const checks=score(require(p.join(d,'target/count.cjs')).parseCount);runs.push({arm,receipt,checks,changedReadonly,records:findings});}
+write(p.join(here,'execution-results.json'),{qualification,runs});console.log(JSON.stringify({qualification,runs:runs.map(r=>({arm:r.arm,receipt:r.receipt,checks:r.checks,changedReadonly:r.changedReadonly,records:r.records.map(x=>x.path)}))},null,2));
