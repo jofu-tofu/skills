@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "f17089f32056f06edc5fefc40d0818c914bd8fdd980f6f2006b77ca0d3d6df03",
+  "candidate_decision": "retain_candidate",
+  "checks": [
+    {
+      "id": "result",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "Results.md",
+          "sha256": "493410d3c104793de23aea50bd20ae69cade8f2c29f5cc2f00ae7790693fed05"
+        },
+        {
+          "path": "downstream-results.json",
+          "sha256": "b4ec8f9f5dc557fc8f8e10b07fcce135e610c64fba88a0f39a93a574343caef7"
+        },
+        {
+          "path": "tests-portable.txt",
+          "sha256": "d4996615ab17faf1cd20b550b0a3836b0be9968d37dd3c6c5a8c03f1b9b3d284"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "positive-v2.jsonl",
+          "sha256": "1e8b34a8dfc4b2e0467b302ce4c18b2d639d101bae851702790d57803c516857"
+        },
+        {
+          "path": "valid-alternative-v2.jsonl",
+          "sha256": "7fe5bc40bc6cc5b895ddf9f6b41e1681e4c41e16bb40bd527cd78a21a3caece2"
+        },
+        {
+          "path": "near-miss-v2.jsonl",
+          "sha256": "754ed751d80bfb89f7ebce179c0d667d2c920f67e67ca1315f8209a7b2af276b"
+        },
+        {
+          "path": "no-skill-v2.jsonl",
+          "sha256": "3b5bedf8f6b0ee7318a4fe94c113c41e179f0718b3dcce7b36af555773e29a81"
+        },
+        {
+          "path": "downstream-results.json",
+          "sha256": "b4ec8f9f5dc557fc8f8e10b07fcce135e610c64fba88a0f39a93a574343caef7"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "tests-portable.txt",
+          "sha256": "d4996615ab17faf1cd20b550b0a3836b0be9968d37dd3c6c5a8c03f1b9b3d284"
+        },
+        {
+          "path": "completion-regression.txt",
+          "sha256": "6bba6d55f0ee4627b1b8bff19404384f32e2f88842fdbb1ba61044424bf5c310"
+        },
+        {
+          "path": "structural.txt",
+          "sha256": "c4782c44e91aecfb41b86d11e9929daa12d764e1584ecece96ad01eb7dc3c53f"
+        },
+        {
+          "path": "Results.md",
+          "sha256": "493410d3c104793de23aea50bd20ae69cade8f2c29f5cc2f00ae7790693fed05"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}

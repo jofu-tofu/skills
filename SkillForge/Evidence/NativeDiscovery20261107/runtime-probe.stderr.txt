@@ -1,0 +1,5 @@
+WARNING: failed to clean up stale arg0 temp dirs: Access is denied. (os error 5)
+WARNING: proceeding, even though we could not update PATH: Access is denied. (os error 5) at path "C:\\Users\\fujos\\.codex\\tmp\\arg0\\codex-arg0iHMCeN"
+Error loading config.toml: unknown variant `default`, expected `fast` or `flex`
+in `service_tier`
+

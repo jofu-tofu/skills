@@ -43,3 +43,26 @@ accuracy tests. Reused holdouts provide provisional selection evidence only. No 
 here installs or automatically applies a selected description.
 
 The viewer and exploration helpers remain optional experimental conveniences. Do not use their output as independent qualification or readiness evidence. Core workflows can complete without them. Benchmark metrics and coverage follow [BenchmarkFormat](BenchmarkFormat.md); unknown values must remain unknown through reports.
+
+### Codex file-loading observer
+
+`node Tools/ObserveCodexDiscovery.cjs trace.jsonl manifest.json` extracts exact successful
+skill-file reads from saved `codex exec --json` events. It never launches a model.
+The manifest supplies an absolute run `cwd` and `skills` entries with unique `id`,
+absolute `path`, and frozen file-byte `sha256`. Keep those files at their captured
+version; identity mismatch exits 2. Relative paths in read commands resolve against
+that recorded cwd.
+
+Qualified scope: Codex CLI 0.167.0-alpha.3.2 on Windows, direct PowerShell
+`Get-Content` / `Get-Content -LiteralPath` commands with exact complete contents.
+Other read forms remain unverified. See the [qualification and limits](../Evidence/NativeDiscovery20261107/Results.md).
+Run the bounded controls with `node Tools/ObserveCodexDiscovery.test.cjs`.
+
+`loading: observed` establishes the recorded file read, not native provenance,
+procedural compliance or task success. Establish native registration and absence of
+injection separately. The helper deliberately leaves those three verdicts unverified.
+No matching read means unverified, even after successful execution; it does not prove
+non-selection. A later runtime error preserves an already verified read. Malformed
+streams and runtime errors retain their separate execution status. This supports
+positive native-loading observations after qualification, not full discovery accuracy,
+false-trigger rates, automatic description ranking or a replacement for TestTriggering.

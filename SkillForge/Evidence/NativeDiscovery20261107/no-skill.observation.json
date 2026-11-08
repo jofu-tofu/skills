@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "trace_sha256": "3b5bedf8f6b0ee7318a4fe94c113c41e179f0718b3dcce7b36af555773e29a81",
+  "execution": "completed",
+  "native_selection": "unverified",
+  "procedural_compliance": "unverified",
+  "task_success": "unverified",
+  "skills": [
+    {
+      "id": "parcel-balance",
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\NativeDiscovery20261107\\skills\\SkillForge\\Evidence\\NativeDiscovery20261107\\fixture\\.agents\\skills\\parcel-balance\\SKILL.md",
+      "content_sha256": "dc370a8951d5560aaf1acc17e66c15bb889aa6164a199e949732a26d73fad4b5",
+      "loading": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "parcel-check",
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\NativeDiscovery20261107\\skills\\SkillForge\\Evidence\\NativeDiscovery20261107\\fixture\\.agents\\skills\\parcel-check\\SKILL.md",
+      "content_sha256": "20b1a33f9c016bc8f045a4b9d8ddfb4d6ac6466e4a8d88eb965cf895e78a64a1",
+      "loading": "unverified",
+      "evidence": []
+    }
+  ],
+  "usage": {
+    "input_tokens": 21105,
+    "cached_input_tokens": 13568,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5,
+    "reasoning_output_tokens": 0
+  },
+  "errors": [],
+  "limitation": "Successful exact file reads only. Native provenance needs separate qualification; absent or unsupported reads do not prove non-selection. No task grading."
+}

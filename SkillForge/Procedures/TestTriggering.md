@@ -12,3 +12,7 @@
 Legacy scripts in Tools/scripts/run_eval.py and run_loop.py require Claude CLI and create command files. They are retained for historical compatibility, not qualified native skill-discovery tests for Codex or modern Claude. Their repeatedly used selection split is validation data, not untouched final test evidence. Do not automatically launch them as proof of triggering accuracy. A runtime-specific adapter must be qualified first.
 
 Reference: [ConstructCases](ConstructCases.md). Bad labels and mismatched discovery paths can produce impressive but irrelevant scores.
+
+Optional Codex evidence extraction: [file-loading observer](../Tools/README.md#codex-file-loading-observer).
+Its bounded read observations still require this procedure's native-runtime qualification;
+unknown selection, compliance and outcome remain separate.

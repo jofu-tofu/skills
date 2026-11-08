@@ -1,0 +1,18 @@
+[
+  {
+    "file": "Procedures/TestTriggering.md",
+    "sha256_lf": "47f5205e3ddd0d1839101f6f878f052aecf6cb64efd53b6d95e13e0646b7443a"
+  },
+  {
+    "file": "Tools/README.md",
+    "sha256_lf": "786ae48f3fc21575c26857a604d29a622f212436489f84353261905e11cbf195"
+  },
+  {
+    "file": "Tools/ObserveCodexDiscovery.cjs",
+    "sha256_lf": "dea06b42f58ec6c3922c0d263035a04b0f2203c04d8afe14ab1251a8b912f6b4"
+  },
+  {
+    "file": "Tools/ObserveCodexDiscovery.test.cjs",
+    "sha256_lf": "c1e7bbccc03939ece1aca7551a0389771acae0f7363fd93e993152cf149e006f"
+  }
+]

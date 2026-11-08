@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Close the documented native discovery evidence/tooling gap where the actual runtime allows it. Qualify observations of actual native selection/loading separately from procedural compliance and downstream task success, using positive, near-miss, valid-alternative and no-skill-needed cases. Preserve explicit unverified status if native observation is unavailable.",
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "b632625c266479cdec1007653629355cbd833711a8a8319fa1af494fa847e8f7",
+    "quote": "Close the documented native discovery evidence/tooling gap where the actual runtime allows it. Qualify observations of actual native selection/loading separately from procedural compliance and downstream task success, using positive, near-miss, valid-alternative and no-skill-needed cases. Preserve explicit unverified status if native observation is unavailable."
+  },
+  "required_checks": [
+    {
+      "id": "result",
+      "kind": "outcome",
+      "description": "Qualified native loading observations or evidenced runtime limitation, separate from compliance and outcome."
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Actual native runtime and downstream interpretation on four case types."
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "No manufactured trigger failure, no lost unknowns, no legacy/injection misclassification."
+    }
+  ]
+}

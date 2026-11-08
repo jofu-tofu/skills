@@ -1,0 +1,15 @@
+{
+  "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\NativeDiscovery20261107\\skills\\SkillForge\\Evidence\\NativeDiscovery20261107\\fixture",
+  "skills": [
+    {
+      "id": "parcel-balance",
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\NativeDiscovery20261107\\skills\\SkillForge\\Evidence\\NativeDiscovery20261107\\fixture\\.agents\\skills\\parcel-balance\\SKILL.md",
+      "sha256": "dc370a8951d5560aaf1acc17e66c15bb889aa6164a199e949732a26d73fad4b5"
+    },
+    {
+      "id": "parcel-check",
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\NativeDiscovery20261107\\skills\\SkillForge\\Evidence\\NativeDiscovery20261107\\fixture\\.agents\\skills\\parcel-check\\SKILL.md",
+      "sha256": "20b1a33f9c016bc8f045a4b9d8ddfb4d6ac6466e4a8d88eb965cf895e78a64a1"
+    }
+  ]
+}

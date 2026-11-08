@@ -1,0 +1,21 @@
+WARNING: failed to clean up stale arg0 temp dirs: Access is denied. (os error 5)
+WARNING: proceeding, even though we could not update PATH: Access is denied. (os error 5) at path "C:\\Users\\fujos\\.codex\\tmp\\arg0\\codex-arg0M2rl4v"
+2026-11-08T03:21:24.141685Z ERROR codex_core::skills::manager: failed to install system skills: io error while remove existing system skills dir: Access is denied. (os error 5)
+2026-11-08T03:21:24.155789Z ERROR codex_core::skills::loader: failed to stat skills entry C:\Users\fujos\.codex\skills\PAI-skills-ResearchLegacy (symlink): The system cannot find the file specified. (os error 2)
+2026-11-08T03:21:24.156080Z ERROR codex_core::skills::loader: failed to stat skills entry C:\Users\fujos\.codex\skills\PAI-skills-ResearchLegacy-Research (symlink): The system cannot find the path specified. (os error 3)
+2026-11-08T03:21:24.471830Z ERROR codex_core::models_manager::cache: failed to load models cache: unknown variant `max`, expected one of `none`, `minimal`, `low`, `medium`, `high`, `xhigh` at line 30 column 25
+2026-11-08T03:21:27.557479Z ERROR codex_core::models_manager::manager: failed to refresh available models: stream disconnected before completion: error sending request for url (https://chatgpt.com/backend-api/codex/models?client_version=0.111.0)
+2026-11-08T03:21:27.562028Z  WARN codex_core::models_manager::model_info: Unknown model gpt-6-astra is used. This will use fallback model metadata.
+2026-11-08T03:21:27.562902Z  WARN codex_protocol::openai_models: Model personality requested but model_messages is missing, falling back to base instructions. model=gpt-6-astra personality=pragmatic
+2026-11-08T03:21:27.575590Z  WARN codex_rmcp_client::oauth: failed to read OAuth tokens from keyring: Platform secure storage failure: Windows error code 5
+2026-11-08T03:21:27.602350Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-11-08T03:21:27.610505Z  WARN codex_rmcp_client::oauth: failed to read OAuth tokens from keyring: Platform secure storage failure: Windows error code 5
+2026-11-08T03:21:27.612403Z  WARN codex_core::models_manager::model_info: Unknown model gpt-6-astra is used. This will use fallback model metadata.
+2026-11-08T03:21:27.612416Z  WARN codex_core::models_manager::model_info: Unknown model gpt-6-astra is used. This will use fallback model metadata.
+2026-11-08T03:21:27.617188Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when Client(reqwest::Error { kind: Request, url: "https://www.agenticcoding.school/api/mcp", source: hyper_util::client::legacy::Error(Connect, ConnectError("dns error", Os { code: 11001, kind: Uncategorized, message: "No such host is known." })) })
+2026-11-08T03:21:27.643399Z  WARN codex_core::models_manager::model_info: Unknown model gpt-6-astra is used. This will use fallback model metadata.
+2026-11-08T03:21:30.726714Z  WARN codex_core::codex: stream disconnected - retrying sampling request (1/5 in 193ms)...
+2026-11-08T03:21:34.105940Z  WARN codex_core::codex: stream disconnected - retrying sampling request (2/5 in 429ms)...
+2026-11-08T03:21:37.516875Z  WARN codex_core::codex: stream disconnected - retrying sampling request (3/5 in 721ms)...
+2026-11-08T03:21:41.339376Z  WARN codex_core::codex: stream disconnected - retrying sampling request (4/5 in 1.687s)...
+2026-11-08T03:21:45.980910Z  WARN codex_core::codex: stream disconnected - retrying sampling request (5/5 in 2.99s)...

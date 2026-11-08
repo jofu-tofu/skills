@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "trace_sha256": "7fe5bc40bc6cc5b895ddf9f6b41e1681e4c41e16bb40bd527cd78a21a3caece2",
+  "execution": "completed",
+  "native_selection": "unverified",
+  "procedural_compliance": "unverified",
+  "task_success": "unverified",
+  "skills": [
+    {
+      "id": "parcel-balance",
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\NativeDiscovery20261107\\skills\\SkillForge\\Evidence\\NativeDiscovery20261107\\fixture\\.agents\\skills\\parcel-balance\\SKILL.md",
+      "content_sha256": "dc370a8951d5560aaf1acc17e66c15bb889aa6164a199e949732a26d73fad4b5",
+      "loading": "unverified",
+      "evidence": []
+    },
+    {
+      "id": "parcel-check",
+      "path": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\NativeDiscovery20261107\\skills\\SkillForge\\Evidence\\NativeDiscovery20261107\\fixture\\.agents\\skills\\parcel-check\\SKILL.md",
+      "content_sha256": "20b1a33f9c016bc8f045a4b9d8ddfb4d6ac6466e4a8d88eb965cf895e78a64a1",
+      "loading": "observed",
+      "evidence": [
+        {
+          "line": 5,
+          "item_id": "item_1",
+          "command": "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content .agents/skills/parcel-check/SKILL.md'"
+        }
+      ]
+    }
+  ],
+  "usage": {
+    "input_tokens": 42408,
+    "cached_input_tokens": 34560,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 83,
+    "reasoning_output_tokens": 0
+  },
+  "errors": [],
+  "limitation": "Successful exact file reads only. Native provenance needs separate qualification; absent or unsupported reads do not prove non-selection. No task grading."
+}

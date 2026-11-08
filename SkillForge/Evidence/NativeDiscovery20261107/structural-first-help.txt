@@ -1,0 +1,9 @@
+
+ValidateSkill - Validate skills against SkillSystem.md spec
+
+Usage:
+  bun run ValidateSkill.ts <SkillName>    Validate specific skill
+  bun run ValidateSkill.ts --all          Validate all skills
+  bun run ValidateSkill.ts --list         List all skills with status
+  bun run ValidateSkill.ts --help         Show this help
+

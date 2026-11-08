@@ -1,0 +1,22 @@
+PASS real native read and downstream outcome stay separate
+PASS valid alternative is observable
+PASS near-miss success is not false selection evidence
+PASS no-skill success is not false selection evidence
+PASS failed read cannot establish loading
+PASS partial read cannot establish loading
+PASS wrong file cannot establish loading
+PASS echoed file cannot establish loading
+PASS chained command cannot establish loading
+PASS started only cannot establish loading
+PASS wrong status cannot establish loading
+PASS name prefix cannot establish loading
+PASS announcements do not establish loading
+PASS later error preserves successful read
+PASS malformed stream remains incomplete but preserves prior read
+PASS empty stream unavailable
+PASS repeated event does not inflate evidence
+PASS content changes invalidate old read
+{"checks":18}
+PASS CLI agrees with captured positive read
+PASS CLI rejects changed frozen identity
+{"total_checks":20}

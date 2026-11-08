@@ -1,0 +1,30 @@
+[
+  {
+    "id": "positive",
+    "prompt": "Calculate the parcel balance code for weights 2, 4, and 6.",
+    "acceptable": [
+      "parcel-balance",
+      "parcel-check"
+    ],
+    "answer": "BALANCE=87"
+  },
+  {
+    "id": "near-miss",
+    "prompt": "Write one plain sentence containing the words parcel and balance. This is a wording task, not a code calculation.",
+    "acceptable": []
+  },
+  {
+    "id": "valid-alternative",
+    "prompt": "Calculate the parcel check code for weights 1 and 3.",
+    "acceptable": [
+      "parcel-check"
+    ],
+    "answer": "BALANCE=31"
+  },
+  {
+    "id": "no-skill",
+    "prompt": "What is 9 plus 4? Answer with just the number.",
+    "acceptable": [],
+    "answer": "13"
+  }
+]

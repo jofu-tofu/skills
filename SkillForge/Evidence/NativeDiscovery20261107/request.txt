@@ -1,0 +1,1 @@
+Close the documented native discovery evidence/tooling gap where the actual runtime allows it. Qualify observations of actual native selection/loading separately from procedural compliance and downstream task success, using positive, near-miss, valid-alternative and no-skill-needed cases. Preserve explicit unverified status if native observation is unavailable.

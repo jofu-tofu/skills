@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1b930-318d-7c03-8876-de0d7de10860"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"I placed the parcel on the scale to check its balance."}}
+{"type":"turn.completed","usage":{"input_tokens":21113,"cached_input_tokens":13568,"cache_write_input_tokens":0,"output_tokens":16,"reasoning_output_tokens":0}}
