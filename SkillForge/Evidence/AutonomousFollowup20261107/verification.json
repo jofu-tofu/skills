@@ -1,0 +1,174 @@
+{
+  "runs": [
+    {
+      "name": "completion-tests",
+      "exit": 0,
+      "stdout": "✔ a completed sampled round does not close untested parent families (82.503ms)\n✔ parent inventory cannot silently omit outcomes from the contract checks (64.3872ms)\n✔ one aggregate skill pass cannot replace distinct parent outcomes (70.3693ms)\n✔ broad work needs an evidenced scope challenge and structural review (82.5044ms)\n✔ complete reviewed broad coverage permits an unchanged skill without forced rounds (89.2808ms)\n✔ an unresolved portfolio child prevents broad closure (100.6874ms)\n✔ new in-scope outcomes remain work after an explicit inventory amendment (100.6261ms)\n✔ missing or tampered broad inventory cannot establish completion (63.767ms)\n✔ coverage judgments cannot be disguised as deliverables (64.2277ms)\n✔ assessment cannot downgrade comprehensive depth or replace parent inventory (62.3888ms)\n✔ supported requested outcomes complete the task independently of candidate choice (63.9693ms)\n✔ historical edit-only closure must continue to behavioral evaluation (64.7781ms)\n✔ historical unrelated tie cannot close an unresolved required repair (64.7792ms)\n✔ a missing next action is planning work, not permission to close (63.1842ms)\n✔ an actual evidenced blocker can stop an unresolved task (67.8404ms)\n✔ a feasible authorized next action takes precedence over a blocker (63.362ms)\n✔ an unsupported blocker cannot end the task (61.9199ms)\n✔ partly blocked requirements leave other unresolved work active (63.0676ms)\n✔ explicit design-only delivery does not require behavioral execution (59.2414ms)\n✔ narrow maintenance can finish with its own supported requirement (60.3204ms)\n✔ assessment-only scope can finish with an inconclusive target verdict (62.0084ms)\n✔ a supported assessment can reject a candidate and still be complete (59.2309ms)\n✔ omitted mandatory evidence remains unresolved (65.4469ms)\n✔ unqualified favorable judgments cannot establish complete (68.2561ms)\n✔ a stale evidence digest cannot establish complete (71.8171ms)\n✔ missing and empty evidence cannot establish complete (69.2921ms)\n✔ behavioral contracts cannot omit execution from their requirements (62.406ms)\n✔ changed contracts cannot reuse an old assessment identity (60.2095ms)\n✔ equivalent uppercase digests retain the same contract identity (74.5602ms)\n✔ assessment cannot redefine the frozen scope (62.2095ms)\n✔ duplicate requirements and duplicate judgments are rejected (66.4944ms)\n✔ truthy strings cannot pretend to authorize an action (67.5989ms)\n✔ scope source must contain its quoted user instruction (65.7764ms)\n✔ evidence outside the declared root is not accepted (70.597ms)\nℹ tests 34\nℹ suites 0\nℹ pass 34\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2417.647\n",
+      "stderr": ""
+    },
+    {
+      "name": "structure",
+      "exit": 0,
+      "stdout": "\n✅ SkillForge (14/14 checks passed)\n  [x] SKILL.md exists\n  [x] Directory TitleCase\n  [x] Valid frontmatter\n  [x] Name TitleCase\n  [x] Name matches directory\n  [x] USE WHEN clause\n  [x] Single-line description\n  [x] Description length\n  [x] Examples section\n  [x] Tools/ directory\n  [x] Workflows/ directory\n  [x] Workflow: CreateSkill.md\n  [x] Workflow: UpdateSkill.md\n  [x] Workflow: EvaluateSkill.md\n",
+      "stderr": ""
+    }
+  ],
+  "links": [
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../SkillIntent.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Quality/Shared.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Quality/UpdateSkill/Context.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Quality/UpdateSkill/Outcomes.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Quality/UpdateSkill/Tradeoffs.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Quality/UpdateSkill/Feedback.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Quality/UpdateSkill/ChallengeCases.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/ComprehensiveImprovement.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Standards/Authoring.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/PlanChange.md#alternative-generation-activation",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/TestTriggering.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/ReviewDesign.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Templates/Improvement/Completion.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/DiagnoseGap.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/EstablishQuality.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/DesignMeasurement.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/PlanChange.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/DraftCandidate.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/EvaluateCandidate.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/ApproveSkill.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/ApproveSkill.md#autonomous-follow-up-of-gains-and-tradeoffs",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Workflows/UpdateSkill.md",
+      "url": "../Procedures/RecordLearning.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "url": "DiagnoseGap.md#baseline-red-case-for-a-repair",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "url": "../Standards/RegressionCoverage.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "url": "PlanChange.md#diagnosing-an-unresolved-tie",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "url": "ComprehensiveImprovement.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "url": "../Templates/Improvement/Completion.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "url": "../Tools/CheckCompletion.cjs",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "url": "../Templates/Improvement/Completion.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "url": "../Templates/Improvement/Decision.md",
+      "exists": true
+    },
+    {
+      "file": "SkillForge/Procedures/ApproveSkill.md",
+      "url": "../Quality/Shared.md",
+      "exists": true
+    }
+  ],
+  "pass": true
+}
