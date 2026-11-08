@@ -1,0 +1,68 @@
+[
+  {
+    "id": "archive",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/ResearchDriven20261106/replay-results.json",
+    "sha256": "abae134a67eb6b10cac0af77c65fe0862f6084c3b6ba0fc60447bade7a0b22fc",
+    "bytes": 2044
+  },
+  {
+    "id": "protocol",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/ResearchDriven20261106/replay-protocol.md",
+    "sha256": "558d52c3cdf3a3163a724d87c3aacdb804f2e4cc1815f649232b6a79b026d9c0",
+    "bytes": 2189
+  },
+  {
+    "id": "input",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/RealSkillComparison20261106/key-results.json",
+    "sha256": "108e97a5a31c5551c476e665c87635a4f482a0a7d20c3a60386c5e7bb28b55fe",
+    "bytes": 1653
+  },
+  {
+    "id": "script",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/20-working-T1-T3/ResearchDriven20261106/replay.cjs",
+    "sha256": "0820d3627f418467e0d0a46add34db176d57f1b593e6cf363da3d9fe4d035333",
+    "bytes": 2146
+  },
+  {
+    "id": "local0",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/TieDiagnosis20261107/Results.md",
+    "sha256": "fdc57503dfe1ca56c8444e8975da8488097863a41cc2f079e5d4a3dc286c9f86",
+    "bytes": 6500
+  },
+  {
+    "id": "local1",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/CandidateReassessment20261107/Inventory.md",
+    "sha256": "20dca84cd8b52b46e617f13eb9ef65b88c0ed017432db60f3c29f0ccfc3bbc7c",
+    "bytes": 6512
+  },
+  {
+    "id": "local2",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/CandidateReassessment20261107/Results.md",
+    "sha256": "e567ea72a01014b38e1375822dee3f7f6cfdc2fa1d75b4c772e2a30e8b110f9b",
+    "bytes": 5633
+  },
+  {
+    "id": "local3",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/ExperimentMemory20261107/Results.md",
+    "sha256": "3092f22beace4d2be20ff442be949b5751d595cc0337936fa5e5b09c31a787e8",
+    "bytes": 4983
+  },
+  {
+    "id": "local4",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/CandidateArchive20261107/skills/SkillForge/Evidence/WorkflowEfficiency20261107/Report.md",
+    "sha256": "45b3375b548c06ea002347470de0b694677a9df3b000339cc0daa438a2c3bb3e",
+    "bytes": 6234
+  },
+  {
+    "id": "confirmation",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/MeasurementConfirmation20261107/skills/SkillForge/Evidence/MeasurementConfirmation20261107/Report.md",
+    "sha256": "c809fa44ccc4ff21de8549a0e4259ab15fb2aa75e9284ee6b313afbeaf2485b6",
+    "bytes": 9497
+  },
+  {
+    "id": "recovery",
+    "path": "C:/Users/fujos/Obsidian/Projects/SkillForge/UnresolvedSessions20261107/skills/SkillForge/Evidence/UnresolvedSessions20261107/Report.md",
+    "sha256": "4d4f91b22e50553a5f3cff1179c7c994cb03999f0deab2bcc3ff092804412597",
+    "bytes": 5365
+  }
+]

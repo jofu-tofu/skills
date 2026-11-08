@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "original_input_hash_matches": true,
+    "original_script_hash_matches": true,
+    "vectors_match_original": true,
+    "sums_match": true,
+    "six_historical_controls_recorded_pass": true,
+    "complementary_not_dominating": true,
+    "no_historical_model_trial": true
+  },
+  "all_pass": true,
+  "scope": "Historical integrity/arithmetic only; controls are recorded, not newly executed. No selection-behavior claim."
+}
