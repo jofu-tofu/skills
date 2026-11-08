@@ -1,0 +1,7 @@
+# Fresh task for the same small reasoning mechanism
+
+Freeze this case before inspecting the candidate author outcome. The new user-visible defect is completion-order output in a limited-concurrency mapper. The full contract also forbids starting queued work after the first processed failure. A native Promise adoption-setup error can reject the outer caller while leaving dispatch enabled; when earlier work finishes, forbidden new work starts. This is a different state invariant and target API from the task-pool slot/listener leak, while probing the same indirect-failure reasoning mechanism.
+
+The subject sees only the order complaint, original code and full existing intent. Hidden checks cover ordering, capacity and FIFO starts, synchronous failure, ordinary rejection, constructor-getter failure, then-getter failure, empty input, first settlement and independent calls. Qualify against the initial buggy target and a separately written correct implementation before author trials. Avoid accepting a correct immediate rejection if later work still starts.
+
+If the development candidate passes and exposure is verified, run one unchanged-current author and one one-paragraph candidate author from identical fresh target inputs. Do not change the paragraph in response to this fresh case. Grade both with the same frozen checker and preserve all outcomes. A tie is preservation/transfer evidence, not another demonstrated gain. A candidate regression blocks retention or narrows/revises the claim explicitly. No other method change or target-specific hint is permitted.

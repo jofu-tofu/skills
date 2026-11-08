@@ -1,0 +1,610 @@
+{
+  "time": "2026-11-08T19:20:07.194Z",
+  "runtime": "v24.12.0",
+  "sourceRevision": "671d76f6f53381d278536ece84e9d4a1b0fda06b",
+  "treatment": {
+    "file": "method/Procedures/ConstructCases.md",
+    "text": "For a state or resource invariant, trace the path from acquisition to release before choosing failure cases. Include operations that can execute user code indirectly, such as property access, conversion, iteration, or result adoption. At a previously uncovered interruption point, check both the immediate outcome and a subsequent operation; returning the expected error does not prove that state was restored.",
+    "words": 60,
+    "baselineHash": "94c776928d8234f25850865f827ecd47634b2d511ceaf43fe5030fc24fd75eda",
+    "candidateHash": "0466309843476d7b73defd5696a136269a071e56477f7930b8d95999eb611dbf"
+  },
+  "runs": [
+    {
+      "id": "pool-current-baseline-v1",
+      "receipt": {
+        "id": "pool-current-baseline-v1",
+        "exit": 0,
+        "timedOut": false,
+        "seconds": 261.67,
+        "usage": [
+          {
+            "input_tokens": 679998,
+            "cached_input_tokens": 634240,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 8186,
+            "reasoning_output_tokens": 310
+          }
+        ],
+        "changed": [
+          "target/pool.cjs"
+        ],
+        "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+        "args": [
+          "exec",
+          "--ephemeral",
+          "--skip-git-repo-check",
+          "-s",
+          "workspace-write",
+          "-C",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-current-baseline-v1",
+          "--json",
+          "-o",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-current-baseline-v1\\response.txt",
+          "-"
+        ],
+        "status": "completed"
+      },
+      "completeCueReads": 0,
+      "commandCount": 13
+    },
+    {
+      "id": "pool-reasoning-candidate-v1",
+      "receipt": {
+        "id": "pool-reasoning-candidate-v1",
+        "exit": 0,
+        "timedOut": false,
+        "seconds": 336.883,
+        "usage": [
+          {
+            "input_tokens": 785791,
+            "cached_input_tokens": 739328,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 9665,
+            "reasoning_output_tokens": 746
+          }
+        ],
+        "changed": [
+          "target/pool.cjs"
+        ],
+        "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+        "args": [
+          "exec",
+          "--ephemeral",
+          "--skip-git-repo-check",
+          "-s",
+          "workspace-write",
+          "-C",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-reasoning-candidate-v1",
+          "--json",
+          "-o",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-reasoning-candidate-v1\\response.txt",
+          "-"
+        ],
+        "status": "completed"
+      },
+      "completeCueReads": 1,
+      "commandCount": 15
+    },
+    {
+      "id": "ordered-map-baseline-v1",
+      "receipt": {
+        "id": "ordered-map-baseline-v1",
+        "exit": 0,
+        "timedOut": false,
+        "seconds": 276.551,
+        "usage": [
+          {
+            "input_tokens": 680527,
+            "cached_input_tokens": 624256,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 8801,
+            "reasoning_output_tokens": 617
+          }
+        ],
+        "changed": [
+          "target/map.cjs"
+        ],
+        "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+        "args": [
+          "exec",
+          "--ephemeral",
+          "--skip-git-repo-check",
+          "-s",
+          "workspace-write",
+          "-C",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\ordered-map-baseline-v1",
+          "--json",
+          "-o",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\ordered-map-baseline-v1\\response.txt",
+          "-"
+        ],
+        "status": "completed"
+      },
+      "completeCueReads": 0,
+      "commandCount": 13
+    },
+    {
+      "id": "ordered-map-candidate-v1",
+      "receipt": {
+        "id": "ordered-map-candidate-v1",
+        "exit": 0,
+        "timedOut": false,
+        "seconds": 356.641,
+        "usage": [
+          {
+            "input_tokens": 603288,
+            "cached_input_tokens": 561280,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 9661,
+            "reasoning_output_tokens": 955
+          }
+        ],
+        "changed": [
+          "target/map.cjs"
+        ],
+        "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+        "args": [
+          "exec",
+          "--ephemeral",
+          "--skip-git-repo-check",
+          "-s",
+          "workspace-write",
+          "-C",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\ordered-map-candidate-v1",
+          "--json",
+          "-o",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\ordered-map-candidate-v1\\response.txt",
+          "-"
+        ],
+        "status": "completed"
+      },
+      "completeCueReads": 1,
+      "commandCount": 15
+    },
+    {
+      "id": "design-scope-candidate-v1",
+      "receipt": {
+        "id": "design-scope-candidate-v1",
+        "exit": 0,
+        "timedOut": false,
+        "seconds": 155.375,
+        "usage": [
+          {
+            "input_tokens": 216037,
+            "cached_input_tokens": 189824,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2725,
+            "reasoning_output_tokens": 26
+          }
+        ],
+        "changed": [],
+        "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+        "args": [
+          "exec",
+          "--ephemeral",
+          "--skip-git-repo-check",
+          "-s",
+          "workspace-write",
+          "-C",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\design-scope-candidate-v1",
+          "--json",
+          "-o",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\design-scope-candidate-v1\\response.txt",
+          "-"
+        ],
+        "status": "completed"
+      },
+      "completeCueReads": 1,
+      "commandCount": 5
+    },
+    {
+      "id": "adequate-resource-candidate-v1",
+      "receipt": {
+        "id": "adequate-resource-candidate-v1",
+        "exit": 0,
+        "timedOut": false,
+        "seconds": 176.474,
+        "usage": [
+          {
+            "input_tokens": 323414,
+            "cached_input_tokens": 293120,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 4725,
+            "reasoning_output_tokens": 51
+          }
+        ],
+        "changed": [],
+        "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+        "args": [
+          "exec",
+          "--ephemeral",
+          "--skip-git-repo-check",
+          "-s",
+          "workspace-write",
+          "-C",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\adequate-resource-candidate-v1",
+          "--json",
+          "-o",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\adequate-resource-candidate-v1\\response.txt",
+          "-"
+        ],
+        "status": "completed"
+      },
+      "completeCueReads": 1,
+      "commandCount": 6
+    }
+  ],
+  "development": {
+    "time": "2026-11-08T19:07:02.586Z",
+    "treatment": {
+      "id": "pool-reasoning-candidate-v1",
+      "differences": [
+        "method/Procedures/ConstructCases.md",
+        "prompt.txt"
+      ],
+      "changedMethodFile": "method/Procedures/ConstructCases.md",
+      "addition": "For a state or resource invariant, trace the path from acquisition to release before choosing failure cases. Include operations that can execute user code indirectly, such as property access, conversion, iteration, or result adoption. At a previously uncovered interruption point, check both the immediate outcome and a subsequent operation; returning the expected error does not prove that state was restored.",
+      "baselineHash": "94c776928d8234f25850865f827ecd47634b2d511ceaf43fe5030fc24fd75eda",
+      "candidateHash": "0466309843476d7b73defd5696a136269a071e56477f7930b8d95999eb611dbf",
+      "promptDifference": "Only the required isolated run directory changes.",
+      "sameInitialTarget": true
+    },
+    "completeCueReads": 1,
+    "stressOriginalHash": "e7e4e3bb058c8bdcd96a796c9aac7f9e17d1052b79c0451dd7946ccd10cbc934",
+    "stressAdapterHash": "ec74c907d582c14475f65158006d63666981b2549cb32c5e8caa76de1015a534",
+    "cases": [
+      {
+        "arm": "baseline",
+        "id": "pool-current-baseline-v1",
+        "receipt": {
+          "id": "pool-current-baseline-v1",
+          "exit": 0,
+          "timedOut": false,
+          "seconds": 261.67,
+          "usage": [
+            {
+              "input_tokens": 679998,
+              "cached_input_tokens": 634240,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 8186,
+              "reasoning_output_tokens": 310
+            }
+          ],
+          "changed": [
+            "target/pool.cjs"
+          ],
+          "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+          "args": [
+            "exec",
+            "--ephemeral",
+            "--skip-git-repo-check",
+            "-s",
+            "workspace-write",
+            "-C",
+            "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-current-baseline-v1",
+            "--json",
+            "-o",
+            "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-current-baseline-v1\\response.txt",
+            "-"
+          ],
+          "status": "completed"
+        },
+        "development": {
+          "file": "runs/pool-current-baseline-v1/target/pool.cjs",
+          "results": [
+            {
+              "kind": "native-promise-constructor",
+              "synchronousThrow": false,
+              "rejectionMatches": true,
+              "followupStarts": 0,
+              "followupValue": null,
+              "remainingAbortListeners": 1,
+              "pass": false
+            },
+            {
+              "kind": "thenable-getter",
+              "synchronousThrow": false,
+              "rejectionMatches": true,
+              "followupStarts": 1,
+              "followupValue": 7,
+              "remainingAbortListeners": 0,
+              "pass": true
+            }
+          ],
+          "pass": false
+        },
+        "adjacent": {
+          "file": "runs/pool-current-baseline-v1/target/pool.cjs",
+          "results": [
+            {
+              "kind": "then-getter",
+              "synchronousThrow": false,
+              "correctRejection": true,
+              "followupStarts": 0,
+              "followupResult": null,
+              "listeners": 1,
+              "pass": false
+            },
+            {
+              "kind": "then-call",
+              "synchronousThrow": false,
+              "correctRejection": true,
+              "followupStarts": 0,
+              "followupResult": null,
+              "listeners": 1,
+              "pass": false
+            },
+            {
+              "kind": "abort-then-getter",
+              "synchronousThrow": false,
+              "correctRejection": true,
+              "followupStarts": 0,
+              "followupResult": null,
+              "listeners": 0,
+              "pass": false
+            }
+          ],
+          "pass": false
+        },
+        "preservation": {
+          "results": [
+            {
+              "name": "synchronous nested starts use available slots",
+              "status": "pass"
+            },
+            {
+              "name": "abort keeps active slot until detached completion",
+              "status": "pass"
+            },
+            {
+              "name": "FIFO survives nested submission while draining",
+              "status": "pass"
+            },
+            {
+              "name": "queued and pre-aborted work never invokes",
+              "status": "pass"
+            },
+            {
+              "name": "self-abort and throw settle once without releasing twice",
+              "status": "pass"
+            },
+            {
+              "name": "thenable rejection and ordinary throw permit subsequent work",
+              "status": "pass"
+            },
+            {
+              "name": "completion and queued cancellation detach listeners",
+              "status": "pass"
+            }
+          ],
+          "pass": true
+        },
+        "stress": {
+          "exit": 0,
+          "error": null,
+          "stdout": "PASS: 12000 queued synchronous throws drain without slot loss; reentrant queued abort and then getter preserve order\n",
+          "stderr": ""
+        }
+      },
+      {
+        "arm": "candidate",
+        "id": "pool-reasoning-candidate-v1",
+        "receipt": {
+          "id": "pool-reasoning-candidate-v1",
+          "exit": 0,
+          "timedOut": false,
+          "seconds": 336.883,
+          "usage": [
+            {
+              "input_tokens": 785791,
+              "cached_input_tokens": 739328,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 9665,
+              "reasoning_output_tokens": 746
+            }
+          ],
+          "changed": [
+            "target/pool.cjs"
+          ],
+          "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+          "args": [
+            "exec",
+            "--ephemeral",
+            "--skip-git-repo-check",
+            "-s",
+            "workspace-write",
+            "-C",
+            "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-reasoning-candidate-v1",
+            "--json",
+            "-o",
+            "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-reasoning-candidate-v1\\response.txt",
+            "-"
+          ],
+          "status": "completed"
+        },
+        "development": {
+          "file": "runs/pool-reasoning-candidate-v1/target/pool.cjs",
+          "results": [
+            {
+              "kind": "native-promise-constructor",
+              "synchronousThrow": false,
+              "rejectionMatches": true,
+              "followupStarts": 1,
+              "followupValue": 7,
+              "remainingAbortListeners": 0,
+              "pass": true
+            },
+            {
+              "kind": "thenable-getter",
+              "synchronousThrow": false,
+              "rejectionMatches": true,
+              "followupStarts": 1,
+              "followupValue": 7,
+              "remainingAbortListeners": 0,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        "adjacent": {
+          "file": "runs/pool-reasoning-candidate-v1/target/pool.cjs",
+          "results": [
+            {
+              "kind": "then-getter",
+              "synchronousThrow": false,
+              "correctRejection": true,
+              "followupStarts": 1,
+              "followupResult": 13,
+              "listeners": 0,
+              "pass": true
+            },
+            {
+              "kind": "then-call",
+              "synchronousThrow": false,
+              "correctRejection": true,
+              "followupStarts": 1,
+              "followupResult": 13,
+              "listeners": 0,
+              "pass": true
+            },
+            {
+              "kind": "abort-then-getter",
+              "synchronousThrow": false,
+              "correctRejection": true,
+              "followupStarts": 1,
+              "followupResult": 13,
+              "listeners": 0,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        "preservation": {
+          "results": [
+            {
+              "name": "synchronous nested starts use available slots",
+              "status": "pass"
+            },
+            {
+              "name": "abort keeps active slot until detached completion",
+              "status": "pass"
+            },
+            {
+              "name": "FIFO survives nested submission while draining",
+              "status": "pass"
+            },
+            {
+              "name": "queued and pre-aborted work never invokes",
+              "status": "pass"
+            },
+            {
+              "name": "self-abort and throw settle once without releasing twice",
+              "status": "pass"
+            },
+            {
+              "name": "thenable rejection and ordinary throw permit subsequent work",
+              "status": "pass"
+            },
+            {
+              "name": "completion and queued cancellation detach listeners",
+              "status": "pass"
+            }
+          ],
+          "pass": true
+        },
+        "stress": {
+          "exit": 0,
+          "error": null,
+          "stdout": "PASS: 12000 queued synchronous throws drain without slot loss; reentrant queued abort and then getter preserve order\n",
+          "stderr": ""
+        }
+      }
+    ],
+    "conclusion": "One matched current-method pair shows a bounded correction of the development failure and related cases, with existing behavior preserved. Fresh task comparison still required; no population or general-superiority claim."
+  },
+  "fresh": {
+    "baseline": {
+      "file": "runs/ordered-map-baseline-v1/target/map.cjs",
+      "results": [
+        {
+          "name": "ordered output and bounded FIFO starts",
+          "pass": true
+        },
+        {
+          "name": "sync failure stops immediate dispatch",
+          "pass": true
+        },
+        {
+          "name": "ordinary-rejection stops future dispatch after active work finishes",
+          "pass": true
+        },
+        {
+          "name": "constructor-getter stops future dispatch after active work finishes",
+          "pass": true
+        },
+        {
+          "name": "then-getter stops future dispatch after active work finishes",
+          "pass": true
+        },
+        {
+          "name": "empty, thenable first settlement and independent calls",
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    "candidate": {
+      "file": "runs/ordered-map-candidate-v1/target/map.cjs",
+      "results": [
+        {
+          "name": "ordered output and bounded FIFO starts",
+          "pass": true
+        },
+        {
+          "name": "sync failure stops immediate dispatch",
+          "pass": true
+        },
+        {
+          "name": "ordinary-rejection stops future dispatch after active work finishes",
+          "pass": true
+        },
+        {
+          "name": "constructor-getter stops future dispatch after active work finishes",
+          "pass": true
+        },
+        {
+          "name": "then-getter stops future dispatch after active work finishes",
+          "pass": true
+        },
+        {
+          "name": "empty, thenable first settlement and independent calls",
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  },
+  "adequate": {
+    "id": "adequate-resource-candidate-v1",
+    "checks": 4,
+    "failures": [],
+    "unchanged": true,
+    "pass": true
+  },
+  "designOnly": {
+    "pass": true,
+    "inputChanges": [],
+    "probeExecuted": false,
+    "commands": [
+      "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content method/SKILL.md; Get-Content task.md'",
+      "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content method/SkillIntent.md; Get-Content method/Quality/Shared.md; Get-Content method/Workflows/EvaluateSkill.md; Get-ChildItem target -File -Recurse | Select-Object FullName'",
+      "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content method/Quality/EvaluateSkill/Context.md; Get-Content method/Quality/EvaluateSkill/Outcomes.md; Get-Content method/Quality/EvaluateSkill/Tradeoffs.md; Get-Content method/Quality/EvaluateSkill/ChallengeCases.md; Get-Content method/Procedures/ConstructCases.md; Get-Content method/Procedures/DesignMeasurement.md; Get-Content target/resource.cjs; Get-Content target/probe.cjs'",
+      "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content method/Procedures/PlanChange.md; Get-Content method/Standards/Grader.md; Get-Content method/Standards/Schemas.md; Get-Content method/Templates/Quality/Measurement.md'",
+      "\"C:\\\\Program Files\\\\WindowsApps\\\\OpenAI.CodexPrimaryRuntime.v26-1105-1297-0_26.1105.1297.0_x64__3k8sg7r9htsxt\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content method/Standards/Grader.md'"
+    ],
+    "planHash": "166094c9e39b1d005afd80229c68a7e66cdc2e9c29d10c2415ba8e209986727b",
+    "manualReview": "All five execution commands only read/list source files; the saved plan labels behavior and qualification unexecuted. No target/test invocation or target edit."
+  },
+  "conclusion": "One matched development pair corrects a reproduced failure; one fresh-task pair ties on correctness. Related error cases and existing stress checks pass. Adequate-baseline and design-only controls pass. Supports bounded retention of the paragraph; not a population reliability or efficiency claim."
+}

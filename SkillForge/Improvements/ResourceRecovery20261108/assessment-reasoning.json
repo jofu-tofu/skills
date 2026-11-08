@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "ab8fe0fb63dd48a1f3bdbe28b6ede856edd735c0346060589f5e83bf6685711e",
+  "candidate_decision": "retain_candidate",
+  "checks": [
+    {
+      "id": "result",
+      "status": "pass",
+      "resolution": "resolved",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "ReasoningResults.md",
+          "sha256": "87b4b307979823d840db731b89dd35aa300cf6b8d1d6088c5bc9b6a822a7e266"
+        },
+        {
+          "path": "PoolReasoningComparison.md",
+          "sha256": "b0ca73b66362703eeee2d0adf61fb50eb57b22df8d6aaff667307a4ce9f58733"
+        },
+        {
+          "path": "reasoning-final-audit.json",
+          "sha256": "da4235f1a9a367a6eea96bb336bbaca3e18bcc1cb34baec180f4dfa2c79de852"
+        },
+        {
+          "path": "confirmation-results.json",
+          "sha256": "cee954e109f8e5bb2a033920a435aa0dd8b6d925c5b70eff5dde171dcf9883a8"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "pool-candidate-input-audit.json",
+          "sha256": "2bea4c307b51f935897be6bdac5313ed40b05917a896c1c2a0fb1d158c2a4a07"
+        },
+        {
+          "path": "reasoning-final-audit.json",
+          "sha256": "da4235f1a9a367a6eea96bb336bbaca3e18bcc1cb34baec180f4dfa2c79de852"
+        },
+        {
+          "path": "confirmation-results.json",
+          "sha256": "cee954e109f8e5bb2a033920a435aa0dd8b6d925c5b70eff5dde171dcf9883a8"
+        }
+      ]
+    },
+    {
+      "id": "preservation",
+      "status": "pass",
+      "qualification": "qualified",
+      "evidence": [
+        {
+          "path": "reasoning-final-audit.json",
+          "sha256": "da4235f1a9a367a6eea96bb336bbaca3e18bcc1cb34baec180f4dfa2c79de852"
+        },
+        {
+          "path": "confirmation-results.json",
+          "sha256": "cee954e109f8e5bb2a033920a435aa0dd8b6d925c5b70eff5dde171dcf9883a8"
+        }
+      ]
+    }
+  ],
+  "actions": [],
+  "blockers": []
+}

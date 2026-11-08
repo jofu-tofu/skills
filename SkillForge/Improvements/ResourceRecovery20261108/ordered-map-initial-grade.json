@@ -1,0 +1,33 @@
+{
+  "file": "fixture-ordered-map/map.cjs",
+  "results": [
+    {
+      "name": "ordered output and bounded FIFO starts",
+      "pass": false,
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n-   'a',\n    'b',\n    'c',\n    'd',\n+   'a'\n  ]\n"
+    },
+    {
+      "name": "sync failure stops immediate dispatch",
+      "pass": true
+    },
+    {
+      "name": "ordinary-rejection stops future dispatch after active work finishes",
+      "pass": true
+    },
+    {
+      "name": "constructor-getter stops future dispatch after active work finishes",
+      "pass": false,
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    0,\n    1,\n+   2,\n+   3\n  ]\n"
+    },
+    {
+      "name": "then-getter stops future dispatch after active work finishes",
+      "pass": false,
+      "error": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    0,\n    1,\n+   2,\n+   3\n  ]\n"
+    },
+    {
+      "name": "empty, thenable first settlement and independent calls",
+      "pass": true
+    }
+  ],
+  "pass": false
+}

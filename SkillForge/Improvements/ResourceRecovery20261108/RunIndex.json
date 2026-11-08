@@ -1,0 +1,1186 @@
+{
+  "runs": [
+    {
+      "id": "adequate-resource-candidate-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 176.474,
+      "usage": [
+        {
+          "input_tokens": 323414,
+          "cached_input_tokens": 293120,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4725,
+          "reasoning_output_tokens": 51
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\adequate-resource-candidate-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\adequate-resource-candidate-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "archive-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 218.948,
+      "usage": [
+        {
+          "input_tokens": 488546,
+          "cached_input_tokens": 443008,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5715,
+          "reasoning_output_tokens": 168
+        }
+      ],
+      "changed": [
+        "project/tool/selected.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "-c",
+        "mcp_servers.session_archive.command=\"C:\\\\Program Files\\\\nodejs\\\\node.exe\"",
+        "-c",
+        "mcp_servers.session_archive.args=[\"C:\\\\Users\\\\fujos\\\\Obsidian\\\\Projects\\\\SkillForge\\\\AtomicReasoning20261108\\\\archive-server.cjs\",\"C:\\\\Users\\\\fujos\\\\Obsidian\\\\Projects\\\\SkillForge\\\\AtomicReasoning20261108\\\\archive-baseline-v1-archive.json\",\"C:\\\\Users\\\\fujos\\\\Obsidian\\\\Projects\\\\SkillForge\\\\AtomicReasoning20261108\\\\archive-baseline-v1-archive-calls.jsonl\"]",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\archive-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\archive-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-canonical-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 339.264,
+      "usage": [
+        {
+          "input_tokens": 798383,
+          "cached_input_tokens": 739968,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 9028,
+          "reasoning_output_tokens": 446
+        }
+      ],
+      "changed": [
+        "target/select.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-canonical-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-canonical-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-canonical-v2",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 268.777,
+      "usage": [
+        {
+          "input_tokens": 734840,
+          "cached_input_tokens": 688640,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6623,
+          "reasoning_output_tokens": 303
+        }
+      ],
+      "changed": [
+        "target/select.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-canonical-v2",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-canonical-v2\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-canonical-v3",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 295.253,
+      "usage": [
+        {
+          "input_tokens": 698167,
+          "cached_input_tokens": 656128,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 8244,
+          "reasoning_output_tokens": 363
+        }
+      ],
+      "changed": [
+        "target/select.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-canonical-v3",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-canonical-v3\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-causal-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 169.384,
+      "usage": [
+        {
+          "input_tokens": 161764,
+          "cached_input_tokens": 124800,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3365,
+          "reasoning_output_tokens": 1189
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-causal-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-causal-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-conditional-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 185.178,
+      "usage": [
+        {
+          "input_tokens": 270874,
+          "cached_input_tokens": 221184,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5198,
+          "reasoning_output_tokens": 938
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-conditional-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-conditional-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-dev-v1",
+      "exit": 1,
+      "timedOut": false,
+      "seconds": 0.197,
+      "usage": null,
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v1\\response.txt",
+        "-"
+      ],
+      "status": "error"
+    },
+    {
+      "id": "baseline-dev-v1-retry",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 140.969,
+      "usage": [
+        {
+          "input_tokens": 251662,
+          "cached_input_tokens": 215808,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3142,
+          "reasoning_output_tokens": 67
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v1-retry",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v1-retry\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-dev-v2",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 135.337,
+      "usage": [
+        {
+          "input_tokens": 211349,
+          "cached_input_tokens": 187520,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3756,
+          "reasoning_output_tokens": 28
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v2",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v2\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-dev-v3",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 135.982,
+      "usage": [
+        {
+          "input_tokens": 222410,
+          "cached_input_tokens": 196352,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2724,
+          "reasoning_output_tokens": 118
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v3",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v3\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-dev-v4",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 100.484,
+      "usage": [
+        {
+          "input_tokens": 221792,
+          "cached_input_tokens": 194688,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2421,
+          "reasoning_output_tokens": 75
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v4",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v4\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-dev-v5",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 93.829,
+      "usage": [
+        {
+          "input_tokens": 132313,
+          "cached_input_tokens": 114944,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2051,
+          "reasoning_output_tokens": 84
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v5",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v5\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-dev-v6",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 95.535,
+      "usage": [
+        {
+          "input_tokens": 166420,
+          "cached_input_tokens": 147456,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2252,
+          "reasoning_output_tokens": 20
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v6",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v6\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-dev-v7",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 103.41,
+      "usage": [
+        {
+          "input_tokens": 166678,
+          "cached_input_tokens": 147712,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2267,
+          "reasoning_output_tokens": 317
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v7",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-dev-v7\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-memo-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 262.572,
+      "usage": [
+        {
+          "input_tokens": 612689,
+          "cached_input_tokens": 559616,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6812,
+          "reasoning_output_tokens": 209
+        }
+      ],
+      "changed": [
+        "target/cache.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-memo-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-memo-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-pool-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 308.757,
+      "usage": [
+        {
+          "input_tokens": 717560,
+          "cached_input_tokens": 675072,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 10400,
+          "reasoning_output_tokens": 291
+        }
+      ],
+      "changed": [
+        "target/pool.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-pool-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-pool-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-repair-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 235.824,
+      "usage": [
+        {
+          "input_tokens": 659359,
+          "cached_input_tokens": 615296,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6383,
+          "reasoning_output_tokens": 91
+        }
+      ],
+      "changed": [
+        "target/select.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-repair-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-repair-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-robust-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 127.402,
+      "usage": [
+        {
+          "input_tokens": 201759,
+          "cached_input_tokens": 182016,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4159,
+          "reasoning_output_tokens": 96
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-robust-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-robust-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "baseline-surrogate-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 175.172,
+      "usage": [
+        {
+          "input_tokens": 247930,
+          "cached_input_tokens": 224896,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4676,
+          "reasoning_output_tokens": 743
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-surrogate-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\baseline-surrogate-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "bound-contract-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 209.399,
+      "usage": [
+        {
+          "input_tokens": 563784,
+          "cached_input_tokens": 514048,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5139,
+          "reasoning_output_tokens": 54
+        }
+      ],
+      "changed": [
+        "project/tool/selected.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\bound-contract-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\bound-contract-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "carryover-design-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 143.184,
+      "usage": [
+        {
+          "input_tokens": 200064,
+          "cached_input_tokens": 180736,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3705,
+          "reasoning_output_tokens": 125
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\carryover-design-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\carryover-design-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "conflict-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 150.11,
+      "usage": [
+        {
+          "input_tokens": 310485,
+          "cached_input_tokens": 276992,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4258,
+          "reasoning_output_tokens": 171
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\conflict-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\conflict-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "decision-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 220.116,
+      "usage": [
+        {
+          "input_tokens": 475030,
+          "cached_input_tokens": 433536,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5847,
+          "reasoning_output_tokens": 243
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\decision-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\decision-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "decision-candidate-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 276.939,
+      "usage": [
+        {
+          "input_tokens": 608188,
+          "cached_input_tokens": 563200,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5775,
+          "reasoning_output_tokens": 72
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\decision-candidate-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\decision-candidate-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "dense-fault-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 204.796,
+      "usage": [
+        {
+          "input_tokens": 287271,
+          "cached_input_tokens": 264192,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6038,
+          "reasoning_output_tokens": 462
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\dense-fault-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\dense-fault-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "design-scope-candidate-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 155.375,
+      "usage": [
+        {
+          "input_tokens": 216037,
+          "cached_input_tokens": 189824,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2725,
+          "reasoning_output_tokens": 26
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\design-scope-candidate-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\design-scope-candidate-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "fault-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 153.275,
+      "usage": [
+        {
+          "input_tokens": 240867,
+          "cached_input_tokens": 219648,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4189,
+          "reasoning_output_tokens": 298
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\fault-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\fault-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "history-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 267.027,
+      "usage": [
+        {
+          "input_tokens": 910089,
+          "cached_input_tokens": 856192,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6136,
+          "reasoning_output_tokens": 164
+        }
+      ],
+      "changed": [
+        "project/tool/selected.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\history-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\history-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "ordered-map-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 276.551,
+      "usage": [
+        {
+          "input_tokens": 680527,
+          "cached_input_tokens": 624256,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 8801,
+          "reasoning_output_tokens": 617
+        }
+      ],
+      "changed": [
+        "target/map.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\ordered-map-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\ordered-map-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "ordered-map-candidate-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 356.641,
+      "usage": [
+        {
+          "input_tokens": 603288,
+          "cached_input_tokens": 561280,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 9661,
+          "reasoning_output_tokens": 955
+        }
+      ],
+      "changed": [
+        "target/map.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\ordered-map-candidate-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\ordered-map-candidate-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "partial-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 127.411,
+      "usage": [
+        {
+          "input_tokens": 204248,
+          "cached_input_tokens": 183296,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3065,
+          "reasoning_output_tokens": 184
+        }
+      ],
+      "changed": [],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\partial-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\partial-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "pool-confirm-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 304.229,
+      "usage": [
+        {
+          "input_tokens": 549043,
+          "cached_input_tokens": 504064,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 6807,
+          "reasoning_output_tokens": 192
+        }
+      ],
+      "changed": [
+        "target/pool.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "pool-confirm-candidate-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 305.719,
+      "usage": [
+        {
+          "input_tokens": 685593,
+          "cached_input_tokens": 637952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 9632,
+          "reasoning_output_tokens": 764
+        }
+      ],
+      "changed": [
+        "target/pool.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-candidate-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-candidate-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "pool-current-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 261.67,
+      "usage": [
+        {
+          "input_tokens": 679998,
+          "cached_input_tokens": 634240,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 8186,
+          "reasoning_output_tokens": 310
+        }
+      ],
+      "changed": [
+        "target/pool.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-current-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-current-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "pool-reasoning-candidate-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 336.883,
+      "usage": [
+        {
+          "input_tokens": 785791,
+          "cached_input_tokens": 739328,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 9665,
+          "reasoning_output_tokens": 746
+        }
+      ],
+      "changed": [
+        "target/pool.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-reasoning-candidate-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-reasoning-candidate-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    },
+    {
+      "id": "replay-baseline-v1",
+      "exit": 0,
+      "timedOut": false,
+      "seconds": 215.743,
+      "usage": [
+        {
+          "input_tokens": 592916,
+          "cached_input_tokens": 552960,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4898,
+          "reasoning_output_tokens": 137
+        }
+      ],
+      "changed": [
+        "project/tool/selected.cjs"
+      ],
+      "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+      "args": [
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-s",
+        "workspace-write",
+        "-C",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\replay-baseline-v1",
+        "--json",
+        "-o",
+        "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\replay-baseline-v1\\response.txt",
+        "-"
+      ],
+      "status": "completed"
+    }
+  ],
+  "totals": {
+    "input": 15881128,
+    "cachedInput": 14563968,
+    "output": 198468,
+    "seconds": 7533.816000000002
+  },
+  "limits": "Provider-reported subject usage only. Cached input is included in input, not additional. Excludes preparation and parent-agent usage. Summed durations are not elapsed wall time. No billed-cost claim."
+}

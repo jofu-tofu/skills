@@ -93,3 +93,5 @@ Route loading, 2026-11-07: [completed direct-template comparison](../Evidence/Ro
 ## Gap obligation versus suggestion — 2026-11-07
 
 [Protocol and results](../Evidence/GapObligation20261107/Report.md): explicit repair/enhancement/suggestion objective and outcome-resolution contract. Seven mechanical baseline acceptance failures are prevented; 47 tests and 14 structural checks pass. One synthetic baseline/candidate pair both repairs the target (27/27 external checks each); candidate naturally uses the new fields. No general model-superiority claim. Scoped retain-candidate; isolated, no merge/install/push. Historical no-change research chats were conditional suggestion investigations, not established abandoned repairs.
+
+Resource recovery, 2026-11-08: [tested atomic reasoning support](ResourceRecovery20261108/Record.md). A 60-word case-selection paragraph addresses a reproduced cleanup/progress failure. Fresh-task and scope controls are preserved; independent author confirmation is included. Earlier rejected reasoning cues remain historical. Bounded retention only; no general reliability or efficiency claim.

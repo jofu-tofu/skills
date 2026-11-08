@@ -1,0 +1,24 @@
+{
+  "file": "pool-positive-control.cjs",
+  "results": [
+    {
+      "kind": "native-promise-constructor",
+      "synchronousThrow": false,
+      "rejectionMatches": true,
+      "followupStarts": 1,
+      "followupValue": 7,
+      "remainingAbortListeners": 0,
+      "pass": true
+    },
+    {
+      "kind": "thenable-getter",
+      "synchronousThrow": false,
+      "rejectionMatches": true,
+      "followupStarts": 1,
+      "followupValue": 7,
+      "remainingAbortListeners": 0,
+      "pass": true
+    }
+  ],
+  "pass": true
+}

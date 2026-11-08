@@ -1,0 +1,272 @@
+{
+  "runs": [
+    {
+      "arm": "baseline",
+      "id": "pool-confirm-baseline-v1",
+      "receipt": {
+        "id": "pool-confirm-baseline-v1",
+        "exit": 0,
+        "timedOut": false,
+        "seconds": 304.229,
+        "usage": [
+          {
+            "input_tokens": 549043,
+            "cached_input_tokens": 504064,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 6807,
+            "reasoning_output_tokens": 192
+          }
+        ],
+        "changed": [
+          "target/pool.cjs"
+        ],
+        "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+        "args": [
+          "exec",
+          "--ephemeral",
+          "--skip-git-repo-check",
+          "-s",
+          "workspace-write",
+          "-C",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-baseline-v1",
+          "--json",
+          "-o",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-baseline-v1\\response.txt",
+          "-"
+        ],
+        "status": "completed"
+      },
+      "differences": [
+        "prompt.txt"
+      ],
+      "completeCueReads": 0,
+      "targetHash": "4024977f7850bb05096093bf405deed9b70b7fa4ab09c80724f81f1b66358762",
+      "development": {
+        "file": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-baseline-v1\\target\\pool.cjs",
+        "results": [
+          {
+            "kind": "native-promise-constructor",
+            "synchronousThrow": false,
+            "rejectionMatches": true,
+            "followupStarts": 0,
+            "followupValue": null,
+            "remainingAbortListeners": 1,
+            "pass": false
+          },
+          {
+            "kind": "thenable-getter",
+            "synchronousThrow": false,
+            "rejectionMatches": true,
+            "followupStarts": 1,
+            "followupValue": 7,
+            "remainingAbortListeners": 0,
+            "pass": true
+          }
+        ],
+        "pass": false
+      },
+      "adjacent": {
+        "file": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-baseline-v1\\target\\pool.cjs",
+        "results": [
+          {
+            "kind": "then-getter",
+            "synchronousThrow": false,
+            "correctRejection": true,
+            "followupStarts": 0,
+            "followupResult": null,
+            "listeners": 1,
+            "pass": false
+          },
+          {
+            "kind": "then-call",
+            "synchronousThrow": false,
+            "correctRejection": true,
+            "followupStarts": 0,
+            "followupResult": null,
+            "listeners": 1,
+            "pass": false
+          },
+          {
+            "kind": "abort-then-getter",
+            "synchronousThrow": false,
+            "correctRejection": true,
+            "followupStarts": 0,
+            "followupResult": null,
+            "listeners": 0,
+            "pass": false
+          }
+        ],
+        "pass": false
+      },
+      "originalChecks": [
+        {
+          "name": "synchronous nested starts use available slots",
+          "status": "pass"
+        },
+        {
+          "name": "abort keeps active slot until detached completion",
+          "status": "pass"
+        },
+        {
+          "name": "FIFO survives nested submission while draining",
+          "status": "pass"
+        },
+        {
+          "name": "queued and pre-aborted work never invokes",
+          "status": "pass"
+        },
+        {
+          "name": "self-abort and throw settle once without releasing twice",
+          "status": "pass"
+        },
+        {
+          "name": "thenable rejection and ordinary throw permit subsequent work",
+          "status": "pass"
+        },
+        {
+          "name": "completion and queued cancellation detach listeners",
+          "status": "pass"
+        }
+      ],
+      "stress": {
+        "exit": 0,
+        "stdout": "PASS: 12000 queued synchronous throws drain without slot loss; reentrant queued abort and then getter preserve order\n",
+        "stderr": ""
+      }
+    },
+    {
+      "arm": "candidate",
+      "id": "pool-confirm-candidate-v1",
+      "receipt": {
+        "id": "pool-confirm-candidate-v1",
+        "exit": 0,
+        "timedOut": false,
+        "seconds": 305.719,
+        "usage": [
+          {
+            "input_tokens": 685593,
+            "cached_input_tokens": 637952,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 9632,
+            "reasoning_output_tokens": 764
+          }
+        ],
+        "changed": [
+          "target/pool.cjs"
+        ],
+        "cli": "C:/Users/fujos/AppData/Local/OpenAI/Codex/bin/14b838c1d074ff01/codex.exe",
+        "args": [
+          "exec",
+          "--ephemeral",
+          "--skip-git-repo-check",
+          "-s",
+          "workspace-write",
+          "-C",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-candidate-v1",
+          "--json",
+          "-o",
+          "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-candidate-v1\\response.txt",
+          "-"
+        ],
+        "status": "completed"
+      },
+      "differences": [
+        "prompt.txt"
+      ],
+      "completeCueReads": 1,
+      "targetHash": "9a506663e9d0febd092c95abfd186c7d02983932a8e9bdf7fdb25d167190f22e",
+      "development": {
+        "file": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-candidate-v1\\target\\pool.cjs",
+        "results": [
+          {
+            "kind": "native-promise-constructor",
+            "synchronousThrow": false,
+            "rejectionMatches": true,
+            "followupStarts": 1,
+            "followupValue": 7,
+            "remainingAbortListeners": 0,
+            "pass": true
+          },
+          {
+            "kind": "thenable-getter",
+            "synchronousThrow": false,
+            "rejectionMatches": true,
+            "followupStarts": 1,
+            "followupValue": 7,
+            "remainingAbortListeners": 0,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "adjacent": {
+        "file": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\pool-confirm-candidate-v1\\target\\pool.cjs",
+        "results": [
+          {
+            "kind": "then-getter",
+            "synchronousThrow": false,
+            "correctRejection": true,
+            "followupStarts": 1,
+            "followupResult": 13,
+            "listeners": 0,
+            "pass": true
+          },
+          {
+            "kind": "then-call",
+            "synchronousThrow": false,
+            "correctRejection": true,
+            "followupStarts": 1,
+            "followupResult": 13,
+            "listeners": 0,
+            "pass": true
+          },
+          {
+            "kind": "abort-then-getter",
+            "synchronousThrow": false,
+            "correctRejection": true,
+            "followupStarts": 1,
+            "followupResult": 13,
+            "listeners": 0,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "originalChecks": [
+        {
+          "name": "synchronous nested starts use available slots",
+          "status": "pass"
+        },
+        {
+          "name": "abort keeps active slot until detached completion",
+          "status": "pass"
+        },
+        {
+          "name": "FIFO survives nested submission while draining",
+          "status": "pass"
+        },
+        {
+          "name": "queued and pre-aborted work never invokes",
+          "status": "pass"
+        },
+        {
+          "name": "self-abort and throw settle once without releasing twice",
+          "status": "pass"
+        },
+        {
+          "name": "thenable rejection and ordinary throw permit subsequent work",
+          "status": "pass"
+        },
+        {
+          "name": "completion and queued cancellation detach listeners",
+          "status": "pass"
+        }
+      ],
+      "stress": {
+        "exit": 0,
+        "stdout": "PASS: 12000 queued synchronous throws drain without slot loss; reentrant queued abort and then getter preserve order\n",
+        "stderr": ""
+      }
+    }
+  ]
+}

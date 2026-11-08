@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "scope": "behavioral",
+  "depth": "focused",
+  "requested_result": "Introduce standalone reasoning support incrementally, one experimentally interpretable mechanism at a time, starting with a genuine baseline failing test and verifying outcome benefit and preservation.",
+  "objective": {
+    "kind": "enhancement",
+    "outcome_check": "result"
+  },
+  "scope_basis": {
+    "path": "request.txt",
+    "sha256": "7c978dcea47ed7e17d477163af79d85ef340ee20e3bf895c7ce8ca9725583e19",
+    "quote": "But let's kind of introduce this additional reasoning support, reasoning support, in an atomic way."
+  },
+  "required_checks": [
+    {
+      "id": "result",
+      "kind": "outcome",
+      "description": "Atomic reasoning support improves a relevant decision with baseline red and fresh-case evidence"
+    },
+    {
+      "id": "execution",
+      "kind": "behavioral_execution",
+      "description": "Matched exact baseline/candidate subject execution with all outcomes preserved"
+    },
+    {
+      "id": "preservation",
+      "kind": "preservation",
+      "description": "Adequate-baseline, design-only and affected caller behavior preserved"
+    }
+  ]
+}

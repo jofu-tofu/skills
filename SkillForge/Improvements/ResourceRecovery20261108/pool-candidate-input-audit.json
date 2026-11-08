@@ -1,0 +1,13 @@
+{
+  "id": "pool-reasoning-candidate-v1",
+  "differences": [
+    "method/Procedures/ConstructCases.md",
+    "prompt.txt"
+  ],
+  "changedMethodFile": "method/Procedures/ConstructCases.md",
+  "addition": "For a state or resource invariant, trace the path from acquisition to release before choosing failure cases. Include operations that can execute user code indirectly, such as property access, conversion, iteration, or result adoption. At a previously uncovered interruption point, check both the immediate outcome and a subsequent operation; returning the expected error does not prove that state was restored.",
+  "baselineHash": "94c776928d8234f25850865f827ecd47634b2d511ceaf43fe5030fc24fd75eda",
+  "candidateHash": "0466309843476d7b73defd5696a136269a071e56477f7930b8d95999eb611dbf",
+  "promptDifference": "Only the required isolated run directory changes.",
+  "sameInitialTarget": true
+}

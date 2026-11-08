@@ -1,0 +1,33 @@
+{
+  "file": "pool-positive-control.cjs",
+  "results": [
+    {
+      "kind": "then-getter",
+      "synchronousThrow": false,
+      "correctRejection": true,
+      "followupStarts": 1,
+      "followupResult": 13,
+      "listeners": 0,
+      "pass": true
+    },
+    {
+      "kind": "then-call",
+      "synchronousThrow": false,
+      "correctRejection": true,
+      "followupStarts": 1,
+      "followupResult": 13,
+      "listeners": 0,
+      "pass": true
+    },
+    {
+      "kind": "abort-then-getter",
+      "synchronousThrow": false,
+      "correctRejection": true,
+      "followupStarts": 1,
+      "followupResult": 13,
+      "listeners": 0,
+      "pass": true
+    }
+  ],
+  "pass": true
+}
