@@ -22,6 +22,22 @@ If missing evidence has an authorized, feasible resolution within the remaining 
 4. Record a justified candidate decision with scope and revisit trigger. Cite the governing rule ID or section anchor, file/version, applicable evidence and decision authority. When a recommendation depends on present adoption status, reconcile the exact candidate and change scope with the target's current release/integration records before deciding, including a recommendation to leave it pending. Historical trial notes establish trial-time status; retained, merged and installed are different states. Newer unrelated records do not supersede matching evidence. Reuse already-read evidence; do not scan the archive by default. If status is missing or conflicting, name the smallest read-only identity/record check and keep the status unverified.
 5. Apply the task-completion check below and return both decisions to the owning workflow. RecordLearning preserves the result but does not convert `continue` into closure. Make no deployment or installation action.
 
+## Owned outcome or bounded suggestion
+
+Classify from the user's required result and preceding context, not from whether the latest idea came from research or whether its trial passed. Record the objective before editing; do not downgrade it after an unsuccessful candidate.
+
+| Objective | What permits completion |
+|---|---|
+| **Repair** a reported or established gap | Applicable evidence shows the gap resolved, or disproves the diagnosis/expectation under the relevant conditions. A passing easier replay or absence of a new failure is not disproof of a captured incident. |
+| **Enhancement** the user requires, including a missing capability or specified improvement | Evidence establishes that outcome. No invented historical failure is needed; rejecting one implementation does not discharge the requirement. |
+| **Suggestion** the user only asks to try, without owning an unresolved outcome | A sufficient bounded evaluation can reject the suggestion and retain baseline. Do not invent a gap, force an edit or search indefinitely for a win. |
+
+A research suggestion used to repair a gap remains a **repair**. “Keep baseline if this candidate fails” controls retention, not the parent repair obligation. Broad improvement retains its parent inventory regardless of a local suggestion's result. If intent is unclear, preserve the ambiguity and perform useful diagnosis; do not choose suggestion scope merely because it makes closure easier.
+
+When a mechanism fails or ties, keep the gap visible and select the next useful diagnostic, alternate mechanism or correction to the measure/environment. Execute that work while authorized and feasible. Do not repeat a settled experiment or require a fixed number of attempts. Stop an owned-outcome task only with resolution, justified disproof for a repair, an explicit user scope amendment, or a genuine evidenced blocker. An amendment preserves the old contract and the source of changed authority; an agent's own pilot limit is not one.
+
+For a no-change result, report which objective was evaluated, why it can close, and any still-owned gap separately from the rejected idea. The [completion format](../Templates/Improvement/Completion.md#objective-and-resolution) binds the objective and outcome disposition. A resolution label still needs qualified, relevant evidence; the checker cannot interpret the original request or prove a diagnosis false.
+
 ## Autonomous follow-up of gains and tradeoffs
 
 Before closing an improvement, check for a promising measured gain or an unresolved effect that could change retention, scope or usefulness. Execute the next feasible, discriminating check under the existing authorization; do not turn it into a future-work suggestion or ask whether the user wants ordinary follow-up testing.
@@ -50,7 +66,7 @@ For behavioral updates, run [CheckCompletion.cjs](../Tools/CheckCompletion.cjs) 
 
 Do not use an exhausted self-selected pilot batch as evidence of an external resource limit. Plan the next discriminating check within the authorized scope rather than repeating saturated cases.
 
-Keep candidate retention independent: `retain_candidate` with unresolved repair coverage still means `continue` or an evidenced `blocked`. Ties that show already-adequate behavior can justify no change, but ties from cases that do not exercise the reported failure cannot close that repair. Do not invent a large benchmark or repeat saturated tests; choose the smallest check that can settle the unresolved decision.
+Keep candidate retention independent: `retain_candidate`, `retain_baseline` or `reject_candidate` with an unresolved owned outcome still means `continue` or an evidenced `blocked`. Apply the [objective distinction](#owned-outcome-or-bounded-suggestion) before accepting a no-change closure. Ties that show already-adequate behavior can justify no change, but ties from cases that do not exercise the reported failure cannot close that repair. Do not invent a large benchmark or repeat saturated tests; choose the smallest check that can settle the unresolved decision.
 
 ## Acceptance and failure checks
 

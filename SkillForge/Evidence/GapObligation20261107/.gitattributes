@@ -1,0 +1,4 @@
+* -text
+# Preserve recorded CRLF/terminal output rather than rewrite hashed evidence.
+*.txt -whitespace
+baseline-checker.cjs -whitespace
