@@ -1,0 +1,75 @@
+{
+  "synthetic": true,
+  "closed_world": true,
+  "checks": {
+    "C1": "Determine current Ledger identity/state and next action for combined handoff.",
+    "C2": "Determine current Gate identity/state and next action for combined handoff.",
+    "C3": "Determine current Receipt identity/state and next action for combined handoff.",
+    "C4": "Determine combined readiness, blocking component check IDs, and whether actual token savings are established."
+  },
+  "records": [
+    {
+      "id": "D01",
+      "date": "2026-09-18T08:00:00Z",
+      "identity": "core-4.8.0",
+      "scope": "baseline",
+      "observation": "Ledger uses legacy records; Gate bypasses checks; Receipt is manual."
+    },
+    {
+      "id": "D02",
+      "date": "2026-09-18T09:00:00Z",
+      "identity": "D-a17",
+      "scope": "Ledger",
+      "observation": "Implemented proposal adds stable event keys to Ledger, written into Receipt."
+    },
+    {
+      "id": "D03",
+      "date": "2026-09-18T09:20:00Z",
+      "identity": "D-b26",
+      "scope": "Gate",
+      "observation": "Proposed enforcement requires stable keys from Ledger and machine-readable Receipt; missing either keeps gate closed."
+    },
+    {
+      "id": "D04",
+      "date": "2026-09-18T09:40:00Z",
+      "identity": "D-c35",
+      "scope": "Receipt",
+      "observation": "Proposed machine-readable handoff artifact contains key and gate result; requires stable-key Ledger and enabled Gate."
+    },
+    {
+      "id": "D05",
+      "date": "2026-09-18T11:00:00Z",
+      "identity": "core-4.8.1",
+      "scope": "merge",
+      "observation": "Merged D-a17 completely. Merged only parser from D-b26; enforcement disabled. Merged D-c35 completely. Repository state only."
+    },
+    {
+      "id": "D06",
+      "date": "2026-09-18T12:00:00Z",
+      "identity": "core-4.8.1",
+      "scope": "installation",
+      "observation": "Production receipt verifies D-a17 active, D-b26 parser active with enforcement disabled. D-c35 enabled."
+    },
+    {
+      "id": "D07",
+      "date": "2026-09-18T12:30:00Z",
+      "identity": "D-c35",
+      "scope": "Receipt",
+      "observation": "Rollback receipt removes D-c35 after duplicate delivery; manual baseline restored. Repository merge remains."
+    },
+    {
+      "id": "D08",
+      "date": "2026-09-18T14:00:00Z",
+      "identity": "core-4.8.2",
+      "scope": "unrelated release",
+      "observation": "Production receipt changes banner colors only; no changes to keys, enforcement or handoff artifacts."
+    },
+    {
+      "id": "D09",
+      "date": "2026-09-18T15:00:00Z",
+      "identity": "audit-d",
+      "scope": "portfolio",
+      "observation": "Combined handoff requires all three features fully integrated and verified active. Proposal merges four model audit calls into one, claiming 40% savings because of fewer headings. No input/output token usage or execution results recorded. Final audit time 15:00."
+    }
+  ]
+}

@@ -1,0 +1,3702 @@
+[
+  {
+    "packet": "development",
+    "control": "correct",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "valid_blockers_C1_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "wrong_blockers_C1_0",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "wrong_blockers_C1_1",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "valid_blockers_C2_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "valid_blockers_C2_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "wrong_blockers_C2_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "wrong_blockers_C2_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "valid_blockers_C3_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "valid_blockers_C3_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "wrong_blockers_C3_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "wrong_blockers_C3_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "valid_blockers_C4_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "wrong_blockers_C4_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "wrong_blockers_C4_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "wrong_blockers_C4_2",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "sufficient_alternative_C1_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "irrelevant_only_C1",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "evidence:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "other_packet_C1",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "unknown_C1",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "sufficient_alternative_C2_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "sufficient_alternative_C2_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "irrelevant_only_C2",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "evidence:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "other_packet_C2",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "unknown_C2",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "sufficient_alternative_C3_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "irrelevant_only_C3",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "evidence:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "other_packet_C3",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "unknown_C3",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "sufficient_alternative_C4_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "sufficient_alternative_C4_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "irrelevant_only_C4",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "evidence:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "other_packet_C4",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "unknown_C4",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "valid_alternative_order_and_extra_prose",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C1_id",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [
+      "C9"
+    ],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C1_identity",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C1_state",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "state:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C1_action",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "action:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C1_efficiency",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C1_blockers",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C1_evidence",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C2_id",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [
+      "C9"
+    ],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C2_identity",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C2_state",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "state:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C2_action",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "action:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C2_efficiency",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C2_blockers",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C2_evidence",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C3_id",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [
+      "C9"
+    ],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C3_identity",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C3_state",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "state:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C3_action",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "action:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C3_efficiency",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C3_blockers",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C3_evidence",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C4_id",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      }
+    },
+    "unexpected": [
+      "C9"
+    ],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C4_identity",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C4_state",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "state:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C4_action",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "action:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C4_efficiency",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C4_blockers",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "single_wrong_C4_evidence",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "cheap_missing_joint",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "blanket_newest_release_success",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "state:reference",
+          "action:reference",
+          "efficiency:reference"
+        ]
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "state:reference",
+          "action:reference",
+          "efficiency:reference"
+        ]
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "state:reference",
+          "action:reference",
+          "efficiency:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "cross_feature_identity",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "empty",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "duplicate_check",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "development",
+    "control": "split_correct_C1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "split_correct_C2",
+    "checks": {
+      "C2": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "split_correct_C3",
+    "checks": {
+      "C3": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "development",
+    "control": "split_correct_C4",
+    "checks": {
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "correct",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "valid_blockers_C1_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "wrong_blockers_C1_0",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "wrong_blockers_C1_1",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "valid_blockers_C2_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "valid_blockers_C2_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "wrong_blockers_C2_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "wrong_blockers_C2_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "valid_blockers_C3_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "valid_blockers_C3_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "wrong_blockers_C3_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "wrong_blockers_C3_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "valid_blockers_C4_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "wrong_blockers_C4_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "wrong_blockers_C4_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "wrong_blockers_C4_2",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "sufficient_alternative_C1_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "irrelevant_only_C1",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "evidence:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "other_packet_C1",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "unknown_C1",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "sufficient_alternative_C2_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "sufficient_alternative_C2_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "sufficient_alternative_C2_2",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "irrelevant_only_C2",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "evidence:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "other_packet_C2",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "unknown_C2",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "sufficient_alternative_C3_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "sufficient_alternative_C3_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "irrelevant_only_C3",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "evidence:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "other_packet_C3",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "unknown_C3",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "sufficient_alternative_C4_0",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "sufficient_alternative_C4_1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "irrelevant_only_C4",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "evidence:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "other_packet_C4",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "unknown_C4",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "valid_alternative_order_and_extra_prose",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C1_id",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [
+      "C9"
+    ],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C1_identity",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C1_state",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "state:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C1_action",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "action:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C1_efficiency",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C1_blockers",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C1_evidence",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C2_id",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [
+      "C9"
+    ],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C2_identity",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C2_state",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "state:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C2_action",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "action:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C2_efficiency",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C2_blockers",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C2_evidence",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C3_id",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [
+      "C9"
+    ],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C3_identity",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C3_state",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "state:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C3_action",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "action:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C3_efficiency",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C3_blockers",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C3_evidence",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C4_id",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      }
+    },
+    "unexpected": [
+      "C9"
+    ],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C4_identity",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C4_state",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "state:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C4_action",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "action:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C4_efficiency",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C4_blockers",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "blockers:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "single_wrong_C4_evidence",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "evidence:schema",
+          "evidence:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "cheap_missing_joint",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "blanket_newest_release_success",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "efficiency:reference"
+        ]
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "state:reference",
+          "action:reference",
+          "efficiency:reference"
+        ]
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "state:reference",
+          "action:reference",
+          "efficiency:reference"
+        ]
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "state:reference",
+          "action:reference",
+          "efficiency:reference"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "cross_feature_identity",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "identity:reference"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "empty",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C2": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C3": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C4": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "duplicate_check",
+    "checks": {
+      "C1": {
+        "pass": false,
+        "errors": [
+          "missing_or_duplicate"
+        ]
+      },
+      "C2": {
+        "pass": true,
+        "errors": []
+      },
+      "C3": {
+        "pass": true,
+        "errors": []
+      },
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": false
+  },
+  {
+    "packet": "reserved",
+    "control": "split_correct_C1",
+    "checks": {
+      "C1": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "split_correct_C2",
+    "checks": {
+      "C2": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "split_correct_C3",
+    "checks": {
+      "C3": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  },
+  {
+    "packet": "reserved",
+    "control": "split_correct_C4",
+    "checks": {
+      "C4": {
+        "pass": true,
+        "errors": []
+      }
+    },
+    "unexpected": [],
+    "pass": true
+  }
+]

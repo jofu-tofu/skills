@@ -1,0 +1,11 @@
+{
+  "events.jsonl": "e842b005eaefe5f38016eb7ed8bd33337a494858f8eb768b7ca5b35f0881e3b4",
+  "execution.json": "2f95f7cbdb776d2b8bb582aed4ea91793c5deb4bbae3347f59597a2bbe48bf05",
+  "inputs.json": "cc6f576f4d693a5221429c3f58b85706a9136fcb764f677247ec14a9d1f7f977",
+  "integrity.json": "46c5c8e8f306f35c357039c36f8ad495748b903d83f0e671284ae7378d620250",
+  "output.schema.json": "b3d379b4f2df9a0725cc9fb7b368bb13822eadd6cbb5f5080b4bb68d5bdb6dbb",
+  "packet.json": "5d2c1b8fe81957da5e5f08ce8235e487b8c5498cfbddab0cbb0f0e00cce92417",
+  "prompt.txt": "6fc56ab2e5081d9cfaea670a5b1e179dd96a524e87ebfddc795c8fda460771bf",
+  "response.txt": "c28871669af5eb76a4af135b1861028502e96bc8443e127e8552ee4a1dedcdc1",
+  "stderr.txt": "daf62ce18753af52faff10e1ab30f0abc00cf6eefc3ec20ae3caf75c12a7cf8f"
+}

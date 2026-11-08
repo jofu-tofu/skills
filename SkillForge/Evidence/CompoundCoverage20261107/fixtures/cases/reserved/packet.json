@@ -1,0 +1,75 @@
+{
+  "synthetic": true,
+  "closed_world": true,
+  "checks": {
+    "C1": "Determine current Index identity/state and next action for combined handoff.",
+    "C2": "Determine current Permit identity/state and next action for combined handoff.",
+    "C3": "Determine current Manifest identity/state and next action for combined handoff.",
+    "C4": "Determine combined readiness, blocking component check IDs, and whether actual token savings are established."
+  },
+  "records": [
+    {
+      "id": "R01",
+      "date": "2026-10-23T08:00:00Z",
+      "identity": "core-7.3.0",
+      "scope": "baseline",
+      "observation": "Index uses legacy records; Permit bypasses checks; Manifest is manual."
+    },
+    {
+      "id": "R02",
+      "date": "2026-10-23T09:00:00Z",
+      "identity": "R-a17",
+      "scope": "Index",
+      "observation": "Implemented proposal adds stable event keys to Index, written into Manifest."
+    },
+    {
+      "id": "R03",
+      "date": "2026-10-23T09:20:00Z",
+      "identity": "R-b26",
+      "scope": "Permit",
+      "observation": "Proposed enforcement requires stable keys from Index and machine-readable Manifest; missing either keeps gate closed."
+    },
+    {
+      "id": "R04",
+      "date": "2026-10-23T09:40:00Z",
+      "identity": "R-c35",
+      "scope": "Manifest",
+      "observation": "Proposed machine-readable handoff artifact contains key and gate result; requires stable-key Index and enabled Permit."
+    },
+    {
+      "id": "R05",
+      "date": "2026-10-23T11:00:00Z",
+      "identity": "core-7.3.1",
+      "scope": "merge",
+      "observation": "Merged R-a17 completely. Merged only parser from R-b26; enforcement disabled. Merged R-c35 completely. Repository state only."
+    },
+    {
+      "id": "R06",
+      "date": "2026-10-23T12:00:00Z",
+      "identity": "core-7.3.1",
+      "scope": "installation",
+      "observation": "Production receipt verifies R-a17 active, R-b26 parser active with enforcement disabled. Receipt does not enumerate R-c35; no other installation observation exists for it."
+    },
+    {
+      "id": "R07",
+      "date": "2026-10-23T12:30:00Z",
+      "identity": "R-b26",
+      "scope": "Permit",
+      "observation": "Owner confirms enforcement disabled. Queued activation ticket for R-c35 has no execution or receipt."
+    },
+    {
+      "id": "R08",
+      "date": "2026-10-23T14:00:00Z",
+      "identity": "core-7.3.2",
+      "scope": "unrelated release",
+      "observation": "Production receipt changes banner colors only; no changes to keys, enforcement or handoff artifacts."
+    },
+    {
+      "id": "R09",
+      "date": "2026-10-23T15:00:00Z",
+      "identity": "audit-r",
+      "scope": "portfolio",
+      "observation": "Combined handoff requires all three features fully integrated and verified active. Proposal merges four model audit calls into one, claiming 40% savings because of fewer headings. No input/output token usage or execution results recorded. Final audit time 15:00."
+    }
+  ]
+}

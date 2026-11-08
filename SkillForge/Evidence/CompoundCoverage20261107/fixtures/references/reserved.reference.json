@@ -1,0 +1,195 @@
+{
+  "packet": "reserved",
+  "canonical": {
+    "checks": [
+      {
+        "id": "C1",
+        "identity": "R-a17",
+        "state": "active",
+        "action": "retain",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "R05",
+          "R06",
+          "R08"
+        ]
+      },
+      {
+        "id": "C2",
+        "identity": "R-b26",
+        "state": "partial",
+        "action": "complete_enforcement",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "R03",
+          "R05",
+          "R06",
+          "R08"
+        ]
+      },
+      {
+        "id": "C3",
+        "identity": "R-c35",
+        "state": "installation_unverified",
+        "action": "verify_installation",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "R05",
+          "R06",
+          "R07",
+          "R08"
+        ]
+      },
+      {
+        "id": "C4",
+        "identity": "audit-r",
+        "state": "blocked",
+        "action": "hold_handoff",
+        "efficiency": "unmeasured",
+        "blockers": [
+          "C2",
+          "C3"
+        ],
+        "evidence": [
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R07",
+          "R09"
+        ]
+      }
+    ]
+  },
+  "rules": {
+    "C1": {
+      "fields": {
+        "identity": [
+          "R-a17"
+        ],
+        "state": [
+          "active"
+        ],
+        "action": [
+          "retain"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "sufficientEvidenceGroups": [
+        [
+          "R06"
+        ]
+      ],
+      "allowedBlockerSets": [
+        []
+      ]
+    },
+    "C2": {
+      "fields": {
+        "identity": [
+          "R-b26"
+        ],
+        "state": [
+          "partial"
+        ],
+        "action": [
+          "complete_enforcement"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "sufficientEvidenceGroups": [
+        [
+          "R06"
+        ],
+        [
+          "R05"
+        ],
+        [
+          "R05",
+          "R07"
+        ]
+      ],
+      "allowedBlockerSets": [
+        [],
+        [
+          "C3"
+        ]
+      ]
+    },
+    "C3": {
+      "fields": {
+        "identity": [
+          "R-c35"
+        ],
+        "state": [
+          "installation_unverified"
+        ],
+        "action": [
+          "verify_installation"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "sufficientEvidenceGroups": [
+        [
+          "R05",
+          "R06"
+        ],
+        [
+          "R05",
+          "R07"
+        ]
+      ],
+      "allowedBlockerSets": [
+        [],
+        [
+          "C2"
+        ]
+      ]
+    },
+    "C4": {
+      "fields": {
+        "identity": [
+          "audit-r"
+        ],
+        "state": [
+          "blocked"
+        ],
+        "action": [
+          "hold_handoff",
+          "resolve_blockers"
+        ],
+        "efficiency": [
+          "unmeasured"
+        ]
+      },
+      "sufficientEvidenceGroups": [
+        [
+          "R06",
+          "R09"
+        ],
+        [
+          "R05",
+          "R07",
+          "R09"
+        ]
+      ],
+      "allowedBlockerSets": [
+        [
+          "C2",
+          "C3"
+        ]
+      ]
+    }
+  },
+  "evidencePolicy": "Accept any listed sufficient group as a subset of cited IDs. Optional valid source IDs do not harm coverage. This does not score citation precision or arbitrary prose entailment.",
+  "blockerPolicy": "Component blockers may use the original empty component-local convention or list unsatisfied external feature prerequisites. Record03 requires keys and the receipt for enforcement; record04 requires keys and enabled enforcement for the receipt. Key generation is active, enforcement partial, receipt unavailable or unverified. Thus C2 may list C3; C3 may list C2; neither may list active C1 or itself. Joint C4 must list both C2 and C3. This resolves an unspecified ownership convention without changing public input."
+}

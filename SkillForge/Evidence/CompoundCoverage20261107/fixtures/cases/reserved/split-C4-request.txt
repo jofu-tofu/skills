@@ -1,0 +1,1 @@
+Apply common-instructions.txt to SAME FULL packet.json. Answer only C4 using output.schema.json. Determine combined readiness, blocking component check IDs, and whether actual token savings are established.

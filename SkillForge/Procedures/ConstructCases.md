@@ -13,4 +13,12 @@
 
 Acceptance: a separate executor can run the plan without inventing requirements. A small smoke suite does not justify general effectiveness. Version suite changes independently of target changes.
 
+## Consolidating model checks
+
+When a plan repeats the same context across compatible model checks, compare sharing that context before increasing scenario complexity. A compound workflow can exercise several requirements and their interactions; keep each requirement's observation and failure identifiable. Map the coverage before replacing separate runs. Keep cheap deterministic checks, red/negative cases and small diagnostics where they expose distinct failures or help locate them. Fewer tests or harder prompts alone are not improvements.
+
+Do not combine comparison arms, development with reserved confirmation, or draws that must remain independent. Several assertions in one context are one execution, not independent trials. If a combined result is ambiguous, split the affected check for diagnosis and preserve the original result and added cost.
+
+For a token-saving claim, compare actual total input plus output tokens for equivalent completed work, including retries, diagnosis and model grading; report cached input separately without subtracting it from total input. Keep unmeasured preparation costs and missing usage explicit. Prefer the simplest arrangement supported by preserved coverage and measured savings. Where checks already share context, do not assume further savings or require a new comparison by default. PlanChange owns the acceptance rule and trial budget.
+
 Before freezing a behavioral suite, trace every required decision in PlanChange's experiment adequacy check to observable evidence. Include the affected caller and final consumer where a handoff can lose the result. Inspect prompts for answers or coaching that remove the behavior being tested. Preserve development diagnoses separately from fresh confirmation; a saturated case remains useful preservation evidence but is not a reason to repeat an uninformative comparison. Return missing decision coverage to PlanChange before executing a suite that cannot answer its question.

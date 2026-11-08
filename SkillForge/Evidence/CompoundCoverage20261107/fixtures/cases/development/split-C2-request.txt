@@ -1,0 +1,1 @@
+Apply common-instructions.txt to SAME FULL packet.json. Answer only C2 using output.schema.json. Determine current Gate identity/state and next action for combined handoff.

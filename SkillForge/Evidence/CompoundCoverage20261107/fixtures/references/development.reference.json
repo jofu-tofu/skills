@@ -1,0 +1,186 @@
+{
+  "packet": "development",
+  "canonical": {
+    "checks": [
+      {
+        "id": "C1",
+        "identity": "D-a17",
+        "state": "active",
+        "action": "retain",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "D05",
+          "D06",
+          "D08"
+        ]
+      },
+      {
+        "id": "C2",
+        "identity": "D-b26",
+        "state": "partial",
+        "action": "complete_enforcement",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "D03",
+          "D05",
+          "D06",
+          "D08"
+        ]
+      },
+      {
+        "id": "C3",
+        "identity": "D-c35",
+        "state": "reverted",
+        "action": "repair_and_reinstall",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "D05",
+          "D07",
+          "D08"
+        ]
+      },
+      {
+        "id": "C4",
+        "identity": "audit-d",
+        "state": "blocked",
+        "action": "hold_handoff",
+        "efficiency": "unmeasured",
+        "blockers": [
+          "C2",
+          "C3"
+        ],
+        "evidence": [
+          "D03",
+          "D04",
+          "D05",
+          "D06",
+          "D07",
+          "D09"
+        ]
+      }
+    ]
+  },
+  "rules": {
+    "C1": {
+      "fields": {
+        "identity": [
+          "D-a17"
+        ],
+        "state": [
+          "active"
+        ],
+        "action": [
+          "retain"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "sufficientEvidenceGroups": [
+        [
+          "D06"
+        ]
+      ],
+      "allowedBlockerSets": [
+        []
+      ]
+    },
+    "C2": {
+      "fields": {
+        "identity": [
+          "D-b26"
+        ],
+        "state": [
+          "partial"
+        ],
+        "action": [
+          "complete_enforcement"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "sufficientEvidenceGroups": [
+        [
+          "D06"
+        ],
+        [
+          "D05"
+        ]
+      ],
+      "allowedBlockerSets": [
+        [],
+        [
+          "C3"
+        ]
+      ]
+    },
+    "C3": {
+      "fields": {
+        "identity": [
+          "D-c35"
+        ],
+        "state": [
+          "reverted"
+        ],
+        "action": [
+          "repair_and_reinstall"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "sufficientEvidenceGroups": [
+        [
+          "D07"
+        ]
+      ],
+      "allowedBlockerSets": [
+        [],
+        [
+          "C2"
+        ]
+      ]
+    },
+    "C4": {
+      "fields": {
+        "identity": [
+          "audit-d"
+        ],
+        "state": [
+          "blocked"
+        ],
+        "action": [
+          "hold_handoff",
+          "resolve_blockers"
+        ],
+        "efficiency": [
+          "unmeasured"
+        ]
+      },
+      "sufficientEvidenceGroups": [
+        [
+          "D06",
+          "D07",
+          "D09"
+        ],
+        [
+          "D05",
+          "D07",
+          "D09"
+        ]
+      ],
+      "allowedBlockerSets": [
+        [
+          "C2",
+          "C3"
+        ]
+      ]
+    }
+  },
+  "evidencePolicy": "Accept any listed sufficient group as a subset of cited IDs. Optional valid source IDs do not harm coverage. This does not score citation precision or arbitrary prose entailment.",
+  "blockerPolicy": "Component blockers may use the original empty component-local convention or list unsatisfied external feature prerequisites. Record03 requires keys and the receipt for enforcement; record04 requires keys and enabled enforcement for the receipt. Key generation is active, enforcement partial, receipt unavailable or unverified. Thus C2 may list C3; C3 may list C2; neither may list active C1 or itself. Joint C4 must list both C2 and C3. This resolves an unspecified ownership convention without changing public input."
+}

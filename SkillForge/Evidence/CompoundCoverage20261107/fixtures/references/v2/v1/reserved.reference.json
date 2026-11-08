@@ -1,0 +1,166 @@
+{
+  "packet": "reserved",
+  "canonical": {
+    "checks": [
+      {
+        "id": "C1",
+        "identity": "R-a17",
+        "state": "active",
+        "action": "retain",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "R05",
+          "R06",
+          "R08"
+        ]
+      },
+      {
+        "id": "C2",
+        "identity": "R-b26",
+        "state": "partial",
+        "action": "complete_enforcement",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "R03",
+          "R05",
+          "R06",
+          "R08"
+        ]
+      },
+      {
+        "id": "C3",
+        "identity": "R-c35",
+        "state": "installation_unverified",
+        "action": "verify_installation",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "R05",
+          "R06",
+          "R07",
+          "R08"
+        ]
+      },
+      {
+        "id": "C4",
+        "identity": "audit-r",
+        "state": "blocked",
+        "action": "hold_handoff",
+        "efficiency": "unmeasured",
+        "blockers": [
+          "C2",
+          "C3"
+        ],
+        "evidence": [
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R07",
+          "R09"
+        ]
+      }
+    ]
+  },
+  "rules": {
+    "C1": {
+      "fields": {
+        "identity": [
+          "R-a17"
+        ],
+        "state": [
+          "active"
+        ],
+        "action": [
+          "retain"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "blockers": [],
+      "requiredEvidence": [
+        "R05",
+        "R06",
+        "R08"
+      ]
+    },
+    "C2": {
+      "fields": {
+        "identity": [
+          "R-b26"
+        ],
+        "state": [
+          "partial"
+        ],
+        "action": [
+          "complete_enforcement"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "blockers": [],
+      "requiredEvidence": [
+        "R03",
+        "R05",
+        "R06",
+        "R08"
+      ]
+    },
+    "C3": {
+      "fields": {
+        "identity": [
+          "R-c35"
+        ],
+        "state": [
+          "installation_unverified"
+        ],
+        "action": [
+          "verify_installation"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "blockers": [],
+      "requiredEvidence": [
+        "R05",
+        "R06",
+        "R07",
+        "R08"
+      ]
+    },
+    "C4": {
+      "fields": {
+        "identity": [
+          "audit-r"
+        ],
+        "state": [
+          "blocked"
+        ],
+        "action": [
+          "hold_handoff",
+          "resolve_blockers"
+        ],
+        "efficiency": [
+          "unmeasured"
+        ]
+      },
+      "blockers": [
+        "C2",
+        "C3"
+      ],
+      "requiredEvidence": [
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R09"
+      ]
+    }
+  }
+}

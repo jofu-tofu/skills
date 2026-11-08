@@ -1,0 +1,164 @@
+{
+  "packet": "development",
+  "canonical": {
+    "checks": [
+      {
+        "id": "C1",
+        "identity": "D-a17",
+        "state": "active",
+        "action": "retain",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "D05",
+          "D06",
+          "D08"
+        ]
+      },
+      {
+        "id": "C2",
+        "identity": "D-b26",
+        "state": "partial",
+        "action": "complete_enforcement",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "D03",
+          "D05",
+          "D06",
+          "D08"
+        ]
+      },
+      {
+        "id": "C3",
+        "identity": "D-c35",
+        "state": "reverted",
+        "action": "repair_and_reinstall",
+        "efficiency": "not_assessed",
+        "blockers": [],
+        "evidence": [
+          "D05",
+          "D07",
+          "D08"
+        ]
+      },
+      {
+        "id": "C4",
+        "identity": "audit-d",
+        "state": "blocked",
+        "action": "hold_handoff",
+        "efficiency": "unmeasured",
+        "blockers": [
+          "C2",
+          "C3"
+        ],
+        "evidence": [
+          "D03",
+          "D04",
+          "D05",
+          "D06",
+          "D07",
+          "D09"
+        ]
+      }
+    ]
+  },
+  "rules": {
+    "C1": {
+      "fields": {
+        "identity": [
+          "D-a17"
+        ],
+        "state": [
+          "active"
+        ],
+        "action": [
+          "retain"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "blockers": [],
+      "requiredEvidence": [
+        "D05",
+        "D06",
+        "D08"
+      ]
+    },
+    "C2": {
+      "fields": {
+        "identity": [
+          "D-b26"
+        ],
+        "state": [
+          "partial"
+        ],
+        "action": [
+          "complete_enforcement"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "blockers": [],
+      "requiredEvidence": [
+        "D03",
+        "D05",
+        "D06",
+        "D08"
+      ]
+    },
+    "C3": {
+      "fields": {
+        "identity": [
+          "D-c35"
+        ],
+        "state": [
+          "reverted"
+        ],
+        "action": [
+          "repair_and_reinstall"
+        ],
+        "efficiency": [
+          "not_assessed"
+        ]
+      },
+      "blockers": [],
+      "requiredEvidence": [
+        "D05",
+        "D07",
+        "D08"
+      ]
+    },
+    "C4": {
+      "fields": {
+        "identity": [
+          "audit-d"
+        ],
+        "state": [
+          "blocked"
+        ],
+        "action": [
+          "hold_handoff",
+          "resolve_blockers"
+        ],
+        "efficiency": [
+          "unmeasured"
+        ]
+      },
+      "blockers": [
+        "C2",
+        "C3"
+      ],
+      "requiredEvidence": [
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D09"
+      ]
+    }
+  }
+}

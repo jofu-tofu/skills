@@ -1,0 +1,1 @@
+Apply common-instructions.txt to SAME FULL packet.json. Answer only C1 using output.schema.json. Determine current Index identity/state and next action for combined handoff.

@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "id": "C1",
+      "identity": "D-a17",
+      "state": "active",
+      "action": "retain",
+      "efficiency": "not_assessed",
+      "blockers": [],
+      "evidence": ["D02", "D05", "D06", "D08"]
+    },
+    {
+      "id": "C2",
+      "identity": "D-b26",
+      "state": "partial",
+      "action": "complete_enforcement",
+      "efficiency": "not_assessed",
+      "blockers": ["C3"],
+      "evidence": ["D03", "D05", "D06", "D07", "D08"],
+      "note": "Only the parser is active; enforcement remains disabled. Ledger satisfies the stable-key dependency, but machine-readable Receipt must be restored."
+    },
+    {
+      "id": "C3",
+      "identity": "D-c35",
+      "state": "reverted",
+      "action": "repair_and_reinstall",
+      "efficiency": "not_assessed",
+      "blockers": ["C2"],
+      "evidence": ["D04", "D05", "D06", "D07", "D08"],
+      "note": "Repository merge remains, but production reverted to manual Receipt. Repair duplicate delivery, reinstall, and verify with Gate enforcement enabled."
+    },
+    {
+      "id": "C4",
+      "identity": "audit-d",
+      "state": "blocked",
+      "action": "hold_handoff",
+      "efficiency": "unmeasured",
+      "blockers": ["C2", "C3"],
+      "evidence": ["D03", "D04", "D06", "D07", "D08", "D09"],
+      "note": "At 15:00 UTC, Gate enforcement and machine-readable Receipt are not jointly active. Verify both together before handoff. Fewer headings and proposed call consolidation do not establish actual token savings; the claimed 40% is unmeasured."
+    }
+  ],
+  "instruction_note": "common-instructions.txt was absent from the current directory. Assessment uses the supplied instructions and packet.json."
+}

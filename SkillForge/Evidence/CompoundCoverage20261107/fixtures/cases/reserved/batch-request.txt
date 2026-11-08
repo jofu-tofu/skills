@@ -1,0 +1,1 @@
+Apply common-instructions.txt to full packet.json. Assess C1,C2,C3,C4 as four atomic checks in this one context, including all dependencies and joint handoff requirements. Return all four using output.schema.json.

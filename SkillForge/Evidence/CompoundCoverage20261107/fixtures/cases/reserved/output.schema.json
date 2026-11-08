@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "checks"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "identity",
+          "state",
+          "action",
+          "efficiency",
+          "blockers",
+          "evidence"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "enum": [
+              "C1",
+              "C2",
+              "C3",
+              "C4"
+            ]
+          },
+          "identity": {
+            "enum": [
+              "R-a17",
+              "R-b26",
+              "R-c35",
+              "audit-r"
+            ]
+          },
+          "state": {
+            "enum": [
+              "active",
+              "partial",
+              "reverted",
+              "installation_unverified",
+              "ready",
+              "blocked"
+            ]
+          },
+          "action": {
+            "enum": [
+              "retain",
+              "complete_enforcement",
+              "repair_and_reinstall",
+              "verify_installation",
+              "hold_handoff",
+              "resolve_blockers"
+            ]
+          },
+          "efficiency": {
+            "enum": [
+              "not_assessed",
+              "unmeasured",
+              "measured"
+            ]
+          },
+          "blockers": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "C1",
+                "C2",
+                "C3"
+              ]
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "R01",
+                "R02",
+                "R03",
+                "R04",
+                "R05",
+                "R06",
+                "R07",
+                "R08",
+                "R09"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "description": "active=fully integrated and verified installed; partial=incomplete integration; reverted=observed rollback; installation_unverified=merged without active installation evidence; ready/blocked=joint prerequisites met/unmet. retain=keep active feature; complete_enforcement=finish and verify checks; repair_and_reinstall=repair rollback cause then verify reinstall; verify_installation=obtain active identity evidence; hold_handoff/resolve_blockers=withhold handoff until blockers cleared. not_assessed=component makes no efficiency decision; unmeasured=no actual token evidence; measured=actual usage supports savings."
+}

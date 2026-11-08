@@ -1,0 +1,1 @@
+Apply common-instructions.txt to full packet.json. Resolve the release as an integrated workflow, following dependencies to the joint handoff. Answer all C1,C2,C3,C4 using output.schema.json.

@@ -1,0 +1,1 @@
+{"checks":[{"id":"C4","identity":"audit-d","state":"blocked","action":"hold_handoff","efficiency":"unmeasured","blockers":["C2","C3"],"evidence":["D03","D04","D05","D06","D07","D08","D09"]}]}
