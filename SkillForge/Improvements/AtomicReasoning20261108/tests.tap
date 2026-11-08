@@ -1,0 +1,322 @@
+TAP version 13
+# Subtest: a completed sampled round does not close untested parent families
+ok 1 - a completed sampled round does not close untested parent families
+  ---
+  duration_ms: 105.1109
+  type: 'test'
+  ...
+# Subtest: parent inventory cannot silently omit outcomes from the contract checks
+ok 2 - parent inventory cannot silently omit outcomes from the contract checks
+  ---
+  duration_ms: 70.2737
+  type: 'test'
+  ...
+# Subtest: one aggregate skill pass cannot replace distinct parent outcomes
+ok 3 - one aggregate skill pass cannot replace distinct parent outcomes
+  ---
+  duration_ms: 72.3099
+  type: 'test'
+  ...
+# Subtest: broad work needs an evidenced scope challenge and structural review
+ok 4 - broad work needs an evidenced scope challenge and structural review
+  ---
+  duration_ms: 92.5707
+  type: 'test'
+  ...
+# Subtest: complete reviewed broad coverage permits an unchanged skill without forced rounds
+ok 5 - complete reviewed broad coverage permits an unchanged skill without forced rounds
+  ---
+  duration_ms: 89.3757
+  type: 'test'
+  ...
+# Subtest: an unresolved portfolio child prevents broad closure
+ok 6 - an unresolved portfolio child prevents broad closure
+  ---
+  duration_ms: 94.1746
+  type: 'test'
+  ...
+# Subtest: new in-scope outcomes remain work after an explicit inventory amendment
+ok 7 - new in-scope outcomes remain work after an explicit inventory amendment
+  ---
+  duration_ms: 91.3675
+  type: 'test'
+  ...
+# Subtest: missing or tampered broad inventory cannot establish completion
+ok 8 - missing or tampered broad inventory cannot establish completion
+  ---
+  duration_ms: 70.605
+  type: 'test'
+  ...
+# Subtest: coverage judgments cannot be disguised as deliverables
+ok 9 - coverage judgments cannot be disguised as deliverables
+  ---
+  duration_ms: 67.0038
+  type: 'test'
+  ...
+# Subtest: assessment cannot downgrade comprehensive depth or replace parent inventory
+ok 10 - assessment cannot downgrade comprehensive depth or replace parent inventory
+  ---
+  duration_ms: 71.4265
+  type: 'test'
+  ...
+# Subtest: supported requested outcomes complete the task independently of candidate choice
+ok 11 - supported requested outcomes complete the task independently of candidate choice
+  ---
+  duration_ms: 81.062
+  type: 'test'
+  ...
+# Subtest: historical edit-only closure must continue to behavioral evaluation
+ok 12 - historical edit-only closure must continue to behavioral evaluation
+  ---
+  duration_ms: 78.294
+  type: 'test'
+  ...
+# Subtest: historical unrelated tie cannot close an unresolved required repair
+ok 13 - historical unrelated tie cannot close an unresolved required repair
+  ---
+  duration_ms: 78.1657
+  type: 'test'
+  ...
+# Subtest: a missing next action is planning work, not permission to close
+ok 14 - a missing next action is planning work, not permission to close
+  ---
+  duration_ms: 76.9664
+  type: 'test'
+  ...
+# Subtest: an actual evidenced blocker can stop an unresolved task
+ok 15 - an actual evidenced blocker can stop an unresolved task
+  ---
+  duration_ms: 78.6041
+  type: 'test'
+  ...
+# Subtest: a feasible authorized next action takes precedence over a blocker
+ok 16 - a feasible authorized next action takes precedence over a blocker
+  ---
+  duration_ms: 70.0422
+  type: 'test'
+  ...
+# Subtest: an unsupported blocker cannot end the task
+ok 17 - an unsupported blocker cannot end the task
+  ---
+  duration_ms: 69.954
+  type: 'test'
+  ...
+# Subtest: partly blocked requirements leave other unresolved work active
+ok 18 - partly blocked requirements leave other unresolved work active
+  ---
+  duration_ms: 73.4017
+  type: 'test'
+  ...
+# Subtest: explicit design-only delivery does not require behavioral execution
+ok 19 - explicit design-only delivery does not require behavioral execution
+  ---
+  duration_ms: 66.4329
+  type: 'test'
+  ...
+# Subtest: narrow maintenance can finish with its own supported requirement
+ok 20 - narrow maintenance can finish with its own supported requirement
+  ---
+  duration_ms: 70.5782
+  type: 'test'
+  ...
+# Subtest: assessment-only scope can finish with an inconclusive target verdict
+ok 21 - assessment-only scope can finish with an inconclusive target verdict
+  ---
+  duration_ms: 68.6812
+  type: 'test'
+  ...
+# Subtest: a supported assessment can reject a candidate and still be complete
+ok 22 - a supported assessment can reject a candidate and still be complete
+  ---
+  duration_ms: 69.6546
+  type: 'test'
+  ...
+# Subtest: omitted mandatory evidence remains unresolved
+ok 23 - omitted mandatory evidence remains unresolved
+  ---
+  duration_ms: 76.0856
+  type: 'test'
+  ...
+# Subtest: unqualified favorable judgments cannot establish complete
+ok 24 - unqualified favorable judgments cannot establish complete
+  ---
+  duration_ms: 85.2035
+  type: 'test'
+  ...
+# Subtest: a stale evidence digest cannot establish complete
+ok 25 - a stale evidence digest cannot establish complete
+  ---
+  duration_ms: 76.6372
+  type: 'test'
+  ...
+# Subtest: missing and empty evidence cannot establish complete
+ok 26 - missing and empty evidence cannot establish complete
+  ---
+  duration_ms: 70.207
+  type: 'test'
+  ...
+# Subtest: behavioral contracts cannot omit execution from their requirements
+ok 27 - behavioral contracts cannot omit execution from their requirements
+  ---
+  duration_ms: 65.4874
+  type: 'test'
+  ...
+# Subtest: changed contracts cannot reuse an old assessment identity
+ok 28 - changed contracts cannot reuse an old assessment identity
+  ---
+  duration_ms: 76.9075
+  type: 'test'
+  ...
+# Subtest: equivalent uppercase digests retain the same contract identity
+ok 29 - equivalent uppercase digests retain the same contract identity
+  ---
+  duration_ms: 81.2776
+  type: 'test'
+  ...
+# Subtest: assessment cannot redefine the frozen scope
+ok 30 - assessment cannot redefine the frozen scope
+  ---
+  duration_ms: 68.016
+  type: 'test'
+  ...
+# Subtest: duplicate requirements and duplicate judgments are rejected
+ok 31 - duplicate requirements and duplicate judgments are rejected
+  ---
+  duration_ms: 67.9757
+  type: 'test'
+  ...
+# Subtest: truthy strings cannot pretend to authorize an action
+ok 32 - truthy strings cannot pretend to authorize an action
+  ---
+  duration_ms: 66.0304
+  type: 'test'
+  ...
+# Subtest: scope source must contain its quoted user instruction
+ok 33 - scope source must contain its quoted user instruction
+  ---
+  duration_ms: 69.2595
+  type: 'test'
+  ...
+# Subtest: evidence outside the declared root is not accepted
+ok 34 - evidence outside the declared root is not accepted
+  ---
+  duration_ms: 75.9014
+  type: 'test'
+  ...
+# Subtest: CLI accepts cwd-relative input paths inside an explicit attempt root
+ok 35 - CLI accepts cwd-relative input paths inside an explicit attempt root
+  ---
+  duration_ms: 241.6414
+  type: 'test'
+  ...
+# Subtest: CLI keeps an existing root-relative input authoritative
+ok 36 - CLI keeps an existing root-relative input authoritative
+  ---
+  duration_ms: 149.8194
+  type: 'test'
+  ...
+# Subtest: CLI does not fall back to a cwd input outside the attempt root
+ok 37 - CLI does not fall back to a cwd input outside the attempt root
+  ---
+  duration_ms: 326.6218
+  type: 'test'
+  ...
+# Subtest: CLI fallback checks the real destination of a directory link
+ok 38 - CLI fallback checks the real destination of a directory link
+  ---
+  duration_ms: 286.5139
+  type: 'test'
+  ...
+# Subtest: CLI preserves absolute input paths
+ok 39 - CLI preserves absolute input paths
+  ---
+  duration_ms: 151.8722
+  type: 'test'
+  ...
+# Subtest: finished experiment without gap resolution continues despite all generic passes
+ok 40 - finished experiment without gap resolution continues despite all generic passes
+  ---
+  duration_ms: 76.8579
+  type: 'test'
+  ...
+# Subtest: rejected mechanism carries the unresolved outcome to the available next action
+ok 41 - rejected mechanism carries the unresolved outcome to the available next action
+  ---
+  duration_ms: 84.2182
+  type: 'test'
+  ...
+# Subtest: unresolved outcome with evidenced access limit is blocked, not complete
+ok 42 - unresolved outcome with evidenced access limit is blocked, not complete
+  ---
+  duration_ms: 80.1592
+  type: 'test'
+  ...
+# Subtest: repair needs its own outcome check rather than experiment-only coverage
+ok 43 - repair needs its own outcome check rather than experiment-only coverage
+  ---
+  duration_ms: 130.7376
+  type: 'test'
+  ...
+# Subtest: assessment cannot downgrade a repair into a suggestion
+ok 44 - assessment cannot downgrade a repair into a suggestion
+  ---
+  duration_ms: 65.9705
+  type: 'test'
+  ...
+# Subtest: required enhancement cannot finish by rejecting a mechanism or disproving a failure
+ok 45 - required enhancement cannot finish by rejecting a mechanism or disproving a failure
+  ---
+  duration_ms: 71.7411
+  type: 'test'
+  ...
+# Subtest: resolved repair can retain baseline when another cause was corrected
+ok 46 - resolved repair can retain baseline when another cause was corrected
+  ---
+  duration_ms: 75.362
+  type: 'test'
+  ...
+# Subtest: evidence disproving a suspected gap permits a no-change repair conclusion
+ok 47 - evidence disproving a suspected gap permits a no-change repair conclusion
+  ---
+  duration_ms: 81.3122
+  type: 'test'
+  ...
+# Subtest: resolution label without qualified evidence cannot close a repair
+ok 48 - resolution label without qualified evidence cannot close a repair
+  ---
+  duration_ms: 229.1169
+  type: 'test'
+  ...
+# Subtest: bounded suggestion may stop unchanged without claiming a gap resolved
+ok 49 - bounded suggestion may stop unchanged without claiming a gap resolved
+  ---
+  duration_ms: 78.657
+  type: 'test'
+  ...
+# Subtest: explicitly required enhancement completes with established outcome
+ok 50 - explicitly required enhancement completes with established outcome
+  ---
+  duration_ms: 77.9911
+  type: 'test'
+  ...
+# Subtest: unknown objective cannot silently fall back to optional suggestion
+ok 51 - unknown objective cannot silently fall back to optional suggestion
+  ---
+  duration_ms: 68.4546
+  type: 'test'
+  ...
+# Subtest: legacy contracts retain historical behavior without claiming objective enforcement
+ok 52 - legacy contracts retain historical behavior without claiming objective enforcement
+  ---
+  duration_ms: 79.8374
+  type: 'test'
+  ...
+1..52
+# tests 52
+# suites 0
+# pass 52
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3856.65

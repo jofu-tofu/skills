@@ -1,9 +1,11 @@
 ---
 status: proposed
 trust: T3
-updated: 2026-11-03
+updated: 2026-11-08
 ---
 # Proposed SkillForge improvement records
+
+Stalled-progress investigation, 2026-11-08: [bounded CLI repair and reasoning comparisons](AtomicReasoning20261108/Record.md). The captured command-line input failure is fixed and installed; all 52 completion/outcome tests pass. A short reasoning cue showed no added benefit and was rejected. Four synthetic session continuations selected and verified useful target work without new reasoning instructions. The user's clarified task goal makes an add-on conditional on evidence. No general reasoning-benefit or reliability claim; no remote publication.
 
 Comparative resolution, 2026-11-07: [tie diagnosis and executed comparison](../Evidence/TieDiagnosis20261107/Results.md). Distinguishes regression adequacy from benefit ranking; qualifies ordered acceptable results and diagnoses unresolved ties. Six actual renderer workload pairs expose opposing compilation advantages and two scoped equalities while all correctness gates pass. Thirteen controls, live invalid-counter/cheap-wrong controls and one candidate caller check pass. No general method-superiority, latency/memory or universal-quality claim. Candidate retained locally; no integration or installation.
 Combined review, 2026-11-07: [selection, compatibility and evidence repairs](../Evidence/CombinedReview20261107/Review.md). Isolated composition keeps the already integrated owner map and adds scoped tie-diagnosis guidance; memory, efficiency and measurement experiments are retained as evidence with rejected runtime changes absent. Original-byte portability repairs preserve recorded evidence hashes. No new main merge, installation, publication or combined behavioral-benefit claim.

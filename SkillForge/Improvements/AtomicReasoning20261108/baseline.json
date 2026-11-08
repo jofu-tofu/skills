@@ -1,0 +1,35 @@
+{
+  "toolSha256": "a046dd82f36761328d5517c0725506299f5794b285d5b34eb13c6ea10a6b65a6",
+  "inputHashes": {
+    "contract.json": "7912b151ecda80a0921c6abf4e0abd4640471c49c935401457ce791dfb12ef6d",
+    "assessment.json": "77394fcad7aed1fcd3a6bc6bb50d2af02f9384188715fbd0aa4f74f817aa6dff"
+  },
+  "cases": [
+    {
+      "id": "captured",
+      "args": [
+        "evidence/contract.json",
+        "evidence/assessment.json",
+        "--root",
+        "evidence"
+      ],
+      "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\replay-baseline-v1",
+      "exit": 2,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"valid\": false,\n  \"task_status\": \"continue\",\n  \"candidate_decision\": null,\n  \"errors\": [\n    \"ENOENT: no such file or directory, open 'C:\\\\Users\\\\fujos\\\\Obsidian\\\\Projects\\\\SkillForge\\\\AtomicReasoning20261108\\\\runs\\\\replay-baseline-v1\\\\evidence\\\\evidence\\\\contract.json'\"\n  ],\n  \"next_actions\": [\n    {\n      \"id\": \"repair-completion-input\",\n      \"description\": \"Repair the unavailable or malformed input.\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "id": "root-relative",
+      "args": [
+        "contract.json",
+        "assessment.json",
+        "--root",
+        "evidence"
+      ],
+      "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\replay-baseline-v1",
+      "exit": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"valid\": true,\n  \"contract_sha256\": \"7912b151ecda80a0921c6abf4e0abd4640471c49c935401457ce791dfb12ef6d\",\n  \"candidate_decision\": \"retain_candidate\",\n  \"task_status\": \"complete\",\n  \"unresolved\": [],\n  \"next_actions\": []\n}\n",
+      "stderr": ""
+    }
+  ]
+}

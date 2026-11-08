@@ -1,0 +1,11 @@
+{
+  "exit": 0,
+  "error": null,
+  "files": {
+    "CheckCompletion.cjs": "b3f4e702c3f229b471cc340c8a34407c93db91d18493d5613038cc81f11b8898",
+    "CheckCompletion.test.cjs": "7432bcb7c2ccde678d0665cbbc2891209e090987b400a2f3c3a4ba88f7d6da0f",
+    "CheckObjective.test.cjs": "9a922aef0b93fc8b56089b28a5f123f8745e3f6685a8b8d049f359c4c0c7afbf"
+  },
+  "stdout": "cli-recovery-tests-local.tap",
+  "stderr": "cli-recovery-tests-local.stderr"
+}

@@ -1,0 +1,36 @@
+{
+  "time": "2026-11-08T17:45:04.663Z",
+  "main": "4e2c43f4401db76781acfc65e8cc5512e88c3005",
+  "repairCommit": "7216f3b7a02ce5ad08feab16c497f945da6c89c7",
+  "atomicRuleCommit": "7e235682c3f664b5aeb08659f0632d935ad05883",
+  "identities": {
+    "Tools/CheckCompletion.cjs": "b3f4e702c3f229b471cc340c8a34407c93db91d18493d5613038cc81f11b8898",
+    "Tools/CheckCompletion.test.cjs": "7432bcb7c2ccde678d0665cbbc2891209e090987b400a2f3c3a4ba88f7d6da0f",
+    "Templates/Improvement/Completion.md": "0ff33ff4f881fec0b5a43cb85e90ab7c1f6690990b28a6b0e2bdf347f2dd580a",
+    "Procedures/PlanChange.md": "ffd0a7eda976fda41e8320ff86d53f554faddd5aa0fbfe028abc77bb0bdc40c3"
+  },
+  "testedCodeMatches": true,
+  "mainClean": true,
+  "installedInvocation": {
+    "cwd": "C:\\Users\\fujos\\Obsidian\\Projects\\SkillForge\\AtomicReasoning20261108\\runs\\replay-baseline-v1",
+    "args": [
+      "C:\\Users\\fujos\\.codex\\skills\\SkillForge\\Tools\\CheckCompletion.cjs",
+      "evidence/contract.json",
+      "evidence/assessment.json",
+      "--root",
+      "evidence"
+    ],
+    "exit": 0,
+    "result": {
+      "schema_version": 1,
+      "valid": true,
+      "contract_sha256": "7912b151ecda80a0921c6abf4e0abd4640471c49c935401457ce791dfb12ef6d",
+      "candidate_decision": "retain_candidate",
+      "task_status": "complete",
+      "unresolved": [],
+      "next_actions": []
+    }
+  },
+  "remotePublication": false,
+  "scope": "Only the completion-CLI repair is activated; the broad stalled-progress goal remains active."
+}
