@@ -1,0 +1,10 @@
+{
+  "time": "2026-11-08T02:35:50.002Z",
+  "files": {
+    "cases.json": "10db91c0621f7f639ea2b16e6a1b4d83b57d931c5c97448939000680449700b9",
+    "consumer-cases.json": "039dc37c9a15205f54264c2d460e37710b854bd593bb9dd6e6ecfe27f78f1ad9",
+    "assess.ts": "2508da753dbe8ef500ead83e1a8da599cb8dc95078c01a3bc5fe04a191c8f1ae",
+    "Protocol.md": "838e9d6fa785499e74910419abce67bebe7edc59cdd8a7550ba1c30c18310b6c",
+    "Measurement.md": "a2086639665a7b9483a2b75d8d7325ba90f7fcc1d7041674543bada04800d94b"
+  }
+}
