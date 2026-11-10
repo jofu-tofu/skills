@@ -46,7 +46,7 @@ Read the `context.md` file provided as input. Extract:
    - **IMP (Impact & Compatibility):** the Impact Map has entries, or the change alters an exported or shared symbol, a default value, a data item or schema, a serialized or wire contract, or something that ships separately from its callers.
    - **INT (Intent Conformance):** Stated Behaviors lists at least one behavior.
 
-3. **STR (Structure)** runs for diffs of 50+ lines, when new files or modules are created, when changes span 3+ directories, or when module boundaries or index files change. In audit mode, include STR for an architecture/ownership concern or general module-health audit even when all files are small and unchanged. Respect an explicitly narrower audit scope and the ReReview override.
+3. **STR (Structure)** runs for diffs of 50+ lines, when new files or modules are created, when changes span 3+ directories, or when module boundaries or index files change. In audit mode, include STR for an architecture/ownership concern or general module-health audit even when all files are small and unchanged. Also select STR when the ordinary caller trace identifies a changed ownership boundary or an unresolved caller obligation, even in a small diff. Respect an explicitly narrower audit scope and the ReReview override.
 
 4. These are signals for judgment, not rigid triggers. When the context suggests a lens's concern without matching a listed signal exactly, include the lens and say why.
 
@@ -64,7 +64,7 @@ Each standards dimension is eligible when a file in scope matches its `applies_t
 
 If selected lenses exceed the cap, reduce in this order until they fit:
 1. Run SIM and CLA in one agent: one entry with `"id": "SIM+CLA"`, both paths in `path` as an array, and the union of their files.
-2. Drop STR only when it is incidental, not an explicitly requested architecture concern or the general-health audit's structural coverage.
+2. Drop STR only when it is incidental. Retain it for an in-scope caller ownership question, an explicitly requested architecture concern, or the general-health audit's structural coverage.
 3. Drop IMP only when the Impact Map is empty and it is not required by the ReReview policy or an explicit request (it was triggered by a signal alone, with no named consumer).
 
 **COR, RES, SEC and INT are never dropped.** Preserve the required audit STR, ReReview IMP and explicitly requested concerns as well. If the selected set still exceeds the cap, run over it: lens caps limit nominal cost, not required coverage. Record every merge, drop and overrun in `coverage`; schedule agent waves within actual runtime capacity.
