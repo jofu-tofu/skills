@@ -28,6 +28,10 @@ Without comprehensive context, the orchestrator either delegates blindly (agents
 
 **Why comprehensiveness matters more than brevity here:** Every piece of context that the orchestrator doesn't have is a review dimension it can't construct. A missed coding standard is a class of issues that won't be caught. A missed user argument is a lens the user asked for that gets silently dropped. The context layer should be dense signal — not bloated, but complete.
 
+## Before inspecting nonpublic evidence
+
+For an ordinary task in scope under the request or existing contract, try it from the caller's side before reading its implementation, private tests, or other nonpublic evidence about how it works. Use only the public entry point, signatures, documentation, examples intended for users, and public diagnostics. A walkthrough is enough unless execution is authorized. Record the first step you could not work out, or the complete public call if you could. If you have already seen nonpublic evidence about the task, use a fresh reviewer given only the public material, or report that an independent walkthrough was not run.
+
 ## Step 0: Read the Plug-in Manifest
 
 Skip this step when the manifest is `none`.
@@ -159,7 +163,7 @@ This is the step most review systems skip. Beyond the diff, gather everything th
 
 Add a compact **Proof Coverage** section to context.md. Reuse supplied acceptance criteria and proof maps; for each in-scope behavior or invariant, record its source, affected surfaces, required/forbidden outcome, relevant test or runtime check, and available evidence. Facts include file/command/log receipts and when checked; label assumptions and stale evidence. Link commands/results to the reviewed revision and environment where known. Missing intent or evidence is a coverage gap, not permission to invent requirements. Audit mode maps only the audited scope.
 
-For changed reusable behavior, trace the ordinary caller when the request or existing contract puts that route in scope. Record the public entry point, a real consumer or a minimal realistic call, which side owns any required sequence or state transitions, and what the available evidence actually exercised. Carry that trace as a Proof Coverage row. If scope is ambiguous, distinguish an observed workaround or caller obligation from an explicit requirement. When the request expressly stops at a low-level helper, assess its contract without requiring integration into an unrelated entry point.
+For changed reusable behavior, trace the ordinary caller when the request or existing contract puts that route in scope. Record the public entry point, a real consumer or a minimal realistic call, the public-only walkthrough result, which side owns any required sequence or state transitions, and what the available evidence actually exercised. If the route became apparent after seeing nonpublic evidence, use the fresh-reviewer or coverage rule above. Carry that trace as a Proof Coverage row. If scope is ambiguous, distinguish an observed workaround or caller obligation from an explicit requirement. When the request expressly stops at a low-level helper, assess its contract without requiring integration into an unrelated entry point.
 
 For changed flows, distinguish completion, visuals, persisted state, incidental defects, and required external side effects. Record missing dimensions as blocked/not run and non-applicable dimensions with reasons. Reuse supplied artifacts; gathering context does not authorize deployment, live side effects, or infrastructure changes.
 
