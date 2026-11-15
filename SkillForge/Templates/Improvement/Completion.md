@@ -27,6 +27,20 @@ For a reported failure, the result check must cover the missed decision under re
 
 New behavioral UpdateSkill contracts record `objective` using [ApproveSkill's distinction](../../Procedures/ApproveSkill.md#owned-outcome-or-bounded-suggestion): `{"kind":"repair","outcome_check":"result"}`, `{"kind":"enhancement","outcome_check":"result"}`, or `{"kind":"suggestion"}`. Choose from the request, not the candidate's performance. Repair/enhancement must bind a declared `kind: "outcome"` check; an experiment-run or deliverable check cannot substitute. Comprehensive work retains all parent checks as well.
 
+### Before editing a repair
+
+Add `"baseline_red_check":"baseline-red"` to the repair objective and declare that ID as its own `behavioral_execution` check alongside the general execution check. Freeze the target version and case. Run the case on the original and preserve the actual result as described in [DiagnoseGap](../../Procedures/DiagnoseGap.md#baseline-red-case-for-a-repair). A manual reader check is fine when it records what the reader could establish from the actual original.
+
+In the early assessment, use `status: "pass"` and `observation: "target_failure_before_edit"` only when the test ran before the edit and caught the intended failure. Link its qualified evidence by path and digest. Leave candidate outcomes unverified. Then run:
+
+```text
+node <skill>/Tools/CheckCompletion.cjs --before-edit contract.json assessment.json --root <attempt-directory>
+```
+
+Save the early assessment and checker result before changing the target. Exit 0 clears this step only. If the test passes on the original, the runner fails, or evidence is missing, keep the edit pending and follow the diagnostic in DiagnoseGap. A check run after editing is retrospective evidence. The checker verifies the recorded assessment and evidence bytes; the reviewer verifies execution order and what actually failed. With neither Node nor Bun, make and save the same judgment manually. A disproved gap can close without an edit after a supported outcome judgment. Existing historical contracts remain readable.
+
+### After evaluating a candidate
+
 For that owned-outcome judgment, a qualified evidence-backed pass also needs `"resolution":"resolved"`. A repair may instead use `"resolution":"disproven"` with evidence that the reported gap or its governing expectation is invalid/already inapplicable; this is not “we tried once and did not see it.” Rejecting a proposed cause does not disprove the gap. Other/missing resolution values remain unresolved even if the experiment check passed. Carry a real next action or evidenced blocker for the owned check. A required enhancement cannot use disproof of a historical failure to claim delivery.
 
 Suggestions need their own bounded decision evidence but no invented repair-resolution label. Assessment/design/maintenance contracts keep their existing scope. Historical contracts without `objective` remain readable under the old checks; this does not retrospectively certify their intent classification. For a resumed owned-outcome task, explicitly amend/freeze the contract before the next attempt rather than silently rewriting history. The assessment cannot redefine `objective`; changing scope requires a justified contract amendment.

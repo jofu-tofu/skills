@@ -16,7 +16,7 @@ function fixture(kind = 'repair') {
   const contract = {schema_version:1,scope:'behavioral',requested_result:request,scope_basis:{...evidence('request.txt',request),quote:request},objective:{kind,...(kind === 'suggestion' ? {} : {outcome_check:'outcome'})},required_checks:[{id:'outcome',kind:'outcome',description:kind === 'suggestion' ? 'Bounded suggestion evaluated' : 'Required user outcome established'},{id:'execution',kind:'behavioral_execution',description:'Actual diagnostic executed'},{id:'preservation',kind:'preservation',description:'Required behavior preserved'}]};
   const assessment = {schema_version:1,candidate_decision:'retain_baseline',checks:contract.required_checks.map(r=>({id:r.id,status:'pass',qualification:'qualified',evidence:[proof]})),actions:[],blockers:[]};
   const outcome = assessment.checks[0];
-  function run(){const body=JSON.stringify(contract);fs.writeFileSync(path.join(root,'contract.json'),body);assessment.contract_sha256=sha(body);fs.writeFileSync(path.join(root,'assessment.json'),JSON.stringify(assessment));const r=spawnSync(process.execPath,[cli,'contract.json','assessment.json','--root',root],{encoding:'utf8'});assert.ok(r.stdout,r.stderr);return {code:r.status,...JSON.parse(r.stdout)};}
+  function run(...flags){const body=JSON.stringify(contract);fs.writeFileSync(path.join(root,'contract.json'),body);assessment.contract_sha256=sha(body);fs.writeFileSync(path.join(root,'assessment.json'),JSON.stringify(assessment));const r=spawnSync(process.execPath,[cli,...flags,'contract.json','assessment.json','--root',root],{encoding:'utf8'});assert.ok(r.stdout,r.stderr);return {code:r.status,...JSON.parse(r.stdout)};}
   return {root,contract,assessment,outcome,proof,evidence,run};
 }
 test('finished experiment without gap resolution continues despite all generic passes',()=>{const f=fixture(); const r=f.run();assert.equal(r.task_status,'continue');assert.equal(r.code,3);assert.deepEqual(r.unresolved.map(x=>x.id),['outcome']);assert.equal(r.next_actions[0].id,'plan-next-check');});
@@ -32,3 +32,65 @@ test('bounded suggestion may stop unchanged without claiming a gap resolved',()=
 test('explicitly required enhancement completes with established outcome',()=>{const f=fixture('enhancement');f.outcome.resolution='resolved';assert.equal(f.run().task_status,'complete');});
 test('unknown objective cannot silently fall back to optional suggestion',()=>{const f=fixture();f.contract.objective.kind='optional-repair';assert.equal(f.run().code,2);});
 test('legacy contracts retain historical behavior without claiming objective enforcement',()=>{const f=fixture();delete f.contract.objective;assert.equal(f.run().task_status,'complete');});
+
+function repairWithBaselineCheck() {
+  const f = fixture();
+  f.contract.objective.baseline_red_check = 'baseline';
+  f.contract.required_checks.push({
+    id: 'baseline', kind: 'behavioral_execution',
+    description: 'The unchanged original fails the intended reader check.',
+  });
+  return f;
+}
+
+test('a repair cannot enter editing with only a generic execution check', () => {
+  const f = fixture();
+  const result = f.run('--before-edit');
+  assert.equal(result.code, 2);
+  assert.match(result.errors.join(' '), /baseline.red check/i);
+});
+
+test('the forex lesson incident stays open when the rewrite passed but the original was not tested before editing', () => {
+  const f = repairWithBaselineCheck();
+  f.outcome.resolution = 'resolved';
+  f.assessment.checks.push({
+    id: 'baseline', status: 'pass', qualification: 'qualified', observation: 'retrospective_failure',
+    evidence: [f.evidence('reader-check.txt', 'The rewrite was edited first. An exact-old-lesson reader check failed afterward.')],
+  });
+  for (const flags of [[], ['--before-edit']]) {
+    const result = f.run(...flags);
+    assert.equal(result.code, 3);
+    assert.deepEqual(result.unresolved.map(x => x.id), ['baseline']);
+  }
+});
+
+test('pre-edit requires the original test to fail for the intended reason', () => {
+  const f = repairWithBaselineCheck();
+  for (const observation of [undefined, 'baseline_pass', 'runner_error']) {
+    f.assessment.checks = [{
+      id: 'baseline', status: 'pass', qualification: 'qualified', observation, evidence: [f.proof],
+    }];
+    const result = f.run('--before-edit');
+    assert.equal(result.code, 3);
+    assert.deepEqual(result.unresolved.map(x => x.id), ['baseline']);
+  }
+});
+
+test('a verified red test clears pre-edit while the repair outcome remains open', () => {
+  const f = repairWithBaselineCheck();
+  f.assessment.checks = [{
+    id: 'baseline', status: 'pass', qualification: 'qualified', observation: 'target_failure_before_edit',
+    evidence: [f.proof],
+  }];
+  assert.equal(f.run('--before-edit').code, 0);
+  assert.equal(f.run().code, 3);
+  fs.appendFileSync(path.join(f.root, 'proof.txt'), 'changed');
+  assert.equal(f.run('--before-edit').code, 3);
+});
+
+test('a disproved repair can finish without granting permission to edit', () => {
+  const f = repairWithBaselineCheck();
+  f.outcome.resolution = 'disproven';
+  assert.equal(f.run().code, 0);
+  assert.equal(f.run('--before-edit').code, 3);
+});

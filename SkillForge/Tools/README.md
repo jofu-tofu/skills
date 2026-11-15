@@ -6,7 +6,7 @@ Retained from the installed SkillForge on 2026-11-03, with the scoped repairs re
 
 | Tool | Use | Status |
 |---|---|---|
-| CheckCompletion.cjs | Contract identity, evidence integrity and complete/continue/blocked task status | Node/Bun; behavioral updates invoke it through ApproveSkill. It does not judge semantic relevance or intercept final answers. |
+| CheckCompletion.cjs | Contract identity, evidence integrity and complete/continue/blocked task status | Node/Bun. Repairs invoke [`--before-edit`](../Templates/Improvement/Completion.md#before-editing-a-repair) before drafting. Behavioral updates invoke the full check through ApproveSkill. The tool checks the submitted record and does not intercept edits. |
 | ValidateSkill.ts and lib/ | Structural checks | Smoke-tested on this draft; enforces legacy naming/format assumptions. |
 | ExploreSkill.ts | Full read-only snapshot | Imported; runtime behavior not qualified here. Avoid loading every file by default. |
 | scripts/aggregate_benchmark.py | Aggregate compatible grading files | Metric units/missingness/counts: 43 bounded CLI/report checks pass; see [contract](BenchmarkFormat.md). |

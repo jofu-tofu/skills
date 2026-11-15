@@ -35,7 +35,7 @@ function evidenceStatus(refs, root) {
   return { valid: true };
 }
 
-function checkCompletion(contract, assessment, root, contractDigest) {
+function checkCompletion(contract, assessment, root, contractDigest, { beforeEdit = false } = {}) {
   root = fs.realpathSync(root);
   const errors = [];
   const invalid = () => ({ schema_version: 1, valid: false, task_status: 'continue',
@@ -70,6 +70,14 @@ function checkCompletion(contract, assessment, root, contractDigest) {
   // Additive for historical contracts. New behavioral updates bind their objective
   // before editing; candidate rejection cannot substitute for outcome resolution.
   const objective = contract.objective;
+  const baselineRedId = objective?.baseline_red_check;
+  if (beforeEdit || baselineRedId !== undefined) {
+    const executionChecks = (list(requirements) ? requirements : []).filter(r => r?.kind === 'behavioral_execution');
+    if (objective?.kind !== 'repair' || !text(baselineRedId) ||
+        !executionChecks.some(r => r.id === baselineRedId) ||
+        !executionChecks.some(r => r.id !== baselineRedId))
+      errors.push('A repair needs a separate baseline-red check of kind behavioral_execution.');
+  }
   if (objective !== undefined) {
     if (!objective || !['repair', 'enhancement', 'suggestion'].includes(objective.kind))
       errors.push('objective.kind must be repair, enhancement or suggestion.');
@@ -142,11 +150,19 @@ function checkCompletion(contract, assessment, root, contractDigest) {
   validateOperations(assessment.blockers, 'affects', false);
   if (errors.length) return invalid();
 
+  const disproved = !beforeEdit && objective?.kind === 'repair' &&
+    assessment.candidate_decision === 'retain_baseline' &&
+    judgments.get(objective.outcome_check)?.resolution === 'disproven';
+  const activeRequirements = beforeEdit
+    ? requirements.filter(requirement => requirement.id === baselineRedId)
+    : requirements.filter(requirement => !disproved || requirement.id !== baselineRedId);
   const unresolved = [];
-  for (const requirement of requirements) {
+  for (const requirement of activeRequirements) {
     const check = judgments.get(requirement.id);
     let reason;
     if (!check || check.status !== 'pass') reason = check ? 'Check is ' + check.status + '.' : 'Required check was omitted.';
+    else if (requirement.id === baselineRedId && check.observation !== 'target_failure_before_edit')
+      reason = 'The baseline test must fail for the reported behavior before editing.';
     else if (objective && ['repair', 'enhancement'].includes(objective.kind) && requirement.id === objective.outcome_check &&
       !(check.resolution === 'resolved' || (objective.kind === 'repair' && check.resolution === 'disproven')))
       reason = 'Required outcome lacks an explicit resolved' + (objective.kind === 'repair' ? '/disproven' : '') + ' disposition; finishing an experiment is not resolution.';
@@ -189,15 +205,17 @@ function readInput(input, root) {
 
 function main(args) {
   if (args.length === 1 && ['--help', '-h'].includes(args[0])) {
-    console.log('Usage: node CheckCompletion.cjs contract.json assessment.json [--root attempt-directory]\nInputs resolve relative to --root first; missing relative inputs may resolve from cwd only inside that root. Evidence always resolves from --root.\nExit: 0 complete; 3 continue; 4 blocked; 2 invalid input. See Procedures/ApproveSkill.md.'); return;
+    console.log('Usage: node CheckCompletion.cjs [--before-edit] contract.json assessment.json [--root attempt-directory]\nInputs resolve relative to --root first; missing relative inputs may resolve from cwd only inside that root. Evidence always resolves from --root.\nExit: 0 complete for the requested check; 3 continue; 4 blocked; 2 invalid input. See Templates/Improvement/Completion.md.'); return;
   }
+  const beforeEdit = args[0] === '--before-edit';
+  if (beforeEdit) args = args.slice(1);
   let result;
   try {
     if (!(args.length === 2 || (args.length === 4 && args[2] === '--root'))) throw Error('Expected contract, assessment and optional --root.');
     const root = path.resolve(args[3] || process.cwd());
     const body = readInput(args[0], root);
     const assessment = JSON.parse(readInput(args[1], root).toString('utf8'));
-    result = checkCompletion(JSON.parse(body.toString('utf8')), assessment, root, digest(body));
+    result = checkCompletion(JSON.parse(body.toString('utf8')), assessment, root, digest(body), { beforeEdit });
   } catch (error) {
     result = { schema_version: 1, valid: false, task_status: 'continue', candidate_decision: null,
       errors: [error.message], next_actions: [{ id: 'repair-completion-input', description: 'Repair the unavailable or malformed input.' }] };
