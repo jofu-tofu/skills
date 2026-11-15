@@ -14,11 +14,11 @@ Read [GapRecord](../Templates/Improvement/GapRecord.md) when recording a gap and
 
 ## Steps
 
-1. Preserve the incident: input, actual output, expected behavior and its source, version/context, consequence, and available evidence. Ask only for missing information needed for the next check; continue with an explicitly bounded hypothesis when possible.
+1. Preserve the incident: recover the original user task, the output or action they received, what they expected and why, and the consequence. Also record the skill version and the messages, source material, tools or permissions that could change the decision. Link the original evidence where access is appropriate. Record omissions or redactions that could affect the replay. Ask only for missing information needed for the next check; continue with an explicitly bounded hypothesis when possible.
 2. Compare the expectation with target intent and applicable outcome IDs. A new preference or changed purpose needs EstablishQuality; do not silently rewrite the outcome to match a proposed fix.
 3. Inspect whether current cases and scoring would detect the incident. For a repair, establish the [baseline red case](#baseline-red-case-for-a-repair) before selecting or drafting a repair candidate. Record missing tools, references or uncertainty. Keep alternative explanations visible.
 4. Select the smallest justified response using the table below. Do not add a metric merely because an incident occurred.
-5. Save the gap record and its next check. The incident is a development/regression case; later confirmation needs different cases. Hand off only the actions authorized by the current workflow.
+5. Save the gap record and its next check. Send the historical evidence and replay outcome to [ConstructCases](ConstructCases.md) for the regression handoff. Use different cases to test whether the fix carries over. Hand off only the actions authorized by the current workflow.
 
 | Evidence suggests | Next action |
 |---|---|
@@ -39,6 +39,10 @@ UpdateSkill sends the diagnosis to [PlanChange](PlanChange.md); the result may b
 A red case is an executed baseline outcome that violates an independently supported requirement. Preserve the task/input, expected outcome and its source, actual output, baseline identity, available context/tools and checker version in the existing gap record. Check that the failure is the reported behavior, not a broken runner, missing dependency or unsupported grader. Accept valid alternative outputs; do not test for the proposed implementation's wording.
 
 Start with the actual incident and faithful information access. Record any changed conditions: pruning an archive, supplying decisive facts or simplifying a task can remove the failure opportunity. Such a case may help diagnosis but cannot replace the incident and prove repair. Never hide valid baseline evidence or weaken the baseline to manufacture red.
+
+Before replacing a reported failure with a cleaner example, replay the recovered task with the old skill. Keep the messages, artifacts and available tools that could matter. Keep the expected failure and answer key out of the replay instructions. Score the output the user would receive. A short fixture can replace a longer transcript only when it preserves the decision and the opportunity to make the same mistake.
+
+If the old skill passes, compare the replay with the incident. Change one relevant condition at a time, such as the preceding message, source information or workflow stage. Record what changed and keep the passing attempts. Use the replay that actually fails for the regression. A reconstructed case remains labeled as such. If the failure still cannot be reproduced, preserve the incident and the pending case with the specific missing evidence. Passing easier examples cannot stand in for that check.
 
 For variable model behavior, predeclare the next observations and stopping decision, preserve every outcome, and distinguish a captured failure, reproduced failure and passing replay. Justify repeats by the uncertainty; neither an arbitrary quota nor running until a failure appears establishes reliability. One passing replay does not erase the incident, and one failure does not establish a population rate.
 
