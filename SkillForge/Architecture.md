@@ -16,6 +16,7 @@ Optional lookup for finding or maintaining instructions. Start ordinary tasks at
 | Draft or review instruction boundaries and handoffs | [DraftCandidate](Procedures/DraftCandidate.md), [ReviewDesign](Procedures/ReviewDesign.md), [Authoring](Standards/Authoring.md) |
 | Construct cases or test triggering | [ConstructCases](Procedures/ConstructCases.md), [TestTriggering](Procedures/TestTriggering.md) |
 | Execute checks and interpret pass/fail/unverified | [EvaluateCandidate](Procedures/EvaluateCandidate.md), [Grader](Standards/Grader.md); [schemas](Standards/Schemas.md) own result formats |
+| Carry creation or updates across sessions and clean up at completion | [SessionHandoffs](Procedures/SessionHandoffs.md) owns the checkpoint. The main session owns decisions and edits. |
 | Decide readiness/retention separately from task completion | [ApproveSkill](Procedures/ApproveSkill.md); [completion contract and invocation](Templates/Improvement/Completion.md); [tool capabilities](Tools/README.md) |
 | Record an attempt and its retained version | [RecordLearning](Procedures/RecordLearning.md); [attempt index](Improvements/Index.md) for changes to SkillForge itself |
 | Check what this package has actually demonstrated | [ValidationSummary](Evidence/ValidationSummary.md) and [release scope](RELEASE.md); linked historical results retain their original scope |

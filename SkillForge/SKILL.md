@@ -10,6 +10,8 @@ Release candidate with purpose-first outcomes, contribution mapping, experiment 
 
 ## Workflow Routing
 
+Keep ownership of creation and updates in the main session. Use [session handoffs](Procedures/SessionHandoffs.md) when work crosses sessions. The handoff preserves the next action and evidence, and the coordinator removes it once the task is complete.
+
 When a workflow is matched, read its file and follow the steps within it.
 
 | Workflow | User intent | File |

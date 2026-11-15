@@ -18,6 +18,8 @@ Deliver a candidate skill for a defined user need, with a scoped assessment or e
 
 ## Workflow Steps
 
+The main session owns creation from scope through completion. Use [session handoffs](../Procedures/SessionHandoffs.md) if work crosses sessions. When the target skill itself needs continuity, include the target's handoff and cleanup rules in its design.
+
 1. Scope the need and check whether an existing skill already covers it. Read the target intent if extending existing work; route that change to UpdateSkill.
 2. Call EstablishQuality for each owned target workflow, including DesignMeasurement for new or unsupported measures. Separate user outcomes from shared internal procedures. Link the measurement specification, qualification status and pending evidence before planning; design-only requests may deliver planned qualification.
 3. Call PlanChange, using a no-skill or named alternative baseline when claiming benefit. For design-only work record behavioral checks as pending.
@@ -25,7 +27,7 @@ Deliver a candidate skill for a defined user need, with a scoped assessment or e
    Read [Authoring](../Standards/Authoring.md); include target intent, user-facing routing, relevant examples, and explicit completion/evidence conditions. Run the bundled structural validator where the target follows its supported format. Check local references separately.
    Call ReviewDesign on the candidate and its handoffs; resolve blocking findings and recheck affected paths before structural completion, recording deferred risks.
 5. If execution is authorized, call EvaluateCandidate then ApproveSkill. Otherwise deliver the candidate as unverified.
-6. When ApproveSkill was used, consume its task status: execute a named `continue` action within creation scope, or report the actual `blocked` limit and resume action. Call RecordLearning and return the candidate, evidence status, and remaining limitations when the scoped task is complete or genuinely blocked. Explicit design-only delivery retains its narrower completion rule.
+6. When ApproveSkill was used, consume its task status: execute a named `continue` action within creation scope, or report the actual `blocked` limit and resume action. Call RecordLearning, finish any handoff after task completion, and return the candidate, evidence status, and remaining limitations when the scoped task is complete or genuinely blocked. Explicit design-only delivery retains its narrower completion rule.
 
 ## Completion
 
