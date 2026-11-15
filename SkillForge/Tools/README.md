@@ -2,6 +2,8 @@
 
 For compatible native regression suites across Prompting, ClarityEngine and WebDesign, use the optional [combined test command](../Checks/SharedSkillTests.md). Keep individual assertions and failures; select only skills relevant to the change.
 
+Use the [failed baseline workflow check](../Checks/FailedBaselineWorkflow.md) to run a fresh Codex session and verify that a failed repair replay leaves the target unchanged and the repair pending.
+
 Retained from the installed SkillForge on 2026-11-03, with the scoped repairs recorded in [validation evidence](../Evidence/ValidationSummary.md). Source hashes are recorded in Improvements/ReconcileLegacy/ImportedFiles.json. Most tools are optional implementation support, not quality evidence by themselves. Behavioral updates invoke CheckCompletion when Node or Bun is available; ApproveSkill defines the labeled manual fallback.
 
 | Tool | Use | Status |
