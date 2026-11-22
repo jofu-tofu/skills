@@ -1,6 +1,6 @@
 ---
 name: CodeReview
-description: Comprehensive multi-agent code review and codebase audit system. USE WHEN code review OR review PR OR review pull request OR review changes OR review commits OR review diff OR check my code OR audit code changes OR review this branch OR what did I change OR look over my code OR inspect my changes OR critique this PR OR give feedback on my changes OR audit this module OR audit this directory OR review this codebase OR audit code quality OR review code health OR audit architecture.
+description: Comprehensive multi-agent code review and codebase audit system. USE WHEN code review OR review PR OR review pull request OR review changes OR review commits OR review diff OR check my code OR audit code changes OR review this branch OR what did I change OR look over my code OR inspect my changes OR critique this PR OR give feedback on my changes OR audit this module OR audit this directory OR review this codebase OR audit code quality OR review code health OR audit architecture OR review a proposed code interface.
 compatibility: Designed for Codex and Devin (or similar agent products). Requires git.
 metadata:
   author: pai
@@ -9,7 +9,7 @@ metadata:
 
 # CodeReview
 
-Multi-agent code review and codebase audit system with **process-boundary enforcement**. Operates in two modes: **diff mode** (review changes against a commit range) and **audit mode** (evaluate existing code in a directory/module). Both modes achieve depth through parallelism — agents review different dimensions simultaneously while a slim context layer prevents token waste. Diff mode verifies claims against changed commits; audit mode verifies claims against actual file contents.
+Multi-agent code review and codebase audit system with **process-boundary enforcement**. For implemented code it operates in two modes: **diff mode** (review changes against a commit range) and **audit mode** (evaluate existing code in a directory/module). A separate proposal route reviews interface sketches before implementation. Both code modes achieve depth through parallelism — agents review different dimensions simultaneously while a slim context layer prevents token waste. Diff mode verifies claims against changed commits; audit mode verifies claims against actual file contents.
 
 ## Success Criteria
 
@@ -52,7 +52,9 @@ Previous architecture had all workflow files read in a single LLM session. The L
 | 4 | Review Agents (available parallel capacity) | Dimension file + addenda + `context.md` + file list | `dimension-[id].md` per agent | Usable nonempty results, or explicit unavailable coverage after bounded retry |
 | 5 | VerifyAndReport | Agent output paths + `context.md` + `dimensions.json` + manifest | `verified-findings.md` + `report.md` | Both readable/nonempty; bounded failure yields incomplete delivery |
 
-When triggered, you MUST:
+For a proposed interface supplied as prose, signatures or pseudocode, run [ProposalReview](Workflows/ProposalReview.md) directly. For mixed requests verify implementation claims through the existing code workflow.
+
+For a diff or existing-code audit, you MUST:
 1. Read `Workflows/Review.md` FIRST — before reading any source code or diffs
 2. Follow Review.md's orchestrator steps — each step spawns an agent with a workflow file path
 3. Check artifacts between steps as specified
@@ -69,6 +71,7 @@ Running the **Review** workflow from the **CodeReview** skill...
 | Workflow | Trigger | File |
 |----------|---------|------|
 | **Review** | "code review", "review my PR", "review this branch", "review my changes", "review my commits", "review last N commits", "check my code", "audit my changes", "what did I change", "do a code review", "run a review", "audit this module", "audit this directory", "review this codebase", "audit code quality", "review code health", "audit architecture" | `Workflows/Review.md` |
+| **ProposalReview** | Review a proposed code interface or module boundary | `Workflows/ProposalReview.md` |
 | **ReReview** | "re-review my fix", "did my fix work", "check fix for regressions", "review the fix delta" | `Workflows/ReReview.md` |
 | **SeriesReview** | "review commit series", "review this commit stack", "commit by commit review" | `Workflows/SeriesReview.md` |
 
