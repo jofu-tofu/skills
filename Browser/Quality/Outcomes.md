@@ -93,3 +93,5 @@ Current bounded evidence: runtime: Bun candidate16 silently exited; awaited entr
 Next: Retain demonstrated result; limits below are separate from supported outcomes measured here.
 
 Source and raw evidence: SkillForge project `20-working-T1-T3/RemainingSkills20261104/deep/engineering-coverage.json`, `engineering-scope.md`, `scope-review.md`, and `engineering/open-outcome-map.json`. Per-outcome records preserve applicable contrasts, qualification and specific trial evidence. These external files are evidence indexes, not runtime dependencies. Structural ownership/portability/schema findings remain required work until explicitly resolved; consult local Improvements records for retained scoped changes.
+
+The offline CLI case in [Accessibility.test.ts](../Tests/Accessibility.test.ts) covers a failed explicit accessibility capture, a successful empty tree, and a populated tree. Before the repair, a capture failure exited successfully. The repaired CLI preserves the failure reason. A successful interaction can still be reported when its optional follow-up snapshot fails.

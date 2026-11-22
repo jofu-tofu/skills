@@ -56,3 +56,5 @@ External evidence root: `20-working-T1-T3/RemainingSkills20261104/deep/reasoning
 Check available inventory/search dependency paths, shell portability, local/online/MCP routing, source freshness/provenance and real invocation. Compare one host-neutral workflow with optional registry reference extraction; no required new search service.
 
 Baseline observations: external `structure-baseline.json`. Minimal contract repairs preserve existing useful workflows; extra folders or length are not evidence of quality. Runtime and documentation findings are separated in Improvements/ records where changed. Continue material unverified outcomes; do not rerun passing samples to manufacture gains. A future provider/model update may require fresh checks.
+
+The [composition cases](CompositionCases.md) add a compatible and an unverified handoff for the same task. The independent reader passed both variations. This is a recommendation check on supplied definitions. The skills were not executed.

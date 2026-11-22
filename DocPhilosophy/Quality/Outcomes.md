@@ -83,3 +83,11 @@ Contribution/owner: DP-KNOW / KnowledgeIsPerishable.
 Applicability and valid/failure contrasts: Team-critical decision cannot exist only in personal vault; personal reflection need not pollute repository; mixed content can be separated with links.
 
 Current coverage: Accepted bounded evidence is indexed by the outcome evidence IDs above; retain the recorded scope and limitations.
+
+## Current policy and an offline emergency copy
+
+Give the adviser this brief alone. “Dispatchers lose network access during outages. Compliance owns the online shutoff policy. Each depot prints an emergency card. A changed cutoff takes effect on Monday. Some sealed depots cannot receive a new card until Wednesday. We need placement and maintenance advice, not file edits.”
+
+A usable answer identifies the authoritative owner and location, keeps an offline path for dispatchers, and explains how to distinguish card versions and retire superseded copies. It must surface the Monday–Wednesday gap and seek an authorized interim instruction. Reject an online-link-only fix, a second independently editable policy, or invented permission to use the old cutoff.
+
+Repeat with the old cutoff still mandatory at sealed depots until Wednesday under a signed exception. Require the advice to preserve the named scope and expiry of that exception. A blanket purge on Monday is now wrong.

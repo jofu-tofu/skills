@@ -38,7 +38,7 @@ Inspect the exact range, before/after source, patches and endpoint state. Blame 
 | Intentional/valid idiom, project exception, or no applicable problem | FALSE POSITIVE | Discard with reason |
 | Genuine issue predates the range and is unrelated to its changes | PRE-EXISTING | Appendix, outside new-finding count |
 | Later commit in range fixed the line | SELF-CORRECTED | Discard |
-| Cannot determine (binary, generated, blame unavailable) | UNVERIFIED | Keep, mark "manual review recommended" |
+| Available source and history cannot establish the claimed behavior or its cause | UNVERIFIED | Keep, mark "manual review recommended" |
 
 ### Audit Mode Verification
 

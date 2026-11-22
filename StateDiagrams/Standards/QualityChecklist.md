@@ -10,7 +10,7 @@ Use this checklist before returning a state diagram or state map.
 - Actions are not mislabeled as durable states.
 - Every non-initial transition has a trigger, outcome, or guard.
 - Every decision node has at least two labeled outgoing branches.
-- Branch labels are mutually exclusive.
+- Replay each branch, including overlapping raw guards and the no-match case. For ordered rules, preserve first-match priority with sequential decisions or equivalent exclusive guards. When priority is unspecified and different targets or actions are possible, record the unresolved overlap.
 - Async paths are visibly distinct from synchronous continuation paths.
 - Manual triggers, callbacks, and durable writes are not collapsed into one edge.
 - Planned or unresolved behavior is visually distinct from current behavior when both are shown.

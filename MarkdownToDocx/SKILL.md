@@ -11,7 +11,7 @@ metadata:
 
 Convert Markdown documents into Word `.docx` output using `pandoc`, with automatic Mermaid diagram rendering to images, visible table formatting, and auto-open for immediate review.
 
-For assessment or improvement, read the owner-agreed [quality outcomes](Quality/Outcomes.md) and [measurement scope](Quality/Measurements.md). Version 1.0.1 records quality requirements; the conversion workflow and tools are unchanged and have not been evaluated against all of them.
+For assessment or improvement, read the owner-agreed [quality outcomes](Quality/Outcomes.md) and [measurement scope](Quality/Measurements.md). The [diagram regression suite](Tests/Mermaid.test.mjs) covers top-level fences, literal examples, asset collisions and offline rendering. Full Word fidelity still needs a document-level check.
 
 ## Workflow Routing
 

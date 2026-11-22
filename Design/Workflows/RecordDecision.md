@@ -40,6 +40,8 @@ If the user cannot answer a question, record it as an explicit assumption or ope
 
 ### Step 2: Prune to the Decision
 
+For a time-limited pilot, record what expires and what decision remains when it ends. Tie rollback to the changes it can actually reverse. If expansion criteria or approval are unknown, leave them open.
+
 Keep only sections that help readers understand or revisit the decision. The ADR is not a full design doc.
 
 Include:

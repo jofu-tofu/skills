@@ -461,31 +461,23 @@ async function takeScreenshot(path?: string): Promise<void> {
   console.log(`Screenshot: ${screenshotPath}`)
 }
 
-async function getA11yTree(): Promise<string | null> {
-  try {
-    const data = await sessionCommand('accessibility', {}, 'GET') as { tree: string }
-    return data?.tree || null
-  } catch {
-    return null
-  }
+async function getA11yTree(): Promise<string> {
+  const data = await sessionCommand('accessibility', {}, 'GET') as { tree: string }
+  if (typeof data?.tree !== 'string') throw new Error('Accessibility snapshot missing from session response')
+  return data.tree
 }
 
 async function printA11yTree(): Promise<void> {
-  const tree = await getA11yTree()
-  if (tree) {
-    console.log('\nAccessibility Tree:')
-    console.log(formatAccessibilityTree(tree))
+  try {
+    await showAccessibilityTree()
+  } catch (error) {
+    console.warn('Action completed. Accessibility snapshot unavailable:', error instanceof Error ? error.message : error)
   }
 }
 
 async function showAccessibilityTree(): Promise<void> {
   const tree = await getA11yTree()
-  if (tree) {
-    console.log('Accessibility Tree:')
-    console.log(formatAccessibilityTree(tree))
-  } else {
-    console.log('No accessibility tree available (navigate to a page first)')
-  }
+  console.log(tree ? 'Accessibility Tree:\n' + formatAccessibilityTree(tree) : 'Accessibility tree is empty')
 }
 
 async function navigate(url: string): Promise<void> {

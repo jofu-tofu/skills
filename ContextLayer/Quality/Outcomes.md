@@ -89,3 +89,5 @@ Current bounded evidence: handoff: Two permitted source reads, unresolved claims
 Next: Retain demonstrated result; limits below are separate from supported outcomes measured here.
 
 Source and raw evidence: SkillForge project `20-working-T1-T3/RemainingSkills20261104/deep/engineering-coverage.json`, `engineering-scope.md`, `scope-review.md`, and `engineering/open-outcome-map.json`. Per-outcome records preserve applicable contrasts, qualification and specific trial evidence. These external files are evidence indexes, not runtime dependencies. Structural ownership/portability/schema findings remain required work until explicitly resolved; consult local Improvements records for retained scoped changes.
+
+[Working-tree drift case](WorkingTreeCase.md) exercises staged and unstaged edits against a sibling-only control. On a temporary Git repo both old count observations were 1, with an unchanged directory shape. The scoped status command identified the modified route and returned no paths for the sibling-only control. This checks Git evidence, not a model-generated drift report.

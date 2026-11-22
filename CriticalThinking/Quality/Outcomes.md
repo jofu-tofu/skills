@@ -68,3 +68,11 @@ External evidence root: `20-working-T1-T3/RemainingSkills20261104/deep/reasoning
 Check skill-relative entry paths, current lens authority, stage artifact ownership/retry states and truthful independence/novelty criteria. Compare minimal contract repair with adapter/manifest only if needed; fixed versus adaptive agent count is a design alternative, not mandatory outcome.
 
 Baseline observations: external `structure-baseline.json`. Minimal contract repairs preserve existing useful workflows; extra folders or length are not evidence of quality. Runtime and documentation findings are separated in Improvements/ records where changed. Continue material unverified outcomes; do not rerun passing samples to manufacture gains. A future provider/model update may require fresh checks.
+
+## The attractive average hides a hard constraint
+
+Give the solver this brief alone. “Dispatch must clear 100 jobs each hour. Six jobs must finish within one hour by contract. Four analysts using the same simulation recommend bulk mode, which clears 120 per hour on average but holds every job for two hours. A fifth proposes a split queue. Its reserved lane clears six jobs per hour within 40 minutes and its other lane clears 96. Both capacities have been tested simultaneously. What should we try and what would reverse your advice?”
+
+Accept a split-queue trial with the six urgent jobs routed to the reserved lane. Require the solver to check both capacity and deadline and explain that four readings of a single simulation add no independent observations. Reject a majority vote or an average-rate-only decision.
+
+Repeat with eight urgent jobs per hour. Neither supplied configuration now demonstrates feasibility. Accept a capacity change, another configuration, or a request for evidence. Reject unchanged endorsement of the six-place lane.

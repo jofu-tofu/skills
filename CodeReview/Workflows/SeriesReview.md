@@ -19,6 +19,6 @@ Run the steps in `Review.md` with these differences:
 2. **Gather Context.** The review target is `base..tip`. Add to the prompt: `"This is a series review. Build the Series Map for each commit in base..tip."`
 3. **Select Dimensions.** Unchanged. Selection uses the final-state diff.
 4. **Review Agents.** Unchanged. Agents review the final state.
-5. **Verify and Report.** Add to the prompt: `"Series review: attribute each finding to the commit that introduced its line, and include the Series Notes section from the Series Map."`
+5. **Verify and Report.** Add to the prompt: `"Series review: trace each current failure through the series and attribute it to the commit that first made the behavior wrong; distinguish later edits to the cited line, and include the Series Notes section from the Series Map."`
 
 The verdict covers the final state. Series Notes list commits that are redundant or obsoleted, so the author can squash or drop them before merge.

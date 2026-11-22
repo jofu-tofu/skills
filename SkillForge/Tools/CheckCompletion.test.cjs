@@ -254,3 +254,38 @@ test('CLI preserves absolute input paths', t => {
   assert.equal(r.status, 0, r.stdout + r.stderr);
   assert.equal(JSON.parse(r.stdout).task_status, 'complete');
 });
+test('an observed failure on the old version cannot also prove a portfolio outcome', t => {
+  const f = broadFixture(t);
+  f.contract.objective = { kind: 'repair', outcome_check: 'R0', baseline_red_check: 'red' };
+  f.contract.required_checks.push({ id: 'red', kind: 'behavioral_execution', description: 'Old export lost a record' });
+  f.inventory.targets[0].families[2].outcomes[0].check_id = 'red';
+  f.bindInventory();
+  f.assessment.checks.find(c => c.id === 'R0').resolution = 'resolved';
+  f.assessment.checks.push({ id: 'red', status: 'pass', qualification: 'qualified',
+    observation: 'target_failure_before_edit', evidence: [f.evidence('baseline.txt', 'Export lost one record.')] });
+  assert.equal(f.run().code, 2);
+});
+
+test('a separate parent judgment still needs more than an observation of the old failure', t => {
+  const f = broadFixture(t);
+  const proof = f.evidence('comparison.txt', 'Original export lost one record. Candidate export preserved it.');
+  f.contract.objective = { kind: 'repair', outcome_check: 'R0', baseline_red_check: 'red' };
+  f.contract.required_checks.push({ id: 'red', kind: 'behavioral_execution', description: 'Original export loses a record' });
+  f.assessment.checks.find(c => c.id === 'R0').resolution = 'resolved';
+  f.assessment.checks.push({ id: 'red', status: 'pass', qualification: 'qualified',
+    observation: 'target_failure_before_edit', evidence: [proof] });
+  const parent = f.assessment.checks.find(c => c.id === 'export');
+  parent.observation = 'target_failure_before_edit';
+  parent.evidence = [proof];
+  const result = f.run();
+  assert.equal(result.code, 3);
+  assert.deepEqual(result.result.unresolved.map(item => item.id), ['export']);
+  f.assessment.blockers.push({ id: 'export-service', affects: ['export'], reason: 'Export service is offline',
+    evidence: [f.evidence('offline.txt', 'Export service unavailable during replay.')] });
+  assert.equal(f.run().code, 4);
+  f.assessment.actions.push({ id: 'local-export', resolves: ['export'], description: 'Replay the same export locally',
+    authorized: true, feasible: true });
+  assert.equal(f.run().code, 3);
+  delete parent.observation;
+  assert.equal(f.run().code, 0);
+});

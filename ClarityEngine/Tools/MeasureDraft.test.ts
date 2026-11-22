@@ -33,3 +33,20 @@ describe("sentence extraction preserves prose before internal punctuation", () =
     expect(prose).toEqual(["Check that the credit adjustment is −.5 units, not .5.", "Keep the sign."]);
   });
 });
+
+test("a fenced example cannot hide the release instruction that follows it", () => {
+  const draft = ["# Procedure", "~~~~markdown", "~~~", "# Appendix", "Example only.", "~~~~", "Ship after approval."].join("\n");
+  expect(parseBlocks(draft).filter(block => block.onMainPath).map(block => block.text)).toEqual(["Procedure", "Ship after approval."]);
+});
+
+test("nested appendix headings stay off the main path until the parent ends", () => {
+  const draft = "## Appendix\n### Appendix A\n### Raw data\nPrivate notes.\n## Decision\nProceed.";
+  expect(parseBlocks(draft).filter(block => block.onMainPath).map(block => block.text)).toEqual(["Decision", "Proceed."]);
+});
+
+test("a collapsed appendix cannot classify the visible decision as appendix material", () => {
+  const draft = "# Instructions\n<details>\n## Appendix\nArchived notes.\n</details>\nRelease the signed report.";
+  const visible = parseBlocks(draft).filter(block => block.onMainPath);
+  expect(visible.map(block => block.text)).toEqual(["Instructions", "Release the signed report."]);
+  expect(visible.at(-1)?.sectionHeading).toBe("Instructions");
+});

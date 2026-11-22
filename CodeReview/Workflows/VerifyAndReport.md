@@ -85,7 +85,7 @@ A retained finding first needs a supported failure mechanism or present maintena
 
 #### Diff Mode Verification
 
-Use `git blame` to confirm each finding's line was introduced by a commit in the review range. Also check for self-correction (a later commit in the range fixed the same line).
+Compare the behavior at base and tip on the triggering input. Trace the responsible patch, including removed code or a changed caller. Blame identifies who last edited a surviving line. A later rename, move or formatting change can preserve an earlier fault. For a series, use the first commit that caused the current failure and check for subsequent repair or reintroduction.
 
 | Condition | Result | Action |
 |---|---|---|

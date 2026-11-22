@@ -39,6 +39,23 @@ test.each([
   expect(check(source, data, true).valid).toBe(valid);
 });
 
+test.each([true, false])('with this preserves the parent of an includeZero flag (%s)', allow => {
+  const source = '{{#each rows}}{{#with this}}{{#if count includeZero=../allow}}{{required}}{{else}}skip{{/if}}{{/with}}{{/each}}';
+  const data = { allow, rows: [{ count: 0, allow: !allow }] };
+  expect(Handlebars.compile(source)(data)).toBe(allow ? '' : 'skip');
+  expect(check(source, data, true).valid).toBe(!allow);
+});
+
+test('an unresolved includeZero helper leaves its zero branch unchecked and checks its siblings', () => {
+  const source = '{{#unless count includeZero=(lookup flags "allow")}}skip{{else}}{{required}}{{/unless}}{{sibling}}';
+  const data = { count: 0, flags: { allow: true } };
+  expect(Handlebars.compile(source)(data)).toBe('');
+  const result = check(source, data, true);
+  expect(result.errors).toHaveLength(1);
+  expect(result.errors[0]).toContain('"sibling"');
+  expect(result.warnings.join(' ')).toContain('not checked');
+});
+
 test('accepts adjacent and nested blocks that render the required text', () => {
   const source = '{{#if ready}}Ready{{/if}}{{#unless blocked}}!{{/unless}}';
   expect(Handlebars.compile(source)({ ready: true, blocked: false })).toBe('Ready!');
@@ -122,4 +139,13 @@ test('returns an actionable invalid result for malformed data', () => {
   const result = validateTemplate({ templatePath, dataPath, strict: true });
   expect(result.valid).toBe(false);
   expect(result.errors.join(' ')).toContain('Data');
+});
+test.each([
+  { allow: true, expected: '', valid: false },
+  { allow: false, expected: 'skip', valid: true },
+])('honors a supplied includeZero flag ($allow)', ({ allow, expected, valid }) => {
+  const source = '{{#if count includeZero=allow}}{{required}}{{else}}skip{{/if}}';
+  const data = { count: 0, allow };
+  expect(Handlebars.compile(source)(data)).toBe(expected);
+  expect(check(source, data, true).valid).toBe(valid);
 });

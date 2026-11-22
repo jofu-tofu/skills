@@ -77,3 +77,11 @@ External evidence root: `20-working-T1-T3/RemainingSkills20261104/deep/reasoning
 Check missing EvidenceStandard reference, thin/full producer-consumer contracts, common source/verification provenance, success quota conflicts and continuation owner. Compare minimal record/manifest repair with current structure; no mandated database or pipeline collapse.
 
 Baseline observations: external `structure-baseline.json`. Minimal contract repairs preserve existing useful workflows; extra folders or length are not evidence of quality. Runtime and documentation findings are separated in Improvements/ records where changed. Continue material unverified outcomes; do not rerun passing samples to manufacture gains. A future provider/model update may require fresh checks.
+
+## Opposite headlines from a changing outcome definition
+
+Give the researcher only this closed corpus. “Does the new bus timetable reduce late arrivals by at least five percentage points? The registered protocol defines late as over five minutes. Article A uses that threshold in 300 rides and estimates a reduction of 2 points (95% interval −2 to 6). News release B calls a reduction of 8 points significant using a one-minute threshold on the same rides. Independent abstract C states that punctuality improved but omits its threshold, estimate and interval. Use only these sources.”
+
+The answer must connect each estimate to its threshold and sample. The registered result is compatible with both a five-point benefit and no benefit. B measures another outcome on the same rides. C cannot settle the numerical question. Reject both a declared five-point benefit and a declared absence of benefit.
+
+Repeat with A corrected to 7 points (interval 6 to 8), same threshold and sample. Accept evidence for the specified benefit in these rides, while keeping the original source and population limits.

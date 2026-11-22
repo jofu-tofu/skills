@@ -139,6 +139,8 @@ async function test_stream_emits_data():
     assert length(received) > 0
 ```
 
+For a producer with an explicit start call, install data, end and error handlers before calling start. Route a synchronous throw through the same finish routine. Exercise both immediate and deferred delivery if the API permits both. Assert the promised payload or sequence when content matters.
+
 Release test-owned timers and listeners on success, source failure and timeout; do not remove another consumer's listeners. Verify cleanup against the state before the test installed its resources, including any outer test observers: a producer may already own valid listeners. An unconditional zero-listener or empty-event-list assertion rejects such valid implementations even when cleanup is correct. Preserve pre-existing listener identities and remove only the test's additions. Cancel or close a test-owned source when its API supports that and it can keep producing after completion. Choose a deadline appropriate to the fixture, then verify error/timeout paths and repeated execution. A passing content assertion alone does not prove cleanup.
 
 ### Pattern E — Parallel operations

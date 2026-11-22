@@ -6,3 +6,11 @@ test('rejects plausible dimensions in an incomplete PNG',()=>expect(()=>inspectP
 test('rejects a complete image body without its end chunk',()=>expect(()=>inspectPng(pixel.subarray(0,-12))).toThrow());
 test('rejects corrupted chunk content',()=>{const corrupt=Buffer.from(pixel);corrupt[40]^=1;expect(()=>inspectPng(corrupt)).toThrow();});
 test('rejects non-image data',()=>expect(()=>inspectPng(Buffer.from('hello'))).toThrow());
+test('rejects a checksummed container with zero total image-data bytes', () => {
+  // An empty IDAT chunk is valid alongside a nonempty one.
+  const empty = Buffer.from('000000004944415435af061e', 'hex');
+  const header = pixel.subarray(0, 33);
+  const end = pixel.subarray(-12);
+  expect(inspectPng(Buffer.concat([header, empty, pixel.subarray(33)]))).toEqual({width: 1, height: 1});
+  expect(() => inspectPng(Buffer.concat([header, empty, empty, end]))).toThrow();
+});

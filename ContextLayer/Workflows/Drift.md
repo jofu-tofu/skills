@@ -80,6 +80,8 @@ Apply same thresholds. Flag as `[LEGACY FORMAT]` in report.
 
 Count signatures cannot detect same-count renames or substitutions. When history is available, inspect scoped name-status changes since the review anchor as well; retain additions, deletions and renames. Missing/rewritten anchors remain unknown.
 
+Before reporting no observed drift, inspect the index and working tree from the project root with `git --no-optional-locks status --porcelain=v1 --untracked-files=all -- <covered-directory>`. Report relevant in-scope staged, unstaged and untracked paths as local changes even when commit and file counts match. A sibling-only change does not affect a targeted verdict. If status cannot be read, label local drift unknown. This metadata identifies possible staleness without opening changed source files.
+
 **Signal B — Structural Fingerprint (secondary):**
 
 Compute current tree signature for the covered directory:
@@ -136,7 +138,7 @@ LOW DRIFT (monitor):
   ~ {path} — {N} commits since audit
 
 NO OBSERVED DRIFT (accuracy not established):
-  ✓ {path} — 0 commits since audit, tree-sig unchanged
+  ✓ {path} — 0 commits since audit, tree-sig unchanged, no relevant local changes
 
 LEGACY FORMAT (upgrade on next Audit/Generate):
   ⚙ {path} — missing dir-commits-at-audit and/or tree-sig fields

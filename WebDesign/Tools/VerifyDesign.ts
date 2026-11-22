@@ -23,7 +23,7 @@ export function inspectPng(b: Buffer): {width:number,height:number} {
    if(!width||!height||width>0x7fffffff||height>0x7fffffff)throw Error('Invalid PNG dimensions');
    header=true;
   }else if(type==='IHDR')throw Error('Duplicate IHDR chunk');
-  if(type==='IDAT')data=true;
+  if(type==='IDAT' && length > 0)data=true;
   if(type==='IEND'){
    if(length!==0||!data)throw Error('Invalid PNG end or missing image data');
    if(next!==b.length)throw Error('Unexpected data after PNG end');

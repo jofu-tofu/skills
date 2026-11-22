@@ -16,7 +16,7 @@ Read References/FrontendDesignPhilosophy.md and the intent that fits the task:
 
 Respect the existing framework, tokens and components. Choose a visual register suited to the content. Produce usable code, accessible semantics, keyboard operation, responsive layouts and reduced-motion behavior. Render the result in the host browser and inspect a screenshot plus the relevant interactions. Critique hierarchy, spacing, fonts, contrast and task completion; fix defects or state what remains unverified. No separate critique, screenshot, publishing or design-system service is required.
 
-Tools/VerifyDesign.ts checks a supplied PNG file's header and dimensions only; it does not capture a page or certify visual quality. Browser capture and visual inspection use the host tools. NativeDesign is optional and requires explicit access to the chosen design application; DirectDesign works without it. Read References/SiteLaunch.md when a public launch is requested, and do not publish unless authorized.
+Tools/VerifyDesign.ts checks PNG container structure, chunk checksums and dimensions. Use the browser to capture the page, inspect its appearance and try the user’s task. NativeDesign is optional and requires explicit access to the chosen design application; DirectDesign works without it. Read References/SiteLaunch.md when a public launch is requested, and do not publish unless authorized.
 
 ## Examples
 

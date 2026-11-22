@@ -24,3 +24,7 @@ The [attempt index](../Improvements/Index.md) links the portable fixtures, check
 ## Next decisions
 
 Review the diagnostic results before running a baseline of the unchanged skill. Extend or qualify checks where the baseline scope needs them; select a change only after identifying a concrete gap. Declare benefit/preservation criteria before a candidate comparison. Fresh cases are required for transfer claims. Changes in viewer, engine, feature set or measurement definition require checking applicability and preserving old observations.
+
+## Mixed-document regression, 2026-11-22
+
+The [end-to-end case](../Tests/test_mixed_document.py) runs the renderer, Pandoc and the table helper on a document with an existing relative image named mermaid1.png, a diagram in a tilde fence, a link and a table. The baseline document contained one image and omitted the diagram. The revision produced two distinct images and preserved the checked heading, link target, table associations, cell border and source bytes. The [renderer cases](../Tests/Mermaid.test.mjs) also cover literal examples and occupied output paths. The end-to-end check opens the delivered package in python-docx. It does not measure Word layout, real-user editing effort or app launch.

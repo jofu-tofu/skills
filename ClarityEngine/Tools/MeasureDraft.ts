@@ -151,7 +151,8 @@ export function parseBlocks(markdown: string): DraftBlock[] {
   let collapsedDepth = 0;
   let appendixLevel = 0;
   let currentSectionHeading = "(document start)";
-  let insideCodeFence = false;
+  let outerSectionHeading = currentSectionHeading;
+  let openFence = "";
   let pendingParagraphLines: string[] = [];
   let lineIndex = 0;
 
@@ -183,17 +184,23 @@ export function parseBlocks(markdown: string): DraftBlock[] {
     const line = lines[lineIndex];
     const trimmed = line.trim();
 
-    if (/^(```|~~~)/.test(trimmed)) {
-      flushParagraph();
-      insideCodeFence = !insideCodeFence;
+    const fence = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    if (openFence) {
+      if (fence && fence[1].startsWith(openFence) && !fence[2].trim()) openFence = "";
       continue;
     }
-    if (insideCodeFence) continue;
+    if (fence && !(fence[1][0] === "`" && fence[2].includes("`"))) {
+      flushParagraph();
+      openFence = fence[1];
+      continue;
+    }
 
     if (/<details\b/i.test(trimmed) || /<\/details>/i.test(trimmed)) {
       flushParagraph();
+      if (collapsedDepth === 0) outerSectionHeading = currentSectionHeading;
       collapsedDepth += (trimmed.match(/<details\b/gi) ?? []).length;
       collapsedDepth = Math.max(0, collapsedDepth - (trimmed.match(/<\/details>/gi) ?? []).length);
+      if (collapsedDepth === 0) currentSectionHeading = outerSectionHeading;
       continue;
     }
 
@@ -201,9 +208,11 @@ export function parseBlocks(markdown: string): DraftBlock[] {
     if (headingMatch) {
       flushParagraph();
       const headingLevel = headingMatch[1].length;
-      if (appendixLevel > 0 && headingLevel <= appendixLevel) appendixLevel = 0;
       const headingText = stripInlineMarkdown(headingMatch[2]);
-      if (/\bappendix\b/i.test(headingText)) appendixLevel = headingLevel;
+      if (collapsedDepth === 0) {
+        if (headingLevel <= appendixLevel) appendixLevel = 0;
+        if (appendixLevel === 0 && /\bappendix\b/i.test(headingText)) appendixLevel = headingLevel;
+      }
       currentSectionHeading = headingText;
       pushBlock("heading", headingText, headingLevel);
       continue;

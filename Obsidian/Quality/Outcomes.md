@@ -103,3 +103,5 @@ Contribution/owner: OB-TEMPLATE / description + Templater/Properties references.
 Applicability and valid/failure contrasts: Static/core template vs Templater; missing plugin; property typing/escaping; date/time fields; filename collisions; script/file/network actions are not executed merely because an example contains them. A template-only request has no named route in the current workflow table.
 
 Current coverage: Accepted bounded evidence is indexed by the outcome evidence IDs above; retain the recorded scope and limitations.
+
+The [link destination case](LinkDestinationCase.md) changes a same-name note's heading and then removes it. An independent reader passed the supplied vault probe. This is a snapshot-based recommendation check; native Obsidian navigation was not exercised.

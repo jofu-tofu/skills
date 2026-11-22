@@ -91,6 +91,7 @@ function checkCompletion(contract, assessment, root, contractDigest, { beforeEdi
   if (contract.depth !== undefined && !['focused', 'comprehensive'].includes(contract.depth)) errors.push('Invalid improvement depth.');
   // Broad work binds the parent inventory independently of a round's selected checks.
   // Hashes cannot prove semantic completeness; the scope-review outcome supplies that review.
+  const parentChecks = new Set();
   if (contract.depth === 'comprehensive') {
     const coverage = evidenceStatus(contract.coverage_inventory ? [contract.coverage_inventory] : [], root);
     if (!coverage.valid) errors.push('Comprehensive depth requires a valid parent coverage inventory: ' + coverage.reason);
@@ -98,12 +99,12 @@ function checkCompletion(contract, assessment, root, contractDigest, { beforeEdi
       try {
         const inventory = JSON.parse(fs.readFileSync(path.resolve(root, contract.coverage_inventory.path), 'utf8'));
         const byId = new Map((list(requirements) ? requirements : []).map(r => [r.id, r]));
-        const ownedChecks = new Set();
+        // The pre-edit failure describes the old version and cannot stand in for a parent result.
         function ownCheck(id, role) {
           const check = byId.get(id);
-          if (!text(id) || !check || check.kind === 'deliverable' || ownedChecks.has(id))
+          if (!text(id) || !check || check.kind === 'deliverable' || id === baselineRedId || parentChecks.has(id))
             errors.push(role + ' needs its own declared non-deliverable check; evidence may be shared, judgments may not.');
-          ownedChecks.add(id);
+          parentChecks.add(id);
         }
         ownCheck(contract.scope_review_check, 'Parent scope review');
         if (inventory.schema_version !== 1 || !list(inventory.targets) || !inventory.targets.length)
@@ -163,6 +164,8 @@ function checkCompletion(contract, assessment, root, contractDigest, { beforeEdi
     if (!check || check.status !== 'pass') reason = check ? 'Check is ' + check.status + '.' : 'Required check was omitted.';
     else if (requirement.id === baselineRedId && check.observation !== 'target_failure_before_edit')
       reason = 'The baseline test must fail for the reported behavior before editing.';
+    else if (objective?.kind === 'repair' && parentChecks.has(requirement.id) && check.observation === 'target_failure_before_edit')
+      reason = 'A parent judgment needs evidence of the retained result. This judgment records the original failure.';
     else if (objective && ['repair', 'enhancement'].includes(objective.kind) && requirement.id === objective.outcome_check &&
       !(check.resolution === 'resolved' || (objective.kind === 'repair' && check.resolution === 'disproven')))
       reason = 'Required outcome lacks an explicit resolved' + (objective.kind === 'repair' ? '/disproven' : '') + ' disposition; finishing an experiment is not resolution.';

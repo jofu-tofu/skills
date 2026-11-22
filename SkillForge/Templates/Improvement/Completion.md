@@ -29,7 +29,7 @@ New behavioral UpdateSkill contracts record `objective` using [ApproveSkill's di
 
 ### Before editing a repair
 
-Add `"baseline_red_check":"baseline-red"` to the repair objective and declare that ID as its own `behavioral_execution` check alongside the general execution check. Freeze the target version and case. Run the case on the original and preserve the actual result as described in [DiagnoseGap](../../Procedures/DiagnoseGap.md#baseline-red-case-for-a-repair). A manual reader check is fine when it records what the reader could establish from the actual original.
+Add `"baseline_red_check":"baseline-red"` to the repair objective and declare that ID as its own `behavioral_execution` check alongside the general execution check. Keep the baseline-red check separate from parent scope, structure and outcome judgments. Evidence of the original failure cannot establish that the retained version meets an outcome. Freeze the target version and case. Run the case on the original and preserve the actual result as described in [DiagnoseGap](../../Procedures/DiagnoseGap.md#baseline-red-case-for-a-repair). A manual reader check is fine when it records what the reader could establish from the actual original.
 
 In the early assessment, use `status: "pass"` and `observation: "target_failure_before_edit"` only when the test ran before the edit and caught the intended failure. Link its qualified evidence by path and digest. Leave candidate outcomes unverified. Then run:
 

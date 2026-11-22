@@ -42,7 +42,7 @@ From the user's description, identify:
 
 **If underspecified:** Ask the user targeted questions. Don't guess signatures — "What should this function accept and return?"
 
-**If user is unavailable / non-interactive context:** Infer the most reasonable interface from the description, document assumptions explicitly in test comments, and proceed. Mark assumptions with `// ASSUMPTION:` so they can be reviewed.
+**If user is unavailable / non-interactive context:** Use supplied contracts, callers and project conventions to resolve the interface. Write the tests those sources support. List any remaining decision that changes which public behavior should pass, and leave that assertion pending.
 
 ### Step 2: Define Behavior Scenarios
 

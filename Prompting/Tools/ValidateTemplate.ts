@@ -157,7 +157,12 @@ function scopedDataChecks(ast: any, data: unknown): { missing: string[]; limited
       const kind = node.path.original;
       const selected = value(node.params[0], contexts, aliases, meta);
       if (kind === 'if' || kind === 'unless') {
-        const includeZero = node.hash?.pairs?.some((x: any) => x.key === 'includeZero' && x.value.value === true);
+        const flag = node.hash?.pairs?.find((pair: any) => pair.key === 'includeZero');
+        if (selected === 0 && flag?.value.type === 'SubExpression') {
+          limited = true;
+          continue;
+        }
+        const includeZero = flag && value(flag.value, contexts, aliases, meta);
         const condition = truthy(selected) || (includeZero && selected === 0);
         visit((kind === 'if' ? condition : !condition) ? node.program : node.inverse, contexts, aliases, meta);
       } else if (kind === 'with') {
@@ -165,7 +170,9 @@ function scopedDataChecks(ast: any, data: unknown): { missing: string[]; limited
         if (truthy(selected) || selected === 0) {
           const local = { ...aliases };
           if (node.program.blockParams?.[0]) local[node.program.blockParams[0]] = selected;
-          visit(node.program, [selected, ...contexts], local, meta);
+          // Handlebars advances ../ only when the block changes the current context.
+          const nestedContexts = selected === contexts[0] ? contexts : [selected, ...contexts];
+          visit(node.program, nestedContexts, local, meta);
         } else visit(node.inverse, contexts, aliases, meta);
       } else {
         const entries = selected && typeof selected === 'object' ? Object.entries(selected) : [];

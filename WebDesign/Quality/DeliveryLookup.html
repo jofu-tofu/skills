@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Delivery lookup</title>
+<main>
+  <h1>Delivery lookup</h1>
+  <form>
+    <label>Tracking code <input name="tracking" required></label>
+    <button>Find delivery</button>
+  </form>
+  <p role="status">Enter a tracking code.</p>
+  <a hidden>Open delivery</a>
+</main>
+<script>
+  const form = document.querySelector('form');
+  const statusLine = document.querySelector('[role=status]');
+  const details = document.querySelector('a');
+  let latest = 0;
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const request = ++latest;
+    const code = form.elements.tracking.value;
+    statusLine.textContent = 'Looking up ' + code;
+    details.hidden = true;
+    try {
+      const response = await fetch('/lookup/' + encodeURIComponent(code));
+      if (!response.ok) throw new Error('Lookup failed');
+      const delivery = await response.json();
+      if (request !== latest) return; // success guard
+      statusLine.textContent = code + ' · ' + delivery.state;
+      details.href = '/deliveries/' + encodeURIComponent(code);
+      details.hidden = false;
+    } catch {
+      if (request !== latest) return; // error guard
+      statusLine.textContent = 'Could not find ' + code + '. Try again.';
+      details.hidden = true;
+    } finally {
+      // Lets the test read the screen only after this response handler has finished.
+      document.dispatchEvent(new CustomEvent('lookup-settled', {detail: code}));
+    }
+  });
+</script>
+</html>

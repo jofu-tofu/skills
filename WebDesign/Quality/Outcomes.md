@@ -29,6 +29,16 @@ External evidence root: `20-working-T1-T3/RemainingSkills20261104/deep/reasoning
 
 ### Support the user task across states and access needs
 
+**Delivery lookup, 2026-11-22 (WD05).** A user searches for delivery A11, then B22 before A11 returns. The offline Chromium test releases B22 first and A11 last. It checks the visible loading message, reads the status after both replies, and opens the offered delivery when a link appears.
+
+| Local fixture | Observed outcome |
+|---|---|
+| Both older successes and older errors are ignored | All four combinations of success and failure kept B22's result. A successful B22 lookup opened delivery B22. A failed B22 lookup showed its error and offered no link. |
+| Older success can update the page | Both older-success cases opened delivery A11, including after B22 had failed. The other two cases passed. |
+| Older errors can update the page | Both older-error cases showed A11's error. One also hid the link to a successful B22 search. The other two cases passed. |
+
+The test caught both deliberately introduced defects. The browser ran a small, hand-written app with controlled HTTP replies. Whether using WebDesign helps an agent produce a better app remains unmeasured by this test. To replay, make Playwright available to Node, set `CHROMIUM_PATH` if using an existing Chromium executable, and run `node Quality/DeliveryLookup.test.cjs` from the skill directory. [Browser check](DeliveryLookup.test.cjs) · [Delivery form](DeliveryLookup.html)
+
 - **WD05** (WD05-check) — **pass**: Core task works across expected empty/loading/error/success/disabled/boundary states; user actions have clear, consistent feedback and persistence semantics. Where integrated state/routes are affected, the changed application preserves the neighboring user flow.
   Contribution: Implementation → browser tests. Check: Exercise relevant form/navigation/data states including error/empty/loading/disabled/success and boundaries; persistence only where contract requires it. Exercise changed code inside its actual fixture app plus a materially affected neighboring flow; tie browser/build evidence to the final artifact revision.
   Cases: existing-app-baseline (pass). Exact files, comparisons and limits are retained under this ID in the external ledger.

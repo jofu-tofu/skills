@@ -79,3 +79,11 @@ Contribution/owner: DE-CONTINUITY.
 Applicability and valid/failure contrasts: Template/reasoning/prose owner conflict; stale posted copy better than draft; source reference version changes; new rationale unknown. Design→prose-tool→Design composition is required.
 
 Current coverage: Accepted bounded evidence is indexed by the outcome evidence IDs above; retain the recorded scope and limitations.
+
+## A pilot that cannot support the decision requested
+
+Give the author this brief alone. “Record our decision for the archive migration. We approved a reversible 5% mirrored-read pilot for 14 days. The migration is still proposed. Archive writes use an irreversible format. An owner can revert the read flag in one minute. The team wants one short record before tomorrow.”
+
+Check the record distinguishes the approved read pilot from the undecided write migration, names the decision or evidence needed after 14 days, and limits rollback claims to reads. Accept a concise record that leaves the write decision open. Reject automatic promotion on day 15 or a claim that the flag can undo converted records.
+
+Then ask a reviewer to assess a draft that accurately states the pilot but ends “No separate write approval is needed because rollback takes a minute.” Require the reviewer to identify exactly which decision and recovery claim exceed the evidence.

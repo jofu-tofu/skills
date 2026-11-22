@@ -74,7 +74,7 @@ The brief; for in-app work, the host project's framework, token file and compone
 
 ## Tool contract
 
-Read References/FrontendDesignPhilosophy.md directly. Use the host's file, browser and screenshot tools; no context loader or separate critique service is needed. Render the page, inspect the screenshot, exercise relevant interactions and compare the result to the brief. Tools/VerifyDesign.ts checks an existing PNG's header and dimensions only, so it never substitutes for visual inspection. Report unavailable browser evidence instead of claiming verification.
+Read References/FrontendDesignPhilosophy.md directly. Use the host's file, browser and screenshot tools; no context loader or separate critique service is needed. Render the page, inspect the screenshot, exercise relevant interactions and compare the result to the brief. Tools/VerifyDesign.ts checks an existing PNG’s container structure, chunk checksums and dimensions. Pixel decoding, screenshot origin and the behavior of the page require separate evidence. Report unavailable browser evidence instead of claiming verification.
 
 ## References
 
